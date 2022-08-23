@@ -1,10 +1,12 @@
 import { Code, Container, createStyles } from '@mantine/core';
 import { Prism } from '@mantine/prism';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { Terminal2 } from 'tabler-icons-react';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
+import { readExampleCodeFile } from '~/lib/code';
 
 const useStyles = createStyles((theme) => ({
   tab: {
@@ -14,30 +16,11 @@ const useStyles = createStyles((theme) => ({
 
 const PATH = 'getting-started';
 
-const code = `
-import { DataTable } from 'mantine-datatable';
+export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
+  props: { code: await readExampleCodeFile('BasicUsageExample.tsx') },
+});
 
-export default function UnitedStatesPresidentsTable() {
-  return (
-    <DataTable
-      columns={[{ propertyName: 'name' }, { propertyName: 'bornIn' }, { propertyName: 'party' }]}
-      records={[
-        { id: 1, name: 'Joe Biden', bornIn: 1942, party: 'Democratic' },
-        { id: 2, name: 'Donald Trump', bornIn: 1946, party: 'Republican' },
-        { id: 3, name: 'Barack Obama', bornIn: 1961, party: 'Democratic' },
-        { id: 4, name: 'George W. Bush', bornIn: 1946, party: 'Republican' },
-        { id: 5, name: 'Bill Clinton', bornIn: 1946, party: 'Democratic' },
-        { id: 6, name: 'George H. W. Bush', bornIn: 1924, party: 'Republican' },
-        { id: 7, name: 'Ronald Reagan', bornIn: 1911, party: 'Republican' },
-        { id: 8, name: 'Jimmy Carter', bornIn: 1924, party: 'Democratic' },
-        { id: 9, name: 'Gerald Ford', bornIn: 1913, party: 'Republican' },
-        { id: 10, name: 'Richard Nixon', bornIn: 1913, party: 'Republican' },
-      ]}
-    />
-  );
-}`;
-
-export default function Page() {
+export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { classes } = useStyles();
 
   return (
