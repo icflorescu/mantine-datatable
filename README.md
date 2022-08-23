@@ -12,4 +12,4 @@ If you find this package useful, please star the repository, [tweet about it](ht
 
 ## License
 
-The (MIT License)[https://github.com/icflorescu/mantine-datatable/blob/master/LICENSE].
+The [MIT License](https://github.com/icflorescu/mantine-datatable/blob/master/LICENSE).
