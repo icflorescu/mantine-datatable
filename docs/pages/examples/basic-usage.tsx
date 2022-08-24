@@ -11,7 +11,7 @@ import readCodeExample from '~/lib/readCodeExample';
 const PATH = 'examples/basic-usage';
 
 export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('BasicUsageExample.tsx')) as string },
+  props: { code: (await readCodeExample('examples/BasicUsageExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
