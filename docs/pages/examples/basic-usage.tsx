@@ -6,12 +6,12 @@ import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import BasicUsageExample from '~/examples/BasicUsageExample';
-import { readExampleCodeFile } from '~/lib/code';
+import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/basic-usage';
 
 export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: await readExampleCodeFile('BasicUsageExample.tsx') },
+  props: { code: (await readCodeExample('BasicUsageExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {

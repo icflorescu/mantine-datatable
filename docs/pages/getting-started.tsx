@@ -6,7 +6,7 @@ import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import { readExampleCodeFile } from '~/lib/code';
+import readCodeExample from '~/lib/readCodeExample';
 
 const useStyles = createStyles((theme) => ({
   tab: {
@@ -17,7 +17,7 @@ const useStyles = createStyles((theme) => ({
 const PATH = 'getting-started';
 
 export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: await readExampleCodeFile('BasicUsageExample.tsx') },
+  props: { code: (await readCodeExample('examples/BasicUsageExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -55,7 +55,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         </Prism.Panel>
       </Prism.Tabs>
       <PageText>You can now import and use the component in your application like so:</PageText>
-      <Prism language="tsx">{code}</Prism>
+      <Prism language="typescript">{code}</Prism>
       <PageNavigation of={PATH} />
     </Container>
   );

@@ -4,12 +4,12 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import { readCodeFile } from '~/lib/code';
+import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'component-properties';
 
 export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: await readCodeFile('../package/DataTable.props.ts') },
+  props: { code: (await readCodeExample('../package/DataTable.props.ts')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
