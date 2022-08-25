@@ -7,6 +7,9 @@ const useStyles = createStyles((theme) => {
   const baseColor = theme.colors[theme.primaryColor][6];
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;
   return {
+    withClickHandler: {
+      cursor: 'pointer',
+    },
     selectorCell: {
       position: 'sticky',
       left: 0,
@@ -88,6 +91,7 @@ export default function DataTableRow<T>({
   return (
     <tr
       className={cx({
+        [classes.withClickHandler]: onClick,
         [classes.selected]: selectionChecked,
         [classes.contextMenuVisible]: contextMenuVisible,
       })}

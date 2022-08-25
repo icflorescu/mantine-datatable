@@ -1,5 +1,6 @@
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { NotificationsProvider } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -54,9 +55,11 @@ export default function _App(props: AppProps) {
               },
             }}
           >
-            <AppWrapper>
-              <Component {...pageProps} />
-            </AppWrapper>
+            <NotificationsProvider>
+              <AppWrapper>
+                <Component {...pageProps} />
+              </AppWrapper>
+            </NotificationsProvider>
           </MantineProvider>
         </ColorSchemeProvider>
       </QueryClientProvider>

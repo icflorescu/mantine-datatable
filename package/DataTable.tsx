@@ -21,6 +21,9 @@ const useStyles = createStyles((theme) => ({
       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     },
   },
+  browserSelectionDisabled: {
+    userSelect: 'none',
+  },
   tableWithVerticalBorders: {
     'th, td': {
       ':not(:first-of-type)': {
@@ -159,6 +162,7 @@ export default function DataTable<T extends Record<string, unknown>>({
           ref={tableRef}
           horizontalSpacing={horizontalSpacing}
           className={cx({
+            [classes.browserSelectionDisabled]: onRowClick || selectedRecords,
             [classes.tableWithVerticalBorders]: withVerticalBorders,
             [classes.verticalAlignmentTop]: verticalAlign === 'top',
             [classes.verticalAlignmentBottom]: verticalAlign === 'bottom',

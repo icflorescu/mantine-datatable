@@ -1,6 +1,6 @@
 import { Code, Container } from '@mantine/core';
-import { Prism } from '@mantine/prism';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import CodeBlock from '~/components/CodeBlock';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -21,9 +21,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         JSDoc annotations, so you can harness the full power of your IDE to build type safe applications with
         confidence. Here is the actual source of <Code>DataTable.props.ts</Code>:
       </PageText>
-      <Prism language="typescript" noCopy>
-        {code}
-      </Prism>
+      <CodeBlock language="typescript" content={code} noCopy />
       <PageNavigation of={PATH} />
     </Container>
   );

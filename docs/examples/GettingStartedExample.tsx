@@ -10,9 +10,9 @@ export default function GettingStartedExample() {
       // provide data
       records={[
         { id: 1, name: 'Joe Biden', bornIn: 1942, party: 'Democratic' },
+        // example-skip more records
         { id: 2, name: 'Donald Trump', bornIn: 1946, party: 'Republican' },
         { id: 3, name: 'Barack Obama', bornIn: 1961, party: 'Democratic' },
-        // example-skip
         { id: 4, name: 'George W. Bush', bornIn: 1946, party: 'Republican' },
         { id: 5, name: 'Bill Clinton', bornIn: 1946, party: 'Democratic' },
         { id: 6, name: 'George H. W. Bush', bornIn: 1924, party: 'Republican' },
@@ -46,6 +46,10 @@ export default function GettingStartedExample() {
       ]}
       // which column should expand to fill the available width
       expandedColumnAccessor="name"
+      // execute this callback when a row is clicked
+      onRowClick={({ name, party, bornIn }) =>
+        alert(`You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}`)
+      }
     />
   );
 }

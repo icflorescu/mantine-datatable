@@ -1,7 +1,7 @@
-import { Code, Container, createStyles } from '@mantine/core';
-import { Prism } from '@mantine/prism';
+import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { Terminal2 } from 'tabler-icons-react';
+import CodeBlock from '~/components/CodeBlock';
+import CodeFiles from '~/components/CodeBlockTabs';
 import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
 import InternalLink from '~/components/InternalLink';
@@ -11,12 +11,6 @@ import PageTitle from '~/components/PageTitle';
 import GettingStartedExample from '~/examples/GettingStartedExample';
 import readCodeExample from '~/lib/readCodeExample';
 
-const useStyles = createStyles((theme) => ({
-  tab: {
-    background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
-  },
-}));
-
 const PATH = 'getting-started';
 
 export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
@@ -24,8 +18,6 @@ export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { classes } = useStyles();
-
   return (
     <Container>
       <PageTitle of={PATH} />
@@ -41,24 +33,22 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <br />
       </PageText>
       <PageText>Install dependencies:</PageText>
-      <Prism.Tabs defaultValue="yarn">
-        <Prism.TabsList>
-          <Prism.Tab className={classes.tab} value="yarn" icon={<Terminal2 width={16} height={16} />}>
-            yarn
-          </Prism.Tab>
-          <Prism.Tab className={classes.tab} value="npm" icon={<Terminal2 width={16} height={16} />}>
-            npm
-          </Prism.Tab>
-        </Prism.TabsList>
-        <Prism.Panel language="bash" value="yarn">
-          {'yarn add @mantine/core @mantine/hooks @emotion/react lodash mantine-datatable'}
-        </Prism.Panel>
-        <Prism.Panel language="bash" value="npm">
-          {'npm i @mantine/core @mantine/hooks @emotion/react lodash mantine-datatable'}
-        </Prism.Panel>
-      </Prism.Tabs>
-      <PageText>You can now import and use the component in your application like so:</PageText>
-      <Prism language="typescript">{code}</Prism>
+      <CodeFiles
+        items={[
+          {
+            title: 'yarn',
+            language: 'bash',
+            content: 'yarn add @mantine/core @mantine/hooks @emotion/react lodash mantine-datatable',
+          },
+          {
+            title: 'npm',
+            language: 'bash',
+            content: 'npm i @mantine/core @mantine/hooks @emotion/react lodash mantine-datatable',
+          },
+        ]}
+      />
+      <PageText>Then you can import the component and use it in your application like so:</PageText>
+      <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>
       <ExampleContainer>
         <GettingStartedExample />
