@@ -47,8 +47,8 @@ export default function DataTable<T extends Record<string, unknown>>({
   verticalAlign,
   fetching,
   columns,
-  idPropertyName = 'id',
-  expandedColumnPropertyName,
+  idAccessor = 'id',
+  expandedColumnAccessor,
   records,
   selectedRecords,
   onSelectedRecordsChange,
@@ -66,7 +66,8 @@ export default function DataTable<T extends Record<string, unknown>>({
   loadingText = 'Loading…',
   noRecordsText = 'No records',
   striped,
-  rowMenu,
+  onRowClick,
+  rowContextMenu,
   ...otherProps
 }: DataTableProps<T>) {
   const {
@@ -83,13 +84,13 @@ export default function DataTable<T extends Record<string, unknown>>({
   const [scrolledToLeft, setScrolledToLeft] = useState(true);
   const [scrolledToRight, setScrolledToRight] = useState(true);
 
-  const [activeRowMenuInfo, setActiveRowMenuInfo] = useState<{ top: number; left: number; record: T } | null>(null);
+  const [contextMenuInfo, setContextMenuInfo] = useState<{ top: number; left: number; record: T } | null>(null);
   useEffect(() => {
-    if (fetching) setActiveRowMenuInfo(null);
+    if (fetching) setContextMenuInfo(null);
   }, [fetching]);
 
   const onScrollPositionChange = () => {
-    if (!fetching) setActiveRowMenuInfo(null);
+    if (!fetching) setContextMenuInfo(null);
 
     if (fetching || tableHeight <= scrollViewportHeight) {
       setScrolledToTop(true);
@@ -127,8 +128,8 @@ export default function DataTable<T extends Record<string, unknown>>({
   };
 
   const recordsLength = records?.length;
-  const recordIds = records?.map((record) => get(record, idPropertyName));
-  const selectedRecordIds = selectedRecords?.map((record) => get(record, idPropertyName));
+  const recordIds = records?.map((record) => get(record, idAccessor));
+  const selectedRecordIds = selectedRecords?.map((record) => get(record, idAccessor));
   const hasRecordsAndSelectedRecords =
     recordIds !== undefined && selectedRecordIds !== undefined && selectedRecordIds.length > 0;
   const allRecordsSelected = hasRecordsAndSelectedRecords && recordIds.every((id) => selectedRecordIds.includes(id));
@@ -168,7 +169,7 @@ export default function DataTable<T extends Record<string, unknown>>({
           <DataTableHeader<T>
             ref={headerRef}
             columns={columns}
-            expandedColumnPropertyName={expandedColumnPropertyName}
+            expandedColumnAccessor={expandedColumnAccessor}
             sortStatus={sortStatus}
             onSortStatusChange={onSortStatusChange}
             selectionVisible={!!selectedRecords}
@@ -179,8 +180,8 @@ export default function DataTable<T extends Record<string, unknown>>({
                 ? () => {
                     onSelectedRecordsChange(
                       allRecordsSelected
-                        ? selectedRecords.filter((record) => !recordIds.includes(get(record, idPropertyName)))
-                        : uniqBy([...selectedRecords, ...records!], (record) => get(record, idPropertyName))
+                        ? selectedRecords.filter((record) => !recordIds.includes(get(record, idAccessor)))
+                        : uniqBy([...selectedRecords, ...records!], (record) => get(record, idAccessor))
                     );
                   }
                 : undefined
@@ -191,13 +192,13 @@ export default function DataTable<T extends Record<string, unknown>>({
           <tbody>
             {recordsLength ? (
               records.map((record, recordIndex) => {
-                const recordId = get(record, idPropertyName);
+                const recordId = get(record, idAccessor);
                 const selected = selectedRecordIds?.includes(recordId) || false;
                 return (
                   <DataTableRow<T>
                     key={recordId as Key}
                     record={record}
-                    expandedColumnPropertyName={expandedColumnPropertyName}
+                    expandedColumnAccessor={expandedColumnAccessor}
                     columns={columns}
                     selectionVisible={!!selectedRecords}
                     selectionChecked={selected}
@@ -212,29 +213,23 @@ export default function DataTable<T extends Record<string, unknown>>({
                               );
                               onSelectedRecordsChange(
                                 selected
-                                  ? differenceBy(selectedRecords, recordsInterval, (r) => get(r, idPropertyName))
-                                  : uniqBy([...selectedRecords, ...recordsInterval], (r) => get(r, idPropertyName))
+                                  ? differenceBy(selectedRecords, recordsInterval, (r) => get(r, idAccessor))
+                                  : uniqBy([...selectedRecords, ...recordsInterval], (r) => get(r, idAccessor))
                               );
                             } else {
                               onSelectedRecordsChange(
                                 selected
-                                  ? selectedRecords.filter((record) => get(record, idPropertyName) !== recordId)
-                                  : uniqBy([...selectedRecords, record], (record) => get(record, idPropertyName))
+                                  ? selectedRecords.filter((record) => get(record, idAccessor) !== recordId)
+                                  : uniqBy([...selectedRecords, record], (record) => get(record, idAccessor))
                               );
                             }
                             setLastSelectionChangeIndex(recordIndex);
                           }
                         : undefined
                     }
-                    menu={
-                      rowMenu
-                        ? {
-                            trigger: rowMenu.trigger || 'rightClick',
-                            onShow: setActiveRowMenuInfo,
-                          }
-                        : undefined
-                    }
-                    menuVisible={activeRowMenuInfo ? get(activeRowMenuInfo.record, idPropertyName) === recordId : false}
+                    onClick={onRowClick}
+                    onContextMenu={rowContextMenu ? setContextMenuInfo : undefined}
+                    contextMenuVisible={contextMenuInfo ? get(contextMenuInfo.record, idAccessor) === recordId : false}
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
                 );
@@ -271,16 +266,18 @@ export default function DataTable<T extends Record<string, unknown>>({
         loaderVariant={loaderVariant}
       />
       <DataTableEmpty pt={headerHeight} pb={footerHeight} text={noRecordsText} active={!fetching && !recordsLength} />
-      {rowMenu &&
-        activeRowMenuInfo &&
-        !(typeof rowMenu.hidden === 'function' ? rowMenu.hidden(activeRowMenuInfo.record) : rowMenu.hidden) && (
+      {rowContextMenu &&
+        contextMenuInfo &&
+        !(typeof rowContextMenu.hidden === 'function'
+          ? rowContextMenu.hidden(contextMenuInfo.record)
+          : rowContextMenu.hidden) && (
           <DataTableRowMenu
-            top={activeRowMenuInfo.top}
-            left={activeRowMenuInfo.left}
-            onDestroy={() => setActiveRowMenuInfo(null)}
+            top={contextMenuInfo.top}
+            left={contextMenuInfo.left}
+            onDestroy={() => setContextMenuInfo(null)}
           >
-            {rowMenu.items.map(({ key, title, icon, color, hidden, disabled, onClick }) => {
-              const { record } = activeRowMenuInfo;
+            {rowContextMenu.items.map(({ key, title, icon, color, hidden, disabled, onClick }) => {
+              const { record } = contextMenuInfo;
               if (typeof hidden === 'function' ? hidden(record) : hidden) return null;
               const titleValue = title
                 ? typeof title === 'function'
@@ -295,7 +292,7 @@ export default function DataTable<T extends Record<string, unknown>>({
                   color={typeof color === 'function' ? color(record) : color}
                   disabled={typeof disabled === 'function' ? disabled(record) : disabled}
                   onClick={() => {
-                    setActiveRowMenuInfo(null);
+                    setContextMenuInfo(null);
                     onClick(record);
                   }}
                 />

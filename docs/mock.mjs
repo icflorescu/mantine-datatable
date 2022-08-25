@@ -1,11 +1,14 @@
 import { faker } from '@faker-js/faker';
-import { writeFile } from 'fs/promises';
+import { writeFile } from 'node:fs/promises';
 
 const companies = [];
 for (let i = 0; i < 10; i++) {
   companies.push({
     id: faker.datatype.uuid(),
     name: faker.company.name(),
+    streetAddress: faker.address.streetAddress(),
+    city: faker.address.cityName(),
+    state: faker.address.stateAbbr(),
   });
 }
 
@@ -32,4 +35,6 @@ for (let i = 0; i < 500; i++) {
   });
 }
 
-writeFile('data.json', JSON.stringify({ companies, departments, employees }, null, 2));
+await writeFile('data/companies.json', JSON.stringify(companies, null, 2));
+await writeFile('data/departments.json', JSON.stringify(departments, null, 2));
+await writeFile('data/employees.json', JSON.stringify(employees, null, 2));

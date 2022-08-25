@@ -26,7 +26,7 @@ const useStyles = createStyles((theme, { color }: { color?: MantineColor }) => {
       fontSize: 0,
       marginRight: theme.spacing.xs,
     },
-    text: {
+    title: {
       whiteSpace: 'nowrap',
     },
   };
@@ -34,7 +34,7 @@ const useStyles = createStyles((theme, { color }: { color?: MantineColor }) => {
 
 type DataTableRowMenuItemProps = {
   icon?: ReactNode;
-  title: string;
+  title: ReactNode;
   color?: MantineColor;
   disabled?: boolean;
   onClick: () => void;
@@ -45,7 +45,7 @@ export default function DataTableRowMenuItem({ icon, title, color, disabled, onC
   return (
     <UnstyledButton className={classes.root} disabled={disabled} onClick={onClick}>
       {icon && <Box className={classes.icon}>{icon}</Box>}
-      <Text className={classes.text} size="sm">
+      <Text className={classes.title} size="sm">
         {title}
       </Text>
     </UnstyledButton>

@@ -73,7 +73,7 @@ type DataTableHeaderProps<T> = {
   sortStatus: DataTableSortStatus | undefined;
   onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
   columns: DataTableColumn<T>[];
-  expandedColumnPropertyName: string | undefined;
+  expandedColumnAccessor: string | undefined;
   selectionVisible: boolean;
   selectionChecked: boolean;
   selectionIndeterminate: boolean;
@@ -87,7 +87,7 @@ export default forwardRef(function DataTableHeader<T>(
     sortStatus,
     onSortStatusChange,
     columns,
-    expandedColumnPropertyName,
+    expandedColumnAccessor,
     selectionVisible,
     selectionChecked,
     selectionIndeterminate,
@@ -122,12 +122,12 @@ export default forwardRef(function DataTableHeader<T>(
             />
           </th>
         )}
-        {columns.map(({ propertyName, visibleMediaQuery, textAlign, width, title, sortable }) => (
+        {columns.map(({ accessor, visibleMediaQuery, textAlign, width, title, sortable }) => (
           <DataTableHeaderCell<T>
-            key={propertyName}
-            propertyName={propertyName}
+            key={accessor}
+            accessor={accessor}
             visibleMediaQuery={visibleMediaQuery}
-            expandedColumnPropertyName={expandedColumnPropertyName}
+            expandedColumnAccessor={expandedColumnAccessor}
             textAlign={textAlign}
             width={width}
             title={title}

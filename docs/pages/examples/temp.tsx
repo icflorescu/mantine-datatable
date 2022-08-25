@@ -8,7 +8,7 @@ import { Edit, Eye, Mouse, Table, Trash, TrashX } from 'tabler-icons-react';
 import ExampleContainer from '~/components/ExampleContainer';
 import PageNavigation from '~/components/PageNavigation';
 import PageTitle from '~/components/PageTitle';
-import { EmployeeData, getEmployees } from '~/data';
+import { Employee, getEmployees } from '~/data';
 
 const PATH = 'examples/temp';
 const recordsPerPage = 100;
@@ -21,18 +21,19 @@ export default function TempExamplePage() {
   });
 
   const [page, setPage] = useState(1);
-  const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({ propertyName: 'name', direction: 'asc' });
+  const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({ columnAccessor: 'name', direction: 'asc' });
 
   const handleSortStatusChange = (status: DataTableSortStatus) => {
     setPage(1);
     setSortStatus(status);
   };
 
-  const { data, isFetching } = useQuery(['employees', sortStatus.propertyName, sortStatus.direction, page], async () =>
-    getEmployees({ recordsPerPage, page, sortStatus })
+  const { data, isFetching } = useQuery(
+    ['employees', sortStatus.columnAccessor, sortStatus.direction, page],
+    async () => getEmployees({ recordsPerPage, page, sortStatus })
   );
 
-  const [selectedRecords, setSelectedRecords] = useState<EmployeeData[]>([]);
+  const [selectedRecords, setSelectedRecords] = useState<Employee[]>([]);
 
   const now = dayjs();
 
@@ -77,20 +78,20 @@ export default function TempExamplePage() {
             fetching={isFetching}
             columns={[
               {
-                propertyName: 'name',
+                accessor: 'name',
                 ellipsis: true,
                 sortable: true,
                 render: ({ firstName, lastName }) => `${firstName} ${lastName}`,
               },
               {
-                propertyName: 'email',
+                accessor: 'email',
                 sortable: true,
                 width: 200,
                 ellipsis: true,
                 visibleMediaQuery: aboveXsMediaQuery,
               },
               {
-                propertyName: 'department.company.name',
+                accessor: 'department.company.name',
                 title: 'Company',
                 width: 150,
                 ellipsis: true,
@@ -98,20 +99,20 @@ export default function TempExamplePage() {
                 visibleMediaQuery: aboveXsMediaQuery,
               },
               {
-                propertyName: 'department.name',
+                accessor: 'department.name',
                 title: 'Department',
                 width: 100,
                 sortable: true,
                 visibleMediaQuery: aboveXsMediaQuery,
               },
               {
-                propertyName: 'age',
+                accessor: 'age',
                 textAlign: 'right',
                 sortable: true,
                 render: ({ birthDate }) => now.diff(birthDate, 'y'),
               },
             ]}
-            expandedColumnPropertyName="name"
+            expandedColumnAccessor="name"
             records={data?.employees}
             page={page}
             onPageChange={setPage}
@@ -121,7 +122,7 @@ export default function TempExamplePage() {
             onSortStatusChange={handleSortStatusChange}
             selectedRecords={selectedRecords}
             onSelectedRecordsChange={setSelectedRecords}
-            rowMenu={{
+            rowContextMenu={{
               items: [
                 {
                   key: 'edit',

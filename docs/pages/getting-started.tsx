@@ -2,10 +2,13 @@ import { Code, Container, createStyles } from '@mantine/core';
 import { Prism } from '@mantine/prism';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { Terminal2 } from 'tabler-icons-react';
+import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
+import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
+import GettingStartedExample from '~/examples/GettingStartedExample';
 import readCodeExample from '~/lib/readCodeExample';
 
 const useStyles = createStyles((theme) => ({
@@ -17,7 +20,7 @@ const useStyles = createStyles((theme) => ({
 const PATH = 'getting-started';
 
 export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('examples/BasicUsageExample.tsx')) as string },
+  props: { code: (await readCodeExample('examples/GettingStartedExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -56,6 +59,15 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </Prism.Tabs>
       <PageText>You can now import and use the component in your application like so:</PageText>
       <Prism language="typescript">{code}</Prism>
+      <PageText>The code above will produce the following result:</PageText>
+      <ExampleContainer>
+        <GettingStartedExample />
+      </ExampleContainer>
+      <PageText>
+        Please <InternalLink to="/getting-started">learn the basics</InternalLink> to get familiar with core Mantine
+        DataTable concepts, refer to <InternalLink to="/component-properties">component properies</InternalLink> page to
+        see the full list of available properties and browse the code examples to see the component in action.
+      </PageText>
       <PageNavigation of={PATH} />
     </Container>
   );

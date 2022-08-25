@@ -1,6 +1,7 @@
 import { Box, Center, createStyles, Group } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { lowerCase, upperFirst } from 'lodash';
+import { ReactNode } from 'react';
 import { ArrowDown, ArrowsVertical, ArrowUp } from 'tabler-icons-react';
 import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
 import getCellWidthStyleProps from './getCellWidthStyleProps';
@@ -32,50 +33,57 @@ const useStyles = createStyles((theme) => ({
 }));
 
 type DataTableHeaderCell<T> = {
-  propertyName: string;
+  accessor: string;
   visibleMediaQuery: string | undefined;
-  title: string | undefined;
-  expandedColumnPropertyName: string | undefined;
+  title: ReactNode | undefined;
+  expandedColumnAccessor: string | undefined;
   sortStatus: DataTableSortStatus | undefined;
   onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
-} & Pick<DataTableColumn<T>, 'propertyName' | 'sortable' | 'textAlign' | 'width'>;
+} & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlign' | 'width'>;
 
 export default function DataTableHeaderCell<T>({
-  propertyName,
+  accessor,
   visibleMediaQuery,
   title,
   sortable,
   textAlign,
   width,
-  expandedColumnPropertyName,
+  expandedColumnAccessor,
   sortStatus,
   onSortStatusChange,
 }: DataTableHeaderCell<T>) {
   const { cx, classes } = useStyles();
   if (!useMediaQuery(visibleMediaQuery || '', true)) return null;
-  const text = title ?? upperFirst(lowerCase(propertyName));
+  const text = title ?? upperFirst(lowerCase(accessor));
   return (
     <Box
       component="th"
       className={cx({ [classes.sortableColumnHeader]: sortable })}
       sx={{
         '&&': { textAlign },
-        ...getCellWidthStyleProps({ width, propertyName, expandedColumnPropertyName }),
+        ...getCellWidthStyleProps({
+          width,
+          accessor,
+          expandedColumnAccessor,
+        }),
       }}
       role={sortable ? 'button' : undefined}
       onClick={
         sortable && onSortStatusChange
           ? () => {
-              onSortStatusChange({ propertyName, direction: sortStatus?.direction === 'asc' ? 'desc' : 'asc' });
+              onSortStatusChange({
+                columnAccessor: accessor,
+                direction: sortStatus?.direction === 'asc' ? 'desc' : 'asc',
+              });
             }
           : undefined
       }
     >
-      {sortable || sortStatus?.propertyName === propertyName ? (
+      {sortable || sortStatus?.columnAccessor === accessor ? (
         <Group position="apart" noWrap spacing="xs">
           <Box className={cx(classes.columnHeaderText, classes.sortableColumnHeaderText)}>{text}</Box>
           <Center>
-            {sortStatus?.propertyName === propertyName ? (
+            {sortStatus?.columnAccessor === accessor ? (
               sortStatus.direction === 'asc' ? (
                 <ArrowDown size={14} />
               ) : (

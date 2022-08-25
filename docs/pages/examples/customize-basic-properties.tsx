@@ -13,7 +13,7 @@ export default function Page() {
       <ExampleContainer>
         <DataTable
           minHeight="none"
-          columns={[{ propertyName: 'name' }, { propertyName: 'email' }]}
+          columns={[{ accessor: 'name' }, { accessor: 'email' }]}
           records={[
             { id: 1, name: 'Donald Trump', email: 'the.orange.man@example.com' },
             { id: 2, name: 'Joe Biden', email: 'joe.biden@example.com' },

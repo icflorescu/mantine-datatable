@@ -1,0 +1,502 @@
+[
+  {
+    "id": "b94dd57d-ac4d-4f4f-ab57-d699f3f30670",
+    "companyId": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
+    "name": "Baby"
+  },
+  {
+    "id": "9665e16b-c69a-43c7-9463-b7ac7e331f7f",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Movies"
+  },
+  {
+    "id": "05fecb7a-ec1a-4b7c-8ec5-23a8235af7a9",
+    "companyId": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
+    "name": "Games"
+  },
+  {
+    "id": "a73a914d-7500-4307-8105-2927d38ee6b9",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Shoes"
+  },
+  {
+    "id": "1614d188-21a7-421e-8e75-777a4a3964a1",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Health"
+  },
+  {
+    "id": "c7c2742f-93b0-4eb0-bcef-0e5270ae1e42",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Tools"
+  },
+  {
+    "id": "4df986f6-5803-4522-932a-a4e0709befbc",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Outdoors"
+  },
+  {
+    "id": "33135859-14b2-4ad3-9b30-0a030c5124e1",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Home"
+  },
+  {
+    "id": "bb8574b1-189d-4995-a842-bbf0912e4672",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Toys"
+  },
+  {
+    "id": "dbfc40cb-ff75-4e80-9ab3-f9878d093b37",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Computers"
+  },
+  {
+    "id": "17b6623e-d91f-4d4c-9f9b-7f150ac1621a",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Computers"
+  },
+  {
+    "id": "79f25909-d0fa-4bf5-8a1a-c60b8014f2ef",
+    "companyId": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
+    "name": "Jewelery"
+  },
+  {
+    "id": "e8f4fe08-7b4d-435b-a85c-351b330c6d30",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Beauty"
+  },
+  {
+    "id": "bf5e5c38-31f6-43e3-8283-69c74a0954d4",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Music"
+  },
+  {
+    "id": "e161b2fb-061d-4a12-9648-42b04e48d45a",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Kids"
+  },
+  {
+    "id": "a5ab8250-a4f1-4ac9-9357-fc34b0860845",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Health"
+  },
+  {
+    "id": "161be56d-1cff-48b8-8787-564e2f857308",
+    "companyId": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
+    "name": "Music"
+  },
+  {
+    "id": "8eb7b3b0-e4f4-48d4-aa21-787f101c2f4c",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Clothing"
+  },
+  {
+    "id": "c38356de-cc69-4e46-87a1-dc28b2d6b8ec",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Outdoors"
+  },
+  {
+    "id": "810f8332-f139-4213-b6aa-8102d86d8f1c",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Kids"
+  },
+  {
+    "id": "e7577cda-3e2e-4cab-bb4e-d14550e2823c",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Shoes"
+  },
+  {
+    "id": "2fe641a4-25d1-4a77-a327-324a1aa4dc58",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Industrial"
+  },
+  {
+    "id": "3b83718a-aae1-4311-8cd6-ec5b6b79eaa1",
+    "companyId": "f7db3323-f6e1-4ad7-8b34-62d357d01782",
+    "name": "Outdoors"
+  },
+  {
+    "id": "188a3185-fd92-4385-a552-fec6dcf6245a",
+    "companyId": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
+    "name": "Movies"
+  },
+  {
+    "id": "23b2b532-67e5-4188-84b2-05421d5e5f53",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Home"
+  },
+  {
+    "id": "dc81e607-df4a-4870-98c6-ff7504af6fb6",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Outdoors"
+  },
+  {
+    "id": "7ec4da72-d3b9-4297-9f0c-379366aac1d9",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Automotive"
+  },
+  {
+    "id": "3a5b0f6f-4e68-4bde-83f6-60ea316c5fb5",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Movies"
+  },
+  {
+    "id": "1eff7b9f-e14a-42d5-831f-684e93ac14a0",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Grocery"
+  },
+  {
+    "id": "1d1e925c-4cd5-4fff-83f7-54ed161f437d",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Home"
+  },
+  {
+    "id": "bc0d15b9-4df1-41a0-a4b0-ad5442a5d8d6",
+    "companyId": "f7db3323-f6e1-4ad7-8b34-62d357d01782",
+    "name": "Tools"
+  },
+  {
+    "id": "ec517fdc-b6e1-4d9a-bb0d-a531a57165b5",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Garden"
+  },
+  {
+    "id": "15f20b0d-a5de-4af2-84b3-38c8ddc4100c",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Grocery"
+  },
+  {
+    "id": "2f5e75bc-9899-49ec-8a48-6d83a56d7294",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Grocery"
+  },
+  {
+    "id": "16ba2514-05d8-4acc-9732-9ec41faeccea",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Shoes"
+  },
+  {
+    "id": "818bd33b-8fdc-4297-9234-166e4a8a6899",
+    "companyId": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
+    "name": "Grocery"
+  },
+  {
+    "id": "29ca3a7a-2fa4-4c56-a8cd-92140214181f",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Tools"
+  },
+  {
+    "id": "fbf3d4f0-1b74-4d21-9fdb-4dab037a43ec",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Beauty"
+  },
+  {
+    "id": "7e3e2fb6-bf78-4d12-a8b4-00bca876759a",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Jewelery"
+  },
+  {
+    "id": "ee155654-f532-49a7-814f-d68a06384f4f",
+    "companyId": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
+    "name": "Tools"
+  },
+  {
+    "id": "9e6b5917-8027-4102-9843-6ae73b9aca5f",
+    "companyId": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
+    "name": "Industrial"
+  },
+  {
+    "id": "73b84c28-a1e4-4451-9ec4-908b014604fa",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Jewelery"
+  },
+  {
+    "id": "b6f73d14-c372-4088-aff7-85d703ceedb2",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Computers"
+  },
+  {
+    "id": "67490082-273a-428a-81ce-18f04b1a3a1d",
+    "companyId": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
+    "name": "Health"
+  },
+  {
+    "id": "cce026a6-edd4-48ed-932b-7025d8804ae3",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Beauty"
+  },
+  {
+    "id": "f1ae259c-db32-4448-945a-ac25904cb214",
+    "companyId": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
+    "name": "Sports"
+  },
+  {
+    "id": "720daa9b-509e-412a-be95-6e8511079989",
+    "companyId": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
+    "name": "Garden"
+  },
+  {
+    "id": "bf1ed63b-b22b-4d15-82f9-65dbad3c63be",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Grocery"
+  },
+  {
+    "id": "7018cfd5-50b6-4ccb-b7ea-814b764d0a1e",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Garden"
+  },
+  {
+    "id": "b47f1319-4b30-4066-b12f-a4338752d22e",
+    "companyId": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
+    "name": "Garden"
+  },
+  {
+    "id": "cc5c2c58-3e33-4908-8e8d-6c5a8e9470ba",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Health"
+  },
+  {
+    "id": "2dcd4fa5-f4bf-4d0a-b397-20489869af07",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Jewelery"
+  },
+  {
+    "id": "7de66538-e861-41e7-95f2-00875d75d37c",
+    "companyId": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
+    "name": "Games"
+  },
+  {
+    "id": "7529fa71-5dd6-4f89-9aa6-c9fd454bc970",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Health"
+  },
+  {
+    "id": "1616a3bb-0833-48bc-99ff-0a04c3a7ad34",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Books"
+  },
+  {
+    "id": "d41365ab-bd17-4600-bf81-9e939ae4016a",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Movies"
+  },
+  {
+    "id": "996e2444-1379-497b-b45e-8898d4ea3b22",
+    "companyId": "f7db3323-f6e1-4ad7-8b34-62d357d01782",
+    "name": "Shoes"
+  },
+  {
+    "id": "16382ea9-1bfd-4681-b4f4-1b3c41b7fbc7",
+    "companyId": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
+    "name": "Electronics"
+  },
+  {
+    "id": "19d95b84-464f-4f3e-9d19-f0f2bd975f2e",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Grocery"
+  },
+  {
+    "id": "41afa180-fd26-4801-af6c-1a973e239212",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Kids"
+  },
+  {
+    "id": "5f9bc461-8fd0-4c16-9616-ade17dc7d177",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Beauty"
+  },
+  {
+    "id": "623146f9-4ee1-4d37-9c2e-8593751b141e",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Grocery"
+  },
+  {
+    "id": "a655b1f5-e7ec-4ab9-83df-7108f3e1e24b",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Music"
+  },
+  {
+    "id": "55e06fac-7bd6-4ce0-ab44-c561311f6a52",
+    "companyId": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
+    "name": "Clothing"
+  },
+  {
+    "id": "9fbf2a45-cc21-4982-afa6-e7e6c12264b9",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Movies"
+  },
+  {
+    "id": "edd9aef0-60f2-4e92-8213-d0614ec644f1",
+    "companyId": "f7db3323-f6e1-4ad7-8b34-62d357d01782",
+    "name": "Health"
+  },
+  {
+    "id": "56fbdaa0-b47d-4b97-960b-d6ad17ec3196",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Electronics"
+  },
+  {
+    "id": "c7aaa7a7-4d1a-4cc2-a53f-7074e37b2a5f",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Music"
+  },
+  {
+    "id": "a1f376b2-585c-4d48-b11b-71f8305b8c1b",
+    "companyId": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
+    "name": "Sports"
+  },
+  {
+    "id": "1acd4b2e-11e6-4f32-a5c5-d51bb63f6c43",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Computers"
+  },
+  {
+    "id": "2bb4cbe2-b6f2-4f44-9922-fe7196a8a5ff",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Games"
+  },
+  {
+    "id": "feca8f30-eb28-4154-94f7-25cc3eba8d91",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Tools"
+  },
+  {
+    "id": "506293d0-57c2-4407-ae83-1861dc76370e",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Kids"
+  },
+  {
+    "id": "39b4bb22-2b18-458d-82c8-ecceb6a89588",
+    "companyId": "f7db3323-f6e1-4ad7-8b34-62d357d01782",
+    "name": "Beauty"
+  },
+  {
+    "id": "9b293052-d9f9-4480-b9ef-26392bc5d372",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Garden"
+  },
+  {
+    "id": "62d08ae8-fa91-4717-bafe-3e89c82cd723",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Electronics"
+  },
+  {
+    "id": "cfc2d1ae-1ed7-4bda-8b34-bfe2aabbe3ce",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Home"
+  },
+  {
+    "id": "e9d4a7da-ea21-498a-b2a2-27348a8a2d59",
+    "companyId": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
+    "name": "Jewelery"
+  },
+  {
+    "id": "08146890-bc72-422a-be14-a4cbdd90e48b",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Beauty"
+  },
+  {
+    "id": "7b15b29f-0fb8-4f98-9a32-d102e44ba966",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Toys"
+  },
+  {
+    "id": "00fa66d4-2c39-4faf-b355-8efdfc9b1ff1",
+    "companyId": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
+    "name": "Grocery"
+  },
+  {
+    "id": "cf48aea5-c578-4b4e-a260-b11ecc19c813",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Garden"
+  },
+  {
+    "id": "a8038d57-980f-4948-80ad-2153386a328b",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Health"
+  },
+  {
+    "id": "a259dd08-c068-4237-9283-63d1a7b158bf",
+    "companyId": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
+    "name": "Toys"
+  },
+  {
+    "id": "77fa16fd-3261-4e86-a0e0-7313e84283af",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Computers"
+  },
+  {
+    "id": "fc18f9f2-193e-422e-b70c-1d7b39251ea5",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Games"
+  },
+  {
+    "id": "c8f2e48b-7aee-48b0-93bd-a7f5b0f08431",
+    "companyId": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
+    "name": "Automotive"
+  },
+  {
+    "id": "3b041ab2-8010-44e0-9443-5b98c41a7bd5",
+    "companyId": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
+    "name": "Home"
+  },
+  {
+    "id": "ed103603-9c64-42a7-ac11-a5949cde6fe4",
+    "companyId": "04638784-3e29-4c31-be42-9e46db269fef",
+    "name": "Garden"
+  },
+  {
+    "id": "b7ac6a78-ebfb-468f-9a3e-d5ddb6701aa0",
+    "companyId": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
+    "name": "Health"
+  },
+  {
+    "id": "38d78905-353f-417c-9a0c-76daa9d89ed5",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Home"
+  },
+  {
+    "id": "3d9e7d5e-edbc-4076-beab-d70d6f021de7",
+    "companyId": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
+    "name": "Music"
+  },
+  {
+    "id": "095656e3-107f-4d81-bf47-6b30c5bc70de",
+    "companyId": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
+    "name": "Computers"
+  },
+  {
+    "id": "a4e6450a-a615-43ce-be0a-eb786de5f2b4",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Outdoors"
+  },
+  {
+    "id": "ff85e04e-dd86-4354-8137-627a1ab0eda1",
+    "companyId": "369f7e38-905e-4eee-bab1-a9560baf2f58",
+    "name": "Jewelery"
+  },
+  {
+    "id": "314eae03-4430-43a5-957d-99709c1c49e5",
+    "companyId": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
+    "name": "Games"
+  },
+  {
+    "id": "166c5292-63a2-4f84-aede-e27e7941773f",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Books"
+  },
+  {
+    "id": "31e80a1f-af52-44aa-8f6d-3985a4082741",
+    "companyId": "510c0907-fae9-495a-b6de-a60cb195898c",
+    "name": "Garden"
+  },
+  {
+    "id": "542fc47a-edd2-4963-b458-53305f36dd6e",
+    "companyId": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
+    "name": "Automotive"
+  },
+  {
+    "id": "bb5ef25c-ef55-48e5-8b3e-5a8a87ff3426",
+    "companyId": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
+    "name": "Computers"
+  }
+]

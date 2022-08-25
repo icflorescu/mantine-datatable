@@ -15,8 +15,8 @@ const useStyles = createStyles({
 
 type DataTableRowCellProps<T> = {
   record: T;
-  expandedColumnPropertyName: string | undefined;
-} & Pick<DataTableColumn<T>, 'propertyName' | 'visibleMediaQuery' | 'textAlign' | 'width' | 'ellipsis' | 'render'>;
+  expandedColumnAccessor: string | undefined;
+} & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlign' | 'width' | 'ellipsis' | 'render'>;
 
 export default function DataTableRowCell<T>({
   visibleMediaQuery,
@@ -24,8 +24,8 @@ export default function DataTableRowCell<T>({
   ellipsis,
   textAlign,
   width,
-  propertyName,
-  expandedColumnPropertyName,
+  accessor,
+  expandedColumnAccessor,
   render,
 }: DataTableRowCellProps<T>) {
   const { cx, classes } = useStyles();
@@ -34,9 +34,16 @@ export default function DataTableRowCell<T>({
     <Box
       component="td"
       className={cx({ [classes.ellipsis]: ellipsis })}
-      sx={{ textAlign, ...getCellWidthStyleProps({ width, propertyName, expandedColumnPropertyName }) }}
+      sx={{
+        textAlign,
+        ...getCellWidthStyleProps({
+          width,
+          accessor,
+          expandedColumnAccessor,
+        }),
+      }}
     >
-      {render ? render(record) : (get(record, propertyName) as ReactNode)}
+      {render ? render(record) : (get(record, accessor) as ReactNode)}
     </Box>
   );
 }

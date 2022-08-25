@@ -1,11 +1,11 @@
 export default function getCellWidthStyleProps({
   width,
-  propertyName,
-  expandedColumnPropertyName,
+  accessor,
+  expandedColumnAccessor,
 }: {
   width: string | number | undefined;
-  propertyName: string;
-  expandedColumnPropertyName: string | undefined;
+  accessor: string;
+  expandedColumnAccessor: string | undefined;
 }) {
-  return propertyName === expandedColumnPropertyName ? { width: '100%' } : { width, minWidth: width, maxWidth: width };
+  return accessor === expandedColumnAccessor ? { width: '100%' } : { width, minWidth: width, maxWidth: width };
 }

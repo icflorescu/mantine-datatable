@@ -12,8 +12,8 @@ export default function Page() {
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        This guide will help you get familiar with core Mantine DataTable concepts. Please read this guide and refer to
-        the example sections before starting development to learn about all available features.
+        This document will help you get familiar with core Mantine DataTable concepts. Please read it and refer to the
+        example sections before starting development to learn about all available features.
       </PageText>
       <PageSubtitle value="Theming, styling and dark color scheme" />
       <PageText>

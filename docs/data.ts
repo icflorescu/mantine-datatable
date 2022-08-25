@@ -1,38 +1,49 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { get, sortBy } from 'lodash';
 import { DataTableSortStatus } from 'mantine-datatable';
-import data from './data.json';
+import companyData from './data/companies.json';
+import departmentData from './data/departments.json';
+import employeeData from './data/employees.json';
 
-const departments = data.departments.map(({ companyId, ...rest }) => ({
-  ...rest,
-  company: data.companies.find(({ id }) => id === companyId),
-}));
+export type Company = {
+  id: string;
+  name: string;
+  streetAddress: string;
+  city: string;
+  state: string;
+};
 
-const employees = data.employees.map(({ departmentId, ...rest }) => ({
-  ...rest,
-  department: departments.find(({ id }) => id === departmentId),
-}));
+export type Department = {
+  id: string;
+  name: string;
+  company: Company;
+};
 
-export type EmployeeData = {
+export type Employee = {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
   birthDate: string;
-  department: {
-    id: string;
-    name: string;
-    company: {
-      id: string;
-      name: string;
-    };
-  };
+  department: Department;
 };
+
+const companies: Company[] = [...companyData];
+
+const departments: Department[] = departmentData.map(({ companyId, ...rest }) => ({
+  ...rest,
+  company: companies.find(({ id }) => id === companyId)!,
+}));
+
+const employees: Employee[] = employeeData.map(({ departmentId, ...rest }) => ({
+  ...rest,
+  department: departments.find(({ id }) => id === departmentId)!,
+}));
 
 export async function getEmployees({
   page,
   recordsPerPage,
-  sortStatus: { propertyName: sortPropertyName, direction: sortDirection },
+  sortStatus: { columnAccessor: sortAccessor, direction: sortDirection },
 }: {
   page: number;
   recordsPerPage: number;
@@ -43,14 +54,14 @@ export async function getEmployees({
   });
 
   let now: Dayjs;
-  if (sortPropertyName === 'age') now = dayjs();
+  if (sortAccessor === 'age') now = dayjs();
 
   let result = sortBy(employees, (employee) =>
-    sortPropertyName === 'name'
+    sortAccessor === 'name'
       ? `${employee.firstName} ${employee.lastName}`
-      : sortPropertyName === 'age'
+      : sortAccessor === 'age'
       ? now.diff(employee.birthDate)
-      : get(employee, sortPropertyName)
+      : get(employee, sortAccessor)
   );
 
   if (sortDirection === 'desc') result.reverse();
@@ -59,5 +70,5 @@ export async function getEmployees({
   const skip = (page - 1) * recordsPerPage;
   result = result.slice(skip, skip + recordsPerPage);
 
-  return { total, employees: result as unknown as EmployeeData[] };
+  return { total, employees: result as Employee[] };
 }

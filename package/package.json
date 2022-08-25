@@ -33,8 +33,8 @@
   ],
   "scripts": {
     "dev": "rm -rf dist",
-    "build": "node build.mjs && tsc",
-    "lint": "eslint *.ts*"
+    "build": "node build.mjs && tsc --emitDeclarationOnly",
+    "lint": "eslint *.ts* && tsc --noEmit"
   },
   "devDependencies": {
     "@mantine/core": "^5.2.3",

@@ -1,9 +1,13 @@
+import { Text } from '@mantine/core';
 import { DataTable } from 'mantine-datatable';
 
-export default function BasicUsageExample() {
+export default function GettingStartedExample() {
   return (
     <DataTable
-      columns={[{ accessor: 'name' }, { accessor: 'bornIn' }, { accessor: 'party' }]}
+      striped
+      highlightOnHover
+      withVerticalBorders
+      // provide data
       records={[
         { id: 1, name: 'Joe Biden', bornIn: 1942, party: 'Democratic' },
         { id: 2, name: 'Donald Trump', bornIn: 1946, party: 'Republican' },
@@ -18,6 +22,30 @@ export default function BasicUsageExample() {
         { id: 10, name: 'Richard Nixon', bornIn: 1913, party: 'Republican' },
         // example-resume
       ]}
+      // define columns
+      columns={[
+        {
+          accessor: 'id',
+          // this column has a custom title
+          title: '#',
+          // right-align column
+          textAlign: 'right',
+        },
+        { accessor: 'name' },
+        {
+          accessor: 'party',
+          // this column has custom cell data rendering
+          render: ({ party }) => (
+            <Text weight={700} color={party === 'Democratic' ? 'blue' : 'red'}>
+              {party.slice(0, 3).toUpperCase()}
+            </Text>
+          ),
+        },
+        // simplest column definition
+        { accessor: 'bornIn' },
+      ]}
+      // which column should expand to fill the available width
+      expandedColumnAccessor="name"
     />
   );
 }

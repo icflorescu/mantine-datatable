@@ -1,5 +1,5 @@
 import { Checkbox, createStyles } from '@mantine/core';
-import { ChangeEventHandler, MouseEvent } from 'react';
+import { ChangeEventHandler } from 'react';
 import { DataTableColumn } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
 
@@ -47,7 +47,7 @@ const useStyles = createStyles((theme) => {
         background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.55) : theme.fn.lighten(baseColor, 0.85),
       },
     },
-    menuVisible: {
+    contextMenuVisible: {
       'tr&': {
         background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.5) : theme.fn.lighten(baseColor, 0.7),
       },
@@ -60,49 +60,46 @@ const useStyles = createStyles((theme) => {
 
 type DataTableRowProps<T> = {
   record: T;
-  expandedColumnPropertyName: string | undefined;
+  expandedColumnAccessor: string | undefined;
   columns: DataTableColumn<T>[];
   selectionVisible: boolean;
   selectionChecked: boolean;
   onSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
-  menu:
-    | {
-        trigger: 'click' | 'rightClick';
-        onShow: (info: { top: number; left: number; record: T }) => void;
-      }
-    | undefined;
-  menuVisible: boolean;
+  onClick: ((record: T) => void) | undefined;
+  onContextMenu: ((info: { top: number; left: number; record: T }) => void) | undefined;
+  contextMenuVisible: boolean;
   leftShadowVisible: boolean;
 };
 
 export default function DataTableRow<T>({
   record,
-  expandedColumnPropertyName,
+  expandedColumnAccessor,
   columns,
   selectionVisible,
   selectionChecked,
   onSelectionChange,
-  menu,
-  menuVisible,
+  onClick,
+  onContextMenu,
+  contextMenuVisible,
   leftShadowVisible,
 }: DataTableRowProps<T>) {
-  const showMenu = menu
-    ? (e: MouseEvent<HTMLTableRowElement, globalThis.MouseEvent>) => {
-        e.preventDefault();
-        menu.onShow({ top: e.clientY, left: e.clientX, record });
-      }
-    : undefined;
-
   const { cx, classes } = useStyles();
 
   return (
     <tr
       className={cx({
         [classes.selected]: selectionChecked,
-        [classes.menuVisible]: menuVisible,
+        [classes.contextMenuVisible]: contextMenuVisible,
       })}
-      onClick={menu?.trigger === 'click' ? showMenu : undefined}
-      onContextMenu={menu?.trigger === 'rightClick' ? showMenu : undefined}
+      onClick={onClick ? () => onClick(record) : undefined}
+      onContextMenu={
+        onContextMenu
+          ? (e) => {
+              e.preventDefault();
+              onContextMenu({ top: e.clientY, left: e.clientX, record });
+            }
+          : undefined
+      }
     >
       {selectionVisible && (
         <td className={cx(classes.selectorCell, { [classes.selectorCellWithRightShadow]: leftShadowVisible })}>
@@ -114,13 +111,13 @@ export default function DataTableRow<T>({
           />
         </td>
       )}
-      {columns.map(({ propertyName, visibleMediaQuery, textAlign, ellipsis, width, render }) => (
+      {columns.map(({ accessor, visibleMediaQuery, textAlign, ellipsis, width, render }) => (
         <DataTableRowCell<T>
-          key={propertyName}
+          key={accessor}
           visibleMediaQuery={visibleMediaQuery}
           record={record}
-          propertyName={propertyName}
-          expandedColumnPropertyName={expandedColumnPropertyName}
+          accessor={accessor}
+          expandedColumnAccessor={expandedColumnAccessor}
           textAlign={textAlign}
           ellipsis={ellipsis}
           width={width}
