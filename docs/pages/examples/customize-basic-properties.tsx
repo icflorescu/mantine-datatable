@@ -40,6 +40,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         number of additional ones. Try to customize them interactively below.
       </PageText>
       <CustomizeBasicPropertiesExample initialCode={initialTsxCode} setCode={setTsxCode} />
+      <PageText>Code:</PageText>
       <CodeBlockTabs
         items={[
           { title: 'tsx code', language: 'typescript', content: tsxCode },

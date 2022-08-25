@@ -2,6 +2,7 @@ import { createStyles, Grid, MantineSize, Paper, Slider, Stack, Switch } from '@
 import { DataTable } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
 import ExampleContainer from '~/components/ExampleContainer';
+import PageText from '~/components/PageText';
 import companies from '~/data/companies.json';
 
 const SIZES: { value: number; size: MantineSize }[] = [
@@ -159,6 +160,7 @@ export default function CustomizeBasicPropertiesExample({
           </Grid.Col>
         </Grid>
       </Paper>
+      <PageText>Output:</PageText>
       <ExampleContainer>
         {/* example-start */}
         <DataTable
