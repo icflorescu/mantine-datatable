@@ -33,6 +33,7 @@ export const PAGES: (
     items: [
       { title: 'Basic usage', path: 'basic-usage' },
       { title: 'Basic table properties', path: 'basic-table-properties' },
+      { title: 'Non-standard record IDs', path: 'non-standard-record-ids' },
       { title: 'Column properties', path: 'column-properties' },
       { title: 'Scrollable vs. dynamic height', path: 'scrollable-vs-dynamic-height' },
       { title: 'Pagination', path: 'pagination' },

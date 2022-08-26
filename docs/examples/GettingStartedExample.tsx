@@ -44,8 +44,6 @@ export default function GettingStartedExample() {
         // simplest column definition
         { accessor: 'bornIn' },
       ]}
-      // which column should expand to fill the available width
-      expandedColumnAccessor="name"
       // execute this callback when a row is clicked
       onRowClick={({ name, party, bornIn }) =>
         alert(`You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}`)
