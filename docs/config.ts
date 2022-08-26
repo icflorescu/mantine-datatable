@@ -37,6 +37,7 @@ export const PAGES: (
       { title: 'Column properties', path: 'column-properties' },
       { title: 'Scrollable vs. dynamic height', path: 'scrollable-vs-dynamic-height' },
       { title: 'Pagination', path: 'pagination' },
+      { title: 'Sorting', path: 'sorting' },
       { title: 'Temp', path: 'temp' },
     ],
   },

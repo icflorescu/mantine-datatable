@@ -1,8 +1,8 @@
 import { Box, createStyles } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
 import { get } from 'lodash';
 import { ReactNode } from 'react';
 import { DataTableColumn } from './DataTable.props';
+import useMediaQueryStringOrFn from './useMediaQueryStringOrFn';
 
 const useStyles = createStyles({
   ellipsis: {
@@ -26,7 +26,8 @@ export default function DataTableRowCell<T>({
   render,
 }: DataTableRowCellProps<T>) {
   const { cx, classes } = useStyles();
-  if (!useMediaQuery(visibleMediaQuery || '', true)) return null;
+
+  if (!useMediaQueryStringOrFn(visibleMediaQuery)) return null;
   return (
     <Box
       component="td"

@@ -1,9 +1,9 @@
-import { Box, Center, createStyles, Group } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
+import { Box, Center, createStyles, Group, MantineTheme } from '@mantine/core';
 import { lowerCase, upperFirst } from 'lodash';
 import { ReactNode } from 'react';
 import { ArrowDown, ArrowsVertical, ArrowUp } from 'tabler-icons-react';
 import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
+import useMediaQueryStringOrFn from './useMediaQueryStringOrFn';
 
 const useStyles = createStyles((theme) => ({
   sortableColumnHeader: {
@@ -17,6 +17,7 @@ const useStyles = createStyles((theme) => ({
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
+    userSelect: 'none',
   },
   sortableColumnHeaderText: {
     minWidth: 0,
@@ -32,8 +33,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 type DataTableHeaderCell<T> = {
-  accessor: string;
-  visibleMediaQuery: string | undefined;
+  visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: ReactNode | undefined;
   sortStatus: DataTableSortStatus | undefined;
   onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
@@ -50,7 +50,7 @@ export default function DataTableHeaderCell<T>({
   onSortStatusChange,
 }: DataTableHeaderCell<T>) {
   const { cx, classes } = useStyles();
-  if (!useMediaQuery(visibleMediaQuery || '', true)) return null;
+  if (!useMediaQueryStringOrFn(visibleMediaQuery)) return null;
   const text = title ?? upperFirst(lowerCase(accessor));
   return (
     <Box

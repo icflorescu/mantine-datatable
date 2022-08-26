@@ -5,13 +5,13 @@ import ExampleContainer from '~/components/ExampleContainer';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import PaginationExample from '~/examples/PaginationExample';
+import SortingExample from '~/examples/SortingExample';
 import readCodeExample from '~/lib/readCodeExample';
 
-const PATH = 'examples/pagination';
+const PATH = 'examples/sorting';
 
 export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('examples/PaginationExample.tsx')) as string },
+  props: { code: (await readCodeExample('examples/SortingExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -19,14 +19,26 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        You can enable pagination by specifying the following component properties: <Code>page</Code>,{' '}
-        <Code>onPageChange</Code>, <Code>totalRecords</Code>, and <Code>recordsPerPage</Code>.
+        In order to enable sorting, you’ll have to:
+        <ul>
+          <li>
+            set <Code>sortable: true</Code> on each sorting candidate column;
+          </li>
+          <li>
+            add a <Code>sortStatus</Code>property on the <Code>DataTable</Code> component equal to an object describing
+            the current sort status;
+          </li>
+          <li>
+            add an <Code>onSortStatusChange</Code> handler to perform the required action when a sortable column header
+            is clicked.
+          </li>
+        </ul>
       </PageText>
       <PageText>Consider the example below:</PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>
       <ExampleContainer height={300}>
-        <PaginationExample />
+        <SortingExample />
       </ExampleContainer>
       <PageNavigation of={PATH} />
     </Container>
