@@ -166,12 +166,6 @@ export type DataTableProps<T> = {
   idAccessor?: string;
 
   /**
-   * Accessor of the column to expand; you can use dot-notation for nested objects property drilling
-   * (i.e. `department.name` or `department.company.name` - see https://lodash.com/docs#get)
-   */
-  expandedColumnAccessor?: string;
-
-  /**
    * Visible records; the `DataTable` component will try to infer its row type from here
    */
   records?: T[];

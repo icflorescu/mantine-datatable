@@ -3,7 +3,6 @@ import { useMediaQuery } from '@mantine/hooks';
 import { get } from 'lodash';
 import { ReactNode } from 'react';
 import { DataTableColumn } from './DataTable.props';
-import getCellWidthStyleProps from './getCellWidthStyleProps';
 
 const useStyles = createStyles({
   ellipsis: {
@@ -15,7 +14,6 @@ const useStyles = createStyles({
 
 type DataTableRowCellProps<T> = {
   record: T;
-  expandedColumnAccessor: string | undefined;
 } & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlign' | 'width' | 'ellipsis' | 'render'>;
 
 export default function DataTableRowCell<T>({
@@ -25,7 +23,6 @@ export default function DataTableRowCell<T>({
   textAlign,
   width,
   accessor,
-  expandedColumnAccessor,
   render,
 }: DataTableRowCellProps<T>) {
   const { cx, classes } = useStyles();
@@ -35,12 +32,10 @@ export default function DataTableRowCell<T>({
       component="td"
       className={cx({ [classes.ellipsis]: ellipsis })}
       sx={{
+        width,
+        minWidth: width,
+        maxWidth: width,
         textAlign,
-        ...getCellWidthStyleProps({
-          width,
-          accessor,
-          expandedColumnAccessor,
-        }),
       }}
     >
       {render ? render(record) : (get(record, accessor) as ReactNode)}

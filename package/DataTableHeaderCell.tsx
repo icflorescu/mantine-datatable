@@ -4,7 +4,6 @@ import { lowerCase, upperFirst } from 'lodash';
 import { ReactNode } from 'react';
 import { ArrowDown, ArrowsVertical, ArrowUp } from 'tabler-icons-react';
 import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
-import getCellWidthStyleProps from './getCellWidthStyleProps';
 
 const useStyles = createStyles((theme) => ({
   sortableColumnHeader: {
@@ -36,7 +35,6 @@ type DataTableHeaderCell<T> = {
   accessor: string;
   visibleMediaQuery: string | undefined;
   title: ReactNode | undefined;
-  expandedColumnAccessor: string | undefined;
   sortStatus: DataTableSortStatus | undefined;
   onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
 } & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlign' | 'width'>;
@@ -48,7 +46,6 @@ export default function DataTableHeaderCell<T>({
   sortable,
   textAlign,
   width,
-  expandedColumnAccessor,
   sortStatus,
   onSortStatusChange,
 }: DataTableHeaderCell<T>) {
@@ -61,11 +58,9 @@ export default function DataTableHeaderCell<T>({
       className={cx({ [classes.sortableColumnHeader]: sortable })}
       sx={{
         '&&': { textAlign },
-        ...getCellWidthStyleProps({
-          width,
-          accessor,
-          expandedColumnAccessor,
-        }),
+        width,
+        minWidth: width,
+        maxWidth: width,
       }}
       role={sortable ? 'button' : undefined}
       onClick={

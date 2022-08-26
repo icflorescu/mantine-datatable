@@ -63,7 +63,6 @@ const useStyles = createStyles((theme) => {
 
 type DataTableRowProps<T> = {
   record: T;
-  expandedColumnAccessor: string | undefined;
   columns: DataTableColumn<T>[];
   selectionVisible: boolean;
   selectionChecked: boolean;
@@ -76,7 +75,6 @@ type DataTableRowProps<T> = {
 
 export default function DataTableRow<T>({
   record,
-  expandedColumnAccessor,
   columns,
   selectionVisible,
   selectionChecked,
@@ -121,7 +119,6 @@ export default function DataTableRow<T>({
           visibleMediaQuery={visibleMediaQuery}
           record={record}
           accessor={accessor}
-          expandedColumnAccessor={expandedColumnAccessor}
           textAlign={textAlign}
           ellipsis={ellipsis}
           width={width}

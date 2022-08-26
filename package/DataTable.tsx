@@ -51,7 +51,6 @@ export default function DataTable<T extends Record<string, unknown>>({
   fetching,
   columns,
   idAccessor = 'id',
-  expandedColumnAccessor,
   records,
   selectedRecords,
   onSelectedRecordsChange,
@@ -173,7 +172,6 @@ export default function DataTable<T extends Record<string, unknown>>({
           <DataTableHeader<T>
             ref={headerRef}
             columns={columns}
-            expandedColumnAccessor={expandedColumnAccessor}
             sortStatus={sortStatus}
             onSortStatusChange={onSortStatusChange}
             selectionVisible={!!selectedRecords}
@@ -202,7 +200,6 @@ export default function DataTable<T extends Record<string, unknown>>({
                   <DataTableRow<T>
                     key={recordId as Key}
                     record={record}
-                    expandedColumnAccessor={expandedColumnAccessor}
                     columns={columns}
                     selectionVisible={!!selectedRecords}
                     selectionChecked={selected}
