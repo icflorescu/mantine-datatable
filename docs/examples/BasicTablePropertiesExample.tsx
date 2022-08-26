@@ -25,7 +25,7 @@ const useStyles = createStyles({
   },
 });
 
-export default function TablePropertiesExample({ initialCode }: { initialCode: string }) {
+export default function BasicTablePropertiesExample({ initialCode }: { initialCode: string }) {
   const [withVerticalBorders, setWithVerticalBorders] = useState(false);
   const [striped, setStriped] = useState(false);
   const [highlightOnHover, setHighlightOnHover] = useState(false);

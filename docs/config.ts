@@ -1,6 +1,6 @@
 import { MantineColor } from '@mantine/core';
 import { FC } from 'react';
-import { Adjustments, Home, Rocket, Star } from 'tabler-icons-react';
+import { Adjustments, Home, Rocket } from 'tabler-icons-react';
 
 export const HEADER_HEIGHT = 56;
 export const NAVBAR_WIDTH = 280;
@@ -25,18 +25,16 @@ export const PAGES: (
 )[] = [
   { icon: Home, title: 'Home' },
   { icon: Rocket, color: 'orange', title: 'Getting started', path: 'getting-started' },
-  { icon: Star, color: 'grape', title: 'Learn the basics', path: 'learn-the-basics' },
-  { icon: Adjustments, color: 'cyan', title: 'Component properties', path: 'component-properties' },
+  { icon: Adjustments, color: 'grape', title: 'Component properties', path: 'component-properties' },
   {
     color: 'green',
     title: 'Examples',
     path: 'examples',
     items: [
       { title: 'Basic usage', path: 'basic-usage' },
-      { title: 'Table properties', path: 'table-properties' },
+      { title: 'Basic table properties', path: 'basic-table-properties' },
       { title: 'Column properties', path: 'column-properties' },
-      { title: 'Column media-queries', path: 'column-media-queries' },
-      { title: 'Scrollable vs. auto-height', path: 'scrollable-vs-auto-height' },
+      { title: 'Scrollable vs. dynamic height', path: 'scrollable-vs-dynamic-height' },
       { title: 'Pagination', path: 'pagination' },
       { title: 'Temp', path: 'temp' },
     ],

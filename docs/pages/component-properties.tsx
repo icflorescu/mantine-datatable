@@ -19,7 +19,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>
         Mantine DataTable component is written in Typescript and its properties are well documented with additional
         JSDoc annotations, so you can harness the full power of your IDE to build type safe applications with
-        confidence. Here is the actual source of <Code>DataTable.props.ts</Code>:
+        confidence.
+        <br />
+        Here is the source of <Code>DataTable.props.ts</Code>:
       </PageText>
       <CodeBlock language="typescript" content={code} noCopy />
       <PageNavigation of={PATH} />

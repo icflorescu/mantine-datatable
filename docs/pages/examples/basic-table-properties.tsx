@@ -4,13 +4,13 @@ import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import TablePropertiesExample from '~/examples/TablePropertiesExample';
+import BasicTablePropertiesExample from '~/examples/BasicTablePropertiesExample';
 import readCodeExample from '~/lib/readCodeExample';
 
-const PATH = 'examples/table-properties';
+const PATH = 'examples/basic-table-properties';
 
 export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('examples/TablePropertiesExample.tsx')) as string },
+  props: { code: (await readCodeExample('examples/BasicTablePropertiesExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -22,7 +22,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <ExternalLink to="https://mantine.dev/core/table/">Mantine Table</ExternalLink> component and implements a
         number of additional ones. Try to customize some of them interactively below:
       </PageText>
-      <TablePropertiesExample initialCode={code} />
+      <BasicTablePropertiesExample initialCode={code} />
       <PageNavigation of={PATH} />
     </Container>
   );

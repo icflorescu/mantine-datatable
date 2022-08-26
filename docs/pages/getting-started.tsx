@@ -54,9 +54,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <GettingStartedExample />
       </ExampleContainer>
       <PageText>
-        Please <InternalLink to="/getting-started">learn the basics</InternalLink> to get familiar with core Mantine
-        DataTable concepts, refer to <InternalLink to="/component-properties">component properies</InternalLink> page to
-        see the full list of available properties and browse the code examples to see the component in action.
+        Have a look at the list of <InternalLink to="/component-properties">component properties</InternalLink> and
+        browse the code examples to see the component in action and learn how to use it.
       </PageText>
       <PageNavigation of={PATH} />
     </Container>
