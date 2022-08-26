@@ -25,7 +25,6 @@ export const PAGES: (
 )[] = [
   { icon: Home, title: 'Home' },
   { icon: Rocket, color: 'orange', title: 'Getting started', path: 'getting-started' },
-  { icon: Adjustments, color: 'grape', title: 'Component properties', path: 'component-properties' },
   {
     color: 'green',
     title: 'Examples',
@@ -42,4 +41,5 @@ export const PAGES: (
       { title: 'Complex usage', path: 'complex-usage' },
     ],
   },
+  { icon: Adjustments, color: 'grape', title: 'Component properties', path: 'component-properties' },
 ];
