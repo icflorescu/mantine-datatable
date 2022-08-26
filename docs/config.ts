@@ -39,7 +39,7 @@ export const PAGES: (
       { title: 'Pagination', path: 'pagination' },
       { title: 'Sorting', path: 'sorting' },
       { title: 'Records selection', path: 'records-selection' },
-      { title: 'Temp', path: 'temp' },
+      { title: 'Complex usage', path: 'complex-usage' },
     ],
   },
 ];
