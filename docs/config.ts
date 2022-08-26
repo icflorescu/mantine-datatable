@@ -33,9 +33,11 @@ export const PAGES: (
     path: 'examples',
     items: [
       { title: 'Basic usage', path: 'basic-usage' },
-      { title: 'Customize basic properties', path: 'customize-basic-properties' },
-      { title: 'Scrollable vs. auto-height', path: 'scrollable-vs-auto-height' },
+      { title: 'Table properties', path: 'table-properties' },
+      { title: 'Column properties', path: 'column-properties' },
       { title: 'Column media-queries', path: 'column-media-queries' },
+      { title: 'Scrollable vs. auto-height', path: 'scrollable-vs-auto-height' },
+      { title: 'Pagination', path: 'pagination' },
       { title: 'Temp', path: 'temp' },
     ],
   },

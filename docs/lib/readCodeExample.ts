@@ -8,6 +8,7 @@ import { readFile } from 'node:fs/promises';
  *  - `example-resume`;
  *  - `example-end`;
  *
+ * Lines containing a single `prettier-ignore` comment are ignored.
  * If a single, un-named block of code is found if the file, the method returns a string; otherwise
  * it returns an object with block name keys and string values
  */
@@ -46,7 +47,6 @@ export default async function readCodeExample(path: string): Promise<string | Re
     const skipCodeMatch =
       line.match(/\/\/ +example-skip(?: +(.*))?/) || line.match(/\{\/\* +example-skip(?: +(.*))? +\*\/\}/);
     if (skipCodeMatch) {
-      console.log(skipCodeMatch);
       adding = false;
       skipping = {
         indent: (skipCodeMatch.index || 0) - indent,
@@ -73,7 +73,10 @@ export default async function readCodeExample(path: string): Promise<string | Re
         '\n';
       skipping = null;
     } else if (adding) {
-      addition = line.slice(indent) + '\n';
+      const lineContent = line.slice(indent);
+      if (!(lineContent === '// prettier-ignore' || lineContent === '{/* prettier-ignore */}')) {
+        addition = line.slice(indent) + '\n';
+      }
     }
     if (addition) {
       if (blockName !== null) {

@@ -46,7 +46,7 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "tabler-icons-react": "^1.54.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.2"
   },
   "peerDependencies": {
     "@mantine/core": "^5.2.3",

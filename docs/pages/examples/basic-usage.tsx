@@ -13,16 +13,14 @@ const PATH = 'examples/basic-usage';
 
 export const getStaticProps: GetStaticProps<{
   code: { 'BasicUsageExample.tsx': string; 'companies.json': string };
-}> = async () => {
-  return {
-    props: {
-      code: await allPromiseProps({
-        'BasicUsageExample.tsx': readCodeExample('examples/BasicUsageExample.tsx') as Promise<string>,
-        'companies.json': readCodeExample('data/companies.json') as Promise<string>,
-      }),
-    },
-  };
-};
+}> = async () => ({
+  props: {
+    code: await allPromiseProps({
+      'BasicUsageExample.tsx': readCodeExample('examples/BasicUsageExample.tsx') as Promise<string>,
+      'companies.json': readCodeExample('data/companies.json') as Promise<string>,
+    }),
+  },
+});
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
@@ -30,7 +28,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageTitle of={PATH} />
       <PageText>
         In its most basic usage scenario, the <Code>DataTable</Code> component only requires <Code>records</Code> and{' '}
-        <Code>columns</Code> properties to be set.
+        <Code>columns</Code> properties to be set:
       </PageText>
       <CodeBlockTabs
         items={[
@@ -38,7 +36,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           { title: 'companies.json', language: 'json', content: code['companies.json'] },
         ]}
       />
-      Output:
+      <PageText>The code above will produce the following result:</PageText>
       <ExampleContainer>
         <BasicUsageExample />
       </ExampleContainer>

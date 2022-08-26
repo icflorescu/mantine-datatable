@@ -1,6 +1,7 @@
 import { createStyles, Grid, MantineSize, Paper, Slider, Stack, Switch } from '@mantine/core';
 import { DataTable } from 'mantine-datatable';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import CodeBlock from '~/components/CodeBlock';
 import ExampleContainer from '~/components/ExampleContainer';
 import PageText from '~/components/PageText';
 import companies from '~/data/companies.json';
@@ -24,13 +25,7 @@ const useStyles = createStyles({
   },
 });
 
-export default function CustomizeBasicPropertiesExample({
-  initialCode,
-  setCode,
-}: {
-  initialCode: string;
-  setCode: (code: string) => void;
-}) {
+export default function TablePropertiesExample({ initialCode }: { initialCode: string }) {
   const [withVerticalBorders, setWithVerticalBorders] = useState(false);
   const [striped, setStriped] = useState(false);
   const [highlightOnHover, setHighlightOnHover] = useState(false);
@@ -49,8 +44,8 @@ export default function CustomizeBasicPropertiesExample({
     if (!customizeVerticalSpacing) setVerticalSpacing(INITIAL_VERTICAL_SPACING);
   }, [customizeVerticalSpacing]);
 
-  useEffect(() => {
-    setCode(
+  const adjustInitialCode = useCallback(
+    () =>
       initialCode
         .replace('\n  withVerticalBorders={withVerticalBorders}', withVerticalBorders ? '\n  withVerticalBorders' : '')
         .replace('\n  striped={striped}', striped ? '\n  striped' : '')
@@ -66,21 +61,26 @@ export default function CustomizeBasicPropertiesExample({
         .replace(
           '\n  fontSize={customizeFontSize ? fontSize : undefined}',
           customizeFontSize ? `\n  fontSize="${fontSize}"` : ''
-        )
-    );
-  }, [
-    initialCode,
-    setCode,
-    withVerticalBorders,
-    striped,
-    highlightOnHover,
-    customizeHorizontalSpacing,
-    horizontalSpacing,
-    customizeVerticalSpacing,
-    verticalSpacing,
-    customizeFontSize,
-    fontSize,
-  ]);
+        ),
+    [
+      customizeFontSize,
+      customizeHorizontalSpacing,
+      customizeVerticalSpacing,
+      fontSize,
+      highlightOnHover,
+      horizontalSpacing,
+      initialCode,
+      striped,
+      verticalSpacing,
+      withVerticalBorders,
+    ]
+  );
+
+  const [code, setCode] = useState(adjustInitialCode());
+
+  useEffect(() => {
+    setCode(adjustInitialCode());
+  }, [adjustInitialCode]);
 
   const { classes } = useStyles();
 
@@ -160,9 +160,11 @@ export default function CustomizeBasicPropertiesExample({
           </Grid.Col>
         </Grid>
       </Paper>
-      <PageText>Output:</PageText>
+      <CodeBlock language="typescript" content={code} />
+      <PageText>The code above will produce the following result:</PageText>
       <ExampleContainer>
         {/* example-start */}
+        {/* prettier-ignore */}
         <DataTable
           withVerticalBorders={withVerticalBorders}
           striped={striped}
