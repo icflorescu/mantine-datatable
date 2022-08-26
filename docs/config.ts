@@ -38,6 +38,7 @@ export const PAGES: (
       { title: 'Scrollable vs. dynamic height', path: 'scrollable-vs-dynamic-height' },
       { title: 'Pagination', path: 'pagination' },
       { title: 'Sorting', path: 'sorting' },
+      { title: 'Records selection', path: 'records-selection' },
       { title: 'Temp', path: 'temp' },
     ],
   },

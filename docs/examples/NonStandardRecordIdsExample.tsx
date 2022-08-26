@@ -23,7 +23,11 @@ export default function NonStandardRecordIdsExample() {
         { accessor: 'name', width: '100%' },
         { accessor: 'bornIn', textAlign: 'right' },
       ]}
-      // non-standard record ID (could also use dot-notation to access a nested object property value)
+      /**
+       * Non-standard record ID.
+       * In this case we're using the `name` property, but we could also use dot-notation to access
+       * a nested object property value.
+       */
       idAccessor="name"
     />
   );

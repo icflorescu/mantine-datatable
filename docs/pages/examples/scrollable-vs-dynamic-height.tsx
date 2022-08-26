@@ -32,9 +32,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         .
         <br />
       </PageText>
-      <PageText>
-        <strong>NOTE:</strong> The <Code>DataTable</Code> will always be <em>“horizontaly-scrollable”</em> if its width
-        it greater than its container width.
+      <PageText info>
+        The <Code>DataTable</Code> will always be <em>“horizontaly-scrollable”</em> if its width it greater than its
+        container width.
       </PageText>
       <PageText>Try the interactive example below to see it in action:</PageText>
       <Paper my="xl" p="sm" withBorder>

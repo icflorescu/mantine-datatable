@@ -11,7 +11,7 @@ import PageTitle from '~/components/PageTitle';
 import { Employee, getEmployees } from '~/data';
 
 const PATH = 'examples/temp';
-const recordsPerPage = 100;
+const PAGE_SIZE = 100;
 
 export default function TempExamplePage() {
   const [scrollable, setScrollable] = useLocalStorage({
@@ -30,7 +30,7 @@ export default function TempExamplePage() {
 
   const { data, isFetching } = useQuery(
     ['employees', sortStatus.columnAccessor, sortStatus.direction, page],
-    async () => getEmployees({ recordsPerPage, page, sortStatus })
+    async () => getEmployees({ recordsPerPage: PAGE_SIZE, page, sortStatus })
   );
 
   const [selectedRecords, setSelectedRecords] = useState<Employee[]>([]);
@@ -109,15 +109,14 @@ export default function TempExamplePage() {
                 accessor: 'age',
                 textAlign: 'right',
                 sortable: true,
-                render: ({ birthDate }) => now.diff(birthDate, 'y'),
+                render: ({ birthDate }) => now.diff(birthDate, 'years'),
               },
             ]}
-            expandedColumnAccessor="name"
             records={data?.employees}
             page={page}
             onPageChange={setPage}
             totalRecords={data?.total}
-            recordsPerPage={recordsPerPage}
+            recordsPerPage={PAGE_SIZE}
             sortStatus={sortStatus}
             onSortStatusChange={handleSortStatusChange}
             selectedRecords={selectedRecords}

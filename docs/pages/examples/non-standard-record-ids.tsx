@@ -19,10 +19,14 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        By default, the <Code>DataTable</Code> will assume each record to have a property called <Code>id</Code> with a
-        primitive data-type unique value.
+        By default, the <Code>DataTable</Code> will assume each record to have a property called <Code>id</Code>,
+        holding a unique value of a primitive data type.
         <br />
-        You can override the default behavior by specifying the <Code>idAccessor</Code> property like so:
+        The record IDs are used internally as <Code>.map()</Code> keys and to compare records when necessary.
+      </PageText>
+      <PageText>
+        You can override the default ID property name by specifying a <Code>DataTable</Code> <Code>idAccessor</Code>{' '}
+        like so:
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>
