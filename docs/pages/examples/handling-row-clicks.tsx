@@ -20,15 +20,16 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
+      <PageText>Click on a row to see it in action:</PageText>
+      <ExampleContainer>
+        <HandlingRowClicksExample />
+      </ExampleContainer>
       <PageText>
         You can handle row clicks by simply providing a property called <Code>onRowClick</Code> pointing to a handler
         function to the <Code>DataTable</Code> component:
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>
-      <ExampleContainer>
-        <HandlingRowClicksExample />
-      </ExampleContainer>
       <PageNavigation of={PATH} />
     </Container>
   );

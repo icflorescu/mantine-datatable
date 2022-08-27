@@ -18,16 +18,15 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
+      <ExampleContainer height={300}>
+        <PaginationExample />
+      </ExampleContainer>
       <PageText>
         You can enable pagination by specifying the following component properties: <Code>page</Code>,{' '}
         <Code>onPageChange</Code>, <Code>totalRecords</Code>, and <Code>recordsPerPage</Code>.
       </PageText>
       <PageText>Consider the example below:</PageText>
       <CodeBlock language="typescript" content={code} />
-      <PageText>The code above will produce the following result:</PageText>
-      <ExampleContainer height={300}>
-        <PaginationExample />
-      </ExampleContainer>
       <PageNavigation of={PATH} />
     </Container>
   );

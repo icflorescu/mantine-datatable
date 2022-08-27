@@ -18,6 +18,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
+      <ExampleContainer height={300}>
+        <SortingExample />
+      </ExampleContainer>
       <PageText>
         In order to enable sorting, you’ll have to:
         <ul>
@@ -34,12 +37,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           </li>
         </ul>
       </PageText>
-      <PageText>Consider the example below:</PageText>
       <CodeBlock language="typescript" content={code} />
-      <PageText>The code above will produce the following result:</PageText>
-      <ExampleContainer height={300}>
-        <SortingExample />
-      </ExampleContainer>
       <PageNavigation of={PATH} />
     </Container>
   );

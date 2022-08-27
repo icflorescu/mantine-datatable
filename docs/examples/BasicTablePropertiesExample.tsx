@@ -3,7 +3,6 @@ import { DataTable } from 'mantine-datatable';
 import { useCallback, useEffect, useState } from 'react';
 import CodeBlock from '~/components/CodeBlock';
 import ExampleContainer from '~/components/ExampleContainer';
-import PageText from '~/components/PageText';
 import companies from '~/data/companies.json';
 
 const SIZES: { value: number; size: MantineSize }[] = [
@@ -161,7 +160,6 @@ export default function BasicTablePropertiesExample({ initialCode }: { initialCo
         </Grid>
       </Paper>
       <CodeBlock language="typescript" content={code} />
-      <PageText>The code above will produce the following result:</PageText>
       <ExampleContainer>
         {/* example-start */}
         {/* prettier-ignore */}

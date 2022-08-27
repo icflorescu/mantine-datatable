@@ -22,6 +22,17 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
+      <PageText>Try the interactive example below to see it in action:</PageText>
+      <Paper my="xl" p="sm" withBorder>
+        <Switch
+          label="Restrict container height to make DataTable horizontaly-scrollable"
+          checked={restrictHeight}
+          onChange={() => setRestrictHeight((v) => !v)}
+        />
+      </Paper>
+      <ExampleContainer>
+        <ScrollableVsDynamicHeightExample restrictHeight={restrictHeight} />
+      </ExampleContainer>
       <PageText>
         The <Code>DataTable</Code> component embeds a{' '}
         <ExternalLink to="https://mantine.dev/core/scroll-area/">Mantine ScrollArea</ExternalLink> and has a default{' '}
@@ -36,19 +47,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         The <Code>DataTable</Code> will always be <em>“horizontaly-scrollable”</em> if its width it greater than its
         container width.
       </PageText>
-      <PageText>Try the interactive example below to see it in action:</PageText>
-      <Paper my="xl" p="sm" withBorder>
-        <Switch
-          label="Restrict container height to make DataTable horizontaly-scrollable"
-          checked={restrictHeight}
-          onChange={() => setRestrictHeight((v) => !v)}
-        />
-      </Paper>
       <CodeBlock language="typescript" content={code} />
-      <PageText>The code above will produce the following result:</PageText>
-      <ExampleContainer>
-        <ScrollableVsDynamicHeightExample restrictHeight={restrictHeight} />
-      </ExampleContainer>
       <PageNavigation of={PATH} />
     </Container>
   );

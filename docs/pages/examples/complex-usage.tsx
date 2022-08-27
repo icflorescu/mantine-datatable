@@ -2,6 +2,7 @@ import { Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
 import ExampleContainer from '~/components/ExampleContainer';
+import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -27,19 +28,19 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        Here is a complex usage scenario featuring custom column definitions, asynchronous data loading with React
-        Query, pagination, sorting and row context-menu.
+        Here is a complex usage scenario featuring custom column definitions, asynchronous data loading with{' '}
+        <ExternalLink to="https://tanstack.com/query/v4/docs/adapters/react-query">React Query</ExternalLink>,
+        pagination, sorting and row context-menu.
       </PageText>
+      <ExampleContainer height={300}>
+        <ComplexUsageExample />
+      </ExampleContainer>
       <CodeBlockTabs
         items={[
           { title: 'ComplexUsageExample.tsx', language: 'typescript', content: code['ComplexUsageExample.tsx'] },
           { title: 'data.ts', language: 'typescript', content: code['data.ts'] },
         ]}
       />
-      <PageText>The code above will produce the following result:</PageText>
-      <ExampleContainer height={300}>
-        <ComplexUsageExample />
-      </ExampleContainer>
       <PageNavigation of={PATH} />
     </Container>
   );

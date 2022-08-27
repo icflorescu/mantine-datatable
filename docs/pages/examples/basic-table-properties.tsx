@@ -20,7 +20,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>
         The <Code>DataTable</Code> component exposes the basic properties of the internal{' '}
         <ExternalLink to="https://mantine.dev/core/table/">Mantine Table</ExternalLink> component and implements a
-        number of additional ones. Try to customize some of them interactively below:
+        number of additional ones. Try customizing some of them interactively below:
       </PageText>
       <BasicTablePropertiesExample initialCode={code} />
       <PageNavigation of={PATH} />

@@ -18,6 +18,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
+      <RecordsSelectionExample />
       <PageText>
         In order to enable records selection, you’ll have to:
         <ul>
@@ -50,10 +51,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <Code>DataTable</Code>’s <Code>idAccessor</Code> property (defaulting to <Code>id</Code> - see more info{' '}
         <InternalLink to="/examples/non-standard-record-ids">here</InternalLink>).
       </PageText>
-      <PageText>Consider the example below:</PageText>
       <CodeBlock language="typescript" content={code} />
-      <PageText>The code above will produce the following result:</PageText>
-      <RecordsSelectionExample />
       <PageNavigation of={PATH} />
     </Container>
   );
