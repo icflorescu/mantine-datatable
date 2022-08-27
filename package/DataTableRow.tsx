@@ -110,6 +110,7 @@ export default function DataTableRow<T>({
             checked={selectionChecked}
             disabled={!onSelectionChange}
             onChange={onSelectionChange}
+            onClick={(e) => e.stopPropagation()}
           />
         </td>
       )}
