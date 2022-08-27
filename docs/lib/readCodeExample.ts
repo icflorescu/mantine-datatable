@@ -72,11 +72,8 @@ export default async function readCodeExample(path: string): Promise<string | Re
         (skipping.commentStyle === 'ts' ? `// ${skipping.comment || ''}...` : `{/* ${skipping.comment || ''}... */}`) +
         '\n';
       skipping = null;
-    } else if (adding) {
-      const lineContent = line.slice(indent);
-      if (!(lineContent === '// prettier-ignore' || lineContent === '{/* prettier-ignore */}')) {
-        addition = lineContent + '\n';
-      }
+    } else if (adding && !(line.includes('// prettier-ignore') || line.includes('{/* prettier-ignore */}'))) {
+      addition = line.slice(indent) + '\n';
     }
     if (addition) {
       if (blockName !== null) {

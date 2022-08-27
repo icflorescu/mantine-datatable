@@ -1,7 +1,8 @@
 import { MantineSize } from '@mantine/core';
 import { DataTable, DataTableVerticalAlignment } from 'mantine-datatable';
-import ExampleContainer from '~/components/ExampleContainer';
 import companies from '~/data/companies.json';
+
+const records = companies.slice(0, 5);
 
 export default function BasicTablePropertiesExample({
   withVerticalBorders,
@@ -29,28 +30,25 @@ export default function BasicTablePropertiesExample({
   verticalAlignment: DataTableVerticalAlignment;
 }) {
   // example-start
-  // ...
   return (
-    <ExampleContainer>
-      {/* prettier-ignore */}
-      <DataTable
-        withVerticalBorders={withVerticalBorders}
-        striped={striped}
-        highlightOnHover={highlightOnHover}
-        horizontalSpacing={customizeHorizontalSpacing ? horizontalSpacing : undefined}
-        verticalSpacing={customizeVerticalSpacing ? verticalSpacing : undefined}
-        fontSize={customizeFontSize ? fontSize : undefined}
-        verticalAlignment={customizeVerticalAlignment ? verticalAlignment : undefined}
-        columns={[
-          { accessor: 'name' },
-          { accessor: 'missionStatement', width: 150 },
-          { accessor: 'streetAddress' },
-          { accessor: 'city' },
-          { accessor: 'state' }
-        ]}
-        records={companies}
-      />
-    </ExampleContainer>
+    // prettier-ignore
+    <DataTable
+      withVerticalBorders={withVerticalBorders}
+      striped={striped}
+      highlightOnHover={highlightOnHover}
+      horizontalSpacing={customizeHorizontalSpacing ? horizontalSpacing : undefined}
+      verticalSpacing={customizeVerticalSpacing ? verticalSpacing : undefined}
+      fontSize={customizeFontSize ? fontSize : undefined}
+      verticalAlignment={customizeVerticalAlignment ? verticalAlignment : undefined}
+      columns={[
+        { accessor: 'name' },
+        { accessor: 'missionStatement', width: 150 },
+        { accessor: 'streetAddress' },
+        { accessor: 'city' },
+        { accessor: 'state' }
+      ]}
+      records={records}
+    />
   );
   // example-end
 }

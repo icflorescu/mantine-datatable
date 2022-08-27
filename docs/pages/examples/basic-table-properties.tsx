@@ -3,6 +3,7 @@ import { DataTableVerticalAlignment } from 'mantine-datatable';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
 import CodeBlock from '~/components/CodeBlock';
+import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import CheckableSegmentedControl from '~/components/pages/basic-table-properties/CheckableSegmentedControl';
@@ -29,8 +30,8 @@ const useStyles = createStyles((theme) => ({
   controlGroups: {
     [`@media(min-width: ${theme.breakpoints.sm}px)`]: {
       flexDirection: 'row',
-      gap: theme.spacing.xl * 3,
-      justifyContent: 'space-around',
+      gap: theme.spacing.xl,
+      justifyContent: 'space-between',
     },
   },
   controls: {
@@ -64,30 +65,23 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
     if (!customizeVerticalSpacing) setVerticalSpacing(INITIAL_VERTICAL_SPACING);
   }, [customizeVerticalSpacing]);
 
-  const adjustInitialCode = useCallback(
+  const adjustCode = useCallback(
     () =>
       initialCode
-        .replace(
-          '\n      withVerticalBorders={withVerticalBorders}',
-          withVerticalBorders ? '\n      withVerticalBorders' : ''
+        .replace(/( +)withVerticalBorders=.*\n/, (_, spaces) =>
+          withVerticalBorders ? `${spaces}withVerticalBorders\n` : ''
         )
-        .replace('\n      striped={striped}', striped ? '\n      striped' : '')
-        .replace('\n      highlightOnHover={highlightOnHover}', highlightOnHover ? '\n      highlightOnHover' : '')
-        .replace(
-          '\n      horizontalSpacing={customizeHorizontalSpacing ? horizontalSpacing : undefined}',
-          customizeHorizontalSpacing ? `\n      horizontalSpacing="${horizontalSpacing}"` : ''
+        .replace(/( +)striped=.*\n/, (_, spaces) => (striped ? `${spaces}striped\n` : ''))
+        .replace(/( +)highlightOnHover=.*\n/, (_, spaces) => (highlightOnHover ? `${spaces}highlightOnHover\n` : ''))
+        .replace(/( +)horizontalSpacing=.*\n/, (_, spaces) =>
+          customizeHorizontalSpacing ? `${spaces}horizontalSpacing="${horizontalSpacing}"\n` : ''
         )
-        .replace(
-          '\n      verticalSpacing={customizeVerticalSpacing ? verticalSpacing : undefined}',
-          customizeVerticalSpacing ? `\n      verticalSpacing="${verticalSpacing}"` : ''
+        .replace(/( +)verticalSpacing=.*\n/, (_, spaces) =>
+          customizeVerticalSpacing ? `${spaces}verticalSpacing="${verticalSpacing}"\n` : ''
         )
-        .replace(
-          '\n      fontSize={customizeFontSize ? fontSize : undefined}',
-          customizeFontSize ? `\n      fontSize="${fontSize}"` : ''
-        )
-        .replace(
-          '\n      verticalAlignment={customizeVerticalAlignment ? verticalAlignment : undefined}',
-          customizeVerticalAlignment ? `\n      verticalAlignment="${verticalAlignment}"` : ''
+        .replace(/( +)fontSize=.*\n/, (_, spaces) => (customizeFontSize ? `${spaces}fontSize="${fontSize}"\n` : ''))
+        .replace(/( +)verticalAlignment=.*\n/, (_, spaces) =>
+          customizeVerticalAlignment ? `${spaces}verticalAlignment="${verticalAlignment}"\n` : ''
         ),
     [
       customizeFontSize,
@@ -105,11 +99,11 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
     ]
   );
 
-  const [code, setCode] = useState(adjustInitialCode());
+  const [code, setCode] = useState(adjustCode());
 
   useEffect(() => {
-    setCode(adjustInitialCode());
-  }, [adjustInitialCode]);
+    setCode(adjustCode());
+  }, [adjustCode]);
 
   const { cx, classes } = useStyles();
 
@@ -121,7 +115,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
         <ExternalLink to="https://mantine.dev/core/table/">Mantine Table</ExternalLink> component and implements a
         number of additional ones. Try customizing some of them interactively below:
       </PageText>
-      <Paper my="xl" p="sm" withBorder>
+      <Paper my="xl" px="xl" py="sm" withBorder>
         <div className={cx(classes.controlGroups, classes.controls)}>
           <div className={classes.controls}>
             <Switch
@@ -183,20 +177,22 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
           </div>
         </div>
       </Paper>
+      <ExampleContainer>
+        <BasicTablePropertiesExample
+          withVerticalBorders={withVerticalBorders}
+          striped={striped}
+          highlightOnHover={highlightOnHover}
+          customizeHorizontalSpacing={customizeHorizontalSpacing}
+          horizontalSpacing={horizontalSpacing}
+          customizeVerticalSpacing={customizeVerticalSpacing}
+          verticalSpacing={verticalSpacing}
+          customizeFontSize={customizeFontSize}
+          fontSize={fontSize}
+          customizeVerticalAlignment={customizeVerticalAlignment}
+          verticalAlignment={verticalAlignment}
+        />
+      </ExampleContainer>
       <CodeBlock language="typescript" content={code} />
-      <BasicTablePropertiesExample
-        withVerticalBorders={withVerticalBorders}
-        striped={striped}
-        highlightOnHover={highlightOnHover}
-        customizeHorizontalSpacing={customizeHorizontalSpacing}
-        horizontalSpacing={horizontalSpacing}
-        customizeVerticalSpacing={customizeVerticalSpacing}
-        verticalSpacing={verticalSpacing}
-        customizeFontSize={customizeFontSize}
-        fontSize={fontSize}
-        customizeVerticalAlignment={customizeVerticalAlignment}
-        verticalAlignment={verticalAlignment}
-      />
       <PageNavigation of={PATH} />
     </Container>
   );

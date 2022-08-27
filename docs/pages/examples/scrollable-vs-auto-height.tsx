@@ -7,25 +7,19 @@ import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import AutoHeightExample from '~/examples/scrollable-vs-auto-height/AutoHeightExample';
-import ScrollableExample from '~/examples/scrollable-vs-auto-height/ScrollableExample';
-import allPromiseProps from '~/lib/allPromiseProps';
+import { AutoHeightExample, ScrollableExample } from '~/examples/ScrollableVsAutoHeightExamples';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/scrollable-vs-auto-height';
 
 export const getStaticProps: GetStaticProps<{
-  code: { 'ScrollableExample.tsx': string; 'AutoHeightExample.tsx': string };
+  code: { scrollable: string; 'auto-height': string };
 }> = async () => ({
   props: {
-    code: await allPromiseProps({
-      'ScrollableExample.tsx': readCodeExample(
-        'examples/scrollable-vs-auto-height/ScrollableExample.tsx'
-      ) as Promise<string>,
-      'AutoHeightExample.tsx': readCodeExample(
-        'examples/scrollable-vs-auto-height/AutoHeightExample.tsx'
-      ) as Promise<string>,
-    }),
+    code: (await readCodeExample('examples/ScrollableVsAutoHeightExamples.tsx')) as {
+      scrollable: string;
+      'auto-height': string;
+    },
   },
 });
 
@@ -58,7 +52,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         The <Code>DataTable</Code> will always be <em>“horizontally-scrollable”</em> if its width it greater than its
         container width.
       </PageText>
-      <CodeBlock language="typescript" content={code[scrollable ? 'ScrollableExample.tsx' : 'AutoHeightExample.tsx']} />
+      <CodeBlock language="typescript" content={code[scrollable ? 'scrollable' : 'auto-height']} />
       <PageNavigation of={PATH} />
     </Container>
   );
