@@ -229,7 +229,14 @@ export default function DataTable<T extends Record<string, unknown>>({
                         : undefined
                     }
                     onClick={onRowClick}
-                    onContextMenu={rowContextMenu ? setContextMenuInfo : undefined}
+                    onContextMenu={
+                      rowContextMenu &&
+                      !(typeof rowContextMenu.hidden === 'function'
+                        ? rowContextMenu.hidden(record)
+                        : rowContextMenu.hidden)
+                        ? setContextMenuInfo
+                        : undefined
+                    }
                     contextMenuVisible={contextMenuInfo ? get(contextMenuInfo.record, idAccessor) === recordId : false}
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
@@ -267,40 +274,36 @@ export default function DataTable<T extends Record<string, unknown>>({
         loaderVariant={loaderVariant}
       />
       <DataTableEmpty pt={headerHeight} pb={footerHeight} text={noRecordsText} active={!fetching && !recordsLength} />
-      {rowContextMenu &&
-        contextMenuInfo &&
-        !(typeof rowContextMenu.hidden === 'function'
-          ? rowContextMenu.hidden(contextMenuInfo.record)
-          : rowContextMenu.hidden) && (
-          <DataTableRowMenu
-            top={contextMenuInfo.top}
-            left={contextMenuInfo.left}
-            onDestroy={() => setContextMenuInfo(null)}
-          >
-            {rowContextMenu.items.map(({ key, title, icon, color, hidden, disabled, onClick }) => {
-              const { record } = contextMenuInfo;
-              if (typeof hidden === 'function' ? hidden(record) : hidden) return null;
-              const titleValue = title
-                ? typeof title === 'function'
-                  ? title(record)
-                  : title
-                : upperFirst(lowerCase(key));
-              return (
-                <DataTableRowMenuItem
-                  key={key}
-                  title={titleValue}
-                  icon={typeof icon === 'function' ? icon(record) : icon}
-                  color={typeof color === 'function' ? color(record) : color}
-                  disabled={typeof disabled === 'function' ? disabled(record) : disabled}
-                  onClick={() => {
-                    setContextMenuInfo(null);
-                    onClick(record);
-                  }}
-                />
-              );
-            })}
-          </DataTableRowMenu>
-        )}
+      {rowContextMenu && contextMenuInfo && (
+        <DataTableRowMenu
+          top={contextMenuInfo.top}
+          left={contextMenuInfo.left}
+          onDestroy={() => setContextMenuInfo(null)}
+        >
+          {rowContextMenu.items.map(({ key, title, icon, color, hidden, disabled, onClick }) => {
+            const { record } = contextMenuInfo;
+            if (typeof hidden === 'function' ? hidden(record) : hidden) return null;
+            const titleValue = title
+              ? typeof title === 'function'
+                ? title(record)
+                : title
+              : upperFirst(lowerCase(key));
+            return (
+              <DataTableRowMenuItem
+                key={key}
+                title={titleValue}
+                icon={typeof icon === 'function' ? icon(record) : icon}
+                color={typeof color === 'function' ? color(record) : color}
+                disabled={typeof disabled === 'function' ? disabled(record) : disabled}
+                onClick={() => {
+                  setContextMenuInfo(null);
+                  onClick(record);
+                }}
+              />
+            );
+          })}
+        </DataTableRowMenu>
+      )}
     </Box>
   );
 }

@@ -205,9 +205,10 @@ export type DataTableProps<T> = {
    */
   rowContextMenu?: {
     /**
-     * If true or a function returning true, the menu will not be shown
+     * Boolean or function accepting the current record as parameter returning boolean;
+     * if true, the menu will not be shown
      */
-    hidden?: boolean | ((data: T | T[]) => boolean);
+    hidden?: boolean | ((record: T) => boolean);
 
     /**
      * Menu items
@@ -219,32 +220,37 @@ export type DataTableProps<T> = {
       key: string;
 
       /**
-       * Item icon
+       * Item icon; ReactNode or a function accepting the current record as parameter
+       * and returning ReactNode
        */
       icon?: ReactNode | ((record: T) => ReactNode);
 
       /**
-       * Item title
+       * Item title; ReactNode or a function accepting the current record as parameter
+       * and returning ReactNode
        */
       title?: ReactNode | ((record: T) => ReactNode);
 
       /**
-       * Item color
+       * Item color; MantineColor or a function accepting the current record as parameter
+       * and returning MantineColor
        */
       color?: MantineColor | ((record: T) => MantineColor);
 
       /**
-       * If true or a function returning true, the menu item will not be shown
+       * Boolean or function accepting the current record as parameter and returning boolean;
+       * if true, the menu item will not be shown
        */
       hidden?: boolean | ((record: T) => boolean);
 
       /**
-       * If true or a function returning true, the menu item will be disabled
+       * Boolean or function accepting the current record as parameter returning boolean;
+       * if true, the menu item will be disabled
        */
       disabled?: boolean | ((record: T) => boolean);
 
       /**
-       * Function to call when the menu item is clicked
+       * Function to call when the menu item is clicked; accepts the current record as parameter
        */
       onClick: (record: T) => void;
     }[];

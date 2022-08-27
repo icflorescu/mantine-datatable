@@ -1,46 +1,37 @@
-import { Container } from '@mantine/core';
+import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import CodeBlockTabs from '~/components/CodeBlockTabs';
+import CodeBlock from '~/components/CodeBlock';
 import ExampleContainer from '~/components/ExampleContainer';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import BasicUsageExample from '~/examples/BasicUsageExample';
-import allPromiseProps from '~/lib/allPromiseProps';
+import ContextMenuExample from '~/examples/ContextMenuExample';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/context-menu';
 
 export const getStaticProps: GetStaticProps<{
-  code: { 'ContextMenuExample.tsx': string; 'companies.json': string };
+  code: string;
 }> = async () => ({
-  props: {
-    code: await allPromiseProps({
-      'ContextMenuExample.tsx': readCodeExample('examples/ContextMenuExample.tsx') as Promise<string>,
-      'companies.json': readCodeExample('data/companies.json') as Promise<string>,
-    }),
-  },
+  props: { code: (await readCodeExample('examples/ContextMenuExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Container>
       <PageTitle of={PATH} />
-      <PageText>To be written...</PageText>
-      <CodeBlockTabs
-        items={[
-          {
-            title: 'ContextMenuExample.tsx',
-            language: 'typescript',
-            content: code['ContextMenuExample.tsx'],
-          },
-          { title: 'companies.json', language: 'json', content: code['companies.json'] },
-        ]}
-      />
-      <PageText>The code above will produce the following result:</PageText>
+      <PageText>Right-click on a row to see it in action:</PageText>
       <ExampleContainer>
-        <BasicUsageExample />
+        <ContextMenuExample />
       </ExampleContainer>
+      <PageText>
+        Mantine doesn’t have (yet?) a context-menu component, but the <Code>DataTable</Code> does allow you to create
+        this useful functionality for your data-rich desktop applications.
+        <br />
+        In order to do so, you’ll have to provide a property called <Code>rowContextMenu</Code> which describes the
+        context-menu behavior:
+      </PageText>
+      <CodeBlock language="typescript" content={code} />
       <PageNavigation of={PATH} />
     </Container>
   );

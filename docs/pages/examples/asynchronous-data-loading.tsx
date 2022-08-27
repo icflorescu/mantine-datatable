@@ -5,7 +5,7 @@ import ExampleContainer from '~/components/ExampleContainer';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import BasicUsageExample from '~/examples/BasicUsageExample';
+import AsynchronousDataLoadingExample from '~/examples/AsynchronousDataLoadingExample';
 import allPromiseProps from '~/lib/allPromiseProps';
 import readCodeExample from '~/lib/readCodeExample';
 
@@ -41,7 +41,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       />
       <PageText>The code above will produce the following result:</PageText>
       <ExampleContainer>
-        <BasicUsageExample />
+        <AsynchronousDataLoadingExample />
       </ExampleContainer>
       <PageNavigation of={PATH} />
     </Container>
