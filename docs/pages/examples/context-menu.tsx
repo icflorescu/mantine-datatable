@@ -23,7 +23,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
-      <PageText>Try the interactive example below:</PageText>
+      <PageText>
+        Mantine doesn’t have a context-menu component, but the <Code>DataTable</Code> does allow you to create this
+        useful functionality for your data-rich desktop applications. Try it in the interactive example below:
+      </PageText>
       <Paper my="xl" p="sm" withBorder>
         <Group>
           <Text size="sm">Context menu status</Text>
@@ -42,11 +45,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <ContextMenuExample exampleStatus={status} />
       </ExampleContainer>
       <PageText>
-        Mantine doesn’t have (yet?) a context-menu component, but the <Code>DataTable</Code> does allow you to create
-        this useful functionality for your data-rich desktop applications.
-        <br />
-        In order to do so, you’ll have to provide a property called <Code>rowContextMenu</Code> which describes the
-        context-menu behavior:
+        In order to enable the context-menu feature, you’ll have to provide a property called{' '}
+        <Code>rowContextMenu</Code> which describes the context-menu behavior:
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageNavigation of={PATH} />
