@@ -15,7 +15,7 @@ const nextConfig = (phase) => {
   };
 
   if (phase === 'phase-production-build' && process.env.GITHUB_PAGES === 'true') {
-    config.basePath = '/mantine-datatable';
+    config.assetPrefix = config.basePath = '/mantine-datatable';
     config.trailingSlash = true;
   }
 
