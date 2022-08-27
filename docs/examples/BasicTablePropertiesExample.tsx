@@ -14,7 +14,7 @@ export default function BasicTablePropertiesExample({
   customizeFontSize,
   fontSize,
   customizeVerticalAlignment,
-  verticalAligment,
+  verticalAlignment,
 }: {
   withVerticalBorders: boolean;
   striped: boolean;
@@ -26,7 +26,7 @@ export default function BasicTablePropertiesExample({
   customizeFontSize: boolean;
   fontSize: MantineSize;
   customizeVerticalAlignment: boolean;
-  verticalAligment: DataTableVerticalAlignment;
+  verticalAlignment: DataTableVerticalAlignment;
 }) {
   // example-start
   // ...
@@ -40,7 +40,7 @@ export default function BasicTablePropertiesExample({
         horizontalSpacing={customizeHorizontalSpacing ? horizontalSpacing : undefined}
         verticalSpacing={customizeVerticalSpacing ? verticalSpacing : undefined}
         fontSize={customizeFontSize ? fontSize : undefined}
-        verticalAlignment={customizeVerticalAlignment ? verticalAligment : undefined}
+        verticalAlignment={customizeVerticalAlignment ? verticalAlignment : undefined}
         columns={[
           { accessor: 'name' },
           { accessor: 'missionStatement', width: 150 },

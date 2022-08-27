@@ -2,10 +2,10 @@ import { Code, Container, createStyles, MantineSize, Paper, Switch } from '@mant
 import { DataTableVerticalAlignment } from 'mantine-datatable';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
-import CheckableSegmentedControl from '~/components/basic-table-properties/CheckableSegmentedControl';
 import CodeBlock from '~/components/CodeBlock';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
+import CheckableSegmentedControl from '~/components/pages/basic-table-properties/CheckableSegmentedControl';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import BasicTablePropertiesExample from '~/examples/BasicTablePropertiesExample';
@@ -195,7 +195,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
         customizeFontSize={customizeFontSize}
         fontSize={fontSize}
         customizeVerticalAlignment={customizeVerticalAlignment}
-        verticalAligment={verticalAlignment}
+        verticalAlignment={verticalAlignment}
       />
       <PageNavigation of={PATH} />
     </Container>
