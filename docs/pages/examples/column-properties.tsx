@@ -1,18 +1,26 @@
 import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import CodeBlock from '~/components/CodeBlock';
+import CodeBlockTabs from '~/components/CodeBlockTabs';
 import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import ColumnPropertiesExample from '~/examples/ColumnPropertiesExample';
+import allPromiseProps from '~/lib/allPromiseProps';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/column-properties';
 
-export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('examples/ColumnPropertiesExample.tsx')) as string },
+export const getStaticProps: GetStaticProps<{
+  code: { 'ColumnPropertiesExample.tsx': string; 'data.ts': string };
+}> = async () => ({
+  props: {
+    code: await allPromiseProps({
+      'ColumnPropertiesExample.tsx': readCodeExample('examples/ColumnPropertiesExample.tsx') as Promise<string>,
+      'data.ts': readCodeExample('data.ts') as Promise<string>,
+    }),
+  },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -44,7 +52,16 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         you must provide one, and each accessor name must be unique amongst the collection of columns.
       </PageText>
       <PageText>Consider the example below:</PageText>
-      <CodeBlock language="typescript" content={code} />
+      <CodeBlockTabs
+        items={[
+          {
+            title: 'ColumnPropertiesExample.tsx',
+            language: 'typescript',
+            content: code['ColumnPropertiesExample.tsx'],
+          },
+          { title: 'data.ts', language: 'typescript', content: code['data.ts'] },
+        ]}
+      />
       <PageText>The code above will produce the following result:</PageText>
       <ExampleContainer>
         <ColumnPropertiesExample />
