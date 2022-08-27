@@ -1,72 +1,82 @@
 [
   {
-    "id": "f7db3323-f6e1-4ad7-8b34-62d357d01782",
-    "name": "Koch, Kub and Kovacek",
-    "streetAddress": "0373 Koss Divide",
-    "city": "Bayonne",
-    "state": "NM"
+    "id": "21f5396e-7a8a-4652-9a73-399af4249b16",
+    "name": "Champlin - Runolfsdottir",
+    "streetAddress": "280 Franco Place",
+    "city": "Atascocita",
+    "state": "NJ",
+    "missionStatement": "streamline global relationships"
   },
   {
-    "id": "d3a75cb0-d3b2-4a38-a1b6-a7ea682276f0",
-    "name": "Herzog, Haley and Rempel",
-    "streetAddress": "6233 Huels Mission",
-    "city": "Corvallis",
-    "state": "NJ"
+    "id": "07cf36a7-15df-4d3a-a569-deecc71768b0",
+    "name": "McKenzie and Sons",
+    "streetAddress": "1056 Delilah Road",
+    "city": "Everett",
+    "state": "NE",
+    "missionStatement": "expedite revolutionary blockchains"
   },
   {
-    "id": "913a35b4-d58f-4620-ba40-3b7e1c30de39",
-    "name": "Monahan, McGlynn and Okuneva",
-    "streetAddress": "40260 Streich Locks",
-    "city": "Grapevine",
-    "state": "VT"
+    "id": "c9494b8a-bb8c-4ea8-9f6f-94b8daa47e27",
+    "name": "O'Kon - Okuneva",
+    "streetAddress": "720 Margot Shore",
+    "city": "Miami",
+    "state": "AK",
+    "missionStatement": "architect user-centric bandwidth"
   },
   {
-    "id": "369f7e38-905e-4eee-bab1-a9560baf2f58",
-    "name": "Nienow LLC",
-    "streetAddress": "99593 Ozella Flat",
-    "city": "Des Moines",
-    "state": "GA"
+    "id": "54a18a31-8411-4d7e-aeeb-932ccdf79b06",
+    "name": "Lind - Wolf",
+    "streetAddress": "287 Ryan Shoal",
+    "city": "Appleton",
+    "state": "MO",
+    "missionStatement": "facilitate mission-critical functionalities"
   },
   {
-    "id": "510c0907-fae9-495a-b6de-a60cb195898c",
-    "name": "Emmerich - Graham",
-    "streetAddress": "95812 Marvin Courts",
-    "city": "Kalamazoo",
-    "state": "SD"
-  },
-  {
-    "id": "caa0f006-9ccb-42d7-86ee-aa11c97b9e32",
-    "name": "Ledner - Huels",
-    "streetAddress": "0950 Kshlerin Locks",
-    "city": "Haltom City",
-    "state": "UT"
-  },
-  {
-    "id": "04638784-3e29-4c31-be42-9e46db269fef",
-    "name": "Jacobi - Yundt",
-    "streetAddress": "0212 Reyes Divide",
-    "city": "Apple Valley",
-    "state": "PA"
-  },
-  {
-    "id": "2119361f-5d8c-4295-8ed2-4cc739bdc00e",
-    "name": "Bernier LLC",
-    "streetAddress": "8855 Cronin Avenue",
+    "id": "6bc08ed5-a1c8-4fa9-991b-b6539482c1ce",
+    "name": "Mills Inc",
+    "streetAddress": "47522 Ollie View",
     "city": "Livonia",
-    "state": "AL"
+    "state": "UT",
+    "missionStatement": "architect customized functionalities"
   },
   {
-    "id": "38d3cbdb-4e88-4710-be85-99a2aa637e3d",
-    "name": "Stokes, Schoen and Wilkinson",
-    "streetAddress": "7944 Wilfredo Mall",
-    "city": "Rancho Cordova",
-    "state": "WV"
+    "id": "6b42ed31-6246-404b-a9fe-e73f065217d3",
+    "name": "Lubowitz - Crona",
+    "streetAddress": "6754 Angela Flats",
+    "city": "Maple Grove",
+    "state": "GA",
+    "missionStatement": "visualize cutting-edge functionalities"
   },
   {
-    "id": "5aaf53b2-4567-46ba-a6ac-c139168dd9ac",
-    "name": "Dooley, Reilly and Lemke",
-    "streetAddress": "458 Nathanael Point",
-    "city": "Seattle",
-    "state": "SD"
+    "id": "0227add3-9cd1-406e-a0c2-10305eb42cf8",
+    "name": "Aufderhar - Marquardt",
+    "streetAddress": "84464 Murray Trail",
+    "city": "Overland Park",
+    "state": "AL",
+    "missionStatement": "redefine mission-critical bandwidth"
+  },
+  {
+    "id": "7a1d16b8-2c97-4721-ba1e-ca68e2453f38",
+    "name": "Padberg - Watsica",
+    "streetAddress": "1975 Mraz Spring",
+    "city": "Ocala",
+    "state": "LA",
+    "missionStatement": "monetize efficient bandwidth"
+  },
+  {
+    "id": "10fc3199-f5a8-44ca-91b1-828415367e89",
+    "name": "Nicolas - Crist",
+    "streetAddress": "461 Batz Drives",
+    "city": "Highlands Ranch",
+    "state": "NJ",
+    "missionStatement": "enable virtual systems"
+  },
+  {
+    "id": "51ef9440-75cd-4dab-84fb-f7615af56a4b",
+    "name": "Powlowski Inc",
+    "streetAddress": "80500 Terence Hollow",
+    "city": "Altoona",
+    "state": "AR",
+    "missionStatement": "integrate rich methodologies"
   }
 ]

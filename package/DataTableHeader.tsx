@@ -120,12 +120,12 @@ export default forwardRef(function DataTableHeader<T>(
             />
           </th>
         )}
-        {columns.map(({ accessor, visibleMediaQuery, textAlign, width, title, sortable }) => (
+        {columns.map(({ accessor, visibleMediaQuery, textAlignment, width, title, sortable }) => (
           <DataTableHeaderCell<T>
             key={accessor}
             accessor={accessor}
             visibleMediaQuery={visibleMediaQuery}
-            textAlign={textAlign}
+            textAlignment={textAlignment}
             width={width}
             title={title}
             sortable={sortable}

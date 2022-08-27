@@ -21,7 +21,7 @@ export default function NonStandardRecordIdsExample() {
       ]}
       columns={[
         { accessor: 'name', width: '100%' },
-        { accessor: 'bornIn', textAlign: 'right' },
+        { accessor: 'bornIn', textAlignment: 'right' },
       ]}
       /**
        * Non-standard record ID.

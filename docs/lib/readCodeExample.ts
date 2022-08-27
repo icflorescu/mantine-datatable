@@ -75,7 +75,7 @@ export default async function readCodeExample(path: string): Promise<string | Re
     } else if (adding) {
       const lineContent = line.slice(indent);
       if (!(lineContent === '// prettier-ignore' || lineContent === '{/* prettier-ignore */}')) {
-        addition = line.slice(indent) + '\n';
+        addition = lineContent + '\n';
       }
     }
     if (addition) {

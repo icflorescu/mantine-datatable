@@ -24,7 +24,7 @@ export default function PaginationExample() {
         { accessor: 'email', width: '100%' },
         {
           accessor: 'birthDate',
-          textAlign: 'right',
+          textAlignment: 'right',
           width: 120,
           render: ({ birthDate }) => dayjs(birthDate).format('MMM D YYYY'),
         },

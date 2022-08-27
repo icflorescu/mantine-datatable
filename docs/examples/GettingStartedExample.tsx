@@ -29,7 +29,7 @@ export default function GettingStartedExample() {
           // this column has a custom title
           title: '#',
           // right-align column
-          textAlign: 'right',
+          textAlignment: 'right',
         },
         { accessor: 'name' },
         {

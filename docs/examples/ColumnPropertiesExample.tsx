@@ -14,7 +14,7 @@ export default function ColumnPropertiesExample() {
         {
           accessor: 'index',
           title: '#',
-          textAlign: 'right',
+          textAlignment: 'right',
           width: 40,
           render: (record) => records.indexOf(record) + 1,
         },
@@ -45,7 +45,7 @@ export default function ColumnPropertiesExample() {
         {
           accessor: 'age',
           width: 60,
-          textAlign: 'right',
+          textAlignment: 'right',
           // column is only visible when screen width is over `theme.breakpoints.xs`
           visibleMediaQuery: (theme) => `(min-width: ${theme.breakpoints.xs}px)`,
           render: ({ birthDate }) => dayjs().diff(birthDate, 'years'),

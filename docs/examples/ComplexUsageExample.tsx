@@ -34,7 +34,7 @@ export default function ComplexUsageExample() {
 
   return (
     <DataTable
-      verticalAlign="top"
+      verticalAlignment="top"
       striped
       withVerticalBorders
       fetching={isFetching}
@@ -68,7 +68,7 @@ export default function ComplexUsageExample() {
         {
           accessor: 'age',
           width: 80,
-          textAlign: 'right',
+          textAlignment: 'right',
           sortable: true,
           render: ({ birthDate }) => now.diff(birthDate, 'years'),
         },

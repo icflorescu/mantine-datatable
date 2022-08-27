@@ -114,13 +114,13 @@ export default function DataTableRow<T>({
           />
         </td>
       )}
-      {columns.map(({ accessor, visibleMediaQuery, textAlign, ellipsis, width, render }) => (
+      {columns.map(({ accessor, visibleMediaQuery, textAlignment, ellipsis, width, render }) => (
         <DataTableRowCell<T>
           key={accessor}
           visibleMediaQuery={visibleMediaQuery}
           record={record}
           accessor={accessor}
-          textAlign={textAlign}
+          textAlignment={textAlignment}
           ellipsis={ellipsis}
           width={width}
           render={render}

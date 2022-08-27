@@ -35,8 +35,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <PageText>
         In addition, each column can be customized by specifying additional properties, such as <Code>width</Code>,{' '}
-        <Code>ellipsis</Code>, <Code>textAlign</Code>, <Code>visibleMediaQuery</Code>, and a <Code>render</Code> method
-        that accepts the current record as its argument.
+        <Code>ellipsis</Code>, <Code>textAlignment</Code>, <Code>visibleMediaQuery</Code>, and a <Code>render</Code>{' '}
+        method that accepts the current record as its argument.
       </PageText>
       <PageText>
         If you provide a custom <Code>render</Code> method, you are in fact creating a <em>“virtual column”</em>, and

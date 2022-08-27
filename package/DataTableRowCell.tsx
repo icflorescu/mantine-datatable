@@ -14,13 +14,13 @@ const useStyles = createStyles({
 
 type DataTableRowCellProps<T> = {
   record: T;
-} & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlign' | 'width' | 'ellipsis' | 'render'>;
+} & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlignment' | 'width' | 'ellipsis' | 'render'>;
 
 export default function DataTableRowCell<T>({
   visibleMediaQuery,
   record,
   ellipsis,
-  textAlign,
+  textAlignment,
   width,
   accessor,
   render,
@@ -36,7 +36,7 @@ export default function DataTableRowCell<T>({
         width,
         minWidth: width,
         maxWidth: width,
-        textAlign,
+        textAlign: textAlignment,
       }}
     >
       {render ? render(record) : (get(record, accessor) as ReactNode)}

@@ -1,6 +1,9 @@
 import { MantineColor, MantineSize, MantineTheme, TableProps } from '@mantine/core';
 import { ReactNode } from 'react';
 
+export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
+export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
+
 export type DataTablePaginationProps =
   | {
       page?: never;
@@ -60,9 +63,9 @@ export type DataTableColumn<T> = {
   render?: (record: T) => ReactNode;
 
   /**
-   * Column alignment; if not specified, the column will be left-aligned
+   * Column text alignment; defaults to `left`
    */
-  textAlign?: 'center' | 'right';
+  textAlignment?: DataTableColumnTextAlignment;
 
   /**
    * If true, column will be sortable
@@ -144,9 +147,9 @@ export type DataTableProps<T> = {
   withVerticalBorders?: boolean;
 
   /**
-   * Vertical alignment for row cells; if not specified, the cells will be centered vertically
+   * Vertical alignment for row cells; defaults to `center`
    */
-  verticalAlign?: 'top' | 'bottom';
+  verticalAlignment?: DataTableVerticalAlignment;
 
   /**
    * If true, will show a loader with semi-transparent background, centered over the table

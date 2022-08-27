@@ -47,7 +47,7 @@ export default function DataTable<T extends Record<string, unknown>>({
   withVerticalBorders,
   height = '100%',
   minHeight,
-  verticalAlign,
+  verticalAlignment = 'center',
   fetching,
   columns,
   idAccessor = 'id',
@@ -163,8 +163,8 @@ export default function DataTable<T extends Record<string, unknown>>({
           className={cx({
             [classes.browserSelectionDisabled]: onRowClick || selectedRecords,
             [classes.tableWithVerticalBorders]: withVerticalBorders,
-            [classes.verticalAlignmentTop]: verticalAlign === 'top',
-            [classes.verticalAlignmentBottom]: verticalAlign === 'bottom',
+            [classes.verticalAlignmentTop]: verticalAlignment === 'top',
+            [classes.verticalAlignmentBottom]: verticalAlignment === 'bottom',
           })}
           striped={recordsLength ? striped : false}
           {...otherProps}

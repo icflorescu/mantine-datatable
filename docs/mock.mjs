@@ -9,6 +9,7 @@ for (let i = 0; i < 10; i++) {
     streetAddress: faker.address.streetAddress(),
     city: faker.address.cityName(),
     state: faker.address.stateAbbr(),
+    missionStatement: faker.company.bs(),
   });
 }
 

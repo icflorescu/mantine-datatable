@@ -37,14 +37,14 @@ type DataTableHeaderCell<T> = {
   title: ReactNode | undefined;
   sortStatus: DataTableSortStatus | undefined;
   onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
-} & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlign' | 'width'>;
+} & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlignment' | 'width'>;
 
 export default function DataTableHeaderCell<T>({
   accessor,
   visibleMediaQuery,
   title,
   sortable,
-  textAlign,
+  textAlignment,
   width,
   sortStatus,
   onSortStatusChange,
@@ -57,7 +57,7 @@ export default function DataTableHeaderCell<T>({
       component="th"
       className={cx({ [classes.sortableColumnHeader]: sortable })}
       sx={{
-        '&&': { textAlign },
+        '&&': { textAlign: textAlignment },
         width,
         minWidth: width,
         maxWidth: width,
