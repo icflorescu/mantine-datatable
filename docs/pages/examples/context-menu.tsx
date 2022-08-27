@@ -1,11 +1,12 @@
-import { Code, Container } from '@mantine/core';
+import { Code, Container, Group, Paper, SegmentedControl, Text } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { useState } from 'react';
 import CodeBlock from '~/components/CodeBlock';
 import ExampleContainer from '~/components/ExampleContainer';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import ContextMenuExample from '~/examples/ContextMenuExample';
+import ContextMenuExample, { ContextMenuExampleStatus } from '~/examples/ContextMenuExample';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/context-menu';
@@ -17,12 +18,28 @@ export const getStaticProps: GetStaticProps<{
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [status, setStatus] = useState<ContextMenuExampleStatus>(ContextMenuExampleStatus.enabled);
+
   return (
     <Container>
       <PageTitle of={PATH} />
-      <PageText>Right-click on a row to see it in action:</PageText>
+      <PageText>Try the interactive example below:</PageText>
+      <Paper my="xl" p="sm" withBorder>
+        <Group>
+          <Text size="sm">Context menu status</Text>
+          <SegmentedControl
+            data={[
+              { value: ContextMenuExampleStatus.enabled, label: 'Enabled' },
+              { value: ContextMenuExampleStatus.disabled, label: 'Disabled' },
+              { value: ContextMenuExampleStatus.disabledForTheFirstRow, label: 'Disabled for the first row' },
+            ]}
+            value={status}
+            onChange={(value) => setStatus(value as ContextMenuExampleStatus)}
+          />
+        </Group>
+      </Paper>
       <ExampleContainer>
-        <ContextMenuExample />
+        <ContextMenuExample exampleStatus={status} />
       </ExampleContainer>
       <PageText>
         Mantine doesn’t have (yet?) a context-menu component, but the <Code>DataTable</Code> does allow you to create

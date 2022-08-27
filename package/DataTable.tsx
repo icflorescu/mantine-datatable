@@ -231,9 +231,9 @@ export default function DataTable<T extends Record<string, unknown>>({
                     onClick={onRowClick}
                     onContextMenu={
                       rowContextMenu &&
-                      !(typeof rowContextMenu.hidden === 'function'
-                        ? rowContextMenu.hidden(record)
-                        : rowContextMenu.hidden)
+                      !(typeof rowContextMenu.disabled === 'function'
+                        ? rowContextMenu.disabled(record)
+                        : rowContextMenu.disabled)
                         ? setContextMenuInfo
                         : undefined
                     }

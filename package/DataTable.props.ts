@@ -208,7 +208,7 @@ export type DataTableProps<T> = {
      * Boolean or function accepting the current record as parameter returning boolean;
      * if true, the menu will not be shown
      */
-    hidden?: boolean | ((record: T) => boolean);
+    disabled?: boolean | ((record: T) => boolean);
 
     /**
      * Menu items
