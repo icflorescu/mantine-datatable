@@ -1,6 +1,8 @@
 {
   "name": "Mantine DataTable",
   "short_name": "Mantine DataTable",
+  "scope": "/mantine-datatable/",
+  "start_url": "/mantine-datatable/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

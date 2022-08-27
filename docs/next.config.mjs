@@ -11,12 +11,13 @@ const nextConfig = (phase) => {
     reactStrictMode: true,
     env: {
       PACKAGE_VERSION: pkg.version,
+      BASE_PATH: '',
     },
   };
 
   if (phase === 'phase-production-build' && process.env.GITHUB_PAGES === 'true') {
-    config.assetPrefix = config.basePath = '/mantine-datatable';
-    config.trailingSlash = true;
+    config.env.BASE_PATH = config.basePath = '/mantine-datatable';
+    config.env.CANONICAL_URL = 'https://icflorescu.github.io//mantine-datatable/';
   }
 
   return withTM(config);
