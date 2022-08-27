@@ -25,8 +25,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         The record IDs are used internally as <Code>.map()</Code> keys and to compare records when necessary.
       </PageText>
       <PageText>
-        You can override the default ID property name by specifying a <Code>DataTable</Code> <Code>idAccessor</Code>{' '}
-        like so:
+        You can override the default ID property name by adding an <Code>idAccessor</Code> property on the{' '}
+        <Code>DataTable</Code> like so:
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>

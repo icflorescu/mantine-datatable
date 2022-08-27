@@ -25,8 +25,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <HandlingRowClicksExample />
       </ExampleContainer>
       <PageText>
-        You can handle row clicks by simply providing a property called <Code>onRowClick</Code> pointing to a handler
-        function to the <Code>DataTable</Code> component:
+        Provide a handler called <Code>onRowClick</Code> to the <Code>DataTable</Code> component, like so:
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>
