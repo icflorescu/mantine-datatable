@@ -7,7 +7,7 @@ name: Deploy Next.js site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,7 +20,7 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 jobs:
@@ -50,16 +50,16 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: '16'
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-        with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: next
+      # - name: Setup Pages
+      #   uses: actions/configure-pages@v2
+      #   with:
+      #     # Automatically inject basePath in your Next.js configuration file and disable
+      #     # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
+      #     #
+      #     # You may remove this line if you want to manage the configuration yourself.
+      #     static_site_generator: next
       - name: Restore cache
         uses: actions/cache@v3
         with:
@@ -73,7 +73,7 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build
-        run: ${{ steps.detect-package-manager.outputs.runner }} build
+        run: GITHUB_PAGES=true ${{ steps.detect-package-manager.outputs.runner }} build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
