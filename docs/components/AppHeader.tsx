@@ -16,7 +16,7 @@ import Logo from './Logo';
 const useStyles = createStyles((theme) => {
   const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]}px)`;
   const buttonBorder = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
-  const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[6];
+  const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6];
 
   return {
     root: {
@@ -35,7 +35,7 @@ const useStyles = createStyles((theme) => {
       },
     },
     menuIcon: {
-      color: theme.colors.gray[6],
+      color: actionIconColor,
       [breakpointMediaQuery]: {
         display: 'none',
       },
@@ -56,7 +56,7 @@ const useStyles = createStyles((theme) => {
       },
     },
     actionIcon: {
-      borderColor: buttonBorder,
+      border: `1px solid ${actionIconColor}`,
       color: actionIconColor,
     },
     sourceCodeButton: {
