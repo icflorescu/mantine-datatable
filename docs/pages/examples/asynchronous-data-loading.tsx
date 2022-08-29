@@ -1,11 +1,11 @@
 import { Code, Container, MantineSize, Paper, Stack } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
+import CheckableSegmentedControl from '~/components/CheckableSegmentedControl';
 import CodeBlock from '~/components/CodeBlock';
 import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
-import CheckableSegmentedControl from '~/components/pages/basic-table-properties/CheckableSegmentedControl';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import AsynchronousDataLoadingExample, { LoaderVariant } from '~/examples/AsynchronousDataLoadingExample';
