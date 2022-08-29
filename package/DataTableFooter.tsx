@@ -51,7 +51,6 @@ type DataTableFooterProps = DataTablePaginationProps & {
   fetching: boolean | undefined;
   recordsLength: number | undefined;
   horizontalSpacing: MantineNumberSize | undefined;
-  loadingText: string;
   topShadowVisible: boolean;
 };
 
@@ -61,7 +60,6 @@ export default forwardRef(function DataTableFooter(
     page,
     onPageChange,
     paginationSize,
-    loadingText,
     totalRecords,
     recordsPerPage,
     recordsLength,
@@ -72,7 +70,7 @@ export default forwardRef(function DataTableFooter(
 ) {
   let paginationText: string;
   if (fetching) {
-    paginationText = loadingText;
+    paginationText = '...';
   } else {
     const from = (page! - 1) * recordsPerPage! + 1;
     const to = from + recordsLength! - 1;

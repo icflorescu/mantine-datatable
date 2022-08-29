@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { DataTable, DataTableSortStatus } from 'mantine-datatable';
 import { useState } from 'react';
 import { Edit, Trash, TrashX } from 'tabler-icons-react';
-import { Employee, getEmployees } from '~/data';
+import { Employee, getEmployeesAsync } from '~/data';
 
 const PAGE_SIZE = 30;
 
@@ -20,7 +20,7 @@ export default function ComplexUsageExample() {
 
   const { data, isFetching } = useQuery(
     ['employees', sortStatus.columnAccessor, sortStatus.direction, page],
-    async () => getEmployees({ recordsPerPage: PAGE_SIZE, page, sortStatus })
+    async () => getEmployeesAsync({ recordsPerPage: PAGE_SIZE, page, sortStatus })
   );
 
   const [selectedRecords, setSelectedRecords] = useState<Employee[]>([]);

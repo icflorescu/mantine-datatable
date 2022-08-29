@@ -174,11 +174,6 @@ export type DataTableProps<T> = {
   records?: T[];
 
   /**
-   * Text to show in the pagination footer when fetching records; defaults to `Loading…`
-   */
-  loadingText?: string;
-
-  /**
    * Loader size; defaults to `lg`
    */
   loaderSize?: MantineSize;

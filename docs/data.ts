@@ -1,9 +1,10 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { get, sortBy } from 'lodash';
 import { DataTableSortStatus } from 'mantine-datatable';
-import companyData from './data/companies.json';
-import departmentData from './data/departments.json';
-import employeeData from './data/employees.json';
+import companyData from '~/data/companies.json';
+import departmentData from '~/data/departments.json';
+import employeeData from '~/data/employees.json';
+import delay, { DelayOptions } from '~/lib/delay';
 
 export type Company = {
   id: string;
@@ -40,18 +41,23 @@ export const employees: Employee[] = employeeData.map(({ departmentId, ...rest }
   department: departments.find(({ id }) => id === departmentId)!,
 }));
 
-export async function getEmployees({
+export async function getCompaniesAsync(delayOptions: DelayOptions = { min: 1000, max: 2000 }) {
+  await delay(delayOptions);
+  return companies;
+}
+
+export async function getEmployeesAsync({
   page,
   recordsPerPage,
   sortStatus: { columnAccessor: sortAccessor, direction: sortDirection },
+  delay: delayOptions = { min: 1000, max: 2000 },
 }: {
   page: number;
   recordsPerPage: number;
   sortStatus: DataTableSortStatus;
+  delay?: DelayOptions;
 }) {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 1000 + Math.round(Math.random() * 1000));
-  });
+  await delay(delayOptions);
 
   let now: Dayjs;
   if (sortAccessor === 'age') now = dayjs();

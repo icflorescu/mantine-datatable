@@ -65,7 +65,6 @@ export default function DataTable<T extends Record<string, unknown>>({
   loaderSize,
   loaderVariant,
   loaderBackgroundBlur,
-  loadingText = 'Loading…',
   noRecordsText = 'No records',
   striped,
   onRowClick,
@@ -254,7 +253,6 @@ export default function DataTable<T extends Record<string, unknown>>({
         <DataTableFooter
           ref={footerRef}
           horizontalSpacing={horizontalSpacing}
-          loadingText={loadingText}
           fetching={fetching}
           page={page}
           onPageChange={handlePageChange}
