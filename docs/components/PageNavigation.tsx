@@ -8,7 +8,7 @@ const useStyles = createStyles((theme) => ({
     margin: `${theme.spacing.xl}px 0`,
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing.sm,
+    gap: theme.spacing.xl,
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -33,7 +33,7 @@ const useStyles = createStyles((theme) => ({
       transform: 'translate3d(0, 1px, 0)',
     },
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-      flex: `0 0 calc(50% - ${theme.spacing.sm / 2}px)`,
+      flex: `0 0 calc(50% - ${theme.spacing.xl / 2}px)`,
     },
   },
 }));
@@ -46,13 +46,13 @@ export default function PageNavigation({ of }: { of: string }) {
     <div className={cx(classes.root, { [classes.withoutNext]: !next })}>
       <Link href={`/${back.path}`} passHref>
         <UnstyledButton className={classes.button} component="a">
-          <Group px="sm" py="xs" position="apart">
+          <Group px="sm" py="xs" position="apart" noWrap>
             <ArrowLeft />
             <div>
               <Text weight={500} align="right">
                 Go back
               </Text>
-              <Text size="sm" color="dimmed" align="right">
+              <Text lineClamp={1} size="sm" color="dimmed" align="right">
                 {back.title}
               </Text>
             </div>
@@ -62,10 +62,10 @@ export default function PageNavigation({ of }: { of: string }) {
       {next && (
         <Link href={`/${next.path}`} passHref>
           <UnstyledButton className={classes.button} component="a">
-            <Group px="sm" py="xs" position="apart">
+            <Group px="sm" py="xs" position="apart" noWrap>
               <div>
                 <Text weight={500}>Up next</Text>
-                <Text size="sm" color="dimmed">
+                <Text lineClamp={1} size="sm" color="dimmed">
                   {next.title}
                 </Text>
               </div>
