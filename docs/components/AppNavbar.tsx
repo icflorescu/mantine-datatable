@@ -33,7 +33,9 @@ const useStyles = createStyles((theme) => {
       position: 'fixed',
       width: NAVBAR_WIDTH,
       maxWidth: '100%',
-      height: '100vh',
+      top: 0,
+      left: 0,
+      bottom: 0,
       transform: 'translate3d(-100%, 0, 0)',
       transition: 'transform .15s ease',
       [breakpointMediaQuery]: {
