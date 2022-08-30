@@ -15,7 +15,11 @@ const useStyles = createStyles((theme, { color }: { color?: MantineColor }) => {
       paddingRight: theme.spacing.sm,
       color: color && theme.colors[color][6],
       transition: 'background .15s ease',
-      '&:hover': {
+      '&[disabled]': {
+        cursor: 'not-allowed',
+        color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[5],
+      },
+      '&:hover:not([disabled])': {
         background: theme.fn.rgba(
           color ? theme.colors[color][6] : theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
           color ? (theme.colorScheme === 'dark' ? 0.15 : 0.08) : 0.25
