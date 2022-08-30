@@ -9,10 +9,13 @@ export function ScrollableExample() {
     // example-start scrollable
     <Box sx={{ height: 300 }}>
       <DataTable
-        striped
+        // example-skip
+        withBorder
         withColumnBorders
+        striped
         records={records}
         columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
+        // example-resume
       />
     </Box>
   );
@@ -23,10 +26,13 @@ export function AutoHeightExample() {
   // example-start auto-height
   return (
     <DataTable
-      striped
+      // example-skip
+      withBorder
       withColumnBorders
+      striped
       records={records}
       columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
+      // example-resume
     />
   );
   // example-end

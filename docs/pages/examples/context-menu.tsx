@@ -1,8 +1,7 @@
-import { Code, Container, createStyles, Paper, Radio, Stack } from '@mantine/core';
+import { Box, Code, Container, createStyles, Paper, Radio, Stack } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
 import CodeBlock from '~/components/CodeBlock';
-import ExampleContainer from '~/components/ExampleContainer';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -85,9 +84,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           </div>
         </Radio.Group>
       </Paper>
-      <ExampleContainer height={300}>
+      <Box sx={{ height: 300 }}>
         <Example />
-      </ExampleContainer>
+      </Box>
       <CodeBlock language="typescript" content={code[example]} />
       <PageNavigation of={PATH} />
     </Container>

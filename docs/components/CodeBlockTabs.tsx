@@ -18,7 +18,7 @@ type CodeBlockTabsProps = {
 export default function CodeBlockTabs({ items }: CodeBlockTabsProps) {
   const { classes } = useStyles();
   return (
-    <Prism.Tabs defaultValue={items[0].title}>
+    <Prism.Tabs my="xl" defaultValue={items[0].title}>
       <Prism.TabsList>
         {items.map(({ title, language }) => {
           const Icon = language === 'bash' ? Terminal2 : Braces;

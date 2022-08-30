@@ -4,6 +4,23 @@ import { ReactNode } from 'react';
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
 
+export type DataTableBorderProps =
+  | {
+      withBorder?: never;
+      borderRadius?: never;
+    }
+  | {
+      /**
+       * If true, table will have border
+       */
+      withBorder: boolean;
+
+      /**
+       * Table border radius
+       */
+      borderRadius?: MantineSize | number;
+    };
+
 export type DataTablePaginationProps =
   | {
       page?: never;
@@ -253,7 +270,8 @@ export type DataTableProps<T> = {
       onClick: (record: T) => void;
     }[];
   };
-} & TableProps &
+} & Omit<TableProps, 'border'> &
+  DataTableBorderProps &
   DataTablePaginationProps &
   DataTableSortProps &
   DataTableSelectionProps<T>;

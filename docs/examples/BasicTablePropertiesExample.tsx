@@ -5,6 +5,9 @@ import companies from '~/data/companies.json';
 const records = companies.slice(0, 5);
 
 export default function BasicTablePropertiesExample({
+  withBorder,
+  customizeBorderRadius,
+  borderRadius,
   withColumnBorders,
   striped,
   highlightOnHover,
@@ -17,6 +20,9 @@ export default function BasicTablePropertiesExample({
   customizeVerticalAlignment,
   verticalAlignment,
 }: {
+  withBorder: boolean;
+  customizeBorderRadius: boolean;
+  borderRadius: MantineSize;
   withColumnBorders: boolean;
   striped: boolean;
   highlightOnHover: boolean;
@@ -33,6 +39,8 @@ export default function BasicTablePropertiesExample({
   return (
     // prettier-ignore
     <DataTable
+      withBorder={withBorder}
+      borderRadius={customizeBorderRadius ? borderRadius : undefined}
       withColumnBorders={withColumnBorders}
       striped={striped}
       highlightOnHover={highlightOnHover}

@@ -1,7 +1,6 @@
 import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
-import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
@@ -63,9 +62,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         ]}
       />
       <PageText>The code above will produce the following result:</PageText>
-      <ExampleContainer>
-        <ColumnPropertiesExample />
-      </ExampleContainer>
+      <ColumnPropertiesExample />
       <PageNavigation of={PATH} />
     </Container>
   );

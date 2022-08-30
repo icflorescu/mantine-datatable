@@ -3,8 +3,9 @@ import { DataTable } from 'mantine-datatable';
 export default function NonStandardRecordIdsExample() {
   return (
     <DataTable
-      striped
+      withBorder
       withColumnBorders
+      striped
       records={[
         { name: 'Joe Biden', bornIn: 1942 },
         // example-skip more records

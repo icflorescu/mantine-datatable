@@ -17,6 +17,7 @@ export default function PaginationExample() {
 
   return (
     <DataTable
+      withBorder
       records={records}
       columns={[
         { accessor: 'firstName', width: 100 },

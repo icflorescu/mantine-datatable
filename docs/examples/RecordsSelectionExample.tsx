@@ -3,7 +3,6 @@ import { showNotification } from '@mantine/notifications';
 import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
 import { Trash } from 'tabler-icons-react';
-import ExampleContainer from '~/components/ExampleContainer';
 import { companies, Company } from '~/data';
 
 export default function RecordsSelectionExample() {
@@ -11,20 +10,19 @@ export default function RecordsSelectionExample() {
 
   return (
     <>
-      <ExampleContainer>
-        <DataTable
-          withColumnBorders
-          records={companies}
-          columns={[
-            { accessor: 'name', width: '40%' },
-            { accessor: 'streetAddress', width: '60%' },
-            { accessor: 'city', width: 160 },
-            { accessor: 'state', width: 80 },
-          ]}
-          selectedRecords={selectedRecords}
-          onSelectedRecordsChange={setSelectedRecords}
-        />
-      </ExampleContainer>
+      <DataTable
+        withBorder
+        withColumnBorders
+        records={companies}
+        columns={[
+          { accessor: 'name', width: '40%' },
+          { accessor: 'streetAddress', width: '60%' },
+          { accessor: 'city', width: 160 },
+          { accessor: 'state', width: 80 },
+        ]}
+        selectedRecords={selectedRecords}
+        onSelectedRecordsChange={setSelectedRecords}
+      />
       <Paper my="xl" py="xl" withBorder>
         <Center>
           <Button

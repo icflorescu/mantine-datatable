@@ -4,9 +4,11 @@ import { DataTable } from 'mantine-datatable';
 export default function GettingStartedExample() {
   return (
     <DataTable
+      withBorder
+      borderRadius="sm"
+      withColumnBorders
       striped
       highlightOnHover
-      withColumnBorders
       // provide data
       records={[
         { id: 1, name: 'Joe Biden', bornIn: 1942, party: 'Democratic' },

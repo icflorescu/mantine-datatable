@@ -46,6 +46,7 @@ export default function AsynchronousDataLoadingExample({
   // prettier-ignore
   return (
     <DataTable
+      withBorder
       minHeight={300}
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={records}

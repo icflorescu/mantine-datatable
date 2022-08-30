@@ -7,8 +7,9 @@ const records = employees.slice(0, 10);
 export default function ColumnPropertiesExample() {
   return (
     <DataTable
-      striped
+      withBorder
       withColumnBorders
+      striped
       records={records}
       columns={[
         {

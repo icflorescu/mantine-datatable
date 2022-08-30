@@ -2,7 +2,6 @@ import { Code, Container, Paper, Switch } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
 import CodeBlock from '~/components/CodeBlock';
-import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
@@ -37,7 +36,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           onChange={() => setScrollable((value) => !value)}
         />
       </Paper>
-      <ExampleContainer>{scrollable ? <ScrollableExample /> : <AutoHeightExample />}</ExampleContainer>
+      {scrollable ? <ScrollableExample /> : <AutoHeightExample />}
       <PageText>
         The <Code>DataTable</Code> component embeds a{' '}
         <ExternalLink to="https://mantine.dev/core/scroll-area/">Mantine ScrollArea</ExternalLink> and has a default{' '}

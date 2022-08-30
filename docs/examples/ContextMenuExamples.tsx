@@ -8,6 +8,7 @@ export function ContextMenuExample1() {
   // ...
   return (
     <DataTable
+      withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
@@ -41,6 +42,7 @@ export function ContextMenuExample2() {
   // ...
   return (
     <DataTable
+      withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
@@ -77,6 +79,7 @@ export function ContextMenuExample3() {
   // ...
   return (
     <DataTable
+      withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
@@ -113,6 +116,7 @@ export function ContextMenuExample4() {
   // ...
   return (
     <DataTable
+      withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
@@ -147,6 +151,7 @@ export function ContextMenuExample5() {
   // ...
   return (
     <DataTable
+      withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
@@ -181,6 +186,7 @@ export function ContextMenuExample6() {
   // ...
   return (
     <DataTable
+      withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
@@ -217,6 +223,7 @@ export function ContextMenuExample7() {
   // ...
   return (
     <DataTable
+      withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
@@ -253,6 +260,7 @@ export function ContextMenuExample8() {
   // ...
   return (
     <DataTable
+      withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{

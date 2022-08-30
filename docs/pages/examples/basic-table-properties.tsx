@@ -4,7 +4,6 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
 import CheckableSegmentedControl from '~/components/CheckableSegmentedControl';
 import CodeBlock from '~/components/CodeBlock';
-import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
@@ -18,6 +17,7 @@ export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
   props: { code: (await readCodeExample('examples/BasicTablePropertiesExample.tsx')) as string },
 });
 
+const INITIAL_BORDER_RADIUS: MantineSize = 'sm';
 const INITIAL_HORIZONTAL_SPACING: MantineSize = 'xs';
 const INITIAL_VERTICAL_SPACING: MantineSize = 'xs';
 const INITIAL_FONT_SIZE: MantineSize = 'sm';
@@ -45,6 +45,9 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function Page({ code: initialCode }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [withBorder, setWithBorder] = useState(false);
+  const [customizeBorderRadius, setCustomizeBorderRadius] = useState(false);
+  const [borderRadius, setBorderRadius] = useState<MantineSize>(INITIAL_BORDER_RADIUS);
   const [withColumnBorders, setWithColumnBorders] = useState(false);
   const [striped, setStriped] = useState(false);
   const [highlightOnHover, setHighlightOnHover] = useState(false);
@@ -58,6 +61,18 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
   const [verticalAlignment, setVerticalAlignment] = useState<DataTableVerticalAlignment>(INITIAL_VERTICAL_ALIGNMENT);
 
   useEffect(() => {
+    if (!withBorder) setCustomizeBorderRadius(false);
+  }, [withBorder]);
+
+  useEffect(() => {
+    if (customizeBorderRadius) {
+      setWithBorder(true);
+    } else {
+      setBorderRadius(INITIAL_BORDER_RADIUS);
+    }
+  }, [customizeBorderRadius]);
+
+  useEffect(() => {
     if (!customizeHorizontalSpacing) setHorizontalSpacing(INITIAL_HORIZONTAL_SPACING);
   }, [customizeHorizontalSpacing]);
 
@@ -68,6 +83,10 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
   const adjustCode = useCallback(
     () =>
       initialCode
+        .replace(/( +)withBorder=.*\n/, (_, spaces) => (withBorder ? `${spaces}withBorder\n` : ''))
+        .replace(/( +)borderRadius=.*\n/, (_, spaces) =>
+          customizeBorderRadius ? `${spaces}borderRadius="${borderRadius}"\n` : ''
+        )
         .replace(/( +)withColumnBorders=.*\n/, (_, spaces) => (withColumnBorders ? `${spaces}withColumnBorders\n` : ''))
         .replace(/( +)striped=.*\n/, (_, spaces) => (striped ? `${spaces}striped\n` : ''))
         .replace(/( +)highlightOnHover=.*\n/, (_, spaces) => (highlightOnHover ? `${spaces}highlightOnHover\n` : ''))
@@ -82,6 +101,8 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
           customizeVerticalAlignment ? `${spaces}verticalAlignment="${verticalAlignment}"\n` : ''
         ),
     [
+      borderRadius,
+      customizeBorderRadius,
       customizeFontSize,
       customizeHorizontalSpacing,
       customizeVerticalAlignment,
@@ -93,6 +114,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
       striped,
       verticalAlignment,
       verticalSpacing,
+      withBorder,
       withColumnBorders,
     ]
   );
@@ -134,8 +156,23 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
               checked={highlightOnHover}
               onChange={() => setHighlightOnHover((v) => !v)}
             />
+            <Switch
+              className={classes.control}
+              label="Table border"
+              checked={withBorder}
+              onChange={() => setWithBorder((v) => !v)}
+            />
           </div>
           <div className={classes.controls}>
+            <CheckableSegmentedControl
+              className={classes.control}
+              label="Border radius"
+              data={SIZES}
+              checked={customizeBorderRadius}
+              onCheckedChange={setCustomizeBorderRadius}
+              value={borderRadius}
+              onChange={(value) => setBorderRadius(value as MantineSize)}
+            />
             <CheckableSegmentedControl
               className={classes.control}
               label="Horizontal spacing"
@@ -175,21 +212,22 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
           </div>
         </div>
       </Paper>
-      <ExampleContainer>
-        <BasicTablePropertiesExample
-          withColumnBorders={withColumnBorders}
-          striped={striped}
-          highlightOnHover={highlightOnHover}
-          customizeHorizontalSpacing={customizeHorizontalSpacing}
-          horizontalSpacing={horizontalSpacing}
-          customizeVerticalSpacing={customizeVerticalSpacing}
-          verticalSpacing={verticalSpacing}
-          customizeFontSize={customizeFontSize}
-          fontSize={fontSize}
-          customizeVerticalAlignment={customizeVerticalAlignment}
-          verticalAlignment={verticalAlignment}
-        />
-      </ExampleContainer>
+      <BasicTablePropertiesExample
+        withBorder={withBorder}
+        customizeBorderRadius={customizeBorderRadius}
+        borderRadius={borderRadius}
+        withColumnBorders={withColumnBorders}
+        striped={striped}
+        highlightOnHover={highlightOnHover}
+        customizeHorizontalSpacing={customizeHorizontalSpacing}
+        horizontalSpacing={horizontalSpacing}
+        customizeVerticalSpacing={customizeVerticalSpacing}
+        verticalSpacing={verticalSpacing}
+        customizeFontSize={customizeFontSize}
+        fontSize={fontSize}
+        customizeVerticalAlignment={customizeVerticalAlignment}
+        verticalAlignment={verticalAlignment}
+      />
       <CodeBlock language="typescript" content={code} />
       <PageNavigation of={PATH} />
     </Container>

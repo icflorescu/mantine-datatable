@@ -14,6 +14,7 @@ export default function SortingExample() {
 
   return (
     <DataTable
+      withBorder
       withColumnBorders
       records={records}
       columns={[

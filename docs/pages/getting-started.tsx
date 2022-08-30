@@ -2,7 +2,6 @@ import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import CodeFiles from '~/components/CodeBlockTabs';
-import ExampleContainer from '~/components/ExampleContainer';
 import ExternalLink from '~/components/ExternalLink';
 import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
@@ -50,9 +49,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>Then you can import the component and use it in your application like so:</PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>
-      <ExampleContainer>
-        <GettingStartedExample />
-      </ExampleContainer>
+      <GettingStartedExample />
       <PageText>
         Have a look at the list of <InternalLink to="/component-properties">component properties</InternalLink> and
         browse the code examples to see the component in action and learn how to use it.

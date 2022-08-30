@@ -1,7 +1,6 @@
 import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
-import ExampleContainer from '~/components/ExampleContainer';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -21,9 +20,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
     <Container>
       <PageTitle of={PATH} />
       <PageText>Click on a row to see it in action:</PageText>
-      <ExampleContainer>
-        <HandlingRowClicksExample />
-      </ExampleContainer>
+      <HandlingRowClicksExample />
       <PageText>
         Provide a handler called <Code>onRowClick</Code> to the <Code>DataTable</Code> component, like so:
       </PageText>

@@ -1,7 +1,6 @@
 import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
-import ExampleContainer from '~/components/ExampleContainer';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -30,9 +29,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>
-      <ExampleContainer>
-        <NonStandardRecordIdsExample />
-      </ExampleContainer>
+      <NonStandardRecordIdsExample />
       <PageNavigation of={PATH} />
     </Container>
   );

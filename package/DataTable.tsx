@@ -12,38 +12,47 @@ import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
 
-const useStyles = createStyles((theme) => ({
-  root: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    tr: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-    },
-  },
-  browserSelectionDisabled: {
-    userSelect: 'none',
-  },
-  tableWithColumnBorders: {
-    'th, td': {
-      ':not(:first-of-type)': {
-        borderLeft: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
+const useStyles = createStyles((theme) => {
+  const border = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
+  return {
+    root: {
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+      tr: {
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
       },
     },
-  },
-  verticalAlignmentTop: {
-    td: {
-      verticalAlign: 'top',
+    browserSelectionDisabled: {
+      userSelect: 'none',
     },
-  },
-  verticalAlignmentBottom: {
-    td: {
-      verticalAlign: 'bottom',
+    tableWithBorder: {
+      border,
     },
-  },
-}));
+    tableWithColumnBorders: {
+      'th, td': {
+        ':not(:first-of-type)': {
+          borderLeft: border,
+        },
+      },
+    },
+    verticalAlignmentTop: {
+      td: {
+        verticalAlign: 'top',
+      },
+    },
+    verticalAlignmentBottom: {
+      td: {
+        verticalAlign: 'bottom',
+      },
+    },
+  };
+});
 
 export default function DataTable<T extends Record<string, unknown>>({
+  withBorder,
+  borderRadius,
   withColumnBorders,
   height = '100%',
   minHeight,
@@ -145,10 +154,21 @@ export default function DataTable<T extends Record<string, unknown>>({
 
   const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;
 
-  const { classes, cx } = useStyles();
+  const { cx, classes } = useStyles();
 
   return (
-    <Box className={classes.root} sx={{ height, minHeight }}>
+    <Box
+      className={cx(classes.root, { [classes.tableWithBorder]: withBorder })}
+      sx={(theme) => ({
+        borderRadius: borderRadius
+          ? typeof borderRadius === 'string'
+            ? theme.radius[borderRadius]
+            : borderRadius
+          : undefined,
+        height,
+        minHeight,
+      })}
+    >
       <DataTableScrollArea
         leftShadowVisible={!(selectedRecords || scrolledToLeft)}
         rightShadowVisible={!scrolledToRight}
