@@ -25,6 +25,12 @@ const useStyles = createStyles((theme, { color }: { color?: MantineColor }) => {
           color ? (theme.colorScheme === 'dark' ? 0.15 : 0.08) : 0.25
         ),
       },
+      '&:active:not([disabled])': {
+        background: theme.fn.rgba(
+          color ? theme.colors[color][6] : theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
+          color ? (theme.colorScheme === 'dark' ? 0.3 : 0.2) : 0.5
+        ),
+      },
     },
     icon: {
       fontSize: 0,
