@@ -6,49 +6,6 @@ const useStyles = createStyles((theme) => {
   return {
     root: {
       flex: '1 1 100%',
-      position: 'relative',
-      '&::before, &::after': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        width: theme.spacing.sm,
-        pointerEvents: 'none',
-        opacity: 0,
-        transition: 'opacity .15s ease',
-      },
-      '&::before': {
-        zIndex: 3,
-        left: 0,
-        background: `linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )}), linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )} 30%)`,
-      },
-      '&::after': {
-        zIndex: 2,
-        right: 0,
-        background: `linear-gradient(to left, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )}), linear-gradient(to left, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )} 30%)`,
-      },
-    },
-    leftShadowVisible: {
-      '&::before': {
-        opacity: 1,
-      },
-    },
-    rightShadowVisible: {
-      '&::after': {
-        opacity: 1,
-      },
     },
     scrollbar: {
       '&[data-state="visible"]': { background: 'transparent' },
@@ -57,8 +14,41 @@ const useStyles = createStyles((theme) => {
     thumb: {
       zIndex: 3,
     },
-    bottomShadow: {
+    shadow: {
       position: 'absolute',
+      pointerEvents: 'none',
+      opacity: 0,
+      transition: 'opacity .15s ease',
+    },
+    leftShadow: {
+      top: 0,
+      left: 0,
+      bottom: 0,
+      width: theme.spacing.sm,
+      zIndex: 3,
+      background: `linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
+        theme.black,
+        0
+      )}), linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
+        theme.black,
+        0
+      )} 30%)`,
+    },
+    rightShadow: {
+      top: 0,
+      bottom: 0,
+      right: 0,
+      width: theme.spacing.sm,
+      zIndex: 2,
+      background: `linear-gradient(to left, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
+        theme.black,
+        0
+      )}), linear-gradient(to left, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
+        theme.black,
+        0
+      )} 30%)`,
+    },
+    bottomShadow: {
       left: 0,
       right: 0,
       bottom: 0,
@@ -68,11 +58,8 @@ const useStyles = createStyles((theme) => {
         theme.black,
         shadowGradientAlpha
       )}), linear-gradient(${theme.fn.rgba(theme.black, 0)} 30%, ${theme.fn.rgba(theme.black, shadowGradientAlpha)})`,
-      pointerEvents: 'none',
-      opacity: 0,
-      transition: 'opacity .15s ease',
     },
-    bottomShadowVisible: {
+    shadowVisible: {
       opacity: 1,
     },
   };
@@ -102,16 +89,14 @@ export default forwardRef(function DataTableScrollArea(
   return (
     <ScrollArea
       viewportRef={ref}
-      className={cx(classes.root, {
-        [classes.leftShadowVisible]: leftShadowVisible,
-        [classes.rightShadowVisible]: rightShadowVisible,
-      })}
-      classNames={{ scrollbar: classes.scrollbar, thumb: classes.thumb }}
+      classNames={{ root: classes.root, scrollbar: classes.scrollbar, thumb: classes.thumb }}
       styles={{ scrollbar: { marginTop: headerHeight } }}
       onScrollPositionChange={onScrollPositionChange}
     >
       {children}
-      <div className={cx(classes.bottomShadow, { [classes.bottomShadowVisible]: bottomShadowVisible })} />
+      <div className={cx(classes.shadow, classes.leftShadow, { [classes.shadowVisible]: leftShadowVisible })} />
+      <div className={cx(classes.shadow, classes.rightShadow, { [classes.shadowVisible]: rightShadowVisible })} />
+      <div className={cx(classes.shadow, classes.bottomShadow, { [classes.shadowVisible]: bottomShadowVisible })} />
     </ScrollArea>
   );
 }) as (props: DataTableScrollAreaProps & { ref: ForwardedRef<HTMLDivElement> }) => JSX.Element;

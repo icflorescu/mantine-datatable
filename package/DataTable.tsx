@@ -1,6 +1,6 @@
 import { Box, createStyles, Table } from '@mantine/core';
 import { useElementSize } from '@mantine/hooks';
-import { differenceBy, get, lowerCase, uniqBy, upperFirst } from 'lodash';
+import { differenceBy, get, lowerCase, throttle, uniqBy, upperFirst } from 'lodash';
 import { Key, useEffect, useState } from 'react';
 import { DataTableProps } from './DataTable.props';
 import DataTableEmpty from './DataTableEmpty';
@@ -100,6 +100,7 @@ export default function DataTable<T extends Record<string, unknown>>({
   }, [fetching]);
 
   const onScrollPositionChange = () => {
+    console.log('here');
     if (!fetching) setContextMenuInfo(null);
 
     if (fetching || tableHeight <= scrollViewportHeight) {
@@ -129,6 +130,8 @@ export default function DataTable<T extends Record<string, unknown>>({
     tableHeight,
     tableWidth,
   ]);
+
+  const onScrollPositionChangeThrottled = throttle(onScrollPositionChange, 200, { leading: true, trailing: true });
 
   const handlePageChange = (page: number) => {
     scrollViewportRef.current.scrollTo({ top: 0, left: 0 });
@@ -173,7 +176,7 @@ export default function DataTable<T extends Record<string, unknown>>({
         rightShadowVisible={!scrolledToRight}
         bottomShadowVisible={!scrolledToBottom}
         headerHeight={headerHeight}
-        onScrollPositionChange={onScrollPositionChange}
+        onScrollPositionChange={onScrollPositionChangeThrottled}
       >
         <Table
           ref={tableRef}

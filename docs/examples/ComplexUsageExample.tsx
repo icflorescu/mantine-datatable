@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Edit, Trash, TrashX } from 'tabler-icons-react';
 import { Employee, getEmployeesAsync } from '~/data';
 
-const PAGE_SIZE = 30;
+const PAGE_SIZE = 100;
 
 export default function ComplexUsageExample() {
   const [page, setPage] = useState(1);
