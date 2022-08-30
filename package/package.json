@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Datatable component for Mantine UI, featuring asynchronous data loading support, sorting, pagination, context menu and more",
   "keywords": [
     "ui",
@@ -24,12 +24,13 @@
     "email": "ionut.florescu@gmail.com",
     "url": "https://github.com/icflorescu"
   },
-  "readme": "dist/README.md",
   "main": "dist/index.cjs",
   "module": "dist/index.ejs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "rm -rf dist",

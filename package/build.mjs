@@ -20,8 +20,8 @@ const config = {
 };
 
 await rm('./dist', { recursive: true, force: true });
-await cp('../README.md', 'dist/README.md');
-await cp('../LICENSE', 'dist/LICENSE');
+await cp('../README.md', 'README.md', { force: true });
+await cp('../LICENSE', 'LICENSE', { force: true });
 
 for (const { name, extension } of formats) {
   await build({ ...config, format: name, outfile: `./dist/index.${extension}` });
