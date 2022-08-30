@@ -106,28 +106,26 @@ export default function DataTable<T extends Record<string, unknown>>({
       setScrolledToTop(true);
       setScrolledToBottom(true);
     } else {
-      const y = scrollViewportRef.current.scrollTop;
-      setScrolledToTop(y === 0);
-      setScrolledToBottom(headerHeight * 2 + footerHeight + y >= scrollViewportHeight);
+      const scrollTop = scrollViewportRef.current.scrollTop;
+      setScrolledToTop(scrollTop === 0);
+      setScrolledToBottom(Math.round(tableHeight - scrollTop) === Math.round(scrollViewportHeight));
     }
 
     if (fetching || tableWidth === scrollViewportWidth) {
       setScrolledToLeft(true);
       setScrolledToRight(true);
     } else {
-      const x = scrollViewportRef.current.scrollLeft;
-      setScrolledToLeft(x === 0);
-      setScrolledToRight(Math.round(tableWidth - x) === Math.round(scrollViewportWidth));
+      const scrollLeft = scrollViewportRef.current.scrollLeft;
+      setScrolledToLeft(scrollLeft === 0);
+      setScrolledToRight(Math.round(tableWidth - scrollLeft) === Math.round(scrollViewportWidth));
     }
   };
 
   useEffect(onScrollPositionChange, [
     fetching,
-    footerHeight,
-    headerHeight,
     scrollViewportHeight,
-    scrollViewportWidth,
     scrollViewportRef,
+    scrollViewportWidth,
     tableHeight,
     tableWidth,
   ]);
@@ -170,9 +168,10 @@ export default function DataTable<T extends Record<string, unknown>>({
       })}
     >
       <DataTableScrollArea
+        ref={scrollViewportRef}
         leftShadowVisible={!(selectedRecords || scrolledToLeft)}
         rightShadowVisible={!scrolledToRight}
-        ref={scrollViewportRef}
+        bottomShadowVisible={!scrolledToBottom}
         headerHeight={headerHeight}
         onScrollPositionChange={onScrollPositionChange}
       >
@@ -280,7 +279,6 @@ export default function DataTable<T extends Record<string, unknown>>({
           recordsPerPage={recordsPerPage}
           paginationSize={paginationSize}
           recordsLength={recordsLength}
-          topShadowVisible={!scrolledToBottom}
         />
       )}
       <DataTableLoader

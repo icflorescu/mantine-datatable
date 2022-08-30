@@ -57,19 +57,45 @@ const useStyles = createStyles((theme) => {
     thumb: {
       zIndex: 3,
     },
+    bottomShadow: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: theme.spacing.sm,
+      borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
+      background: `linear-gradient(${theme.fn.rgba(theme.black, 0)}, ${theme.fn.rgba(
+        theme.black,
+        shadowGradientAlpha
+      )}), linear-gradient(${theme.fn.rgba(theme.black, 0)} 30%, ${theme.fn.rgba(theme.black, shadowGradientAlpha)})`,
+      pointerEvents: 'none',
+      opacity: 0,
+      transition: 'opacity .15s ease',
+    },
+    bottomShadowVisible: {
+      opacity: 1,
+    },
   };
 });
 
 type DataTableScrollAreaProps = {
   leftShadowVisible: boolean;
   rightShadowVisible: boolean;
+  bottomShadowVisible: boolean;
   headerHeight: number;
   onScrollPositionChange: () => void;
   children: ReactNode;
 };
 
 export default forwardRef(function DataTableScrollArea(
-  { leftShadowVisible, rightShadowVisible, headerHeight, onScrollPositionChange, children }: DataTableScrollAreaProps,
+  {
+    leftShadowVisible,
+    rightShadowVisible,
+    bottomShadowVisible,
+    headerHeight,
+    onScrollPositionChange,
+    children,
+  }: DataTableScrollAreaProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   const { cx, classes } = useStyles();
@@ -85,6 +111,7 @@ export default forwardRef(function DataTableScrollArea(
       onScrollPositionChange={onScrollPositionChange}
     >
       {children}
+      <div className={cx(classes.bottomShadow, { [classes.bottomShadowVisible]: bottomShadowVisible })} />
     </ScrollArea>
   );
 }) as (props: DataTableScrollAreaProps & { ref: ForwardedRef<HTMLDivElement> }) => JSX.Element;
