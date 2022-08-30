@@ -43,8 +43,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <Code>height</Code> of <Code>100%</Code>.
         <br />
         Thus, placing the component inside a height-restricted container will turn on its{' '}
-        <em>“vertically scrollable behavior”</em>
-        .
+        <em>“vertically-scrollable”</em> behavior.
         <br />
       </PageText>
       <PageText info>

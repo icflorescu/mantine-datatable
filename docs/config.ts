@@ -35,6 +35,7 @@ export const PAGES: (
       { title: 'Non-standard record IDs', path: 'non-standard-record-ids' },
       { title: 'Column properties', path: 'column-properties' },
       { title: 'Scrollable vs. auto-height', path: 'scrollable-vs-auto-height' },
+      { title: 'Empty state', path: 'empty-state' },
       { title: 'Pagination', path: 'pagination' },
       { title: 'Sorting', path: 'sorting' },
       { title: 'Records selection', path: 'records-selection' },
