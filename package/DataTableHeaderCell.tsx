@@ -1,7 +1,7 @@
 import { Box, Center, createStyles, Group, MantineTheme } from '@mantine/core';
 import { lowerCase, upperFirst } from 'lodash';
 import { ReactNode } from 'react';
-import { ArrowDown, ArrowsVertical, ArrowUp } from 'tabler-icons-react';
+import { ArrowDown, ArrowsVertical } from 'tabler-icons-react';
 import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
 import useMediaQueryStringOrFn from './useMediaQueryStringOrFn';
 
@@ -22,6 +22,12 @@ const useStyles = createStyles((theme) => ({
   sortableColumnHeaderText: {
     minWidth: 0,
     flexGrow: 1,
+  },
+  sortableColumnHeaderIcon: {
+    transition: 'transform .15s ease',
+  },
+  sortableColumnHeaderIconRotated: {
+    transform: 'rotate3d(0, 0, 1, 180deg)',
   },
   sortableColumnHeaderNeutralIcon: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[5],
@@ -79,13 +85,14 @@ export default function DataTableHeaderCell<T>({
           <Box className={cx(classes.columnHeaderText, classes.sortableColumnHeaderText)}>{text}</Box>
           <Center>
             {sortStatus?.columnAccessor === accessor ? (
-              sortStatus.direction === 'asc' ? (
-                <ArrowDown size={14} />
-              ) : (
-                <ArrowUp size={14} />
-              )
+              <ArrowDown
+                className={cx(classes.sortableColumnHeaderIcon, {
+                  [classes.sortableColumnHeaderIconRotated]: sortStatus.direction === 'desc',
+                })}
+                size={14}
+              />
             ) : (
-              <ArrowsVertical size={14} className={classes.sortableColumnHeaderNeutralIcon} />
+              <ArrowsVertical className={classes.sortableColumnHeaderNeutralIcon} size={14} />
             )}
           </Center>
         </Group>
