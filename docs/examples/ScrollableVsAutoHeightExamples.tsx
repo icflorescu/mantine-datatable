@@ -10,7 +10,7 @@ export function ScrollableExample() {
     <Box sx={{ height: 300 }}>
       <DataTable
         striped
-        withVerticalBorders
+        withColumnBorders
         records={records}
         columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
       />
@@ -24,7 +24,7 @@ export function AutoHeightExample() {
   return (
     <DataTable
       striped
-      withVerticalBorders
+      withColumnBorders
       records={records}
       columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
     />

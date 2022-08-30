@@ -13,7 +13,7 @@ export default function RecordsSelectionExample() {
     <>
       <ExampleContainer>
         <DataTable
-          withVerticalBorders
+          withColumnBorders
           records={companies}
           columns={[
             { accessor: 'name', width: '40%' },

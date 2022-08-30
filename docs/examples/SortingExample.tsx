@@ -14,7 +14,7 @@ export default function SortingExample() {
 
   return (
     <DataTable
-      withVerticalBorders
+      withColumnBorders
       records={records}
       columns={[
         { accessor: 'name', width: '40%', sortable: true },

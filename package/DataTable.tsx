@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => ({
   browserSelectionDisabled: {
     userSelect: 'none',
   },
-  tableWithVerticalBorders: {
+  tableWithColumnBorders: {
     'th, td': {
       ':not(:first-of-type)': {
         borderLeft: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
@@ -44,7 +44,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function DataTable<T extends Record<string, unknown>>({
-  withVerticalBorders,
+  withColumnBorders,
   height = '100%',
   minHeight,
   verticalAlignment = 'center',
@@ -161,7 +161,7 @@ export default function DataTable<T extends Record<string, unknown>>({
           horizontalSpacing={horizontalSpacing}
           className={cx({
             [classes.browserSelectionDisabled]: onRowClick || selectedRecords,
-            [classes.tableWithVerticalBorders]: withVerticalBorders,
+            [classes.tableWithColumnBorders]: withColumnBorders,
             [classes.verticalAlignmentTop]: verticalAlignment === 'top',
             [classes.verticalAlignmentBottom]: verticalAlignment === 'bottom',
           })}

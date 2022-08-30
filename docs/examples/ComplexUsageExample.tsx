@@ -36,7 +36,7 @@ export default function ComplexUsageExample() {
     <DataTable
       verticalAlignment="top"
       striped
-      withVerticalBorders
+      withColumnBorders
       fetching={isFetching}
       columns={[
         {

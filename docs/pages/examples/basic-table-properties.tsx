@@ -45,7 +45,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function Page({ code: initialCode }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [withVerticalBorders, setWithVerticalBorders] = useState(false);
+  const [withColumnBorders, setWithColumnBorders] = useState(false);
   const [striped, setStriped] = useState(false);
   const [highlightOnHover, setHighlightOnHover] = useState(false);
   const [customizeHorizontalSpacing, setCustomizeHorizontalSpacing] = useState(false);
@@ -68,9 +68,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
   const adjustCode = useCallback(
     () =>
       initialCode
-        .replace(/( +)withVerticalBorders=.*\n/, (_, spaces) =>
-          withVerticalBorders ? `${spaces}withVerticalBorders\n` : ''
-        )
+        .replace(/( +)withColumnBorders=.*\n/, (_, spaces) => (withColumnBorders ? `${spaces}withColumnBorders\n` : ''))
         .replace(/( +)striped=.*\n/, (_, spaces) => (striped ? `${spaces}striped\n` : ''))
         .replace(/( +)highlightOnHover=.*\n/, (_, spaces) => (highlightOnHover ? `${spaces}highlightOnHover\n` : ''))
         .replace(/( +)horizontalSpacing=.*\n/, (_, spaces) =>
@@ -95,7 +93,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
       striped,
       verticalAlignment,
       verticalSpacing,
-      withVerticalBorders,
+      withColumnBorders,
     ]
   );
 
@@ -120,9 +118,9 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
           <div className={classes.controls}>
             <Switch
               className={classes.control}
-              label="Vertical borders"
-              checked={withVerticalBorders}
-              onChange={() => setWithVerticalBorders((v) => !v)}
+              label="Column borders"
+              checked={withColumnBorders}
+              onChange={() => setWithColumnBorders((v) => !v)}
             />
             <Switch
               className={classes.control}
@@ -179,7 +177,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
       </Paper>
       <ExampleContainer>
         <BasicTablePropertiesExample
-          withVerticalBorders={withVerticalBorders}
+          withColumnBorders={withColumnBorders}
           striped={striped}
           highlightOnHover={highlightOnHover}
           customizeHorizontalSpacing={customizeHorizontalSpacing}

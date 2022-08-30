@@ -8,7 +8,7 @@ export default function ColumnPropertiesExample() {
   return (
     <DataTable
       striped
-      withVerticalBorders
+      withColumnBorders
       records={records}
       columns={[
         {

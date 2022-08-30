@@ -4,7 +4,7 @@ export default function NonStandardRecordIdsExample() {
   return (
     <DataTable
       striped
-      withVerticalBorders
+      withColumnBorders
       records={[
         { name: 'Joe Biden', bornIn: 1942 },
         // example-skip more records

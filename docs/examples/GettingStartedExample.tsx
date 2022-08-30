@@ -6,7 +6,7 @@ export default function GettingStartedExample() {
     <DataTable
       striped
       highlightOnHover
-      withVerticalBorders
+      withColumnBorders
       // provide data
       records={[
         { id: 1, name: 'Joe Biden', bornIn: 1942, party: 'Democratic' },

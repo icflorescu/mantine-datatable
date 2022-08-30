@@ -142,9 +142,9 @@ export type DataTableProps<T> = {
   minHeight?: string | number;
 
   /**
-   * If true, cells will have vertical borders
+   * If true, columns will have vertical borders
    */
-  withVerticalBorders?: boolean;
+  withColumnBorders?: boolean;
 
   /**
    * Vertical alignment for row cells; defaults to `center`
