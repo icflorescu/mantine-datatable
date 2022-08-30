@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Adjustments, Home, Rocket } from 'tabler-icons-react';
 
 export const HEADER_HEIGHT = 56;
+export const FOOTER_HEIGHT = 48;
 export const NAVBAR_WIDTH = 280;
 export const NAVBAR_BREAKPOINT = 'md';
 export const REPO_LINK = 'https://github.com/icflorescu/mantine-datatable';
