@@ -42,7 +42,7 @@
     "@types/lodash": "^4.14.184",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
-    "esbuild": "^0.15.5",
+    "esbuild": "^0.15.6",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "tabler-icons-react": "^1.54.0",
