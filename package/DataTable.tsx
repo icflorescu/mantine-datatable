@@ -100,7 +100,6 @@ export default function DataTable<T extends Record<string, unknown>>({
   }, [fetching]);
 
   const onScrollPositionChange = () => {
-    console.log('here');
     if (!fetching) setContextMenuInfo(null);
 
     if (fetching || tableHeight <= scrollViewportHeight) {
