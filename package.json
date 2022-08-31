@@ -8,7 +8,8 @@
     "package"
   ],
   "scripts": {
-    "generate-docs-data": "node generate-docs-data.mjs",
+    "generate-docs-data": "node scripts/generate-docs-data.mjs",
+    "set-package-versions": "node --no-warnings scripts/set-package-versions.mjs",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "start": "npx serve docs/out",
