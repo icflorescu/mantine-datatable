@@ -1,13 +1,11 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "0.0.0",
+  "version": "0.1.4",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
-    "mock": "node mock.mjs",
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "npx serve out",
     "lint": "next lint"
   },
   "dependencies": {
@@ -28,7 +26,6 @@
     "tabler-icons-react": "^1.54.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.5.0",
     "@types/lodash": "^4.14.184",
     "@types/node": "^18.7.14",
     "@types/react": "^18.0.18",
