@@ -15,7 +15,7 @@ export default class _Document extends Document {
             <>
               <link rel="canonical" href={process.env.CANONICAL_URL} />
               <meta property="og:url" content={process.env.CANONICAL_URL} />
-              <meta property="og:image" content={`${process.env.CANONICAL_URL}mantine-datatable.png`} />
+              <meta property="og:image" content={`${process.env.CANONICAL_URL}mantine-datatable-repo.png`} />
               <meta property="og:image:alt" content={SEO_DEFAULT_DESCRIPTION} />
             </>
           )}

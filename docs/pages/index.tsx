@@ -6,9 +6,10 @@ import { REPO_LINK } from '~/config';
 
 const useStyles = createStyles((theme) => ({
   title: {
+    marginBottom: '.75em',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[8],
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-      marginTop: '0.33em',
+      marginTop: '.33em',
       lineHeight: 1.1,
       fontSize: 52,
     },
@@ -16,13 +17,17 @@ const useStyles = createStyles((theme) => ({
       fontSize: 64,
     },
     [`@media (min-width: ${theme.breakpoints.md}px)`]: {
-      marginTop: '0.66em',
+      marginTop: '.66em',
     },
   },
   gradientText: {
     background: theme.fn.gradient({ from: theme.colors.blue[6], to: theme.colors.cyan[6] }),
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
+  },
+  image: {
+    overflow: 'hidden',
+    borderRadius: theme.radius.sm,
   },
   subtitle: {
     margin: '2em 0',
@@ -67,6 +72,14 @@ export default function Page() {
         <br />
         <span className={classes.gradientText}>data-rich applications.</span>
       </Title>
+      <div className={classes.image}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${process.env.BASE_PATH}/mantine-datatable.png`}
+          alt="Mantine DataTable dark mode support"
+          title="Mantine DataTable supports dark mode"
+        />
+      </div>
       <Text className={classes.subtitle}>Build data-rich interfaces faster than ever with Mantine DataTable.</Text>
       <div className={classes.features}>
         <HomePageFeature icon={Scale} title="Free and open-source">
