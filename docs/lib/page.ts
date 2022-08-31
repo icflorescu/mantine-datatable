@@ -1,7 +1,7 @@
 import { memoize } from 'lodash';
 import { PAGES } from '~/config';
 
-type PageInfo = { path: string; title: string };
+type PageInfo = { path: string; title: string; description?: string };
 
 const flattenedPages: PageInfo[] = [];
 for (const { path, title, items } of PAGES) {
@@ -20,7 +20,10 @@ const getPage = memoize((path: string) => {
   return page;
 });
 
-export const getPageTitle = memoize((path: string) => getPage(path).title);
+export const getPageMeta = memoize((path: string) => {
+  const { title, description } = getPage(path);
+  return { title, description };
+});
 
 export const getPageNavigation = memoize((path: string) => {
   const page = getPage(path);

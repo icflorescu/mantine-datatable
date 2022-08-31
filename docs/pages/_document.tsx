@@ -1,5 +1,6 @@
 import { createGetInitialProps } from '@mantine/next';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
+import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE } from '~/config';
 
 const getInitialProps = createGetInitialProps();
 
@@ -10,7 +11,16 @@ export default class _Document extends Document {
     return (
       <Html>
         <Head>
-          {process.env.CANONICAL_URL && <link rel="canonical" href={process.env.CANONICAL_URL} />}
+          {process.env.CANONICAL_URL && (
+            <>
+              <link rel="canonical" href={process.env.CANONICAL_URL} />
+              <meta property="og:url" content={process.env.CANONICAL_URL} />
+            </>
+          )}
+          <meta property="og:image" content={`${process.env.BASE_PATH}/mantine-datatable.png`} />
+          <meta property="og:image:alt" content={SEO_DEFAULT_DESCRIPTION} />
+          <meta property="og:site_name" content={SEO_DEFAULT_TITLE} />
+          <meta property="og:type" content="object" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link

@@ -1,13 +1,18 @@
 import { Title } from '@mantine/core';
 import Head from 'next/head';
-import { getPageTitle } from '~/lib/page';
+import { SEO_DEFAULT_DESCRIPTION } from '~/config';
+import { getPageMeta } from '~/lib/page';
 
 export default function PageTitle({ of }: { of: string }) {
-  const title = getPageTitle(of);
+  const { title, description } = getPageMeta(of);
+  const titleWithSuffix = `${title} | Mantine DataTable`;
   return (
     <>
       <Head>
-        <title>{`${title} | Mantine DataTable`}</title>
+        <title>{titleWithSuffix}</title>
+        <meta property="og:title" content={titleWithSuffix} />
+        <meta name="description" content={description ?? SEO_DEFAULT_DESCRIPTION} />
+        <meta property="og:description" content={description ?? SEO_DEFAULT_DESCRIPTION} />
       </Head>
       <Title
         order={2}

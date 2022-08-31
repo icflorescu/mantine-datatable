@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import AppWrapper from '~/components/AppWrapper';
+import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE } from '~/config';
 
 export default function _App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -25,8 +26,10 @@ export default function _App(props: AppProps) {
   return (
     <>
       <Head>
-        <title>Mantine DataTable</title>
-        <meta name="description" content="DataTable component for building data-rich applications" />
+        <title>{SEO_DEFAULT_TITLE}</title>
+        <meta property="og:title" content={SEO_DEFAULT_TITLE} />
+        <meta name="description" content={SEO_DEFAULT_DESCRIPTION} />
+        <meta property="og:description" content={SEO_DEFAULT_DESCRIPTION} />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <QueryClientProvider client={queryClient}>
