@@ -1,5 +1,9 @@
 # [Mantine DataTable](https://icflorescu.github.io/mantine-datatable/)
 
+[![NPM version][npm-image]][npm-url]
+[![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
+
 A table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu and more.
 
 ## Documentation and examples
@@ -13,3 +17,10 @@ If you find this package useful, please star the repository, [tweet about it](ht
 ## License
 
 The [MIT License](https://github.com/icflorescu/mantine-datatable/blob/master/LICENSE).
+
+[npm-image]: https://img.shields.io/npm/v/mantine-datatable.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/mantine-datatable
+[license-image]: http://img.shields.io/npm/l/mantine-datatable.svg?style=flat-square
+[license-url]: LICENSE
+[downloads-image]: http://img.shields.io/npm/dm/mantine-datatable.svg?style=flat-square
+[downloads-url]: https://npmjs.org/package/mantine-datatable
