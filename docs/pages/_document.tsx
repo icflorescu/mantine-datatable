@@ -15,10 +15,10 @@ export default class _Document extends Document {
             <>
               <link rel="canonical" href={process.env.CANONICAL_URL} />
               <meta property="og:url" content={process.env.CANONICAL_URL} />
+              <meta property="og:image" content={`${process.env.CANONICAL_URL}/mantine-datatable.png`} />
+              <meta property="og:image:alt" content={SEO_DEFAULT_DESCRIPTION} />
             </>
           )}
-          <meta property="og:image" content={`${process.env.BASE_PATH}/mantine-datatable.png`} />
-          <meta property="og:image:alt" content={SEO_DEFAULT_DESCRIPTION} />
           <meta property="og:site_name" content={SEO_DEFAULT_TITLE} />
           <meta property="og:type" content="object" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
