@@ -23,8 +23,8 @@ export function ScrollableExample() {
 }
 
 export function AutoHeightExample() {
-  // example-start auto-height
   return (
+    // example-start auto-height
     <DataTable
       // example-skip
       withBorder
@@ -34,6 +34,6 @@ export function AutoHeightExample() {
       columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
       // example-resume
     />
+    // example-end
   );
-  // example-end
 }
