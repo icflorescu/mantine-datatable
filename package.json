@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-turborepo",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "This is a monorepo; see package/package.json for more info",
   "private": true,
   "workspaces": [
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "generate-docs-data": "node scripts/generate-docs-data.mjs",
-    "set-package-versions": "node --no-warnings scripts/set-package-versions.mjs",
+    "set-package-versions": "NODE_NO_WARNINGS=1 node scripts/set-package-versions.mjs",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "start": "npx serve docs/out",
