@@ -36,6 +36,7 @@ for (let i = 0; i < 500; i++) {
   });
 }
 
-await writeFile('data/companies.json', JSON.stringify(companies, null, 2));
-await writeFile('data/departments.json', JSON.stringify(departments, null, 2));
-await writeFile('data/employees.json', JSON.stringify(employees, null, 2));
+const DATA_FOLDER = '../docs/data';
+await writeFile(`${DATA_FOLDER}/companies.json`, JSON.stringify(companies, null, 2));
+await writeFile(`${DATA_FOLDER}/departments.json`, JSON.stringify(departments, null, 2));
+await writeFile(`${DATA_FOLDER}/employees.json`, JSON.stringify(employees, null, 2));

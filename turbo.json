@@ -6,7 +6,6 @@
     },
     "lint": { "outputs": [] },
     "dev": { "cache": false },
-    "start": { "cache": false },
-    "mock": { "cache": false }
+    "start": { "cache": false }
   }
 }

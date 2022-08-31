@@ -4,9 +4,9 @@
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && next export",
-    "lint": "next lint"
+    "dev": "NODE_NO_WARNINGS=1 next dev",
+    "build": "NODE_NO_WARNINGS=1 next build && NODE_NO_WARNINGS=1 next export",
+    "lint": "NODE_NO_WARNINGS=1 next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",

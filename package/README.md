@@ -1,10 +1,10 @@
-# Mantine DataTable
+# [Mantine DataTable](https://icflorescu.github.io/mantine-datatable/)
 
-A table component for your Mantine data-rich applications, featuring asynchronous data loading support, column sorting, custom cell data rendering, row context menu and more.
+A table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu and more.
 
-## Documentation
+## Documentation and examples
 
-Coming soon.
+See [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mantine-datatable/).
 
 ## Supporting the author
 

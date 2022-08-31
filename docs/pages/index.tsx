@@ -6,14 +6,14 @@ import { REPO_LINK } from '~/config';
 
 const useStyles = createStyles((theme) => ({
   title: {
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[8],
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
       marginTop: '0.33em',
       lineHeight: 1.1,
       fontSize: 52,
     },
     [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
-      lineHeight: 1.1,
-      fontSize: 72,
+      fontSize: 64,
     },
     [`@media (min-width: ${theme.breakpoints.md}px)`]: {
       marginTop: '0.66em',
@@ -67,9 +67,7 @@ export default function Page() {
         <br />
         <span className={classes.gradientText}>data-rich applications.</span>
       </Title>
-      <Text className={classes.subtitle}>
-        Build fully-functional data-rich dashboard interfaces faster than ever with Mantine DataTable.
-      </Text>
+      <Text className={classes.subtitle}>Build data-rich interfaces faster than ever with Mantine DataTable.</Text>
       <div className={classes.features}>
         <HomePageFeature icon={Scale} title="Free and open-source">
           This package is released under the MIT license, same as Mantine, so you can freely build fantastic
@@ -80,10 +78,12 @@ export default function Page() {
           type safe applications with confidence
         </HomePageFeature>
         <HomePageFeature icon={Settings} title="Feature rich">
-          Asynchronous data loading support, column sorting, custom cell data rendering, row context menu and more
+          Asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data
+          rendering, row context menu and more
         </HomePageFeature>
         <HomePageFeature icon={Rocket} title="Use anywhere">
-          You can use this component in any modern framework supported by Mantine, such as Next.js or Remix
+          You can use this component in any modern framework supported by Mantine, such as Next.js, Vite, Create React
+          App, Remix or Gatsby
         </HomePageFeature>
       </div>
       <Group className={classes.buttons}>

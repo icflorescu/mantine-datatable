@@ -1,5 +1,4 @@
 import { build } from 'esbuild';
-import { cp, rm } from 'node:fs/promises';
 import pkg from './package.json' assert { type: 'json' };
 
 const formats = [
@@ -18,10 +17,6 @@ const config = {
   inject: ['react-shim.mjs'],
   external: Object.keys(pkg.peerDependencies),
 };
-
-await rm('./dist', { recursive: true, force: true });
-await cp('../README.md', 'README.md', { force: true });
-await cp('../LICENSE', 'LICENSE', { force: true });
 
 for (const { name, extension } of formats) {
   await build({ ...config, format: name, outfile: `./dist/index.${extension}` });

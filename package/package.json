@@ -35,7 +35,7 @@
   ],
   "scripts": {
     "dev": "rm -rf dist",
-    "build": "rm -rf dist && node --no-warnings build.mjs && tsc --emitDeclarationOnly",
+    "build": "rm -rf dist && NODE_NO_WARNINGS=1 node build.mjs && tsc --emitDeclarationOnly",
     "lint": "eslint *.ts* && tsc --noEmit"
   },
   "devDependencies": {
