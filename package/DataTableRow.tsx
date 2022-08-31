@@ -43,19 +43,25 @@ const useStyles = createStyles((theme) => {
       cursor: 'pointer',
     },
     selected: {
-      'tr&': {
-        background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.6) : theme.fn.lighten(baseColor, 0.9),
-      },
-      'table[data-striped] tbody &:nth-of-type(odd)': {
-        background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.55) : theme.fn.lighten(baseColor, 0.85),
+      '&&': {
+        'tr&': {
+          background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.6) : theme.fn.lighten(baseColor, 0.9),
+        },
+        'table[data-striped] tbody &:nth-of-type(odd)': {
+          background:
+            theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.55) : theme.fn.lighten(baseColor, 0.85),
+        },
       },
     },
     contextMenuVisible: {
-      'tr&': {
-        background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.5) : theme.fn.lighten(baseColor, 0.7),
-      },
-      'table[data-striped] tbody &:nth-of-type(odd)': {
-        background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.45) : theme.fn.lighten(baseColor, 0.65),
+      '&&': {
+        'tr&': {
+          background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.5) : theme.fn.lighten(baseColor, 0.7),
+        },
+        'table[data-striped] tbody &:nth-of-type(odd)': {
+          background:
+            theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.45) : theme.fn.lighten(baseColor, 0.65),
+        },
       },
     },
   };
