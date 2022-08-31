@@ -35,7 +35,8 @@ const useStyles = createStyles((theme) => {
       maxWidth: '100%',
       top: 0,
       left: 0,
-      bottom: 0,
+      height: '100vh',
+      maxHeight: '100%',
       transform: 'translate3d(-100%, 0, 0)',
       transition: 'transform .15s ease',
       [breakpointMediaQuery]: {
