@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-turborepo",
-  "version": "0.0.0",
+  "version": "0.1.4",
   "description": "This is a monorepo; see package/package.json for more info",
   "private": true,
   "workspaces": [
@@ -8,14 +8,15 @@
     "package"
   ],
   "scripts": {
-    "mock": "turbo run mock",
+    "generate-docs-data": "node generate-docs-data.mjs",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "start": "turbo run start",
+    "start": "npx serve docs/out",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "eslint": "^8.23.0",
