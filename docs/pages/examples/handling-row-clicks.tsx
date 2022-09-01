@@ -25,7 +25,6 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         Provide a handler called <Code>onRowClick</Code> to the <Code>DataTable</Code> component, like so:
       </PageText>
       <CodeBlock language="typescript" content={code} />
-      <PageText>The code above will produce the following result:</PageText>
       <PageNavigation of={PATH} />
     </Container>
   );
