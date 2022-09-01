@@ -1,4 +1,4 @@
-import { Code, Container, MantineSize, Paper, Stack } from '@mantine/core';
+import { Code, Container, MantineSize, MANTINE_SIZES, Paper, Stack } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
 import CheckableSegmentedControl from '~/components/CheckableSegmentedControl';
@@ -20,7 +20,6 @@ const INITIAL_VARIANT = 'oval';
 const INITIAL_SIZE = 'lg';
 const INITIAL_BLUR = 1;
 
-const SIZES: MantineSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 const VARIANTS = ['oval', 'bars', 'dots'];
 const BLURS = [1, 2, 3, 4, 5];
 
@@ -88,7 +87,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
           />
           <CheckableSegmentedControl
             label="Loader Size"
-            data={SIZES}
+            data={MANTINE_SIZES as unknown as string[]}
             checked={customizeLoaderSize}
             onCheckedChange={setCustomizeLoaderSize}
             value={loaderSize}

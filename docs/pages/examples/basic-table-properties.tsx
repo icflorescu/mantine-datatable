@@ -1,4 +1,4 @@
-import { Code, Container, createStyles, MantineSize, Paper, Switch } from '@mantine/core';
+import { Code, Container, createStyles, MantineSize, MANTINE_SIZES, Paper, Switch } from '@mantine/core';
 import { DataTableVerticalAlignment } from 'mantine-datatable';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
@@ -24,7 +24,6 @@ const INITIAL_VERTICAL_SPACING: MantineSize = 'xs';
 const INITIAL_FONT_SIZE: MantineSize = 'sm';
 const INITIAL_VERTICAL_ALIGNMENT: DataTableVerticalAlignment = 'center';
 
-const SIZES: MantineSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 const VERTICAL_ALIGNMENTS: DataTableVerticalAlignment[] = ['top', 'center', 'bottom'];
 
 const useStyles = createStyles((theme) => ({
@@ -175,7 +174,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Border radius"
-              data={SIZES}
+              data={MANTINE_SIZES as unknown as string[]}
               checked={customizeBorderRadius}
               onCheckedChange={setCustomizeBorderRadius}
               value={borderRadius}
@@ -186,7 +185,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Shadow"
-              data={SIZES}
+              data={MANTINE_SIZES as unknown as string[]}
               checked={customizeShadow}
               onCheckedChange={setCustomizeShadow}
               value={shadow}
@@ -195,7 +194,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Horizontal spacing"
-              data={SIZES}
+              data={MANTINE_SIZES as unknown as string[]}
               checked={customizeHorizontalSpacing}
               onCheckedChange={setCustomizeHorizontalSpacing}
               value={horizontalSpacing}
@@ -204,7 +203,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Vertical spacing"
-              data={SIZES}
+              data={MANTINE_SIZES as unknown as string[]}
               checked={customizeVerticalSpacing}
               onCheckedChange={setCustomizeVerticalSpacing}
               value={verticalSpacing}
@@ -213,7 +212,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Font size"
-              data={SIZES}
+              data={MANTINE_SIZES as unknown as string[]}
               checked={customizeFontSize}
               onCheckedChange={setCustomizeFontSize}
               value={fontSize}
