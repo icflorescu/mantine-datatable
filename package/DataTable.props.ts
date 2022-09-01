@@ -1,4 +1,4 @@
-import { MantineColor, MantineNumberSize, MantineTheme, TableProps } from '@mantine/core';
+import { MantineColor, MantineNumberSize, MantineShadow, MantineTheme, TableProps } from '@mantine/core';
 import { ReactNode } from 'react';
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
@@ -157,6 +157,11 @@ export type DataTableProps<T> = {
    * Minimum table height
    */
   minHeight?: string | number;
+
+  /**
+   * `DataTable` component shadow
+   */
+  shadow?: MantineShadow;
 
   /**
    * If true, columns will have vertical borders

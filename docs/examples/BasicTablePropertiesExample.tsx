@@ -8,6 +8,8 @@ export default function BasicTablePropertiesExample({
   withBorder,
   customizeBorderRadius,
   borderRadius,
+  customizeShadow,
+  shadow,
   withColumnBorders,
   striped,
   highlightOnHover,
@@ -23,6 +25,8 @@ export default function BasicTablePropertiesExample({
   withBorder: boolean;
   customizeBorderRadius: boolean;
   borderRadius: MantineSize;
+  customizeShadow: boolean;
+  shadow: MantineSize;
   withColumnBorders: boolean;
   striped: boolean;
   highlightOnHover: boolean;
@@ -41,6 +45,7 @@ export default function BasicTablePropertiesExample({
     <DataTable
       withBorder={withBorder}
       borderRadius={customizeBorderRadius ? borderRadius : undefined}
+      shadow={customizeShadow ? shadow : undefined}
       withColumnBorders={withColumnBorders}
       striped={striped}
       highlightOnHover={highlightOnHover}

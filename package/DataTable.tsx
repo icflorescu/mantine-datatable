@@ -1,4 +1,4 @@
-import { Box, createStyles, Table } from '@mantine/core';
+import { Box, createStyles, MantineSize, Table } from '@mantine/core';
 import { useElementSize } from '@mantine/hooks';
 import { differenceBy, get, lowerCase, throttle, uniqBy, upperFirst } from 'lodash';
 import { Key, useEffect, useState } from 'react';
@@ -56,6 +56,7 @@ export default function DataTable<T extends Record<string, unknown>>({
   withColumnBorders,
   height = '100%',
   minHeight,
+  shadow,
   verticalAlignment = 'center',
   fetching,
   columns,
@@ -160,11 +161,8 @@ export default function DataTable<T extends Record<string, unknown>>({
     <Box
       className={cx(classes.root, { [classes.tableWithBorder]: withBorder })}
       sx={(theme) => ({
-        borderRadius: borderRadius
-          ? typeof borderRadius === 'string'
-            ? theme.radius[borderRadius]
-            : borderRadius
-          : undefined,
+        borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
+        boxShadow: theme.shadows[shadow as MantineSize] || shadow,
         height,
         minHeight,
       })}

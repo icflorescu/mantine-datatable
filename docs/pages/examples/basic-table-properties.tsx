@@ -18,6 +18,7 @@ export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
 });
 
 const INITIAL_BORDER_RADIUS: MantineSize = 'sm';
+const INITIAL_SHADOW: MantineSize = 'sm';
 const INITIAL_HORIZONTAL_SPACING: MantineSize = 'xs';
 const INITIAL_VERTICAL_SPACING: MantineSize = 'xs';
 const INITIAL_FONT_SIZE: MantineSize = 'sm';
@@ -48,6 +49,8 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
   const [withBorder, setWithBorder] = useState(false);
   const [customizeBorderRadius, setCustomizeBorderRadius] = useState(false);
   const [borderRadius, setBorderRadius] = useState<MantineSize>(INITIAL_BORDER_RADIUS);
+  const [customizeShadow, setCustomizeShadow] = useState(false);
+  const [shadow, setShadow] = useState<MantineSize>(INITIAL_BORDER_RADIUS);
   const [withColumnBorders, setWithColumnBorders] = useState(false);
   const [striped, setStriped] = useState(false);
   const [highlightOnHover, setHighlightOnHover] = useState(false);
@@ -63,6 +66,10 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
   useEffect(() => {
     if (!withBorder) setCustomizeBorderRadius(false);
   }, [withBorder]);
+
+  useEffect(() => {
+    if (!customizeShadow) setShadow(INITIAL_SHADOW);
+  }, [customizeShadow]);
 
   useEffect(() => {
     if (customizeBorderRadius) {
@@ -87,6 +94,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
         .replace(/( +)borderRadius=.*\n/, (_, spaces) =>
           customizeBorderRadius ? `${spaces}borderRadius="${borderRadius}"\n` : ''
         )
+        .replace(/( +)shadow=.*\n/, (_, spaces) => (customizeShadow ? `${spaces}shadow="${shadow}"\n` : ''))
         .replace(/( +)withColumnBorders=.*\n/, (_, spaces) => (withColumnBorders ? `${spaces}withColumnBorders\n` : ''))
         .replace(/( +)striped=.*\n/, (_, spaces) => (striped ? `${spaces}striped\n` : ''))
         .replace(/( +)highlightOnHover=.*\n/, (_, spaces) => (highlightOnHover ? `${spaces}highlightOnHover\n` : ''))
@@ -105,12 +113,14 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
       customizeBorderRadius,
       customizeFontSize,
       customizeHorizontalSpacing,
+      customizeShadow,
       customizeVerticalAlignment,
       customizeVerticalSpacing,
       fontSize,
       highlightOnHover,
       horizontalSpacing,
       initialCode,
+      shadow,
       striped,
       verticalAlignment,
       verticalSpacing,
@@ -162,8 +172,6 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
               checked={withBorder}
               onChange={() => setWithBorder((v) => !v)}
             />
-          </div>
-          <div className={classes.controls}>
             <CheckableSegmentedControl
               className={classes.control}
               label="Border radius"
@@ -172,6 +180,17 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
               onCheckedChange={setCustomizeBorderRadius}
               value={borderRadius}
               onChange={(value) => setBorderRadius(value as MantineSize)}
+            />
+          </div>
+          <div className={classes.controls}>
+            <CheckableSegmentedControl
+              className={classes.control}
+              label="Shadow"
+              data={SIZES}
+              checked={customizeShadow}
+              onCheckedChange={setCustomizeShadow}
+              value={shadow}
+              onChange={(value) => setShadow(value as MantineSize)}
             />
             <CheckableSegmentedControl
               className={classes.control}
@@ -216,6 +235,8 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
         withBorder={withBorder}
         customizeBorderRadius={customizeBorderRadius}
         borderRadius={borderRadius}
+        customizeShadow={customizeShadow}
+        shadow={shadow}
         withColumnBorders={withColumnBorders}
         striped={striped}
         highlightOnHover={highlightOnHover}
