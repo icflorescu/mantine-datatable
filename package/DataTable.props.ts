@@ -1,4 +1,4 @@
-import { MantineColor, MantineSize, MantineTheme, TableProps } from '@mantine/core';
+import { MantineColor, MantineNumberSize, MantineTheme, TableProps } from '@mantine/core';
 import { ReactNode } from 'react';
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
@@ -18,7 +18,7 @@ export type DataTableBorderProps =
       /**
        * Table border radius
        */
-      borderRadius?: MantineSize | number;
+      borderRadius?: MantineNumberSize;
     };
 
 export type DataTablePaginationProps =
@@ -53,7 +53,7 @@ export type DataTablePaginationProps =
       /**
        * Pagination component size; defaults to `sm`
        */
-      paginationSize?: MantineSize;
+      paginationSize?: MantineNumberSize;
     };
 
 export type DataTableColumn<T> = {
@@ -193,7 +193,7 @@ export type DataTableProps<T> = {
   /**
    * Loader size; defaults to `lg`
    */
-  loaderSize?: MantineSize;
+  loaderSize?: MantineNumberSize;
 
   /**
    * Loader variant

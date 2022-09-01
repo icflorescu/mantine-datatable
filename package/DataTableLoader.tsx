@@ -1,4 +1,4 @@
-import { Center, createStyles, Loader, MantineSize, MantineTheme } from '@mantine/core';
+import { Center, createStyles, Loader, MantineNumberSize, MantineTheme } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -24,7 +24,7 @@ type DataTableLoaderProps = {
   pb: number;
   fetching: boolean | undefined;
   loaderBackgroundBlur: number | undefined;
-  loaderSize: MantineSize | undefined;
+  loaderSize: MantineNumberSize | undefined;
   loaderVariant: MantineTheme['loader'] | undefined;
 };
 
