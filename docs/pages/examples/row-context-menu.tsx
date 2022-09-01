@@ -6,35 +6,37 @@ import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import {
-  ContextMenuExample1,
-  ContextMenuExample2,
-  ContextMenuExample3,
-  ContextMenuExample4,
-  ContextMenuExample5,
-  ContextMenuExample6,
-  ContextMenuExample7,
-  ContextMenuExample8,
-} from '~/examples/ContextMenuExamples';
+  RowContextMenuExample1,
+  RowContextMenuExample2,
+  RowContextMenuExample3,
+  RowContextMenuExample4,
+  RowContextMenuExample5,
+  RowContextMenuExample6,
+  RowContextMenuExample7,
+  RowContextMenuExample8,
+  RowContextMenuExample9,
+} from '~/examples/RowContextMenuExamples';
 import readCodeExample from '~/lib/readCodeExample';
 
-const PATH = 'examples/context-menu';
+const PATH = 'examples/row-context-menu';
 
 const EXAMPLES = [
-  ContextMenuExample1,
-  ContextMenuExample2,
-  ContextMenuExample3,
-  ContextMenuExample4,
-  ContextMenuExample5,
-  ContextMenuExample6,
-  ContextMenuExample7,
-  ContextMenuExample8,
+  RowContextMenuExample1,
+  RowContextMenuExample2,
+  RowContextMenuExample3,
+  RowContextMenuExample4,
+  RowContextMenuExample5,
+  RowContextMenuExample6,
+  RowContextMenuExample7,
+  RowContextMenuExample8,
+  RowContextMenuExample9,
 ];
 
 export const getStaticProps: GetStaticProps<{
   code: Record<string, string>;
 }> = async () => ({
   props: {
-    code: (await readCodeExample('examples/ContextMenuExamples.tsx')) as Record<string, string>,
+    code: (await readCodeExample('examples/RowContextMenuExamples.tsx')) as Record<string, string>,
   },
 });
 
@@ -71,15 +73,16 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           <div className={classes.controls}>
             <Stack>
               <Radio value="1" label="Simple context menu" />
-              <Radio value="2" label="Disable context menu" />
-              <Radio value="3" label="Disable context menu for the first row" />
-              <Radio value="4" label="Disable “delete” context menu action for the first row" />
+              <Radio value="2" label="Show context menu on click" />
+              <Radio value="3" label="Hide context menu" />
+              <Radio value="4" label="Hide context menu for the first row" />
+              <Radio value="5" label="Disable “delete” context menu action for the first row" />
             </Stack>
             <Stack>
-              <Radio value="5" label="Hide “delete” context menu action for the first row" />
-              <Radio value="6" label="Add action icons" />
-              <Radio value="7" label="Customize “delete” action icon for the first row" />
-              <Radio value="8" label="Customize “delete” action color for the first row" />
+              <Radio value="6" label="Hide “delete” context menu action for the first row" />
+              <Radio value="7" label="Specify action icons" />
+              <Radio value="8" label="Customize “delete” action icon for the first row" />
+              <Radio value="9" label="Customize “delete” action color for the first row" />
             </Stack>
           </div>
         </Radio.Group>

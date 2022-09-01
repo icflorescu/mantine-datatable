@@ -147,6 +147,43 @@ export type DataTableSelectionProps<T> =
       onSelectedRecordsChange?: (selectedRecords: T[]) => void;
     };
 
+export type DataTableContextMenuItemProps = {
+  /**
+   * Unique item key
+   */
+  key: string;
+
+  /**
+   * Item icon
+   */
+  icon?: ReactNode;
+
+  /**
+   * Item title
+   */
+  title?: ReactNode;
+
+  /**
+   * Item color
+   */
+  color?: MantineColor;
+
+  /**
+   * if true, the menu item will not be shown
+   */
+  hidden?: boolean;
+
+  /**
+   * if true, the menu item will be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Function to call when the menu item is clicked
+   */
+  onClick: () => void;
+};
+
 export type DataTableProps<T> = {
   /**
    * Table height; defaults to `100%`
@@ -221,59 +258,24 @@ export type DataTableProps<T> = {
   onRowClick?: (record: T) => void;
 
   /**
-   * Context-menu to show when right-clicking a row
+   * Defines a context-menu menu to show when user right-clicks or clicks on a row
    */
   rowContextMenu?: {
+    /**
+     * Context menu trigger; defaults to `rightClick` for classic behavior
+     */
+    trigger?: 'rightClick' | 'click';
+
     /**
      * Boolean or function accepting the current record as parameter returning boolean;
      * if true, the menu will not be shown
      */
-    disabled?: boolean | ((record: T) => boolean);
+    hidden?: boolean | ((record: T) => boolean);
 
     /**
-     * Menu items
+     * A function returning the row menu items for the current record
      */
-    items: {
-      /**
-       * Unique item key
-       */
-      key: string;
-
-      /**
-       * Item icon; ReactNode or a function accepting the current record as parameter
-       * and returning ReactNode
-       */
-      icon?: ReactNode | ((record: T) => ReactNode);
-
-      /**
-       * Item title; ReactNode or a function accepting the current record as parameter
-       * and returning ReactNode
-       */
-      title?: ReactNode | ((record: T) => ReactNode);
-
-      /**
-       * Item color; MantineColor or a function accepting the current record as parameter
-       * and returning MantineColor
-       */
-      color?: MantineColor | ((record: T) => MantineColor);
-
-      /**
-       * Boolean or function accepting the current record as parameter and returning boolean;
-       * if true, the menu item will not be shown
-       */
-      hidden?: boolean | ((record: T) => boolean);
-
-      /**
-       * Boolean or function accepting the current record as parameter returning boolean;
-       * if true, the menu item will be disabled
-       */
-      disabled?: boolean | ((record: T) => boolean);
-
-      /**
-       * Function to call when the menu item is clicked; accepts the current record as parameter
-       */
-      onClick: (record: T) => void;
-    }[];
+    items: (record: T) => DataTableContextMenuItemProps[];
   };
 } & Omit<TableProps, 'border'> &
   DataTableBorderProps &

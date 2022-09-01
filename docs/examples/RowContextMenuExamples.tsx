@@ -3,25 +3,24 @@ import { DataTable } from 'mantine-datatable';
 import { Edit, Send, Trash, X } from 'tabler-icons-react';
 import companies from '~/data/companies.json';
 
-export function ContextMenuExample1() {
-  // example-start 1
-  // ...
+export function RowContextMenuExample1() {
   return (
+    // example-start 1
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        items: [
+        items: (record) => [
           {
             key: 'edit',
-            onClick: (record) => showNotification({ message: `Should edit company ${record.name}` }),
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
           {
             key: 'delete',
             color: 'red',
-            title: (record) => `Delete company ${record.name}`,
-            onClick: (record) => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
           {
             key: 'sendMessage',
@@ -33,31 +32,30 @@ export function ContextMenuExample1() {
         ],
       }}
     />
+    // example-end
   );
-  // example-end
 }
 
-export function ContextMenuExample2() {
-  // example-start 2
-  // ...
+export function RowContextMenuExample2() {
   return (
+    // example-start 2
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        disabled: true,
-        items: [
+        trigger: 'click',
+        items: (record) => [
           // example-skip
           {
             key: 'edit',
-            onClick: (record) => showNotification({ message: `Should edit company ${record.name}` }),
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
           {
             key: 'delete',
             color: 'red',
-            title: (record) => `Delete company ${record.name}`,
-            onClick: (record) => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
           {
             key: 'sendMessage',
@@ -70,31 +68,30 @@ export function ContextMenuExample2() {
         ],
       }}
     />
+    // example-end
   );
-  // example-end
 }
 
-export function ContextMenuExample3() {
-  // example-start 3
-  // ...
+export function RowContextMenuExample3() {
   return (
+    // example-start 3
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        disabled: (record) => companies.indexOf(record) === 0,
-        items: [
+        hidden: true,
+        items: (record) => [
           // example-skip
           {
             key: 'edit',
-            onClick: (record) => showNotification({ message: `Should edit company ${record.name}` }),
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
           {
             key: 'delete',
             color: 'red',
-            title: (record) => `Delete company ${record.name}`,
-            onClick: (record) => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
           {
             key: 'sendMessage',
@@ -107,30 +104,30 @@ export function ContextMenuExample3() {
         ],
       }}
     />
+    // example-end
   );
-  // example-end
 }
 
-export function ContextMenuExample4() {
-  // example-start 4
-  // ...
+export function RowContextMenuExample4() {
   return (
+    // example-start 4
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        items: [
+        hidden: (record) => companies.indexOf(record) === 0,
+        items: (record) => [
+          // example-skip
           {
             key: 'edit',
-            onClick: (record) => showNotification({ message: `Should edit company ${record.name}` }),
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
           {
             key: 'delete',
             color: 'red',
-            disabled: (record) => companies.indexOf(record) === 0,
-            title: (record) => `Delete company ${record.name}`,
-            onClick: (record) => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
           {
             key: 'sendMessage',
@@ -139,34 +136,37 @@ export function ContextMenuExample4() {
               showNotification({ message: 'Should send a message to this company' });
             },
           },
+          // example-resume
         ],
       }}
     />
+    // example-end
   );
-  // example-end
 }
 
-export function ContextMenuExample5() {
-  // example-start 5
-  // ...
+export function RowContextMenuExample5() {
   return (
+    // example-start 5
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        items: [
+        items: (record) => [
+          // example-skip
           {
             key: 'edit',
-            onClick: (record) => showNotification({ message: `Should edit company ${record.name}` }),
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
+          // example-resume
           {
             key: 'delete',
             color: 'red',
-            hidden: (record) => companies.indexOf(record) === 0,
-            title: (record) => `Delete company ${record.name}`,
-            onClick: (record) => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+            disabled: companies.indexOf(record) === 0,
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
+          // example-skip
           {
             key: 'sendMessage',
             title: 'Send message to company HQ',
@@ -174,34 +174,72 @@ export function ContextMenuExample5() {
               showNotification({ message: 'Should send a message to this company' });
             },
           },
+          // example-resume
         ],
       }}
     />
+    // example-end
   );
-  // example-end
 }
 
-export function ContextMenuExample6() {
-  // example-start 6
-  // ...
+export function RowContextMenuExample6() {
   return (
+    // example-start 6
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        items: [
+        items: (record) => [
+          // example-skip
+          {
+            key: 'edit',
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
+          },
+          // example-resume
+          {
+            key: 'delete',
+            color: 'red',
+            hidden: companies.indexOf(record) === 0,
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+          },
+          // example-skip
+          {
+            key: 'sendMessage',
+            title: 'Send message to company HQ',
+            onClick: () => {
+              showNotification({ message: 'Should send a message to this company' });
+            },
+          },
+          // example-resume
+        ],
+      }}
+    />
+    // example-end
+  );
+}
+
+export function RowContextMenuExample7() {
+  return (
+    // example-start 7
+    <DataTable
+      withBorder
+      columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
+      records={companies}
+      rowContextMenu={{
+        items: (record) => [
           {
             key: 'edit',
             icon: <Edit size={16} />,
-            onClick: (record) => showNotification({ message: `Should edit company ${record.name}` }),
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
           {
             key: 'delete',
             color: 'red',
             icon: <Trash size={16} />,
-            title: (record) => `Delete company ${record.name}`,
-            onClick: (record) => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
           {
             key: 'sendMessage',
@@ -214,32 +252,34 @@ export function ContextMenuExample6() {
         ],
       }}
     />
+    // example-end
   );
-  // example-end
 }
 
-export function ContextMenuExample7() {
-  // example-start 7
-  // ...
+export function RowContextMenuExample8() {
   return (
+    // example-start 8
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        items: [
+        items: (record) => [
+          // example-skip
           {
             key: 'edit',
             icon: <Edit size={16} />,
-            onClick: (record) => showNotification({ message: `Should edit company ${record.name}` }),
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
+          // example-resume
           {
             key: 'delete',
             color: 'red',
-            icon: (record) => (companies.indexOf(record) === 0 ? <X size={16} /> : <Trash size={16} />),
-            title: (record) => `Delete company ${record.name}`,
-            onClick: (record) => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+            icon: companies.indexOf(record) === 0 ? <X size={16} /> : <Trash size={16} />,
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
+          // example-skip
           {
             key: 'sendMessage',
             title: 'Send message to company HQ',
@@ -248,35 +288,38 @@ export function ContextMenuExample7() {
               showNotification({ message: 'Should send a message to this company' });
             },
           },
+          // example-resume
         ],
       }}
     />
+    // example-end
   );
-  // example-end
 }
 
-export function ContextMenuExample8() {
-  // example-start 8
-  // ...
+export function RowContextMenuExample9() {
   return (
+    // example-start 9
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        items: [
+        items: (record) => [
+          // example-skip
           {
             key: 'edit',
             icon: <Edit size={16} />,
-            onClick: (record) => showNotification({ message: `Should edit company ${record.name}` }),
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
+          // example-resume
           {
             key: 'delete',
-            color: (record) => (companies.indexOf(record) === 0 ? 'orange' : 'red'),
+            color: companies.indexOf(record) === 0 ? 'orange' : 'red',
             icon: <Trash size={16} />,
-            title: (record) => `Delete company ${record.name}`,
-            onClick: (record) => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
+          // example-skip
           {
             key: 'sendMessage',
             title: 'Send message to company HQ',
@@ -285,9 +328,10 @@ export function ContextMenuExample8() {
               showNotification({ message: 'Should send a message to this company' });
             },
           },
+          // example-resume
         ],
       }}
     />
+    // example-end
   );
-  // example-end
 }

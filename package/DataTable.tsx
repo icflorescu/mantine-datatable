@@ -95,13 +95,13 @@ export default function DataTable<T extends Record<string, unknown>>({
   const [scrolledToLeft, setScrolledToLeft] = useState(true);
   const [scrolledToRight, setScrolledToRight] = useState(true);
 
-  const [contextMenuInfo, setContextMenuInfo] = useState<{ top: number; left: number; record: T } | null>(null);
+  const [rowContextMenuInfo, setRowContextMenuInfo] = useState<{ top: number; left: number; record: T } | null>(null);
   useEffect(() => {
-    if (fetching) setContextMenuInfo(null);
+    if (fetching) setRowContextMenuInfo(null);
   }, [fetching]);
 
   const onScrollPositionChange = () => {
-    if (!fetching) setContextMenuInfo(null);
+    if (!fetching) setRowContextMenuInfo(null);
 
     if (fetching || tableHeight <= scrollViewportHeight) {
       setScrolledToTop(true);
@@ -214,6 +214,20 @@ export default function DataTable<T extends Record<string, unknown>>({
               records.map((record, recordIndex) => {
                 const recordId = get(record, idAccessor);
                 const selected = selectedRecordIds?.includes(recordId) || false;
+
+                let showContextMenuOnClick = false;
+                let showContextMenuOnRightClick = false;
+                if (rowContextMenu) {
+                  const { hidden } = rowContextMenu;
+                  if (!hidden || !(typeof hidden === 'function' ? hidden(record) : hidden)) {
+                    if (rowContextMenu.trigger === 'click') {
+                      showContextMenuOnClick = true;
+                    } else {
+                      showContextMenuOnRightClick = true;
+                    }
+                  }
+                }
+
                 return (
                   <DataTableRow<T>
                     key={recordId as Key}
@@ -246,16 +260,29 @@ export default function DataTable<T extends Record<string, unknown>>({
                           }
                         : undefined
                     }
-                    onClick={onRowClick}
-                    onContextMenu={
-                      rowContextMenu &&
-                      !(typeof rowContextMenu.disabled === 'function'
-                        ? rowContextMenu.disabled(record)
-                        : rowContextMenu.disabled)
-                        ? setContextMenuInfo
+                    onClick={
+                      showContextMenuOnClick
+                        ? (e) => {
+                            setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
+                            onRowClick?.(record);
+                          }
+                        : onRowClick
+                        ? () => {
+                            onRowClick(record);
+                          }
                         : undefined
                     }
-                    contextMenuVisible={contextMenuInfo ? get(contextMenuInfo.record, idAccessor) === recordId : false}
+                    onContextMenu={
+                      showContextMenuOnRightClick
+                        ? (e) => {
+                            e.preventDefault();
+                            setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
+                          }
+                        : undefined
+                    }
+                    contextMenuVisible={
+                      rowContextMenuInfo ? get(rowContextMenuInfo.record, idAccessor) === recordId : false
+                    }
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
                 );
@@ -290,34 +317,29 @@ export default function DataTable<T extends Record<string, unknown>>({
         loaderVariant={loaderVariant}
       />
       <DataTableEmpty pt={headerHeight} pb={footerHeight} text={noRecordsText} active={!fetching && !recordsLength} />
-      {rowContextMenu && contextMenuInfo && (
+      {rowContextMenu && rowContextMenuInfo && (
         <DataTableRowMenu
-          top={contextMenuInfo.top}
-          left={contextMenuInfo.left}
-          onDestroy={() => setContextMenuInfo(null)}
+          top={rowContextMenuInfo.top}
+          left={rowContextMenuInfo.left}
+          onDestroy={() => setRowContextMenuInfo(null)}
         >
-          {rowContextMenu.items.map(({ key, title, icon, color, hidden, disabled, onClick }) => {
-            const { record } = contextMenuInfo;
-            if (typeof hidden === 'function' ? hidden(record) : hidden) return null;
-            const titleValue = title
-              ? typeof title === 'function'
-                ? title(record)
-                : title
-              : upperFirst(lowerCase(key));
-            return (
-              <DataTableRowMenuItem
-                key={key}
-                title={titleValue}
-                icon={typeof icon === 'function' ? icon(record) : icon}
-                color={typeof color === 'function' ? color(record) : color}
-                disabled={typeof disabled === 'function' ? disabled(record) : disabled}
-                onClick={() => {
-                  setContextMenuInfo(null);
-                  onClick(record);
-                }}
-              />
-            );
-          })}
+          {rowContextMenu
+            .items(rowContextMenuInfo.record)
+            .map(({ key, title, icon, color, hidden, disabled, onClick }) =>
+              hidden ? null : (
+                <DataTableRowMenuItem
+                  key={key}
+                  title={title ?? upperFirst(lowerCase(key))}
+                  icon={icon}
+                  color={color}
+                  disabled={disabled}
+                  onClick={() => {
+                    setRowContextMenuInfo(null);
+                    onClick();
+                  }}
+                />
+              )
+            )}
         </DataTableRowMenu>
       )}
     </Box>

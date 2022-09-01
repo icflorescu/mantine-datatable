@@ -84,8 +84,8 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: handling row click events',
       },
       {
-        path: 'context-menu',
-        title: 'Context menu',
+        path: 'row-context-menu',
+        title: 'Row context menu',
         description: 'Example: working with row context menus',
       },
       {

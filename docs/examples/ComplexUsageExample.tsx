@@ -1,4 +1,5 @@
-import { useMantineTheme } from '@mantine/core';
+import { Button, createStyles, Group, Stack, Text, useMantineTheme } from '@mantine/core';
+import { closeAllModals, openModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -6,6 +7,15 @@ import { DataTable, DataTableSortStatus } from 'mantine-datatable';
 import { useState } from 'react';
 import { Edit, Trash, TrashX } from 'tabler-icons-react';
 import { Employee, getEmployeesAsync } from '~/data';
+
+const useStyles = createStyles((theme) => ({
+  modal: { width: 300 },
+  modalTitle: {
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6],
+    fontWeight: 700,
+  },
+  modalLabel: { width: 80 },
+}));
 
 const PAGE_SIZE = 100;
 
@@ -30,6 +40,7 @@ export default function ComplexUsageExample() {
   } = useMantineTheme();
   const aboveXsMediaQuery = `(min-width: ${xsBreakpoint}px)`;
 
+  const { classes } = useStyles();
   const now = dayjs();
 
   return (
@@ -84,28 +95,54 @@ export default function ComplexUsageExample() {
       onSortStatusChange={handleSortStatusChange}
       selectedRecords={selectedRecords}
       onSelectedRecordsChange={setSelectedRecords}
-      onRowClick={({ firstName, lastName }) => showNotification({ message: `Should edit ${firstName} ${lastName}` })}
+      onRowClick={({ firstName, lastName, birthDate }) =>
+        openModal({
+          title: `${firstName} ${lastName}`,
+          classNames: { modal: classes.modal, title: classes.modalTitle },
+          children: (
+            <Stack>
+              <Group>
+                <Text className={classes.modalLabel} size="sm">
+                  First name
+                </Text>
+                <Text size="sm">{firstName}</Text>
+              </Group>
+              <Group>
+                <Text className={classes.modalLabel} size="sm">
+                  Last name
+                </Text>
+                <Text size="sm">{lastName}</Text>
+              </Group>
+              <Group>
+                <Text className={classes.modalLabel} size="sm">
+                  Birth date
+                </Text>
+                <Text size="sm">{dayjs(birthDate).format('MMMM DD, YYYY')}</Text>
+              </Group>
+              <Button onClick={() => closeAllModals()}>Close</Button>
+            </Stack>
+          ),
+        })
+      }
       rowContextMenu={{
-        items: [
+        items: ({ id, firstName, lastName }) => [
           {
             key: 'edit',
             icon: <Edit size={14} />,
-            title: ({ firstName, lastName }) => `Edit ${firstName} ${lastName}`,
-            onClick: ({ firstName, lastName }) =>
-              showNotification({ color: 'orange', message: `Should edit ${firstName} ${lastName}` }),
+            title: `Edit ${firstName} ${lastName}`,
+            onClick: () => showNotification({ color: 'orange', message: `Should edit ${firstName} ${lastName}` }),
           },
           {
             key: 'delete',
-            title: ({ firstName, lastName }) => `Delete ${firstName} ${lastName}`,
+            title: `Delete ${firstName} ${lastName}`,
             icon: <TrashX size={14} />,
             color: 'red',
-            onClick: ({ firstName, lastName }) =>
-              showNotification({ color: 'red', message: `Should delete ${firstName} ${lastName}` }),
+            onClick: () => showNotification({ color: 'red', message: `Should delete ${firstName} ${lastName}` }),
           },
           {
             key: 'deleteMany',
-            hidden: ({ id }) => selectedRecords.length <= 1 || !selectedRecords.map((r) => r.id).includes(id),
-            title: () => `Delete ${selectedRecords.length} selected records`,
+            hidden: selectedRecords.length <= 1 || !selectedRecords.map((r) => r.id).includes(id),
+            title: `Delete ${selectedRecords.length} selected records`,
             icon: <Trash size={14} />,
             color: 'red',
             onClick: () =>

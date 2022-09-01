@@ -1,5 +1,5 @@
 import { Checkbox, createStyles } from '@mantine/core';
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, MouseEventHandler } from 'react';
 import { DataTableColumn } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
 
@@ -73,8 +73,8 @@ type DataTableRowProps<T> = {
   selectionVisible: boolean;
   selectionChecked: boolean;
   onSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
-  onClick: ((record: T) => void) | undefined;
-  onContextMenu: ((info: { top: number; left: number; record: T }) => void) | undefined;
+  onClick: MouseEventHandler<HTMLTableRowElement> | undefined;
+  onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
 };
@@ -99,15 +99,8 @@ export default function DataTableRow<T>({
         [classes.selected]: selectionChecked,
         [classes.contextMenuVisible]: contextMenuVisible,
       })}
-      onClick={onClick ? () => onClick(record) : undefined}
-      onContextMenu={
-        onContextMenu
-          ? (e) => {
-              e.preventDefault();
-              onContextMenu({ top: e.clientY, left: e.clientX, record });
-            }
-          : undefined
-      }
+      onClick={onClick}
+      onContextMenu={onContextMenu}
     >
       {selectionVisible && (
         <td className={cx(classes.selectorCell, { [classes.selectorCellWithRightShadow]: leftShadowVisible })}>
