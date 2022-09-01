@@ -62,12 +62,32 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build
         run: GITHUB_PAGES=true ${{ steps.detect-package-manager.outputs.runner }} build
-      - name: Upload artifact
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./docs/out
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: ./package
 
-  # Deployment job
+  # NPM publishing job
+  publish:
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: package
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          dry-run: true
+
+  # Pages deployment job
   deploy:
     environment:
       name: github-pages
@@ -78,17 +98,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-
-  # Publish npm job
-  publish:
-    environment:
-      name: github-pages
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - run: 'ls -la'
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./package/package.json
-          dry-run: true
