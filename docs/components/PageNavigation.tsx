@@ -7,7 +7,7 @@ const useStyles = createStyles((theme) => ({
   root: {
     margin: `${theme.spacing.xl}px 0`,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column-reverse',
     gap: theme.spacing.xl,
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
       flexDirection: 'row',
