@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/icflorescu/mantine-datatable/issues"
   },
-  "license": "ISC",
+  "license": "MIT",
   "author": {
     "name": "Ionut-Cristian Florescu",
     "email": "ionut.florescu@gmail.com",
