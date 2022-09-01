@@ -66,6 +66,11 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./docs/out
+      - name: Publish npm package
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: './package/package.json'
 
   # Deployment job
   deploy:
@@ -78,8 +83,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-      - name: Publish npm package
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: './package/package.json'
