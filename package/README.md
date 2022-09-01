@@ -1,4 +1,4 @@
-# [Mantine DataTable](https://icflorescu.github.io/mantine-datatable/)
+# Mantine DataTable
 
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
