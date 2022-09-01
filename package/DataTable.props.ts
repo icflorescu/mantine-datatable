@@ -147,42 +147,58 @@ export type DataTableSelectionProps<T> =
       onSelectedRecordsChange?: (selectedRecords: T[]) => void;
     };
 
-export type DataTableContextMenuItemProps = {
-  /**
-   * Unique item key
-   */
-  key: string;
+export type DataTableContextMenuItemProps =
+  | {
+      /**
+       * Unique item key
+       */
+      key: string;
+    } & (
+      | {
+          /**
+           * If true, insert an actions divider
+           */
+          divider: true;
+          icon?: never;
+          title?: never;
+          color?: never;
+          hidden?: never;
+          disabled?: never;
+          onClick?: never;
+        }
+      | {
+          divider?: never;
+          /**
+           * Item icon
+           */
+          icon?: ReactNode;
 
-  /**
-   * Item icon
-   */
-  icon?: ReactNode;
+          /**
+           * Item title
+           */
+          title?: ReactNode;
 
-  /**
-   * Item title
-   */
-  title?: ReactNode;
+          /**
+           * Item color
+           */
+          color?: MantineColor;
 
-  /**
-   * Item color
-   */
-  color?: MantineColor;
+          /**
+           * if true, the menu item will not be shown
+           */
+          hidden?: boolean;
 
-  /**
-   * if true, the menu item will not be shown
-   */
-  hidden?: boolean;
+          /**
+           * if true, the menu item will be disabled
+           */
+          disabled?: boolean;
 
-  /**
-   * if true, the menu item will be disabled
-   */
-  disabled?: boolean;
-
-  /**
-   * Function to call when the menu item is clicked
-   */
-  onClick: () => void;
-};
+          /**
+           * Function to call when the menu item is clicked
+           */
+          onClick: () => void;
+        }
+    );
 
 export type DataTableProps<T> = {
   /**
@@ -265,6 +281,21 @@ export type DataTableProps<T> = {
      * Context menu trigger; defaults to `rightClick` for classic behavior
      */
     trigger?: 'rightClick' | 'click';
+
+    /**
+     * Menu z-index; defaults to `3`
+     */
+    zIndex?: number;
+
+    /**
+     * Menu border radius; defaults to `xs`
+     */
+    borderRadius?: MantineNumberSize;
+
+    /**
+     * Menu shadow; defaults to `sm`
+     */
+    shadow?: MantineShadow;
 
     /**
      * Boolean or function accepting the current record as parameter returning boolean;

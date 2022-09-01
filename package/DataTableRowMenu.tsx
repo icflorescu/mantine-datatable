@@ -1,18 +1,20 @@
-import { createStyles, Paper, useMantineTheme } from '@mantine/core';
+import { createStyles, MantineNumberSize, MantineShadow, Paper, useMantineTheme } from '@mantine/core';
 import { useClickOutside, useElementSize, useMergedRef, useWindowEvent } from '@mantine/hooks';
 import { ReactNode } from 'react';
 
 const useStyles = createStyles((theme) => ({
   root: {
     position: 'fixed',
-    padding: 4,
     border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
+    overflow: 'hidden',
     transition: 'all .15s ease',
   },
 }));
 
 type DataTableRowMenuProps = {
-  zIndex?: number;
+  borderRadius: MantineNumberSize | undefined;
+  shadow: MantineShadow | undefined;
+  zIndex: number | undefined;
   top: number;
   left: number;
   children: ReactNode;
@@ -20,9 +22,11 @@ type DataTableRowMenuProps = {
 };
 
 export default function DataTableRowMenu({
+  borderRadius = 'xs',
+  shadow = 'sm',
+  zIndex = 3,
   top: desiredTop,
   left: desiredLeft,
-  zIndex = 3,
   onDestroy,
   children,
 }: DataTableRowMenuProps) {
@@ -43,7 +47,7 @@ export default function DataTableRowMenu({
   const { classes } = useStyles();
 
   return (
-    <Paper ref={ref} shadow="md" className={classes.root} sx={{ top, left, zIndex }}>
+    <Paper ref={ref} shadow={shadow} radius={borderRadius} className={classes.root} sx={{ top, left, zIndex }}>
       {children}
     </Paper>
   );

@@ -8,7 +8,7 @@ const useStyles = createStyles((theme, { color }: { color?: MantineColor }) => {
       width: '100%',
       display: 'flex',
       alignItems: 'center',
-      borderRadius: theme.radius.xs,
+      // borderRadius: theme.radius.xs,
       paddingTop: verticalPadding,
       paddingBottom: verticalPadding,
       paddingLeft: theme.spacing.sm,

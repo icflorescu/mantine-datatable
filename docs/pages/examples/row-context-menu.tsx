@@ -7,6 +7,7 @@ import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import {
   RowContextMenuExample1,
+  RowContextMenuExample10,
   RowContextMenuExample2,
   RowContextMenuExample3,
   RowContextMenuExample4,
@@ -30,6 +31,7 @@ const EXAMPLES = [
   RowContextMenuExample7,
   RowContextMenuExample8,
   RowContextMenuExample9,
+  RowContextMenuExample10,
 ];
 
 export const getStaticProps: GetStaticProps<{
@@ -83,6 +85,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
               <Radio value="7" label="Specify action icons" />
               <Radio value="8" label="Customize “delete” action icon for the first row" />
               <Radio value="9" label="Customize “delete” action color for the first row" />
+              <Radio value="10" label="With custom border radius, custom shadow and actions divider" />
             </Stack>
           </div>
         </Radio.Group>

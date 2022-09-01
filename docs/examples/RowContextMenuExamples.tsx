@@ -335,3 +335,39 @@ export function RowContextMenuExample9() {
     // example-end
   );
 }
+
+export function RowContextMenuExample10() {
+  return (
+    // example-start 10
+    <DataTable
+      withBorder
+      columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
+      records={companies}
+      rowContextMenu={{
+        shadow: 'xl',
+        borderRadius: 'md',
+        items: (record) => [
+          {
+            key: 'edit',
+            onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
+          },
+          {
+            key: 'delete',
+            color: 'red',
+            title: `Delete company ${record.name}`,
+            onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+          },
+          { key: 'divider1', divider: true },
+          {
+            key: 'sendMessage',
+            title: 'Send message to company HQ',
+            onClick: () => {
+              showNotification({ message: 'Should send a message to this company' });
+            },
+          },
+        ],
+      }}
+    />
+    // example-end
+  );
+}

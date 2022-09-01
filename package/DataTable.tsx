@@ -9,6 +9,7 @@ import DataTableHeader from './DataTableHeader';
 import DataTableLoader from './DataTableLoader';
 import DataTableRow from './DataTableRow';
 import DataTableRowMenu from './DataTableRowMenu';
+import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
 
@@ -319,14 +320,19 @@ export default function DataTable<T extends Record<string, unknown>>({
       <DataTableEmpty pt={headerHeight} pb={footerHeight} text={noRecordsText} active={!fetching && !recordsLength} />
       {rowContextMenu && rowContextMenuInfo && (
         <DataTableRowMenu
+          zIndex={rowContextMenu.zIndex}
+          borderRadius={rowContextMenu.borderRadius}
+          shadow={rowContextMenu.shadow}
           top={rowContextMenuInfo.top}
           left={rowContextMenuInfo.left}
           onDestroy={() => setRowContextMenuInfo(null)}
         >
           {rowContextMenu
             .items(rowContextMenuInfo.record)
-            .map(({ key, title, icon, color, hidden, disabled, onClick }) =>
-              hidden ? null : (
+            .map(({ divider, key, title, icon, color, hidden, disabled, onClick }) =>
+              divider ? (
+                <DataTableRowMenuDivider key={key} />
+              ) : hidden ? null : (
                 <DataTableRowMenuItem
                   key={key}
                   title={title ?? upperFirst(lowerCase(key))}
