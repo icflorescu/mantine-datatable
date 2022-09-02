@@ -6,7 +6,7 @@
 [![Downloads][downloads-image]][npm-url]
 [![Language][language-image]][repo-url]
 
-A table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu and more.
+A "dark-theme aware" **table component** for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu, and more.
 
 ![Mantine DataTable](https://user-images.githubusercontent.com/581999/187723353-0e082dbc-925b-4d0d-a14e-94c00073ee08.png)
 
