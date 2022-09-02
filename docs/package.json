@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_NO_WARNINGS=1 next dev",
     "build": "NODE_NO_WARNINGS=1 next build && NODE_NO_WARNINGS=1 next export",
-    "prebuild": "next-sitemap",
+    "postbuild": "next-sitemap",
     "lint": "NODE_NO_WARNINGS=1 next lint"
   },
   "dependencies": {
