@@ -14,11 +14,6 @@ const useStyles = createStyles((theme) => ({
       justifyContent: 'space-between',
     },
   },
-  withoutNext: {
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-      justifyContent: 'flex-start',
-    },
-  },
   button: {
     display: 'block',
     background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.fn.lighten(theme.colors.gray[1], 0.5),
@@ -36,6 +31,11 @@ const useStyles = createStyles((theme) => ({
       flex: `0 0 calc(50% - ${theme.spacing.xl / 2}px)`,
     },
   },
+  withoutNext: {
+    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+      flexBasis: '100%',
+    },
+  },
 }));
 
 export default function PageNavigation({ of }: { of: string }) {
@@ -43,9 +43,9 @@ export default function PageNavigation({ of }: { of: string }) {
   const { cx, classes } = useStyles();
 
   return (
-    <div className={cx(classes.root, { [classes.withoutNext]: !next })}>
+    <div className={classes.root}>
       <Link href={`/${back.path}`} passHref>
-        <UnstyledButton className={classes.button} component="a">
+        <UnstyledButton className={cx(classes.button, { [classes.withoutNext]: !next })} component="a">
           <Group px="sm" py="xs" position="apart" noWrap>
             <ArrowLeft />
             <div>
