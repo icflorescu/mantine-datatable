@@ -1,4 +1,4 @@
-import { Container, createStyles } from '@mantine/core';
+import { Container, createStyles, Text } from '@mantine/core';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
@@ -14,14 +14,29 @@ const useStyles = createStyles((theme) => ({
       gap: theme.spacing.xl,
       alignItems: 'center',
     },
+    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+      alignItems: 'end',
+    },
   },
   picture: {
-    maxWidth: 160,
-    display: 'block',
+    width: '100%',
+    maxWidth: 400,
     margin: '0 auto',
-    borderRadius: '50%',
+    display: 'block',
+    borderRadius: theme.radius.md,
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-      borderRadius: theme.radius.md,
+      width: 160,
+    },
+  },
+  greeting: {
+    fontSize: '120%',
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7],
+    margin: `${theme.spacing.xl}px 0`,
+  },
+  emphasis: {
+    color: theme.colorScheme === 'dark' ? theme.colors.red[4] : theme.colors.red[9],
+    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+      marginTop: 0,
     },
   },
 }));
@@ -36,13 +51,15 @@ export default function Page() {
           <img className={classes.picture} src="https://avatars.githubusercontent.com/u/581999" alt="@icflorescu" />
         </ExternalLink>
         <div>
-          <PageText>Hi there!</PageText>
-          <PageText>
-            I’m Ionut-Cristian Florescu, a full-stack developer with more than 20 years of experience from Bucharest,
-            Romania, EU.
+          <Text className={classes.greeting} component="h3">
+            Hi there!
+          </Text>
+          <Text>
+            I’m Ionut-Cristian Florescu, a full-stack developer from Bucharest, Romania, EU, with more than 20 years of
+            experience in building commercial web applications and open-source projects.
             <br />
             Mantine DataTable is one of my dearest open-source projects.
-          </PageText>
+          </Text>
         </div>
       </div>
       <PageText>
@@ -52,9 +69,23 @@ export default function Page() {
         page, you probably have a pretty good idea of how my skills could help you.
       </PageText>
       <PageText>
-        So, if you want to hire my services don’t hesitate to drop me a line at the email address listed in my GitHub
-        profile. Since I’m currently getting a constant flow of approaches (some of them relevant, others not so much),{' '}
-        <em>mentioning Mantine DataTable in your text would help me prioritize your message.</em>
+        So, if you want to hire my services, don’t hesitate to{' '}
+        <Text className={classes.emphasis} component="span">
+          drop me a line
+        </Text>{' '}
+        at the email address listed in my GitHub profile.
+        <br />
+        I’m currently getting a constant flow of approaches, some of them relevant, others not so relevant.
+        <br />
+        Mentioning <em>“Mantine DataTable”</em> in your text would help me{' '}
+        <Text className={classes.emphasis} component="span">
+          <em>prioritize your message</em>.
+        </Text>
+      </PageText>
+      <PageText>
+        Thank you for your interest,
+        <br />
+        <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink>
       </PageText>
       <PageNavigation of={PATH} />
     </Container>
