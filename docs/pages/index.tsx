@@ -91,7 +91,7 @@ export default function Page() {
           type safe applications with confidence
         </HomePageFeature>
         <HomePageFeature icon={Settings} title="Feature rich">
-          Asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data
+          Asynchronous data loading support, pagination, multiple rows selection, column sorting, custom cell data
           rendering, row context menu and more
         </HomePageFeature>
         <HomePageFeature icon={Rocket} title="Use anywhere">
