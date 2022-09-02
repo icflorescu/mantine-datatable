@@ -23,7 +23,7 @@ export default function RecordsSelectionExample() {
         selectedRecords={selectedRecords}
         onSelectedRecordsChange={setSelectedRecords}
       />
-      <Paper my="xl" py="xl" withBorder>
+      <Paper my="xl" py="xl" withBorder radius={0}>
         <Center>
           <Button
             uppercase

@@ -24,11 +24,11 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         In order to enable sorting, you’ll have to:
         <ul>
           <li>
-            add a <Code>sortable: true</Code> property on each sorting candidate column;
+            add a <Code>sortable: true</Code> property to each sorting candidate column;
           </li>
           <li>
-            add a <Code>sortStatus</Code>property on the <Code>DataTable</Code> component equal to an object describing
-            the current sort status;
+            add a <Code>sortStatus</Code> property to the <Code>DataTable</Code> component, pointing to an object
+            describing the current sort status;
           </li>
           <li>
             add a handler called <Code>onSortStatusChange</Code> to the <Code>DataTable</Code> to perform the required

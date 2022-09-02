@@ -116,6 +116,7 @@ export function RowContextMenuExample4() {
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
+        // hide the context menu for the 1st row
         hidden: (record) => companies.indexOf(record) === 0,
         items: (record) => [
           // example-skip
@@ -162,6 +163,7 @@ export function RowContextMenuExample5() {
           {
             key: 'delete',
             color: 'red',
+            // disable this item for the 1st row
             disabled: companies.indexOf(record) === 0,
             title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
@@ -200,6 +202,7 @@ export function RowContextMenuExample6() {
           {
             key: 'delete',
             color: 'red',
+            // hide this item for the 1st row
             hidden: companies.indexOf(record) === 0,
             title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
@@ -275,6 +278,7 @@ export function RowContextMenuExample8() {
           {
             key: 'delete',
             color: 'red',
+            // set a specific icon for the 1st row
             icon: companies.indexOf(record) === 0 ? <X size={16} /> : <Trash size={16} />,
             title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
@@ -314,6 +318,7 @@ export function RowContextMenuExample9() {
           // example-resume
           {
             key: 'delete',
+            // set a specific color for the 1st row
             color: companies.indexOf(record) === 0 ? 'orange' : 'red',
             icon: <Trash size={16} />,
             title: `Delete company ${record.name}`,
@@ -344,8 +349,8 @@ export function RowContextMenuExample10() {
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        shadow: 'xl',
-        borderRadius: 'md',
+        shadow: 'xl', // custom shadow
+        borderRadius: 'md', // custom border radius
         items: (record) => [
           {
             key: 'edit',
@@ -354,13 +359,12 @@ export function RowContextMenuExample10() {
           {
             key: 'delete',
             color: 'red',
-            title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
+          // add a divider between `delete` and `sendMessage` items
           { key: 'divider1', divider: true },
           {
             key: 'sendMessage',
-            title: 'Send message to company HQ',
             onClick: () => {
               showNotification({ message: 'Should send a message to this company' });
             },

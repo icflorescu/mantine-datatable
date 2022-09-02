@@ -24,16 +24,16 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         You can enable pagination by adding the following component properties:
         <ul>
           <li>
-            <Code>page</Code> - the current page number
+            <Code>page</Code> → the current page number
           </li>
           <li>
-            <Code>onPageChange</Code> - a callback that is executed when the user changes the current page
+            <Code>onPageChange</Code> → a callback that is executed when the user changes the current page
           </li>
           <li>
-            <Code>totalRecords</Code> - the total number of records in the dataset
+            <Code>totalRecords</Code> → the total number of records in the dataset
           </li>
           <li>
-            <Code>recordsPerPage</Code> - the number of records per page
+            <Code>recordsPerPage</Code> → the number of records per page
           </li>
         </ul>
       </PageText>

@@ -74,18 +74,18 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <Radio.Group value={String(example)} onChange={setExample}>
           <div className={classes.controls}>
             <Stack>
-              <Radio value="1" label="Simple context menu" />
-              <Radio value="2" label="Show context menu on click" />
+              <Radio value="1" label="Simple context menu, triggered by right-clicking" />
+              <Radio value="2" label="Trigger context menu on row clicking instead of right-clicking" />
               <Radio value="3" label="Hide context menu" />
-              <Radio value="4" label="Hide context menu for the first row" />
-              <Radio value="5" label="Disable “delete” context menu action for the first row" />
+              <Radio value="4" label="Hide context menu for a specific record" />
+              <Radio value="5" label="Disable “delete” context menu action for a specific record" />
             </Stack>
             <Stack>
-              <Radio value="6" label="Hide “delete” context menu action for the first row" />
+              <Radio value="6" label="Hide “delete” context menu action for a specific record" />
               <Radio value="7" label="Specify action icons" />
-              <Radio value="8" label="Customize “delete” action icon for the first row" />
-              <Radio value="9" label="Customize “delete” action color for the first row" />
-              <Radio value="10" label="With custom border radius, custom shadow and actions divider" />
+              <Radio value="8" label="Customize “delete” action icon for a specific record" />
+              <Radio value="9" label="Customize “delete” action color for a specific record" />
+              <Radio value="10" label="Customize border radius, shadow and add an actions divider" />
             </Stack>
           </div>
         </Radio.Group>

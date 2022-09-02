@@ -30,7 +30,7 @@ export default function Page() {
         </ul>
       </PageText>
       <PageText>
-        If you have an idea about a new feature and are willing to put your effort into it, please don’t hesitate to
+        If you have an idea about a new feature and are willing to put your effort into it, please don’t hesitate to{' '}
         <ExternalLink to={REPO_LINK}>make a PR</ExternalLink>. Contributions are more than welcome.
       </PageText>
       <PageText>

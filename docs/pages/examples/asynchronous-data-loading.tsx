@@ -112,8 +112,9 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
         loaderBackgroundBlur={loaderBackgroundBlur}
       />
       <PageText>
-        Simply set the `fetching` property to `true` to indicate data loading state by overlaying a{' '}
-        <ExternalLink to="https://mantine.dev/core/loader/">Loader</ExternalLink> over the <Code>DataTable</Code> rows.
+        Simply set a <Code>fetching: true</Code> property to the <Code>DataTable</Code> to indicate data loading state
+        by overlaying a <ExternalLink to="https://mantine.dev/core/loader/">Loader</ExternalLink> over the{' '}
+        <Code>DataTable</Code> rows.
         <br />
         You can further customize the Loader appearance with <Code>loaderSize</Code>, <Code>loaderVariant</Code> and{' '}
         <Code>loaderBackgroundBlur</Code>.

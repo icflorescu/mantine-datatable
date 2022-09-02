@@ -5,8 +5,8 @@ import employees from '~/data/employees.json';
 const records = employees.slice(0, 15);
 
 export function ScrollableExample() {
+  // example-start scrollable
   return (
-    // example-start scrollable
     <Box sx={{ height: 300 }}>
       <DataTable
         // example-skip
@@ -18,13 +18,13 @@ export function ScrollableExample() {
         // example-resume
       />
     </Box>
+    // example-end
   );
-  // example-end
 }
 
 export function AutoHeightExample() {
+  // example-start auto-height
   return (
-    // example-start auto-height
     <DataTable
       // example-skip
       withBorder
@@ -34,6 +34,6 @@ export function AutoHeightExample() {
       columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
       // example-resume
     />
-    // example-end
   );
+  // example-end
 }

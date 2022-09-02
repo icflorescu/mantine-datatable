@@ -22,6 +22,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         its empty state by displaying an icon and a customizable text, like so:
       </PageText>
       <EmptyStateExample />
+      <PageText>
+        If you’re not happy with the default text you can modify it by setting the <Code>noRecordsText</Code> property.
+      </PageText>
       <PageText info>
         Make sure to set a <Code>minHeight</Code> large enough to accommodate the icon and text when dealing with empty
         state in non <em>“vertically-scrollable”</em> tables.

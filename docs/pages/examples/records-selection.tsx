@@ -23,12 +23,12 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         In order to enable records selection, you’ll have to add the following properties to the <Code>DataTable</Code>:
         <ul>
           <li>
-            <Code>selectedRecords</Code> - an array of currently selected records (with the same TS type as the{' '}
+            <Code>selectedRecords</Code> → an array of currently selected records (with the same TS type as the{' '}
             <Code>records</Code> property);
           </li>
           <li>
-            <Code>onSelectedRecordsChange</Code> to the <Code>DataTable</Code> a callback that will be invoked when the
-            user alters the current selection.
+            <Code>onSelectedRecordsChange</Code> → a callback that will be invoked when the user alters the current
+            selection.
           </li>
         </ul>
         When adding these two properties, the component will render a selection checkbox column and handle user input as
