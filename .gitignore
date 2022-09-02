@@ -6,3 +6,5 @@ yarn-error.log*
 out
 dist
 .turbo
+docs/public/robots.txt
+docs/public/sitemap.xml
