@@ -9,8 +9,9 @@ import {
   Text,
   useMantineColorScheme,
 } from '@mantine/core';
-import { BrandGithub, Menu2, Moon, Sun } from 'tabler-icons-react';
+import { Menu2, Moon, Sun } from 'tabler-icons-react';
 import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, REPO_LINK } from '~/config';
+import GitHubIcon from './GitHubIcon';
 import Logo from './Logo';
 
 const useStyles = createStyles((theme) => {
@@ -101,7 +102,7 @@ export default function AppHeader({
         classNames={{ root: classes.sourceCodeButton, icon: classes.sourceCodeButtonIcon }}
         size="xs"
         variant="default"
-        leftIcon={<BrandGithub size={16} />}
+        leftIcon={<GitHubIcon size={16} />}
         component="a"
         href={REPO_LINK}
         target="_blank"
@@ -111,7 +112,7 @@ export default function AppHeader({
       <Logo className={cx(classes.logo, { [classes.logoWithNavbarVisible]: navbarVisible })} insideHeader />
       <Group className={classes.actionIcons} spacing="xs">
         <ActionIcon className={classes.actionIcon} variant="outline" component="a" href={REPO_LINK} target="_blank">
-          <BrandGithub size={16} />
+          <GitHubIcon size={16} />
         </ActionIcon>
         <ActionIcon className={classes.actionIcon} variant="outline" onClick={() => toggleColorScheme()}>
           <ColorSchemeIcon size={16} />

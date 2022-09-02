@@ -37,14 +37,18 @@ export default function AppFooter() {
   const { classes } = useStyles();
   return (
     <div className={classes.root}>
-      <img src="http://img.shields.io/npm/l/mantine-datatable.svg?style=social" alt="MIT License" />
+      <ExternalLink to="https://github.com/icflorescu/mantine-datatable/blob/main/LICENSE">
+        <img src="http://img.shields.io/npm/l/mantine-datatable.svg?style=social" alt="MIT License" />
+      </ExternalLink>
       <Text size="sm">
         Built by <ExternalLink to="https://github.com/icflorescu">Ionut-Cristian Florescu</ExternalLink>.
       </Text>
-      <Group spacing="xs">
-        <img src="https://img.shields.io/github/stars/icflorescu/mantine-datatable?style=social" alt="GitHub Stars" />
-        <img src="http://img.shields.io/npm/dm/mantine-datatable.svg?style=social" alt="NPM Downloads" />
-      </Group>
+      <ExternalLink to="https://github.com/icflorescu/mantine-datatable">
+        <Group spacing="xs">
+          <img src="https://img.shields.io/github/stars/icflorescu/mantine-datatable?style=social" alt="GitHub Stars" />
+          <img src="http://img.shields.io/npm/dm/mantine-datatable.svg?style=social" alt="NPM Downloads" />
+        </Group>
+      </ExternalLink>
     </div>
   );
 }
