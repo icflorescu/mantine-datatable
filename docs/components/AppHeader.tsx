@@ -9,6 +9,7 @@ import {
   Text,
   useMantineColorScheme,
 } from '@mantine/core';
+import { useWindowScroll } from '@mantine/hooks';
 import { Menu2, Moon, Sun } from 'tabler-icons-react';
 import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, REPO_LINK } from '~/config';
 import GitHubIcon from './GitHubIcon';
@@ -18,6 +19,7 @@ const useStyles = createStyles((theme) => {
   const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]}px)`;
   const buttonBorder = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
   const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6];
+  const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.25 : 0.05;
 
   return {
     root: {
@@ -33,6 +35,25 @@ const useStyles = createStyles((theme) => {
       justifyContent: 'space-between',
       [breakpointMediaQuery]: {
         marginLeft: NAVBAR_WIDTH,
+      },
+      '&::after': {
+        position: 'absolute',
+        content: '""',
+        left: 0,
+        right: 0,
+        height: theme.spacing.xs,
+        bottom: -(theme.spacing.xs + 1),
+        background: `linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
+          theme.black,
+          0
+        )}), linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(theme.black, 0)} 30%)`,
+        opacity: 0,
+        transition: 'opacity .15s ease',
+      },
+    },
+    windowScrolledOnY: {
+      '&::after': {
+        opacity: 1,
       },
     },
     menuIcon: {
@@ -92,11 +113,12 @@ export default function AppHeader({
 }) {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const ColorSchemeIcon = colorScheme === 'dark' ? Sun : Moon;
+  const [{ y: windowScrollY }] = useWindowScroll();
 
   const { classes, cx } = useStyles();
 
   return (
-    <Group className={classes.root} px="sm" spacing="xs">
+    <Group className={cx(classes.root, { [classes.windowScrolledOnY]: windowScrollY !== 0 })} px="sm" spacing="xs">
       <Menu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} />
       <Button
         classNames={{ root: classes.sourceCodeButton, icon: classes.sourceCodeButtonIcon }}
