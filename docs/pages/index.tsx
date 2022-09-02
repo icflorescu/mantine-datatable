@@ -87,8 +87,8 @@ export default function Page() {
           applications with it
         </HomePageFeature>
         <HomePageFeature icon={Lifebuoy} title="Typescript based">
-          The entire codebase is written in typescript and component properties are well documented, so you can build
-          type safe applications with confidence
+          The entire codebase is written in TypeScript, component properties are well typed and documented with JSDoc,
+          so you can build type safe applications with confidence
         </HomePageFeature>
         <HomePageFeature icon={Settings} title="Feature rich">
           Asynchronous data loading support, pagination, multiple rows selection, column sorting, custom cell data
