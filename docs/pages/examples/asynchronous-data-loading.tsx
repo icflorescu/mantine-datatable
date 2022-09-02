@@ -120,7 +120,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
       </PageText>
       <PageText info>
         If your <Code>DataTable</Code> is not vertically scrollable and contains no initial data, make sure to set its
-        `minHeight` to minimize the “content jump” and accommodate the <Code>Loader</Code> height.
+        <Code>minHeight</Code> to minimize the “content jump” and accommodate the <Code>Loader</Code> height.
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageNavigation of={PATH} />
