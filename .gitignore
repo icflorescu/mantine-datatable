@@ -8,3 +8,5 @@ dist
 .turbo
 docs/public/robots.txt
 docs/public/sitemap.xml
+package/README.md
+package/LICENSE
