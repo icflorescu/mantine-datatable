@@ -2,7 +2,9 @@
 
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
-[![Downloads][downloads-image]][downloads-url]
+[![Stars][stars-image]][repo-url]
+[![Downloads][downloads-image]][npm-url]
+[![Language][language-image]][repo-url]
 
 A table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu and more.
 
@@ -10,7 +12,7 @@ A table component for your Mantine UI data-rich applications, featuring asynchro
 
 ## Documentation and examples
 
-See [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mantine-datatable/).
+See [website](https://icflorescu.github.io/mantine-datatable/).
 
 ## Supporting the author
 
@@ -20,9 +22,11 @@ If you find this package useful, please star the repository, [tweet about it](ht
 
 The [MIT License](https://github.com/icflorescu/mantine-datatable/blob/master/LICENSE).
 
-[npm-image]: https://img.shields.io/npm/v/mantine-datatable.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/mantine-datatable
-[license-image]: http://img.shields.io/npm/l/mantine-datatable.svg?style=flat-square
+[repo-url]: https://github.com/icflorescu/mantine-datatable
 [license-url]: LICENSE
+[npm-image]: https://img.shields.io/npm/v/mantine-datatable.svg?style=flat-square
+[license-image]: http://img.shields.io/npm/l/mantine-datatable.svg?style=flat-square
 [downloads-image]: http://img.shields.io/npm/dm/mantine-datatable.svg?style=flat-square
-[downloads-url]: https://npmjs.org/package/mantine-datatable
+[stars-image]: https://img.shields.io/github/stars/icflorescu/mantine-datatable?style=flat-square
+[language-image]: https://img.shields.io/github/languages/top/icflorescu/mantine-datatable?style=flat-square
