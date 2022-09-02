@@ -32,7 +32,9 @@ export default function Page() {
     <Container>
       <PageTitle of={PATH} />
       <div className={classes.intro}>
-        <img className={classes.picture} src="https://avatars.githubusercontent.com/u/581999" alt="@icflorescu" />
+        <ExternalLink to={AUTHOR_LINK}>
+          <img className={classes.picture} src="https://avatars.githubusercontent.com/u/581999" alt="@icflorescu" />
+        </ExternalLink>
         <div>
           <PageText>Hi there!</PageText>
           <PageText>
