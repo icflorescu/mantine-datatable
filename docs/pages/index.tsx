@@ -73,7 +73,6 @@ export default function Page() {
         <span className={classes.gradientText}>data-rich applications.</span>
       </Title>
       <div className={classes.image}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`${process.env.BASE_PATH}/mantine-datatable.png`}
           alt="Mantine DataTable dark mode support"

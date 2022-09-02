@@ -7,7 +7,8 @@ export const SEO_DEFAULT_DESCRIPTION =
   'A fully featured table component for building data-rich applications with Mantine UI';
 
 export const HEADER_HEIGHT = 56;
-export const FOOTER_HEIGHT = 48;
+export const FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT = 108;
+export const FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT = 48;
 export const NAVBAR_WIDTH = 280;
 export const NAVBAR_BREAKPOINT = 'md';
 export const REPO_LINK = 'https://github.com/icflorescu/mantine-datatable';
