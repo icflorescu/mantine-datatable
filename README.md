@@ -16,7 +16,11 @@ See [website](https://icflorescu.github.io/mantine-datatable/).
 
 ## Supporting the author
 
-If you find this package useful, please star the repository, [tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu), [endorse me on LinkedIn](https://www.linkedin.com/in/icflorescu) or drop me a line to discuss about employing [my skills](https://github.com/icflorescu).
+If you find this package useful, please star the repository, [tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu), and [endorse me on LinkedIn](https://www.linkedin.com/in/icflorescu).
+
+If you want to hire my services, don’t hesitate to drop me a line at the email address listed in my [GitHub profile](https://github.com/icflorescu).
+I’m currently getting a constant flow of approaches, some of them relevant, others not so relevant.
+Mentioning “Mantine DataTable” in your text would help me prioritize your message.
 
 ## License
 
