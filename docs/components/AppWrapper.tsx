@@ -12,11 +12,12 @@ import AppHeader from './AppHeader';
 import AppNavbar from './AppNavbar';
 
 const useStyles = createStyles((theme) => {
-  const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.25 : 0.05;
+  const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.2 : 0.015;
   return {
     main: {
       position: 'relative',
       background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.fn.lighten(theme.colors.gray[0], 0.9),
+      borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]}`,
       marginTop: HEADER_HEIGHT,
       marginBottom: FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT,
       minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT}px)`,
@@ -26,8 +27,8 @@ const useStyles = createStyles((theme) => {
         content: '""',
         left: 0,
         right: 0,
-        height: theme.spacing.sm / 2,
-        bottom: -(theme.spacing.sm / 2),
+        height: theme.spacing.sm,
+        bottom: -theme.spacing.sm - 1,
         background: `linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
           theme.black,
           0

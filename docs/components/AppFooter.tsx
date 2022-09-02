@@ -10,6 +10,7 @@ import {
 import ExternalLink from './ExternalLink';
 
 const useStyles = createStyles((theme) => {
+  const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.2 : 0.015;
   return {
     root: {
       position: 'fixed',
@@ -30,6 +31,21 @@ const useStyles = createStyles((theme) => {
         height: FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        '&::before': {
+          position: 'absolute',
+          content: '""',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          width: theme.spacing.sm,
+          background: `linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
+            theme.black,
+            0
+          )}), linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
+            theme.black,
+            0
+          )} 30%)`,
+        },
       },
     },
   };

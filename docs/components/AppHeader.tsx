@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => {
   const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]}px)`;
   const buttonBorder = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
   const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6];
-  const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.25 : 0.05;
+  const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.3 : 0.03;
 
   return {
     root: {
@@ -41,8 +41,8 @@ const useStyles = createStyles((theme) => {
         content: '""',
         left: 0,
         right: 0,
-        height: theme.spacing.xs,
-        bottom: -(theme.spacing.xs + 1),
+        height: theme.spacing.sm,
+        bottom: -theme.spacing.sm - 1,
         background: `linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
           theme.black,
           0
