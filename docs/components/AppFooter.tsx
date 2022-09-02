@@ -61,12 +61,14 @@ export default function AppFooter() {
       <Text size="sm">
         Built by <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink>.
       </Text>
-      <ExternalLink to={REPO_LINK}>
-        <Group spacing="xs">
+      <Group spacing="xs">
+        <ExternalLink to={REPO_LINK}>
           <img src="https://img.shields.io/github/stars/icflorescu/mantine-datatable?style=social" alt="GitHub Stars" />
+        </ExternalLink>
+        <ExternalLink to="https://npmjs.org/package/mantine-datatable">
           <img src="http://img.shields.io/npm/dm/mantine-datatable.svg?style=social" alt="NPM Downloads" />
-        </Group>
-      </ExternalLink>
+        </ExternalLink>
+      </Group>
     </div>
   );
 }
