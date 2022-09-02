@@ -1,9 +1,11 @@
 import { createStyles, Group, Text } from '@mantine/core';
 import {
+  AUTHOR_LINK,
   FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
   FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT,
   NAVBAR_BREAKPOINT,
   NAVBAR_WIDTH,
+  REPO_LINK,
 } from '~/config';
 import ExternalLink from './ExternalLink';
 
@@ -37,13 +39,13 @@ export default function AppFooter() {
   const { classes } = useStyles();
   return (
     <div className={classes.root}>
-      <ExternalLink to="https://github.com/icflorescu/mantine-datatable/blob/main/LICENSE">
+      <ExternalLink to={`${REPO_LINK}/blob/main/LICENSE`}>
         <img src="http://img.shields.io/npm/l/mantine-datatable.svg?style=social" alt="MIT License" />
       </ExternalLink>
       <Text size="sm">
-        Built by <ExternalLink to="https://github.com/icflorescu">Ionut-Cristian Florescu</ExternalLink>.
+        Built by <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink>.
       </Text>
-      <ExternalLink to="https://github.com/icflorescu/mantine-datatable">
+      <ExternalLink to={REPO_LINK}>
         <Group spacing="xs">
           <img src="https://img.shields.io/github/stars/icflorescu/mantine-datatable?style=social" alt="GitHub Stars" />
           <img src="http://img.shields.io/npm/dm/mantine-datatable.svg?style=social" alt="NPM Downloads" />

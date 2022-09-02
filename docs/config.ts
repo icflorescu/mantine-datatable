@@ -1,6 +1,6 @@
 import { MantineColor } from '@mantine/core';
 import { FC } from 'react';
-import { Adjustments, Home, Rocket } from 'tabler-icons-react';
+import { Adjustments, HeartHandshake, Home, Lifebuoy, Rocket } from 'tabler-icons-react';
 
 export const SEO_DEFAULT_TITLE = 'Mantine DataTable';
 export const SEO_DEFAULT_DESCRIPTION =
@@ -11,6 +11,8 @@ export const FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT = 108;
 export const FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT = 48;
 export const NAVBAR_WIDTH = 280;
 export const NAVBAR_BREAKPOINT = 'md';
+
+export const AUTHOR_LINK = 'https://github.com/icflorescu';
 export const REPO_LINK = 'https://github.com/icflorescu/mantine-datatable';
 
 export const PAGES: ({ title: string; color?: MantineColor; description?: string } & (
@@ -101,5 +103,26 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
       },
     ],
   },
-  { icon: Adjustments, color: 'grape', title: 'Component properties', path: 'component-properties' },
+  {
+    path: 'component-properties',
+    title: 'Component properties',
+    description:
+      'Mantine DataTable component is written in TypeScript and its properties are well documented with additional JSDoc annotations',
+    color: 'grape',
+    icon: Adjustments,
+  },
+  {
+    path: 'contribute-and-support',
+    title: 'Contribute & support',
+    description: 'Make a pull-request or support the development of this project',
+    color: 'teal',
+    icon: Lifebuoy,
+  },
+  {
+    path: 'hire-the-author',
+    title: 'Hire the author',
+    description: 'Hire the services of a fullstack/frontend developer with 20+ years of experience',
+    color: 'red',
+    icon: HeartHandshake,
+  },
 ];
