@@ -52,7 +52,7 @@ export default function Page() {
         page, you probably have a pretty good idea of how my skills could help you.
       </PageText>
       <PageText>
-        So, if you want to hire my services don’t hesitate to drop me a line on the email address listed in my GitHub
+        So, if you want to hire my services don’t hesitate to drop me a line at the email address listed in my GitHub
         profile. Since I’m currently getting a constant flow of approaches (some of them relevant, others not so much),{' '}
         <em>mentioning Mantine DataTable in your text would help me prioritize your message.</em>
       </PageText>
