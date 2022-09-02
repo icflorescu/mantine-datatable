@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_NO_WARNINGS=1 next dev",
-    "build": "NODE_NO_WARNINGS=1 next build && NODE_NO_WARNINGS=1 next export",
-    "postbuild": "next-sitemap",
+    "build": "NODE_NO_WARNINGS=1 next build && next-sitemap && NODE_NO_WARNINGS=1 next export",
     "lint": "NODE_NO_WARNINGS=1 next lint"
   },
   "dependencies": {
