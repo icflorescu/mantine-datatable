@@ -1,6 +1,7 @@
 import { Button, Container, createStyles, Group, Text, Title } from '@mantine/core';
 import Link from 'next/link';
-import { BrandGithub, Lifebuoy, Rocket, Scale, Settings } from 'tabler-icons-react';
+import { Lifebuoy, Rocket, Scale, Settings } from 'tabler-icons-react';
+import GitHubIcon from '~/components/GitHubIcon';
 import HomePageFeature from '~/components/HomePageFeature';
 import { REPO_LINK } from '~/config';
 
@@ -114,7 +115,7 @@ export default function Page() {
           size="md"
           variant="gradient"
           gradient={{ from: 'gray.6', to: 'gray.5' }}
-          leftIcon={<BrandGithub />}
+          leftIcon={<GitHubIcon size={20} />}
           component="a"
           href={REPO_LINK}
           target="_blank"
