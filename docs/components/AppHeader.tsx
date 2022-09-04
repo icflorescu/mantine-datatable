@@ -29,7 +29,18 @@ const useStyles = createStyles((theme) => {
       left: 0,
       right: 0,
       height: HEADER_HEIGHT,
-      background: theme.fn.rgba(theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white, 0.75),
+      background: theme.fn.gradient({
+        deg: 180,
+        ...(theme.colorScheme === 'dark'
+          ? {
+              from: theme.fn.rgba(theme.colors.dark[7], 0.95),
+              to: theme.fn.rgba(theme.colors.dark[7], 0.75),
+            }
+          : {
+              from: theme.fn.rgba(theme.white, 0.95),
+              to: theme.fn.rgba(theme.white, 0.75),
+            }),
+      }),
       backdropFilter: 'blur(2px)',
       borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]}`,
       justifyContent: 'space-between',
