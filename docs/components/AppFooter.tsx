@@ -60,8 +60,12 @@ export default function AppFooter() {
       <ExternalLink to={`${REPO_LINK}/blob/main/LICENSE`}>
         <img src={`http://img.shields.io/npm/l/mantine-datatable.svg?style=${badgeStyle}`} alt="MIT License" />
       </ExternalLink>
-      <Text size="sm">
-        Built by <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink>.
+      <Text size="sm" align="center">
+        Built by <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink> and{' '}
+        <ExternalLink to="https://github.com/icflorescu/mantine-datatable/graphs/contributors">
+          these awesome people
+        </ExternalLink>
+        .
       </Text>
       <Group spacing="xs">
         <ExternalLink to={REPO_LINK}>
