@@ -16,7 +16,7 @@ export default function PageSubtitle({ value }: { value: string }) {
       })}
       order={3}
     >
-      <Box component="a" sx={{ display: 'none' }} href={`#${kebabCase(value)}`} />
+      <Box component="a" sx={{ display: 'none' }} id={`#${kebabCase(value)}`} />
       {value}
     </Title>
   );
