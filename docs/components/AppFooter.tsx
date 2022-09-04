@@ -1,4 +1,4 @@
-import { createStyles, Group, Text } from '@mantine/core';
+import { createStyles, Group, Text, useMantineColorScheme } from '@mantine/core';
 import {
   AUTHOR_LINK,
   FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
@@ -52,21 +52,26 @@ const useStyles = createStyles((theme) => {
 });
 
 export default function AppFooter() {
+  const { colorScheme } = useMantineColorScheme();
+  const badgeStyle = colorScheme === 'dark' ? 'flat' : 'social';
   const { classes } = useStyles();
   return (
     <div className={classes.root}>
       <ExternalLink to={`${REPO_LINK}/blob/main/LICENSE`}>
-        <img src="http://img.shields.io/npm/l/mantine-datatable.svg?style=social" alt="MIT License" />
+        <img src={`http://img.shields.io/npm/l/mantine-datatable.svg?style=${badgeStyle}`} alt="MIT License" />
       </ExternalLink>
       <Text size="sm">
         Built by <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink>.
       </Text>
       <Group spacing="xs">
         <ExternalLink to={REPO_LINK}>
-          <img src="https://img.shields.io/github/stars/icflorescu/mantine-datatable?style=social" alt="GitHub Stars" />
+          <img
+            src={`https://img.shields.io/github/stars/icflorescu/mantine-datatable?style=${badgeStyle}`}
+            alt="GitHub Stars"
+          />
         </ExternalLink>
         <ExternalLink to="https://npmjs.org/package/mantine-datatable">
-          <img src="http://img.shields.io/npm/dm/mantine-datatable.svg?style=social" alt="NPM Downloads" />
+          <img src={`http://img.shields.io/npm/dm/mantine-datatable.svg?style=${badgeStyle}`} alt="NPM Downloads" />
         </ExternalLink>
       </Group>
     </div>
