@@ -16,9 +16,7 @@ See [website](https://icflorescu.github.io/mantine-datatable/).
 
 ## Contributors
 
-<a href="https://github.com/icflorescu/mantine-datatable/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=icflorescu/mantine-datatable" />
-</a>
+[![Contributors list](https://contrib.rocks/image?repo=icflorescu/mantine-datatable)](https://github.com/icflorescu/mantine-datatable/graphs/contributors)
 
 Want to [become a contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)? 
 
