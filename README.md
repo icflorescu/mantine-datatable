@@ -14,6 +14,14 @@ A "dark-theme aware" **table component** for your Mantine UI data-rich applicati
 
 See [website](https://icflorescu.github.io/mantine-datatable/).
 
+## Contributors
+
+<a href="https://github.com/icflorescu/mantine-datatable/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=icflorescu/mantine-datatable" />
+</a>
+
+Wanna [become a contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)? 
+
 ## Supporting the author
 
 If you find this package useful, please star the repository, [tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu), and [endorse me on LinkedIn](https://www.linkedin.com/in/icflorescu).
