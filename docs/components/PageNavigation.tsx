@@ -45,7 +45,7 @@ export default function PageNavigation({ of }: { of: string }) {
   return (
     <div className={classes.root}>
       <Link href={`/${back.path}`} passHref>
-        <UnstyledButton className={cx(classes.button, { [classes.withoutNext]: !next })} component="a">
+        <UnstyledButton className={cx(classes.button, { [classes.withoutNext]: !next })} component="a" rel="prev">
           <Group px="sm" py="xs" position="apart" noWrap>
             <ArrowLeft />
             <div>
@@ -61,7 +61,7 @@ export default function PageNavigation({ of }: { of: string }) {
       </Link>
       {next && (
         <Link href={`/${next.path}`} passHref>
-          <UnstyledButton className={classes.button} component="a">
+          <UnstyledButton className={classes.button} component="a" rel="next">
             <Group px="sm" py="xs" position="apart" noWrap>
               <div>
                 <Text weight={500}>Up next</Text>

@@ -57,7 +57,7 @@ export default function AppFooter() {
   const { classes } = useStyles();
   return (
     <div className={classes.root}>
-      <ExternalLink to={`${REPO_LINK}/blob/main/LICENSE`}>
+      <ExternalLink to={`${REPO_LINK}/blob/main/LICENSE`} rel="license">
         <img src={`http://img.shields.io/npm/l/mantine-datatable.svg?style=${badgeStyle}`} alt="MIT License" />
       </ExternalLink>
       <Text size="sm" align="center">
