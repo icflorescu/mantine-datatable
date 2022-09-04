@@ -77,6 +77,11 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: sorting data',
       },
       {
+        path: 'searching-and-filtering',
+        title: 'Searching and filtering',
+        description: 'Example: searching and filtering data',
+      },
+      {
         path: 'records-selection',
         title: 'Records selection',
         description: 'Example: how to enable multiple records selection',

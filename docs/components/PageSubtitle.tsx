@@ -1,9 +1,19 @@
-import { Box, Title } from '@mantine/core';
+import { MantineNumberSize, Title } from '@mantine/core';
 import { kebabCase } from 'lodash';
 
-export default function PageSubtitle({ value }: { value: string }) {
+export default function PageSubtitle({
+  value,
+  mt = 'xl',
+  mb = 'xl',
+}: {
+  value: string;
+  mt?: MantineNumberSize;
+  mb?: MantineNumberSize;
+}) {
   return (
     <Title
+      mt={mt}
+      mb={mb}
       sx={(theme) => ({
         color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[8],
         fontSize: '1.15rem',
@@ -16,8 +26,7 @@ export default function PageSubtitle({ value }: { value: string }) {
       })}
       order={3}
     >
-      <Box component="a" sx={{ display: 'none' }} id={`#${kebabCase(value)}`} />
-      {value}
+      <a id={`${kebabCase(value)}`}>{value}</a>
     </Title>
   );
 }
