@@ -30,8 +30,11 @@ export default function Page() {
         </ul>
       </PageText>
       <PageText>
-        If you have an idea about a new feature and are willing to put your effort into it, please don’t hesitate to{' '}
-        <ExternalLink to={REPO_LINK}>make a PR</ExternalLink>. Contributions are more than welcome.
+        If you find a bug or you have an idea about a new or missing feature, please don’t hesitate to{' '}
+        <ExternalLink to={`${REPO_LINK}/issues`}>raise an issue</ExternalLink>. If you’re willing to put your effort
+        into it, coming up with a pull-request would be fantastic.
+        <br />
+        Contributions are more than welcome.
       </PageText>
       <PageText>
         If you find this project useful, it would help a lot to{' '}
