@@ -1,6 +1,7 @@
-import { Container } from '@mantine/core';
+import { Box, Container } from '@mantine/core';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
+import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import { AUTHOR_LINK, REPO_LINK } from '~/config';
@@ -29,13 +30,25 @@ export default function Page() {
           </li>
         </ul>
       </PageText>
+      <PageSubtitle value="Contribute" />
       <PageText>
         If you find a bug or you have an idea about a new or missing feature, please don’t hesitate to{' '}
-        <ExternalLink to={`${REPO_LINK}/issues`}>raise an issue</ExternalLink>. If you’re willing to put your effort
-        into it, coming up with a pull-request would be fantastic.
+        <ExternalLink to={`${REPO_LINK}/issues`}>raise an issue</ExternalLink>.
         <br />
-        Contributions are more than welcome.
+        If you’re willing to put your effort into it, coming up with a pull-request would be fantastic.
+        <br />
+        Code contributions are more than welcome.
       </PageText>
+      <PageSubtitle value="List of contributors" />
+      <Box my="xl">
+        <ExternalLink to="https://github.com/icflorescu/mantine-datatable/graphs/contributors">
+          <img
+            src="https://contrib.rocks/image?repo=icflorescu/mantine-datatable"
+            alt="Mantine DataTable contributors"
+          />
+        </ExternalLink>
+      </Box>
+      <PageSubtitle value="Supporting the project" />
       <PageText>
         If you find this project useful, it would help a lot to{' '}
         <ExternalLink to="http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu">
