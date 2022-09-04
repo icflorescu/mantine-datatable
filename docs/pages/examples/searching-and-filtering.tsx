@@ -26,7 +26,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <CodeBlock language="typescript" content={code} />
       <PageText info>
         <PageSubtitle mt={0} mb="xs" value="Why no built-in “Excel-like” searching and filtering support?" />
-        You’ll often have to implement have to implement searching and filtering data in your projects.
+        You’ll often have to implement searching and filtering data in your projects.
         <br />
         However there’s simply no way for <Code>Mantine DataTable</Code> to accommodate every possible usage scenario
         out there. Most of the times you’d have to deal with pagination, sorting, asynchronous loading; sometimes you’d
