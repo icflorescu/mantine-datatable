@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-turborepo",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "This is a monorepo; see package/package.json for more info",
   "private": true,
   "workspaces": [
