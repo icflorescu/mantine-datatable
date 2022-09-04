@@ -58,7 +58,7 @@ export default function AppFooter() {
   return (
     <div className={classes.root}>
       <ExternalLink to={`${REPO_LINK}/blob/main/LICENSE`} rel="license">
-        <img src={`http://img.shields.io/npm/l/mantine-datatable.svg?style=${badgeStyle}`} alt="MIT License" />
+        <img src={`https://img.shields.io/npm/l/mantine-datatable.svg?style=${badgeStyle}`} alt="MIT License" />
       </ExternalLink>
       <Text size="sm" align="center">
         Built by <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink> and{' '}
@@ -75,7 +75,7 @@ export default function AppFooter() {
           />
         </ExternalLink>
         <ExternalLink to="https://npmjs.org/package/mantine-datatable">
-          <img src={`http://img.shields.io/npm/dm/mantine-datatable.svg?style=${badgeStyle}`} alt="NPM Downloads" />
+          <img src={`https://img.shields.io/npm/dm/mantine-datatable.svg?style=${badgeStyle}`} alt="NPM Downloads" />
         </ExternalLink>
       </Group>
     </div>

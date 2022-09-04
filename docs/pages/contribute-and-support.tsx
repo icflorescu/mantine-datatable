@@ -62,7 +62,7 @@ export default function Page() {
       <PageSubtitle value="Supporting the project" />
       <PageText>
         If you find this project useful, it would help a lot to{' '}
-        <ExternalLink to="http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu">
+        <ExternalLink to="https://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu">
           spread the word
         </ExternalLink>
         , star the <ExternalLink to={REPO_LINK}>repository</ExternalLink> and{' '}
