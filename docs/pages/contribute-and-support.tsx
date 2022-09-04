@@ -1,4 +1,6 @@
 import { Box, Container } from '@mantine/core';
+import { useWindowEvent } from '@mantine/hooks';
+import { useEffect, useState } from 'react';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
@@ -9,6 +11,15 @@ import { AUTHOR_LINK, REPO_LINK } from '~/config';
 const PATH = 'contribute-and-support';
 
 export default function Page() {
+  const [contributorCols, setContributorCols] = useState(12);
+
+  const adjustContributorCols = () => {
+    setContributorCols(window.innerWidth < 400 ? 4 : window.innerWidth < 800 ? 8 : 12);
+  };
+
+  useWindowEvent('resize', adjustContributorCols);
+  useEffect(adjustContributorCols, []);
+
   return (
     <Container>
       <PageTitle of={PATH} />
@@ -43,7 +54,7 @@ export default function Page() {
       <Box my="xl">
         <ExternalLink to="https://github.com/icflorescu/mantine-datatable/graphs/contributors">
           <img
-            src="https://contrib.rocks/image?repo=icflorescu/mantine-datatable"
+            src={`https://contrib.rocks/image?repo=icflorescu/mantine-datatable&columns=${contributorCols}`}
             alt="Mantine DataTable contributors"
           />
         </ExternalLink>
