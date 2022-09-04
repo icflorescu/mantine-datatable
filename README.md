@@ -20,7 +20,7 @@ See [website](https://icflorescu.github.io/mantine-datatable/).
   <img src="https://contrib.rocks/image?repo=icflorescu/mantine-datatable" />
 </a>
 
-Wanna [become a contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)? 
+Want to [become a contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)? 
 
 ## Supporting the author
 
