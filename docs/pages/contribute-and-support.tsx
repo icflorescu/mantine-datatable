@@ -43,8 +43,11 @@ export default function Page() {
       </PageText>
       <PageSubtitle value="Contribute" />
       <PageText>
-        If you find a bug or you have an idea about a new or missing feature, please don’t hesitate to{' '}
+        If you find a bug please don’t hesitate to{' '}
         <ExternalLink to={`${REPO_LINK}/issues`}>raise an issue</ExternalLink>.
+        <br />
+        If you have an idea about a new or missing feature, let’s discuss it{' '}
+        <ExternalLink to={`${REPO_LINK}/discussions`}>here</ExternalLink>.
         <br />
         If you’re willing to put your effort into it, coming up with a pull-request would be fantastic.
         <br />
@@ -52,7 +55,7 @@ export default function Page() {
       </PageText>
       <PageSubtitle value="List of contributors" />
       <Box my="xl">
-        <ExternalLink to="https://github.com/icflorescu/mantine-datatable/graphs/contributors">
+        <ExternalLink to={`${REPO_LINK}/graphs/contributors`}>
           <img
             src={`https://contrib.rocks/image?repo=icflorescu/mantine-datatable&columns=${contributorCols}`}
             alt="Mantine DataTable contributors"
