@@ -44,7 +44,7 @@ export default function Logo({ className, insideHeader }: { className?: string; 
           Mantine DataTable
         </Text>
         <Code className={cx(classes.version, { [classes.versionInsideHeader]: insideHeader })}>
-          v{process.env.PACKAGE_VERSION}
+          {process.env.PACKAGE_VERSION}
         </Code>
       </a>
     </Link>
