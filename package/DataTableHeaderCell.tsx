@@ -3,7 +3,7 @@ import { lowerCase, upperFirst } from 'lodash';
 import { ReactNode } from 'react';
 import { ArrowDown, ArrowsVertical } from 'tabler-icons-react';
 import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
-import useMediaQueryStringOrFn from './useMediaQueryStringOrFn';
+import { useMediaQueryStringOrFunction } from './utils';
 
 const useStyles = createStyles((theme) => ({
   sortableColumnHeader: {
@@ -56,7 +56,7 @@ export default function DataTableHeaderCell<T>({
   onSortStatusChange,
 }: DataTableHeaderCell<T>) {
   const { cx, classes } = useStyles();
-  if (!useMediaQueryStringOrFn(visibleMediaQuery)) return null;
+  if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   const text = title ?? upperFirst(lowerCase(accessor));
   return (
     <Box
