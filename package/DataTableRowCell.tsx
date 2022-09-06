@@ -1,8 +1,7 @@
 import { Box, createStyles } from '@mantine/core';
-import { get } from 'lodash';
 import { ReactNode } from 'react';
 import { DataTableColumn } from './DataTable.props';
-import { useMediaQueryStringOrFunction } from './utils';
+import { getValueAtPath, useMediaQueryStringOrFunction } from './utils';
 
 const useStyles = createStyles({
   ellipsis: {
@@ -39,7 +38,7 @@ export default function DataTableRowCell<T>({
         textAlign: textAlignment,
       }}
     >
-      {render ? render(record) : (get(record, accessor) as ReactNode)}
+      {render ? render(record) : (getValueAtPath(record, accessor) as ReactNode)}
     </Box>
   );
 }

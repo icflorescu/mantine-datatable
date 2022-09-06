@@ -1,7 +1,6 @@
 import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
-import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -30,12 +29,13 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         The only property you <strong>have</strong> to specify for a column is its <Code>accessor</Code> (the name of
         the record property you want to display in each column cell).
         <br />
-        The <Code>accessor</Code> supports dot-notation for nested objects property drilling (see lodash{' '}
-        <ExternalLink to="https://lodash.com/docs#get">get</ExternalLink> method).
+        The <Code>accessor</Code> supports dot-notation for nested objects property drilling (i.e.{' '}
+        <Code>&apos;department.company.name&apos;</Code>).
         <br />
-        The component will try to derrive a column header title by aplying lodash’s{' '}
-        <ExternalLink to="https://lodash.com/docs#upperFirst">upperFirst</ExternalLink> and{' '}
-        <ExternalLink to="https://lodash.com/docs#lowerCase">lowerCase</ExternalLink> methods on the provided accessor.
+        The component will try to derrive a column header title by “humanizing” the provided accessor (i.e.{' '}
+        <Code>&apos;firstName&apos; → &apos;First name&apos;</Code> or{' '}
+        <Code>&apos;department.company.name&apos; → &apos;Department company name&apos;</Code>
+        ).
         <br />
         If you’re not happy with the automatically derrived title, you can override it by setting your own column{' '}
         <Code>title</Code>.

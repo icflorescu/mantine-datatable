@@ -1,9 +1,8 @@
 import { Box, Center, createStyles, Group, MantineTheme } from '@mantine/core';
-import { lowerCase, upperFirst } from 'lodash';
 import { ReactNode } from 'react';
 import { ArrowDown, ArrowsVertical } from 'tabler-icons-react';
 import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
-import { useMediaQueryStringOrFunction } from './utils';
+import { humanize, useMediaQueryStringOrFunction } from './utils';
 
 const useStyles = createStyles((theme) => ({
   sortableColumnHeader: {
@@ -57,7 +56,7 @@ export default function DataTableHeaderCell<T>({
 }: DataTableHeaderCell<T>) {
   const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
-  const text = title ?? upperFirst(lowerCase(accessor));
+  const text = title ?? humanize(accessor);
   return (
     <Box
       component="th"

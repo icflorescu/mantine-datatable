@@ -11,6 +11,7 @@ const useStyles = createStyles((theme) => {
       '&[data-state="visible"]': { background: 'transparent' },
       'div::before': { pointerEvents: 'none' },
     },
+    corner: { background: 'transparent' },
     thumb: {
       zIndex: 3,
     },
@@ -88,7 +89,7 @@ export default forwardRef(function DataTableScrollArea(
   return (
     <ScrollArea
       viewportRef={ref}
-      classNames={{ root: classes.root, scrollbar: classes.scrollbar, thumb: classes.thumb }}
+      classNames={{ root: classes.root, scrollbar: classes.scrollbar, thumb: classes.thumb, corner: classes.corner }}
       styles={{ scrollbar: { marginTop: headerHeight } }}
       onScrollPositionChange={onScrollPositionChange}
     >

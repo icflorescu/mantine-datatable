@@ -1,4 +1,4 @@
-import { Box, Container } from '@mantine/core';
+import { Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
 import ExternalLink from '~/components/ExternalLink';
@@ -31,9 +31,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <ExternalLink to="https://tanstack.com/query/v4/docs/adapters/react-query">React Query</ExternalLink>,
         pagination, sorting and row context-menu.
       </PageText>
-      <Box sx={{ height: 320 }}>
-        <ComplexUsageExample />
-      </Box>
+      <ComplexUsageExample />
       <CodeBlockTabs
         items={[
           { title: 'ComplexUsageExample.tsx', language: 'typescript', content: code['ComplexUsageExample.tsx'] },

@@ -25,7 +25,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <ExternalLink to="https://mantine.dev/pages/getting-started/">Getting started with Mantine</ExternalLink> page.
       </PageText>
       <PageText>
-        Mantine DataTable depends on <Code>@mantine/core</Code>, <Code>@mantine/hooks</Code> and <Code>lodash</Code>.
+        Mantine DataTable depends on <Code>@mantine/core</Code> and <Code>@mantine/hooks</Code>.
         <br />
         Mantine also depends on <Code>@emotion/react</Code> (and <Code>@emotion/server</Code> when used with SSR
         frameworks).
@@ -37,12 +37,12 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           {
             title: 'yarn',
             language: 'bash',
-            content: 'yarn add @mantine/core @mantine/hooks @emotion/react lodash mantine-datatable',
+            content: 'yarn add @mantine/core @mantine/hooks @emotion/react mantine-datatable',
           },
           {
             title: 'npm',
             language: 'bash',
-            content: 'npm i @mantine/core @mantine/hooks @emotion/react lodash mantine-datatable',
+            content: 'npm i @mantine/core @mantine/hooks @emotion/react mantine-datatable',
           },
         ]}
       />

@@ -1,6 +1,5 @@
 import { Box, createStyles, MantineSize, Table } from '@mantine/core';
-import { useElementSize } from '@mantine/hooks';
-import { differenceBy, get, lowerCase, throttle, uniqBy, upperFirst } from 'lodash';
+import { useDebouncedState, useElementSize } from '@mantine/hooks';
 import { Key, useEffect, useState } from 'react';
 import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
@@ -13,6 +12,10 @@ import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
+import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
+
+const SCROLL_STATE_DEBOUNCE_INTERVAL = 200;
+const SCROLL_STATE_DEBOUNCE_OPTIONS = { leading: true };
 
 const useStyles = createStyles((theme) => {
   const border = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
@@ -92,10 +95,26 @@ export default function DataTable<T extends Record<string, unknown>>({
   const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementSize<HTMLTableElement>();
   const { ref: footerRef, height: footerHeight } = useElementSize<HTMLDivElement>();
 
-  const [scrolledToTop, setScrolledToTop] = useState(true);
-  const [scrolledToBottom, setScrolledToBottom] = useState(true);
-  const [scrolledToLeft, setScrolledToLeft] = useState(true);
-  const [scrolledToRight, setScrolledToRight] = useState(true);
+  const [scrolledToTop, setScrolledToTop] = useDebouncedState(
+    true,
+    SCROLL_STATE_DEBOUNCE_INTERVAL,
+    SCROLL_STATE_DEBOUNCE_OPTIONS
+  );
+  const [scrolledToBottom, setScrolledToBottom] = useDebouncedState(
+    true,
+    SCROLL_STATE_DEBOUNCE_INTERVAL,
+    SCROLL_STATE_DEBOUNCE_OPTIONS
+  );
+  const [scrolledToLeft, setScrolledToLeft] = useDebouncedState(
+    true,
+    SCROLL_STATE_DEBOUNCE_INTERVAL,
+    SCROLL_STATE_DEBOUNCE_OPTIONS
+  );
+  const [scrolledToRight, setScrolledToRight] = useDebouncedState(
+    true,
+    SCROLL_STATE_DEBOUNCE_INTERVAL,
+    SCROLL_STATE_DEBOUNCE_OPTIONS
+  );
 
   const [rowContextMenuInfo, setRowContextMenuInfo] = useState<{ top: number; left: number; record: T } | null>(null);
   useEffect(() => {
@@ -124,6 +143,12 @@ export default function DataTable<T extends Record<string, unknown>>({
     }
   };
 
+  /**
+   * React hooks linting rule would reccomend to also include the `useDobouncedState` setters
+   * (setScrolledToBottom, setScrolledToLeft, setScrolledToRight, setScrolledToTop) in the effect
+   * dependecies, but it looks like there's actually no need to.
+   */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(onScrollPositionChange, [
     fetching,
     scrollViewportHeight,
@@ -133,16 +158,14 @@ export default function DataTable<T extends Record<string, unknown>>({
     tableWidth,
   ]);
 
-  const onScrollPositionChangeThrottled = throttle(onScrollPositionChange, 200, { leading: true, trailing: true });
-
   const handlePageChange = (page: number) => {
     scrollViewportRef.current.scrollTo({ top: 0, left: 0 });
     onPageChange!(page);
   };
 
   const recordsLength = records?.length;
-  const recordIds = records?.map((record) => get(record, idAccessor));
-  const selectedRecordIds = selectedRecords?.map((record) => get(record, idAccessor));
+  const recordIds = records?.map((record) => getValueAtPath(record, idAccessor));
+  const selectedRecordIds = selectedRecords?.map((record) => getValueAtPath(record, idAccessor));
   const hasRecordsAndSelectedRecords =
     recordIds !== undefined && selectedRecordIds !== undefined && selectedRecordIds.length > 0;
   const allRecordsSelected = hasRecordsAndSelectedRecords && recordIds.every((id) => selectedRecordIds.includes(id));
@@ -175,7 +198,7 @@ export default function DataTable<T extends Record<string, unknown>>({
         rightShadowVisible={!scrolledToRight}
         bottomShadowVisible={!scrolledToBottom}
         headerHeight={headerHeight}
-        onScrollPositionChange={onScrollPositionChangeThrottled}
+        onScrollPositionChange={onScrollPositionChange}
       >
         <Table
           ref={tableRef}
@@ -202,8 +225,8 @@ export default function DataTable<T extends Record<string, unknown>>({
                 ? () => {
                     onSelectedRecordsChange(
                       allRecordsSelected
-                        ? selectedRecords.filter((record) => !recordIds.includes(get(record, idAccessor)))
-                        : uniqBy([...selectedRecords, ...records!], (record) => get(record, idAccessor))
+                        ? selectedRecords.filter((record) => !recordIds.includes(getValueAtPath(record, idAccessor)))
+                        : uniqBy([...selectedRecords, ...records!], (record) => getValueAtPath(record, idAccessor))
                     );
                   }
                 : undefined
@@ -214,7 +237,7 @@ export default function DataTable<T extends Record<string, unknown>>({
           <tbody>
             {recordsLength ? (
               records.map((record, recordIndex) => {
-                const recordId = get(record, idAccessor);
+                const recordId = getValueAtPath(record, idAccessor);
                 const selected = selectedRecordIds?.includes(recordId) || false;
 
                 let showContextMenuOnClick = false;
@@ -248,14 +271,16 @@ export default function DataTable<T extends Record<string, unknown>>({
                               );
                               onSelectedRecordsChange(
                                 selected
-                                  ? differenceBy(selectedRecords, recordsInterval, (r) => get(r, idAccessor))
-                                  : uniqBy([...selectedRecords, ...recordsInterval], (r) => get(r, idAccessor))
+                                  ? differenceBy(selectedRecords, recordsInterval, (r) => getValueAtPath(r, idAccessor))
+                                  : uniqBy([...selectedRecords, ...recordsInterval], (r) =>
+                                      getValueAtPath(r, idAccessor)
+                                    )
                               );
                             } else {
                               onSelectedRecordsChange(
                                 selected
-                                  ? selectedRecords.filter((record) => get(record, idAccessor) !== recordId)
-                                  : uniqBy([...selectedRecords, record], (record) => get(record, idAccessor))
+                                  ? selectedRecords.filter((record) => getValueAtPath(record, idAccessor) !== recordId)
+                                  : uniqBy([...selectedRecords, record], (record) => getValueAtPath(record, idAccessor))
                               );
                             }
                             setLastSelectionChangeIndex(recordIndex);
@@ -283,7 +308,7 @@ export default function DataTable<T extends Record<string, unknown>>({
                         : undefined
                     }
                     contextMenuVisible={
-                      rowContextMenuInfo ? get(rowContextMenuInfo.record, idAccessor) === recordId : false
+                      rowContextMenuInfo ? getValueAtPath(rowContextMenuInfo.record, idAccessor) === recordId : false
                     }
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
@@ -339,7 +364,7 @@ export default function DataTable<T extends Record<string, unknown>>({
               ) : hidden ? null : (
                 <DataTableRowMenuItem
                   key={key}
-                  title={title ?? upperFirst(lowerCase(key))}
+                  title={title ?? humanize(key)}
                   icon={icon}
                   color={color}
                   disabled={disabled}
