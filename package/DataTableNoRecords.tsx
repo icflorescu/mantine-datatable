@@ -25,14 +25,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-type DataTableEmptyProps = {
+type DataTableNoRecordsProps = {
   text: string;
   pt: number;
   pb: number;
   active: boolean;
 };
 
-export default function DataTableEmpty({ text, pt, pb, active }: DataTableEmptyProps) {
+export default function DataTableNoRecords({ text, pt, pb, active }: DataTableNoRecordsProps) {
   const { classes, cx } = useStyles();
   return (
     <Center pt={pt} pb={pb} className={cx(classes.root, { [classes.active]: active })}>
