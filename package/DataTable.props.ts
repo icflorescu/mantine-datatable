@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
 
-export type DataTableBorderProps =
+export type DataTableOuterBorderProps =
   | {
       withBorder?: never;
       borderRadius?: never;
@@ -324,7 +324,7 @@ export type DataTableProps<T> = {
     items: (record: T) => DataTableContextMenuItemProps[];
   };
 } & Omit<TableProps, 'border'> &
-  DataTableBorderProps &
+  DataTableOuterBorderProps &
   DataTablePaginationProps &
   DataTableSortProps &
   DataTableSelectionProps<T>;
