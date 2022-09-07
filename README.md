@@ -4,6 +4,7 @@
 [![License][license-image]][license-url]
 [![Stars][stars-image]][repo-url]
 [![Last commit][last-commit-image]][repo-url]
+[![Closed issues][closed-issues-image]][repo-url]
 [![Downloads][downloads-image]][npm-url]
 [![Language][language-image]][repo-url]
 
@@ -41,4 +42,5 @@ The [MIT License](https://github.com/icflorescu/mantine-datatable/blob/master/LI
 [downloads-image]: http://img.shields.io/npm/dm/mantine-datatable.svg?style=flat-square
 [stars-image]: https://img.shields.io/github/stars/icflorescu/mantine-datatable?style=flat-square
 [last-commit-image]: https://img.shields.io/github/last-commit/icflorescu/mantine-datatable?style=flat-square
+[closed-issues-image]: https://img.shields.io/github/issues-closed-raw/icflorescu/mantine-datatable?style=flat-square
 [language-image]: https://img.shields.io/github/languages/top/icflorescu/mantine-datatable?style=flat-square
