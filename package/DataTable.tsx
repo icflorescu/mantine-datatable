@@ -40,11 +40,18 @@ const useStyles = createStyles(
         tr: {
           backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
         },
-        '&& thead tr th': {
-          borderBottomColor: borderColorValue,
+        '&&': {
+          'thead tr th': {
+            borderBottomColor: borderColorValue,
+          },
+          'tbody tr td': {
+            borderBottomColor: rowBorderColorValue,
+          },
         },
-        '&& tbody tr td': {
-          borderBottomColor: rowBorderColorValue,
+      },
+      lastRowBorderBottomVisible: {
+        'tbody tr:last-of-type td': {
+          borderBottom: `1px solid ${rowBorderColorValue}`,
         },
       },
       textSelectionDisabled: {
@@ -229,6 +236,7 @@ export default function DataTable<T extends Record<string, unknown>>({
           horizontalSpacing={horizontalSpacing}
           className={cx({
             [classes.tableWithColumnBorders]: withColumnBorders,
+            [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
             [classes.textSelectionDisabled]: textSelectionDisabled,
             [classes.verticalAlignmentTop]: verticalAlignment === 'top',
             [classes.verticalAlignmentBottom]: verticalAlignment === 'bottom',
