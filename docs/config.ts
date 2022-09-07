@@ -4,7 +4,7 @@ import { Adjustments, HeartHandshake, Home, Lifebuoy, Rocket } from 'tabler-icon
 
 export const SEO_DEFAULT_TITLE = 'Mantine DataTable';
 export const SEO_DEFAULT_DESCRIPTION =
-  'A fully featured table component for building data-rich applications with Mantine UI';
+  'Mantine DataTable, a fully featured table component for building data-rich applications with Mantine UI';
 
 export const HEADER_HEIGHT = 56;
 export const FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT = 128;
@@ -31,7 +31,7 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
   {
     path: 'getting-started',
     title: 'Getting started',
-    description: 'How to install the package, its dependencies and how to import and use it in your application',
+    description: 'How to install Mantine DataTable, its dependencies and how to import and use it in your application',
     color: 'orange',
     icon: Rocket,
   },
@@ -44,67 +44,72 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
       {
         path: 'basic-table-properties',
         title: 'Basic table properties',
-        description: 'Example: how to set the basic table properties',
+        description: 'Example: how to set the basic Mantine DataTable properties',
       },
       {
         path: 'non-standard-record-ids',
         title: 'Non-standard record IDs',
-        description: 'Example: using non-standard record IDs',
+        description: 'Example: using non-standard record IDs with Mantine DataTable',
       },
       {
         path: 'column-properties',
         title: 'Column properties',
-        description: 'Example: setting column properties',
+        description: 'Example: setting Mantine DataTable column properties',
       },
       {
         path: 'scrollable-vs-auto-height',
         title: 'Scrollable vs. auto-height',
-        description: 'Example: how to make the table vertically scrollable',
+        description: 'Example: how to make the Mantine DataTable vertically scrollable',
       },
       {
         path: 'empty-state',
         title: 'Empty state',
-        description: 'Example: component shows an empty state indicator when is provided with an empty array',
+        description: 'Example: Mantine DataTable shows an empty state indicator when is provided with an empty array',
       },
       {
         path: 'pagination',
         title: 'Pagination',
-        description: 'Example: using paged data',
+        description: 'Example: using paged data with Mantine DataTable',
       },
       {
         path: 'sorting',
         title: 'Sorting',
-        description: 'Example: sorting data',
+        description: 'Example: sorting data with Mantine DataTable',
       },
       {
         path: 'searching-and-filtering',
         title: 'Searching and filtering',
-        description: 'Example: searching and filtering data',
+        description: 'Example: searching and filtering data with Mantine DataTable',
       },
       {
         path: 'records-selection',
         title: 'Records selection',
-        description: 'Example: how to enable multiple records selection',
+        description: 'Example: how to enable multiple records selection on Mantine DataTable',
       },
       {
         path: 'handling-row-clicks',
         title: 'Handling row clicks',
-        description: 'Example: handling row click events',
+        description: 'Example: handling row click events on Mantine DataTable',
       },
       {
         path: 'row-context-menu',
         title: 'Row context menu',
-        description: 'Example: working with row context menus',
+        description: 'Example: working with row context menus on Mantine DataTable',
+      },
+      {
+        path: 'disabling-text-selection',
+        title: 'Disabling text selection',
+        description: 'Example: disabling text selection on Mantine DataTable',
       },
       {
         path: 'asynchronous-data-loading',
         title: 'Asynchronous data loading',
-        description: 'Example: loading data asynchronously',
+        description: 'Example: loading data asynchronously with Mantine DataTable',
       },
       {
         path: 'complex-usage',
         title: 'Complex usage',
-        description: 'Example: a complex usage scenario',
+        description: 'Example: a complex usage scenario for Mantine DataTable',
       },
     ],
   },

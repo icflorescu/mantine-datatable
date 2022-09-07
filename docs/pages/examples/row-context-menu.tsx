@@ -2,6 +2,7 @@ import { Box, Code, Container, createStyles, Paper, Radio, Stack } from '@mantin
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
 import CodeBlock from '~/components/CodeBlock';
+import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -94,6 +95,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <Example />
       </Box>
       <CodeBlock language="typescript" content={code[example]} />
+      <PageText info>
+        When using a row context menu triggered by click instead of right-click, you might want to{' '}
+        <InternalLink to="/examples/disabling-text-selection">disable text selection</InternalLink>.
+      </PageText>
       <PageNavigation of={PATH} />
     </Container>
   );

@@ -225,6 +225,11 @@ export type DataTableProps<T> = {
   withColumnBorders?: boolean;
 
   /**
+   * If true, the user will not be able to select text
+   */
+  textSelectionDisabled?: boolean;
+
+  /**
    * Vertical alignment for row cells; defaults to `center`
    */
   verticalAlignment?: DataTableVerticalAlignment;

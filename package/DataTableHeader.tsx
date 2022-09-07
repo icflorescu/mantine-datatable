@@ -33,6 +33,9 @@ const useStyles = createStyles((theme) => {
         opacity: 1,
       },
     },
+    textSelectionDisabled: {
+      userSelect: 'none',
+    },
     selectorColumnHeader: {
       position: 'sticky',
       width: 0,
@@ -98,12 +101,7 @@ export default forwardRef(function DataTableHeader<T>(
   const { classes, cx } = useStyles();
 
   return (
-    <thead
-      className={cx(classes.root, {
-        [classes.bottomShadowVisible]: bottomShadowVisible,
-      })}
-      ref={ref}
-    >
+    <thead className={cx(classes.root, { [classes.bottomShadowVisible]: bottomShadowVisible })} ref={ref}>
       <tr>
         {selectionVisible && (
           <th

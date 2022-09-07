@@ -16,7 +16,6 @@ const useStyles = createStyles((theme) => ({
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
-    userSelect: 'none',
   },
   sortableColumnHeaderText: {
     minWidth: 0,

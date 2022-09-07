@@ -29,7 +29,7 @@ const useStyles = createStyles((theme) => {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
       },
     },
-    browserSelectionDisabled: {
+    textSelectionDisabled: {
       userSelect: 'none',
     },
     tableWithBorder: {
@@ -59,6 +59,7 @@ export default function DataTable<T extends Record<string, unknown>>({
   withBorder,
   borderRadius,
   withColumnBorders,
+  textSelectionDisabled,
   height = '100%',
   minHeight,
   shadow,
@@ -204,8 +205,8 @@ export default function DataTable<T extends Record<string, unknown>>({
           ref={tableRef}
           horizontalSpacing={horizontalSpacing}
           className={cx({
-            [classes.browserSelectionDisabled]: onRowClick || selectedRecords,
             [classes.tableWithColumnBorders]: withColumnBorders,
+            [classes.textSelectionDisabled]: textSelectionDisabled,
             [classes.verticalAlignmentTop]: verticalAlignment === 'top',
             [classes.verticalAlignmentBottom]: verticalAlignment === 'bottom',
           })}
