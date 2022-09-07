@@ -232,6 +232,19 @@ export type DataTableProps<T> = {
   withColumnBorders?: boolean;
 
   /**
+   * Table border color, applied to the outer border, the header bottom border, and the pagination
+   * footer top border; defaults to
+   * `(theme) => (theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3])`
+   */
+  borderColor?: string | ((theme: MantineTheme) => string);
+
+  /**
+   * Row border color; defaults to
+   * `(theme) => (theme.fn.rgba(theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3], 0.65))`
+   */
+  rowBorderColor?: string | ((theme: MantineTheme) => string);
+
+  /**
    * If true, the user will not be able to select text
    */
   textSelectionDisabled?: boolean;

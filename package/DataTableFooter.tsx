@@ -1,27 +1,30 @@
-import { Box, createStyles, MantineNumberSize, Pagination, Text } from '@mantine/core';
+import { Box, createStyles, MantineNumberSize, MantineTheme, Pagination, Text } from '@mantine/core';
 import { ForwardedRef, forwardRef, ReactNode } from 'react';
 import { DataTablePaginationProps } from './DataTable.props';
 
-const useStyles = createStyles((theme) => ({
-  root: {
-    borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: theme.spacing.xs,
-    [theme.fn.largerThan('xs')]: { flexDirection: 'row' },
-  },
-  pagination: {
-    opacity: 1,
-    transition: 'opacity .15s ease',
-  },
-  paginationFetching: {
-    opacity: 0,
-  },
-}));
+const useStyles = createStyles(
+  (theme, { topBorderColor }: { topBorderColor: string | ((theme: MantineTheme) => string) }) => ({
+    root: {
+      borderTop: `1px solid ${typeof topBorderColor === 'function' ? topBorderColor(theme) : topBorderColor}`,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: theme.spacing.xs,
+      [theme.fn.largerThan('xs')]: { flexDirection: 'row' },
+    },
+    pagination: {
+      opacity: 1,
+      transition: 'opacity .15s ease',
+    },
+    paginationFetching: {
+      opacity: 0,
+    },
+  })
+);
 
 type DataTableFooterProps = DataTablePaginationProps & {
+  topBorderColor: string | ((theme: MantineTheme) => string);
   fetching: boolean | undefined;
   recordsLength: number | undefined;
   horizontalSpacing: MantineNumberSize | undefined;
@@ -29,6 +32,7 @@ type DataTableFooterProps = DataTablePaginationProps & {
 
 export default forwardRef(function DataTableFooter(
   {
+    topBorderColor,
     fetching,
     page,
     onPageChange,
@@ -50,7 +54,7 @@ export default forwardRef(function DataTableFooter(
     paginationTextValue = paginationText!({ from, to, totalRecords });
   }
 
-  const { classes, cx } = useStyles();
+  const { classes, cx } = useStyles({ topBorderColor });
 
   return (
     <Box ref={ref} px={horizontalSpacing ?? 'xs'} py="xs" className={classes.root}>

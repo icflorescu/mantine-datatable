@@ -102,6 +102,11 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: disabling text selection on Mantine DataTable',
       },
       {
+        path: 'customizing-border-colors',
+        title: 'Customizing border colors',
+        description: 'Example: how to customize the border colors of Mantine DataTable',
+      },
+      {
         path: 'asynchronous-data-loading',
         title: 'Asynchronous data loading',
         description: 'Example: loading data asynchronously with Mantine DataTable',

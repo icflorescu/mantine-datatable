@@ -1,4 +1,4 @@
-import { Box, createStyles, MantineSize, Table } from '@mantine/core';
+import { Box, createStyles, MantineSize, MantineTheme, Table } from '@mantine/core';
 import { useDebouncedState, useElementSize } from '@mantine/hooks';
 import { Key, useEffect, useState } from 'react';
 import { DataTableProps } from './DataTable.props';
@@ -17,47 +17,69 @@ import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
 const SCROLL_STATE_DEBOUNCE_INTERVAL = 200;
 const SCROLL_STATE_DEBOUNCE_OPTIONS = { leading: true };
 
-const useStyles = createStyles((theme) => {
-  const border = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
-  return {
-    root: {
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      overflow: 'hidden',
-      tr: {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-      },
-    },
-    textSelectionDisabled: {
-      userSelect: 'none',
-    },
-    tableWithBorder: {
-      border,
-    },
-    tableWithColumnBorders: {
-      'th, td': {
-        ':not(:first-of-type)': {
-          borderLeft: border,
+const useStyles = createStyles(
+  (
+    theme,
+    {
+      borderColor,
+      rowBorderColor,
+    }: {
+      borderColor: string | ((theme: MantineTheme) => string);
+      rowBorderColor: string | ((theme: MantineTheme) => string);
+    }
+  ) => {
+    const borderColorValue = typeof borderColor === 'function' ? borderColor(theme) : borderColor;
+    const rowBorderColorValue = typeof rowBorderColor === 'function' ? rowBorderColor(theme) : rowBorderColor;
+
+    return {
+      root: {
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        tr: {
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+        },
+        '&& thead tr th': {
+          borderBottomColor: borderColorValue,
+        },
+        '&& tbody tr td': {
+          borderBottomColor: rowBorderColorValue,
         },
       },
-    },
-    verticalAlignmentTop: {
-      td: {
-        verticalAlign: 'top',
+      textSelectionDisabled: {
+        userSelect: 'none',
       },
-    },
-    verticalAlignmentBottom: {
-      td: {
-        verticalAlign: 'bottom',
+      tableWithBorder: {
+        border: `1px solid ${borderColorValue}`,
       },
-    },
-  };
-});
+      tableWithColumnBorders: {
+        'th, td': {
+          ':not(:first-of-type)': {
+            borderLeft: `1px solid ${rowBorderColorValue}`,
+          },
+        },
+      },
+      verticalAlignmentTop: {
+        td: {
+          verticalAlign: 'top',
+        },
+      },
+      verticalAlignmentBottom: {
+        td: {
+          verticalAlign: 'bottom',
+        },
+      },
+    };
+  }
+);
 
 export default function DataTable<T extends Record<string, unknown>>({
   withBorder,
   borderRadius,
+  borderColor = (theme) => (theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]),
+  rowBorderColor = (theme) =>
+    theme.fn.rgba(theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3], 0.65),
   withColumnBorders,
   textSelectionDisabled,
   height = '100%',
@@ -182,7 +204,7 @@ export default function DataTable<T extends Record<string, unknown>>({
 
   const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;
 
-  const { cx, classes } = useStyles();
+  const { cx, classes } = useStyles({ borderColor, rowBorderColor });
 
   return (
     <Box
@@ -325,6 +347,7 @@ export default function DataTable<T extends Record<string, unknown>>({
       {page && (
         <DataTableFooter
           ref={footerRef}
+          topBorderColor={borderColor}
           horizontalSpacing={horizontalSpacing}
           fetching={fetching}
           page={page}
