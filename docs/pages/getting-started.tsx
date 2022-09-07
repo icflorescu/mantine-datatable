@@ -31,7 +31,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         frameworks).
         <br />
       </PageText>
-      <PageText>Install dependencies:</PageText>
+      <PageText>Install the package and its dependencies:</PageText>
       <CodeFiles
         items={[
           {

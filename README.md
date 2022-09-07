@@ -12,9 +12,68 @@ A "dark-theme aware" **table component** for your Mantine UI data-rich applicati
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/187723353-0e082dbc-925b-4d0d-a14e-94c00073ee08.png)](https://icflorescu.github.io/mantine-datatable/)
 
-## Documentation and examples
+## Full documentation and examples
 
-See [website](https://icflorescu.github.io/mantine-datatable/).
+Visit [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mantine-datatable/) to view the full documentation and learn how to use it.
+
+## Quickstart
+
+Install the package and its dependencies:
+
+```sh
+npm i @mantine/core @mantine/hooks @emotion/react mantine-datatable
+```
+
+Use it in your code:
+
+```ts
+import { Text } from '@mantine/core';
+import { DataTable } from 'mantine-datatable';
+
+export default function GettingStartedExample() {
+  return (
+    <DataTable
+      withBorder
+      borderRadius="sm"
+      withColumnBorders
+      striped
+      highlightOnHover
+      // provide data
+      records={[
+        { id: 1, name: 'Joe Biden', bornIn: 1942, party: 'Democratic' },
+        // more records...
+      ]}
+      // define columns
+      columns={[
+        {
+          accessor: 'id',
+          // this column has a custom title
+          title: '#',
+          // right-align column
+          textAlignment: 'right',
+        },
+        { accessor: 'name' },
+        {
+          accessor: 'party',
+          // this column has custom cell data rendering
+          render: ({ party }) => (
+            <Text weight={700} color={party === 'Democratic' ? 'blue' : 'red'}>
+              {party.slice(0, 3).toUpperCase()}
+            </Text>
+          ),
+        },
+        // simplest column definition
+        { accessor: 'bornIn' },
+      ]}
+      // execute this callback when a row is clicked
+      onRowClick={({ name, party, bornIn }) =>
+        alert(`You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}`)
+      }
+    />
+  );
+}
+```
+Also see the [getting started](https://icflorescu.github.io/mantine-datatable/getting-started) page in the documentation.
 
 ## Contributors
 
