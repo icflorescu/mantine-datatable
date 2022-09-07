@@ -2,9 +2,9 @@
 
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
-[![Stars][stars-image]][repo-url]
+[![Stars][stars-image]][stars-url]
 [![Last commit][last-commit-image]][repo-url]
-[![Closed issues][closed-issues-image]][repo-url]
+[![Closed issues][closed-issues-image]][closed-issues-url]
 [![Downloads][downloads-image]][npm-url]
 [![Language][language-image]][repo-url]
 
@@ -95,6 +95,8 @@ The [MIT License](https://github.com/icflorescu/mantine-datatable/blob/master/LI
 
 [npm-url]: https://npmjs.org/package/mantine-datatable
 [repo-url]: https://github.com/icflorescu/mantine-datatable
+[stars-url]: https://github.com/icflorescu/mantine-datatable/stargazers
+[closed-issues-url]: https://github.com/icflorescu/mantine-datatable/issues?q=is%3Aissue+is%3Aclosed
 [license-url]: LICENSE
 [npm-image]: https://img.shields.io/npm/v/mantine-datatable.svg?style=flat-square
 [license-image]: http://img.shields.io/npm/l/mantine-datatable.svg?style=flat-square
