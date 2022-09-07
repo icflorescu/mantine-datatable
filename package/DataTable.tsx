@@ -78,6 +78,7 @@ export default function DataTable<T extends Record<string, unknown>>({
   totalRecords,
   recordsPerPage,
   paginationSize = 'sm',
+  paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
   loaderSize,
   loaderVariant,
   loaderBackgroundBlur,
@@ -331,6 +332,7 @@ export default function DataTable<T extends Record<string, unknown>>({
           totalRecords={totalRecords}
           recordsPerPage={recordsPerPage}
           paginationSize={paginationSize}
+          paginationText={paginationText}
           recordsLength={recordsLength}
         />
       )}

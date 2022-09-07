@@ -1,5 +1,6 @@
-import { Box, Code, Container } from '@mantine/core';
+import { Box, Code, Container, MANTINE_SIZES } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { Fragment } from 'react';
 import CodeBlock from '~/components/CodeBlock';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
@@ -34,6 +35,25 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           </li>
           <li>
             <Code>recordsPerPage</Code> → the number of records per page
+          </li>
+        </ul>
+        If you’re not happy with the default pagination behavior, you can override it by setting these{' '}
+        <strong>optional</strong> properties:
+        <ul>
+          <li>
+            <Code>paginationText</Code> → a callback receiving an object in the shape of{' '}
+            <Code>{'{ from: number; to: number; totalRecords: number }'}</Code> and returning the pagination text
+          </li>
+          <li>
+            <Code>paginationSize</Code> → the pagination size,{' '}
+            <Code>
+              {MANTINE_SIZES.map((size, index) => (
+                <Fragment key={size}>
+                  {index !== 0 && ' | '}
+                  &apos;{size}&apos;
+                </Fragment>
+              ))}
+            </Code>
           </li>
         </ul>
       </PageText>

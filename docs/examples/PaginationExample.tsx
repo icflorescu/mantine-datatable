@@ -34,6 +34,10 @@ export default function PaginationExample() {
       recordsPerPage={PAGE_SIZE}
       page={page}
       onPageChange={(p) => setPage(p)}
+      // uncomment the next line to use a custom pagination text
+      // paginationText={({ from, to, totalRecords }) => `Records ${from} - ${to} of ${totalRecords}`}
+      // uncomment the next line to use a custom pagination size
+      // paginationSize="md"
     />
   );
 }

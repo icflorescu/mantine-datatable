@@ -1,5 +1,5 @@
 import { Box, createStyles, MantineNumberSize, Pagination, Text } from '@mantine/core';
-import { ForwardedRef, forwardRef } from 'react';
+import { ForwardedRef, forwardRef, ReactNode } from 'react';
 import { DataTablePaginationProps } from './DataTable.props';
 
 const useStyles = createStyles((theme) => ({
@@ -33,6 +33,7 @@ export default forwardRef(function DataTableFooter(
     page,
     onPageChange,
     paginationSize,
+    paginationText,
     totalRecords,
     recordsPerPage,
     recordsLength,
@@ -40,21 +41,20 @@ export default forwardRef(function DataTableFooter(
   }: DataTableFooterProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
-  let paginationText: string;
-  if (fetching) {
-    paginationText = '...';
+  let paginationTextValue: ReactNode;
+  if (fetching || !totalRecords) {
+    paginationTextValue = '...';
   } else {
     const from = (page! - 1) * recordsPerPage! + 1;
     const to = from + recordsLength! - 1;
-    paginationText = `${from} - ${to}`;
-    if (totalRecords) paginationText += ` / ${totalRecords}`;
+    paginationTextValue = paginationText!({ from, to, totalRecords });
   }
 
   const { classes, cx } = useStyles();
 
   return (
     <Box ref={ref} px={horizontalSpacing ?? 'xs'} py="xs" className={classes.root}>
-      <Text size={paginationSize}>{paginationText}</Text>
+      <Text size={paginationSize}>{paginationTextValue}</Text>
       <Pagination
         className={cx(classes.pagination, { [classes.paginationFetching]: fetching || !recordsLength })}
         page={page}
