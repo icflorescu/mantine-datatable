@@ -28,11 +28,9 @@ const useStyles = createStyles((theme, { color = 'blue' }: { color?: MantineColo
     },
   },
   bullet: {
-    zIndex: 1,
     width: 12,
     height: 12,
-    background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.white,
-    border: `2px solid ${theme.colors[color][6]}`,
+    background: theme.colors[color][6],
     borderRadius: '50%',
   },
   text: {
@@ -52,8 +50,8 @@ export default function AppNavbarLinkListItem({ title, to, color, active }: AppN
 
   return (
     <Link key={to} href={to} passHref>
-      <UnstyledButton className={cx(classes.root, { [classes.active]: active })} component="a">
-        <Group pl={19} py={8} spacing={16}>
+      <UnstyledButton pl={19} py={8} className={cx(classes.root, { [classes.active]: active })} component="a">
+        <Group spacing={16}>
           <Box className={classes.bullet} />
           <Text className={classes.text} size="sm" weight={500}>
             {title}
