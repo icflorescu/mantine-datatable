@@ -69,7 +69,7 @@ export default function Page() {
           spread the word
         </ExternalLink>
         , star the <ExternalLink to={REPO_LINK}>repository</ExternalLink> and{' '}
-        <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorese me on LinkedIn</ExternalLink>.
+        <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>.
       </PageText>
       <PageText>
         Thank you for your support,
