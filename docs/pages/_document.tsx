@@ -33,7 +33,7 @@ export default class _Document extends Document {
           <link rel="manifest" href={`${process.env.BASE_PATH}/site.webmanifest`} />
           <link rel="mask-icon" href={`${process.env.BASE_PATH}/safari-pinned-tab.svg`} color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#2b5797" />
-          <meta name="theme-color" content="#ffffff" />
+          <meta name="theme-color" content="#228be6" />
         </Head>
         <body>
           <Main />
