@@ -74,16 +74,12 @@ export default function Page() {
         <span className={classes.gradientText}>data-rich applications.</span>
       </Title>
       <div className={classes.image}>
-        <img
-          src={`${process.env.BASE_PATH}/mantine-datatable.png`}
-          alt="Mantine DataTable dark mode support"
-          title="Mantine DataTable supports dark mode"
-        />
+        <img src={`${process.env.BASE_PATH}/mantine-datatable.png`} alt="Dark mode support" title="Dark mode support" />
       </div>
       <Text className={classes.subtitle}>Build data-rich interfaces faster than ever with Mantine DataTable.</Text>
       <div className={classes.features}>
         <HomePageFeature icon={Scale} title="Free and open-source">
-          This package is released under the MIT license, same as Mantine, so you can freely build fantastic
+          This package is released under the MIT license, same as Mantine, so you can freely build fantastic data-rich
           applications with it
         </HomePageFeature>
         <HomePageFeature icon={Lifebuoy} title="Typescript based">
@@ -91,12 +87,12 @@ export default function Page() {
           so you can build type safe applications with confidence
         </HomePageFeature>
         <HomePageFeature icon={Settings} title="Feature rich">
-          Asynchronous data loading support, pagination, multiple rows selection, column sorting, custom cell data
-          rendering, row context menu and more
+          Supports asynchronous data loading, pagination, multiple rows selection, column sorting, custom cell data
+          rendering, row context menu, dark theme and more
         </HomePageFeature>
         <HomePageFeature icon={Rocket} title="Use anywhere">
-          You can use this component in any modern framework supported by Mantine, such as Next.js, Vite, Create React
-          App, Remix or Gatsby
+          You can use this component in any modern React framework supported by Mantine, such as Next.js, Vite, Create
+          React App, Remix or Gatsby
         </HomePageFeature>
       </div>
       <Group className={classes.buttons}>
