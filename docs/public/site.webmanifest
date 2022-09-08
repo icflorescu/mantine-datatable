@@ -1,8 +1,8 @@
 {
   "name": "Mantine DataTable",
   "short_name": "Mantine DataTable",
-  "scope": "/mantine-datatable/",
-  "start_url": "/mantine-datatable/",
+  "start_url": "./",
+  "scope": ".",
   "icons": [
     {
       "src": "https://icflorescu.github.io/mantine-datatable/android-chrome-512x512.png",
