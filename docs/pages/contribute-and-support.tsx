@@ -53,7 +53,7 @@ export default function Page() {
         <br />
         Code contributions are more than welcome.
       </PageText>
-      <PageSubtitle value="List of contributors" />
+      <PageSubtitle value="List of code contributors" />
       <Box my="xl">
         <ExternalLink to={`${REPO_LINK}/graphs/contributors`}>
           <img

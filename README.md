@@ -74,11 +74,11 @@ export default function GettingStartedExample() {
 ```
 Also see the [getting started](https://icflorescu.github.io/mantine-datatable/getting-started) page in the documentation.
 
-## Contributors
+## Code contributors
 
 [![Contributors list](https://contrib.rocks/image?repo=icflorescu/mantine-datatable)](https://github.com/icflorescu/mantine-datatable/graphs/contributors)
 
-Want to [become a contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)?
+Want to [become a code contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)?
 
 ## Supporting the author
 
