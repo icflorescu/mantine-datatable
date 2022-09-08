@@ -1,6 +1,6 @@
 import { createGetInitialProps } from '@mantine/next';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE } from '~/config';
+import { SEO_CREATOR, SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE } from '~/config';
 
 const getInitialProps = createGetInitialProps();
 
@@ -17,6 +17,10 @@ export default class _Document extends Document {
               <meta property="og:url" content={process.env.CANONICAL_URL} />
               <meta property="og:image" content={`${process.env.CANONICAL_URL}mantine-datatable-repo.png`} />
               <meta property="og:image:alt" content={SEO_DEFAULT_DESCRIPTION} />
+              <meta name="twitter:card" content="summary" />
+              <meta name="twitter:url" content={process.env.CANONICAL_URL} />
+              <meta name="twitter:image" content={`${process.env.CANONICAL_URL}mantine-datatable-repo.png`} />
+              <meta name="twitter:creator" content={SEO_CREATOR} />
             </>
           )}
           <meta property="og:site_name" content={SEO_DEFAULT_TITLE} />
