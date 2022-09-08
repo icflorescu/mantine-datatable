@@ -62,12 +62,11 @@ export default function GettingStartedExample() {
             </Text>
           ),
         },
-        // simplest column definition
         { accessor: 'bornIn' },
       ]}
       // execute this callback when a row is clicked
       onRowClick={({ name, party, bornIn }) =>
-        alert(`You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}`)
+        alert(`You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}.`)
       }
     />
   );
@@ -79,7 +78,7 @@ Also see the [getting started](https://icflorescu.github.io/mantine-datatable/ge
 
 [![Contributors list](https://contrib.rocks/image?repo=icflorescu/mantine-datatable)](https://github.com/icflorescu/mantine-datatable/graphs/contributors)
 
-Want to [become a contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)? 
+Want to [become a contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)?
 
 ## Supporting the author
 

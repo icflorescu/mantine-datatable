@@ -43,7 +43,6 @@ export default function GettingStartedExample() {
             </Text>
           ),
         },
-        // simplest column definition
         { accessor: 'bornIn' },
       ]}
       // execute this callback when a row is clicked
