@@ -130,14 +130,15 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
   {
     path: 'contribute-and-support',
     title: 'Contribute & support',
-    description: 'Make a pull-request or support the development of this project',
+    description:
+      'Contribute and support the development of Mantine DataTable by raising issues, bringing up new ideas, coming up with pull-requests, starring the repo or hiring its author',
     color: 'teal',
     icon: Lifebuoy,
   },
   {
     path: 'hire-the-author',
     title: 'Hire the author',
-    description: 'Hire the services of a fullstack/frontend developer with 20+ years of experience',
+    description: 'Hire the author of Mantine DataTable - a fullstack/frontend developer with 20+ years of experience',
     color: 'red',
     icon: HeartHandshake,
   },
