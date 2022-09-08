@@ -12,6 +12,7 @@ const useStyles = createStyles((theme) => {
     },
     selectorCell: {
       position: 'sticky',
+      zIndex: 1,
       left: 0,
       background: 'inherit',
       '&::after': {
