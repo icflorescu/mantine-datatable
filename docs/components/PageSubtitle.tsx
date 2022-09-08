@@ -1,5 +1,5 @@
 import { MantineNumberSize, Title } from '@mantine/core';
-import { kebabCase } from 'lodash';
+import kebabCase from 'lodash/kebabCase';
 
 export default function PageSubtitle({
   value,

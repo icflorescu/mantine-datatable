@@ -1,5 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
-import { get, sortBy } from 'lodash';
+import get from 'lodash/get';
+import sortBy from 'lodash/sortBy';
 import { DataTableSortStatus } from 'mantine-datatable';
 import companyData from '~/data/companies.json';
 import departmentData from '~/data/departments.json';

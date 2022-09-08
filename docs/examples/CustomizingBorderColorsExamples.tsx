@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import sortBy from 'lodash/sortBy';
 import { DataTable } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
 import { companies } from '~/data';

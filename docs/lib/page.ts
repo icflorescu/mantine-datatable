@@ -1,4 +1,4 @@
-import { memoize } from 'lodash';
+import memoize from 'lodash/memoize';
 import { PAGES } from '~/config';
 
 type PageInfo = { path: string; title: string; description?: string };
