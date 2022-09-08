@@ -4,7 +4,7 @@ import { Adjustments, HeartHandshake, Home, Lifebuoy, Rocket } from 'tabler-icon
 
 export const SEO_DEFAULT_TITLE = 'Mantine DataTable';
 export const SEO_DEFAULT_DESCRIPTION =
-  'Mantine DataTable, a fully featured table component for building data-rich applications with Mantine UI';
+  'A fully featured data table / data grid component for building data-rich applications with Mantine UI';
 export const SEO_CREATOR = '@icflorescu';
 
 export const HEADER_HEIGHT = 56;
