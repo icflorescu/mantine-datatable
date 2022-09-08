@@ -16,6 +16,9 @@ const useStyles = createStyles((theme) => ({
   title: {
     marginTop: '-0.33em',
   },
+  description: {
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[8],
+  },
 }));
 
 type HopePageFeatureProps = {
@@ -35,7 +38,7 @@ export default function HomePageFeature({ icon: Icon, title, children }: HopePag
         <Text className={classes.title} weight="500">
           {title}
         </Text>
-        <Text color="dimmed" size="sm">
+        <Text className={classes.description} size="sm">
           {children}
         </Text>
       </div>

@@ -9,7 +9,7 @@ export default class _Document extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           {process.env.CANONICAL_URL && (
             <>

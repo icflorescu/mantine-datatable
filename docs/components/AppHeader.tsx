@@ -144,10 +144,22 @@ export default function AppHeader({
       </Button>
       <Logo className={cx(classes.logo, { [classes.logoWithNavbarVisible]: navbarVisible })} insideHeader />
       <Group className={classes.actionIcons} spacing="xs">
-        <ActionIcon className={classes.actionIcon} variant="outline" component="a" href={REPO_LINK} target="_blank">
+        <ActionIcon
+          aria-label="Soure code"
+          className={classes.actionIcon}
+          variant="outline"
+          component="a"
+          href={REPO_LINK}
+          target="_blank"
+        >
           <GitHubIcon size={16} />
         </ActionIcon>
-        <ActionIcon className={classes.actionIcon} variant="outline" onClick={() => toggleColorScheme()}>
+        <ActionIcon
+          aria-label="Toggle color scheme"
+          className={classes.actionIcon}
+          variant="outline"
+          onClick={() => toggleColorScheme()}
+        >
           <ColorSchemeIcon size={16} />
         </ActionIcon>
       </Group>
