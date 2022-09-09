@@ -3,7 +3,7 @@ import transpileModules from 'next-transpile-modules';
 import pkg from '../package/package.json' assert { type: 'json' };
 
 const withTM = transpileModules(['mantine-datatable']);
-const withPWA = pwa({ dest: 'public' });
+const withPWA = pwa({ dest: 'public', disable: process.env.NODE_ENV === 'development' });
 
 const nextConfig = (phase) => {
   /**

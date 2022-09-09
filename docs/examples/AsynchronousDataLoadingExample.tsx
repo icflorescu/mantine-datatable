@@ -28,7 +28,7 @@ export default function AsynchronousDataLoadingExample({
 
   const load = async () => {
     setFetching(true);
-    const companies = await getCompaniesAsync({ min: 800, max: 1000 });
+    const companies = await getCompaniesAsync({ count: 4, delay: { min: 800, max: 1000 } });
     if (isMounted()) {
       setRecords(companies);
       setFetching(false);
@@ -47,7 +47,7 @@ export default function AsynchronousDataLoadingExample({
   return (
     <DataTable
       withBorder
-      minHeight={300}
+      minHeight={180}
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={records}
       fetching={fetching}

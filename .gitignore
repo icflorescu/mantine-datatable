@@ -9,6 +9,8 @@ dist
 docs/public/robots.txt
 docs/public/sitemap.xml
 docs/public/sw.js
+docs/public/sw.js.map
 docs/public/workbox-*.js
+docs/public/workbox-*.js.map
 package/README.md
 package/LICENSE

@@ -42,9 +42,15 @@ export const employees: Employee[] = employeeData.map(({ departmentId, ...rest }
   department: departments.find(({ id }) => id === departmentId)!,
 }));
 
-export async function getCompaniesAsync(delayOptions: DelayOptions = { min: 1000, max: 2000 }) {
+export async function getCompaniesAsync({
+  count,
+  delay: delayOptions = { min: 1000, max: 2000 },
+}: {
+  count: number;
+  delay?: DelayOptions;
+}) {
   await delay(delayOptions);
-  return companies;
+  return companies.slice(0, count);
 }
 
 export async function getEmployeesAsync({
