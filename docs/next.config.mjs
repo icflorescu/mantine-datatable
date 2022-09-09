@@ -1,7 +1,9 @@
+import pwa from 'next-pwa';
 import transpileModules from 'next-transpile-modules';
 import pkg from '../package/package.json' assert { type: 'json' };
 
 const withTM = transpileModules(['mantine-datatable']);
+const withPWA = pwa({ dest: 'public' });
 
 const nextConfig = (phase) => {
   /**
@@ -20,7 +22,7 @@ const nextConfig = (phase) => {
     config.env.CANONICAL_URL = 'https://icflorescu.github.io/mantine-datatable/';
   }
 
-  return withTM(config);
+  return withPWA(withTM(config));
 };
 
 export default nextConfig;

@@ -8,5 +8,7 @@ dist
 .turbo
 docs/public/robots.txt
 docs/public/sitemap.xml
+docs/public/sw.js
+docs/public/workbox-*.js
 package/README.md
 package/LICENSE
