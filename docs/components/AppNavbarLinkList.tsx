@@ -63,7 +63,7 @@ export default function AppNavbarLinkList({ color, title, items }: AppNavbarLink
   const { classes, cx } = useStyles();
 
   return (
-    <div>
+    <>
       <AppNavbarButton
         icon={ChevronRight}
         rotateIcon={open}
@@ -83,6 +83,6 @@ export default function AppNavbarLinkList({ color, title, items }: AppNavbarLink
           <AppNavbarLinkListItem key={to} title={title} to={to} color={color} active={to === asPath} />
         ))}
       </Collapse>
-    </div>
+    </>
   );
 }
