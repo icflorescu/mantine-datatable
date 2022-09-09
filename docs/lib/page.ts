@@ -35,4 +35,6 @@ export const getPageNavigation = memoize((path: string) => {
   };
 });
 
-export const getExamplePages = memoize(() => flattenedPages.filter((page) => page.path.startsWith('/example/')));
+export const getFirstExamplePagePath = memoize(
+  () => flattenedPages.find((page) => page.path.startsWith('examples/'))!.path
+);

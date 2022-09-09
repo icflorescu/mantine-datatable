@@ -1,9 +1,10 @@
 import { Button, Container, createStyles, Group, Text, Title } from '@mantine/core';
 import Link from 'next/link';
-import { Lifebuoy, Rocket, Scale, Settings } from 'tabler-icons-react';
+import { Bulb, Lifebuoy, Rocket, Scale, Settings } from 'tabler-icons-react';
 import GitHubIcon from '~/components/GitHubIcon';
 import HomePageFeature from '~/components/HomePageFeature';
 import { REPO_LINK } from '~/config';
+import { getFirstExamplePagePath } from '~/lib/page';
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -60,6 +61,12 @@ const useStyles = createStyles((theme) => ({
       gap: theme.spacing.xl,
     },
   },
+  button: {
+    width: '100%',
+    [`@media (min-width: 420px)`]: {
+      width: 'auto',
+    },
+  },
 }));
 
 export default function Page() {
@@ -98,6 +105,7 @@ export default function Page() {
       <Group className={classes.buttons}>
         <Link href="/getting-started" passHref>
           <Button
+            className={classes.button}
             size="md"
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan' }}
@@ -108,6 +116,7 @@ export default function Page() {
           </Button>
         </Link>
         <Button
+          className={classes.button}
           size="md"
           variant="gradient"
           gradient={{ from: 'gray.6', to: 'gray.5' }}
@@ -118,6 +127,18 @@ export default function Page() {
         >
           View code
         </Button>
+        <Link href={getFirstExamplePagePath()} passHref>
+          <Button
+            className={classes.button}
+            size="md"
+            variant="gradient"
+            gradient={{ from: 'green.7', to: 'green.6' }}
+            leftIcon={<Bulb />}
+            component="a"
+          >
+            Learn by example
+          </Button>
+        </Link>
       </Group>
     </Container>
   );
