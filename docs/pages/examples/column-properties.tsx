@@ -32,12 +32,12 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         The <Code>accessor</Code> supports dot-notation for nested objects property drilling (i.e.{' '}
         <Code>&apos;department.company.name&apos;</Code>).
         <br />
-        The component will try to derrive a column header title by “humanizing” the provided accessor (i.e.{' '}
+        The component will try to derive a column header title by “humanizing” the provided accessor (i.e.{' '}
         <Code>&apos;firstName&apos; → &apos;First name&apos;</Code> or{' '}
         <Code>&apos;department.company.name&apos; → &apos;Department company name&apos;</Code>
         ).
         <br />
-        If you’re not happy with the automatically derrived title, you can override it by setting your own column{' '}
+        If you’re not happy with the automatically derived title, you can override it by setting your own column{' '}
         <Code>title</Code>.
       </PageText>
       <PageText>
