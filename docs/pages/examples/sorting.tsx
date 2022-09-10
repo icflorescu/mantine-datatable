@@ -37,8 +37,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText info>
-        If you enable sorting, you might want to{' '}
-        <InternalLink to="/examples/disabling-text-selection">disable text selection</InternalLink>.
+        If you enable sorting, you might want to consider{' '}
+        <InternalLink to="/examples/disabling-text-selection">disabling text selection</InternalLink>; otherwise,
+        repeatedly clicking on the same column header will naturally result in a text selection on the column title
+        text, which may be annoying for some users.
       </PageText>
       <PageNavigation of={PATH} />
     </Container>
