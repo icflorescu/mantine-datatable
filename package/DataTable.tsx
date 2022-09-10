@@ -3,10 +3,10 @@ import { useDebouncedState, useElementSize } from '@mantine/hooks';
 import { Key, useEffect, useState } from 'react';
 import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
+import DataTableEmptyState from './DataTableEmptyState';
 import DataTableFooter from './DataTableFooter';
 import DataTableHeader from './DataTableHeader';
 import DataTableLoader from './DataTableLoader';
-import DataTableNoRecords from './DataTableNoRecords';
 import DataTableRow from './DataTableRow';
 import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
@@ -111,7 +111,9 @@ export default function DataTable<T extends Record<string, unknown>>({
   loaderSize,
   loaderVariant,
   loaderBackgroundBlur,
+  emptyState,
   noRecordsText = 'No records',
+  noRecordsIcon,
   striped,
   onRowClick,
   rowContextMenu,
@@ -375,12 +377,15 @@ export default function DataTable<T extends Record<string, unknown>>({
         loaderSize={loaderSize}
         loaderVariant={loaderVariant}
       />
-      <DataTableNoRecords
+      <DataTableEmptyState
         pt={headerHeight}
         pb={footerHeight}
+        icon={noRecordsIcon}
         text={noRecordsText}
         active={!fetching && !recordsLength}
-      />
+      >
+        {emptyState}
+      </DataTableEmptyState>
       {rowContextMenu && rowContextMenuInfo && (
         <DataTableRowMenu
           zIndex={rowContextMenu.zIndex}

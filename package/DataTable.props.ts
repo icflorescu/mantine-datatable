@@ -21,6 +21,31 @@ export type DataTableOuterBorderProps =
       borderRadius?: MantineNumberSize;
     };
 
+export type DataTableEmptyStateProps =
+  | {
+      /**
+       * Content to show when no records are available; the provided content
+       * will be overlaid and centered automatically
+       */
+      emptyState?: ReactNode;
+
+      noRecordsText?: never;
+      noRecordsIcon?: never;
+    }
+  | {
+      emptyState?: never;
+
+      /**
+       * Text to show when no records are available
+       */
+      noRecordsText?: string;
+
+      /**
+       * Icon to show when no records are available
+       */
+      noRecordsIcon?: ReactNode;
+    };
+
 export type DataTablePaginationProps =
   | {
       page?: never;
@@ -292,11 +317,6 @@ export type DataTableProps<T> = {
   loaderBackgroundBlur?: number;
 
   /**
-   * Text to show when no records are available
-   */
-  noRecordsText?: string;
-
-  /**
    * Function to call when a row is clicked
    */
   onRowClick?: (record: T) => void;
@@ -338,6 +358,7 @@ export type DataTableProps<T> = {
   };
 } & Omit<TableProps, 'border'> &
   DataTableOuterBorderProps &
+  DataTableEmptyStateProps &
   DataTablePaginationProps &
   DataTableSortProps &
   DataTableSelectionProps<T>;
