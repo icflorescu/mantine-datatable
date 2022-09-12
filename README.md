@@ -72,7 +72,7 @@ export default function GettingStartedExample() {
   );
 }
 ```
-Also see the [getting started](https://icflorescu.github.io/mantine-datatable/getting-started) page in the documentation.
+Also see the [getting started](https://icflorescu.github.io/mantine-datatable/getting-started) page in the documentation, have a look at the available [component properties](https://icflorescu.github.io/mantine-datatable/component-properties) and make sure to browse the comprehensive list of [usage examples](https://icflorescu.github.io/mantine-datatable/examples/basic-usage).
 
 ## Code contributors
 
