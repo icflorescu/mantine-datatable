@@ -65,11 +65,23 @@ export default function Page() {
       <PageSubtitle value="Supporting the project" />
       <PageText>
         If you find this project useful, it would help a lot to{' '}
+        <strong>
+          <ExternalLink to={REPO_LINK}>star the repository</ExternalLink>
+        </strong>
+        ,{' '}
         <ExternalLink to="https://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu">
           spread the word
         </ExternalLink>
-        , star the <ExternalLink to={REPO_LINK}>repository</ExternalLink> and{' '}
-        <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>.
+        , and <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>.
+      </PageText>
+      <PageSubtitle value="Why do repository stars matter" />
+      <PageText>
+        The more stars this repository gets, the more visibility it gains among the Mantine users community. The more
+        users it gets, the more chances that some of those users will become active code contributors willing to put
+        their effort into bringing new features to life and/or fixing bugs.
+        <br />
+        As the repository gain awareness, my chances of getting hired to work on Mantine-based projects will increase,
+        which in turn will help maintain my vested interest in keeping the project alive.
       </PageText>
       <PageText>
         Thank you for your support,
