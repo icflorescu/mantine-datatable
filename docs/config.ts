@@ -110,12 +110,13 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
       {
         path: 'asynchronous-data-loading',
         title: 'Asynchronous data loading',
-        description: 'Example: loading data asynchronously with Mantine DataTable',
+        description: 'Example: Loading data asynchronously loading with Mantine DataTable and customizing the loader',
       },
       {
         path: 'complex-usage',
         title: 'Complex usage',
-        description: 'Example: a complex usage scenario for Mantine DataTable',
+        description:
+          'Example: a complex usage scenario for Mantine DataTable featuring custom column definitions, asynchronous data loading with React Query, sorting, pagination, custom cell data rendering, multiple row selection, and row context-menu',
       },
     ],
   },
