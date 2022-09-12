@@ -22,11 +22,11 @@ const useStyles = createStyles((theme) => {
       transition: 'opacity .15s ease',
     },
     leftShadow: {
+      zIndex: 3,
       top: 0,
       left: 0,
       bottom: 0,
       width: theme.spacing.sm,
-      zIndex: 3,
       background: `linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
         theme.black,
         0
@@ -36,11 +36,11 @@ const useStyles = createStyles((theme) => {
       )} 30%)`,
     },
     rightShadow: {
+      zIndex: 2,
       top: 0,
       bottom: 0,
       right: 0,
       width: theme.spacing.sm,
-      zIndex: 2,
       background: `linear-gradient(to left, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
         theme.black,
         0
@@ -50,6 +50,7 @@ const useStyles = createStyles((theme) => {
       )} 30%)`,
     },
     bottomShadow: {
+      zIndex: 2,
       left: 0,
       right: 0,
       bottom: 0,
