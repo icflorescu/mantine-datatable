@@ -8,6 +8,7 @@ import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import GettingStartedExample from '~/examples/GettingStartedExample';
+import { getFirstExamplePagePath } from '~/lib/page';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'getting-started';
@@ -51,8 +52,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>The code above will produce the following result:</PageText>
       <GettingStartedExample />
       <PageText>
-        Have a look at the list of <InternalLink to="/component-properties">component properties</InternalLink> and
-        browse the code examples to see the component in action and learn how to use it.
+        Have a look at the list of <InternalLink to="/component-properties">component properties</InternalLink> and{' '}
+        <InternalLink to={getFirstExamplePagePath()}>browse the code examples</InternalLink> to see the component in
+        action and learn how to use it.
       </PageText>
       <PageNavigation of={PATH} />
     </Container>

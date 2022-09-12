@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import CheckableSegmentedControl from '~/components/CheckableSegmentedControl';
 import CodeBlock from '~/components/CodeBlock';
 import ExternalLink from '~/components/ExternalLink';
+import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -249,6 +250,12 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
         verticalAlignment={verticalAlignment}
       />
       <CodeBlock language="typescript" content={code} />
+      <PageText>
+        However, <InternalLink to="/component-properties">there’s much more</InternalLink> you can do with{' '}
+        <Code>Mantine DataTable</Code>.
+        <br />
+        Head over to the next example to discover other features.
+      </PageText>
       <PageNavigation of={PATH} />
     </Container>
   );
