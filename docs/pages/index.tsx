@@ -7,6 +7,9 @@ import { REPO_LINK } from '~/config';
 import { getFirstExamplePagePath } from '~/lib/page';
 
 const useStyles = createStyles((theme) => ({
+  root: {
+    maxWidth: 640,
+  },
   title: {
     marginBottom: '.75em',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[8],
@@ -16,7 +19,7 @@ const useStyles = createStyles((theme) => ({
       fontSize: 52,
     },
     [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
-      fontSize: 64,
+      fontSize: 60,
     },
     [`@media (min-width: ${theme.breakpoints.md}px)`]: {
       marginTop: '.66em',
@@ -32,7 +35,9 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.sm,
   },
   subtitle: {
-    margin: '2em 0',
+    margin: '1em 0 2em',
+    fontWeight: 500,
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[8],
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
       fontSize: 20,
     },
@@ -50,96 +55,112 @@ const useStyles = createStyles((theme) => ({
       flexWrap: 'wrap',
       rowGap: theme.spacing.lg * 2,
     },
-    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
-      maxWidth: '80%',
-    },
   },
   buttons: {
     margin: '2em 0 0',
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-      margin: '3em 0 1em',
       gap: theme.spacing.xl,
+      margin: '3em 0 1em',
     },
   },
   button: {
     width: '100%',
-    [`@media (min-width: 420px)`]: {
+    '@media (min-width: 420px)': {
+      width: `calc(50% - ${theme.spacing.md / 2}px)`,
+    },
+    '@media (min-width: 560px)': {
       width: 'auto',
+    },
+  },
+  examplesButton: {
+    '@media (min-width: 420px)': {
+      width: '100%',
+    },
+    '@media (min-width: 560px)': {
+      width: 'initial',
     },
   },
 }));
 
 export default function Page() {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
   return (
     <Container>
-      <Title className={classes.title} order={2}>
-        A table component
-        <br />
-        for your Mantine
-        <br />
-        <span className={classes.gradientText}>data-rich applications.</span>
-      </Title>
-      <div className={classes.image}>
-        <img src={`${process.env.BASE_PATH}/mantine-datatable.png`} alt="Dark mode support" title="Dark mode support" />
-      </div>
-      <Text className={classes.subtitle}>Build data-rich interfaces faster than ever with Mantine DataTable.</Text>
-      <div className={classes.features}>
-        <HomePageFeature icon={Scale} title="Free and open-source">
-          This package is released under the MIT license, same as Mantine, so you can freely build fantastic data-rich
-          applications with it
-        </HomePageFeature>
-        <HomePageFeature icon={Lifebuoy} title="Typescript based">
-          The entire codebase is written in TypeScript, component properties are well typed and documented with JSDoc,
-          so you can build type safe applications with confidence
-        </HomePageFeature>
-        <HomePageFeature icon={Settings} title="Feature rich">
-          Supports asynchronous data loading, pagination, multiple rows selection, column sorting, custom cell data
-          rendering, row context menu, dark theme and more
-        </HomePageFeature>
-        <HomePageFeature icon={Rocket} title="Use anywhere">
-          You can use this component in any modern React framework supported by Mantine, such as Next.js, Vite, Create
-          React App, Remix or Gatsby
-        </HomePageFeature>
-      </div>
-      <Group className={classes.buttons}>
-        <Link href="/getting-started" passHref>
+      <div className={classes.root}>
+        <Title className={classes.title} order={2}>
+          A table component
+          <br />
+          for your Mantine
+          <br />
+          <span className={classes.gradientText}>data-rich applications.</span>
+        </Title>
+        <div className={classes.image}>
+          <img
+            src={`${process.env.BASE_PATH}/mantine-datatable.png`}
+            alt="Dark mode support"
+            title="Dark mode support"
+          />
+        </div>
+        <Text className={classes.subtitle}>
+          Mantine DataTable brings datagrid-like functionality to your data-rich user interfaces.
+        </Text>
+        <div className={classes.features}>
+          <HomePageFeature icon={Scale} title="Free and open-source">
+            This package is released under the MIT license, same as Mantine, so you can freely build fantastic data-rich
+            applications with it
+          </HomePageFeature>
+          <HomePageFeature icon={Lifebuoy} title="Typescript based">
+            The entire codebase is written in TypeScript, component properties are well typed and documented with JSDoc,
+            so you can build type safe applications with confidence
+          </HomePageFeature>
+          <HomePageFeature icon={Settings} title="Feature rich">
+            Supports asynchronous data loading, pagination, multiple rows selection, column sorting, custom cell data
+            rendering, row context menu, dark theme and more
+          </HomePageFeature>
+          <HomePageFeature icon={Rocket} title="Use anywhere">
+            You can use this component in any modern React framework supported by Mantine, such as Next.js, Vite, Create
+            React App, Remix or Gatsby
+          </HomePageFeature>
+        </div>
+        <Group className={classes.buttons}>
+          <Link href="/getting-started" passHref>
+            <Button
+              className={classes.button}
+              size="md"
+              variant="gradient"
+              gradient={{ from: 'blue', to: 'cyan' }}
+              leftIcon={<Rocket />}
+              component="a"
+            >
+              Get started
+            </Button>
+          </Link>
           <Button
             className={classes.button}
             size="md"
             variant="gradient"
-            gradient={{ from: 'blue', to: 'cyan' }}
-            leftIcon={<Rocket />}
+            gradient={{ from: 'gray.6', to: 'gray.5' }}
+            leftIcon={<GitHubIcon size={20} />}
             component="a"
+            href={REPO_LINK}
+            target="_blank"
           >
-            Get started
+            View code
           </Button>
-        </Link>
-        <Button
-          className={classes.button}
-          size="md"
-          variant="gradient"
-          gradient={{ from: 'gray.6', to: 'gray.5' }}
-          leftIcon={<GitHubIcon size={20} />}
-          component="a"
-          href={REPO_LINK}
-          target="_blank"
-        >
-          View code
-        </Button>
-        <Link href={getFirstExamplePagePath()} passHref>
-          <Button
-            className={classes.button}
-            size="md"
-            variant="gradient"
-            gradient={{ from: 'green.7', to: 'green.6' }}
-            leftIcon={<Bulb />}
-            component="a"
-          >
-            Learn by example
-          </Button>
-        </Link>
-      </Group>
+          <Link href={getFirstExamplePagePath()} passHref>
+            <Button
+              className={cx(classes.button, classes.examplesButton)}
+              size="md"
+              variant="gradient"
+              gradient={{ from: 'green.7', to: 'green.6' }}
+              leftIcon={<Bulb />}
+              component="a"
+            >
+              Learn by example
+            </Button>
+          </Link>
+        </Group>
+      </div>
     </Container>
   );
 }
