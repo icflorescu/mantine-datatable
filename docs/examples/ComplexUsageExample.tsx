@@ -30,7 +30,8 @@ export default function ComplexUsageExample() {
 
   const { data, isFetching } = useQuery(
     ['employees', sortStatus.columnAccessor, sortStatus.direction, page],
-    async () => getEmployeesAsync({ recordsPerPage: PAGE_SIZE, page, sortStatus })
+    async () => getEmployeesAsync({ recordsPerPage: PAGE_SIZE, page, sortStatus }),
+    { refetchOnWindowFocus: false }
   );
 
   const [selectedRecords, setSelectedRecords] = useState<Employee[]>([]);
@@ -141,6 +142,7 @@ export default function ComplexUsageExample() {
               color: 'red',
               onClick: () => showNotification({ color: 'red', message: `Should delete ${firstName} ${lastName}` }),
             },
+            { key: 'divider-1', divider: true },
             {
               key: 'deleteMany',
               hidden: selectedRecords.length <= 1 || !selectedRecords.map((r) => r.id).includes(id),
