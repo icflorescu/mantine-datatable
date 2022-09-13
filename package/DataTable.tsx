@@ -82,7 +82,7 @@ const useStyles = createStyles(
   }
 );
 
-export default function DataTable<T extends Record<string, unknown>>({
+export default function DataTable<T>({
   withBorder,
   borderRadius,
   borderColor = (theme) => (theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]),
