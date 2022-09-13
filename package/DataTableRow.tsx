@@ -114,18 +114,33 @@ export default function DataTableRow<T>({
           />
         </td>
       )}
-      {columns.map(({ accessor, visibleMediaQuery, textAlignment, ellipsis, width, render }) => (
-        <DataTableRowCell<T>
-          key={accessor}
-          visibleMediaQuery={visibleMediaQuery}
-          record={record}
-          accessor={accessor}
-          textAlignment={textAlignment}
-          ellipsis={ellipsis}
-          width={width}
-          render={render}
-        />
-      ))}
+      {columns.map(
+        ({
+          accessor,
+          visibleMediaQuery,
+          textAlignment,
+          ellipsis,
+          width,
+          render,
+          cellsClassName,
+          cellsStyle,
+          cellsSx,
+        }) => (
+          <DataTableRowCell<T>
+            key={accessor}
+            className={typeof cellsClassName === 'function' ? cellsClassName(record) : cellsClassName}
+            style={typeof cellsStyle === 'function' ? cellsStyle(record) : cellsStyle}
+            sx={cellsSx}
+            visibleMediaQuery={visibleMediaQuery}
+            record={record}
+            accessor={accessor}
+            textAlignment={textAlignment}
+            ellipsis={ellipsis}
+            width={width}
+            render={render}
+          />
+        )
+      )}
     </tr>
   );
 }

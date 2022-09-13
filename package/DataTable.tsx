@@ -1,6 +1,6 @@
-import { Box, createStyles, MantineSize, MantineTheme, Table } from '@mantine/core';
+import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useDebouncedState, useElementSize } from '@mantine/hooks';
-import { Key, useEffect, useState } from 'react';
+import { CSSProperties, Key, useEffect, useState } from 'react';
 import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
@@ -14,6 +14,7 @@ import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
 import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
 
+const EMPTY_OBJECT = {};
 const SCROLL_STATE_DEBOUNCE_INTERVAL = 200;
 const SCROLL_STATE_DEBOUNCE_OPTIONS = { leading: true };
 
@@ -117,6 +118,11 @@ export default function DataTable<T extends Record<string, unknown>>({
   striped,
   onRowClick,
   rowContextMenu,
+  sx,
+  className,
+  classNames,
+  style,
+  styles,
   ...otherProps
 }: DataTableProps<T>) {
   const {
@@ -213,17 +219,22 @@ export default function DataTable<T extends Record<string, unknown>>({
 
   const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;
 
-  const { cx, classes } = useStyles({ borderColor, rowBorderColor });
+  const { cx, classes, theme } = useStyles({ borderColor, rowBorderColor });
+  const styleProperties = typeof styles === 'function' ? styles(theme, EMPTY_OBJECT) : styles;
 
   return (
     <Box
-      className={cx(classes.root, { [classes.tableWithBorder]: withBorder })}
-      sx={(theme) => ({
-        borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
-        boxShadow: theme.shadows[shadow as MantineSize] || shadow,
-        height,
-        minHeight,
-      })}
+      className={cx(classes.root, { [classes.tableWithBorder]: withBorder }, className, classNames?.root)}
+      sx={[
+        (theme) => ({
+          borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
+          boxShadow: theme.shadows[shadow as MantineSize] || shadow,
+          height,
+          minHeight,
+        }),
+        ...packSx(sx),
+      ]}
+      style={{ ...styleProperties?.root, ...style } as CSSProperties}
     >
       <DataTableScrollArea
         ref={scrollViewportRef}
@@ -248,6 +259,8 @@ export default function DataTable<T extends Record<string, unknown>>({
         >
           <DataTableHeader<T>
             ref={headerRef}
+            className={classNames?.header}
+            style={styleProperties?.header}
             columns={columns}
             sortStatus={sortStatus}
             onSortStatusChange={onSortStatusChange}
@@ -357,6 +370,8 @@ export default function DataTable<T extends Record<string, unknown>>({
       {page && (
         <DataTableFooter
           ref={footerRef}
+          className={classNames?.pagination}
+          style={styleProperties?.pagination}
           topBorderColor={borderColor}
           horizontalSpacing={horizontalSpacing}
           fetching={fetching}

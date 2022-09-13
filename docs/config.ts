@@ -108,6 +108,11 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: how to customize the border colors of Mantine DataTable',
       },
       {
+        path: 'additional-styling',
+        title: 'Additional styling',
+        description: 'Example: more ways to style a Mantine DataTable component',
+      },
+      {
         path: 'asynchronous-data-loading',
         title: 'Asynchronous data loading',
         description: 'Example: Loading data asynchronously loading with Mantine DataTable and customizing the loader',

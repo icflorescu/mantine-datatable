@@ -1,5 +1,5 @@
-import { Box, createStyles } from '@mantine/core';
-import { ReactNode } from 'react';
+import { Box, createStyles, Sx } from '@mantine/core';
+import { CSSProperties, ReactNode } from 'react';
 import { DataTableColumn } from './DataTable.props';
 import { getValueAtPath, useMediaQueryStringOrFunction } from './utils';
 
@@ -12,10 +12,16 @@ const useStyles = createStyles({
 });
 
 type DataTableRowCellProps<T> = {
+  className?: string;
+  sx?: Sx;
+  style?: CSSProperties;
   record: T;
 } & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlignment' | 'width' | 'ellipsis' | 'render'>;
 
 export default function DataTableRowCell<T>({
+  className,
+  sx,
+  style,
   visibleMediaQuery,
   record,
   ellipsis,
@@ -25,18 +31,21 @@ export default function DataTableRowCell<T>({
   render,
 }: DataTableRowCellProps<T>) {
   const { cx, classes } = useStyles();
-
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
     <Box
       component="td"
-      className={cx({ [classes.ellipsis]: ellipsis })}
-      sx={{
-        width,
-        minWidth: width,
-        maxWidth: width,
-        textAlign: textAlignment,
-      }}
+      className={cx({ [classes.ellipsis]: ellipsis }, className)}
+      sx={[
+        {
+          width,
+          minWidth: width,
+          maxWidth: width,
+          textAlign: textAlignment,
+        },
+        sx,
+      ]}
+      style={style}
     >
       {render ? render(record) : (getValueAtPath(record, accessor) as ReactNode)}
     </Box>

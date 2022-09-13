@@ -1,5 +1,5 @@
-import { Checkbox, createStyles } from '@mantine/core';
-import { ForwardedRef, forwardRef } from 'react';
+import { Checkbox, createStyles, CSSObject } from '@mantine/core';
+import { CSSProperties, ForwardedRef, forwardRef } from 'react';
 import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
 import DataTableHeaderCell from './DataTableHeaderCell';
 
@@ -73,6 +73,8 @@ const useStyles = createStyles((theme) => {
 });
 
 type DataTableHeaderProps<T> = {
+  className?: string;
+  style?: CSSObject;
   sortStatus: DataTableSortStatus | undefined;
   onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
   columns: DataTableColumn<T>[];
@@ -86,6 +88,8 @@ type DataTableHeaderProps<T> = {
 
 export default forwardRef(function DataTableHeader<T>(
   {
+    className,
+    style,
     sortStatus,
     onSortStatusChange,
     columns,
@@ -101,7 +105,11 @@ export default forwardRef(function DataTableHeader<T>(
   const { classes, cx } = useStyles();
 
   return (
-    <thead className={cx(classes.root, { [classes.bottomShadowVisible]: bottomShadowVisible })} ref={ref}>
+    <thead
+      className={cx(classes.root, { [classes.bottomShadowVisible]: bottomShadowVisible }, className)}
+      style={style as CSSProperties}
+      ref={ref}
+    >
       <tr>
         {selectionVisible && (
           <th

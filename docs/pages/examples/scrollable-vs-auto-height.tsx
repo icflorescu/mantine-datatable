@@ -11,14 +11,13 @@ import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/scrollable-vs-auto-height';
 
+type ExampleName = 'scrollable' | 'auto-height';
+
 export const getStaticProps: GetStaticProps<{
-  code: { scrollable: string; 'auto-height': string };
+  code: Record<ExampleName, string>;
 }> = async () => ({
   props: {
-    code: (await readCodeExample('examples/ScrollableVsAutoHeightExamples.tsx')) as {
-      scrollable: string;
-      'auto-height': string;
-    },
+    code: (await readCodeExample('examples/ScrollableVsAutoHeightExamples.tsx')) as Record<ExampleName, string>,
   },
 });
 

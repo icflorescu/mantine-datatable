@@ -1,5 +1,14 @@
-import { MantineColor, MantineNumberSize, MantineShadow, MantineSize, MantineTheme, TableProps } from '@mantine/core';
-import { ReactNode } from 'react';
+import type {
+  DefaultProps,
+  MantineColor,
+  MantineNumberSize,
+  MantineShadow,
+  MantineSize,
+  MantineTheme,
+  Sx,
+  TableProps,
+} from '@mantine/core';
+import type { CSSProperties, ReactNode } from 'react';
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
@@ -131,6 +140,23 @@ export type DataTableColumn<T> = {
    * If true, cell content in this column will be truncated with ellipsis as needed
    */
   ellipsis?: boolean;
+
+  /**
+   * Optional class name passed to each data cell in the column; can be a string or a function
+   * receiving the current record as its argument and returning a string
+   */
+  cellsClassName?: string | ((record: T) => string | undefined);
+
+  /**
+   * Optional style passed to each data cell in the column; can be a CSS properties object or
+   * a function receiving the current record as its argument and returning a CSS properties object
+   */
+  cellsStyle?: CSSProperties | ((record: T) => CSSProperties | undefined);
+
+  /**
+   * Optional style passed to each data cell in the column; see https://mantine.dev/styles/sx/
+   */
+  cellsSx?: Sx;
 };
 
 export type DataTableSortStatus = {
@@ -356,7 +382,8 @@ export type DataTableProps<T> = {
      */
     items: (record: T) => DataTableContextMenuItemProps[];
   };
-} & Omit<TableProps, 'border'> &
+} & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
+  Omit<DefaultProps<'root' | 'header' | 'pagination', CSSProperties>, 'unstyled'> &
   DataTableOuterBorderProps &
   DataTableEmptyStateProps &
   DataTablePaginationProps &

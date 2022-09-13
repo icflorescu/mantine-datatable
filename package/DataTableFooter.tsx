@@ -1,5 +1,5 @@
-import { Box, createStyles, MantineNumberSize, MantineTheme, Pagination, Text } from '@mantine/core';
-import { ForwardedRef, forwardRef, ReactNode } from 'react';
+import { Box, createStyles, CSSObject, MantineNumberSize, MantineTheme, Pagination, Text } from '@mantine/core';
+import { CSSProperties, ForwardedRef, forwardRef, ReactNode } from 'react';
 import { DataTablePaginationProps } from './DataTable.props';
 
 const useStyles = createStyles(
@@ -24,6 +24,8 @@ const useStyles = createStyles(
 );
 
 type DataTableFooterProps = DataTablePaginationProps & {
+  className?: string;
+  style?: CSSObject;
   topBorderColor: string | ((theme: MantineTheme) => string);
   fetching: boolean | undefined;
   recordsLength: number | undefined;
@@ -32,6 +34,8 @@ type DataTableFooterProps = DataTablePaginationProps & {
 
 export default forwardRef(function DataTableFooter(
   {
+    className,
+    style,
     topBorderColor,
     fetching,
     page,
@@ -57,7 +61,13 @@ export default forwardRef(function DataTableFooter(
   const { classes, cx } = useStyles({ topBorderColor });
 
   return (
-    <Box ref={ref} px={horizontalSpacing ?? 'xs'} py="xs" className={classes.root}>
+    <Box
+      ref={ref}
+      px={horizontalSpacing ?? 'xs'}
+      py="xs"
+      className={cx(classes.root, className)}
+      style={style as CSSProperties}
+    >
       <Text size={paginationSize}>{paginationTextValue}</Text>
       <Pagination
         className={cx(classes.pagination, { [classes.paginationFetching]: fetching || !recordsLength })}
