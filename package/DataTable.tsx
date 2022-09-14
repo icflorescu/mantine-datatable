@@ -58,6 +58,10 @@ const useStyles = createStyles(
       textSelectionDisabled: {
         userSelect: 'none',
       },
+      table: {
+        borderCollapse: 'separate',
+        borderSpacing: 0,
+      },
       tableWithBorder: {
         border: `1px solid ${borderColorValue}`,
       },
@@ -247,7 +251,7 @@ export default function DataTable<T>({
         <Table
           ref={tableRef}
           horizontalSpacing={horizontalSpacing}
-          className={cx({
+          className={cx(classes.table, {
             [classes.tableWithColumnBorders]: withColumnBorders,
             [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
             [classes.textSelectionDisabled]: textSelectionDisabled,
