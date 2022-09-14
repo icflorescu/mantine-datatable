@@ -48,14 +48,24 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: how to set the basic Mantine DataTable properties',
       },
       {
-        path: 'non-standard-record-ids',
-        title: 'Non-standard record IDs',
-        description: 'Example: using non-standard record IDs with Mantine DataTable',
-      },
-      {
         path: 'column-properties',
         title: 'Column properties',
         description: 'Example: setting Mantine DataTable column properties',
+      },
+      {
+        path: 'customizing-border-colors',
+        title: 'Customizing border colors',
+        description: 'Example: how to customize the border colors of Mantine DataTable',
+      },
+      {
+        path: 'additional-styling',
+        title: 'Additional styling',
+        description: 'Example: more ways to style a Mantine DataTable component',
+      },
+      {
+        path: 'non-standard-record-ids',
+        title: 'Non-standard record IDs',
+        description: 'Example: using non-standard record IDs with Mantine DataTable',
       },
       {
         path: 'scrollable-vs-auto-height',
@@ -101,16 +111,6 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         path: 'disabling-text-selection',
         title: 'Disabling text selection',
         description: 'Example: disabling text selection on Mantine DataTable',
-      },
-      {
-        path: 'customizing-border-colors',
-        title: 'Customizing border colors',
-        description: 'Example: how to customize the border colors of Mantine DataTable',
-      },
-      {
-        path: 'additional-styling',
-        title: 'Additional styling',
-        description: 'Example: more ways to style a Mantine DataTable component',
       },
       {
         path: 'asynchronous-data-loading',
