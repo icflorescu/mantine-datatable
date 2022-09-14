@@ -53,12 +53,12 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>
         There are more ways to style a <Code>Mantine DataTable</Code> component besides setting it’s{' '}
         <InternalLink to="/examples/basic-table-properties">basic properties</InternalLink> and{' '}
-        <InternalLink to="/examples/column-properties">column properties</InternalLink>.
+        <InternalLink to="/examples/column-properties">column properties</InternalLink> or customizing it’s{' '}
+        <InternalLink to="/examples/customizing-border-colors">border colors</InternalLink>.
       </PageText>
       <PageSubtitle value="With className" />
       <PageText>
-        You can naturally specify a <Code>className</Code> that will target the <Code>Mantine DataTable</Code> component
-        root:
+        You can specify a <Code>className</Code> that will target the <Code>Mantine DataTable</Code> component root:
       </PageText>
       <CodeBlock language="typescript" content={code['with-class-name']} />
       <AdditionalStylingExampleWithClassName />
