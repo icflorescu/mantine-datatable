@@ -1,4 +1,4 @@
-import { Box, createStyles, Sx } from '@mantine/core';
+import { Box, createStyles, Sx, Anchor } from '@mantine/core';
 import { CSSProperties, ReactNode } from 'react';
 import { DataTableColumn } from './DataTable.props';
 import { getValueAtPath, useMediaQueryStringOrFunction } from './utils';
@@ -16,7 +16,7 @@ type DataTableRowCellProps<T> = {
   sx?: Sx;
   style?: CSSProperties;
   record: T;
-} & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlignment' | 'width' | 'ellipsis' | 'render'>;
+} & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlignment' | 'width' | 'ellipsis' | 'render' | 'getHref'>;
 
 export default function DataTableRowCell<T>({
   className,
@@ -29,9 +29,15 @@ export default function DataTableRowCell<T>({
   width,
   accessor,
   render,
+  getHref
 }: DataTableRowCellProps<T>) {
   const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
+
+  let cellValue = render ? render(record) : (getValueAtPath(record, accessor) as ReactNode)
+
+  cellValue = getHref ? <Anchor href={getHref(record)}></Anchor> : cellValue
+  
   return (
     <Box
       component="td"
@@ -47,7 +53,7 @@ export default function DataTableRowCell<T>({
       ]}
       style={style}
     >
-      {render ? render(record) : (getValueAtPath(record, accessor) as ReactNode)}
+      {cellValue}
     </Box>
   );
 }

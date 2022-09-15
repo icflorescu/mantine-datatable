@@ -122,6 +122,11 @@ export type DataTableColumn<T> = {
   render?: (record: T) => ReactNode;
 
   /**
+   * If provided, this is used to render an Anchor around the cell value
+   */
+  getHref?: (record: T) => string;
+
+  /**
    * Column text alignment; defaults to `left`
    */
   textAlignment?: DataTableColumnTextAlignment;
