@@ -1,6 +1,6 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useDebouncedState, useElementSize } from '@mantine/hooks';
-import { CSSProperties, Key, useEffect, useState, useCallback } from 'react';
+import { CSSProperties, Key, useEffect, useState } from 'react';
 import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
@@ -207,14 +207,13 @@ export default function DataTable<T>({
     onPageChange!(page);
   };
 
-  const {expandRowOn = 'click', expandMultiple = false, expandFirst, collapseProps} = expandedRow ?? {};
+  const { expandRowOn = 'click', expandMultiple = false, expandFirst, collapseProps } = expandedRow ?? {};
 
-  let initialExpandedRows = expandRowOn === "always" ? [] : [expandFirst];
+  const initialExpandedRows = expandRowOn === 'always' ? [] : [expandFirst];
   const [expandedRowIds, setExpandedRowIds] = useState<unknown[]>(initialExpandedRows);
-  const changeExpandedRowIds =
-    expandMultiple
-      ? (recordID: unknown) => setExpandedRowIds([...(expandedRowIds as unknown[]), recordID])
-      : (recordID: unknown) => setExpandedRowIds([recordID]);
+  const changeExpandedRowIds = expandMultiple
+    ? (recordID: unknown) => setExpandedRowIds([...(expandedRowIds as unknown[]), recordID])
+    : (recordID: unknown) => setExpandedRowIds([recordID]);
 
   useEffect(() => {
     if (typeof expandRowOn === 'function' && records) {
@@ -228,7 +227,7 @@ export default function DataTable<T>({
       }
       setExpandedRowIds(rowIds);
     }
-  }, [records, expandRowOn, expandMultiple]);
+  }, [records, idAccessor, expandRowOn, expandMultiple]);
 
   const recordsLength = records?.length;
   const recordIds = records?.map((record) => getValueAtPath(record, idAccessor));
@@ -298,12 +297,12 @@ export default function DataTable<T>({
             onSelectionChange={
               onSelectedRecordsChange
                 ? () => {
-                  onSelectedRecordsChange(
-                    allRecordsSelected
-                      ? selectedRecords.filter((record) => !recordIds.includes(getValueAtPath(record, idAccessor)))
-                      : uniqBy([...selectedRecords, ...records!], (record) => getValueAtPath(record, idAccessor))
-                  );
-                }
+                    onSelectedRecordsChange(
+                      allRecordsSelected
+                        ? selectedRecords.filter((record) => !recordIds.includes(getValueAtPath(record, idAccessor)))
+                        : uniqBy([...selectedRecords, ...records!], (record) => getValueAtPath(record, idAccessor))
+                    );
+                  }
                 : undefined
             }
             leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
@@ -338,59 +337,59 @@ export default function DataTable<T>({
                     onSelectionChange={
                       onSelectedRecordsChange
                         ? (e) => {
-                          if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
-                            const recordsInterval = records.filter(
-                              recordIndex > lastSelectionChangeIndex
-                                ? (_, index) => index >= lastSelectionChangeIndex && index <= recordIndex
-                                : (_, index) => index >= recordIndex && index <= lastSelectionChangeIndex
-                            );
-                            onSelectedRecordsChange(
-                              selected
-                                ? differenceBy(selectedRecords, recordsInterval, (r) => getValueAtPath(r, idAccessor))
-                                : uniqBy([...selectedRecords, ...recordsInterval], (r) =>
-                                  getValueAtPath(r, idAccessor)
-                                )
-                            );
-                          } else {
-                            onSelectedRecordsChange(
-                              selected
-                                ? selectedRecords.filter((record) => getValueAtPath(record, idAccessor) !== recordId)
-                                : uniqBy([...selectedRecords, record], (record) => getValueAtPath(record, idAccessor))
-                            );
+                            if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
+                              const recordsInterval = records.filter(
+                                recordIndex > lastSelectionChangeIndex
+                                  ? (_, index) => index >= lastSelectionChangeIndex && index <= recordIndex
+                                  : (_, index) => index >= recordIndex && index <= lastSelectionChangeIndex
+                              );
+                              onSelectedRecordsChange(
+                                selected
+                                  ? differenceBy(selectedRecords, recordsInterval, (r) => getValueAtPath(r, idAccessor))
+                                  : uniqBy([...selectedRecords, ...recordsInterval], (r) =>
+                                      getValueAtPath(r, idAccessor)
+                                    )
+                              );
+                            } else {
+                              onSelectedRecordsChange(
+                                selected
+                                  ? selectedRecords.filter((record) => getValueAtPath(record, idAccessor) !== recordId)
+                                  : uniqBy([...selectedRecords, record], (record) => getValueAtPath(record, idAccessor))
+                              );
+                            }
+                            setLastSelectionChangeIndex(recordIndex);
                           }
-                          setLastSelectionChangeIndex(recordIndex);
-                        }
                         : undefined
                     }
                     onClick={
                       showContextMenuOnClick
                         ? expandRowOn === 'click'
                           ? (e) => {
-                            setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                            changeExpandedRowIds(recordId);
-                            onRowClick?.(record);
-                          }
-                          : (e) => {
-                            setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                            onRowClick?.(record);
-                          }
-                        : expandRowOn === 'click'
-                          ? () => {
-                            changeExpandedRowIds(recordId);
-                            onRowClick?.(record);
-                          }
-                          : onRowClick
-                            ? () => {
-                              onRowClick(record);
+                              setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
+                              changeExpandedRowIds(recordId);
+                              onRowClick?.(record);
                             }
-                            : undefined
+                          : (e) => {
+                              setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
+                              onRowClick?.(record);
+                            }
+                        : expandRowOn === 'click'
+                        ? () => {
+                            changeExpandedRowIds(recordId);
+                            onRowClick?.(record);
+                          }
+                        : onRowClick
+                        ? () => {
+                            onRowClick(record);
+                          }
+                        : undefined
                     }
                     onContextMenu={
                       showContextMenuOnRightClick
                         ? (e) => {
-                          e.preventDefault();
-                          setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                        }
+                            e.preventDefault();
+                            setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
+                          }
                         : undefined
                     }
                     contextMenuVisible={
@@ -398,7 +397,7 @@ export default function DataTable<T>({
                     }
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                     expandedRow={expandedRow?.item}
-                    isExpanded={expandRowOn === "always" ? true : expandedRowIds.includes(recordId)}
+                    isExpanded={expandRowOn === 'always' ? true : expandedRowIds.includes(recordId)}
                     collapseProps={collapseProps ?? {}}
                   />
                 );

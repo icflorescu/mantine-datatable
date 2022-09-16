@@ -1,6 +1,6 @@
 import { Checkbox, createStyles, Collapse } from '@mantine/core';
 import { ChangeEventHandler, MouseEventHandler } from 'react';
-import { DataTableColumn, DataTableProps, ExpandedRowCollapseProps } from './DataTable.props';
+import { DataTableColumn, ExpandedRowCollapseProps } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
 
 const useStyles = createStyles((theme) => {
@@ -78,13 +78,13 @@ interface DataTableRowProps<T> {
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
-};
+}
 
 interface DataTableRowParentProps<T> extends DataTableRowProps<T> {
   expandedRow: ((record: T) => React.ReactNode) | undefined;
   isExpanded: boolean;
   collapseProps: ExpandedRowCollapseProps;
-};
+}
 
 export default function DataTableRowParent<T>({
   record,
@@ -98,7 +98,7 @@ export default function DataTableRowParent<T>({
   leftShadowVisible,
   expandedRow,
   isExpanded,
-  collapseProps
+  collapseProps,
 }: DataTableRowParentProps<T>) {
   const dataTableRow = DataTableRow({
     record,
@@ -109,11 +109,11 @@ export default function DataTableRowParent<T>({
     onClick,
     onContextMenu,
     contextMenuVisible,
-    leftShadowVisible
+    leftShadowVisible,
   });
 
   if (expandedRow) {
-    const {animateOpacity, transitionDuration, transitionTimingFunction} = collapseProps;
+    const { animateOpacity, transitionDuration, transitionTimingFunction } = collapseProps;
     return (
       <>
         {dataTableRow}
@@ -127,8 +127,7 @@ export default function DataTableRowParent<T>({
         </Collapse>
       </>
     );
-  }
-  else {
+  } else {
     return dataTableRow;
   }
 }
