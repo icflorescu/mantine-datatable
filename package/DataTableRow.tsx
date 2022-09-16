@@ -1,6 +1,6 @@
-import { Checkbox, createStyles } from '@mantine/core';
+import { Checkbox, createStyles, Collapse } from '@mantine/core';
 import { ChangeEventHandler, MouseEventHandler } from 'react';
-import { DataTableColumn } from './DataTable.props';
+import { DataTableColumn, DataTableProps, ExpandedRowCollapseProps } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
 
 const useStyles = createStyles((theme) => {
@@ -68,7 +68,7 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-type DataTableRowProps<T> = {
+interface DataTableRowProps<T> {
   record: T;
   columns: DataTableColumn<T>[];
   selectionVisible: boolean;
@@ -78,10 +78,15 @@ type DataTableRowProps<T> = {
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
-  child?: (record: T) => React.ReactNode;
 };
 
-export default function DataTableRow<T>({
+interface DataTableRowParentProps<T> extends DataTableRowProps<T> {
+  expandedRow: ((record: T) => React.ReactNode) | undefined;
+  isExpanded: boolean;
+  collapseProps: ExpandedRowCollapseProps;
+};
+
+export default function DataTableRowParent<T>({
   record,
   columns,
   selectionVisible,
@@ -91,9 +96,11 @@ export default function DataTableRow<T>({
   onContextMenu,
   contextMenuVisible,
   leftShadowVisible,
-  child,
-}: DataTableRowProps<T>) {
-  const dataTableRow = getDataTableRow({
+  expandedRow,
+  isExpanded,
+  collapseProps
+}: DataTableRowParentProps<T>) {
+  const dataTableRow = DataTableRow({
     record,
     columns,
     selectionVisible,
@@ -105,11 +112,19 @@ export default function DataTableRow<T>({
     leftShadowVisible
   });
 
-  if (child) {
+  if (expandedRow) {
+    const {animateOpacity, transitionDuration, transitionTimingFunction} = collapseProps;
     return (
       <>
         {dataTableRow}
-        {child(record)}
+        <Collapse
+          in={isExpanded}
+          animateOpacity={animateOpacity}
+          transitionDuration={transitionDuration}
+          transitionTimingFunction={transitionTimingFunction}
+        >
+          {expandedRow(record)}
+        </Collapse>
       </>
     );
   }
@@ -118,7 +133,7 @@ export default function DataTableRow<T>({
   }
 }
 
-function getDataTableRow<T>({
+function DataTableRow<T>({
   record,
   columns,
   selectionVisible,

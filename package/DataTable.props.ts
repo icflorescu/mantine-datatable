@@ -7,95 +7,103 @@ import type {
   MantineTheme,
   Sx,
   TableProps,
+  CollapseProps
 } from '@mantine/core';
 import type { CSSProperties, ReactNode } from 'react';
+
+export type ExpandedRowCollapseProps = {
+  transitionDuration?: number;
+  transitionTimingFunction?: string;
+  animateOpacity?: boolean;
+}
+//Extract<CollapseProps, 'animateOpacity' | 'transitionDuration' | 'transitionTimingFunction'>;
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
 
 export type DataTableOuterBorderProps =
   | {
-      withBorder?: never;
-      borderRadius?: never;
-    }
+    withBorder?: never;
+    borderRadius?: never;
+  }
   | {
-      /**
-       * If true, table will have border
-       */
-      withBorder: boolean;
+    /**
+     * If true, table will have border
+     */
+    withBorder: boolean;
 
-      /**
-       * Table border radius
-       */
-      borderRadius?: MantineNumberSize;
-    };
+    /**
+     * Table border radius
+     */
+    borderRadius?: MantineNumberSize;
+  };
 
 export type DataTableEmptyStateProps =
   | {
-      /**
-       * Content to show when no records are available; the provided content
-       * will be overlaid and centered automatically
-       */
-      emptyState?: ReactNode;
+    /**
+     * Content to show when no records are available; the provided content
+     * will be overlaid and centered automatically
+     */
+    emptyState?: ReactNode;
 
-      noRecordsText?: never;
-      noRecordsIcon?: never;
-    }
+    noRecordsText?: never;
+    noRecordsIcon?: never;
+  }
   | {
-      emptyState?: never;
+    emptyState?: never;
 
-      /**
-       * Text to show when no records are available
-       */
-      noRecordsText?: string;
+    /**
+     * Text to show when no records are available
+     */
+    noRecordsText?: string;
 
-      /**
-       * Icon to show when no records are available
-       */
-      noRecordsIcon?: ReactNode;
-    };
+    /**
+     * Icon to show when no records are available
+     */
+    noRecordsIcon?: ReactNode;
+  };
 
 export type DataTablePaginationProps =
   | {
-      page?: never;
-      onPageChange?: never;
-      totalRecords?: never;
-      recordsPerPage?: never;
-      paginationSize?: never;
-      paginationText?: never;
-    }
+    page?: never;
+    onPageChange?: never;
+    totalRecords?: never;
+    recordsPerPage?: never;
+    paginationSize?: never;
+    paginationText?: never;
+  }
   | {
-      /**
-       * Current page number (1-based); if provided, a pagination component is shown
-       */
-      page: number;
+    /**
+     * Current page number (1-based); if provided, a pagination component is shown
+     */
+    page: number;
 
-      /**
-       * Callback fired after change of each page
-       */
-      onPageChange: (page: number) => void;
+    /**
+     * Callback fired after change of each page
+     */
+    onPageChange: (page: number) => void;
 
-      /**
-       * Total number of records in the dataset
-       */
-      totalRecords: number | undefined;
+    /**
+     * Total number of records in the dataset
+     */
+    totalRecords: number | undefined;
 
-      /**
-       * Number of records per page
-       */
-      recordsPerPage: number;
+    /**
+     * Number of records per page
+     */
+    recordsPerPage: number;
 
-      /**
-       * Pagination component size; defaults to `sm`
-       */
-      paginationSize?: MantineSize;
+    /**
+     * Pagination component size; defaults to `sm`
+     */
+    paginationSize?: MantineSize;
 
-      /**
-       * Pagination text; defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`
-       * ```
-       */
-      paginationText?: (options: { from: number; to: number; totalRecords: number }) => ReactNode;
-    };
+    /**
+     * Pagination text; defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`
+     * ```
+     */
+    paginationText?: (options: { from: number; to: number; totalRecords: number }) => ReactNode;
+  };
 
 export type DataTableColumn<T> = {
   /**
@@ -174,92 +182,92 @@ export type DataTableSortStatus = {
 
 export type DataTableSortProps =
   | {
-      sortStatus?: never;
-      onSortStatusChange?: never;
-    }
+    sortStatus?: never;
+    onSortStatusChange?: never;
+  }
   | {
-      /**
-       * Current sort status (sort column accessor & direction)
-       */
-      sortStatus: DataTableSortStatus;
+    /**
+     * Current sort status (sort column accessor & direction)
+     */
+    sortStatus: DataTableSortStatus;
 
-      /**
-       * Callback fired after change of sort status
-       */
-      onSortStatusChange?: (sortStatus: DataTableSortStatus) => void;
-    };
+    /**
+     * Callback fired after change of sort status
+     */
+    onSortStatusChange?: (sortStatus: DataTableSortStatus) => void;
+  };
 
 export type DataTableSelectionProps<T> =
   | {
-      selectedRecords?: never;
-      onSelectedRecordsChange?: never;
-    }
+    selectedRecords?: never;
+    onSelectedRecordsChange?: never;
+  }
   | {
-      /**
-       * Currently-selected records
-       */
-      selectedRecords: T[];
+    /**
+     * Currently-selected records
+     */
+    selectedRecords: T[];
 
-      /**
-       * Callback fired after change of selected records
-       */
-      onSelectedRecordsChange?: (selectedRecords: T[]) => void;
-    };
+    /**
+     * Callback fired after change of selected records
+     */
+    onSelectedRecordsChange?: (selectedRecords: T[]) => void;
+  };
 
 export type DataTableContextMenuItemProps =
   | {
+    /**
+     * Unique item key
+     */
+    key: string;
+  } & (
+    | {
       /**
-       * Unique item key
+       * If true, insert an actions divider
        */
-      key: string;
-    } & (
-      | {
-          /**
-           * If true, insert an actions divider
-           */
-          divider: true;
-          icon?: never;
-          title?: never;
-          color?: never;
-          hidden?: never;
-          disabled?: never;
-          onClick?: never;
-        }
-      | {
-          divider?: never;
-          /**
-           * Item icon
-           */
-          icon?: ReactNode;
+      divider: true;
+      icon?: never;
+      title?: never;
+      color?: never;
+      hidden?: never;
+      disabled?: never;
+      onClick?: never;
+    }
+    | {
+      divider?: never;
+      /**
+       * Item icon
+       */
+      icon?: ReactNode;
 
-          /**
-           * Item title; if not present, one will be generated by "humanizing"
-           * the provided item key
-           * (i.e. `viewRecord` -> `View record`)
-           */
-          title?: ReactNode;
+      /**
+       * Item title; if not present, one will be generated by "humanizing"
+       * the provided item key
+       * (i.e. `viewRecord` -> `View record`)
+       */
+      title?: ReactNode;
 
-          /**
-           * Item color
-           */
-          color?: MantineColor;
+      /**
+       * Item color
+       */
+      color?: MantineColor;
 
-          /**
-           * if true, the menu item will not be shown
-           */
-          hidden?: boolean;
+      /**
+       * if true, the menu item will not be shown
+       */
+      hidden?: boolean;
 
-          /**
-           * if true, the menu item will be disabled
-           */
-          disabled?: boolean;
+      /**
+       * if true, the menu item will be disabled
+       */
+      disabled?: boolean;
 
-          /**
-           * Function to call when the menu item is clicked
-           */
-          onClick: () => void;
-        }
-    );
+      /**
+       * Function to call when the menu item is clicked
+       */
+      onClick: () => void;
+    }
+  );
 
 export type DataTableProps<T> = {
   /**
@@ -381,6 +389,42 @@ export type DataTableProps<T> = {
      * A function returning the row menu items for the current record
      */
     items: (record: T) => DataTableContextMenuItemProps[];
+  };
+
+  /**
+   * Defines a custom component to render beneath the related record's row
+   */
+  expandedRow?: {
+    /**
+     * Defines when rows should expand; defaults to `click`
+     * May pass a custom function that receives the current record;
+     * if true, that row will be expanded
+     */
+    expandRowOn?: 'click' | 'always' | ((record: T) => boolean);
+
+    /**
+     * Defined if multiple rows are allowed to be expanded at the same time; defaults to `false`
+     */
+    expandMultiple?: boolean;
+
+    /**
+     * Defines the record that will be expanded when the table is first loaded;
+     * defaults to `undefined`;
+     * does nothing if `expandRowOn === 'always'`
+     */
+    expandFirst?: unknown;
+
+    /**
+     * Pass additional props to the Mantine Collapse component wrapping the custom component;
+     * does not accept the `children`, `in`, or `onTransitionEnd` properties
+     */
+    collapseProps?: ExpandedRowCollapseProps;
+
+    /**
+     * Custom component to be rendered;
+     * accepts the current record
+     */
+    item: (record: T) => ReactNode;
   };
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<DefaultProps<'root' | 'header' | 'pagination', CSSProperties>, 'unstyled'> &
