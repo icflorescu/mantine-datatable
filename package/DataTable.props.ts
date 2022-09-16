@@ -11,12 +11,7 @@ import type {
 } from '@mantine/core';
 import type { CSSProperties, ReactNode } from 'react';
 
-export type ExpandedRowCollapseProps = {
-  transitionDuration?: number;
-  transitionTimingFunction?: string;
-  animateOpacity?: boolean;
-}
-//Extract<CollapseProps, 'animateOpacity' | 'transitionDuration' | 'transitionTimingFunction'>;
+export type ExpandedRowCollapseProps = Pick<CollapseProps, 'animateOpacity' | 'transitionDuration' | 'transitionTimingFunction'>;
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
