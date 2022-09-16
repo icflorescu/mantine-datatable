@@ -78,9 +78,47 @@ type DataTableRowProps<T> = {
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
+  child?: (record: T) => React.ReactNode;
 };
 
 export default function DataTableRow<T>({
+  record,
+  columns,
+  selectionVisible,
+  selectionChecked,
+  onSelectionChange,
+  onClick,
+  onContextMenu,
+  contextMenuVisible,
+  leftShadowVisible,
+  child,
+}: DataTableRowProps<T>) {
+  const dataTableRow = getDataTableRow({
+    record,
+    columns,
+    selectionVisible,
+    selectionChecked,
+    onSelectionChange,
+    onClick,
+    onContextMenu,
+    contextMenuVisible,
+    leftShadowVisible
+  });
+
+  if (child) {
+    return (
+      <>
+        {dataTableRow}
+        {child(record)}
+      </>
+    );
+  }
+  else {
+    return dataTableRow;
+  }
+}
+
+function getDataTableRow<T>({
   record,
   columns,
   selectionVisible,
