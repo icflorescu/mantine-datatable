@@ -27,7 +27,6 @@ const useStyles = createStyles((theme) => {
       left: 0,
       right: 0,
       height: theme.spacing.sm,
-      borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
       background: `linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
         theme.black,
         0
