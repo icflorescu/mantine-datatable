@@ -212,8 +212,14 @@ export default function DataTable<T>({
   const initialExpandedRows = expandRowOn === 'always' ? [] : [expandFirst];
   const [expandedRowIds, setExpandedRowIds] = useState<unknown[]>(initialExpandedRows);
   const changeExpandedRowIds = expandMultiple
-    ? (recordID: unknown) => setExpandedRowIds([...(expandedRowIds as unknown[]), recordID])
-    : (recordID: unknown) => setExpandedRowIds([recordID]);
+    ? (recordID: unknown, isExpanded: boolean) => {
+        isExpanded
+          ? setExpandedRowIds(expandedRowIds.filter((currentID) => currentID !== recordID))
+          : setExpandedRowIds([...(expandedRowIds as unknown[]), recordID]);
+      }
+    : (recordID: unknown, isExpanded: boolean) => {
+        isExpanded ? setExpandedRowIds([]) : setExpandedRowIds([recordID]);
+      };
 
   useEffect(() => {
     if (typeof expandRowOn === 'function' && records) {
@@ -313,6 +319,7 @@ export default function DataTable<T>({
               records.map((record, recordIndex) => {
                 const recordId = getValueAtPath(record, idAccessor);
                 const selected = selectedRecordIds?.includes(recordId) || false;
+                const isExpanded = expandRowOn === 'always' ? true : expandedRowIds.includes(recordId);
 
                 let showContextMenuOnClick = false;
                 let showContextMenuOnRightClick = false;
@@ -366,7 +373,7 @@ export default function DataTable<T>({
                         ? expandRowOn === 'click'
                           ? (e) => {
                               setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                              changeExpandedRowIds(recordId);
+                              changeExpandedRowIds(recordId, isExpanded);
                               onRowClick?.(record);
                             }
                           : (e) => {
@@ -375,7 +382,7 @@ export default function DataTable<T>({
                             }
                         : expandRowOn === 'click'
                         ? () => {
-                            changeExpandedRowIds(recordId);
+                            changeExpandedRowIds(recordId, isExpanded);
                             onRowClick?.(record);
                           }
                         : onRowClick
@@ -397,7 +404,7 @@ export default function DataTable<T>({
                     }
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                     expandedRow={expandedRow?.item}
-                    isExpanded={expandRowOn === 'always' ? true : expandedRowIds.includes(recordId)}
+                    isExpanded={isExpanded}
                     collapseProps={collapseProps ?? {}}
                   />
                 );

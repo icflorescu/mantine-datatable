@@ -65,6 +65,12 @@ const useStyles = createStyles((theme) => {
         },
       },
     },
+    expandedRow: {
+      padding: '0 !important',
+    },
+    expandedRow__collapsed: {
+      border: '0 !important',
+    },
   };
 });
 
@@ -105,7 +111,7 @@ export default function DataTableRowParent<T>({
   collapseProps,
 }: DataTableRowParentProps<T>) {
   const styles = useStyles();
-  const { classes } = styles;
+  const { cx, classes } = styles;
 
   const dataTableRow = DataTableRow({
     record,
@@ -127,15 +133,18 @@ export default function DataTableRowParent<T>({
       <>
         {dataTableRow}
         <tr>
-          <td colSpan={columnCount} className={classes.expandedRow}>
-        <Collapse
-          in={isExpanded}
-          animateOpacity={animateOpacity}
-          transitionDuration={transitionDuration}
-          transitionTimingFunction={transitionTimingFunction}
-        >
-          {expandedRow(record)}
-        </Collapse>
+          <td
+            colSpan={columnCount}
+            className={cx(classes.expandedRow, { [classes.expandedRow__collapsed]: !isExpanded })}
+          >
+            <Collapse
+              in={isExpanded}
+              animateOpacity={animateOpacity}
+              transitionDuration={transitionDuration}
+              transitionTimingFunction={transitionTimingFunction}
+            >
+              {expandedRow(record)}
+            </Collapse>
           </td>
         </tr>
       </>
