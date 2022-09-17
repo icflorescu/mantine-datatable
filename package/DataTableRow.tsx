@@ -68,7 +68,7 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-interface DataTableRowProps<T> {
+interface DataTableRowBaseProps<T> {
   record: T;
   columns: DataTableColumn<T>[];
   selectionVisible: boolean;
@@ -80,7 +80,11 @@ interface DataTableRowProps<T> {
   leftShadowVisible: boolean;
 }
 
-interface DataTableRowParentProps<T> extends DataTableRowProps<T> {
+interface DataTableRowChildProps<T> extends DataTableRowBaseProps<T> {
+  styles: ReturnType<typeof useStyles>;
+}
+
+interface DataTableRowParentProps<T> extends DataTableRowBaseProps<T> {
   expandedRow: ((record: T) => React.ReactNode) | undefined;
   isExpanded: boolean;
   collapseProps: ExpandedRowCollapseProps;
@@ -100,6 +104,9 @@ export default function DataTableRowParent<T>({
   isExpanded,
   collapseProps,
 }: DataTableRowParentProps<T>) {
+  const styles = useStyles();
+  const { classes } = styles;
+
   const dataTableRow = DataTableRow({
     record,
     columns,
@@ -110,13 +117,17 @@ export default function DataTableRowParent<T>({
     onContextMenu,
     contextMenuVisible,
     leftShadowVisible,
+    styles,
   });
 
   if (expandedRow) {
     const { animateOpacity, transitionDuration, transitionTimingFunction } = collapseProps;
+    const columnCount = selectionVisible ? columns.length + 1 : columns.length;
     return (
       <>
         {dataTableRow}
+        <tr>
+          <td colSpan={columnCount} className={classes.expandedRow}>
         <Collapse
           in={isExpanded}
           animateOpacity={animateOpacity}
@@ -125,6 +136,8 @@ export default function DataTableRowParent<T>({
         >
           {expandedRow(record)}
         </Collapse>
+          </td>
+        </tr>
       </>
     );
   } else {
@@ -142,8 +155,9 @@ function DataTableRow<T>({
   onContextMenu,
   contextMenuVisible,
   leftShadowVisible,
-}: DataTableRowProps<T>) {
-  const { cx, classes } = useStyles();
+  styles,
+}: DataTableRowChildProps<T>) {
+  const { cx, classes } = styles;
 
   return (
     <tr
