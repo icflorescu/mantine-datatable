@@ -1,4 +1,4 @@
-import { createStyles, ScrollArea } from '@mantine/core';
+import { Box, createStyles, ScrollArea } from '@mantine/core';
 import { ForwardedRef, forwardRef, ReactNode } from 'react';
 
 const useStyles = createStyles((theme) => {
@@ -20,6 +20,18 @@ const useStyles = createStyles((theme) => {
       pointerEvents: 'none',
       opacity: 0,
       transition: 'opacity .15s ease',
+    },
+    topShadow: {
+      zIndex: 2,
+      top: 0,
+      left: 0,
+      right: 0,
+      height: theme.spacing.sm,
+      borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
+      background: `linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
+        theme.black,
+        0
+      )}), linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(theme.black, 0)} 30%)`,
     },
     leftShadow: {
       zIndex: 3,
@@ -67,6 +79,7 @@ const useStyles = createStyles((theme) => {
 });
 
 type DataTableScrollAreaProps = {
+  topShadowVisible: boolean;
   leftShadowVisible: boolean;
   rightShadowVisible: boolean;
   bottomShadowVisible: boolean;
@@ -77,6 +90,7 @@ type DataTableScrollAreaProps = {
 
 export default forwardRef(function DataTableScrollArea(
   {
+    topShadowVisible,
     leftShadowVisible,
     rightShadowVisible,
     bottomShadowVisible,
@@ -95,6 +109,10 @@ export default forwardRef(function DataTableScrollArea(
       onScrollPositionChange={onScrollPositionChange}
     >
       {children}
+      <Box
+        className={cx(classes.shadow, classes.topShadow, { [classes.shadowVisible]: topShadowVisible })}
+        sx={{ top: headerHeight }}
+      />
       <div className={cx(classes.shadow, classes.leftShadow, { [classes.shadowVisible]: leftShadowVisible })} />
       <div className={cx(classes.shadow, classes.rightShadow, { [classes.shadowVisible]: rightShadowVisible })} />
       <div className={cx(classes.shadow, classes.bottomShadow, { [classes.shadowVisible]: bottomShadowVisible })} />

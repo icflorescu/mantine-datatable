@@ -242,6 +242,7 @@ export default function DataTable<T>({
     >
       <DataTableScrollArea
         ref={scrollViewportRef}
+        topShadowVisible={!scrolledToTop}
         leftShadowVisible={!(selectedRecords || scrolledToLeft)}
         rightShadowVisible={!scrolledToRight}
         bottomShadowVisible={!scrolledToBottom}
@@ -283,7 +284,6 @@ export default function DataTable<T>({
                 : undefined
             }
             leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
-            bottomShadowVisible={!scrolledToTop}
           />
           <tbody>
             {recordsLength ? (
