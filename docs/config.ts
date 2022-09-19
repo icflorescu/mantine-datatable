@@ -108,6 +108,11 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: working with row context menus on Mantine DataTable',
       },
       {
+        path: 'expanding-rows',
+        title: 'Expanding rows',
+        description: 'Example: working with row expansion on Mantine DataTable',
+      },
+      {
         path: 'disabling-text-selection',
         title: 'Disabling text selection',
         description: 'Example: disabling text selection on Mantine DataTable',
@@ -115,7 +120,7 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
       {
         path: 'asynchronous-data-loading',
         title: 'Asynchronous data loading',
-        description: 'Example: Loading data asynchronously loading with Mantine DataTable and customizing the loader',
+        description: 'Example: loading data asynchronously with Mantine DataTable and customizing the loader',
       },
       {
         path: 'complex-usage',
