@@ -1,6 +1,6 @@
-import { Checkbox, createStyles } from '@mantine/core';
+import { Checkbox, createStyles, Collapse } from '@mantine/core';
 import { ChangeEventHandler, MouseEventHandler } from 'react';
-import { DataTableColumn } from './DataTable.props';
+import { DataTableColumn, ExpandedRowCollapseProps } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
 
 const useStyles = createStyles((theme) => {
@@ -65,10 +65,16 @@ const useStyles = createStyles((theme) => {
         },
       },
     },
+    expandedRow: {
+      padding: '0 !important',
+    },
+    expandedRow__collapsed: {
+      border: '0 !important',
+    },
   };
 });
 
-type DataTableRowProps<T> = {
+interface DataTableRowBaseProps<T> {
   record: T;
   columns: DataTableColumn<T>[];
   selectionVisible: boolean;
@@ -78,9 +84,19 @@ type DataTableRowProps<T> = {
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
-};
+}
 
-export default function DataTableRow<T>({
+interface DataTableRowChildProps<T> extends DataTableRowBaseProps<T> {
+  styles: ReturnType<typeof useStyles>;
+}
+
+interface DataTableRowParentProps<T> extends DataTableRowBaseProps<T> {
+  expandedRow: ((record: T) => React.ReactNode) | undefined;
+  isExpanded: boolean;
+  collapseProps: ExpandedRowCollapseProps;
+}
+
+export default function DataTableRowParent<T>({
   record,
   columns,
   selectionVisible,
@@ -90,8 +106,67 @@ export default function DataTableRow<T>({
   onContextMenu,
   contextMenuVisible,
   leftShadowVisible,
-}: DataTableRowProps<T>) {
-  const { cx, classes } = useStyles();
+  expandedRow,
+  isExpanded,
+  collapseProps,
+}: DataTableRowParentProps<T>) {
+  const styles = useStyles();
+  const { cx, classes } = styles;
+
+  const dataTableRow = DataTableRow({
+    record,
+    columns,
+    selectionVisible,
+    selectionChecked,
+    onSelectionChange,
+    onClick,
+    onContextMenu,
+    contextMenuVisible,
+    leftShadowVisible,
+    styles,
+  });
+
+  if (expandedRow) {
+    const { animateOpacity, transitionDuration, transitionTimingFunction } = collapseProps;
+    const columnCount = selectionVisible ? columns.length + 1 : columns.length;
+    return (
+      <>
+        {dataTableRow}
+        <tr>
+          <td
+            colSpan={columnCount}
+            className={cx(classes.expandedRow, { [classes.expandedRow__collapsed]: !isExpanded })}
+          >
+            <Collapse
+              in={isExpanded}
+              animateOpacity={animateOpacity}
+              transitionDuration={transitionDuration}
+              transitionTimingFunction={transitionTimingFunction}
+            >
+              {expandedRow(record)}
+            </Collapse>
+          </td>
+        </tr>
+      </>
+    );
+  } else {
+    return dataTableRow;
+  }
+}
+
+function DataTableRow<T>({
+  record,
+  columns,
+  selectionVisible,
+  selectionChecked,
+  onSelectionChange,
+  onClick,
+  onContextMenu,
+  contextMenuVisible,
+  leftShadowVisible,
+  styles,
+}: DataTableRowChildProps<T>) {
+  const { cx, classes } = styles;
 
   return (
     <tr
