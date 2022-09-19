@@ -9,7 +9,7 @@ import type {
   TableProps,
   PopoverProps,
   PopoverTargetProps,
-  Modal,
+  ModalProps,
 } from '@mantine/core';
 import type { CSSProperties, ReactNode } from 'react';
 import { DataTableHeaderCellBase } from './DataTableHeaderCell';
@@ -403,7 +403,7 @@ export type DataTableProps<T> = {
       /**
        * Props to customize the behaviour of the root `Popover` component
        */
-      popoverProps?: Omit<PopoverProps, 'children' | 'opened' | 'defaultOpened'>;
+      popoverProps?: Partial<Omit<PopoverProps, 'children' | 'opened' | 'defaultOpened'>>;
 
       /**
        * Prop to customize the behaviour of the `Popover.Target` component
@@ -415,7 +415,20 @@ export type DataTableProps<T> = {
      * Pass in a custom `Modal` component instead;
      * ignored if `popover` is set
      */
-    modal?: (headerCellProps: DataTableHeaderCellBase<T>) => typeof Modal;
+    modal?: {
+      /**
+       * Custom component to be rendered
+       */
+      item: (headerCellProps: DataTableHeaderCellBase<T>) => ReactNode;
+
+      /**
+       * Props to customize the behaviour of the `Modal`;
+       * if `modalProps.title` is a function, it will be passed the title of the current column
+       */
+      modalProps?: Partial<Omit<ModalProps, 'opened' | 'children' | 'title'>> & {
+        title: string | ((title: string) => ReactNode)
+      };
+    };
   };
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<DefaultProps<'root' | 'header' | 'pagination', CSSProperties>, 'unstyled'> &

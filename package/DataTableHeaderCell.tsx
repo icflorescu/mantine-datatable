@@ -1,4 +1,4 @@
-import { Box, Center, createStyles, Group, MantineTheme, Popover } from '@mantine/core';
+import { Box, Center, createStyles, Group, MantineTheme, Popover, Modal } from '@mantine/core';
 import { ReactNode, useState } from 'react';
 import { ArrowDown, ArrowsVertical, Filter, FilterOff } from 'tabler-icons-react';
 import { DataTableColumn, DataTableProps, DataTableSortStatus } from './DataTable.props';
@@ -102,14 +102,14 @@ export default function DataTableHeaderCellParent<T>({
 
   const { popover, modal } = filterButton;
 
-  const onOpen = popover?.popoverProps?.onChange
-    ? (opened: boolean) => {
-        popover.popoverProps!.onChange!(opened);
-        setFilterOpened(opened);
-      }
-    : setFilterOpened;
-
   if (popover) {
+    const onOpen = popover.popoverProps?.onChange
+      ? (opened: boolean) => {
+          popover.popoverProps!.onChange!(opened);
+          setFilterOpened(opened);
+        }
+      : setFilterOpened;
+
     return (
       <Popover
         arrowOffset={popover.popoverProps?.arrowOffset}
@@ -166,15 +166,61 @@ export default function DataTableHeaderCellParent<T>({
       return cellWrapper(dataTableHeaderCell);
     }
 
+    const onClose = modal.modalProps?.onClose
+      ? () => {
+        modal.modalProps!.onClose!();
+        setFilterOpened(false);
+      }
+      : () => setFilterOpened(false);
+
+      const modalTitleProp = modal.modalProps?.title;
+      let modalTitle: string | ReactNode;
+      
+      if (modalTitleProp) {
+        if (typeof modalTitleProp === 'function') modalTitle = modalTitleProp(String(title));
+        else modalTitle = modalTitleProp;
+      }
+      else {
+        modalTitle = title;
+      }
     return (
       <>
-        {modal}
+        <Modal
+          centered={modal.modalProps?.centered}
+          closeButtonLabel={modal.modalProps?.closeButtonLabel}
+          closeOnClickOutside={modal.modalProps?.closeOnClickOutside}
+          closeOnEscape={modal.modalProps?.closeOnEscape}
+          fullScreen={modal.modalProps?.fullScreen}
+          id={modal.modalProps?.id}
+          lockScroll={modal.modalProps?.lockScroll}
+          onClose={onClose}
+          opened={filterOpened}
+          overflow={modal.modalProps?.overflow}
+          overlayBlur={modal.modalProps?.overlayBlur}
+          overlayColor={modal.modalProps?.overlayColor}
+          overlayOpacity={modal.modalProps?.overlayOpacity}
+          padding={modal.modalProps?.padding}
+          radius={modal.modalProps?.radius}
+          shadow={modal.modalProps?.shadow}
+          size={modal.modalProps?.size}
+          target={modal.modalProps?.target}
+          title={modalTitle}
+          transition={modal.modalProps?.transition}
+          transitionDuration={modal.modalProps?.transitionDuration}
+          transitionTimingFunction={modal.modalProps?.transitionTimingFunction}
+          trapFocus={modal.modalProps?.trapFocus}
+          withCloseButton={modal.modalProps?.withCloseButton}
+          withFocusReturn={modal.modalProps?.withFocusReturn}
+          withinPortal={modal.modalProps?.withinPortal}
+          zIndex={modal.modalProps?.zIndex}
+        >
         {cellWrapper(
           <Group position="apart" noWrap spacing={0}>
             {dataTableHeaderCell}
-            {DataTableHeaderFilterButton({ filterOpened, onOpen })}
+            {DataTableHeaderFilterButton({ filterOpened, onOpen: setFilterOpened })}
           </Group>
         )}
+        </Modal>
       </>
     );
   }
