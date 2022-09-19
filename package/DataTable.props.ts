@@ -9,10 +9,10 @@ import type {
   TableProps,
   PopoverProps,
   PopoverTargetProps,
-  Modal
+  Modal,
 } from '@mantine/core';
 import type { CSSProperties, ReactNode } from 'react';
-import { DataTableHeaderCellBase } from "./DataTableHeaderCell";
+import { DataTableHeaderCellBase } from './DataTableHeaderCell';
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
@@ -403,12 +403,12 @@ export type DataTableProps<T> = {
       /**
        * Props to customize the behaviour of the root `Popover` component
        */
-      popoverProps?: Omit<PopoverProps, 'children' | 'opened' | 'defaultOpened'>,
+      popoverProps?: Omit<PopoverProps, 'children' | 'opened' | 'defaultOpened'>;
 
       /**
        * Prop to customize the behaviour of the `Popover.Target` component
        */
-       popupType?: PopoverTargetProps['popupType'],
+      popupType?: PopoverTargetProps['popupType'];
     };
 
     /**

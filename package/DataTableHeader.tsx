@@ -1,7 +1,7 @@
 import { Checkbox, createStyles, CSSObject } from '@mantine/core';
 import { CSSProperties, ForwardedRef, forwardRef } from 'react';
 import { DataTableColumn, DataTableProps, DataTableSortStatus } from './DataTable.props';
-import DataTableHeaderCellParent from "./DataTableHeaderCell";
+import DataTableHeaderCellParent from './DataTableHeaderCell';
 
 const useStyles = createStyles((theme) => {
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;
