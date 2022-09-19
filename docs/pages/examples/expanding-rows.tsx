@@ -1,4 +1,4 @@
-import { Container } from '@mantine/core';
+import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import PageNavigation from '~/components/PageNavigation';
@@ -22,6 +22,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>Click on a row to see it in action:</PageText>
       <ExpandingRowsExample />
       <PageText>To be written...</PageText>
+      <PageText info>
+        Row expansion feature doesn’t work well with <Code>stripped</Code> property.
+      </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageNavigation of={PATH} />
     </Container>

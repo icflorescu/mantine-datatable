@@ -1,4 +1,4 @@
-import { Checkbox, createStyles, Collapse } from '@mantine/core';
+import { Checkbox, Collapse, createStyles } from '@mantine/core';
 import { ChangeEventHandler, MouseEventHandler } from 'react';
 import { DataTableColumn, ExpandedRowCollapseProps } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
@@ -7,7 +7,7 @@ const useStyles = createStyles((theme) => {
   const baseColor = theme.colors[theme.primaryColor][6];
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;
   return {
-    withClickHandler: {
+    withPointerCursor: {
       cursor: 'pointer',
     },
     selectorCell: {
@@ -66,17 +66,22 @@ const useStyles = createStyles((theme) => {
       },
     },
     expandedRow: {
-      padding: '0 !important',
+      '&&': {
+        padding: 0,
+      },
     },
-    expandedRow__collapsed: {
-      border: '0 !important',
+    expandedRowCollapsed: {
+      '&&': {
+        border: 0,
+      },
     },
   };
 });
 
-interface DataTableRowBaseProps<T> {
+type DataTableRowProps<T> = {
   record: T;
   columns: DataTableColumn<T>[];
+  withPointerCursor: boolean;
   selectionVisible: boolean;
   selectionChecked: boolean;
   onSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
@@ -84,21 +89,15 @@ interface DataTableRowBaseProps<T> {
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
-}
-
-interface DataTableRowChildProps<T> extends DataTableRowBaseProps<T> {
-  styles: ReturnType<typeof useStyles>;
-}
-
-interface DataTableRowParentProps<T> extends DataTableRowBaseProps<T> {
   expandedRow: ((record: T) => React.ReactNode) | undefined;
   isExpanded: boolean;
   collapseProps: ExpandedRowCollapseProps;
-}
+};
 
-export default function DataTableRowParent<T>({
+export default function DataTableRow<T>({
   record,
   columns,
+  withPointerCursor,
   selectionVisible,
   selectionChecked,
   onSelectionChange,
@@ -109,69 +108,13 @@ export default function DataTableRowParent<T>({
   expandedRow,
   isExpanded,
   collapseProps,
-}: DataTableRowParentProps<T>) {
-  const styles = useStyles();
-  const { cx, classes } = styles;
+}: DataTableRowProps<T>) {
+  const { cx, classes } = useStyles();
 
-  const dataTableRow = DataTableRow({
-    record,
-    columns,
-    selectionVisible,
-    selectionChecked,
-    onSelectionChange,
-    onClick,
-    onContextMenu,
-    contextMenuVisible,
-    leftShadowVisible,
-    styles,
-  });
-
-  if (expandedRow) {
-    const { animateOpacity, transitionDuration, transitionTimingFunction } = collapseProps;
-    const columnCount = selectionVisible ? columns.length + 1 : columns.length;
-    return (
-      <>
-        {dataTableRow}
-        <tr>
-          <td
-            colSpan={columnCount}
-            className={cx(classes.expandedRow, { [classes.expandedRow__collapsed]: !isExpanded })}
-          >
-            <Collapse
-              in={isExpanded}
-              animateOpacity={animateOpacity}
-              transitionDuration={transitionDuration}
-              transitionTimingFunction={transitionTimingFunction}
-            >
-              {expandedRow(record)}
-            </Collapse>
-          </td>
-        </tr>
-      </>
-    );
-  } else {
-    return dataTableRow;
-  }
-}
-
-function DataTableRow<T>({
-  record,
-  columns,
-  selectionVisible,
-  selectionChecked,
-  onSelectionChange,
-  onClick,
-  onContextMenu,
-  contextMenuVisible,
-  leftShadowVisible,
-  styles,
-}: DataTableRowChildProps<T>) {
-  const { cx, classes } = styles;
-
-  return (
+  const row = (
     <tr
       className={cx({
-        [classes.withClickHandler]: onClick,
+        [classes.withPointerCursor]: withPointerCursor,
         [classes.selected]: selectionChecked,
         [classes.contextMenuVisible]: contextMenuVisible,
       })}
@@ -218,4 +161,31 @@ function DataTableRow<T>({
       )}
     </tr>
   );
+
+  if (expandedRow) {
+    const { animateOpacity, transitionDuration, transitionTimingFunction } = collapseProps;
+    const columnCount = selectionVisible ? columns.length + 1 : columns.length;
+    return (
+      <>
+        {row}
+        <tr>
+          <td
+            colSpan={columnCount}
+            className={cx(classes.expandedRow, { [classes.expandedRowCollapsed]: !isExpanded })}
+          >
+            <Collapse
+              in={isExpanded}
+              animateOpacity={animateOpacity}
+              transitionDuration={transitionDuration}
+              transitionTimingFunction={transitionTimingFunction}
+            >
+              {expandedRow(record)}
+            </Collapse>
+          </td>
+        </tr>
+      </>
+    );
+  } else {
+    return row;
+  }
 }
