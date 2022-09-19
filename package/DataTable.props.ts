@@ -426,7 +426,7 @@ export type DataTableProps<T> = {
        * if `modalProps.title` is a function, it will be passed the title of the current column
        */
       modalProps?: Partial<Omit<ModalProps, 'opened' | 'children' | 'title'>> & {
-        title: string | ((title: string) => ReactNode)
+        title: string | ((title: string) => ReactNode);
       };
     };
   };

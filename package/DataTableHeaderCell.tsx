@@ -168,21 +168,20 @@ export default function DataTableHeaderCellParent<T>({
 
     const onClose = modal.modalProps?.onClose
       ? () => {
-        modal.modalProps!.onClose!();
-        setFilterOpened(false);
-      }
+          modal.modalProps!.onClose!();
+          setFilterOpened(false);
+        }
       : () => setFilterOpened(false);
 
-      const modalTitleProp = modal.modalProps?.title;
-      let modalTitle: string | ReactNode;
-      
-      if (modalTitleProp) {
-        if (typeof modalTitleProp === 'function') modalTitle = modalTitleProp(String(title));
-        else modalTitle = modalTitleProp;
-      }
-      else {
-        modalTitle = title;
-      }
+    const modalTitleProp = modal.modalProps?.title;
+    let modalTitle: string | ReactNode;
+
+    if (modalTitleProp) {
+      if (typeof modalTitleProp === 'function') modalTitle = modalTitleProp(String(title));
+      else modalTitle = modalTitleProp;
+    } else {
+      modalTitle = title;
+    }
     return (
       <>
         <Modal
@@ -214,12 +213,12 @@ export default function DataTableHeaderCellParent<T>({
           withinPortal={modal.modalProps?.withinPortal}
           zIndex={modal.modalProps?.zIndex}
         >
-        {cellWrapper(
-          <Group position="apart" noWrap spacing={0}>
-            {dataTableHeaderCell}
-            {DataTableHeaderFilterButton({ filterOpened, onOpen: setFilterOpened })}
-          </Group>
-        )}
+          {cellWrapper(
+            <Group position="apart" noWrap spacing={0}>
+              {dataTableHeaderCell}
+              {DataTableHeaderFilterButton({ filterOpened, onOpen: setFilterOpened })}
+            </Group>
+          )}
         </Modal>
       </>
     );
