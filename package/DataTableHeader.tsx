@@ -1,7 +1,7 @@
 import { Checkbox, createStyles, CSSObject } from '@mantine/core';
 import { CSSProperties, ForwardedRef, forwardRef } from 'react';
-import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
-import DataTableHeaderCell from './DataTableHeaderCell';
+import { DataTableColumn, DataTableProps, DataTableSortStatus } from './DataTable.props';
+import DataTableHeaderCellParent from "./DataTableHeaderCell";
 
 const useStyles = createStyles((theme) => {
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;
@@ -84,6 +84,7 @@ type DataTableHeaderProps<T> = {
   onSelectionChange: (() => void) | undefined;
   leftShadowVisible: boolean;
   bottomShadowVisible: boolean;
+  filterButton: DataTableProps<T>['filterButton'];
 };
 
 export default forwardRef(function DataTableHeader<T>(
@@ -99,6 +100,7 @@ export default forwardRef(function DataTableHeader<T>(
     onSelectionChange,
     leftShadowVisible,
     bottomShadowVisible,
+    filterButton,
   }: DataTableHeaderProps<T>,
   ref: ForwardedRef<HTMLTableSectionElement>
 ) {
@@ -127,7 +129,7 @@ export default forwardRef(function DataTableHeader<T>(
           </th>
         )}
         {columns.map(({ accessor, visibleMediaQuery, textAlignment, width, title, sortable }) => (
-          <DataTableHeaderCell<T>
+          <DataTableHeaderCellParent<T>
             key={accessor}
             accessor={accessor}
             visibleMediaQuery={visibleMediaQuery}
@@ -137,6 +139,7 @@ export default forwardRef(function DataTableHeader<T>(
             sortable={sortable}
             sortStatus={sortStatus}
             onSortStatusChange={onSortStatusChange}
+            filterButton={filterButton}
           />
         ))}
       </tr>

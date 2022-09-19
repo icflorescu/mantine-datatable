@@ -7,8 +7,12 @@ import type {
   MantineTheme,
   Sx,
   TableProps,
+  PopoverProps,
+  PopoverTargetProps,
+  Modal
 } from '@mantine/core';
 import type { CSSProperties, ReactNode } from 'react';
+import { DataTableHeaderCellBase } from "./DataTableHeaderCell";
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
@@ -381,6 +385,37 @@ export type DataTableProps<T> = {
      * A function returning the row menu items for the current record
      */
     items: (record: T) => DataTableContextMenuItemProps[];
+  };
+
+  /**
+   * Defines a custom component to render when the filter button is clicked
+   */
+  filterButton?: {
+    /**
+     * Render the custom component in a `Popover`
+     */
+    popover?: {
+      /**
+       * Custom component to be rendered
+       */
+      item: (headerCellProps: DataTableHeaderCellBase<T>) => ReactNode;
+
+      /**
+       * Props to customize the behaviour of the root `Popover` component
+       */
+      popoverProps?: Omit<PopoverProps, 'children' | 'opened' | 'defaultOpened'>,
+
+      /**
+       * Prop to customize the behaviour of the `Popover.Target` component
+       */
+       popupType?: PopoverTargetProps['popupType'],
+    };
+
+    /**
+     * Pass in a custom `Modal` component instead;
+     * ignored if `popover` is set
+     */
+    modal?: (headerCellProps: DataTableHeaderCellBase<T>) => typeof Modal;
   };
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<DefaultProps<'root' | 'header' | 'pagination', CSSProperties>, 'unstyled'> &

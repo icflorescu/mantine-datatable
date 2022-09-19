@@ -1,8 +1,10 @@
-import { Box, Center, createStyles, Group, MantineTheme } from '@mantine/core';
-import { ReactNode } from 'react';
-import { ArrowDown, ArrowsVertical } from 'tabler-icons-react';
-import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
+import { Box, Center, createStyles, Group, MantineTheme, Popover } from '@mantine/core';
+import { ReactNode, useState } from 'react';
+import { ArrowDown, ArrowsVertical, Filter, FilterOff } from 'tabler-icons-react';
+import { DataTableColumn, DataTableProps, DataTableSortStatus } from './DataTable.props';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
+
+const DATATABLEHEADER_ICONSIZE = 14;
 
 const useStyles = createStyles((theme) => ({
   sortableColumnHeader: {
@@ -36,26 +38,157 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-type DataTableHeaderCell<T> = {
-  visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
+export type DataTableHeaderCellBase<T> = {
   title: ReactNode | undefined;
   sortStatus: DataTableSortStatus | undefined;
   onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
 } & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlignment' | 'width'>;
 
-export default function DataTableHeaderCell<T>({
+interface DataTableHeaderCellChild<T> extends Omit<DataTableHeaderCellBase<T>, 'textAlignment' | 'width'> {
+  styles: ReturnType<typeof useStyles>;
+}
+
+interface DataTableHeaderCellParent<T> extends DataTableHeaderCellBase<T> {
+  visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
+  filterButton: DataTableProps<T>['filterButton'];
+}
+
+interface DataTableHeaderCellWrapper<T> extends Pick<DataTableColumn<T>, 'sortable' | 'textAlignment' | 'width'> {
+  children: ReactNode;
+  styles: ReturnType<typeof useStyles>;
+}
+
+interface DataTableHeaderFilterButton {
+  filterOpened: boolean;
+  onOpen: (opened: boolean) => void;
+}
+
+export default function DataTableHeaderCellParent<T>({
   accessor,
-  visibleMediaQuery,
   title,
   sortable,
   textAlignment,
   width,
   sortStatus,
   onSortStatusChange,
-}: DataTableHeaderCell<T>) {
-  const { cx, classes } = useStyles();
+  visibleMediaQuery,
+  filterButton,
+}: DataTableHeaderCellParent<T>) {
+  const [filterOpened, setFilterOpened] = useState(false);
+
+  const styles = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
-  const text = title ?? humanize(accessor);
+
+  const cellWrapper = (children: ReactNode) => {
+    return DataTableHeaderCellWrapper({
+      sortable,
+      textAlignment,
+      width,
+      children,
+      styles,
+    });
+  };
+
+  const dataTableHeaderCell = DataTableHeaderCell({
+    accessor,
+    title,
+    sortable,
+    sortStatus,
+    onSortStatusChange,
+    styles,
+  });
+
+  if (!filterButton) return cellWrapper(dataTableHeaderCell);
+
+  const { popover, modal } = filterButton;
+
+  const onOpen = popover?.popoverProps?.onChange
+    ? (opened: boolean) => {
+        popover.popoverProps!.onChange!(opened);
+        setFilterOpened(opened);
+      }
+    : setFilterOpened;
+
+  if (popover) {
+    return (
+      <Popover
+        arrowOffset={popover.popoverProps?.arrowOffset}
+        arrowSize={popover.popoverProps?.arrowSize}
+        clickOutsideEvents={popover.popoverProps?.clickOutsideEvents}
+        closeOnClickOutside={popover.popoverProps?.closeOnClickOutside}
+        closeOnEscape={popover.popoverProps?.closeOnEscape}
+        exitTransitionDuration={popover.popoverProps?.exitTransitionDuration}
+        id={popover.popoverProps?.id}
+        middlewares={popover.popoverProps?.middlewares}
+        offset={popover.popoverProps?.offset}
+        onChange={onOpen}
+        onClose={popover.popoverProps?.onClose}
+        onOpen={popover.popoverProps?.onOpen}
+        onPositionChange={popover.popoverProps?.onPositionChange}
+        opened={filterOpened}
+        position={popover.popoverProps?.position}
+        positionDependencies={popover.popoverProps?.positionDependencies}
+        radius={popover.popoverProps?.radius}
+        shadow={popover.popoverProps?.shadow}
+        transition={popover.popoverProps?.transition}
+        transitionDuration={popover.popoverProps?.transitionDuration}
+        trapFocus={popover.popoverProps?.trapFocus}
+        width={popover.popoverProps?.width}
+        withArrow={popover.popoverProps?.withArrow}
+        withRoles={popover.popoverProps?.withRoles}
+        withinPortal={popover.popoverProps?.withinPortal}
+        zIndex={popover.popoverProps?.zIndex}
+      >
+        <Popover.Target popupType={popover.popupType}>
+          {cellWrapper(
+            <Group position="apart" noWrap spacing={0}>
+              {dataTableHeaderCell}
+              {DataTableHeaderFilterButton({ filterOpened, onOpen })}
+            </Group>
+          )}
+        </Popover.Target>
+        <Popover.Dropdown>
+          {popover.item({
+            accessor,
+            title,
+            sortable,
+            textAlignment,
+            width,
+            sortStatus,
+            onSortStatusChange,
+          })}
+        </Popover.Dropdown>
+      </Popover>
+    );
+  } else {
+    if (!modal) {
+      console.error('filterButton is empty');
+      return cellWrapper(dataTableHeaderCell);
+    }
+
+    return (
+      <>
+        {modal}
+        {cellWrapper(
+          <Group position="apart" noWrap spacing={0}>
+            {dataTableHeaderCell}
+            {DataTableHeaderFilterButton({ filterOpened, onOpen })}
+          </Group>
+        )}
+      </>
+    );
+  }
+}
+
+function DataTableHeaderCellWrapper<T>({
+  sortable,
+  textAlignment,
+  width,
+  children,
+  styles,
+}: DataTableHeaderCellWrapper<T>) {
+  const { cx, classes } = styles;
+
   return (
     <Box
       component="th"
@@ -66,6 +199,32 @@ export default function DataTableHeaderCell<T>({
         minWidth: width,
         maxWidth: width,
       }}
+    >
+      {children}
+    </Box>
+  );
+}
+
+function DataTableHeaderFilterButton({ filterOpened, onOpen }: DataTableHeaderFilterButton) {
+  return (
+    <Center role="button" onClick={() => onOpen(filterOpened)}>
+      {filterOpened ? <FilterOff size={DATATABLEHEADER_ICONSIZE} /> : <Filter size={DATATABLEHEADER_ICONSIZE} />}
+    </Center>
+  );
+}
+
+function DataTableHeaderCell<T>({
+  accessor,
+  title,
+  sortable,
+  sortStatus,
+  onSortStatusChange,
+  styles,
+}: DataTableHeaderCellChild<T>) {
+  const { cx, classes } = styles;
+  const text = title ?? humanize(accessor);
+  return (
+    <Box
       role={sortable ? 'button' : undefined}
       onClick={
         sortable && onSortStatusChange
@@ -77,6 +236,7 @@ export default function DataTableHeaderCell<T>({
             }
           : undefined
       }
+      sx={{ flexGrow: 1 }}
     >
       {sortable || sortStatus?.columnAccessor === accessor ? (
         <Group position="apart" noWrap spacing="xs">
@@ -87,7 +247,7 @@ export default function DataTableHeaderCell<T>({
                 className={cx(classes.sortableColumnHeaderIcon, {
                   [classes.sortableColumnHeaderIconRotated]: sortStatus.direction === 'desc',
                 })}
-                size={14}
+                size={DATATABLEHEADER_ICONSIZE}
               />
             ) : (
               <ArrowsVertical className={classes.sortableColumnHeaderNeutralIcon} size={14} />

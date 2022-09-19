@@ -122,6 +122,7 @@ export default function DataTable<T>({
   striped,
   onRowClick,
   rowContextMenu,
+  filterButton,
   sx,
   className,
   classNames,
@@ -284,6 +285,7 @@ export default function DataTable<T>({
             }
             leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
             bottomShadowVisible={!scrolledToTop}
+            filterButton={filterButton}
           />
           <tbody>
             {recordsLength ? (
