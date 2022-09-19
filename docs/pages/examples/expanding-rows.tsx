@@ -19,10 +19,17 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
+      <PageText warning>
+        This feature is work in progress.
+        <br />
+        Things may break or change.
+        <br />
+        Use at your own risk!
+      </PageText>
       <PageText>Click on a row to see it in action:</PageText>
       <ExpandingRowsExample />
       <PageText>To be written...</PageText>
-      <PageText info>
+      <PageText warning>
         Row expansion feature doesn’t work well with <Code>stripped</Code> property.
       </PageText>
       <CodeBlock language="typescript" content={code} />
