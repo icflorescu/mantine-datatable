@@ -11,27 +11,6 @@ const useStyles = createStyles((theme) => {
       position: 'sticky',
       top: 0,
       background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: -theme.spacing.sm + 1,
-        height: theme.spacing.sm,
-        borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
-        background: `linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )}), linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(theme.black, 0)} 30%)`,
-        pointerEvents: 'none',
-        opacity: 0,
-        transition: 'opacity .15s ease',
-      },
-    },
-    bottomShadowVisible: {
-      '&::after': {
-        opacity: 1,
-      },
     },
     textSelectionDisabled: {
       userSelect: 'none',
@@ -107,11 +86,7 @@ export default forwardRef(function DataTableHeader<T>(
   const { classes, cx } = useStyles();
 
   return (
-    <thead
-      className={cx(classes.root, { [classes.bottomShadowVisible]: bottomShadowVisible }, className)}
-      style={style as CSSProperties}
-      ref={ref}
-    >
+    <thead className={cx(classes.root, className)} style={style as CSSProperties} ref={ref}>
       <tr>
         {selectionVisible && (
           <th
