@@ -78,7 +78,6 @@ export default forwardRef(function DataTableHeader<T>(
     selectionIndeterminate,
     onSelectionChange,
     leftShadowVisible,
-    bottomShadowVisible,
     filterButton,
   }: DataTableHeaderProps<T>,
   ref: ForwardedRef<HTMLTableSectionElement>
