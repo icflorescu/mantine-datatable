@@ -63,6 +63,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
             defaults to <Code>&apos;left&apos;</Code> if not specified;
           </li>
           <li>
+            <Code>hidden</Code> → if true, the column will not be visible;
+          </li>
+          <li>
             <Code>visibleMediaQuery</Code> → a media query <Code>string</Code> or a function accepting the current{' '}
             <Code>MantineTheme</Code> as its argument and returning a media-query string; if set, the column will only
             be visible according to the specified media query;

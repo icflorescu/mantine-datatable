@@ -129,6 +129,7 @@ export default function DataTableRow<T>({
       {columns.map(
         ({
           accessor,
+          hidden,
           visibleMediaQuery,
           textAlignment,
           ellipsis,
@@ -137,21 +138,22 @@ export default function DataTableRow<T>({
           cellsClassName,
           cellsStyle,
           cellsSx,
-        }) => (
-          <DataTableRowCell<T>
-            key={accessor}
-            className={typeof cellsClassName === 'function' ? cellsClassName(record) : cellsClassName}
-            style={typeof cellsStyle === 'function' ? cellsStyle(record) : cellsStyle}
-            sx={cellsSx}
-            visibleMediaQuery={visibleMediaQuery}
-            record={record}
-            accessor={accessor}
-            textAlignment={textAlignment}
-            ellipsis={ellipsis}
-            width={width}
-            render={render}
-          />
-        )
+        }) =>
+          hidden ? null : (
+            <DataTableRowCell<T>
+              key={accessor}
+              className={typeof cellsClassName === 'function' ? cellsClassName(record) : cellsClassName}
+              style={typeof cellsStyle === 'function' ? cellsStyle(record) : cellsStyle}
+              sx={cellsSx}
+              visibleMediaQuery={visibleMediaQuery}
+              record={record}
+              accessor={accessor}
+              textAlignment={textAlignment}
+              ellipsis={ellipsis}
+              width={width}
+              render={render}
+            />
+          )
       )}
     </tr>
   );
