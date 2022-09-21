@@ -1,5 +1,6 @@
 import { MantineTheme, useMantineTheme } from '@mantine/core';
 import { useDebouncedState, useMediaQuery } from '@mantine/hooks';
+import { useEffect, useState } from 'react';
 
 export function useMediaQueryStringOrFunction(mediaQuery: string | ((theme: MantineTheme) => string) | undefined) {
   const theme = useMantineTheme();
@@ -56,4 +57,14 @@ export function useDataTableScrollState() {
     scrolledToRight,
     setScrolledToRight,
   };
+}
+
+export function useDataTableLastSelectionChangeIndexState(recordIds: unknown[] | undefined) {
+  const [lastSelectionChangeIndex, setLastSelectionChangeIndex] = useState<number | null>(null);
+  const recordIdsString = recordIds?.join(':') || '';
+  useEffect(() => {
+    setLastSelectionChangeIndex(null);
+  }, [recordIdsString]);
+
+  return { lastSelectionChangeIndex, setLastSelectionChangeIndex };
 }

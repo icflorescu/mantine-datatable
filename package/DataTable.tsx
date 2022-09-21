@@ -12,7 +12,14 @@ import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
-import { differenceBy, getValueAtPath, humanize, uniqBy, useDataTableScrollState } from './utils';
+import {
+  differenceBy,
+  getValueAtPath,
+  humanize,
+  uniqBy,
+  useDataTableLastSelectionChangeIndexState,
+  useDataTableScrollState,
+} from './utils';
 
 const EMPTY_OBJECT = {};
 
@@ -213,12 +220,8 @@ export default function DataTable<T>({
     };
   }
 
-  const [lastSelectionChangeIndex, setLastSelectionChangeIndex] = useState<number | null>(null);
-
-  const recordIdsString = recordIds?.join(':') || '';
-  useEffect(() => {
-    setLastSelectionChangeIndex(null);
-  }, [recordIdsString]);
+  const { lastSelectionChangeIndex, setLastSelectionChangeIndex } =
+    useDataTableLastSelectionChangeIndexState(recordIds);
 
   const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;
 
