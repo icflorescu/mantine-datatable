@@ -1,5 +1,5 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
-import { useDebouncedState, useElementSize } from '@mantine/hooks';
+import { useElementSize } from '@mantine/hooks';
 import { ChangeEventHandler, CSSProperties, Key, MouseEventHandler, useEffect, useState } from 'react';
 import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
@@ -12,11 +12,9 @@ import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
-import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
+import { differenceBy, getValueAtPath, humanize, uniqBy, useDataTableScrollState } from './utils';
 
 const EMPTY_OBJECT = {};
-const SCROLL_STATE_DEBOUNCE_INTERVAL = 200;
-const SCROLL_STATE_DEBOUNCE_OPTIONS = { leading: true };
 
 const useStyles = createStyles(
   (
@@ -138,26 +136,16 @@ export default function DataTable<T>({
   const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementSize<HTMLTableElement>();
   const { ref: footerRef, height: footerHeight } = useElementSize<HTMLDivElement>();
 
-  const [scrolledToTop, setScrolledToTop] = useDebouncedState(
-    true,
-    SCROLL_STATE_DEBOUNCE_INTERVAL,
-    SCROLL_STATE_DEBOUNCE_OPTIONS
-  );
-  const [scrolledToBottom, setScrolledToBottom] = useDebouncedState(
-    true,
-    SCROLL_STATE_DEBOUNCE_INTERVAL,
-    SCROLL_STATE_DEBOUNCE_OPTIONS
-  );
-  const [scrolledToLeft, setScrolledToLeft] = useDebouncedState(
-    true,
-    SCROLL_STATE_DEBOUNCE_INTERVAL,
-    SCROLL_STATE_DEBOUNCE_OPTIONS
-  );
-  const [scrolledToRight, setScrolledToRight] = useDebouncedState(
-    true,
-    SCROLL_STATE_DEBOUNCE_INTERVAL,
-    SCROLL_STATE_DEBOUNCE_OPTIONS
-  );
+  const {
+    scrolledToTop,
+    setScrolledToTop,
+    scrolledToBottom,
+    setScrolledToBottom,
+    scrolledToLeft,
+    setScrolledToLeft,
+    scrolledToRight,
+    setScrolledToRight,
+  } = useDataTableScrollState();
 
   const [rowContextMenuInfo, setRowContextMenuInfo] = useState<{ top: number; left: number; record: T } | null>(null);
   useEffect(() => {
