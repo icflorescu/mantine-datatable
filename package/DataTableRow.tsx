@@ -65,16 +65,6 @@ const useStyles = createStyles((theme) => {
         },
       },
     },
-    expandedRow: {
-      '&&': {
-        padding: 0,
-      },
-    },
-    expandedRowCollapsed: {
-      '&&': {
-        border: 0,
-      },
-    },
   };
 });
 
