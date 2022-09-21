@@ -122,7 +122,6 @@ export default function DataTable<T>({
   striped,
   onRowClick,
   rowContextMenu,
-  expandedRow,
   sx,
   className,
   classNames,
@@ -207,34 +206,6 @@ export default function DataTable<T>({
     onPageChange!(page);
   };
 
-  const { expandRowOn = 'click', expandMultiple = false, expandFirst, collapseProps } = expandedRow ?? {};
-
-  const initialExpandedRows = expandRowOn === 'always' ? [] : [expandFirst];
-  const [expandedRowIds, setExpandedRowIds] = useState<unknown[]>(initialExpandedRows);
-  const changeExpandedRowIds = expandMultiple
-    ? (recordId: unknown, isExpanded: boolean) => {
-        isExpanded
-          ? setExpandedRowIds(expandedRowIds.filter((id) => id !== recordId))
-          : setExpandedRowIds([...(expandedRowIds as unknown[]), recordId]);
-      }
-    : (recordId: unknown, isExpanded: boolean) => {
-        isExpanded ? setExpandedRowIds([]) : setExpandedRowIds([recordId]);
-      };
-
-  useEffect(() => {
-    if (typeof expandRowOn === 'function' && records) {
-      const recordIds: unknown[] = [];
-      for (const record of records) {
-        const result = expandRowOn(record);
-        if (result) {
-          recordIds.push(getValueAtPath(record, idAccessor));
-          if (!expandMultiple) break;
-        }
-      }
-      setExpandedRowIds(recordIds);
-    }
-  }, [records, idAccessor, expandRowOn, expandMultiple]);
-
   const recordsLength = records?.length;
   const recordIds = records?.map((record) => getValueAtPath(record, idAccessor));
   const selectedRecordIds = selectedRecords?.map((record) => getValueAtPath(record, idAccessor));
@@ -318,9 +289,7 @@ export default function DataTable<T>({
             {recordsLength ? (
               records.map((record, recordIndex) => {
                 const recordId = getValueAtPath(record, idAccessor);
-                const selected = selectedRecordIds?.includes(recordId) || false;
-                const isExpanded = expandRowOn === 'always' ? true : expandedRowIds.includes(recordId);
-                const expandRowOnClick = expandRowOn === 'click';
+                const isSelected = selectedRecordIds?.includes(recordId) || false;
 
                 let showContextMenuOnClick = false;
                 let showContextMenuOnRightClick = false;
@@ -340,9 +309,9 @@ export default function DataTable<T>({
                     key={recordId as Key}
                     record={record}
                     columns={columns}
-                    withPointerCursor={!!onRowClick || showContextMenuOnClick || expandRowOnClick}
+                    withPointerCursor={!!onRowClick || showContextMenuOnClick}
                     selectionVisible={!!selectedRecords}
-                    selectionChecked={selected}
+                    selectionChecked={isSelected}
                     onSelectionChange={
                       onSelectedRecordsChange
                         ? (e) => {
@@ -353,7 +322,7 @@ export default function DataTable<T>({
                                   : (_, index) => index >= recordIndex && index <= lastSelectionChangeIndex
                               );
                               onSelectedRecordsChange(
-                                selected
+                                isSelected
                                   ? differenceBy(selectedRecords, recordsInterval, (r) => getValueAtPath(r, idAccessor))
                                   : uniqBy([...selectedRecords, ...recordsInterval], (r) =>
                                       getValueAtPath(r, idAccessor)
@@ -361,7 +330,7 @@ export default function DataTable<T>({
                               );
                             } else {
                               onSelectedRecordsChange(
-                                selected
+                                isSelected
                                   ? selectedRecords.filter((record) => getValueAtPath(record, idAccessor) !== recordId)
                                   : uniqBy([...selectedRecords, record], (record) => getValueAtPath(record, idAccessor))
                               );
@@ -372,19 +341,8 @@ export default function DataTable<T>({
                     }
                     onClick={
                       showContextMenuOnClick
-                        ? expandRowOnClick
-                          ? (e) => {
-                              setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                              changeExpandedRowIds(recordId, isExpanded);
-                              onRowClick?.(record);
-                            }
-                          : (e) => {
-                              setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                              onRowClick?.(record);
-                            }
-                        : expandRowOnClick
-                        ? () => {
-                            changeExpandedRowIds(recordId, isExpanded);
+                        ? (e) => {
+                            setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
                             onRowClick?.(record);
                           }
                         : onRowClick
@@ -405,9 +363,6 @@ export default function DataTable<T>({
                       rowContextMenuInfo ? getValueAtPath(rowContextMenuInfo.record, idAccessor) === recordId : false
                     }
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
-                    expandedRow={expandedRow?.item}
-                    isExpanded={isExpanded}
-                    collapseProps={collapseProps ?? {}}
                   />
                 );
               })

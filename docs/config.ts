@@ -108,11 +108,6 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: working with row context menus on Mantine DataTable',
       },
       {
-        path: 'expanding-rows',
-        title: 'Expanding rows',
-        description: 'Example: working with row expansion on Mantine DataTable',
-      },
-      {
         path: 'disabling-text-selection',
         title: 'Disabling text selection',
         description: 'Example: disabling text selection on Mantine DataTable',

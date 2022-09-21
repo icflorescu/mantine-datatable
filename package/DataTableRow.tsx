@@ -1,6 +1,6 @@
-import { Checkbox, Collapse, createStyles } from '@mantine/core';
+import { Checkbox, createStyles } from '@mantine/core';
 import { ChangeEventHandler, MouseEventHandler } from 'react';
-import { DataTableColumn, ExpandedRowCollapseProps } from './DataTable.props';
+import { DataTableColumn } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
 
 const useStyles = createStyles((theme) => {
@@ -89,9 +89,6 @@ type DataTableRowProps<T> = {
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
-  expandedRow: ((record: T) => React.ReactNode) | undefined;
-  isExpanded: boolean;
-  collapseProps: ExpandedRowCollapseProps;
 };
 
 export default function DataTableRow<T>({
@@ -105,13 +102,10 @@ export default function DataTableRow<T>({
   onContextMenu,
   contextMenuVisible,
   leftShadowVisible,
-  expandedRow,
-  isExpanded,
-  collapseProps,
 }: DataTableRowProps<T>) {
   const { cx, classes } = useStyles();
 
-  const row = (
+  return (
     <tr
       className={cx({
         [classes.withPointerCursor]: withPointerCursor,
@@ -161,31 +155,4 @@ export default function DataTableRow<T>({
       )}
     </tr>
   );
-
-  if (expandedRow) {
-    const { animateOpacity, transitionDuration, transitionTimingFunction } = collapseProps;
-    const columnCount = selectionVisible ? columns.length + 1 : columns.length;
-    return (
-      <>
-        {row}
-        <tr>
-          <td
-            colSpan={columnCount}
-            className={cx(classes.expandedRow, { [classes.expandedRowCollapsed]: !isExpanded })}
-          >
-            <Collapse
-              in={isExpanded}
-              animateOpacity={animateOpacity}
-              transitionDuration={transitionDuration}
-              transitionTimingFunction={transitionTimingFunction}
-            >
-              {expandedRow(record)}
-            </Collapse>
-          </td>
-        </tr>
-      </>
-    );
-  } else {
-    return row;
-  }
 }

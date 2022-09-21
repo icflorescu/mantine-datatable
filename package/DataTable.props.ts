@@ -1,5 +1,4 @@
 import type {
-  CollapseProps,
   DefaultProps,
   MantineColor,
   MantineNumberSize,
@@ -262,44 +261,6 @@ export type DataTableContextMenuItemProps =
         }
     );
 
-export type ExpandedRowCollapseProps = Pick<
-  CollapseProps,
-  'animateOpacity' | 'transitionDuration' | 'transitionTimingFunction'
->;
-
-type ExpandedRowProps<T> = {
-  /**
-   * Defines when rows should expand; defaults to `click`
-   * May pass a custom function that receives the current record;
-   * if true, that row will be expanded
-   */
-  expandRowOn?: 'click' | 'always' | ((record: T) => boolean);
-
-  /**
-   * Defined if multiple rows are allowed to be expanded at the same time; defaults to `false`
-   */
-  expandMultiple?: boolean;
-
-  /**
-   * Defines the record that will be expanded when the table is first loaded;
-   * defaults to `undefined`;
-   * does nothing if `expandRowOn === 'always'`
-   */
-  expandFirst?: unknown;
-
-  /**
-   * Pass additional props to the Mantine Collapse component wrapping the custom component;
-   * does not accept the `children`, `in`, or `onTransitionEnd` properties
-   */
-  collapseProps?: ExpandedRowCollapseProps;
-
-  /**
-   * Custom component to be rendered;
-   * accepts the current record
-   */
-  item: (record: T) => ReactNode;
-};
-
 export type DataTableProps<T> = {
   /**
    * Table height; defaults to `100%`
@@ -421,11 +382,6 @@ export type DataTableProps<T> = {
      */
     items: (record: T) => DataTableContextMenuItemProps[];
   };
-
-  /**
-   * Defines a custom component to render beneath the related record's row
-   */
-  expandedRow?: ExpandedRowProps<T>;
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<DefaultProps<'root' | 'header' | 'pagination', CSSProperties>, 'unstyled'> &
   DataTableOuterBorderProps &
