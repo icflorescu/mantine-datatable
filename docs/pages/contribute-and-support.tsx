@@ -1,4 +1,4 @@
-import { Box, Container } from '@mantine/core';
+import { Box, Code, Container } from '@mantine/core';
 import { useWindowEvent } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import ExternalLink from '~/components/ExternalLink';
@@ -45,13 +45,18 @@ export default function Page() {
       <PageText>
         If you find a bug please don’t hesitate to{' '}
         <ExternalLink to={`${REPO_LINK}/issues`}>raise an issue</ExternalLink>.
-        <br />
+      </PageText>
+      <PageText>
         If you have an idea about a new or missing feature, let’s discuss it{' '}
         <ExternalLink to={`${REPO_LINK}/discussions`}>here</ExternalLink>.
         <br />
-        If you’re willing to put your effort into it, coming up with a pull-request would be fantastic.
+        Or better yet, if you’re willing to put your effort into it, coming up with a pull-request would be fantastic.
         <br />
-        Code contributions are more than welcome.
+        So many people <em>take open-source for granted</em>, but far fewer understand its true essence and are generous
+        enough to contribute their own time and skills to a project they find useful.
+      </PageText>
+      <PageText info>
+        New features are developed in the <Code>next</Code> branch.
       </PageText>
       <PageSubtitle value="List of code contributors" />
       <Box my="xl">
@@ -68,11 +73,11 @@ export default function Page() {
         <strong>
           <ExternalLink to={REPO_LINK}>star the repository</ExternalLink>
         </strong>
-        ,{' '}
+        🙏 ,{' '}
         <ExternalLink to="https://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu">
           spread the word
         </ExternalLink>
-        , and <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>.
+        💕, and <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>👍.
       </PageText>
       <PageSubtitle value="Why do repository stars matter" />
       <PageText>
