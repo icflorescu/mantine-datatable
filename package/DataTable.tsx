@@ -1,6 +1,6 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useDebouncedState, useElementSize } from '@mantine/hooks';
-import { CSSProperties, Key, useEffect, useState } from 'react';
+import { ChangeEventHandler, CSSProperties, Key, MouseEventHandler, useEffect, useState } from 'react';
 import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
@@ -214,6 +214,17 @@ export default function DataTable<T>({
   const allRecordsSelected = hasRecordsAndSelectedRecords && recordIds.every((id) => selectedRecordIds.includes(id));
   const someRecordsSelected = hasRecordsAndSelectedRecords && recordIds.some((id) => selectedRecordIds.includes(id));
 
+  let handleHeaderSelectionChange: (() => void) | undefined;
+  if (onSelectedRecordsChange) {
+    handleHeaderSelectionChange = () => {
+      onSelectedRecordsChange(
+        allRecordsSelected
+          ? selectedRecords.filter((record) => !recordIds.includes(getValueAtPath(record, idAccessor)))
+          : uniqBy([...selectedRecords, ...records!], (record) => getValueAtPath(record, idAccessor))
+      );
+    };
+  }
+
   const [lastSelectionChangeIndex, setLastSelectionChangeIndex] = useState<number | null>(null);
 
   const recordIdsString = recordIds?.join(':') || '';
@@ -272,17 +283,7 @@ export default function DataTable<T>({
             selectionVisible={!!selectedRecords}
             selectionChecked={allRecordsSelected}
             selectionIndeterminate={someRecordsSelected && !allRecordsSelected}
-            onSelectionChange={
-              onSelectedRecordsChange
-                ? () => {
-                    onSelectedRecordsChange(
-                      allRecordsSelected
-                        ? selectedRecords.filter((record) => !recordIds.includes(getValueAtPath(record, idAccessor)))
-                        : uniqBy([...selectedRecords, ...records!], (record) => getValueAtPath(record, idAccessor))
-                    );
-                  }
-                : undefined
-            }
+            onSelectionChange={handleHeaderSelectionChange}
             leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
           />
           <tbody>
@@ -304,6 +305,51 @@ export default function DataTable<T>({
                   }
                 }
 
+                let handleSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
+                if (onSelectedRecordsChange) {
+                  handleSelectionChange = (e) => {
+                    if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
+                      const recordsInterval = records.filter(
+                        recordIndex > lastSelectionChangeIndex
+                          ? (_, index) => index >= lastSelectionChangeIndex && index <= recordIndex
+                          : (_, index) => index >= recordIndex && index <= lastSelectionChangeIndex
+                      );
+                      onSelectedRecordsChange(
+                        isSelected
+                          ? differenceBy(selectedRecords, recordsInterval, (r) => getValueAtPath(r, idAccessor))
+                          : uniqBy([...selectedRecords, ...recordsInterval], (r) => getValueAtPath(r, idAccessor))
+                      );
+                    } else {
+                      onSelectedRecordsChange(
+                        isSelected
+                          ? selectedRecords.filter((record) => getValueAtPath(record, idAccessor) !== recordId)
+                          : uniqBy([...selectedRecords, record], (record) => getValueAtPath(record, idAccessor))
+                      );
+                    }
+                    setLastSelectionChangeIndex(recordIndex);
+                  };
+                }
+
+                let handleClick: MouseEventHandler<HTMLTableRowElement> | undefined;
+                if (showContextMenuOnClick) {
+                  handleClick = (e) => {
+                    setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
+                    onRowClick?.(record);
+                  };
+                } else if (onRowClick) {
+                  handleClick = () => {
+                    onRowClick(record);
+                  };
+                }
+
+                let handleContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
+                if (showContextMenuOnRightClick) {
+                  handleContextMenu = (e) => {
+                    e.preventDefault();
+                    setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
+                  };
+                }
+
                 return (
                   <DataTableRow<T>
                     key={recordId as Key}
@@ -312,53 +358,9 @@ export default function DataTable<T>({
                     withPointerCursor={!!onRowClick || showContextMenuOnClick}
                     selectionVisible={!!selectedRecords}
                     selectionChecked={isSelected}
-                    onSelectionChange={
-                      onSelectedRecordsChange
-                        ? (e) => {
-                            if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
-                              const recordsInterval = records.filter(
-                                recordIndex > lastSelectionChangeIndex
-                                  ? (_, index) => index >= lastSelectionChangeIndex && index <= recordIndex
-                                  : (_, index) => index >= recordIndex && index <= lastSelectionChangeIndex
-                              );
-                              onSelectedRecordsChange(
-                                isSelected
-                                  ? differenceBy(selectedRecords, recordsInterval, (r) => getValueAtPath(r, idAccessor))
-                                  : uniqBy([...selectedRecords, ...recordsInterval], (r) =>
-                                      getValueAtPath(r, idAccessor)
-                                    )
-                              );
-                            } else {
-                              onSelectedRecordsChange(
-                                isSelected
-                                  ? selectedRecords.filter((record) => getValueAtPath(record, idAccessor) !== recordId)
-                                  : uniqBy([...selectedRecords, record], (record) => getValueAtPath(record, idAccessor))
-                              );
-                            }
-                            setLastSelectionChangeIndex(recordIndex);
-                          }
-                        : undefined
-                    }
-                    onClick={
-                      showContextMenuOnClick
-                        ? (e) => {
-                            setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                            onRowClick?.(record);
-                          }
-                        : onRowClick
-                        ? () => {
-                            onRowClick(record);
-                          }
-                        : undefined
-                    }
-                    onContextMenu={
-                      showContextMenuOnRightClick
-                        ? (e) => {
-                            e.preventDefault();
-                            setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                          }
-                        : undefined
-                    }
+                    onSelectionChange={handleSelectionChange}
+                    onClick={handleClick}
+                    onContextMenu={handleContextMenu}
                     contextMenuVisible={
                       rowContextMenuInfo ? getValueAtPath(rowContextMenuInfo.record, idAccessor) === recordId : false
                     }
