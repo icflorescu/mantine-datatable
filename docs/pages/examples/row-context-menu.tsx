@@ -99,6 +99,11 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         When using a row context menu triggered by click instead of right-click, you might want to{' '}
         <InternalLink to="/examples/disabling-text-selection">disable text selection</InternalLink>.
       </PageText>
+      <PageText>
+        If you’re not a fan of context menus,{' '}
+        <InternalLink to="/examples/row-actions-cell">implementing a row actions cell</InternalLink> should’t be
+        difficult.
+      </PageText>
       <PageNavigation of={PATH} />
     </Container>
   );
