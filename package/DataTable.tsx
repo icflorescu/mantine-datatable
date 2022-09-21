@@ -12,14 +12,8 @@ import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
-import {
-  differenceBy,
-  getValueAtPath,
-  humanize,
-  uniqBy,
-  useDataTableLastSelectionChangeIndexState,
-  useDataTableScrollState,
-} from './utils';
+import { useDataTableLastSelectionChangeIndexState, useDataTableScrollState } from './hooks';
+import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
 
 const EMPTY_OBJECT = {};
 

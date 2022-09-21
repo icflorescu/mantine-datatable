@@ -1,6 +1,5 @@
 import { MantineTheme, useMantineTheme } from '@mantine/core';
-import { useDebouncedState, useMediaQuery } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
+import { useMediaQuery } from '@mantine/hooks';
 
 export function useMediaQueryStringOrFunction(mediaQuery: string | ((theme: MantineTheme) => string) | undefined) {
   const theme = useMantineTheme();
@@ -37,34 +36,4 @@ export function getValueAtPath(obj: unknown, path: string) {
   if (!path) return undefined;
   const pathArray = path.match(/([^[.\]])+/g) as string[];
   return pathArray.reduce((prevObj: unknown, key) => prevObj && (prevObj as Record<string, unknown>)[key], obj);
-}
-
-export function useDataTableScrollState() {
-  const debouncedStateArgs: [boolean, number, { leading: true }] = [true, 200, { leading: true }];
-
-  const [scrolledToTop, setScrolledToTop] = useDebouncedState(...debouncedStateArgs);
-  const [scrolledToBottom, setScrolledToBottom] = useDebouncedState(...debouncedStateArgs);
-  const [scrolledToLeft, setScrolledToLeft] = useDebouncedState(...debouncedStateArgs);
-  const [scrolledToRight, setScrolledToRight] = useDebouncedState(...debouncedStateArgs);
-
-  return {
-    scrolledToTop,
-    setScrolledToTop,
-    scrolledToBottom,
-    setScrolledToBottom,
-    scrolledToLeft,
-    setScrolledToLeft,
-    scrolledToRight,
-    setScrolledToRight,
-  };
-}
-
-export function useDataTableLastSelectionChangeIndexState(recordIds: unknown[] | undefined) {
-  const [lastSelectionChangeIndex, setLastSelectionChangeIndex] = useState<number | null>(null);
-  const recordIdsString = recordIds?.join(':') || '';
-  useEffect(() => {
-    setLastSelectionChangeIndex(null);
-  }, [recordIdsString]);
-
-  return { lastSelectionChangeIndex, setLastSelectionChangeIndex };
 }
