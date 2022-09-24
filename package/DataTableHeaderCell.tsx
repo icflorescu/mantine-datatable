@@ -60,7 +60,7 @@ interface DataTableHeaderCellWrapper<T> extends Pick<DataTableColumn<T>, 'sortab
 
 interface DataTableHeaderFilterButton {
   filterOpened: boolean;
-  onOpen: (opened: boolean) => void;
+  onChange: (opened: boolean) => void;
 }
 
 export default function DataTableHeaderCellParent<T>({
@@ -103,7 +103,7 @@ export default function DataTableHeaderCellParent<T>({
   const { popover, modal } = filterButton;
 
   if (popover) {
-    const onOpen = popover.popoverProps?.onChange
+    const onChange = popover.popoverProps?.onChange
       ? (opened: boolean) => {
           popover.popoverProps!.onChange!(opened);
           setFilterOpened(opened);
@@ -121,7 +121,7 @@ export default function DataTableHeaderCellParent<T>({
         id={popover.popoverProps?.id}
         middlewares={popover.popoverProps?.middlewares}
         offset={popover.popoverProps?.offset}
-        onChange={onOpen}
+        onChange={onChange}
         onClose={popover.popoverProps?.onClose}
         onOpen={popover.popoverProps?.onOpen}
         onPositionChange={popover.popoverProps?.onPositionChange}
@@ -143,7 +143,7 @@ export default function DataTableHeaderCellParent<T>({
           {cellWrapper(
             <Group position="apart" noWrap spacing={0}>
               {dataTableHeaderCell}
-              {DataTableHeaderFilterButton({ filterOpened, onOpen })}
+              {DataTableHeaderFilterButton({ filterOpened, onChange })}
             </Group>
           )}
         </Popover.Target>
@@ -216,7 +216,7 @@ export default function DataTableHeaderCellParent<T>({
           {cellWrapper(
             <Group position="apart" noWrap spacing={0}>
               {dataTableHeaderCell}
-              {DataTableHeaderFilterButton({ filterOpened, onOpen: setFilterOpened })}
+              {DataTableHeaderFilterButton({ filterOpened, onChange: setFilterOpened })}
             </Group>
           )}
         </Modal>
@@ -250,9 +250,9 @@ function DataTableHeaderCellWrapper<T>({
   );
 }
 
-function DataTableHeaderFilterButton({ filterOpened, onOpen }: DataTableHeaderFilterButton) {
+function DataTableHeaderFilterButton({ filterOpened, onChange }: DataTableHeaderFilterButton) {
   return (
-    <Center role="button" onClick={() => onOpen(filterOpened)}>
+    <Center role="button" onClick={() => onChange(filterOpened)}>
       {filterOpened ? <FilterOff size={DATATABLEHEADER_ICONSIZE} /> : <Filter size={DATATABLEHEADER_ICONSIZE} />}
     </Center>
   );
