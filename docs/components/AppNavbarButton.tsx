@@ -46,11 +46,12 @@ type AppNavbarButtonProps = AppNavbarButtonDisplayProps & {
   rotateIcon?: boolean;
   active?: boolean;
   href?: string;
+  externalLink?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export default forwardRef(function AppNavbarButton(
-  { color, icon: Icon, title, href, onClick, active, rotateIcon }: AppNavbarButtonProps,
+  { color, icon: Icon, title, href, externalLink, onClick, active, rotateIcon }: AppNavbarButtonProps,
   ref: ForwardedRef<HTMLButtonElement | HTMLAnchorElement>
 ) {
   const { classes, cx } = useStyles({ color });
@@ -62,6 +63,7 @@ export default forwardRef(function AppNavbarButton(
       ref={ref}
       component={href ? 'a' : 'button'}
       href={href}
+      target={externalLink ? '_blank' : undefined}
       onClick={onClick}
     >
       <Group px="sm" py="xs" spacing="xs">

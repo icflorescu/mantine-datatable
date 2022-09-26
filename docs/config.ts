@@ -1,6 +1,6 @@
 import { MantineColor } from '@mantine/core';
 import { FC } from 'react';
-import { Adjustments, HeartHandshake, Home, Lifebuoy, Rocket } from 'tabler-icons-react';
+import { Adjustments, HeartHandshake, Home, Lifebuoy, List, Rocket } from 'tabler-icons-react';
 
 export const SEO_DEFAULT_TITLE = 'Mantine DataTable';
 export const SEO_DEFAULT_DESCRIPTION =
@@ -150,6 +150,12 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
       'Contribute and support the development of Mantine DataTable by raising issues, bringing up new ideas, coming up with pull-requests, starring the repo or hiring its author',
     color: 'teal',
     icon: Lifebuoy,
+  },
+  {
+    path: 'https://github.com/icflorescu/mantine-datatable/blob/main/CHANGELOG.md',
+    title: 'Changelog',
+    color: 'pink',
+    icon: List,
   },
   {
     path: 'hire-the-author',
