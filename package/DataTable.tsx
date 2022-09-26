@@ -1,6 +1,6 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useElementSize } from '@mantine/hooks';
-import { ChangeEventHandler, CSSProperties, Key, MouseEventHandler, useEffect, useState } from 'react';
+import { ChangeEventHandler, CSSProperties, Key, MouseEventHandler, useEffect } from 'react';
 import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
@@ -12,7 +12,7 @@ import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
-import { useDataTableLastSelectionChangeIndexState, useDataTableScrollState } from './hooks';
+import { useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion, useScrollStatus } from './hooks';
 import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
 
 const EMPTY_OBJECT = {};
@@ -121,6 +121,7 @@ export default function DataTable<T>({
   striped,
   onRowClick,
   rowContextMenu,
+  rowExpansion,
   sx,
   className,
   classNames,
@@ -146,15 +147,15 @@ export default function DataTable<T>({
     setScrolledToLeft,
     scrolledToRight,
     setScrolledToRight,
-  } = useDataTableScrollState();
+  } = useScrollStatus();
 
-  const [rowContextMenuInfo, setRowContextMenuInfo] = useState<{ top: number; left: number; record: T } | null>(null);
-  useEffect(() => {
-    if (fetching) setRowContextMenuInfo(null);
-  }, [fetching]);
+  const { rowContextMenuInfo, setRowContextMenuInfo } = useRowContextMenu<T>(fetching);
+  const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
   const onScrollPositionChange = () => {
-    if (!fetching) setRowContextMenuInfo(null);
+    if (!fetching && rowContextMenu) {
+      setRowContextMenuInfo(null);
+    }
 
     if (fetching || tableHeight <= scrollViewportHeight) {
       setScrolledToTop(true);
@@ -214,11 +215,8 @@ export default function DataTable<T>({
     };
   }
 
-  const { lastSelectionChangeIndex, setLastSelectionChangeIndex } =
-    useDataTableLastSelectionChangeIndexState(recordIds);
-
+  const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
   const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;
-
   const { cx, classes, theme } = useStyles({ borderColor, rowBorderColor });
   const styleProperties = typeof styles === 'function' ? styles(theme, EMPTY_OBJECT) : styles;
 
@@ -340,7 +338,6 @@ export default function DataTable<T>({
                     key={recordId as Key}
                     record={record}
                     columns={columns}
-                    withPointerCursor={!!onRowClick || showContextMenuOnClick}
                     selectionVisible={!!selectedRecords}
                     selectionChecked={isSelected}
                     onSelectionChange={handleSelectionChange}
@@ -349,6 +346,7 @@ export default function DataTable<T>({
                     contextMenuVisible={
                       rowContextMenuInfo ? getValueAtPath(rowContextMenuInfo.record, idAccessor) === recordId : false
                     }
+                    expansion={rowExpansionInfo}
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
                 );

@@ -13,6 +13,7 @@ export type Company = {
   streetAddress: string;
   city: string;
   state: string;
+  missionStatement: string;
 };
 
 export type Department = {
