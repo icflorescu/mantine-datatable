@@ -78,7 +78,7 @@ export default function RowActionsCellExample() {
           title: <Text mr="xs">Row actions</Text>,
           textAlignment: 'right',
           render: (company) => (
-            <Group spacing={4} position="right">
+            <Group spacing={4} position="right" noWrap>
               <ActionIcon color="green" onClick={() => showInfo(company)}>
                 <Eye size={16} />
               </ActionIcon>
