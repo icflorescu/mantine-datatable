@@ -3,6 +3,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
 import ExternalLink from '~/components/ExternalLink';
+import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
@@ -13,6 +14,7 @@ import {
   RowExpansionExampleMultipleExpandedRows,
   RowExpansionExampleSimple,
   RowExpansionExampleTriggerAlways,
+  RowExpansionExampleWithClickableCellComponents,
 } from '~/examples/RowExpansionExamples';
 import RowExpansionExampleWithInlineEditor from '~/examples/RowExpansionExampleWithInlineEditor';
 import RowExpansionExampleWithLazyLoading from '~/examples/RowExpansionExampleWithLazyLoading';
@@ -26,6 +28,7 @@ type Example =
   | 'initially-expanded-rows'
   | 'multiple-expanded-rows'
   | 'trigger-always'
+  | 'with-clickable-cell-components'
   | 'with-inline-editor-table'
   | 'with-inline-editor-row-expansion'
   | 'with-lazy-loading-table'
@@ -112,6 +115,18 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         ]}
       />
       <RowExpansionExampleWithLazyLoading />
+      <PageSubtitle value="Using with clickable components in cells" />
+      <PageText>
+        If you need to combine the row expansion behavior with clickable cell components (such as links or{' '}
+        <InternalLink to="/examples/row-actions-cell">row actions</InternalLink>) make sure to intercept the event on
+        the clickable components and{' '}
+        <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">
+          invoke its <Code>.stopPropagation()</Code> method
+        </ExternalLink>
+        , like so:
+      </PageText>
+      <CodeBlock language="typescript" content={code['with-clickable-cell-components']} />
+      <RowExpansionExampleWithClickableCellComponents />
       <PageNavigation of={PATH} />
     </Container>
   );
