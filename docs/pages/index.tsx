@@ -105,17 +105,17 @@ export default function Page() {
           Mantine DataTable brings datagrid-like functionality to your data-rich user interfaces.
         </Text>
         <div className={classes.features}>
-          <HomePageFeature icon={Scale} title="Free and open-source">
-            This package is released under the MIT license, same as Mantine, so you can freely build fantastic data-rich
-            applications with it
+          <HomePageFeature icon={Settings} title="Feature rich">
+            Supports asynchronous data loading, pagination, multiple rows selection, column sorting, custom cell data
+            rendering, row context menu, row expansion, dark theme and more
           </HomePageFeature>
           <HomePageFeature icon={Lifebuoy} title="Typescript based">
             The entire codebase is written in TypeScript, component properties are well typed and documented with JSDoc,
             so you can build type safe applications with confidence
           </HomePageFeature>
-          <HomePageFeature icon={Settings} title="Feature rich">
-            Supports asynchronous data loading, pagination, multiple rows selection, column sorting, custom cell data
-            rendering, row context menu, dark theme and more
+          <HomePageFeature icon={Scale} title="Free and open-source">
+            This package is released under the MIT license, same as Mantine, so you can freely build fantastic data-rich
+            applications with it
           </HomePageFeature>
           <HomePageFeature icon={Rocket} title="Use anywhere">
             You can use this component in any modern React framework supported by Mantine, such as Next.js, Vite, Create

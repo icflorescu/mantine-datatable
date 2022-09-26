@@ -108,6 +108,11 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: working with row context menus on Mantine DataTable',
       },
       {
+        path: 'expanding-rows',
+        title: 'Expanding rows',
+        description: 'Example: expanding and collapsing rows on Mantine DataTable',
+      },
+      {
         path: 'row-actions-cell',
         title: 'Row actions cell',
         description: 'Example: how to implement a row actions cell on Mantine DataTable',

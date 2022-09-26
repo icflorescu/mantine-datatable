@@ -1,4 +1,5 @@
 import type {
+  CollapseProps,
   DefaultProps,
   MantineColor,
   MantineNumberSize,
@@ -266,6 +267,73 @@ export type DataTableContextMenuItemProps =
         }
     );
 
+export type DataTableContextMenuProps<T> = {
+  /**
+   * Context menu trigger; defaults to `rightClick` for classic behavior
+   */
+  trigger?: 'rightClick' | 'click';
+
+  /**
+   * Menu z-index; defaults to `3`
+   */
+  zIndex?: number;
+
+  /**
+   * Menu border radius; defaults to `xs`
+   */
+  borderRadius?: MantineNumberSize;
+
+  /**
+   * Menu shadow; defaults to `sm`
+   */
+  shadow?: MantineShadow;
+
+  /**
+   * Boolean or function accepting the current record as parameter returning boolean;
+   * if true, the menu will not be shown
+   */
+  hidden?: boolean | ((record: T) => boolean);
+
+  /**
+   * Function returning the row menu items for the current record
+   */
+  items: (record: T) => DataTableContextMenuItemProps[];
+};
+
+export type DataTableRowExpansionCollapseProps = Pick<
+  CollapseProps,
+  'animateOpacity' | 'transitionDuration' | 'transitionTimingFunction'
+>;
+
+export type DataTableRowExpansionProps<T> = {
+  /**
+   * Defines when rows should expand; defaults to `click`
+   */
+  trigger?: 'click' | 'always';
+
+  /**
+   * If true, multiple rows can be expanded at the same time
+   */
+  allowMultiple?: boolean;
+
+  /**
+   * Function defining which records will be initially expanded;
+   * does nothing if `trigger === 'always'`
+   */
+  initiallyExpanded?: (record: T) => boolean;
+
+  /**
+   * Additional properties passed to the Mantine Collapse component wrapping the custom content
+   */
+  collapseProps?: DataTableRowExpansionCollapseProps;
+
+  /**
+   * Function returning the custom content to be lazily rendered for an expanded row;
+   * accepts the current record and a `collapse()` callback that can be used to collapse the expanded row
+   */
+  content: (props: { record: T; collapse: () => void }) => ReactNode;
+};
+
 export type DataTableProps<T> = {
   /**
    * Table height; defaults to `100%`
@@ -353,40 +421,11 @@ export type DataTableProps<T> = {
   onRowClick?: (record: T) => void;
 
   /**
-   * Defines a context-menu menu to show when user right-clicks or clicks on a row
+   * Defines a context-menu to show when user right-clicks or clicks on a row
    */
-  rowContextMenu?: {
-    /**
-     * Context menu trigger; defaults to `rightClick` for classic behavior
-     */
-    trigger?: 'rightClick' | 'click';
+  rowContextMenu?: DataTableContextMenuProps<T>;
 
-    /**
-     * Menu z-index; defaults to `3`
-     */
-    zIndex?: number;
-
-    /**
-     * Menu border radius; defaults to `xs`
-     */
-    borderRadius?: MantineNumberSize;
-
-    /**
-     * Menu shadow; defaults to `sm`
-     */
-    shadow?: MantineShadow;
-
-    /**
-     * Boolean or function accepting the current record as parameter returning boolean;
-     * if true, the menu will not be shown
-     */
-    hidden?: boolean | ((record: T) => boolean);
-
-    /**
-     * A function returning the row menu items for the current record
-     */
-    items: (record: T) => DataTableContextMenuItemProps[];
-  };
+  rowExpansion?: DataTableRowExpansionProps<T>;
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<DefaultProps<'root' | 'header' | 'pagination', CSSProperties>, 'unstyled'> &
   DataTableOuterBorderProps &
