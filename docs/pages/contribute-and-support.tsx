@@ -41,22 +41,32 @@ export default function Page() {
           </li>
         </ul>
       </PageText>
-      <PageSubtitle value="Contribute" />
+      <PageSubtitle value="Raising issues and asking for features" />
       <PageText>
         If you find a bug please don’t hesitate to{' '}
         <ExternalLink to={`${REPO_LINK}/issues`}>raise an issue</ExternalLink>.
-      </PageText>
-      <PageText>
+        <br />
         If you have an idea about a new or missing feature, let’s discuss it{' '}
         <ExternalLink to={`${REPO_LINK}/discussions`}>here</ExternalLink>.
+      </PageText>
+      <PageText info>
+        Be considerate when asking for a new feature!
         <br />
-        Or better yet, if you’re willing to put your effort into it, coming up with a pull-request would be fantastic.
+        Is it really something that would be useful for other poeple, or just an edge case?
+      </PageText>
+      <PageSubtitle value="Contributing" />
+      <PageText>
+        Better yet, if you’re willing to put your effort into it, coming up with a pull-request would be fantastic.
         <br />
         So many people <em>take open-source for granted</em>, but far fewer understand its true essence and are generous
         enough to contribute their own time and skills to a project they find useful.
       </PageText>
       <PageText info>
         New features are developed in the <Code>next</Code> branch.
+        <br />
+        If you want to implement a new feature or improve an existing one, make sure to also add an example page and/or
+        alter the one(s) already referring to it. It’t not a feature if other people don’t know about it or don’t
+        understand how to use it.
       </PageText>
       <PageSubtitle value="List of code contributors" />
       <Box my="xl">
@@ -69,15 +79,15 @@ export default function Page() {
       </Box>
       <PageSubtitle value="Supporting the project" />
       <PageText>
-        If you find this project useful, it would help a lot to{' '}
+        If you find this project useful, it would help a lot to 🙏
         <strong>
           <ExternalLink to={REPO_LINK}>star the repository</ExternalLink>
         </strong>
-        🙏 ,{' '}
+        , 💕
         <ExternalLink to="https://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu">
           spread the word
         </ExternalLink>
-        💕, and <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>👍.
+        , and 👍<ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>.
       </PageText>
       <PageSubtitle value="Why do repository stars matter" />
       <PageText>

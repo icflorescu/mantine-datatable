@@ -3,6 +3,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
 import ExternalLink from '~/components/ExternalLink';
+import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
@@ -112,6 +113,18 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         ]}
       />
       <RowExpansionExampleWithLazyLoading />
+      <PageText info>
+        If you need to combine the row expansion behavior with links, buttons,{' '}
+        <InternalLink to="/examples/row-actions-cell">row actions</InternalLink> or any kind of clickable components
+        inside cells, make sure to intercept the <Code>click</Code> event on those components and{' '}
+        <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">
+          invoke its <Code>.stopPropagation()</Code> method
+        </ExternalLink>
+        .
+        <br />
+        See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows">this example</InternalLink> for more
+        information.
+      </PageText>
       <PageNavigation of={PATH} />
     </Container>
   );

@@ -42,7 +42,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        The <Code>DataTable</Code> component conveniently allows to to disable text selection.
+        The <Code>DataTable</Code> component conveniently allows you to disable text selection.
         <br />
         For instance, for usability reasons, it would make sense to disable text selection if you:
         <ul>

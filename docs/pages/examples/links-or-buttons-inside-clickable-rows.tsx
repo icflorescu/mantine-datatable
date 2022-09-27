@@ -6,15 +6,15 @@ import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import RowActionsCellExample from '~/examples/RowActionsCellExample';
+import LinksOrButtonsInsideClickableRowsExample from '~/examples/LinksOrButtonsInsideClickableRowsExample';
 import readCodeExample from '~/lib/readCodeExample';
 
-const PATH = 'examples/row-actions-cell';
+const PATH = 'examples/links-or-buttons-inside-clickable-rows';
 
 export const getStaticProps: GetStaticProps<{
   code: string;
 }> = async () => ({
-  props: { code: (await readCodeExample('examples/RowActionsCellExample.tsx')) as string },
+  props: { code: (await readCodeExample('examples/LinksOrButtonsInsideClickableRowsExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -22,29 +22,20 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        If a simple <InternalLink to="/examples/handling-row-clicks">row click handler</InternalLink> is not enough and{' '}
-        <InternalLink to="/examples/row-context-menu">context menus</InternalLink> are not your thing, implementing a
-        row actions cell should’t be difficult. Here’s how you could do it, unsing the column <Code>render</Code>{' '}
-        function:
-      </PageText>
-      <RowActionsCellExample />
-      <CodeBlock language="typescript" content={code} />
-      <PageText info>
-        If you need to combine row actions with{' '}
+        If you need to add links, buttons or any kind of clickable components inside{' '}
         <InternalLink to="/examples/handling-row-clicks">clickable rows</InternalLink>,{' '}
         <InternalLink to="/examples/expanding-rows">expandable rows</InternalLink> or{' '}
         <InternalLink to="/examples/row-context-menu">
           row context-menus triggered by <Code>click</Code> instead of <Code>right-click</Code>
         </InternalLink>
-        , make sure to intercept the <Code>click</Code> event on the actions and{' '}
+        , make sure to intercept the <Code>click</Code> event on the clickable components and{' '}
         <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">
           invoke its <Code>.stopPropagation()</Code> method
         </ExternalLink>
-        .
-        <br />
-        See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows">this example</InternalLink> for more
-        information.
+        , like so:
       </PageText>
+      <LinksOrButtonsInsideClickableRowsExample />
+      <CodeBlock language="typescript" content={code} />
       <PageNavigation of={PATH} />
     </Container>
   );

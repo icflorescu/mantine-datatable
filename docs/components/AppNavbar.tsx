@@ -77,8 +77,8 @@ export default function AppNavbar({ visible, onHideClick }: { visible: boolean; 
         </Box>
         <Navbar.Section grow component={ScrollArea}>
           <Box my="xs">
-            {PAGES.map(({ icon, title, color, path, items }) => {
-              if (path?.startsWith('http://') || path?.startsWith('https://')) {
+            {PAGES.map(({ icon, title, color, path, external, items }) => {
+              if (external) {
                 return <AppNavbarButton key={path} icon={icon!} title={title} color={color} href={path} externalLink />;
               }
               const to = `/${path || ''}`;
@@ -92,8 +92,6 @@ export default function AppNavbar({ visible, onHideClick }: { visible: boolean; 
                     to: `${to}/${itemPath}`,
                   }))}
                 />
-              ) : path?.startsWith('http://') || path?.startsWith('https://') ? (
-                <AppNavbarButton key={path} icon={icon!} title={title} color={color} href={path} />
               ) : (
                 <AppNavbarLink key={to} icon={icon} title={title} color={color} to={to} />
               );

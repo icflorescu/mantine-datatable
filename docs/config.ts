@@ -16,7 +16,7 @@ export const NAVBAR_BREAKPOINT = 'md';
 export const AUTHOR_LINK = 'https://github.com/icflorescu';
 export const REPO_LINK = 'https://github.com/icflorescu/mantine-datatable';
 
-export const PAGES: ({ title: string; color?: MantineColor; description?: string } & (
+export const PAGES: ({ external?: true; title: string; color?: MantineColor; description?: string } & (
   | {
       path?: string;
       icon: FC<{ size?: string | number }>;
@@ -118,6 +118,11 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
         description: 'Example: how to implement a row actions cell on Mantine DataTable',
       },
       {
+        path: 'links-or-buttons-inside-clickable-rows',
+        title: 'Links or buttons inside clickable rows',
+        description: 'Example: how to add links or buttons inside Mantine DataTable clickable rows',
+      },
+      {
         path: 'disabling-text-selection',
         title: 'Disabling text selection',
         description: 'Example: disabling text selection on Mantine DataTable',
@@ -152,16 +157,17 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
     icon: Lifebuoy,
   },
   {
-    path: 'https://github.com/icflorescu/mantine-datatable/blob/main/CHANGELOG.md',
-    title: 'Changelog',
-    color: 'pink',
-    icon: List,
-  },
-  {
     path: 'hire-the-author',
     title: 'Hire the author',
     description: 'Hire the author of Mantine DataTable - a fullstack/frontend developer with 20+ years of experience',
     color: 'red',
     icon: HeartHandshake,
+  },
+  {
+    external: true,
+    path: 'https://github.com/icflorescu/mantine-datatable/blob/main/CHANGELOG.md',
+    title: 'Changelog',
+    color: 'gray',
+    icon: List,
   },
 ];
