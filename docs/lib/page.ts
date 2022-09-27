@@ -1,14 +1,12 @@
 import memoize from 'lodash/memoize';
 import { PAGES } from '~/config';
 
-export const isExternalLink = (path: string) => path.startsWith('http://') || path.startsWith('https://');
-
 type PageInfo = { path: string; title: string; description?: string };
 
 const flattenedPages: PageInfo[] = [];
-for (const { path, title, items } of PAGES) {
+for (const { external, path, title, items } of PAGES) {
   if (!items) {
-    if (path && !isExternalLink(path)) {
+    if (!external) {
       flattenedPages.push({ path: path || '', title });
     }
   } else {

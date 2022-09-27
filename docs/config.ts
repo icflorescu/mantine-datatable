@@ -16,7 +16,7 @@ export const NAVBAR_BREAKPOINT = 'md';
 export const AUTHOR_LINK = 'https://github.com/icflorescu';
 export const REPO_LINK = 'https://github.com/icflorescu/mantine-datatable';
 
-export const PAGES: ({ title: string; color?: MantineColor; description?: string } & (
+export const PAGES: ({ external?: true; title: string; color?: MantineColor; description?: string } & (
   | {
       path?: string;
       icon: FC<{ size?: string | number }>;
@@ -159,6 +159,7 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
     icon: HeartHandshake,
   },
   {
+    external: true,
     path: 'https://github.com/icflorescu/mantine-datatable/blob/main/CHANGELOG.md',
     title: 'Changelog',
     color: 'gray',

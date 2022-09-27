@@ -1,7 +1,6 @@
 import { Box, createStyles, Navbar, ScrollArea } from '@mantine/core';
 import { X } from 'tabler-icons-react';
 import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, PAGES } from '~/config';
-import { isExternalLink } from '~/lib/page';
 import AppNavbarButton from './AppNavbarButton';
 import AppNavbarLink from './AppNavbarLink';
 import AppNavbarLinkList from './AppNavbarLinkList';
@@ -78,8 +77,8 @@ export default function AppNavbar({ visible, onHideClick }: { visible: boolean; 
         </Box>
         <Navbar.Section grow component={ScrollArea}>
           <Box my="xs">
-            {PAGES.map(({ icon, title, color, path, items }) => {
-              if (path && isExternalLink(path)) {
+            {PAGES.map(({ icon, title, color, path, external, items }) => {
+              if (external) {
                 return <AppNavbarButton key={path} icon={icon!} title={title} color={color} href={path} externalLink />;
               }
               const to = `/${path || ''}`;
