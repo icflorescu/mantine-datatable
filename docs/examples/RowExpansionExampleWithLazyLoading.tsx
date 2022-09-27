@@ -1,8 +1,7 @@
 import { Center, createStyles, Group, LoadingOverlay, Stack, Text } from '@mantine/core';
 import { DataTable } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
-import { companies, departments, employees } from '~/data';
-import delay from '~/lib/delay';
+import { companies, countCompanyDepartmentsAsync, countCompanyEmployeesAsync } from '~/data';
 import useIsMounted from '~/lib/useIsMounted';
 
 const records = companies.slice(0, 5);
@@ -27,10 +26,14 @@ function CompanyDetails({ companyId }: { companyId: string }) {
     // simulate expensive async loading operation
     (async () => {
       setLoading(true);
-      await delay({ min: 800, max: 1200 });
+      const delay = { min: 800, max: 1200 };
+      const [departments, employees] = await Promise.all([
+        countCompanyDepartmentsAsync({ companyId, delay }),
+        countCompanyEmployeesAsync({ companyId, delay }),
+      ]);
       if (isMounted()) {
-        setNumberOfDepartments(departments.filter((department) => department.company.id === companyId).length);
-        setNumberOfEmployees(employees.filter((employee) => employee.department.company.id === companyId).length);
+        setNumberOfDepartments(departments);
+        setNumberOfEmployees(employees);
         setLoading(false);
       }
     })();
