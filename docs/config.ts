@@ -118,6 +118,11 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: how to implement a row actions cell on Mantine DataTable',
       },
       {
+        path: 'links-or-buttons-inside-clickable-rows',
+        title: 'Links or buttons inside clickable rows',
+        description: 'Example: how to add links or buttons inside Mantine DataTable clickable rows',
+      },
+      {
         path: 'disabling-text-selection',
         title: 'Disabling text selection',
         description: 'Example: disabling text selection on Mantine DataTable',

@@ -1,4 +1,4 @@
-import { Box, createStyles, Group, MantineColor, Text, UnstyledButton } from '@mantine/core';
+import { Box, createStyles, MantineColor, Text, UnstyledButton } from '@mantine/core';
 import Link from 'next/link';
 
 const useStyles = createStyles((theme, { color = 'blue' }: { color?: MantineColor }) => ({
@@ -27,9 +27,14 @@ const useStyles = createStyles((theme, { color = 'blue' }: { color?: MantineColo
           : theme.fn.rgba(theme.fn.darken(theme.colors[color][6], 0.3), 0.15),
     },
   },
+  content: {
+    display: 'flex',
+    gap: 16,
+  },
   bullet: {
-    width: 12,
+    flex: '0 0 12px',
     height: 12,
+    marginTop: 5,
     background: theme.colors[color][6],
     borderRadius: '50%',
   },
@@ -51,12 +56,12 @@ export default function AppNavbarLinkListItem({ title, to, color, active }: AppN
   return (
     <Link key={to} href={to} passHref>
       <UnstyledButton pl={19} py={8} className={cx(classes.root, { [classes.active]: active })} component="a">
-        <Group spacing={16}>
+        <div className={classes.content}>
           <Box className={classes.bullet} />
           <Text className={classes.text} size="sm" weight={500}>
             {title}
           </Text>
-        </Group>
+        </div>
       </UnstyledButton>
     </Link>
   );
