@@ -152,16 +152,16 @@ export const PAGES: ({ title: string; color?: MantineColor; description?: string
     icon: Lifebuoy,
   },
   {
-    path: 'https://github.com/icflorescu/mantine-datatable/blob/main/CHANGELOG.md',
-    title: 'Changelog',
-    color: 'pink',
-    icon: List,
-  },
-  {
     path: 'hire-the-author',
     title: 'Hire the author',
     description: 'Hire the author of Mantine DataTable - a fullstack/frontend developer with 20+ years of experience',
     color: 'red',
     icon: HeartHandshake,
+  },
+  {
+    path: 'https://github.com/icflorescu/mantine-datatable/blob/main/CHANGELOG.md',
+    title: 'Changelog',
+    color: 'gray',
+    icon: List,
   },
 ];
