@@ -40,18 +40,18 @@
     "lint": "eslint *.ts* && tsc --noEmit"
   },
   "devDependencies": {
-    "@mantine/core": "^5.4.1",
-    "@mantine/hooks": "^5.4.1",
+    "@mantine/core": "^5.5.0",
+    "@mantine/hooks": "^5.5.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "esbuild": "^0.15.9",
+    "esbuild": "^0.15.10",
     "react": "^18.2.0",
     "tabler-icons-react": "^1.55.0",
     "typescript": "^4.8.4"
   },
   "peerDependencies": {
-    "@mantine/core": "^5.4.1",
-    "@mantine/hooks": "^5.4.1",
+    "@mantine/core": "^5.5.0",
+    "@mantine/hooks": "^5.5.0",
     "react": "^18.2.0"
   }
 }
