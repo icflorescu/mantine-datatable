@@ -8,8 +8,6 @@
 [![Downloads][downloads-image]][npm-url]
 [![Language][language-image]][repo-url]
 
-[![Featured on Openbase](https://badges.openbase.com/js/featured/mantine-datatable.svg?)](https://openbase.com/js/mantine-datatable?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
-
 A "dark-theme aware" **table component** for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multiple rows selection, column sorting, custom cell data rendering, row context menu, row expansion, and more.
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/189911698-369ba48e-65f0-4772-aad3-cb5e6d4cb59d.png)](https://icflorescu.github.io/mantine-datatable/)
