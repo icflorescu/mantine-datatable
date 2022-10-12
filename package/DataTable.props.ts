@@ -154,6 +154,21 @@ export type DataTableColumn<T> = {
   visibleMediaQuery?: string | ((theme: MantineTheme) => string);
 
   /**
+   * Optional class name passed to the column title
+   */
+  titleClassName?: string;
+
+  /**
+   * Optional style passed to the column title
+   */
+  titleStyle?: CSSProperties;
+
+  /**
+   * Optional style passed to the column title; see https://mantine.dev/styles/sx/
+   */
+  titleSx?: Sx;
+
+  /**
    * Optional class name passed to each data cell in the column; can be a string or a function
    * receiving the current record as its argument and returning a string
    */

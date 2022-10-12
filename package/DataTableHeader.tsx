@@ -99,20 +99,35 @@ export default forwardRef(function DataTableHeader<T>(
             />
           </th>
         )}
-        {columns.map(({ accessor, hidden, visibleMediaQuery, textAlignment, width, title, sortable }) =>
-          hidden ? null : (
-            <DataTableHeaderCell<T>
-              key={accessor}
-              accessor={accessor}
-              visibleMediaQuery={visibleMediaQuery}
-              textAlignment={textAlignment}
-              width={width}
-              title={title}
-              sortable={sortable}
-              sortStatus={sortStatus}
-              onSortStatusChange={onSortStatusChange}
-            />
-          )
+        {columns.map(
+          ({
+            accessor,
+            hidden,
+            visibleMediaQuery,
+            textAlignment,
+            width,
+            title,
+            sortable,
+            titleClassName,
+            titleStyle,
+            titleSx,
+          }) =>
+            hidden ? null : (
+              <DataTableHeaderCell<T>
+                key={accessor}
+                className={titleClassName}
+                style={titleStyle}
+                sx={titleSx}
+                accessor={accessor}
+                visibleMediaQuery={visibleMediaQuery}
+                textAlignment={textAlignment}
+                width={width}
+                title={title}
+                sortable={sortable}
+                sortStatus={sortStatus}
+                onSortStatusChange={onSortStatusChange}
+              />
+            )
         )}
       </tr>
     </thead>

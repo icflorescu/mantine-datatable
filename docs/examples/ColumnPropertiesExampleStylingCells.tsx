@@ -7,6 +7,7 @@ const records = employees.slice(0, 10);
 
 const useStyles = createStyles((theme) => ({
   idColumnCells: { fontWeight: 700 },
+  birthdayColumnTitle: { '&&': { color: theme.colors.blue[6] } },
   birthdayInDecember: {
     fontWeight: 700,
     color: theme.colors.blue[6],
@@ -47,6 +48,9 @@ export default function ColumnPropertiesExampleStylingCells() {
         {
           accessor: 'department.name',
           width: 150,
+          // style title with an Sx object
+          titleSx: (theme) => ({ '&&': { color: theme.colors.green[6] } }),
+          // style cells with an Sx object
           cellsSx: (theme) => ({
             color: theme.colors.green[8],
             background: theme.fn.rgba(theme.colors.orange[6], 0.25),
@@ -62,6 +66,8 @@ export default function ColumnPropertiesExampleStylingCells() {
           accessor: 'birthDate',
           title: 'Birthday',
           width: 100,
+          // style title with a custom class name
+          titleClassName: classes.birthdayColumnTitle,
           // style cells with a class name depending on current record
           cellsClassName: ({ birthDate }) =>
             cx({ [classes.birthdayInDecember]: dayjs(birthDate).format('MM') === '12' }),
@@ -71,6 +77,8 @@ export default function ColumnPropertiesExampleStylingCells() {
           accessor: 'age',
           width: 60,
           textAlignment: 'right',
+          // style title with a CSS properties object
+          titleStyle: { fontStyle: 'italic' },
           // style cells with a CSS properties object depending on current record
           cellsStyle: ({ birthDate }) =>
             dayjs().diff(birthDate, 'years') <= 40

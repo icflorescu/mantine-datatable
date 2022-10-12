@@ -2,6 +2,7 @@ import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
+import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
@@ -96,8 +97,27 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <ColumnPropertiesExample />
       <PageSubtitle value="Styling column cells" />
       <PageText>
-        In addition, each column’s cells can be further customized by specifying the following styling properties:
+        In addition, each column can be further customized by specifying the following styling properties:
         <ul>
+          <li>
+            <Code>titleClassName</Code> (it may be necessary to increase selector specificity to override the default
+            styling; see{' '}
+            <ExternalLink to="https://stackoverflow.com/questions/62660480/is-there-a-way-to-increase-specificity-by-adding-the-element-with-emotion">
+              here
+            </ExternalLink>
+            )
+          </li>
+          <li>
+            <Code>titleStyle</Code>
+          </li>
+          <li>
+            <Code>titleSx</Code> (it may be necessary to increase selector specificity to override the default styling;
+            see{' '}
+            <ExternalLink to="https://stackoverflow.com/questions/62660480/is-there-a-way-to-increase-specificity-by-adding-the-element-with-emotion">
+              here
+            </ExternalLink>
+            )
+          </li>
           <li>
             <Code>cellsClassName</Code>
           </li>
