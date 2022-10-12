@@ -17,18 +17,10 @@ export function humanize(value: string) {
 }
 
 export function differenceBy<T>(arr1: T[], arr2: T[], iteratee: (value: T) => unknown) {
-  if (typeof iteratee === 'string') {
-    const prop = iteratee;
-    iteratee = (item) => item[prop];
-  }
   return arr1.filter((c) => !arr2.map(iteratee).includes(iteratee(c)));
 }
 
 export function uniqBy<T>(arr: T[], iteratee: (value: T) => unknown) {
-  if (typeof iteratee === 'string') {
-    const prop = iteratee;
-    iteratee = (item) => item[prop];
-  }
   return arr.filter((x, i, self) => i === self.findIndex((y) => iteratee(x) === iteratee(y)));
 }
 
