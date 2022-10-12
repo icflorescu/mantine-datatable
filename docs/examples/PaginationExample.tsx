@@ -36,6 +36,8 @@ export default function PaginationExample() {
       onPageChange={(p) => setPage(p)}
       // uncomment the next line to use a custom pagination text
       // paginationText={({ from, to, totalRecords }) => `Records ${from} - ${to} of ${totalRecords}`}
+      // uncomment the next line to use a custom pagination color
+      paginationColor="ffaa11"
       // uncomment the next line to use a custom pagination size
       // paginationSize="md"
     />

@@ -2,6 +2,7 @@ import { Box, Code, Container, MANTINE_SIZES } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { Fragment } from 'react';
 import CodeBlock from '~/components/CodeBlock';
+import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -43,6 +44,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           <li>
             <Code>paginationText</Code> → a callback receiving an object in the shape of{' '}
             <Code>{'{ from: number; to: number; totalRecords: number }'}</Code> and returning the pagination text
+          </li>
+          <li>
+            <Code>paginationColor</Code> → the pagination color; see{' '}
+            <ExternalLink to="https://mantine.dev/theming/colors/">Mantine Colors</ExternalLink>
           </li>
           <li>
             <Code>paginationSize</Code> → the pagination size,{' '}

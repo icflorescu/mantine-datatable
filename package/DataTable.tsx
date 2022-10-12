@@ -110,6 +110,7 @@ export default function DataTable<T>({
   onPageChange,
   totalRecords,
   recordsPerPage,
+  paginationColor,
   paginationSize = 'sm',
   paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
   loaderSize,
@@ -369,6 +370,7 @@ export default function DataTable<T>({
           onPageChange={handlePageChange}
           totalRecords={totalRecords}
           recordsPerPage={recordsPerPage}
+          paginationColor={paginationColor}
           paginationSize={paginationSize}
           paginationText={paginationText}
           recordsLength={recordsLength}

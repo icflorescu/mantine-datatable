@@ -62,6 +62,7 @@ export type DataTablePaginationProps =
       onPageChange?: never;
       totalRecords?: never;
       recordsPerPage?: never;
+      paginationColor?: never;
       paginationSize?: never;
       paginationText?: never;
     }
@@ -90,6 +91,11 @@ export type DataTablePaginationProps =
        * Pagination component size; defaults to `sm`
        */
       paginationSize?: MantineSize;
+
+      /**
+       * Pagination component color; defaults to primary theme color
+       */
+      paginationColor?: MantineColor;
 
       /**
        * Pagination text; defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`
