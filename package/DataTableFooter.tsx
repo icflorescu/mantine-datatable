@@ -40,6 +40,7 @@ export default forwardRef(function DataTableFooter(
     fetching,
     page,
     onPageChange,
+    paginationColor,
     paginationSize,
     paginationText,
     totalRecords,
@@ -70,6 +71,7 @@ export default forwardRef(function DataTableFooter(
     >
       <Text size={paginationSize}>{paginationTextValue}</Text>
       <Pagination
+        color={paginationColor}
         className={cx(classes.pagination, { [classes.paginationFetching]: fetching || !recordsLength })}
         page={page}
         onChange={onPageChange}
