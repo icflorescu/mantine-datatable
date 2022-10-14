@@ -81,19 +81,23 @@ export function useRowExpansion<T>({
     }
   }
 
-  let [expandedRecordIds, setExpandedRecordIds] = useState<unknown[]>(initiallyExpandedRecordIds);
+  let expandedRecordIds: unknown[];
+  let setExpandedRecordIds: (expandedRecordIds: unknown[]) => void;
+  const expandedRecordIdsState = useState<unknown[]>(initiallyExpandedRecordIds);
 
   if (rowExpansion) {
     const { trigger, allowMultiple, collapseProps, content } = rowExpansion;
     if (rowExpansion.expanded) {
-      ({ recordIds: expandedRecordIds, setRecordIds: setExpandedRecordIds } = rowExpansion.expanded);
+      ({ recordIds: expandedRecordIds, onRecordIdsChange: setExpandedRecordIds } = rowExpansion.expanded);
+    } else {
+      [expandedRecordIds, setExpandedRecordIds] = expandedRecordIdsState;
     }
 
     const collapseRow = (record: T) =>
       setExpandedRecordIds(expandedRecordIds.filter((id) => id !== getValueAtPath(record, idAccessor)));
 
     return {
-      expandOnClick: trigger !== 'always',
+      expandOnClick: trigger !== 'always' && trigger !== 'never',
       isRowExpanded: (record: T) =>
         trigger === 'always' ? true : expandedRecordIds.includes(getValueAtPath(record, idAccessor)),
       expandRow: (record: T) => {

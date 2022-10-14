@@ -232,10 +232,11 @@ export function RowExpansionExampleControlledMode() {
         ]}
         records={records}
         rowExpansion={{
+          // trigger: 'never', // 👈 uncomment this if you want to disable expanding/collapsing on click
           allowMultiple: true,
           expanded: {
             recordIds: expandedRecordIds,
-            setRecordIds: setExpandedRecordIds,
+            onRecordIdsChange: setExpandedRecordIds,
           },
           content: ({ record }) => (
             // example-skip expansion content

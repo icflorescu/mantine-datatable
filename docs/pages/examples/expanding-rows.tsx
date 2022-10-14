@@ -117,16 +117,20 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <RowExpansionExampleWithLazyLoading />
       <PageSubtitle value="Controlled mode" />
       <PageText>
-        You can use the row expansion feature in controlled mode by pointing the <Code>rowExpansion.expanded</Code>{' '}
+        You can control the row expansion feature by pointing the <Code>rowExpansion</Code>/<Code>expanded</Code>{' '}
         property to an object containing:
         <ul>
           <li>
             <Code>recordIds</Code> → an array containing the currently expanded record IDs
           </li>
           <li>
-            <Code>setRecordIds</Code> → a function to set the currently expanded record IDs
+            <Code>onRecordIdsChange</Code> → a callback function that gets called when the currently expanded records
+            change
           </li>
         </ul>
+        When using the row expansion feature in controlled mode, if you want to prevent the default behavior of toggling
+        the expansion state on click, set the <Code>rowExpansion</Code>/<Code>trigger</Code> property to{' '}
+        <Code>&apos;never&apos;</Code>.
       </PageText>
       <RowExpansionExampleControlledMode />
       <CodeBlock language="typescript" content={code['controlled-mode']} />

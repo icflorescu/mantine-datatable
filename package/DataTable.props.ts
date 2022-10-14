@@ -247,7 +247,7 @@ export type DataTableSelectionProps<T> =
       selectedRecords: T[];
 
       /**
-       * Callback fired after change of selected records
+       * Callback fired when selected records change
        */
       onSelectedRecordsChange?: (selectedRecords: T[]) => void;
     };
@@ -349,7 +349,7 @@ export type DataTableRowExpansionProps<T> = {
   /**
    * Defines when rows should expand; defaults to `click`
    */
-  trigger?: 'click' | 'always';
+  trigger?: 'click' | 'always' | 'never';
 
   /**
    * If true, multiple rows can be expanded at the same time
@@ -367,11 +367,21 @@ export type DataTableRowExpansionProps<T> = {
    */
   collapseProps?: DataTableRowExpansionCollapseProps;
 
+  /**
+   * An object defining the row expansion behavior in controlled mode
+   */
   expanded?: {
+    /**
+     * Currently expanded record IDs
+     */
+    recordIds: unknown[];
+
+    /**
+     * Callback fired when expanded records change;
+     * receives an array containing the newly expanded record IDs
+     */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    recordIds: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setRecordIds: Dispatch<SetStateAction<any[]>>;
+    onRecordIdsChange: Dispatch<SetStateAction<any[]>> | ((recordIds: unknown[]) => void);
   };
 
   /**
