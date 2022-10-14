@@ -81,24 +81,33 @@ export function useRowExpansion<T>({
     }
   }
 
-  const [expandedRecordIds, setExpandedRecordIds] = useState<unknown[]>(initiallyExpandedRecordIds);
+  let expandedRecordIds: unknown[];
+  let setExpandedRecordIds: (expandedRecordIds: unknown[]) => void;
+  const expandedRecordIdsState = useState<unknown[]>(initiallyExpandedRecordIds);
 
-  if (typeof rowExpansion !== 'undefined') {
+  if (rowExpansion) {
+    const { trigger, allowMultiple, collapseProps, content } = rowExpansion;
+    if (rowExpansion.expanded) {
+      ({ recordIds: expandedRecordIds, onRecordIdsChange: setExpandedRecordIds } = rowExpansion.expanded);
+    } else {
+      [expandedRecordIds, setExpandedRecordIds] = expandedRecordIdsState;
+    }
+
     const collapseRow = (record: T) =>
       setExpandedRecordIds(expandedRecordIds.filter((id) => id !== getValueAtPath(record, idAccessor)));
 
     return {
-      expandOnClick: rowExpansion.trigger !== 'always',
+      expandOnClick: trigger !== 'always' && trigger !== 'never',
       isRowExpanded: (record: T) =>
-        rowExpansion.trigger === 'always' ? true : expandedRecordIds.includes(getValueAtPath(record, idAccessor)),
+        trigger === 'always' ? true : expandedRecordIds.includes(getValueAtPath(record, idAccessor)),
       expandRow: (record: T) => {
         const recordId = getValueAtPath(record, idAccessor);
-        setExpandedRecordIds(rowExpansion.allowMultiple ? [...expandedRecordIds, recordId] : [recordId]);
+        setExpandedRecordIds(allowMultiple ? [...expandedRecordIds, recordId] : [recordId]);
       },
       collapseRow,
-      collapseProps: rowExpansion.collapseProps,
+      collapseProps,
       content: (record: T, recordIndex: number) => () =>
-        rowExpansion.content({ record, recordIndex, collapse: () => collapseRow(record) }),
+        content({ record, recordIndex, collapse: () => collapseRow(record) }),
     };
   }
 }

@@ -10,6 +10,7 @@ import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import {
   RowExpansionExampleCollapseProps,
+  RowExpansionExampleControlledMode,
   RowExpansionExampleInitiallyExpandedRows,
   RowExpansionExampleMultipleExpandedRows,
   RowExpansionExampleSimple,
@@ -30,7 +31,8 @@ type Example =
   | 'with-inline-editor-table'
   | 'with-inline-editor-row-expansion'
   | 'with-lazy-loading-table'
-  | 'with-lazy-loading-row-expansion';
+  | 'with-lazy-loading-row-expansion'
+  | 'controlled-mode';
 
 export const getStaticProps: GetStaticProps<{
   code: Record<Example, string>;
@@ -113,6 +115,25 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         ]}
       />
       <RowExpansionExampleWithLazyLoading />
+      <PageSubtitle value="Controlled mode" />
+      <PageText>
+        You can control the row expansion feature by pointing the <Code>rowExpansion</Code>/<Code>expanded</Code>{' '}
+        property to an object containing:
+        <ul>
+          <li>
+            <Code>recordIds</Code> → an array containing the currently expanded record IDs
+          </li>
+          <li>
+            <Code>onRecordIdsChange</Code> → a callback function that gets called when the currently expanded records
+            change
+          </li>
+        </ul>
+        When using the row expansion feature in controlled mode, if you want to prevent the default behavior of toggling
+        the expansion state on click, set the <Code>rowExpansion</Code>/<Code>trigger</Code> property to{' '}
+        <Code>&apos;never&apos;</Code>.
+      </PageText>
+      <RowExpansionExampleControlledMode />
+      <CodeBlock language="typescript" content={code['controlled-mode']} />
       <PageText info>
         If you need to combine the row expansion behavior with links, buttons,{' '}
         <InternalLink to="/examples/row-actions-cell">row action cells</InternalLink> or any kind of clickable

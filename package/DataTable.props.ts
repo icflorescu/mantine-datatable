@@ -9,7 +9,7 @@ import type {
   Sx,
   TableProps,
 } from '@mantine/core';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, Dispatch, ReactNode, SetStateAction } from 'react';
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
@@ -247,7 +247,7 @@ export type DataTableSelectionProps<T> =
       selectedRecords: T[];
 
       /**
-       * Callback fired after change of selected records
+       * Callback fired when selected records change
        */
       onSelectedRecordsChange?: (selectedRecords: T[]) => void;
     };
@@ -349,7 +349,7 @@ export type DataTableRowExpansionProps<T> = {
   /**
    * Defines when rows should expand; defaults to `click`
    */
-  trigger?: 'click' | 'always';
+  trigger?: 'click' | 'always' | 'never';
 
   /**
    * If true, multiple rows can be expanded at the same time
@@ -366,6 +366,23 @@ export type DataTableRowExpansionProps<T> = {
    * Additional properties passed to the Mantine Collapse component wrapping the custom content
    */
   collapseProps?: DataTableRowExpansionCollapseProps;
+
+  /**
+   * An object defining the row expansion behavior in controlled mode
+   */
+  expanded?: {
+    /**
+     * Currently expanded record IDs
+     */
+    recordIds: unknown[];
+
+    /**
+     * Callback fired when expanded records change;
+     * receives an array containing the newly expanded record IDs
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onRecordIdsChange: Dispatch<SetStateAction<any[]>> | ((recordIds: unknown[]) => void);
+  };
 
   /**
    * Function returning the custom content to be lazily rendered for an expanded row;
@@ -472,7 +489,10 @@ export type DataTableProps<T> = {
 
   rowExpansion?: DataTableRowExpansionProps<T>;
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
-  Omit<DefaultProps<'root' | 'header' | 'pagination', CSSProperties>, 'unstyled'> &
+  Omit<
+    DefaultProps<'root' | 'header' | 'pagination', CSSProperties>,
+    'unstyled' | 'p' | 'px' | 'py' | 'pt' | 'pb' | 'pl' | 'pr'
+  > &
   DataTableOuterBorderProps &
   DataTableEmptyStateProps &
   DataTablePaginationProps &
