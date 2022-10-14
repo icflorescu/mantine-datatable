@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.8.0 (2022-09-26)
+## 1.7.8 (2022-10-14)
 - Add [cell click handlers](https://icflorescu.github.io/mantine-datatable/examples/handling-cell-clicks)
 - Add `recordIndex` as a second parameter on various hadlers and callbacks (such as `onRowClick`, column `render`, etc.)
 
