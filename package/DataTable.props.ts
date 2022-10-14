@@ -119,9 +119,9 @@ export type DataTableColumn<T> = {
   title?: ReactNode;
 
   /**
-   * Custom cell data render function accepting the current record
+   * Custom cell data render function accepting the current record and its index in `records`
    */
-  render?: (record: T) => ReactNode;
+  render?: (record: T, index: number) => ReactNode;
 
   /**
    * Column text alignment; defaults to `left`
@@ -170,15 +170,15 @@ export type DataTableColumn<T> = {
 
   /**
    * Optional class name passed to each data cell in the column; can be a string or a function
-   * receiving the current record as its argument and returning a string
+   * receiving the current record and its index as arguments and returning a string
    */
-  cellsClassName?: string | ((record: T) => string | undefined);
+  cellsClassName?: string | ((record: T, recordIndex: number) => string | undefined);
 
   /**
    * Optional style passed to each data cell in the column; can be a CSS properties object or
-   * a function receiving the current record as its argument and returning a CSS properties object
+   * a function receiving the current record and its index as arguments and returning a CSS properties object
    */
-  cellsStyle?: CSSProperties | ((record: T) => CSSProperties | undefined);
+  cellsStyle?: CSSProperties | ((record: T, recordIndex: number) => CSSProperties | undefined);
 
   /**
    * Optional style passed to each data cell in the column; see https://mantine.dev/styles/sx/
@@ -310,15 +310,15 @@ export type DataTableContextMenuProps<T> = {
   shadow?: MantineShadow;
 
   /**
-   * Boolean or function accepting the current record as parameter returning boolean;
+   * Boolean or a function accepting the current record and its index as arguments and returning a boolean value;
    * if true, the menu will not be shown
    */
-  hidden?: boolean | ((record: T) => boolean);
+  hidden?: boolean | ((record: T, recordIndex: number) => boolean);
 
   /**
-   * Function returning the row menu items for the current record
+   * Function accepting the current record and its index as arguments and returning the row menu items
    */
-  items: (record: T) => DataTableContextMenuItemProps[];
+  items: (record: T, recordIndex: number) => DataTableContextMenuItemProps[];
 };
 
 export type DataTableRowExpansionCollapseProps = Pick<
@@ -341,7 +341,7 @@ export type DataTableRowExpansionProps<T> = {
    * Function defining which records will be initially expanded;
    * does nothing if `trigger === 'always'`
    */
-  initiallyExpanded?: (record: T) => boolean;
+  initiallyExpanded?: (record: T, recordIndex: number) => boolean;
 
   /**
    * Additional properties passed to the Mantine Collapse component wrapping the custom content
@@ -352,7 +352,7 @@ export type DataTableRowExpansionProps<T> = {
    * Function returning the custom content to be lazily rendered for an expanded row;
    * accepts the current record and a `collapse()` callback that can be used to collapse the expanded row
    */
-  content: (props: { record: T; collapse: () => void }) => ReactNode;
+  content: (props: { record: T; recordIndex: number; collapse: () => void }) => ReactNode;
 };
 
 export type DataTableProps<T> = {
@@ -437,9 +437,9 @@ export type DataTableProps<T> = {
   loaderBackgroundBlur?: number;
 
   /**
-   * Function to call when a row is clicked
+   * Function to call when a row is clicked, accepting the current record and its index in `records`
    */
-  onRowClick?: (record: T) => void;
+  onRowClick?: (record: T, index: number) => void;
 
   /**
    * Defines a context-menu to show when user right-clicks or clicks on a row

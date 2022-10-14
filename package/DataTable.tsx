@@ -280,7 +280,7 @@ export default function DataTable<T>({
                 let showContextMenuOnRightClick = false;
                 if (rowContextMenu) {
                   const { hidden } = rowContextMenu;
-                  if (!hidden || !(typeof hidden === 'function' ? hidden(record) : hidden)) {
+                  if (!hidden || !(typeof hidden === 'function' ? hidden(record, recordIndex) : hidden)) {
                     if (rowContextMenu.trigger === 'click') {
                       showContextMenuOnClick = true;
                     } else {
@@ -317,12 +317,12 @@ export default function DataTable<T>({
                 let handleClick: MouseEventHandler<HTMLTableRowElement> | undefined;
                 if (showContextMenuOnClick) {
                   handleClick = (e) => {
-                    setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
-                    onRowClick?.(record);
+                    setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record, recordIndex });
+                    onRowClick?.(record, recordIndex);
                   };
                 } else if (onRowClick) {
                   handleClick = () => {
-                    onRowClick(record);
+                    onRowClick(record, recordIndex);
                   };
                 }
 
@@ -330,7 +330,7 @@ export default function DataTable<T>({
                 if (showContextMenuOnRightClick) {
                   handleContextMenu = (e) => {
                     e.preventDefault();
-                    setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record });
+                    setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record, recordIndex });
                   };
                 }
 
@@ -338,6 +338,7 @@ export default function DataTable<T>({
                   <DataTableRow<T>
                     key={recordId as Key}
                     record={record}
+                    recordIndex={recordIndex}
                     columns={columns}
                     selectionVisible={!!selectedRecords}
                     selectionChecked={isSelected}
@@ -403,7 +404,7 @@ export default function DataTable<T>({
           onDestroy={() => setRowContextMenuInfo(null)}
         >
           {rowContextMenu
-            .items(rowContextMenuInfo.record)
+            .items(rowContextMenuInfo.record, rowContextMenuInfo.recordIndex)
             .map(({ divider, key, title, icon, color, hidden, disabled, onClick }) =>
               divider ? (
                 <DataTableRowMenuDivider key={key} />

@@ -16,6 +16,7 @@ type DataTableRowCellProps<T> = {
   sx?: Sx;
   style?: CSSProperties;
   record: T;
+  recordIndex: number;
 } & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlignment' | 'width' | 'ellipsis' | 'render'>;
 
 export default function DataTableRowCell<T>({
@@ -24,6 +25,7 @@ export default function DataTableRowCell<T>({
   style,
   visibleMediaQuery,
   record,
+  recordIndex,
   ellipsis,
   textAlignment,
   width,
@@ -47,7 +49,7 @@ export default function DataTableRowCell<T>({
       ]}
       style={style}
     >
-      {render ? render(record) : (getValueAtPath(record, accessor) as ReactNode)}
+      {render ? render(record, recordIndex) : (getValueAtPath(record, accessor) as ReactNode)}
     </Box>
   );
 }

@@ -39,6 +39,7 @@ const useStyles = createStyles((theme) => {
 
 type DataTableRowProps<T> = {
   record: T;
+  recordIndex: number;
   columns: DataTableColumn<T>[];
   selectionVisible: boolean;
   selectionChecked: boolean;
@@ -52,6 +53,7 @@ type DataTableRowProps<T> = {
 
 export default function DataTableRow<T>({
   record,
+  recordIndex,
   columns,
   selectionVisible,
   selectionChecked,
@@ -111,11 +113,12 @@ export default function DataTableRow<T>({
             hidden ? null : (
               <DataTableRowCell<T>
                 key={accessor}
-                className={typeof cellsClassName === 'function' ? cellsClassName(record) : cellsClassName}
-                style={typeof cellsStyle === 'function' ? cellsStyle(record) : cellsStyle}
+                className={typeof cellsClassName === 'function' ? cellsClassName(record, recordIndex) : cellsClassName}
+                style={typeof cellsStyle === 'function' ? cellsStyle(record, recordIndex) : cellsStyle}
                 sx={cellsSx}
                 visibleMediaQuery={visibleMediaQuery}
                 record={record}
+                recordIndex={recordIndex}
                 accessor={accessor}
                 textAlignment={textAlignment}
                 ellipsis={ellipsis}
@@ -129,7 +132,7 @@ export default function DataTableRow<T>({
         <DataTableRowExpansion
           colSpan={columns.filter((c) => !c.hidden).length + (selectionVisible ? 1 : 0)}
           open={expansion.isRowExpanded(record)}
-          content={expansion.content(record)}
+          content={expansion.content(record, recordIndex)}
           collapseProps={expansion.collapseProps}
         />
       )}
