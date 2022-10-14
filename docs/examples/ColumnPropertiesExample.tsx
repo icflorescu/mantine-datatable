@@ -44,6 +44,7 @@ export default function ColumnPropertiesExample() {
           visibleMediaQuery: (theme) => `(min-width: ${theme.breakpoints.xs}px)`,
         },
         {
+          // "virtual column"
           accessor: 'age',
           width: 60,
           textAlignment: 'right',
