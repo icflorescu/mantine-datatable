@@ -22,7 +22,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        If a simple <InternalLink to="/examples/handling-row-clicks">row click handler</InternalLink> is not enough and{' '}
+        If a simple <InternalLink to="/examples/handling-row-clicks">row click</InternalLink> or{' '}
+        <InternalLink to="/examples/handling-cell-clicks">cell click</InternalLink> handler is not enough and{' '}
         <InternalLink to="/examples/row-context-menu">context menus</InternalLink> are not your thing, implementing a
         row actions cell should’t be difficult. Here’s how you could do it, unsing the column <Code>render</Code>{' '}
         function:
@@ -32,6 +33,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText info>
         If you need to combine row actions with{' '}
         <InternalLink to="/examples/handling-row-clicks">clickable rows</InternalLink>,{' '}
+        <InternalLink to="/examples/handling-cell-clicks">clickable cells</InternalLink>,{' '}
         <InternalLink to="/examples/expanding-rows">expandable rows</InternalLink> or{' '}
         <InternalLink to="/examples/row-context-menu">
           row context-menus triggered by <Code>click</Code> instead of <Code>right-click</Code>

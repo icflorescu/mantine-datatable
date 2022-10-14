@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 import { ChangeEventHandler, MouseEventHandler } from 'react';
-import { DataTableColumn } from './DataTable.props';
+import { DataTableCellClickHandler, DataTableColumn } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
 import DataTableRowExpansion from './DataTableRowExpansion';
 import DataTableRowSelectorCell from './DataTableRowSelectorCell';
@@ -39,11 +39,13 @@ const useStyles = createStyles((theme) => {
 
 type DataTableRowProps<T> = {
   record: T;
+  recordIndex: number;
   columns: DataTableColumn<T>[];
   selectionVisible: boolean;
   selectionChecked: boolean;
   onSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
   onClick: MouseEventHandler<HTMLTableRowElement> | undefined;
+  onCellClick: DataTableCellClickHandler<T> | undefined;
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   expansion: ReturnType<typeof useRowExpansion<T>>;
   contextMenuVisible: boolean;
@@ -52,11 +54,13 @@ type DataTableRowProps<T> = {
 
 export default function DataTableRow<T>({
   record,
+  recordIndex,
   columns,
   selectionVisible,
   selectionChecked,
   onSelectionChange,
   onClick,
+  onCellClick,
   onContextMenu,
   expansion,
   contextMenuVisible,
@@ -95,8 +99,8 @@ export default function DataTableRow<T>({
             onChange={onSelectionChange}
           />
         )}
-        {columns.map(
-          ({
+        {columns.map((column, columnIndex) => {
+          const {
             accessor,
             hidden,
             visibleMediaQuery,
@@ -107,29 +111,37 @@ export default function DataTableRow<T>({
             cellsClassName,
             cellsStyle,
             cellsSx,
-          }) =>
-            hidden ? null : (
-              <DataTableRowCell<T>
-                key={accessor}
-                className={typeof cellsClassName === 'function' ? cellsClassName(record) : cellsClassName}
-                style={typeof cellsStyle === 'function' ? cellsStyle(record) : cellsStyle}
-                sx={cellsSx}
-                visibleMediaQuery={visibleMediaQuery}
-                record={record}
-                accessor={accessor}
-                textAlignment={textAlignment}
-                ellipsis={ellipsis}
-                width={width}
-                render={render}
-              />
-            )
-        )}
+          } = column;
+
+          let handleCellClick: MouseEventHandler<HTMLTableCellElement> | undefined;
+          if (onCellClick) {
+            handleCellClick = () => onCellClick({ record, recordIndex, column, columnIndex });
+          }
+
+          return hidden ? null : (
+            <DataTableRowCell<T>
+              key={accessor}
+              className={typeof cellsClassName === 'function' ? cellsClassName(record, recordIndex) : cellsClassName}
+              style={typeof cellsStyle === 'function' ? cellsStyle(record, recordIndex) : cellsStyle}
+              sx={cellsSx}
+              visibleMediaQuery={visibleMediaQuery}
+              record={record}
+              recordIndex={recordIndex}
+              onClick={handleCellClick}
+              accessor={accessor}
+              textAlignment={textAlignment}
+              ellipsis={ellipsis}
+              width={width}
+              render={render}
+            />
+          );
+        })}
       </tr>
       {expansion && (
         <DataTableRowExpansion
           colSpan={columns.filter((c) => !c.hidden).length + (selectionVisible ? 1 : 0)}
           open={expansion.isRowExpanded(record)}
-          content={expansion.content(record)}
+          content={expansion.content(record, recordIndex)}
           collapseProps={expansion.collapseProps}
         />
       )}

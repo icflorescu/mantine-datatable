@@ -47,7 +47,12 @@ export function useLastSelectionChangeIndex(recordIds: unknown[] | undefined) {
 }
 
 export function useRowContextMenu<T>(fetching?: boolean) {
-  const [rowContextMenuInfo, setRowContextMenuInfo] = useState<{ top: number; left: number; record: T } | null>(null);
+  const [rowContextMenuInfo, setRowContextMenuInfo] = useState<{
+    top: number;
+    left: number;
+    record: T;
+    recordIndex: number;
+  } | null>(null);
   useEffect(() => {
     if (fetching) setRowContextMenuInfo(null);
   }, [fetching]);
@@ -92,7 +97,8 @@ export function useRowExpansion<T>({
       },
       collapseRow,
       collapseProps: rowExpansion.collapseProps,
-      content: (record: T) => () => rowExpansion.content({ record, collapse: () => collapseRow(record) }),
+      content: (record: T, recordIndex: number) => () =>
+        rowExpansion.content({ record, recordIndex, collapse: () => collapseRow(record) }),
     };
   }
 }

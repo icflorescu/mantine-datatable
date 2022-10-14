@@ -102,7 +102,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <PageText info>
         If you need to combine context menus triggered by <Code>click</Code> instead of <Code>right-click</Code> with
-        links, buttons, <InternalLink to="/examples/row-actions-cell">row actions</InternalLink> or any kind of
+        links, buttons, <InternalLink to="/examples/row-actions-cell">row action cells</InternalLink> or any kind of
         clickable components inside cells, make sure to intercept the <Code>click</Code> event on those components and{' '}
         <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">
           invoke its <Code>.stopPropagation()</Code> method

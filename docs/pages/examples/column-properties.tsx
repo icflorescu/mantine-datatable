@@ -78,9 +78,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         </ul>
       </PageText>
       <PageText>
-        If you provide a custom <Code>render</Code> method, you are in fact creating a <em>“virtual column”</em>, and
-        the <Code>accessor</Code> name doesn’t have to refer an existing property (or nested property) name. However,
-        you must provide one, and each accessor name must be unique amongst the collection of columns.
+        You can create a <em>“virtual column”</em> by providing an accessor that doesn’t to refer an existing property
+        (or nested property) name. In this case, you <strong>must</strong> provide a custom <Code>render</Code> method.
+        Also, keep in mind that each accessor name must be unique amongst the collection of columns.
       </PageText>
       <PageText>Consider the example below:</PageText>
       <CodeBlockTabs
@@ -95,7 +95,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       />
       <PageText>The code above will produce the following result:</PageText>
       <ColumnPropertiesExample />
-      <PageSubtitle value="Styling column cells" />
+      <PageSubtitle value="Styling column titles and cells" />
       <PageText>
         In addition, each column can be further customized by specifying the following styling properties:
         <ul>

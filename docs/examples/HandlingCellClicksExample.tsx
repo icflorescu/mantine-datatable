@@ -1,25 +1,24 @@
-import { Button, Center, Stack, Text } from '@mantine/core';
+import { Button, Center, Code, Stack, Text } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
 import { DataTable } from 'mantine-datatable';
 import { companies } from '~/data';
 
-export default function HandlingRowClicksExample() {
+export default function HandlingCellClicksExample() {
   return (
     // example-start
     <DataTable
       withBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
-      onRowClick={(company, rowIndex) => {
+      onCellClick={({ record, recordIndex, column, columnIndex }) => {
         openModal({
-          title: 'Company information',
-          styles: {
-            modal: { maxWidth: 300 },
-          },
+          title: 'Cell click information',
           children: (
             <Stack>
               <Text size="sm">
-                You clicked on row[{rowIndex}], referring to company <em>{company.name}</em>.
+                You clicked on row[{recordIndex}], column[{columnIndex}] with accessor <Code>{column.accessor}</Code>.
+                <br />
+                The clicked row refers to company <em>{record.name}</em>.
               </Text>
               <Center>
                 <Button sx={{ width: '100%', maxWidth: 100 }} onClick={() => closeAllModals()}>
