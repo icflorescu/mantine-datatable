@@ -1,5 +1,5 @@
-import { Box, Center, createStyles, Group, MantineTheme } from '@mantine/core';
-import { ReactNode } from 'react';
+import { Box, Center, createStyles, Group, MantineTheme, Sx } from '@mantine/core';
+import { CSSProperties, ReactNode } from 'react';
 import { ArrowDown, ArrowsVertical } from 'tabler-icons-react';
 import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
@@ -37,6 +37,9 @@ const useStyles = createStyles((theme) => ({
 }));
 
 type DataTableHeaderCell<T> = {
+  className?: string;
+  sx?: Sx;
+  style?: CSSProperties;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: ReactNode | undefined;
   sortStatus: DataTableSortStatus | undefined;
@@ -44,6 +47,9 @@ type DataTableHeaderCell<T> = {
 } & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlignment' | 'width'>;
 
 export default function DataTableHeaderCell<T>({
+  className,
+  sx,
+  style,
   accessor,
   visibleMediaQuery,
   title,
@@ -59,13 +65,17 @@ export default function DataTableHeaderCell<T>({
   return (
     <Box
       component="th"
-      className={cx({ [classes.sortableColumnHeader]: sortable })}
-      sx={{
-        '&&': { textAlign: textAlignment },
-        width,
-        minWidth: width,
-        maxWidth: width,
-      }}
+      className={cx({ [classes.sortableColumnHeader]: sortable }, className)}
+      sx={[
+        {
+          '&&': { textAlign: textAlignment },
+          width,
+          minWidth: width,
+          maxWidth: width,
+        },
+        sx,
+      ]}
+      style={style}
       role={sortable ? 'button' : undefined}
       onClick={
         sortable && onSortStatusChange
