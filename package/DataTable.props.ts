@@ -9,7 +9,7 @@ import type {
   Sx,
   TableProps,
 } from '@mantine/core';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, Dispatch, ReactNode, SetStateAction } from 'react';
 
 export type DataTableColumnTextAlignment = 'left' | 'center' | 'right';
 export type DataTableVerticalAlignment = 'top' | 'center' | 'bottom';
@@ -366,6 +366,13 @@ export type DataTableRowExpansionProps<T> = {
    * Additional properties passed to the Mantine Collapse component wrapping the custom content
    */
   collapseProps?: DataTableRowExpansionCollapseProps;
+
+  expanded?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    recordIds: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setRecordIds: Dispatch<SetStateAction<any[]>>;
+  };
 
   /**
    * Function returning the custom content to be lazily rendered for an expanded row;

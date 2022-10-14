@@ -1,5 +1,6 @@
-import { createStyles, Group, Stack, Text } from '@mantine/core';
+import { Button, createStyles, Group, Stack, Text } from '@mantine/core';
 import { DataTable } from 'mantine-datatable';
+import { useState } from 'react';
 import { companies } from '~/data';
 
 const records = companies.slice(0, 5);
@@ -173,6 +174,88 @@ export function RowExpansionExampleTriggerAlways() {
         // example-resume
       }}
     />
+  );
+  // example-end
+}
+
+export function RowExpansionExampleControlledMode() {
+  const { classes } = useStyles();
+  const [firstRowId, secondRowId, thirdRowId, fourthRowId] = records.slice(0, 4).map((r) => r.id);
+
+  // example-start controlled-mode
+  const [expandedRecordIds, setExpandedRecordIds] = useState<string[]>([]);
+
+  const expandFirstAndThirdRow = () => {
+    setExpandedRecordIds([firstRowId, thirdRowId]);
+  };
+
+  const expandSecondAndFourthRow = () => {
+    setExpandedRecordIds([secondRowId, fourthRowId]);
+  };
+
+  const collapseAllRows = () => {
+    setExpandedRecordIds([]);
+  };
+
+  return (
+    <>
+      {/* example-skip buttons triggering the above callbacks */}
+      <Button.Group>
+        <Button
+          variant="default"
+          onClick={expandFirstAndThirdRow}
+          disabled={expandedRecordIds.includes(firstRowId) && expandedRecordIds.includes(thirdRowId)}
+        >
+          Expand first and third row
+        </Button>
+        <Button
+          variant="default"
+          onClick={expandSecondAndFourthRow}
+          disabled={expandedRecordIds.includes(secondRowId) && expandedRecordIds.includes(fourthRowId)}
+        >
+          Expand second and fourth row
+        </Button>
+        <Button variant="default" onClick={collapseAllRows} disabled={expandedRecordIds.length === 0}>
+          Collapse all rows
+        </Button>
+      </Button.Group>
+      {/* example-resume */}
+      <DataTable
+        mt="md"
+        withBorder
+        withColumnBorders
+        columns={[
+          { accessor: 'number', title: '#', render: (_, index) => index + 1 },
+          { accessor: 'name', width: '100%' },
+          { accessor: 'city', ellipsis: true },
+          { accessor: 'state' },
+        ]}
+        records={records}
+        rowExpansion={{
+          allowMultiple: true,
+          expanded: {
+            recordIds: expandedRecordIds,
+            setRecordIds: setExpandedRecordIds,
+          },
+          content: ({ record }) => (
+            // example-skip expansion content
+            <Stack className={classes.details} p="xs" spacing={6}>
+              <Group spacing={6}>
+                <Text className={classes.label}>Postal address:</Text>
+                <Text>
+                  {record.streetAddress}, {record.city}, {record.state}
+                </Text>
+              </Group>
+              <Group spacing={6}>
+                <Text className={classes.label}>Mission statement:</Text>
+                <Text italic>“{record.missionStatement}”</Text>
+              </Group>
+            </Stack>
+            // example-resume
+          ),
+        }}
+      />
+    </>
   );
   // example-end
 }
