@@ -124,6 +124,13 @@ export default function DataTable<T>({
   onCellClick,
   rowContextMenu,
   rowExpansion,
+  m,
+  my,
+  mx,
+  mt,
+  mb,
+  ml,
+  mr,
   sx,
   className,
   classNames,
@@ -220,10 +227,12 @@ export default function DataTable<T>({
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
   const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;
   const { cx, classes, theme } = useStyles({ borderColor, rowBorderColor });
+  const marginProperties = { m, my, mx, mt, mb, ml, mr };
   const styleProperties = typeof styles === 'function' ? styles(theme, EMPTY_OBJECT) : styles;
 
   return (
     <Box
+      {...marginProperties}
       className={cx(classes.root, { [classes.tableWithBorder]: withBorder }, className, classNames?.root)}
       sx={[
         (theme) => ({

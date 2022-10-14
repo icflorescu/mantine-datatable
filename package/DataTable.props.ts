@@ -479,7 +479,10 @@ export type DataTableProps<T> = {
 
   rowExpansion?: DataTableRowExpansionProps<T>;
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
-  Omit<DefaultProps<'root' | 'header' | 'pagination', CSSProperties>, 'unstyled'> &
+  Omit<
+    DefaultProps<'root' | 'header' | 'pagination', CSSProperties>,
+    'unstyled' | 'p' | 'px' | 'py' | 'pt' | 'pb' | 'pl' | 'pr'
+  > &
   DataTableOuterBorderProps &
   DataTableEmptyStateProps &
   DataTablePaginationProps &

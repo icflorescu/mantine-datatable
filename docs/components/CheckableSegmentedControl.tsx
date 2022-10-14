@@ -19,6 +19,7 @@ const useStyles = createStyles((theme) => ({
   },
   inputs: {
     display: 'flex',
+    alignItems: 'center',
     gap: theme.spacing.xs,
     marginLeft: 18,
     ['@media (min-width: 375px)']: {
