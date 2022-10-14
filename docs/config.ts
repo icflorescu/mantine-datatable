@@ -103,6 +103,11 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: handling row click events on Mantine DataTable',
       },
       {
+        path: 'handling-cell-clicks',
+        title: 'Handling cell clicks',
+        description: 'Example: handling cell click events on Mantine DataTable',
+      },
+      {
         path: 'row-context-menu',
         title: 'Row context menu',
         description: 'Example: working with row context menus on Mantine DataTable',
@@ -118,9 +123,9 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: how to implement a row actions cell on Mantine DataTable',
       },
       {
-        path: 'links-or-buttons-inside-clickable-rows',
-        title: 'Links or buttons inside clickable rows',
-        description: 'Example: how to add links or buttons inside Mantine DataTable clickable rows',
+        path: 'links-or-buttons-inside-clickable-rows-or-cells',
+        title: 'Links or buttons inside clickable rows/cells',
+        description: 'Example: how to add links or buttons inside Mantine DataTable clickable rows or cells',
       },
       {
         path: 'disabling-text-selection',

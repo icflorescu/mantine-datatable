@@ -186,6 +186,25 @@ export type DataTableColumn<T> = {
   cellsSx?: Sx;
 };
 
+export type DataTableCellClickHandler<T> = (params: {
+  /**
+   * Clicked record
+   */
+  record: T;
+  /**
+   * Clicked record index
+   */
+  recordIndex: number;
+  /**
+   * Clicked column information
+   */
+  column: DataTableColumn<T>;
+  /**
+   * Clicked column index
+   */
+  columnIndex: number;
+}) => void;
+
 export type DataTableSortStatus = {
   /**
    * Sort column accessor; you can use dot-notation for nested objects property drilling
@@ -437,9 +456,14 @@ export type DataTableProps<T> = {
   loaderBackgroundBlur?: number;
 
   /**
+   * Function to call when a row cell is clicked
+   */
+  onCellClick?: DataTableCellClickHandler<T>;
+
+  /**
    * Function to call when a row is clicked, accepting the current record and its index in `records`
    */
-  onRowClick?: (record: T, index: number) => void;
+  onRowClick?: (record: T, recordIndex: number) => void;
 
   /**
    * Defines a context-menu to show when user right-clicks or clicks on a row

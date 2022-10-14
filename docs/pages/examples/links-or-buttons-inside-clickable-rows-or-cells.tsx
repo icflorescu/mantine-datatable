@@ -9,7 +9,7 @@ import PageTitle from '~/components/PageTitle';
 import LinksOrButtonsInsideClickableRowsExample from '~/examples/LinksOrButtonsInsideClickableRowsExample';
 import readCodeExample from '~/lib/readCodeExample';
 
-const PATH = 'examples/links-or-buttons-inside-clickable-rows';
+const PATH = 'examples/links-or-buttons-inside-clickable-rows-or-cells';
 
 export const getStaticProps: GetStaticProps<{
   code: string;
@@ -22,8 +22,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        If you need to add links, buttons or any kind of clickable components inside{' '}
+        If you need to add links, buttons or any kind of clickable components inside clickable{' '}
         <InternalLink to="/examples/handling-row-clicks">clickable rows</InternalLink>,{' '}
+        <InternalLink to="/examples/handling-cell-clicks">clickable cells</InternalLink>,{' '}
         <InternalLink to="/examples/expanding-rows">expandable rows</InternalLink> or{' '}
         <InternalLink to="/examples/row-context-menu">
           row context-menus triggered by <Code>click</Code> instead of <Code>right-click</Code>

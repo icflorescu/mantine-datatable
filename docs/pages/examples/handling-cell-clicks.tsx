@@ -6,29 +6,29 @@ import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import HandlingRowClicksExample from '~/examples/HandlingRowClicksExample';
+import HandlingCellClicksExample from '~/examples/HandlingCellClicksExample';
 import readCodeExample from '~/lib/readCodeExample';
 
-const PATH = 'examples/handling-row-clicks';
+const PATH = 'examples/handling-cell-clicks';
 
 export const getStaticProps: GetStaticProps<{
   code: string;
 }> = async () => ({
-  props: { code: (await readCodeExample('examples/HandlingRowClicksExample.tsx')) as string },
+  props: { code: (await readCodeExample('examples/HandlingCellClicksExample.tsx')) as string },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Container>
       <PageTitle of={PATH} />
-      <PageText>Click on a row to see it in action:</PageText>
-      <HandlingRowClicksExample />
+      <PageText>Click on a cell to see it in action:</PageText>
+      <HandlingCellClicksExample />
       <PageText>
-        Provide a handler called <Code>onRowClick</Code> to the <Code>DataTable</Code> component, like so:
+        Provide a handler called <Code>onCellClick</Code> to the <Code>DataTable</Code> component, like so:
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText info>
-        When handling row clicks, you might want to{' '}
+        When handling cell clicks, you might want to{' '}
         <InternalLink to="/examples/disabling-text-selection">disable text selection</InternalLink>.
       </PageText>
       <PageText info>
@@ -42,13 +42,6 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <br />
         See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows">this example</InternalLink> for more
         information.
-      </PageText>
-      <PageText>
-        If you need more granularity, consider using an{' '}
-        <InternalLink to="/examples/handling-cell-clicks">
-          <Code>onCellClick</Code> handler
-        </InternalLink>{' '}
-        instead.
       </PageText>
       <PageNavigation of={PATH} />
     </Container>

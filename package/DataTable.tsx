@@ -121,6 +121,7 @@ export default function DataTable<T>({
   noRecordsIcon,
   striped,
   onRowClick,
+  onCellClick,
   rowContextMenu,
   rowExpansion,
   sx,
@@ -344,6 +345,7 @@ export default function DataTable<T>({
                     selectionChecked={isSelected}
                     onSelectionChange={handleSelectionChange}
                     onClick={handleClick}
+                    onCellClick={onCellClick}
                     onContextMenu={handleContextMenu}
                     contextMenuVisible={
                       rowContextMenuInfo ? getValueAtPath(rowContextMenuInfo.record, idAccessor) === recordId : false
