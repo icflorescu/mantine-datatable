@@ -1,4 +1,5 @@
 import { Button, createStyles, Group, Stack, Text } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
 import { companies } from '~/data';
@@ -8,6 +9,7 @@ const records = companies.slice(0, 5);
 const useStyles = createStyles((theme) => ({
   details: { background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0] },
   label: { width: 130 },
+  horizontalButton: { flex: '1 1 33%' },
 }));
 
 export function RowExpansionExampleSimple() {
@@ -179,7 +181,8 @@ export function RowExpansionExampleTriggerAlways() {
 }
 
 export function RowExpansionExampleControlledMode() {
-  const { classes } = useStyles();
+  const { theme, classes, cx } = useStyles();
+  const horizontalButtons = useMediaQuery(`(min-width: ${theme.breakpoints.md}px)`);
   const [firstRowId, secondRowId, thirdRowId, fourthRowId] = records.slice(0, 4).map((r) => r.id);
 
   // example-start controlled-mode
@@ -200,8 +203,9 @@ export function RowExpansionExampleControlledMode() {
   return (
     <>
       {/* example-skip buttons triggering the above callbacks */}
-      <Button.Group>
+      <Button.Group orientation={horizontalButtons ? 'horizontal' : 'vertical'}>
         <Button
+          className={cx({ [classes.horizontalButton]: horizontalButtons })}
           variant="default"
           onClick={expandFirstAndThirdRow}
           disabled={expandedRecordIds.includes(firstRowId) && expandedRecordIds.includes(thirdRowId)}
@@ -209,13 +213,19 @@ export function RowExpansionExampleControlledMode() {
           Expand first and third row
         </Button>
         <Button
+          className={cx({ [classes.horizontalButton]: horizontalButtons })}
           variant="default"
           onClick={expandSecondAndFourthRow}
           disabled={expandedRecordIds.includes(secondRowId) && expandedRecordIds.includes(fourthRowId)}
         >
           Expand second and fourth row
         </Button>
-        <Button variant="default" onClick={collapseAllRows} disabled={expandedRecordIds.length === 0}>
+        <Button
+          className={cx({ [classes.horizontalButton]: horizontalButtons })}
+          variant="default"
+          onClick={collapseAllRows}
+          disabled={expandedRecordIds.length === 0}
+        >
           Collapse all rows
         </Button>
       </Button.Group>
