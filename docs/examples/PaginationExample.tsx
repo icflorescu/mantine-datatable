@@ -1,3 +1,4 @@
+import { Box } from '@mantine/core';
 import dayjs from 'dayjs';
 import { DataTable } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
@@ -16,30 +17,32 @@ export default function PaginationExample() {
   }, [page]);
 
   return (
-    <DataTable
-      withBorder
-      records={records}
-      columns={[
-        { accessor: 'firstName', width: 100 },
-        { accessor: 'lastName', width: 100 },
-        { accessor: 'email', width: '100%' },
-        {
-          accessor: 'birthDate',
-          textAlignment: 'right',
-          width: 120,
-          render: ({ birthDate }) => dayjs(birthDate).format('MMM D YYYY'),
-        },
-      ]}
-      totalRecords={employees.length}
-      recordsPerPage={PAGE_SIZE}
-      page={page}
-      onPageChange={(p) => setPage(p)}
-      // uncomment the next line to use a custom pagination text
-      // paginationText={({ from, to, totalRecords }) => `Records ${from} - ${to} of ${totalRecords}`}
-      // uncomment the next line to use a custom pagination color
-      paginationColor="ffaa11"
-      // uncomment the next line to use a custom pagination size
-      // paginationSize="md"
-    />
+    <Box sx={{ height: 300 }}>
+      <DataTable
+        withBorder
+        records={records}
+        columns={[
+          { accessor: 'firstName', width: 100 },
+          { accessor: 'lastName', width: 100 },
+          { accessor: 'email', width: '100%' },
+          {
+            accessor: 'birthDate',
+            textAlignment: 'right',
+            width: 120,
+            render: ({ birthDate }) => dayjs(birthDate).format('MMM D YYYY'),
+          },
+        ]}
+        totalRecords={employees.length}
+        recordsPerPage={PAGE_SIZE}
+        page={page}
+        onPageChange={(p) => setPage(p)}
+        // uncomment the next line to use a custom pagination text
+        // paginationText={({ from, to, totalRecords }) => `Records ${from} - ${to} of ${totalRecords}`}
+        // uncomment the next line to use a custom pagination color
+        paginationColor="ffaa11"
+        // uncomment the next line to use a custom pagination size
+        // paginationSize="md"
+      />
+    </Box>
   );
 }
