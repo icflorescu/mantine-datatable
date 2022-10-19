@@ -1,4 +1,4 @@
-import { Box, Code, Container, MANTINE_SIZES } from '@mantine/core';
+import { Code, Container, MANTINE_SIZES } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { Fragment } from 'react';
 import CodeBlock from '~/components/CodeBlock';
@@ -19,9 +19,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
-      <Box sx={{ height: 300 }}>
-        <PaginationExample />
-      </Box>
+      <PaginationExample />
       <PageText>
         You can enable pagination by adding the following component properties:
         <ul>
