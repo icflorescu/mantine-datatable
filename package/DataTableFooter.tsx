@@ -23,7 +23,7 @@ const useStyles = createStyles(
   })
 );
 
-type DataTableFooterProps = Omit<DataTablePaginationProps, 'loadingText' | 'noRecordsText'> & {
+type DataTableFooterProps = Omit<DataTablePaginationProps, 'loadingText'> & {
   className?: string;
   style?: CSSObject;
   topBorderColor: string | ((theme: MantineTheme) => string);
