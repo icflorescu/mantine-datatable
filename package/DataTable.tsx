@@ -103,6 +103,7 @@ export default function DataTable<T>({
   records,
   selectedRecords,
   onSelectedRecordsChange,
+  isRecordSelectable,
   sortStatus,
   onSortStatusChange,
   horizontalSpacing,
@@ -211,16 +212,22 @@ export default function DataTable<T>({
   const selectedRecordIds = selectedRecords?.map((record) => getValueAtPath(record, idAccessor));
   const hasRecordsAndSelectedRecords =
     recordIds !== undefined && selectedRecordIds !== undefined && selectedRecordIds.length > 0;
-  const allRecordsSelected = hasRecordsAndSelectedRecords && recordIds.every((id) => selectedRecordIds.includes(id));
-  const someRecordsSelected = hasRecordsAndSelectedRecords && recordIds.some((id) => selectedRecordIds.includes(id));
+
+  const selectableRecords = isRecordSelectable ? records?.filter(isRecordSelectable) : records;
+  const selectableRecordIds = selectableRecords?.map((record) => getValueAtPath(record, idAccessor));
+
+  const allSelectableRecordsSelected =
+    hasRecordsAndSelectedRecords && selectableRecordIds!.every((id) => selectedRecordIds.includes(id));
+  const someRecordsSelected =
+    hasRecordsAndSelectedRecords && selectableRecordIds!.some((id) => selectedRecordIds.includes(id));
 
   let handleHeaderSelectionChange: (() => void) | undefined;
   if (onSelectedRecordsChange) {
     handleHeaderSelectionChange = () => {
       onSelectedRecordsChange(
-        allRecordsSelected
-          ? selectedRecords.filter((record) => !recordIds.includes(getValueAtPath(record, idAccessor)))
-          : uniqBy([...selectedRecords, ...records!], (record) => getValueAtPath(record, idAccessor))
+        allSelectableRecordsSelected
+          ? selectedRecords.filter((record) => !selectableRecordIds!.includes(getValueAtPath(record, idAccessor)))
+          : uniqBy([...selectedRecords, ...selectableRecords!], (record) => getValueAtPath(record, idAccessor))
       );
     };
   }
@@ -276,8 +283,8 @@ export default function DataTable<T>({
             sortStatus={sortStatus}
             onSortStatusChange={onSortStatusChange}
             selectionVisible={!!selectedRecords}
-            selectionChecked={allRecordsSelected}
-            selectionIndeterminate={someRecordsSelected && !allRecordsSelected}
+            selectionChecked={allSelectableRecordsSelected}
+            selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
             onSelectionChange={handleHeaderSelectionChange}
             leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
           />
@@ -304,15 +311,21 @@ export default function DataTable<T>({
                 if (onSelectedRecordsChange) {
                   handleSelectionChange = (e) => {
                     if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
-                      const recordsInterval = records.filter(
+                      const targetRecords = records.filter(
                         recordIndex > lastSelectionChangeIndex
-                          ? (_, index) => index >= lastSelectionChangeIndex && index <= recordIndex
-                          : (_, index) => index >= recordIndex && index <= lastSelectionChangeIndex
+                          ? (r, index) =>
+                              index >= lastSelectionChangeIndex &&
+                              index <= recordIndex &&
+                              (isRecordSelectable ? isRecordSelectable(r, index) : true)
+                          : (r, index) =>
+                              index >= recordIndex &&
+                              index <= lastSelectionChangeIndex &&
+                              (isRecordSelectable ? isRecordSelectable(r, index) : true)
                       );
                       onSelectedRecordsChange(
                         isSelected
-                          ? differenceBy(selectedRecords, recordsInterval, (r) => getValueAtPath(r, idAccessor))
-                          : uniqBy([...selectedRecords, ...recordsInterval], (r) => getValueAtPath(r, idAccessor))
+                          ? differenceBy(selectedRecords, targetRecords, (r) => getValueAtPath(r, idAccessor))
+                          : uniqBy([...selectedRecords, ...targetRecords], (r) => getValueAtPath(r, idAccessor))
                       );
                     } else {
                       onSelectedRecordsChange(
@@ -354,6 +367,7 @@ export default function DataTable<T>({
                     selectionVisible={!!selectedRecords}
                     selectionChecked={isSelected}
                     onSelectionChange={handleSelectionChange}
+                    isRecordSelectable={isRecordSelectable}
                     onClick={handleClick}
                     onCellClick={onCellClick}
                     onContextMenu={handleContextMenu}

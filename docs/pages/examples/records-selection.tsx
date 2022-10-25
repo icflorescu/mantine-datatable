@@ -3,15 +3,18 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
+import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import RecordsSelectionExample from '~/examples/RecordsSelectionExample';
+import { RecordsSelectionExample, RecordsSelectionWithDisabledItemsExample } from '~/examples/RecordsSelectionExamples';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/records-selection';
 
-export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('examples/RecordsSelectionExample.tsx')) as string },
+type ExampleName = 'standard' | 'disabled-records';
+
+export const getStaticProps: GetStaticProps<{ code: Record<ExampleName, string> }> = async () => ({
+  props: { code: (await readCodeExample('examples/RecordsSelectionExamples.tsx')) as Record<ExampleName, string> },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -51,7 +54,13 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <Code>DataTable</Code>’s <Code>idAccessor</Code> property (defaulting to <Code>id</Code> - see more info{' '}
         <InternalLink to="/examples/non-standard-record-ids">here</InternalLink>).
       </PageText>
-      <CodeBlock language="typescript" content={code} />
+      <CodeBlock language="typescript" content={code['standard']} />
+      <PageSubtitle value="Disable selection of certain records" />
+      <PageText>
+        You can disable the selection of certain records by providing an `isRecordSelectable` property like so:
+      </PageText>
+      <CodeBlock language="typescript" content={code['disabled-records']} />
+      <RecordsSelectionWithDisabledItemsExample />
       <PageNavigation of={PATH} />
     </Container>
   );
