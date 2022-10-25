@@ -5,7 +5,8 @@ import { useState } from 'react';
 import { Trash } from 'tabler-icons-react';
 import { companies, Company } from '~/data';
 
-export default function RecordsSelectionExample() {
+export function RecordsSelectionExample() {
+  // example-start standard
   const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);
 
   return (
@@ -42,4 +43,28 @@ export default function RecordsSelectionExample() {
       </Paper>
     </>
   );
+  // example-end
+}
+
+export function RecordsSelectionWithDisabledItemsExample() {
+  // example-start disabled-records
+  const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);
+
+  return (
+    <DataTable
+      withBorder
+      withColumnBorders
+      records={companies}
+      columns={[
+        { accessor: 'name', width: '40%' },
+        { accessor: 'streetAddress', width: '60%' },
+        { accessor: 'city', width: 160 },
+        { accessor: 'state', width: 80 },
+      ]}
+      selectedRecords={selectedRecords}
+      onSelectedRecordsChange={setSelectedRecords}
+      isRecordSelectable={(record) => record.name.length < 18}
+    />
+  );
+  // example-end
 }

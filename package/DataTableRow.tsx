@@ -44,6 +44,7 @@ type DataTableRowProps<T> = {
   selectionVisible: boolean;
   selectionChecked: boolean;
   onSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
+  isRecordSelectable: ((record: T, index: number) => boolean) | undefined;
   onClick: MouseEventHandler<HTMLTableRowElement> | undefined;
   onCellClick: DataTableCellClickHandler<T> | undefined;
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
@@ -59,6 +60,7 @@ export default function DataTableRow<T>({
   selectionVisible,
   selectionChecked,
   onSelectionChange,
+  isRecordSelectable,
   onClick,
   onCellClick,
   onContextMenu,
@@ -95,7 +97,7 @@ export default function DataTableRow<T>({
           <DataTableRowSelectorCell
             withRightShadow={leftShadowVisible}
             checked={selectionChecked}
-            disabled={!onSelectionChange}
+            disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable(record, recordIndex) : false)}
             onChange={onSelectionChange}
           />
         )}

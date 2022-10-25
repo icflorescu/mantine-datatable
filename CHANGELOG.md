@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.7.11 (2022-10-25)
+- Implement [#101](https://github.com/icflorescu/mantine-datatable/issues/101): `isRecordSelectable: (record: T) => boolean` property to prevent the selection of certain records
+
+## 1.7.10 (2022-10-25)
+- Fix [#102](https://github.com/icflorescu/mantine-datatable/issues/102): `paginationText` was overriden when no records were found
+- Add `loadingText` option
+
 ## 1.7.9 (2022-10-15)
 - Implement row expansion [controlled mode](https://icflorescu.github.io/mantine-datatable/examples/row-expansion-examples)
 - Implement margin props on the DataTable component (m, my, mx, mt, mb, ml, mr)
