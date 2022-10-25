@@ -58,7 +58,6 @@ export type DataTablePaginationProps =
       recordsPerPage?: never;
       paginationColor?: never;
       paginationSize?: never;
-      noRecordsText?: never;
       loadingText?: never;
       paginationText?: never;
     }
@@ -94,12 +93,7 @@ export type DataTablePaginationProps =
       paginationColor?: MantineColor;
 
       /**
-       * Text to show on when no records are available
-       */
-      noRecordsText?: string;
-
-      /**
-       * Text to show when records are loading
+       * Text to show while records are loading
        */
       loadingText?: string;
 
@@ -477,6 +471,11 @@ export type DataTableProps<T> = {
    * Loader background blur (in pixels)
    */
   loaderBackgroundBlur?: number;
+
+  /**
+   * Text to show on empty state and pagination footer when no records are available
+   */
+  noRecordsText?: string;
 
   /**
    * Function to call when a row cell is clicked
