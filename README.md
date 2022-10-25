@@ -80,9 +80,9 @@ Have a look at the available [component properties](https://icflorescu.github.io
 
 Want to [become a code contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)?
 
-## Supporting the project and its author
+## Supporting the project
 
-If you find this package useful, please star the repository, [tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu), and [endorse me on LinkedIn](https://www.linkedin.com/in/icflorescu).
+If you find this package useful, please 🙏star the repository, 💕[tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu), 👍[endorse me on LinkedIn](https://www.linkedin.com/in/icflorescu) or consider hiring my services.
 
 The more stars this repository gets, the more visibility it gains among the Mantine users community. The more
 users it gets, the more chances that some of those users will become active code contributors willing to put
@@ -90,6 +90,8 @@ their effort into bringing new features to life and/or fixing bugs.
 
 As the repository gain awareness, my chances of getting hired to work on Mantine-based projects will increase,
 which in turn will help maintain my vested interest in keeping the project alive.
+
+## Hiring the author
 
 If you want to hire my services, don’t hesitate to drop me a line at the email address listed in my [GitHub profile](https://github.com/icflorescu).
 I’m currently getting a constant flow of approaches, some of them relevant, others not so relevant.

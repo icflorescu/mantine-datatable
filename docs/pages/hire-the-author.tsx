@@ -14,16 +14,15 @@ const useStyles = createStyles((theme) => ({
       gap: theme.spacing.xl,
       alignItems: 'center',
     },
-    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.md}px)`]: {
       alignItems: 'end',
     },
   },
   picture: {
     width: '100%',
-    maxWidth: 400,
-    margin: '0 auto',
+    maxWidth: 200,
     display: 'block',
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.sm,
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
       width: 160,
     },
@@ -32,6 +31,9 @@ const useStyles = createStyles((theme) => ({
     fontSize: '120%',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7],
     margin: `${theme.spacing.xl}px 0`,
+  },
+  badge: {
+    verticalAlign: 'text-bottom',
   },
   emphasis: {
     color: theme.colorScheme === 'dark' ? theme.colors.red[4] : theme.colors.red[9],
@@ -64,8 +66,14 @@ export default function Page() {
       </div>
       <PageText>
         You can learn more about what I do by visiting my profiles on{' '}
-        <ExternalLink to={AUTHOR_LINK}>GitHub</ExternalLink> or{' '}
-        <ExternalLink to="https://www.linkedin.com/in/icflorescu">LinkedIn</ExternalLink>, but since you are on this
+        <ExternalLink to={AUTHOR_LINK}>GitHub</ExternalLink>{' '}
+        <img className={classes.badge} src="https://img.shields.io/github/stars/icflorescu" alt="GitHub stars" />{' '}
+        <img
+          className={classes.badge}
+          src="https://img.shields.io/github/followers/icflorescu"
+          alt="GitHub followers"
+        />{' '}
+        or <ExternalLink to="https://www.linkedin.com/in/icflorescu">LinkedIn</ExternalLink>, but since you are on this
         page, you probably have a pretty good idea of how my skills could help you.
       </PageText>
       <PageText>

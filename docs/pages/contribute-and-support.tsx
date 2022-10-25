@@ -2,6 +2,7 @@ import { Box, Code, Container } from '@mantine/core';
 import { useWindowEvent } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import ExternalLink from '~/components/ExternalLink';
+import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
@@ -79,7 +80,7 @@ export default function Page() {
       </Box>
       <PageSubtitle value="Supporting the project" />
       <PageText>
-        If you find this project useful, it would help a lot to 🙏
+        If you find this project useful, it would help a lot if you could 🙏
         <strong>
           <ExternalLink to={REPO_LINK}>star the repository</ExternalLink>
         </strong>
@@ -87,7 +88,8 @@ export default function Page() {
         <ExternalLink to="https://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu">
           spread the word
         </ExternalLink>
-        , and 👍<ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>.
+        , 👍<ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>, or — better
+        yet — <InternalLink to="/hire-the-author">hire my services</InternalLink>.
       </PageText>
       <PageSubtitle value="Why do repository stars matter" />
       <PageText>
