@@ -40,8 +40,15 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <strong>optional</strong> properties:
         <ul>
           <li>
+            <Code>loadingText</Code> → a <Code>string</Code> to display while loading records
+          </li>
+          <li>
+            <Code>noRecordsText</Code> → a <Code>string</Code> to display when no records are present
+          </li>
+          <li>
             <Code>paginationText</Code> → a callback receiving an object in the shape of{' '}
-            <Code>{'{ from: number; to: number; totalRecords: number }'}</Code> and returning the pagination text
+            <Code>{'{ from: number; to: number; totalRecords: number }'}</Code> and returning a <Code>ReactNode</Code>{' '}
+            representing the pagination text
           </li>
           <li>
             <Code>paginationColor</Code> → the pagination color; see{' '}
