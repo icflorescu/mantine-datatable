@@ -39,16 +39,10 @@ export type DataTableEmptyStateProps =
        */
       emptyState?: ReactNode;
 
-      noRecordsText?: never;
       noRecordsIcon?: never;
     }
   | {
       emptyState?: never;
-
-      /**
-       * Text to show when no records are available
-       */
-      noRecordsText?: string;
 
       /**
        * Icon to show when no records are available
@@ -64,6 +58,8 @@ export type DataTablePaginationProps =
       recordsPerPage?: never;
       paginationColor?: never;
       paginationSize?: never;
+      noRecordsText?: never;
+      loadingText?: never;
       paginationText?: never;
     }
   | {
@@ -96,6 +92,16 @@ export type DataTablePaginationProps =
        * Pagination component color; defaults to primary theme color
        */
       paginationColor?: MantineColor;
+
+      /**
+       * Text to show on when no records are available
+       */
+      noRecordsText?: string;
+
+      /**
+       * Text to show when records are loading
+       */
+      loadingText?: string;
 
       /**
        * Pagination text; defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`

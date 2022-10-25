@@ -36,10 +36,14 @@ export default function PaginationExample() {
         recordsPerPage={PAGE_SIZE}
         page={page}
         onPageChange={(p) => setPage(p)}
+        // uncomment the next line to use a custom loading text
+        // loadingText="Loading..."
+        // uncomment the next line to display a custom text when no records were found
+        // noRecordsText="No records found"
         // uncomment the next line to use a custom pagination text
         // paginationText={({ from, to, totalRecords }) => `Records ${from} - ${to} of ${totalRecords}`}
-        // uncomment the next line to use a custom pagination color
-        paginationColor="ffaa11"
+        // uncomment the next line to use a custom pagination color (see https://mantine.dev/theming/colors/)
+        // paginationColor="grape"
         // uncomment the next line to use a custom pagination size
         // paginationSize="md"
       />

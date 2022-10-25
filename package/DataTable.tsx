@@ -116,6 +116,7 @@ export default function DataTable<T>({
   loaderSize,
   loaderVariant,
   loaderBackgroundBlur,
+  loadingText = '...',
   emptyState,
   noRecordsText = 'No records',
   noRecordsIcon,
@@ -385,6 +386,8 @@ export default function DataTable<T>({
           paginationColor={paginationColor}
           paginationSize={paginationSize}
           paginationText={paginationText}
+          noRecordsText={noRecordsText}
+          loadingText={loadingText}
           recordsLength={recordsLength}
         />
       )}

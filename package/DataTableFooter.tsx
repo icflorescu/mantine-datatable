@@ -23,13 +23,15 @@ const useStyles = createStyles(
   })
 );
 
-type DataTableFooterProps = DataTablePaginationProps & {
+type DataTableFooterProps = Omit<DataTablePaginationProps, 'loadingText' | 'noRecordsText'> & {
   className?: string;
   style?: CSSObject;
   topBorderColor: string | ((theme: MantineTheme) => string);
   fetching: boolean | undefined;
   recordsLength: number | undefined;
   horizontalSpacing: MantineNumberSize | undefined;
+  loadingText: string;
+  noRecordsText: string;
 };
 
 export default forwardRef(function DataTableFooter(
@@ -42,6 +44,8 @@ export default forwardRef(function DataTableFooter(
     onPageChange,
     paginationColor,
     paginationSize,
+    loadingText,
+    noRecordsText,
     paginationText,
     totalRecords,
     recordsPerPage,
@@ -51,8 +55,10 @@ export default forwardRef(function DataTableFooter(
   ref: ForwardedRef<HTMLDivElement>
 ) {
   let paginationTextValue: ReactNode;
-  if (fetching || !totalRecords) {
-    paginationTextValue = '...';
+  if (fetching) {
+    paginationTextValue = loadingText;
+  } else if (!totalRecords) {
+    paginationTextValue = noRecordsText;
   } else {
     const from = (page! - 1) * recordsPerPage! + 1;
     const to = from + recordsLength! - 1;
