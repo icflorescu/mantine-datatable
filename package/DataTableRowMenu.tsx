@@ -15,8 +15,8 @@ type DataTableRowMenuProps = {
   borderRadius: MantineNumberSize | undefined;
   shadow: MantineShadow | undefined;
   zIndex: number | undefined;
-  top: number;
-  left: number;
+  y: number;
+  x: number;
   children: ReactNode;
   onDestroy: () => void;
 };
@@ -25,8 +25,8 @@ export default function DataTableRowMenu({
   borderRadius = 'xs',
   shadow = 'sm',
   zIndex = 3,
-  top: desiredTop,
-  left: desiredLeft,
+  y: desiredY,
+  x: desiredX,
   onDestroy,
   children,
 }: DataTableRowMenuProps) {
@@ -37,17 +37,31 @@ export default function DataTableRowMenu({
   const ref = useMergedRef(clickOutsideRef, sizeRef);
 
   const {
-    spacing: { xs: xsSpacing },
+    dir,
+    spacing: { md: mdSpacing },
   } = useMantineTheme();
 
   const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
-  const top = desiredTop + height + xsSpacing > windowHeight ? windowHeight - height - xsSpacing : desiredTop;
-  const left = desiredLeft + width + xsSpacing > windowWidth ? windowWidth - width - xsSpacing : desiredLeft;
 
   const { classes } = useStyles();
 
   return (
-    <Paper ref={ref} shadow={shadow} radius={borderRadius} className={classes.root} sx={{ top, left, zIndex }}>
+    <Paper
+      ref={ref}
+      shadow={shadow}
+      radius={borderRadius}
+      className={classes.root}
+      sx={{
+        zIndex,
+        top: desiredY + height + mdSpacing > windowHeight ? windowHeight - height - mdSpacing : desiredY,
+        left:
+          dir === 'ltr'
+            ? desiredX + width + mdSpacing > windowWidth
+              ? windowWidth - width - mdSpacing
+              : desiredX
+            : windowWidth - mdSpacing - (desiredX - width - mdSpacing < 0 ? width + mdSpacing : desiredX),
+      }}
+    >
       {children}
     </Paper>
   );
