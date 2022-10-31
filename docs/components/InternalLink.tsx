@@ -4,10 +4,8 @@ import { ReactNode } from 'react';
 
 export default function InternalLink({ to, children }: { to: string; children: ReactNode }) {
   return (
-    <Link href={to} passHref>
-      <Text variant="link" component="a">
-        {children}
-      </Text>
-    </Link>
+    <Text variant="link" component={Link} href={to}>
+      {children}
+    </Text>
   );
 }

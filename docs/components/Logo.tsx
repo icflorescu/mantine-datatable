@@ -35,18 +35,16 @@ const useStyles = createStyles((theme) => ({
 export default function Logo({ className, insideHeader }: { className?: string; insideHeader?: boolean }) {
   const { classes, cx } = useStyles();
   return (
-    <Link href="/">
-      <a className={cx(classes.root, className)}>
-        <ThemeIcon className={cx({ [classes.iconInsideHeader]: insideHeader })} size="md" radius="lg">
-          <Table size={16} />
-        </ThemeIcon>
-        <Text className={classes.title} component="h1">
-          Mantine DataTable
-        </Text>
-        <Code className={cx(classes.version, { [classes.versionInsideHeader]: insideHeader })}>
-          {process.env.PACKAGE_VERSION}
-        </Code>
-      </a>
+    <Link className={cx(classes.root, className)} href="/">
+      <ThemeIcon className={cx({ [classes.iconInsideHeader]: insideHeader })} size="md" radius="lg">
+        <Table size={16} />
+      </ThemeIcon>
+      <Text className={classes.title} component="h1">
+        Mantine DataTable
+      </Text>
+      <Code className={cx(classes.version, { [classes.versionInsideHeader]: insideHeader })}>
+        {process.env.PACKAGE_VERSION}
+      </Code>
     </Link>
   );
 }

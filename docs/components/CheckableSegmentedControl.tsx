@@ -26,6 +26,9 @@ const useStyles = createStyles((theme) => ({
       marginLeft: 0,
     },
   },
+  checkbox: {
+    fontSize: 0,
+  },
   segmentedControl: {
     width: 160,
   },
@@ -59,7 +62,12 @@ export default function CheckableSegmentedControl({
         {label}
       </Text>
       <div className={classes.inputs}>
-        <Checkbox id={id} checked={checked} onChange={(e) => onCheckedChange(e.target.checked)} />
+        <Checkbox
+          id={id}
+          className={classes.checkbox}
+          checked={checked}
+          onChange={(e) => onCheckedChange(e.target.checked)}
+        />
         <SegmentedControl
           className={classes.segmentedControl}
           size="xs"

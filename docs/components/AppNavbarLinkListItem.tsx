@@ -54,15 +54,19 @@ export default function AppNavbarLinkListItem({ title, to, color, active }: AppN
   const { classes, cx } = useStyles({ color });
 
   return (
-    <Link key={to} href={to} passHref>
-      <UnstyledButton pl={19} py={8} className={cx(classes.root, { [classes.active]: active })} component="a">
-        <div className={classes.content}>
-          <Box className={classes.bullet} />
-          <Text className={classes.text} size="sm" weight={500}>
-            {title}
-          </Text>
-        </div>
-      </UnstyledButton>
-    </Link>
+    <UnstyledButton
+      pl={19}
+      py={8}
+      className={cx(classes.root, { [classes.active]: active })}
+      component={Link}
+      href={to}
+    >
+      <div className={classes.content}>
+        <Box className={classes.bullet} />
+        <Text className={classes.text} size="sm" weight={500}>
+          {title}
+        </Text>
+      </div>
+    </UnstyledButton>
   );
 }

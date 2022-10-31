@@ -44,35 +44,36 @@ export default function PageNavigation({ of }: { of: string }) {
 
   return (
     <div className={classes.root}>
-      <Link href={`/${back.path}`} passHref>
-        <UnstyledButton className={cx(classes.button, { [classes.withoutNext]: !next })} component="a" rel="prev">
+      <UnstyledButton
+        className={cx(classes.button, { [classes.withoutNext]: !next })}
+        component={Link}
+        href={`/${back.path}`}
+        rel="prev"
+      >
+        <Group px="sm" py="xs" position="apart" noWrap>
+          <ArrowLeft />
+          <div>
+            <Text weight={500} align="right">
+              Go back
+            </Text>
+            <Text lineClamp={1} size="sm" color="dimmed" align="right">
+              {back.title}
+            </Text>
+          </div>
+        </Group>
+      </UnstyledButton>
+      {next && (
+        <UnstyledButton className={classes.button} component={Link} href={`/${next.path}`} rel="next">
           <Group px="sm" py="xs" position="apart" noWrap>
-            <ArrowLeft />
             <div>
-              <Text weight={500} align="right">
-                Go back
-              </Text>
-              <Text lineClamp={1} size="sm" color="dimmed" align="right">
-                {back.title}
+              <Text weight={500}>Up next</Text>
+              <Text lineClamp={1} size="sm" color="dimmed">
+                {next.title}
               </Text>
             </div>
+            <ArrowRight />
           </Group>
         </UnstyledButton>
-      </Link>
-      {next && (
-        <Link href={`/${next.path}`} passHref>
-          <UnstyledButton className={classes.button} component="a" rel="next">
-            <Group px="sm" py="xs" position="apart" noWrap>
-              <div>
-                <Text weight={500}>Up next</Text>
-                <Text lineClamp={1} size="sm" color="dimmed">
-                  {next.title}
-                </Text>
-              </div>
-              <ArrowRight />
-            </Group>
-          </UnstyledButton>
-        </Link>
       )}
     </div>
   );
