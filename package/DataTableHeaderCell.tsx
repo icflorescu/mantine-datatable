@@ -1,7 +1,7 @@
 import { Box, Center, createStyles, Group, MantineTheme, Sx } from '@mantine/core';
 import { CSSProperties, ReactNode } from 'react';
 import { ArrowDown, ArrowsVertical } from 'tabler-icons-react';
-import { DataTableColumn, DataTableSortStatus } from './DataTable.props';
+import { DataTableColumn, DataTableSortStatus } from './types';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
 
 const useStyles = createStyles((theme) => ({

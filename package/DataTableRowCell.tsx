@@ -1,6 +1,6 @@
 import { Box, createStyles, Sx } from '@mantine/core';
 import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
-import { DataTableColumn } from './DataTable.props';
+import { DataTableColumn } from './types';
 import { getValueAtPath, useMediaQueryStringOrFunction } from './utils';
 
 const useStyles = createStyles({

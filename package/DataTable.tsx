@@ -1,7 +1,6 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useElementSize } from '@mantine/hooks';
 import { ChangeEventHandler, CSSProperties, Key, MouseEventHandler, useEffect } from 'react';
-import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
 import DataTableFooter from './DataTableFooter';
@@ -13,6 +12,7 @@ import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
 import { useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion, useScrollStatus } from './hooks';
+import { DataTableProps } from './types';
 import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
 
 const EMPTY_OBJECT = {};

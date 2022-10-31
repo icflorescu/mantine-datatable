@@ -1,6 +1,6 @@
 import { Box, createStyles, CSSObject, MantineNumberSize, MantineTheme, Pagination, Text } from '@mantine/core';
 import { CSSProperties, ForwardedRef, forwardRef, ReactNode } from 'react';
-import { DataTablePaginationProps } from './DataTable.props';
+import { DataTablePaginationProps } from './types';
 
 const useStyles = createStyles(
   (theme, { topBorderColor }: { topBorderColor: string | ((theme: MantineTheme) => string) }) => ({

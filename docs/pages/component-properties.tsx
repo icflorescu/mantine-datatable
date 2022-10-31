@@ -1,4 +1,4 @@
-import { Code, Container } from '@mantine/core';
+import { Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import PageNavigation from '~/components/PageNavigation';
@@ -8,8 +8,32 @@ import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'component-properties';
 
-export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('../package/DataTable.props.ts')) as string },
+const TYPE_DEFINITION_FILES = [
+  'DataTableProps.ts',
+  'DataTableColumn.ts',
+  'DataTableColumnTextAlignment.ts',
+  'DataTableVerticalAlignment.ts',
+  'DataTableOuterBorderProps.ts',
+  'DataTableEmptyStateProps.ts',
+  'DataTablePaginationProps.ts',
+  'DataTableSortStatus.ts',
+  'DataTableSortProps.ts',
+  'DataTableSelectionProps.ts',
+  'DataTableContextMenuProps.ts',
+  'DataTableContextMenuItemProps.ts',
+  'DataTableRowExpansionProps.ts',
+  'DataTableRowExpansionCollapseProps.ts',
+  'DataTableCellClickHandler.ts',
+];
+
+export const getStaticProps: GetStaticProps<{
+  code: string[];
+}> = async () => ({
+  props: {
+    code: await Promise.all(
+      TYPE_DEFINITION_FILES.map((file) => readCodeExample(`../package/types/${file}`) as Promise<string>)
+    ),
+  },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -20,10 +44,11 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         Mantine DataTable component is written in TypeScript and its properties are well documented with additional
         JSDoc annotations, so you can harness the full power of your IDE to build type safe applications with
         confidence.
-        <br />
-        Here is the source of <Code>DataTable.props.ts</Code>:
       </PageText>
-      <CodeBlock language="typescript" content={code} noCopy />
+      <PageText>Here are the type definitions:</PageText>
+      {TYPE_DEFINITION_FILES.map((file, index) => (
+        <CodeBlock key="file" language="typescript" fileName={file} content={code[index]} noCopy />
+      ))}
       <PageNavigation of={PATH} />
     </Container>
   );

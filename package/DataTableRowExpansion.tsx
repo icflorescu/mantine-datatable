@@ -1,7 +1,7 @@
 import { Collapse, createStyles } from '@mantine/core';
 import { ReactNode } from 'react';
-import { DataTableRowExpansionCollapseProps } from './DataTable.props';
 import { useRowExpansionStatus } from './hooks';
+import { DataTableRowExpansionCollapseProps } from './types';
 
 const useStyles = createStyles({
   cell: {
