@@ -341,7 +341,7 @@ export default function DataTable<T>({
                 let handleClick: MouseEventHandler<HTMLTableRowElement> | undefined;
                 if (showContextMenuOnClick) {
                   handleClick = (e) => {
-                    setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record, recordIndex });
+                    setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
                     onRowClick?.(record, recordIndex);
                   };
                 } else if (onRowClick) {
@@ -354,7 +354,7 @@ export default function DataTable<T>({
                 if (showContextMenuOnRightClick) {
                   handleContextMenu = (e) => {
                     e.preventDefault();
-                    setRowContextMenuInfo({ top: e.clientY, left: e.clientX, record, recordIndex });
+                    setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
                   };
                 }
 
@@ -427,8 +427,8 @@ export default function DataTable<T>({
           zIndex={rowContextMenu.zIndex}
           borderRadius={rowContextMenu.borderRadius}
           shadow={rowContextMenu.shadow}
-          top={rowContextMenuInfo.top}
-          left={rowContextMenuInfo.left}
+          y={rowContextMenuInfo.y}
+          x={rowContextMenuInfo.x}
           onDestroy={() => setRowContextMenuInfo(null)}
         >
           {rowContextMenu

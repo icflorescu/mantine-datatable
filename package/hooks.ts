@@ -48,8 +48,8 @@ export function useLastSelectionChangeIndex(recordIds: unknown[] | undefined) {
 
 export function useRowContextMenu<T>(fetching?: boolean) {
   const [rowContextMenuInfo, setRowContextMenuInfo] = useState<{
-    top: number;
-    left: number;
+    y: number;
+    x: number;
     record: T;
     recordIndex: number;
   } | null>(null);
