@@ -5,9 +5,10 @@ import { Braces, Terminal2 } from 'tabler-icons-react';
 const useStyles = createStyles((theme) => ({
   tab: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[6],
+    fontWeight: 500,
     fontSize: 12,
     [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-      fontSize: 'initial',
+      fontSize: 14,
     },
   },
 }));

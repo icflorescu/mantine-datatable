@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "1.7.12",
+  "version": "1.7.13",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -23,7 +23,7 @@
     "mantine-datatable": "*",
     "next": "^13.0.0",
     "next-pwa": "^5.6.0",
-    "next-sitemap": "^3.1.29",
+    "next-sitemap": "^3.1.30",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tabler-icons-react": "^1.55.0"

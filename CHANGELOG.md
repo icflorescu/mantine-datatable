@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.13 (2022-10-31)
+- Implement [#100](https://github.com/icflorescu/mantine-datatable/issues/100): page size selector  
+
 ## 1.7.12 (2022-10-31)
 - Fix [#110](https://github.com/icflorescu/mantine-datatable/issues/110): context-menu positioning bug in RTL display mode
 

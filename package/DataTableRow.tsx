@@ -1,10 +1,10 @@
 import { createStyles } from '@mantine/core';
 import { ChangeEventHandler, MouseEventHandler } from 'react';
-import { DataTableCellClickHandler, DataTableColumn } from './DataTable.props';
 import DataTableRowCell from './DataTableRowCell';
 import DataTableRowExpansion from './DataTableRowExpansion';
 import DataTableRowSelectorCell from './DataTableRowSelectorCell';
 import { useRowExpansion } from './hooks';
+import { DataTableCellClickHandler, DataTableColumn } from './types';
 
 const useStyles = createStyles((theme) => {
   const baseColor = theme.colors[theme.primaryColor][6];

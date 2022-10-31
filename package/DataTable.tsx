@@ -1,7 +1,6 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useElementSize } from '@mantine/hooks';
 import { ChangeEventHandler, CSSProperties, Key, MouseEventHandler, useEffect } from 'react';
-import { DataTableProps } from './DataTable.props';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
 import DataTableFooter from './DataTableFooter';
@@ -13,6 +12,7 @@ import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
 import { useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion, useScrollStatus } from './hooks';
+import { DataTableProps } from './types';
 import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
 
 const EMPTY_OBJECT = {};
@@ -111,9 +111,13 @@ export default function DataTable<T>({
   onPageChange,
   totalRecords,
   recordsPerPage,
+  onRecordsPerPageChange,
+  recordsPerPageOptions,
+  recordsPerPageLabel = 'Records per page',
   paginationColor,
   paginationSize = 'sm',
   paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
+  paginationWrapBreakpoint = 'sm',
   loaderSize,
   loaderVariant,
   loaderBackgroundBlur,
@@ -397,9 +401,13 @@ export default function DataTable<T>({
           onPageChange={handlePageChange}
           totalRecords={totalRecords}
           recordsPerPage={recordsPerPage}
+          onRecordsPerPageChange={onRecordsPerPageChange}
+          recordsPerPageOptions={recordsPerPageOptions}
+          recordsPerPageLabel={recordsPerPageLabel}
           paginationColor={paginationColor}
           paginationSize={paginationSize}
           paginationText={paginationText}
+          paginationWrapBreakpoint={paginationWrapBreakpoint}
           noRecordsText={noRecordsText}
           loadingText={loadingText}
           recordsLength={recordsLength}
