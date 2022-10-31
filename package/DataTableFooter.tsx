@@ -1,9 +1,17 @@
 import { Box, createStyles, CSSObject, MantineNumberSize, MantineTheme, Pagination, Text } from '@mantine/core';
 import { CSSProperties, ForwardedRef, forwardRef, ReactNode } from 'react';
+import DataTablePageSizeSelector from './DataTablePageSizeSelector';
 import { DataTablePaginationProps } from './types';
+import { WithOptional, WithRequired } from './types/utils';
 
 const useStyles = createStyles(
-  (theme, { topBorderColor }: { topBorderColor: string | ((theme: MantineTheme) => string) }) => ({
+  (
+    theme,
+    {
+      topBorderColor,
+      paginationWrapBreakpoint,
+    }: { topBorderColor: string | ((theme: MantineTheme) => string); paginationWrapBreakpoint: MantineNumberSize }
+  ) => ({
     root: {
       borderTop: `1px solid ${typeof topBorderColor === 'function' ? topBorderColor(theme) : topBorderColor}`,
       display: 'flex',
@@ -11,7 +19,10 @@ const useStyles = createStyles(
       alignItems: 'center',
       justifyContent: 'space-between',
       gap: theme.spacing.xs,
-      [theme.fn.largerThan('xs')]: { flexDirection: 'row' },
+      [theme.fn.largerThan(paginationWrapBreakpoint)]: { flexDirection: 'row' },
+    },
+    text: {
+      flex: '1 1 auto',
     },
     pagination: {
       opacity: 1,
@@ -23,14 +34,19 @@ const useStyles = createStyles(
   })
 );
 
-type DataTableFooterProps = Omit<DataTablePaginationProps, 'loadingText'> & {
+type DataTableFooterProps = WithOptional<
+  WithRequired<
+    DataTablePaginationProps,
+    'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint'
+  >,
+  'onRecordsPerPageChange' | 'recordsPerPageOptions'
+> & {
   className?: string;
   style?: CSSObject;
   topBorderColor: string | ((theme: MantineTheme) => string);
   fetching: boolean | undefined;
   recordsLength: number | undefined;
   horizontalSpacing: MantineNumberSize | undefined;
-  loadingText: string;
   noRecordsText: string;
 };
 
@@ -49,8 +65,12 @@ export default forwardRef(function DataTableFooter(
     paginationText,
     totalRecords,
     recordsPerPage,
+    onRecordsPerPageChange,
+    recordsPerPageLabel,
+    recordsPerPageOptions,
     recordsLength,
     horizontalSpacing,
+    paginationWrapBreakpoint,
   }: DataTableFooterProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -65,7 +85,7 @@ export default forwardRef(function DataTableFooter(
     paginationTextValue = paginationText!({ from, to, totalRecords });
   }
 
-  const { classes, cx } = useStyles({ topBorderColor });
+  const { classes, cx } = useStyles({ topBorderColor, paginationWrapBreakpoint });
 
   return (
     <Box
@@ -75,7 +95,18 @@ export default forwardRef(function DataTableFooter(
       className={cx(classes.root, className)}
       style={style as CSSProperties}
     >
-      <Text size={paginationSize}>{paginationTextValue}</Text>
+      <Text className={classes.text} size={paginationSize}>
+        {paginationTextValue}
+      </Text>
+      {recordsPerPageOptions && (
+        <DataTablePageSizeSelector
+          size={paginationSize}
+          label={recordsPerPageLabel}
+          values={recordsPerPageOptions}
+          value={recordsPerPage!}
+          onChange={onRecordsPerPageChange!}
+        />
+      )}
       <Pagination
         color={paginationColor}
         className={cx(classes.pagination, { [classes.paginationFetching]: fetching || !recordsLength })}

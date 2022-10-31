@@ -1,7 +1,8 @@
-import type { MantineColor, MantineSize } from '@mantine/core';
+import type { MantineColor, MantineNumberSize, MantineSize } from '@mantine/core';
 import type { ReactNode } from 'react';
+import { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelectorProps';
 
-export type DataTablePaginationProps =
+export type DataTablePaginationProps = (
   | {
       page?: never;
       onPageChange?: never;
@@ -11,6 +12,7 @@ export type DataTablePaginationProps =
       paginationSize?: never;
       loadingText?: never;
       paginationText?: never;
+      paginationWrapBreakpoint?: never;
     }
   | {
       /**
@@ -53,4 +55,13 @@ export type DataTablePaginationProps =
        * ```
        */
       paginationText?: (options: { from: number; to: number; totalRecords: number }) => ReactNode;
-    };
+
+      /**
+       * Pagination wrap breakpints; defaults to `sm`.
+       * Below this breakpoint the content will be displayed on multiple lines;
+       * above it the content will be displayed on a single line.
+       */
+      paginationWrapBreakpoint?: MantineNumberSize;
+    }
+) &
+  DataTablePageSizeSelectorProps;

@@ -111,9 +111,13 @@ export default function DataTable<T>({
   onPageChange,
   totalRecords,
   recordsPerPage,
+  onRecordsPerPageChange,
+  recordsPerPageOptions,
+  recordsPerPageLabel = 'Records per page',
   paginationColor,
   paginationSize = 'sm',
   paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
+  paginationWrapBreakpoint = 'sm',
   loaderSize,
   loaderVariant,
   loaderBackgroundBlur,
@@ -397,9 +401,13 @@ export default function DataTable<T>({
           onPageChange={handlePageChange}
           totalRecords={totalRecords}
           recordsPerPage={recordsPerPage}
+          onRecordsPerPageChange={onRecordsPerPageChange}
+          recordsPerPageOptions={recordsPerPageOptions}
+          recordsPerPageLabel={recordsPerPageLabel}
           paginationColor={paginationColor}
           paginationSize={paginationSize}
           paginationText={paginationText}
+          paginationWrapBreakpoint={paginationWrapBreakpoint}
           noRecordsText={noRecordsText}
           loadingText={loadingText}
           recordsLength={recordsLength}

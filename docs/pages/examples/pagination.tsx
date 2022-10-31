@@ -4,15 +4,27 @@ import { Fragment } from 'react';
 import CodeBlock from '~/components/CodeBlock';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
+import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import PaginationExample from '~/examples/PaginationExample';
+import PaginationExampleWithPageSizeSelector from '~/examples/PaginationExampleWithPageSizeSelector';
+import allPromiseProps from '~/lib/allPromiseProps';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/pagination';
 
-export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('examples/PaginationExample.tsx')) as string },
+type Example = 'standard' | 'with-page-size-selector';
+
+export const getStaticProps: GetStaticProps<{ code: Record<Example, string> }> = async () => ({
+  props: {
+    code: await allPromiseProps({
+      standard: readCodeExample('examples/PaginationExample.tsx') as Promise<string>,
+      'with-page-size-selector': readCodeExample(
+        'examples/PaginationExampleWithPageSizeSelector.tsx'
+      ) as Promise<string>,
+    }),
+  },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -65,10 +77,30 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
               ))}
             </Code>
           </li>
+          <li>
+            <Code>paginationWrapBreakpoint</Code> → a breakpoint below which the pagination footer content will wrap on
+            multiple lines; defaults to <Code>sm</Code>
+          </li>
         </ul>
       </PageText>
-      <PageText>Consider the example below:</PageText>
-      <CodeBlock language="typescript" content={code} />
+      <CodeBlock language="typescript" content={code['standard']} />
+      <PageSubtitle value="Displaying a page size selector" />
+      <PageText>
+        You can display a selector to let the user choose the page size by setting the following component properties:
+        <ul>
+          <li>
+            <Code>recordsPerPageOptions</Code> → an array of page size numbers to display in the page size selector
+          </li>
+          <li>
+            <Code>onRecordsPerPageChange</Code> → a callback that is executed when the user changes the page size
+          </li>
+          <li>
+            <Code>recordsPerPageLabel</Code> → the page size selector label, defaulting to &apos;Records per page&apos;
+          </li>
+        </ul>
+      </PageText>
+      <CodeBlock language="typescript" content={code['with-page-size-selector']} />
+      <PaginationExampleWithPageSizeSelector />
       <PageNavigation of={PATH} />
     </Container>
   );

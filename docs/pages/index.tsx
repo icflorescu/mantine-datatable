@@ -123,18 +123,17 @@ export default function Page() {
           </HomePageFeature>
         </div>
         <Group className={classes.buttons}>
-          <Link href="/getting-started" passHref>
-            <Button
-              className={classes.button}
-              size="md"
-              variant="gradient"
-              gradient={{ from: 'blue', to: 'cyan' }}
-              leftIcon={<Rocket />}
-              component="a"
-            >
-              Get started
-            </Button>
-          </Link>
+          <Button
+            className={classes.button}
+            size="md"
+            variant="gradient"
+            gradient={{ from: 'blue', to: 'cyan' }}
+            leftIcon={<Rocket />}
+            component={Link}
+            href="/getting-started"
+          >
+            Get started
+          </Button>
           <Button
             className={classes.button}
             size="md"
@@ -147,18 +146,17 @@ export default function Page() {
           >
             View code
           </Button>
-          <Link href={getFirstExamplePagePath()} passHref>
-            <Button
-              className={cx(classes.button, classes.examplesButton)}
-              size="md"
-              variant="gradient"
-              gradient={{ from: 'green.7', to: 'green.6' }}
-              leftIcon={<Bulb />}
-              component="a"
-            >
-              Learn by example
-            </Button>
-          </Link>
+          <Button
+            className={cx(classes.button, classes.examplesButton)}
+            size="md"
+            variant="gradient"
+            gradient={{ from: 'green.7', to: 'green.6' }}
+            leftIcon={<Bulb />}
+            component={Link}
+            href={getFirstExamplePagePath()}
+          >
+            Learn by example
+          </Button>
         </Group>
       </div>
     </Container>
