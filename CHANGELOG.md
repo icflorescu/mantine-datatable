@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.12 (2022-10-31)
+- Fix [#110](https://github.com/icflorescu/mantine-datatable/issues/110): context-menu positioning bug in RTL display mode
+
 ## 1.7.11 (2022-10-25)
 - Implement [#101](https://github.com/icflorescu/mantine-datatable/issues/101): `isRecordSelectable: (record: T) => boolean` property to prevent the selection of certain records
 
