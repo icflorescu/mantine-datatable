@@ -47,7 +47,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <PageText>Here are the type definitions:</PageText>
       {TYPE_DEFINITION_FILES.map((file, index) => (
-        <CodeBlock key="file" language="typescript" fileName={file} content={code[index]} noCopy />
+        <CodeBlock key={file} language="typescript" fileName={file} content={code[index]} noCopy />
       ))}
       <PageNavigation of={PATH} />
     </Container>
