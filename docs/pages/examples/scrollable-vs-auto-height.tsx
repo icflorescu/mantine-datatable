@@ -1,4 +1,4 @@
-import { Code, Container, Paper, Switch } from '@mantine/core';
+import { Code, Container, createStyles, Paper, Switch } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
 import CodeBlock from '~/components/CodeBlock';
@@ -21,8 +21,13 @@ export const getStaticProps: GetStaticProps<{
   },
 });
 
+const useStyles = createStyles({
+  control: { fontSize: 0 },
+});
+
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [scrollable, setScrollable] = useState(true);
+  const { classes } = useStyles();
 
   return (
     <Container>
@@ -30,6 +35,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>Try the interactive example below to see the feature it in action:</PageText>
       <Paper my="xl" p="sm" withBorder>
         <Switch
+          className={classes.control}
           label="Place component in a height-restricted container to make it vertically-scrollable"
           checked={scrollable}
           onChange={() => setScrollable((value) => !value)}

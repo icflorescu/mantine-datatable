@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
 });
 
 const useStyles = createStyles({
-  control: { minHeight: 36 },
+  control: { fontSize: 0 },
 });
 
 export default function Page({ code: initialCode }: InferGetStaticPropsType<typeof getStaticProps>) {
