@@ -1,4 +1,5 @@
-import { Center, createStyles, Loader, MantineNumberSize, MantineTheme } from '@mantine/core';
+import { Center, createStyles, DefaultMantineColor, Loader, MantineNumberSize, MantineTheme } from '@mantine/core';
+import { ReactNode } from 'react';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -23,18 +24,22 @@ type DataTableLoaderProps = {
   pt: number;
   pb: number;
   fetching: boolean | undefined;
-  loaderBackgroundBlur: number | undefined;
-  loaderSize: MantineNumberSize | undefined;
-  loaderVariant: MantineTheme['loader'] | undefined;
+  customContent: ReactNode | undefined;
+  backgroundBlur: number | undefined;
+  size: MantineNumberSize | undefined;
+  variant: MantineTheme['loader'] | undefined;
+  color: DefaultMantineColor | undefined;
 };
 
 export default function DataTableLoader({
   pt,
   pb,
   fetching,
-  loaderBackgroundBlur,
-  loaderSize,
-  loaderVariant,
+  customContent,
+  backgroundBlur,
+  size,
+  variant,
+  color,
 }: DataTableLoaderProps) {
   const { classes, cx } = useStyles();
   return (
@@ -42,9 +47,9 @@ export default function DataTableLoader({
       pt={pt}
       pb={pb}
       className={cx(classes.root, { [classes.fetching]: fetching })}
-      sx={loaderBackgroundBlur ? { backdropFilter: `blur(${loaderBackgroundBlur}px)` } : undefined}
+      sx={backgroundBlur ? { backdropFilter: `blur(${backgroundBlur}px)` } : undefined}
     >
-      {fetching && <Loader size={loaderSize} variant={loaderVariant} />}
+      {fetching && (customContent || <Loader size={size} variant={variant} color={color} />)}
     </Center>
   );
 }

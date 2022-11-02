@@ -1,9 +1,10 @@
-import type { DefaultProps, MantineNumberSize, MantineShadow, MantineTheme, TableProps } from '@mantine/core';
+import type { DefaultProps, MantineShadow, MantineTheme, TableProps } from '@mantine/core';
 import type { CSSProperties } from 'react';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumn } from './DataTableColumn';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
 import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';
+import { DataTableLoaderProps } from './DataTableLoaderProps';
 import type { DataTableOuterBorderProps } from './DataTableOuterBorderProps';
 import type { DataTablePaginationProps } from './DataTablePaginationProps';
 import type { DataTableRowExpansionProps } from './DataTableRowExpansionProps';
@@ -78,21 +79,6 @@ export type DataTableProps<T> = {
   records?: T[];
 
   /**
-   * Loader size; defaults to `lg`
-   */
-  loaderSize?: MantineNumberSize;
-
-  /**
-   * Loader variant
-   */
-  loaderVariant?: MantineTheme['loader'];
-
-  /**
-   * Loader background blur (in pixels)
-   */
-  loaderBackgroundBlur?: number;
-
-  /**
    * Text to show on empty state and pagination footer when no records are available
    */
   noRecordsText?: string;
@@ -119,6 +105,7 @@ export type DataTableProps<T> = {
     'unstyled' | 'p' | 'px' | 'py' | 'pt' | 'pb' | 'pl' | 'pr'
   > &
   DataTableOuterBorderProps &
+  DataTableLoaderProps &
   DataTableEmptyStateProps &
   DataTablePaginationProps &
   DataTableSortProps &
