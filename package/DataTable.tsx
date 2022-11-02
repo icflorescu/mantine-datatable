@@ -118,9 +118,11 @@ export default function DataTable<T>({
   paginationSize = 'sm',
   paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
   paginationWrapBreakpoint = 'sm',
+  loaderBackgroundBlur,
+  customLoader,
   loaderSize,
   loaderVariant,
-  loaderBackgroundBlur,
+  loaderColor,
   loadingText = '...',
   emptyState,
   noRecordsText = 'No records',
@@ -417,9 +419,11 @@ export default function DataTable<T>({
         pt={headerHeight}
         pb={footerHeight}
         fetching={fetching}
-        loaderBackgroundBlur={loaderBackgroundBlur}
-        loaderSize={loaderSize}
-        loaderVariant={loaderVariant}
+        backgroundBlur={loaderBackgroundBlur}
+        customContent={customLoader}
+        size={loaderSize}
+        variant={loaderVariant}
+        color={loaderColor}
       />
       <DataTableEmptyState
         pt={headerHeight}

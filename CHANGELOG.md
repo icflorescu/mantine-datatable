@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.14 (2022-11-02)
+- Implement [#116](https://github.com/icflorescu/mantine-datatable/issues/116): custom loader component
+- Add `loaderColor` property  
+
 ## 1.7.13 (2022-10-31)
 - Implement [#100](https://github.com/icflorescu/mantine-datatable/issues/100): page size selector  
 
