@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.15 (2022-11-08)
+- Update Mantine to 3.7.1
+
 ## 1.7.14 (2022-11-02)
 - Implement [#116](https://github.com/icflorescu/mantine-datatable/issues/116): custom loader component
 - Add `loaderColor` property  
