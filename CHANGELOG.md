@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.16 (2022-11-15)
+- Update Mantine to 3.7.2
+
 ## 1.7.15 (2022-11-08)
 - Update Mantine to 3.7.1
 
