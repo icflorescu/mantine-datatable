@@ -60,6 +60,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <em>lazily rendered</em> when a row is expanded.
       </PageText>
       <PageText info>Styling the expanded content falls within your responsibility.</PageText>
+      <PageText info>
+        Don’t forget to set the <Code>idAccessor</Code> property if your unique record key is not <Code>id</Code>.<br />
+        See <InternalLink to="/examples/non-standard-record-ids">non-standard record IDs</InternalLink> for more info.
+      </PageText>
       <CodeBlock language="typescript" content={code['simple']} />
       <PageText>Click on a row to test the behavior:</PageText>
       <RowExpansionExampleSimple />
