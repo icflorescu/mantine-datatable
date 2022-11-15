@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "1.7.15",
+  "version": "1.7.16",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -11,25 +11,25 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
-    "@mantine/core": "^5.7.1",
-    "@mantine/hooks": "^5.7.1",
-    "@mantine/modals": "^5.7.1",
-    "@mantine/next": "^5.7.1",
-    "@mantine/notifications": "^5.7.1",
-    "@mantine/prism": "^5.7.1",
-    "@tanstack/react-query": "^4.14.5",
+    "@mantine/core": "^5.7.2",
+    "@mantine/hooks": "^5.7.2",
+    "@mantine/modals": "^5.7.2",
+    "@mantine/next": "^5.7.2",
+    "@mantine/notifications": "^5.7.2",
+    "@mantine/prism": "^5.7.2",
+    "@tanstack/react-query": "^4.16.1",
     "dayjs": "^1.11.6",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
-    "next": "^13.0.2",
+    "next": "^13.0.3",
     "next-pwa": "^5.6.0",
-    "next-sitemap": "^3.1.30",
+    "next-sitemap": "^3.1.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tabler-icons-react": "^1.55.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.188",
+    "@types/lodash": "^4.14.189",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "typescript": "^4.8.4"

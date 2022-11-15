@@ -40,8 +40,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         </ExternalLink>
         .
         <br />
-        See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows">this example</InternalLink> for more
-        information.
+        See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows-or-cells">this example</InternalLink> for
+        more information.
       </PageText>
       <PageNavigation of={PATH} />
     </Container>
