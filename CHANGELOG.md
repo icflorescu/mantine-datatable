@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.17 (2022-11-15)
+- Update Mantine to 3.8.0 & TypeScript to 4.9.3 
+
 ## 1.7.16 (2022-11-15)
 - Update Mantine to 3.7.2
 
