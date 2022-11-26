@@ -66,7 +66,7 @@ export default function Page() {
         New features are developed in the <Code>next</Code> branch.
         <br />
         If you want to implement a new feature or improve an existing one, make sure to also add an example page and/or
-        alter the one(s) already referring to it. It’t not a feature if other people don’t know about it or don’t
+        alter the one(s) already referring to it. It’s not a feature if other people don’t know about it or don’t
         understand how to use it.
       </PageText>
       <PageSubtitle value="List of code contributors" />
