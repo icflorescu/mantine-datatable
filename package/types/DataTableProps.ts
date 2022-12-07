@@ -98,7 +98,15 @@ export type DataTableProps<T> = {
    */
   rowContextMenu?: DataTableContextMenuProps<T>;
 
+  /**
+   * Defines the row expansion behavior
+   */
   rowExpansion?: DataTableRowExpansionProps<T>;
+
+  /**
+   * Optional function returning an object of custom attributes to be applied to each row in the table
+   */
+  customRowAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<
     DefaultProps<'root' | 'header' | 'pagination', CSSProperties>,
