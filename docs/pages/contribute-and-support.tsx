@@ -78,7 +78,14 @@ export default function Page() {
           />
         </ExternalLink>
       </Box>
-      <PageSubtitle value="Supporting the project" />
+      <PageSubtitle value="Sponsoring" />
+      <PageText>
+        As mentioned above, I’ve dedicated a sizeable amount of my own free time to build this project. Its maintenance
+        requires a constant effort. So, if you find <Code>Mantine DataTable</Code> useful and you want to support its
+        development, you can do so by{' '}
+        <ExternalLink to="https://github.com/sponsors/icflorescu">sponsoring my work</ExternalLink>.
+      </PageText>
+      <PageSubtitle value="Other means of support" />
       <PageText>
         If you find this project useful, it would help a lot if you could 🙏
         <strong>
