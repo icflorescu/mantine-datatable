@@ -11,14 +11,14 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
-    "@mantine/core": "^5.9.1",
-    "@mantine/hooks": "^5.9.1",
-    "@mantine/modals": "^5.9.1",
-    "@mantine/next": "^5.9.1",
-    "@mantine/notifications": "^5.9.1",
-    "@mantine/prism": "^5.9.1",
+    "@mantine/core": "^5.9.2",
+    "@mantine/hooks": "^5.9.2",
+    "@mantine/modals": "^5.9.2",
+    "@mantine/next": "^5.9.2",
+    "@mantine/notifications": "^5.9.2",
+    "@mantine/prism": "^5.9.2",
     "@tanstack/react-query": "^4.19.1",
-    "dayjs": "^1.11.6",
+    "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
     "next": "^13.0.6",
@@ -26,11 +26,11 @@
     "next-sitemap": "^3.1.32",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tabler-icons-react": "^1.55.0"
+    "tabler-icons-react": "^1.56.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.11.10",
+    "@types/node": "^18.11.11",
     "@types/react": "^18.0.26",
     "typescript": "^4.9.3"
   }
