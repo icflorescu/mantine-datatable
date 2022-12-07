@@ -80,7 +80,11 @@ Have a look at the available [component properties](https://icflorescu.github.io
 
 Want to [become a code contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)?
 
-## Supporting the project
+## Sponsor the project
+
+If you find this package useful, please consider ❤️[sponsoring my work](https://github.com/sponsors/icflorescu). Your sponsorship will help me dedicate more time to maintaining the project and will encourage me to add new features and fix existing bugs. If you're a company using Mantine DataTable in a commercial project, you can also [hire my services](https://github.com/icflorescu).
+
+## Other means of support
 
 If you find this package useful, please 🙏star the repository, 💕[tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu), 👍[endorse me on LinkedIn](https://www.linkedin.com/in/icflorescu) or consider hiring my services.
 
