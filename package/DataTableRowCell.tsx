@@ -21,7 +21,10 @@ type DataTableRowCellProps<T> = {
   record: T;
   recordIndex: number;
   onClick?: MouseEventHandler<HTMLTableCellElement>;
-} & Pick<DataTableColumn<T>, 'accessor' | 'visibleMediaQuery' | 'textAlignment' | 'width' | 'ellipsis' | 'render'>;
+} & Pick<
+  DataTableColumn<T>,
+  'accessor' | 'visibleMediaQuery' | 'textAlignment' | 'width' | 'ellipsis' | 'render' | 'customCellAttributes'
+>;
 
 export default function DataTableRowCell<T>({
   className,
@@ -36,6 +39,7 @@ export default function DataTableRowCell<T>({
   width,
   accessor,
   render,
+  customCellAttributes,
 }: DataTableRowCellProps<T>) {
   const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
@@ -54,6 +58,7 @@ export default function DataTableRowCell<T>({
       ]}
       style={style}
       onClick={onClick}
+      {...customCellAttributes?.(record, recordIndex)}
     >
       {render ? render(record, recordIndex) : (getValueAtPath(record, accessor) as ReactNode)}
     </Box>

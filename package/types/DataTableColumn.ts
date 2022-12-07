@@ -82,4 +82,9 @@ export type DataTableColumn<T> = {
    * Optional style passed to each data cell in the column; see https://mantine.dev/styles/sx/
    */
   cellsSx?: Sx;
+
+  /**
+   * Optional function returning an object of custom attributes to be applied to each cell in the column
+   */
+  customCellAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
 };

@@ -138,6 +138,11 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: loading data asynchronously with Mantine DataTable and customizing the loader',
       },
       {
+        path: 'custom-row-or-cell-attributes',
+        title: 'Custom row or cell attributes',
+        description: 'Example: How to add custom attributes to Mantine DataTable rows or cells',
+      },
+      {
         path: 'complex-usage',
         title: 'Complex usage',
         description:
