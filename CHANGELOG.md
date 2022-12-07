@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.24 (2022-12-07)
+- Implement the [custom row / cell attributes](https://icflorescu.github.io/mantine-datatable/examples/custom-row-or-cell-attributes) feature 
+
 ## 1.7.17 (2022-11-15)
 - Update Mantine to 3.8.0 & TypeScript to 4.9.3 
 
