@@ -9,6 +9,7 @@ import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import AdditionalStylingExampleWithClassName from '~/examples/AdditionalStylingExampleWithClassName';
 import AdditionalStylingExampleWithClassNames from '~/examples/AdditionalStylingExampleWithClassNames';
+import AdditionalStylingExampleWithRowClassName from '~/examples/AdditionalStylingExampleWithRowClassName';
 import AdditionalStylingExampleWithStyleObject from '~/examples/AdditionalStylingExampleWithStyleObject';
 import AdditionalStylingExampleWithStylesFunction from '~/examples/AdditionalStylingExampleWithStylesFunction';
 import AdditionalStylingExampleWithStylesObject from '~/examples/AdditionalStylingExampleWithStylesObject';
@@ -27,7 +28,8 @@ export const getStaticProps: GetStaticProps<{
     | 'with-sx-function'
     | 'with-class-names'
     | 'with-styles-object'
-    | 'with-styles-function',
+    | 'with-styles-function'
+    | 'with-row-class-name',
     string
   >;
 }> = async () => ({
@@ -41,6 +43,9 @@ export const getStaticProps: GetStaticProps<{
       'with-styles-object': readCodeExample('examples/AdditionalStylingExampleWithStylesObject.tsx') as Promise<string>,
       'with-styles-function': readCodeExample(
         'examples/AdditionalStylingExampleWithStylesFunction.tsx'
+      ) as Promise<string>,
+      'with-row-class-name': readCodeExample(
+        'examples/AdditionalStylingExampleWithRowClassName.tsx'
       ) as Promise<string>,
     }),
   },
@@ -101,6 +106,14 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <CodeBlock language="typescript" content={code['with-styles-function']} />
       <AdditionalStylingExampleWithStylesFunction />
+      <PageSubtitle value="Row styling" />
+      <PageText>
+        You can style rows with <Code>rowClassName</Code>, <Code>rowStyle</Code> and <Code>rowSx</Code> properties. They
+        work the same way as <Code>className</Code>, <Code>style</Code> and <Code>sx</Code>, but target rows instead of
+        the component root.
+      </PageText>
+      <CodeBlock language="typescript" content={code['with-row-class-name']} />
+      <AdditionalStylingExampleWithRowClassName />
       <PageNavigation of={PATH} />
     </Container>
   );
