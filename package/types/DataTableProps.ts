@@ -1,4 +1,4 @@
-import type { DefaultProps, MantineShadow, MantineTheme, TableProps } from '@mantine/core';
+import type { DefaultProps, MantineShadow, MantineTheme, Sx, TableProps } from '@mantine/core';
 import type { CSSProperties } from 'react';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumn } from './DataTableColumn';
@@ -102,6 +102,23 @@ export type DataTableProps<T> = {
    * Defines the row expansion behavior
    */
   rowExpansion?: DataTableRowExpansionProps<T>;
+
+  /**
+   * Optional class name passed to each row; can be a string or a function
+   * receiving the current record and its index as arguments and returning a string
+   */
+  rowClassName?: string | ((record: T, recordIndex: number) => string | undefined);
+
+  /**
+   * Optional style passed to each row; can be a CSS properties object or
+   * a function receiving the current record and its index as arguments and returning a CSS properties object
+   */
+  rowStyle?: CSSProperties | ((record: T, recordIndex: number) => CSSProperties | undefined);
+
+  /**
+   * Optional style passed to each row; see https://mantine.dev/styles/sx/
+   */
+  rowSx?: Sx;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each row in the table

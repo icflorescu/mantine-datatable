@@ -1,5 +1,5 @@
-import { createStyles } from '@mantine/core';
-import { ChangeEventHandler, MouseEventHandler } from 'react';
+import { Box, createStyles, Sx } from '@mantine/core';
+import { ChangeEventHandler, CSSProperties, MouseEventHandler } from 'react';
 import DataTableRowCell from './DataTableRowCell';
 import DataTableRowExpansion from './DataTableRowExpansion';
 import DataTableRowSelectorCell from './DataTableRowSelectorCell';
@@ -50,6 +50,9 @@ type DataTableRowProps<T> = {
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   expansion: ReturnType<typeof useRowExpansion<T>>;
   customRowAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
+  className?: string | ((record: T, recordIndex: number) => string | undefined);
+  style?: CSSProperties | ((record: T, recordIndex: number) => CSSProperties | undefined);
+  sx?: Sx;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
 };
@@ -67,19 +70,28 @@ export default function DataTableRow<T>({
   onContextMenu,
   expansion,
   customRowAttributes,
+  className,
+  style,
+  sx,
   contextMenuVisible,
   leftShadowVisible,
 }: DataTableRowProps<T>) {
   const { cx, classes } = useStyles();
 
+  console.log(typeof className === 'function' ? className(record, recordIndex) : className);
+
   return (
     <>
-      <tr
-        className={cx({
-          [classes.withPointerCursor]: onClick || expansion?.expandOnClick,
-          [classes.selected]: selectionChecked,
-          [classes.contextMenuVisible]: contextMenuVisible,
-        })}
+      <Box
+        component="tr"
+        className={cx(
+          {
+            [classes.withPointerCursor]: onClick || expansion?.expandOnClick,
+            [classes.selected]: selectionChecked,
+            [classes.contextMenuVisible]: contextMenuVisible,
+          },
+          typeof className === 'function' ? className(record, recordIndex) : className
+        )}
         onClick={(e) => {
           if (expansion) {
             const { isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
@@ -93,6 +105,8 @@ export default function DataTableRow<T>({
           }
           onClick?.(e);
         }}
+        style={typeof style === 'function' ? style(record, recordIndex) : style}
+        sx={sx}
         {...customRowAttributes?.(record, recordIndex)}
         onContextMenu={onContextMenu}
       >
@@ -143,7 +157,7 @@ export default function DataTableRow<T>({
             />
           );
         })}
-      </tr>
+      </Box>
       {expansion && (
         <DataTableRowExpansion
           colSpan={columns.filter((c) => !c.hidden).length + (selectionVisible ? 1 : 0)}

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.28 (2022-12-16)
+- Implement additional row styling properties (`rowClassName`, `rowStyle`, `rowSx`) 
+
 ## 1.7.24 (2022-12-07)
 - Implement the [custom row / cell attributes](https://icflorescu.github.io/mantine-datatable/examples/custom-row-or-cell-attributes) feature 
 

@@ -132,6 +132,9 @@ export default function DataTable<T>({
   onCellClick,
   rowContextMenu,
   rowExpansion,
+  rowClassName,
+  rowStyle,
+  rowSx,
   customRowAttributes,
   m,
   my,
@@ -382,6 +385,9 @@ export default function DataTable<T>({
                       rowContextMenuInfo ? getValueAtPath(rowContextMenuInfo.record, idAccessor) === recordId : false
                     }
                     expansion={rowExpansionInfo}
+                    className={rowClassName}
+                    style={rowStyle}
+                    sx={rowSx}
                     customRowAttributes={customRowAttributes}
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
