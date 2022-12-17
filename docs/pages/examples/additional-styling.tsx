@@ -9,7 +9,7 @@ import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import AdditionalStylingExampleWithClassName from '~/examples/AdditionalStylingExampleWithClassName';
 import AdditionalStylingExampleWithClassNames from '~/examples/AdditionalStylingExampleWithClassNames';
-import AdditionalStylingExampleWithRowClassName from '~/examples/AdditionalStylingExampleWithRowClassName';
+import AdditionalStylingExampleWithRowStyling from '~/examples/AdditionalStylingExampleWithRowStyling';
 import AdditionalStylingExampleWithStyleObject from '~/examples/AdditionalStylingExampleWithStyleObject';
 import AdditionalStylingExampleWithStylesFunction from '~/examples/AdditionalStylingExampleWithStylesFunction';
 import AdditionalStylingExampleWithStylesObject from '~/examples/AdditionalStylingExampleWithStylesObject';
@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps<{
     | 'with-class-names'
     | 'with-styles-object'
     | 'with-styles-function'
-    | 'with-row-class-name',
+    | 'with-row-styling',
     string
   >;
 }> = async () => ({
@@ -44,9 +44,7 @@ export const getStaticProps: GetStaticProps<{
       'with-styles-function': readCodeExample(
         'examples/AdditionalStylingExampleWithStylesFunction.tsx'
       ) as Promise<string>,
-      'with-row-class-name': readCodeExample(
-        'examples/AdditionalStylingExampleWithRowClassName.tsx'
-      ) as Promise<string>,
+      'with-row-styling': readCodeExample('examples/AdditionalStylingExampleWithRowStyling.tsx') as Promise<string>,
     }),
   },
 });
@@ -112,8 +110,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         work the same way as <Code>className</Code>, <Code>style</Code> and <Code>sx</Code>, but target rows instead of
         the component root.
       </PageText>
-      <CodeBlock language="typescript" content={code['with-row-class-name']} />
-      <AdditionalStylingExampleWithRowClassName />
+      <CodeBlock language="typescript" content={code['with-row-styling']} />
+      <AdditionalStylingExampleWithRowStyling />
       <PageNavigation of={PATH} />
     </Container>
   );

@@ -78,8 +78,6 @@ export default function DataTableRow<T>({
 }: DataTableRowProps<T>) {
   const { cx, classes } = useStyles();
 
-  console.log(typeof className === 'function' ? className(record, recordIndex) : className);
-
   return (
     <>
       <Box
