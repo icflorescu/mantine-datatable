@@ -11,12 +11,12 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
-    "@mantine/core": "^5.9.4",
-    "@mantine/hooks": "^5.9.4",
-    "@mantine/modals": "^5.9.4",
-    "@mantine/next": "^5.9.4",
-    "@mantine/notifications": "^5.9.4",
-    "@mantine/prism": "^5.9.4",
+    "@mantine/core": "^5.9.5",
+    "@mantine/hooks": "^5.9.5",
+    "@mantine/modals": "^5.9.5",
+    "@mantine/next": "^5.9.5",
+    "@mantine/notifications": "^5.9.5",
+    "@mantine/prism": "^5.9.5",
     "@tanstack/react-query": "^4.20.4",
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.11.15",
+    "@types/node": "^18.11.16",
     "@types/react": "^18.0.26",
     "typescript": "^4.9.4"
   }
