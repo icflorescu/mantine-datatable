@@ -65,9 +65,11 @@ const useStyles = createStyles(
         border: `1px solid ${borderColorValue}`,
       },
       tableWithColumnBorders: {
-        'th, td': {
-          ':not(:first-of-type)': {
-            borderLeft: `1px solid ${rowBorderColorValue}`,
+        '&&': {
+          'th, td': {
+            ':not(:first-of-type)': {
+              borderLeft: `1px solid ${rowBorderColorValue}`,
+            },
           },
         },
       },
