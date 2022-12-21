@@ -101,6 +101,10 @@ If you want to hire my services, don’t hesitate to drop me a line at the email
 I’m currently getting a constant flow of approaches, some of them relevant, others not so relevant.
 Mentioning “Mantine DataTable” in your text would help me prioritize your message.
 
+## Acknowledgements
+
+🙏Spacial thanks to [Ani Ravi](https://github.com/aniravi24) for being the first person to sponsor my work on this project!
+
 ## License
 
 The [MIT License](https://github.com/icflorescu/mantine-datatable/blob/master/LICENSE).

@@ -107,6 +107,11 @@ export default function Page() {
         As the repository gain awareness, my chances of getting hired to work on Mantine-based projects will increase,
         which in turn will help maintain my vested interest in keeping the project alive.
       </PageText>
+      <PageSubtitle value="Acknowledgements" />
+      <PageText>
+        🙏Special thanks to <ExternalLink to="https://github.com/aniravi24">Ani Ravi</ExternalLink> for being the first
+        person to sponsor my work on this project!
+      </PageText>
       <PageText>
         Thank you for your support,
         <br />

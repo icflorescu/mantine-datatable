@@ -62,6 +62,7 @@ export default function DataTableHeaderCell<T>({
   const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   const text = title ?? humanize(accessor);
+  const tooltip = typeof text === 'string' ? text : undefined;
   return (
     <Box
       component="th"
@@ -90,7 +91,9 @@ export default function DataTableHeaderCell<T>({
     >
       {sortable || sortStatus?.columnAccessor === accessor ? (
         <Group position="apart" noWrap spacing="xs">
-          <Box className={cx(classes.columnHeaderText, classes.sortableColumnHeaderText)}>{text}</Box>
+          <Box className={cx(classes.columnHeaderText, classes.sortableColumnHeaderText)} title={tooltip}>
+            {text}
+          </Box>
           <Center>
             {sortStatus?.columnAccessor === accessor ? (
               <ArrowDown
@@ -105,7 +108,9 @@ export default function DataTableHeaderCell<T>({
           </Center>
         </Group>
       ) : (
-        <Box className={classes.columnHeaderText}>{text}</Box>
+        <Box className={classes.columnHeaderText} title={tooltip}>
+          {text}
+        </Box>
       )}
     </Box>
   );
