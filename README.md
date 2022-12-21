@@ -103,7 +103,7 @@ Mentioning “Mantine DataTable” in your text would help me prioritize your me
 
 ## Acknowledgements
 
-🙏Spacial thanks to [Ani Ravi](https://github.com/aniravi24) for being the first person to sponsor my work on this project!
+🙏Special thanks to [Ani Ravi](https://github.com/aniravi24) for being the first person to sponsor my work on this project!
 
 ## License
 
