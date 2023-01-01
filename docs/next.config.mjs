@@ -9,9 +9,7 @@ const nextConfig = (phase) => {
    */
   const config = {
     reactStrictMode: true,
-    experimental: {
-      transpilePackages: ['mantine-datatable'],
-    },
+    transpilePackages: ['mantine-datatable'],
     env: {
       PACKAGE_VERSION: pkg.version,
       BASE_PATH: '',
