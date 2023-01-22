@@ -101,6 +101,7 @@ export default function DataTable<T>({
   verticalAlignment = 'center',
   fetching,
   columns,
+  defaultColumnRender,
   idAccessor = 'id',
   records,
   selectedRecords,
@@ -376,6 +377,7 @@ export default function DataTable<T>({
                     record={record}
                     recordIndex={recordIndex}
                     columns={columns}
+                    defaultColumnRender={defaultColumnRender}
                     selectionVisible={!!selectedRecords}
                     selectionChecked={isSelected}
                     onSelectionChange={handleSelectionChange}

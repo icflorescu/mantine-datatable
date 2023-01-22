@@ -1,5 +1,5 @@
 import { Box, createStyles, Sx } from '@mantine/core';
-import { ChangeEventHandler, CSSProperties, MouseEventHandler } from 'react';
+import { ChangeEventHandler, CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import DataTableRowCell from './DataTableRowCell';
 import DataTableRowExpansion from './DataTableRowExpansion';
 import DataTableRowSelectorCell from './DataTableRowSelectorCell';
@@ -41,6 +41,7 @@ type DataTableRowProps<T> = {
   record: T;
   recordIndex: number;
   columns: DataTableColumn<T>[];
+  defaultColumnRender: ((record: T, index: number, accessor: string) => ReactNode) | undefined;
   selectionVisible: boolean;
   selectionChecked: boolean;
   onSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
@@ -61,6 +62,7 @@ export default function DataTableRow<T>({
   record,
   recordIndex,
   columns,
+  defaultColumnRender,
   selectionVisible,
   selectionChecked,
   onSelectionChange,
@@ -151,6 +153,7 @@ export default function DataTableRow<T>({
               ellipsis={ellipsis}
               width={width}
               render={render}
+              defaultRender={defaultColumnRender}
               customCellAttributes={customCellAttributes}
             />
           );

@@ -20,6 +20,7 @@ type DataTableRowCellProps<T> = {
   style?: CSSProperties;
   record: T;
   recordIndex: number;
+  defaultRender: ((record: T, index: number, accessor: string) => ReactNode) | undefined;
   onClick?: MouseEventHandler<HTMLTableCellElement>;
 } & Pick<
   DataTableColumn<T>,
@@ -39,6 +40,7 @@ export default function DataTableRowCell<T>({
   width,
   accessor,
   render,
+  defaultRender,
   customCellAttributes,
 }: DataTableRowCellProps<T>) {
   const { cx, classes } = useStyles();
@@ -60,7 +62,11 @@ export default function DataTableRowCell<T>({
       onClick={onClick}
       {...customCellAttributes?.(record, recordIndex)}
     >
-      {render ? render(record, recordIndex) : (getValueAtPath(record, accessor) as ReactNode)}
+      {render
+        ? render(record, recordIndex)
+        : defaultRender
+        ? defaultRender(record, recordIndex, accessor)
+        : (getValueAtPath(record, accessor) as ReactNode)}
     </Box>
   );
 }

@@ -1,5 +1,5 @@
 import type { DefaultProps, MantineShadow, MantineTheme, Sx, TableProps } from '@mantine/core';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumn } from './DataTableColumn';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
@@ -65,6 +65,12 @@ export type DataTableProps<T> = {
    * Visible columns
    */
   columns: DataTableColumn<T>[];
+
+  /**
+   * A default render function for all columns; accepts the current record, its index in `records`
+   * and the column accessor
+   */
+  defaultColumnRender?: (record: T, index: number, accesor: string) => ReactNode;
 
   /**
    * Accessor to use as unique record key; you can use dot-notation for nested objects property drilling
