@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.35 (2023-01-22)
+- Implement `defaultColumnRender` property to customize the default column render function 
+
 ## 1.7.28 (2022-12-16)
 - Implement additional row styling properties (`rowClassName`, `rowStyle`, `rowSx`) 
 
