@@ -56,8 +56,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
             <Code>width</Code> → desired column width as a <Code>number</Code> or <Code>string</Code>;
           </li>
           <li>
-            <Code>ellipsis</Code> → <Code>boolean</Code>; if true, cell content in this column will be truncated with
-            ellipsis as needed;
+            <Code>ellipsis</Code> → <Code>boolean</Code>; if true, cell content in this column will not wrap and will be
+            truncated with ellipsis if/as needed;
           </li>
           <li>
             <Code>textAlignment</Code> → <Code>&apos;left&apos; | &apos;center&apos; | &apos;right&apos;</Code>;

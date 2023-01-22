@@ -25,7 +25,7 @@ export default function DefaultColumnRenderExample() {
       ]}
       columns={[
         { accessor: 'bookTitle', width: '100%' },
-        { accessor: 'published', textAlignment: 'right' },
+        { accessor: 'published', textAlignment: 'right', ellipsis: true },
       ]}
       defaultColumnRender={(row, _, accessor) => {
         const data = row[accessor as keyof typeof row];
