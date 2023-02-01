@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.38 (2023-02-01)
+- Use explicit type imports in package
+
 ## 1.7.37 (2023-02-01)
 - Implement `noWrap` column property
 
