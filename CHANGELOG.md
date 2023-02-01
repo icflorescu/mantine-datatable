@@ -1,16 +1,19 @@
 # Changelog
 
+## 1.7.37 (2023-02-01)
+- Implement `noWrap` column property
+
 ## 1.7.35 (2023-01-22)
-- Implement `defaultColumnRender` property to customize the default column render function 
+- Implement `defaultColumnRender` property to customize the default column render function
 
 ## 1.7.28 (2022-12-16)
-- Implement additional row styling properties (`rowClassName`, `rowStyle`, `rowSx`) 
+- Implement additional row styling properties (`rowClassName`, `rowStyle`, `rowSx`)
 
 ## 1.7.24 (2022-12-07)
-- Implement the [custom row / cell attributes](https://icflorescu.github.io/mantine-datatable/examples/custom-row-or-cell-attributes) feature 
+- Implement the [custom row / cell attributes](https://icflorescu.github.io/mantine-datatable/examples/custom-row-or-cell-attributes) feature
 
 ## 1.7.17 (2022-11-15)
-- Update Mantine to 3.8.0 & TypeScript to 4.9.3 
+- Update Mantine to 3.8.0 & TypeScript to 4.9.3
 
 ## 1.7.16 (2022-11-15)
 - Update Mantine to 3.7.2
@@ -20,10 +23,10 @@
 
 ## 1.7.14 (2022-11-02)
 - Implement [#116](https://github.com/icflorescu/mantine-datatable/issues/116): custom loader component
-- Add `loaderColor` property  
+- Add `loaderColor` property
 
 ## 1.7.13 (2022-10-31)
-- Implement [#100](https://github.com/icflorescu/mantine-datatable/issues/100): page size selector  
+- Implement [#100](https://github.com/icflorescu/mantine-datatable/issues/100): page size selector
 
 ## 1.7.12 (2022-10-31)
 - Fix [#110](https://github.com/icflorescu/mantine-datatable/issues/110): context-menu positioning bug in RTL display mode
