@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "1.7.37",
+  "version": "1.7.38",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
