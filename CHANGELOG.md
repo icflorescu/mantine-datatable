@@ -1,6 +1,9 @@
 # Changelog
 
 ## 1.7.37 (2023-02-01)
+- Ensure footer background respects theme color scheme
+
+## 1.7.37 (2023-02-01)
 - Implement `noWrap` column property
 - Use explicit type imports in package
 
