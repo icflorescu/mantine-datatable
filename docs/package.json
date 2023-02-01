@@ -11,19 +11,19 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
-    "@mantine/core": "^5.10.1",
-    "@mantine/hooks": "^5.10.1",
-    "@mantine/modals": "^5.10.1",
-    "@mantine/next": "^5.10.1",
-    "@mantine/notifications": "^5.10.1",
-    "@mantine/prism": "^5.10.1",
-    "@tanstack/react-query": "^4.22.3",
+    "@mantine/core": "^5.10.2",
+    "@mantine/hooks": "^5.10.2",
+    "@mantine/modals": "^5.10.2",
+    "@mantine/next": "^5.10.2",
+    "@mantine/notifications": "^5.10.2",
+    "@mantine/prism": "^5.10.2",
+    "@tanstack/react-query": "^4.24.4",
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
-    "next": "^13.1.4",
+    "next": "^13.1.6",
     "next-pwa": "^5.6.0",
-    "next-sitemap": "^3.1.47",
+    "next-sitemap": "^3.1.49",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tabler-icons-react": "^1.56.0"
@@ -32,6 +32,6 @@
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }
