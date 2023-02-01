@@ -1,5 +1,5 @@
-import { DefaultMantineColor, MantineNumberSize, MantineTheme } from '@mantine/core';
-import { ReactNode } from 'react';
+import type { DefaultMantineColor, MantineNumberSize, MantineTheme } from '@mantine/core';
+import type { ReactNode } from 'react';
 
 export type DataTableLoaderProps = {
   /**

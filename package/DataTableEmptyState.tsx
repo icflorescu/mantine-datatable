@@ -1,5 +1,5 @@
 import { Center, createStyles, Text } from '@mantine/core';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { DatabaseOff } from 'tabler-icons-react';
 
 const useStyles = createStyles((theme) => ({

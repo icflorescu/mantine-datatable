@@ -1,4 +1,4 @@
-import { Button, Group, MantineColor, MantineSize, Menu, Text } from '@mantine/core';
+import { Button, Group, Menu, Text, type MantineColor, type MantineSize } from '@mantine/core';
 
 type DataTablePageSizeSelectorProps = {
   size: MantineSize;

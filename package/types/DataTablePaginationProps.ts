@@ -1,6 +1,6 @@
 import type { MantineColor, MantineNumberSize, MantineSize } from '@mantine/core';
 import type { ReactNode } from 'react';
-import { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelectorProps';
+import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelectorProps';
 
 export type DataTablePaginationProps = (
   | {

@@ -1,4 +1,4 @@
-import { MantineTheme, useMantineTheme } from '@mantine/core';
+import { useMantineTheme, type MantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 
 export function useMediaQueryStringOrFunction(mediaQuery: string | ((theme: MantineTheme) => string) | undefined) {

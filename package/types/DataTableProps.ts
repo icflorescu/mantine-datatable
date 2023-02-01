@@ -4,7 +4,7 @@ import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumn } from './DataTableColumn';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
 import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';
-import { DataTableLoaderProps } from './DataTableLoaderProps';
+import type { DataTableLoaderProps } from './DataTableLoaderProps';
 import type { DataTableOuterBorderProps } from './DataTableOuterBorderProps';
 import type { DataTablePaginationProps } from './DataTablePaginationProps';
 import type { DataTableRowExpansionProps } from './DataTableRowExpansionProps';

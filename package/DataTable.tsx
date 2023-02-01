@@ -1,6 +1,6 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useElementSize } from '@mantine/hooks';
-import { ChangeEventHandler, CSSProperties, Key, MouseEventHandler, useEffect } from 'react';
+import { useEffect, type ChangeEventHandler, type CSSProperties, type Key, type MouseEventHandler } from 'react';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
 import DataTableFooter from './DataTableFooter';

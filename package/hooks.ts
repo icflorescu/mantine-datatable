@@ -1,6 +1,6 @@
 import { useDebouncedState, useTimeout } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
-import { DataTableRowExpansionProps } from './types';
+import type { DataTableRowExpansionProps } from './types';
 import { getValueAtPath } from './utils';
 
 const SCROLL_DEBOUNCE_INTERVAL = 200;
