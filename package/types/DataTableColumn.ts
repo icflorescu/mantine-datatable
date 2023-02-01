@@ -37,11 +37,6 @@ export type DataTableColumn<T> = {
   width?: string | number;
 
   /**
-   * If true, cell content in this column will be truncated with ellipsis as needed
-   */
-  ellipsis?: boolean;
-
-  /**
    * If true, column will not be visible
    */
   hidden?: boolean;
@@ -87,4 +82,26 @@ export type DataTableColumn<T> = {
    * Optional function returning an object of custom attributes to be applied to each cell in the column
    */
   customCellAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
-};
+} & (
+  | {
+      /**
+       * If true, cell content in this column will be truncated with ellipsis as needed and will not wrap
+       * to multiple lines.
+       * (i.e. `overflow: hidden; text-overflow: ellipsis`; `white-space: nowrap`)
+       * On a column you can either set this property or `noWrap` but not both.
+       */
+      ellipsis?: boolean;
+
+      noWrap?: never;
+    }
+  | {
+      ellipsis?: never;
+
+      /**
+       * If true, cell content in this column will not wrap to multiple lines
+       * (i.e. `white-space: nowrap`)
+       * On a column you can either set this property or `ellipsis` but not both.
+       */
+      noWrap?: boolean;
+    }
+);

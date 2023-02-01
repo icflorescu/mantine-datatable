@@ -56,8 +56,14 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
             <Code>width</Code> → desired column width as a <Code>number</Code> or <Code>string</Code>;
           </li>
           <li>
-            <Code>ellipsis</Code> → <Code>boolean</Code>; if true, cell content in this column will not wrap and will be
-            truncated with ellipsis if/as needed;
+            <Code>ellipsis</Code> → <Code>boolean</Code>; if true, cell content in this column will not wrap to multiple
+            lines and will be truncated with ellipsis if/as needed; you can either set this property to{' '}
+            <Code>true</Code> or set <Code>noWrap</Code> to <Code>true</Code>, but not both;
+          </li>
+          <li>
+            <Code>noWrap</Code> → <Code>boolean</Code>; if true, cell content in this column will not wrap on multiple
+            lines (i.e. <Code>white-space: nowrap</Code>); you can either set this property to <Code>true</Code> or set{' '}
+            <Code>ellipsis</Code> to <Code>true</Code>, but not both;
           </li>
           <li>
             <Code>textAlignment</Code> → <Code>&apos;left&apos; | &apos;center&apos; | &apos;right&apos;</Code>;

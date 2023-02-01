@@ -1,5 +1,5 @@
 import { Checkbox, createStyles } from '@mantine/core';
-import { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler } from 'react';
 
 const useStyles = createStyles((theme) => {
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;

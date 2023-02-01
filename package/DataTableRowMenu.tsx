@@ -1,6 +1,6 @@
-import { createStyles, MantineNumberSize, MantineShadow, Paper, useMantineTheme } from '@mantine/core';
+import { createStyles, Paper, useMantineTheme, type MantineNumberSize, type MantineShadow } from '@mantine/core';
 import { useClickOutside, useElementSize, useMergedRef, useWindowEvent } from '@mantine/hooks';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 const useStyles = createStyles((theme) => ({
   root: {

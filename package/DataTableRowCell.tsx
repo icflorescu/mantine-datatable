@@ -1,15 +1,17 @@
-import { Box, createStyles, Sx } from '@mantine/core';
-import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
-import { DataTableColumn } from './types';
+import { Box, createStyles, type Sx } from '@mantine/core';
+import type { CSSProperties, MouseEventHandler, ReactNode } from 'react';
+import type { DataTableColumn } from './types';
 import { getValueAtPath, useMediaQueryStringOrFunction } from './utils';
 
 const useStyles = createStyles({
   withPointerCursor: {
     cursor: 'pointer',
   },
+  noWrap: {
+    whiteSpace: 'nowrap',
+  },
   ellipsis: {
     overflow: 'hidden',
-    whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
   },
 });
@@ -24,7 +26,14 @@ type DataTableRowCellProps<T> = {
   onClick?: MouseEventHandler<HTMLTableCellElement>;
 } & Pick<
   DataTableColumn<T>,
-  'accessor' | 'visibleMediaQuery' | 'textAlignment' | 'width' | 'ellipsis' | 'render' | 'customCellAttributes'
+  | 'accessor'
+  | 'visibleMediaQuery'
+  | 'textAlignment'
+  | 'width'
+  | 'noWrap'
+  | 'ellipsis'
+  | 'render'
+  | 'customCellAttributes'
 >;
 
 export default function DataTableRowCell<T>({
@@ -35,6 +44,7 @@ export default function DataTableRowCell<T>({
   record,
   recordIndex,
   onClick,
+  noWrap,
   ellipsis,
   textAlignment,
   width,
@@ -48,7 +58,10 @@ export default function DataTableRowCell<T>({
   return (
     <Box
       component="td"
-      className={cx({ [classes.ellipsis]: ellipsis, [classes.withPointerCursor]: onClick }, className)}
+      className={cx(
+        { [classes.noWrap]: noWrap || ellipsis, [classes.ellipsis]: ellipsis, [classes.withPointerCursor]: onClick },
+        className
+      )}
       sx={[
         {
           width,

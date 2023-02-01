@@ -1,5 +1,12 @@
-import { Center, createStyles, DefaultMantineColor, Loader, MantineNumberSize, MantineTheme } from '@mantine/core';
-import { ReactNode } from 'react';
+import {
+  Center,
+  createStyles,
+  Loader,
+  type DefaultMantineColor,
+  type MantineNumberSize,
+  type MantineTheme,
+} from '@mantine/core';
+import type { ReactNode } from 'react';
 
 const useStyles = createStyles((theme) => ({
   root: {

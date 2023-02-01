@@ -1,8 +1,16 @@
-import { Box, createStyles, CSSObject, MantineNumberSize, MantineTheme, Pagination, Text } from '@mantine/core';
-import { CSSProperties, ForwardedRef, forwardRef, ReactNode } from 'react';
+import {
+  Box,
+  createStyles,
+  Pagination,
+  Text,
+  type CSSObject,
+  type MantineNumberSize,
+  type MantineTheme,
+} from '@mantine/core';
+import { forwardRef, type CSSProperties, type ForwardedRef, type ReactNode } from 'react';
 import DataTablePageSizeSelector from './DataTablePageSizeSelector';
-import { DataTablePaginationProps } from './types';
-import { WithOptional, WithRequired } from './types/utils';
+import type { DataTablePaginationProps } from './types';
+import type { WithOptional, WithRequired } from './types/utils';
 
 const useStyles = createStyles(
   (
