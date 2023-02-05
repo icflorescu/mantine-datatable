@@ -41,6 +41,11 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
             content: 'yarn add @mantine/core @mantine/hooks @emotion/react mantine-datatable',
           },
           {
+            title: 'pnpm',
+            language: 'bash',
+            content: 'pnpm i @mantine/core @mantine/hooks @emotion/react mantine-datatable',
+          },
+          {
             title: 'npm',
             language: 'bash',
             content: 'npm i @mantine/core @mantine/hooks @emotion/react mantine-datatable',
