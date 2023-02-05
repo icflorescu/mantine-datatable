@@ -52,6 +52,11 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           },
         ]}
       />
+      <PageText info>
+        If you are using Next.js, you also need to install <Code>@mantine/next</Code> and <Code>@emotion/server</Code>{' '}
+        and make sure to follow the Mantine{' '}
+        <ExternalLink to="https://mantine.dev/guides/next/">usage with Next.js</ExternalLink> guide.
+      </PageText>
       <PageText>Then you can import the component and use it in your application like so:</PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>
