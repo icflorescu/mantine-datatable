@@ -148,6 +148,11 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: How to add custom attributes to Mantine DataTable rows or cells',
       },
       {
+        path: 'using-with-auto-animate',
+        title: 'Using bodyRef with AutoAnimate',
+        description: 'Example: How to use Mantine DataTable bodyRef property with AutoAnimate',
+      },
+      {
         path: 'complex-usage',
         title: 'Complex usage',
         description:

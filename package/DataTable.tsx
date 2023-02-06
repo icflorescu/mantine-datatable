@@ -139,6 +139,7 @@ export default function DataTable<T>({
   rowStyle,
   rowSx,
   customRowAttributes,
+  bodyRef,
   m,
   my,
   mx,
@@ -301,7 +302,7 @@ export default function DataTable<T>({
             onSelectionChange={handleHeaderSelectionChange}
             leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
           />
-          <tbody>
+          <tbody ref={bodyRef}>
             {recordsLength ? (
               records.map((record, recordIndex) => {
                 const recordId = getValueAtPath(record, idAccessor);
