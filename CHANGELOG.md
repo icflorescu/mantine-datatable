@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.0 (2023-02-06)
+- Fix `noWrap` column property not working
+- Expose `bodyRef` property to access the table body element (useful for animating table row operations with [AutoAnimate](https://auto-animate.formkit.com/))
+
 ## 1.7.38 (2023-02-01)
 - Ensure footer background respects theme color scheme
 

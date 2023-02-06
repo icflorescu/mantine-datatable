@@ -124,6 +124,7 @@ export default function DataTableRow<T>({
             hidden,
             visibleMediaQuery,
             textAlignment,
+            noWrap,
             ellipsis,
             width,
             render,
@@ -150,6 +151,7 @@ export default function DataTableRow<T>({
               onClick={handleCellClick}
               accessor={accessor}
               textAlignment={textAlignment}
+              noWrap={noWrap}
               ellipsis={ellipsis}
               width={width}
               render={render}

@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "1.7.39",
+  "version": "1.8.0",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -11,6 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
+    "@faker-js/faker": "^7.6.0",
+    "@formkit/auto-animate": "^1.0.0-beta.6",
     "@mantine/core": "^5.10.3",
     "@mantine/hooks": "^5.10.3",
     "@mantine/modals": "^5.10.3",
@@ -30,7 +32,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.11.18",
+    "@types/node": "^18.11.19",
     "@types/react": "^18.0.27",
     "typescript": "^4.9.5"
   }

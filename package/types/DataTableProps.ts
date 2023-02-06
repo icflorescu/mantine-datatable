@@ -130,6 +130,11 @@ export type DataTableProps<T> = {
    * Optional function returning an object of custom attributes to be applied to each row in the table
    */
   customRowAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
+
+  /**
+   * Ref pointing to the table body element
+   */
+  bodyRef?: (instance: HTMLTableSectionElement | null) => void;
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<
     DefaultProps<'root' | 'header' | 'pagination', CSSProperties>,
