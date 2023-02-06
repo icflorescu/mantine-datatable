@@ -1,5 +1,5 @@
 import type { DefaultProps, MantineShadow, MantineTheme, Sx, TableProps } from '@mantine/core';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, ReactNode, RefObject } from 'react';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumn } from './DataTableColumn';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
@@ -134,7 +134,7 @@ export type DataTableProps<T> = {
   /**
    * Ref pointing to the table body element
    */
-  bodyRef?: (instance: HTMLTableSectionElement | null) => void;
+  bodyRef?: ((instance: HTMLTableSectionElement | null) => void) | RefObject<HTMLTableSectionElement>;
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<
     DefaultProps<'root' | 'header' | 'pagination', CSSProperties>,
