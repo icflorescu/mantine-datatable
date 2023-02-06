@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.1 (2023-02-06)
+- Improve `bodyRef` property type
+
 ## 1.8.0 (2023-02-06)
 - Fix `noWrap` column property not working
 - Expose `bodyRef` property to access the table body element (useful for animating table row operations with [AutoAnimate](https://auto-animate.formkit.com/))
