@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -25,14 +25,14 @@
     "mantine-datatable": "*",
     "next": "^13.1.6",
     "next-pwa": "^5.6.0",
-    "next-sitemap": "^3.1.49",
+    "next-sitemap": "^3.1.52",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tabler-icons-react": "^1.56.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.11.19",
+    "@types/node": "^18.13.0",
     "@types/react": "^18.0.27",
     "typescript": "^4.9.5"
   }
