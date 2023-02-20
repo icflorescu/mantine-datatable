@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.6 (2023-02-20)
+- Fix row column border color not being applied correctly
+
 ## 1.8.1 (2023-02-06)
 - Improve `bodyRef` property type
 
