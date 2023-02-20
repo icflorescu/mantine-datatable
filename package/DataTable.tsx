@@ -45,7 +45,7 @@ const useStyles = createStyles(
             borderBottomColor: borderColorValue,
           },
           'tbody tr td': {
-            borderBottomColor: rowBorderColorValue,
+            borderTopColor: rowBorderColorValue,
           },
         },
       },
