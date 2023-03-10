@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
   version: {
     fontSize: 11,
     lineHeight: 1,
-    padding: '2px 4px 1px',
+    padding: '3px 4px 0',
     margin: '-8px 0 0 -4px',
   },
   versionInsideHeader: {

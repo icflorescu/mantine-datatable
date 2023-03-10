@@ -62,9 +62,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>The code above will produce the following result:</PageText>
       <GettingStartedExample />
       <PageText>
-        Have a look at the list of <InternalLink to="/component-properties">component properties</InternalLink> and{' '}
-        <InternalLink to={getFirstExamplePagePath()}>browse the code examples</InternalLink> to see the component in
-        action and learn how to use it.
+        <InternalLink to={getFirstExamplePagePath()}>Browse the code examples</InternalLink> to see the component in
+        action and learn how to use it, and refer to the{' '}
+        <InternalLink to="/component-properties">component properties</InternalLink> for an exhaustive list of
+        customizable options.
       </PageText>
       <PageNavigation of={PATH} />
     </Container>

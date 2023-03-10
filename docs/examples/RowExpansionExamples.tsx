@@ -182,7 +182,7 @@ export function RowExpansionExampleTriggerAlways() {
 
 export function RowExpansionExampleControlledMode() {
   const { theme, classes, cx } = useStyles();
-  const horizontalButtons = useMediaQuery(`(min-width: ${theme.breakpoints.md}px)`);
+  const horizontalButtons = useMediaQuery(`(min-width: ${theme.breakpoints.md})`);
   const [firstRowId, secondRowId, thirdRowId, fourthRowId] = records.slice(0, 4).map((r) => r.id);
 
   // example-start controlled-mode

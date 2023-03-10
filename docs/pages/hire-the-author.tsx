@@ -9,12 +9,12 @@ const PATH = 'hire-the-author';
 
 const useStyles = createStyles((theme) => ({
   intro: {
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       display: 'flex',
       gap: theme.spacing.xl,
       alignItems: 'center',
     },
-    [`@media (min-width: ${theme.breakpoints.md}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.md})`]: {
       alignItems: 'end',
     },
   },
@@ -23,21 +23,21 @@ const useStyles = createStyles((theme) => ({
     maxWidth: 200,
     display: 'block',
     borderRadius: theme.radius.sm,
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       width: 160,
     },
   },
   greeting: {
     fontSize: '120%',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7],
-    margin: `${theme.spacing.xl}px 0`,
+    margin: `${theme.spacing.xl} 0`,
   },
   badge: {
     verticalAlign: 'text-bottom',
   },
   emphasis: {
     color: theme.colorScheme === 'dark' ? theme.colors.red[4] : theme.colors.red[9],
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       marginTop: 0,
     },
   },

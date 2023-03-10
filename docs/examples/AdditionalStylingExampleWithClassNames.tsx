@@ -16,6 +16,12 @@ const useStyles = createStyles((theme) => ({
   },
   pagination: {
     color: theme.colors.orange[6],
+    'button[data-active="true"]': {
+      background: theme.colors.orange[4],
+    },
+    'button[data-active="true"]:not([data-disabled="true"]):hover': {
+      background: theme.colors.orange[5],
+    },
   },
 }));
 

@@ -1,15 +1,15 @@
-import { createStyles, Group, Text, UnstyledButton } from '@mantine/core';
+import { createStyles, Group, px, Text, UnstyledButton } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import { getPageNavigation } from '~/lib/page';
 
 const useStyles = createStyles((theme) => ({
   root: {
-    margin: `${theme.spacing.xl}px 0`,
+    margin: `${theme.spacing.xl} 0`,
     display: 'flex',
     flexDirection: 'column-reverse',
     gap: theme.spacing.xl,
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
@@ -27,12 +27,12 @@ const useStyles = createStyles((theme) => ({
       background: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2],
       transform: 'translate3d(0, 1px, 0)',
     },
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-      flex: `0 0 calc(50% - ${theme.spacing.xl / 2}px)`,
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
+      flex: `0 0 calc(50% - ${px(theme.spacing.xl) / 2}px)`,
     },
   },
   withoutNext: {
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       flexBasis: '100%',
     },
   },

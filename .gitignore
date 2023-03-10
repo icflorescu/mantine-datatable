@@ -6,6 +6,7 @@ yarn-error.log*
 out
 dist
 .turbo
+tsconfig.tsbuildinfo
 docs/public/robots.txt
 docs/public/sitemap.xml
 docs/public/sw.js

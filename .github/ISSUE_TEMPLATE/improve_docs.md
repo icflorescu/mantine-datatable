@@ -4,7 +4,6 @@ about: Improve documentation website or JSDoc comments in the codebase
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
 **Describe the improvement you'd like**

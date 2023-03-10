@@ -72,6 +72,7 @@ export default function GettingStartedExample() {
   );
 }
 ```
+
 Have a look at the available [component properties](https://icflorescu.github.io/mantine-datatable/component-properties) and make sure to browse the comprehensive list of [usage examples](https://icflorescu.github.io/mantine-datatable/examples/basic-usage).
 
 ## Code contributors

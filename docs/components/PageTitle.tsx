@@ -23,13 +23,13 @@ export default function PageTitle({ of }: { of: string }) {
           color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[8],
           fontSize: '1.5rem',
           marginBottom: '1em',
-          [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+          [`@media (min-width: ${theme.breakpoints.sm})`]: {
             fontSize: '1.75rem',
           },
-          [`@media (min-width: ${theme.breakpoints.md}px)`]: {
+          [`@media (min-width: ${theme.breakpoints.md})`]: {
             fontSize: '2rem',
           },
-          [`@media (min-width: ${theme.breakpoints.lg}px)`]: {
+          [`@media (min-width: ${theme.breakpoints.lg})`]: {
             marginTop: '1em',
           },
         })}
