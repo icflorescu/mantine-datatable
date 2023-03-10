@@ -1256,7 +1256,7 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@mantine/core@^6.0.1":
+"@mantine/core@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@mantine/core/-/core-6.0.1.tgz#e9cb1edc895a803c1957071eac9fc2b5457330be"
   integrity sha512-RJ0gnEOMQu9qGV9bZxb4FrHe3UT2GjVokzZ91C/Ht8DTu8Ar1uUch45+VsqI67JG2ceHykOMvsDWgAulCUKBNg==
@@ -1268,19 +1268,19 @@
     react-remove-scroll "^2.5.5"
     react-textarea-autosize "8.3.4"
 
-"@mantine/hooks@^6.0.1":
+"@mantine/hooks@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-6.0.1.tgz#0b01f445b8b03854b029fd257e810424da30df2c"
   integrity sha512-D3zWNPMrmjBbns0krXCE5FyWNmrKosYqD+J4/yyBrngvN6XMlmqfUr4C6ofndRrpZHxyshEJgVYLvB5h2bioGQ==
 
-"@mantine/modals@^6.0.1":
+"@mantine/modals@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@mantine/modals/-/modals-6.0.1.tgz#23d5cd2d1ce01fbe4ec19bb4246dab769d103656"
   integrity sha512-uMtGDI3sPygQV5VOLIuNa8Y7gmylZN82BAWy8KoCduVn5Fbby/t6ILz7OVJEp8Ob+IL9CZZYvQRtnHQ0zLjq8g==
   dependencies:
     "@mantine/utils" "6.0.1"
 
-"@mantine/next@^6.0.1":
+"@mantine/next@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@mantine/next/-/next-6.0.1.tgz#3b07f7f42d5770d29429c18cc114853a560c83e9"
   integrity sha512-+7Mb79V+ah/XhVmOTQ6tlg0ZHZhweTgryQO9u87wD8KMxuuNhdNLZq27E8390PTXHhxFO93T7k4WbQqIXQOkUg==
@@ -1288,7 +1288,7 @@
     "@mantine/ssr" "6.0.1"
     "@mantine/styles" "6.0.1"
 
-"@mantine/notifications@^6.0.1":
+"@mantine/notifications@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-6.0.1.tgz#7a28e89ecd0b0b40cb893cc648587addb5d809d9"
   integrity sha512-IZpaQD9qPf2vZHa4kvRfEC/pg3NnTHUiIJVvZm0zWJDXB/klZtxSSbcnmp18Pv5vZlpUZXgIb5JE1exeFiPz1g==
@@ -1296,7 +1296,7 @@
     "@mantine/utils" "6.0.1"
     react-transition-group "4.4.2"
 
-"@mantine/prism@^6.0.1":
+"@mantine/prism@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@mantine/prism/-/prism-6.0.1.tgz#3c7460da04853b8e67f5f9c6c30cddae56f75c98"
   integrity sha512-IVzYAJszYRo5EDPDDmbkMexjkEn0bfjnhkGOcPas7C0AMA94r2Dg/4/MgNdjg3e3afW9DAIN9MYWgVD6EGMFrA==
