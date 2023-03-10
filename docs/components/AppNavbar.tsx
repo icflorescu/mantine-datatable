@@ -7,7 +7,7 @@ import AppNavbarLinkList from './AppNavbarLinkList';
 import Logo from './Logo';
 
 const useStyles = createStyles((theme) => {
-  const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]}px)`;
+  const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`;
 
   return {
     backdrop: {

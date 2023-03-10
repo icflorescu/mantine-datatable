@@ -17,7 +17,7 @@ const useStyles = createStyles((theme) => ({
     display: 'inline-block',
     fontSize: 12,
     fontWeight: 500,
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       fontSize: 14,
     },
   },

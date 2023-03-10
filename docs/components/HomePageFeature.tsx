@@ -1,12 +1,12 @@
-import { createStyles, Text, ThemeIcon } from '@mantine/core';
+import { createStyles, px, Text, ThemeIcon } from '@mantine/core';
 import { FC, ReactNode } from 'react';
 
 const useStyles = createStyles((theme) => ({
   root: {
     display: 'flex',
     gap: theme.spacing.md,
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
-      width: `calc(50% - ${theme.spacing.lg}px)`,
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
+      width: `calc(50% - ${px(theme.spacing.lg)}px)`,
       flexDirection: 'column',
     },
   },

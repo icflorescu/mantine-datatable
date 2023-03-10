@@ -9,10 +9,16 @@ import { useState } from 'react';
 import { Employee, getEmployeesAsync } from '~/data';
 
 const useStyles = createStyles((theme) => ({
-  modal: { width: 300 },
+  modalHeader: {
+    borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]}`,
+    marginBottom: theme.spacing.md,
+  },
   modalTitle: {
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[8],
     fontWeight: 700,
+  },
+  modalContent: {
+    maxWidth: 300,
   },
   modalLabel: { width: 80 },
 }));
@@ -39,7 +45,7 @@ export default function ComplexUsageExample() {
   const {
     breakpoints: { xs: xsBreakpoint },
   } = useMantineTheme();
-  const aboveXsMediaQuery = `(min-width: ${xsBreakpoint}px)`;
+  const aboveXsMediaQuery = `(min-width: ${xsBreakpoint})`;
 
   const { classes } = useStyles();
   const now = dayjs();
@@ -101,7 +107,7 @@ export default function ComplexUsageExample() {
         onRowClick={({ firstName, lastName, birthDate }) =>
           openModal({
             title: `${firstName} ${lastName}`,
-            classNames: { modal: classes.modal, title: classes.modalTitle },
+            classNames: { header: classes.modalHeader, title: classes.modalTitle, content: classes.modalContent },
             children: (
               <Stack>
                 <Group>

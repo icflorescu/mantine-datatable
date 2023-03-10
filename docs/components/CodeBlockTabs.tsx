@@ -7,7 +7,7 @@ const useStyles = createStyles((theme) => ({
     color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[6],
     fontWeight: 500,
     fontSize: 12,
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       fontSize: 14,
     },
   },

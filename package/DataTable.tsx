@@ -250,7 +250,7 @@ export default function DataTable<T>({
   const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;
   const { cx, classes, theme } = useStyles({ borderColor, rowBorderColor });
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
-  const styleProperties = typeof styles === 'function' ? styles(theme, EMPTY_OBJECT) : styles;
+  const styleProperties = typeof styles === 'function' ? styles(theme, EMPTY_OBJECT, EMPTY_OBJECT) : styles;
 
   return (
     <Box

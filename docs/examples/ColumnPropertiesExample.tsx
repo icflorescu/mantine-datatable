@@ -41,7 +41,7 @@ export default function ColumnPropertiesExample() {
           width: 100,
           render: ({ birthDate }) => dayjs(birthDate).format('MMM D'),
           // column is only visible when screen width is over `theme.breakpoints.xs`
-          visibleMediaQuery: (theme) => `(min-width: ${theme.breakpoints.xs}px)`,
+          visibleMediaQuery: (theme) => `(min-width: ${theme.breakpoints.xs})`,
         },
         {
           // "virtual column"
@@ -49,7 +49,7 @@ export default function ColumnPropertiesExample() {
           width: 60,
           textAlignment: 'right',
           // column is only visible when screen width is over `theme.breakpoints.xs`
-          visibleMediaQuery: (theme) => `(min-width: ${theme.breakpoints.xs}px)`,
+          visibleMediaQuery: (theme) => `(min-width: ${theme.breakpoints.xs})`,
           render: ({ birthDate }) => dayjs().diff(birthDate, 'years'),
         },
       ]}

@@ -5,6 +5,7 @@ import {
   Center,
   createStyles,
   Group,
+  px,
   SegmentedControl,
   Text,
   useMantineColorScheme,
@@ -16,7 +17,7 @@ import GitHubIcon from './GitHubIcon';
 import Logo from './Logo';
 
 const useStyles = createStyles((theme) => {
-  const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]}px)`;
+  const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`;
   const buttonBorder = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
   const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6];
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.3 : 0.03;
@@ -53,7 +54,7 @@ const useStyles = createStyles((theme) => {
         left: 0,
         right: 0,
         height: theme.spacing.sm,
-        bottom: -theme.spacing.sm - 1,
+        bottom: -px(theme.spacing.sm) - 1,
         background: `linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
           theme.black,
           0
@@ -100,8 +101,10 @@ const useStyles = createStyles((theme) => {
       },
     },
     sourceCodeButtonIcon: {
-      marginBottom: -2,
       '&&': { marginRight: 5 },
+    },
+    sourceCodeButtonLabel: {
+      marginBottom: -2,
     },
     colorSchemeSegmentedControlContainer: {
       display: 'none',
@@ -132,7 +135,11 @@ export default function AppHeader({
     <Group className={cx(classes.root, { [classes.windowScrolledOnY]: windowScrollY !== 0 })} px="sm" spacing="xs">
       <IconMenu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} />
       <Button
-        classNames={{ root: classes.sourceCodeButton, icon: classes.sourceCodeButtonIcon }}
+        classNames={{
+          root: classes.sourceCodeButton,
+          icon: classes.sourceCodeButtonIcon,
+          label: classes.sourceCodeButtonLabel,
+        }}
         size="xs"
         variant="default"
         leftIcon={<GitHubIcon size={16} />}
@@ -178,7 +185,9 @@ export default function AppHeader({
               label: (
                 <Center>
                   <IconSun size={14} />
-                  <Box ml={10}>Light</Box>
+                  <Box ml={10} mb={-2}>
+                    Light
+                  </Box>
                 </Center>
               ),
             },
@@ -187,7 +196,9 @@ export default function AppHeader({
               label: (
                 <Center>
                   <IconMoon size={14} />
-                  <Box ml={10}>Dark</Box>
+                  <Box ml={10} mb={-2}>
+                    Dark
+                  </Box>
                 </Center>
               ),
             },

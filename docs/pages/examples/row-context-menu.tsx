@@ -49,7 +49,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing.xl,
-    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.sm})`]: {
       width: '100%',
       flexDirection: 'row',
       justifyContent: 'space-between',

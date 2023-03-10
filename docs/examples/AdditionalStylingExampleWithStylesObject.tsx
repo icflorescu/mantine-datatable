@@ -25,9 +25,6 @@ export default function AdditionalStylingExampleWithStylesObject() {
         header: {
           fontStyle: 'italic',
         },
-        pagination: {
-          color: 'orange',
-        },
       }}
       // example-skip
       columns={[

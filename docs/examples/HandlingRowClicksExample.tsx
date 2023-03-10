@@ -13,9 +13,6 @@ export default function HandlingRowClicksExample() {
       onRowClick={(company, rowIndex) => {
         openModal({
           title: 'Company information',
-          styles: {
-            modal: { maxWidth: 300 },
-          },
           children: (
             <Stack>
               <Text size="sm">

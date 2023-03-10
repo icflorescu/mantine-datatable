@@ -1,4 +1,4 @@
-import { createStyles, Global } from '@mantine/core';
+import { createStyles, Global, px } from '@mantine/core';
 import { ReactNode, useState } from 'react';
 import {
   FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
@@ -21,20 +21,20 @@ const useStyles = createStyles((theme) => {
       marginTop: HEADER_HEIGHT,
       marginBottom: FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT,
       minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT}px)`,
-      padding: `${theme.spacing.lg}px 0`,
+      padding: `${theme.spacing.lg} 0`,
       '&::after': {
         position: 'absolute',
         content: '""',
         left: 0,
         right: 0,
         height: theme.spacing.sm,
-        bottom: -theme.spacing.sm - 1,
+        bottom: -px(theme.spacing.sm) - 1,
         background: `linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
           theme.black,
           0
         )}), linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(theme.black, 0)} 30%)`,
       },
-      [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]}px)`]: {
+      [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`]: {
         marginLeft: NAVBAR_WIDTH,
         marginBottom: FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
         minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT}px)`,
@@ -84,7 +84,7 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
         <Global
           styles={(theme) => ({
             body: {
-              [`@media (max-width: ${theme.breakpoints.md - 1}px)`]: {
+              [`@media (max-width: ${px(theme.breakpoints.md) - 1}px)`]: {
                 overflow: 'hidden',
               },
             },

@@ -35,7 +35,7 @@ const BLURS = [1, 2, 3, 4, 5];
 
 const useStyles = createStyles((theme) => ({
   controlGroups: {
-    [`@media(min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media(min-width: ${theme.breakpoints.sm})`]: {
       flexDirection: 'row',
       gap: theme.spacing.xl,
       justifyContent: 'space-between',

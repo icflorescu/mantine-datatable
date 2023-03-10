@@ -26,7 +26,7 @@ const useStyles = createStyles((theme) => {
       justifyContent: 'center',
       alignItems: 'center',
       gap: theme.spacing.xs,
-      [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]}px)`]: {
+      [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`]: {
         marginLeft: NAVBAR_WIDTH,
         height: FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
         flexDirection: 'row',

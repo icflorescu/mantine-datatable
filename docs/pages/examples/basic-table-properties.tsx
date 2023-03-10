@@ -29,7 +29,7 @@ const VERTICAL_ALIGNMENTS: DataTableVerticalAlignment[] = ['top', 'center', 'bot
 
 const useStyles = createStyles((theme) => ({
   controlGroups: {
-    [`@media(min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media(min-width: ${theme.breakpoints.sm})`]: {
       flexDirection: 'row',
       gap: theme.spacing.xl,
       justifyContent: 'space-between',

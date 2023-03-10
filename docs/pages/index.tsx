@@ -13,15 +13,15 @@ const useStyles = createStyles((theme) => ({
   title: {
     marginBottom: '.75em',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[8],
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       marginTop: '.33em',
       lineHeight: 1.1,
       fontSize: 52,
     },
-    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.sm})`]: {
       fontSize: 60,
     },
-    [`@media (min-width: ${theme.breakpoints.md}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.md})`]: {
       marginTop: '.66em',
     },
   },
@@ -38,10 +38,10 @@ const useStyles = createStyles((theme) => ({
     margin: '1em 0 2em',
     fontWeight: 500,
     color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[8],
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       fontSize: 20,
     },
-    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.sm})`]: {
       fontSize: 24,
     },
   },
@@ -49,16 +49,16 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing.lg,
-    columnGap: theme.spacing.lg * 2,
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    columnGap: `calc(${theme.spacing.lg} * 2)`,
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      rowGap: theme.spacing.lg * 2,
+      rowGap: `calc(${theme.spacing.lg} * 2)`,
     },
   },
   buttons: {
     margin: '2em 0 0',
-    [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
       gap: theme.spacing.xl,
       margin: '3em 0 1em',
     },
@@ -66,11 +66,14 @@ const useStyles = createStyles((theme) => ({
   button: {
     width: '100%',
     '@media (min-width: 420px)': {
-      width: `calc(50% - ${theme.spacing.md / 2}px)`,
+      width: `calc(50% - ${theme.spacing.md} / 2)`,
     },
     '@media (min-width: 560px)': {
       width: 'auto',
     },
+  },
+  buttonLabel: {
+    marginTop: 2,
   },
   examplesButton: {
     '@media (min-width: 420px)': {
@@ -124,7 +127,7 @@ export default function Page() {
         </div>
         <Group className={classes.buttons}>
           <Button
-            className={classes.button}
+            classNames={{ root: classes.button, label: classes.buttonLabel }}
             size="md"
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan' }}
@@ -135,7 +138,7 @@ export default function Page() {
             Get started
           </Button>
           <Button
-            className={classes.button}
+            classNames={{ root: classes.button, label: classes.buttonLabel }}
             size="md"
             variant="gradient"
             gradient={{ from: 'gray.6', to: 'gray.5' }}
@@ -147,7 +150,7 @@ export default function Page() {
             View code
           </Button>
           <Button
-            className={cx(classes.button, classes.examplesButton)}
+            classNames={{ root: cx(classes.button, classes.examplesButton), label: classes.buttonLabel }}
             size="md"
             variant="gradient"
             gradient={{ from: 'green.7', to: 'green.6' }}
