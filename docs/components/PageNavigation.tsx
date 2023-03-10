@@ -1,6 +1,6 @@
 import { createStyles, Group, Text, UnstyledButton } from '@mantine/core';
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight } from 'tabler-icons-react';
 import { getPageNavigation } from '~/lib/page';
 
 const useStyles = createStyles((theme) => ({
@@ -51,7 +51,7 @@ export default function PageNavigation({ of }: { of: string }) {
         rel="prev"
       >
         <Group px="sm" py="xs" position="apart" noWrap>
-          <ArrowLeft />
+          <IconArrowLeft />
           <div>
             <Text weight={500} align="right">
               Go back
@@ -71,7 +71,7 @@ export default function PageNavigation({ of }: { of: string }) {
                 {next.title}
               </Text>
             </div>
-            <ArrowRight />
+            <IconArrowRight />
           </Group>
         </UnstyledButton>
       )}

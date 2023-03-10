@@ -1,6 +1,6 @@
 import { Code, createStyles, Text, ThemeIcon } from '@mantine/core';
+import { IconTable } from '@tabler/icons-react';
 import Link from 'next/link';
-import { Table } from 'tabler-icons-react';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -37,7 +37,7 @@ export default function Logo({ className, insideHeader }: { className?: string; 
   return (
     <Link className={cx(classes.root, className)} href="/">
       <ThemeIcon className={cx({ [classes.iconInsideHeader]: insideHeader })} size="md" radius="lg">
-        <Table size={16} />
+        <IconTable size={16} />
       </ThemeIcon>
       <Text className={classes.title} component="h1">
         Mantine DataTable

@@ -1,8 +1,8 @@
 import { Button, Center, Paper } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
+import { IconTrash } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
-import { Trash } from 'tabler-icons-react';
 import { companies, Company } from '~/data';
 
 export function RecordsSelectionExample() {
@@ -28,7 +28,7 @@ export function RecordsSelectionExample() {
         <Center>
           <Button
             uppercase
-            leftIcon={<Trash size={16} />}
+            leftIcon={<IconTrash size={16} />}
             color="red"
             disabled={!selectedRecords.length}
             onClick={() => showNotification({ color: 'red', message: 'Deleting data is dangerous!' })}

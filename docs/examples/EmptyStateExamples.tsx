@@ -1,6 +1,6 @@
 import { Box, Image, Stack, Text } from '@mantine/core';
+import { IconMoodSad } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
-import { MoodSad } from 'tabler-icons-react';
 
 export function EmptyStateExampleStandard() {
   // example-start standard
@@ -53,7 +53,7 @@ export function EmptyStateExampleCustomIconAndText() {
             background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
           })}
         >
-          <MoodSad size={36} strokeWidth={1.5} />
+          <IconMoodSad size={36} strokeWidth={1.5} />
         </Box>
       }
       noRecordsText="No records found"

@@ -1,6 +1,6 @@
 import { showNotification } from '@mantine/notifications';
+import { IconEdit, IconSend, IconTrash, IconX } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
-import { Edit, Send, Trash, X } from 'tabler-icons-react';
 import companies from '~/data/companies.json';
 
 export function RowContextMenuExample1() {
@@ -234,20 +234,20 @@ export function RowContextMenuExample7() {
         items: (record) => [
           {
             key: 'edit',
-            icon: <Edit size={16} />,
+            icon: <IconEdit size={16} />,
             onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
           {
             key: 'delete',
             color: 'red',
-            icon: <Trash size={16} />,
+            icon: <IconTrash size={16} />,
             title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
           {
             key: 'sendMessage',
             title: 'Send message to company HQ',
-            icon: <Send size={16} />,
+            icon: <IconSend size={16} />,
             onClick: () => {
               showNotification({ message: 'Should send a message to this company' });
             },
@@ -271,7 +271,7 @@ export function RowContextMenuExample8() {
           // example-skip
           {
             key: 'edit',
-            icon: <Edit size={16} />,
+            icon: <IconEdit size={16} />,
             onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
           // example-resume
@@ -279,7 +279,7 @@ export function RowContextMenuExample8() {
             key: 'delete',
             color: 'red',
             // set a specific icon for the 1st row
-            icon: companies.indexOf(record) === 0 ? <X size={16} /> : <Trash size={16} />,
+            icon: companies.indexOf(record) === 0 ? <IconX size={16} /> : <IconTrash size={16} />,
             title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
@@ -287,7 +287,7 @@ export function RowContextMenuExample8() {
           {
             key: 'sendMessage',
             title: 'Send message to company HQ',
-            icon: <Send size={16} />,
+            icon: <IconSend size={16} />,
             onClick: () => {
               showNotification({ message: 'Should send a message to this company' });
             },
@@ -312,7 +312,7 @@ export function RowContextMenuExample9() {
           // example-skip
           {
             key: 'edit',
-            icon: <Edit size={16} />,
+            icon: <IconEdit size={16} />,
             onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
           },
           // example-resume
@@ -320,7 +320,7 @@ export function RowContextMenuExample9() {
             key: 'delete',
             // set a specific color for the 1st row
             color: companies.indexOf(record) === 0 ? 'orange' : 'red',
-            icon: <Trash size={16} />,
+            icon: <IconTrash size={16} />,
             title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
@@ -328,7 +328,7 @@ export function RowContextMenuExample9() {
           {
             key: 'sendMessage',
             title: 'Send message to company HQ',
-            icon: <Send size={16} />,
+            icon: <IconSend size={16} />,
             onClick: () => {
               showNotification({ message: 'Should send a message to this company' });
             },

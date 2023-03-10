@@ -1,6 +1,6 @@
 import { Button, Container, createStyles, Group, Text, Title } from '@mantine/core';
+import { IconBulb, IconLifebuoy, IconRocket, IconScale, IconSettings } from '@tabler/icons-react';
 import Link from 'next/link';
-import { Bulb, Lifebuoy, Rocket, Scale, Settings } from 'tabler-icons-react';
 import GitHubIcon from '~/components/GitHubIcon';
 import HomePageFeature from '~/components/HomePageFeature';
 import { REPO_LINK } from '~/config';
@@ -105,19 +105,19 @@ export default function Page() {
           Mantine DataTable brings datagrid-like functionality to your data-rich user interfaces.
         </Text>
         <div className={classes.features}>
-          <HomePageFeature icon={Settings} title="Feature rich">
+          <HomePageFeature icon={IconSettings} title="Feature rich">
             Supports asynchronous data loading, pagination, multiple rows selection, column sorting, custom cell data
             rendering, row context menu, row expansion, dark theme and more
           </HomePageFeature>
-          <HomePageFeature icon={Lifebuoy} title="Typescript based">
+          <HomePageFeature icon={IconLifebuoy} title="Typescript based">
             The entire codebase is written in TypeScript, component properties are well typed and documented with JSDoc,
             so you can build type safe applications with confidence
           </HomePageFeature>
-          <HomePageFeature icon={Scale} title="Free and open-source">
+          <HomePageFeature icon={IconScale} title="Free and open-source">
             This package is released under the MIT license, same as Mantine, so you can freely build fantastic data-rich
             applications with it
           </HomePageFeature>
-          <HomePageFeature icon={Rocket} title="Use anywhere">
+          <HomePageFeature icon={IconRocket} title="Use anywhere">
             You can use this component in any modern React framework supported by Mantine, such as Next.js, Vite, Create
             React App, Remix or Gatsby
           </HomePageFeature>
@@ -128,7 +128,7 @@ export default function Page() {
             size="md"
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan' }}
-            leftIcon={<Rocket />}
+            leftIcon={<IconRocket />}
             component={Link}
             href="/getting-started"
           >
@@ -151,7 +151,7 @@ export default function Page() {
             size="md"
             variant="gradient"
             gradient={{ from: 'green.7', to: 'green.6' }}
-            leftIcon={<Bulb />}
+            leftIcon={<IconBulb />}
             component={Link}
             href={getFirstExamplePagePath()}
           >

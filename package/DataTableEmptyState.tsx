@@ -1,6 +1,6 @@
 import { Center, createStyles, Text } from '@mantine/core';
+import { IconDatabaseOff } from '@tabler/icons-react';
 import type { ReactNode } from 'react';
-import { DatabaseOff } from 'tabler-icons-react';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -43,7 +43,7 @@ export default function DataTableEmptyState({ icon, text, pt, pb, active, childr
         <>
           {icon || (
             <div className={classes.standardIcon}>
-              <DatabaseOff />
+              <IconDatabaseOff />
             </div>
           )}
           <Text size="sm" color="dimmed">

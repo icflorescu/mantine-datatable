@@ -1583,6 +1583,19 @@
   dependencies:
     tslib "^2.4.0"
 
+"@tabler/icons-react@^2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-2.9.0.tgz#4278612cd0c9e045358b5990e78e02d3d4f09f4a"
+  integrity sha512-V3v2yTK72UMSRXfBD/1IQB7fmcI0MoJk253nzcjhMdwTIIltOWuotCiiyqNv7lX7iKAeL7/ApCMNC03CDuQQ1g==
+  dependencies:
+    "@tabler/icons" "2.9.0"
+    prop-types "^15.7.2"
+
+"@tabler/icons@2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.9.0.tgz#f07b23307561131d99f28dd59931a81b527ff0e7"
+  integrity sha512-x0Vafi2m0jP+fgWxgOu/wI6/o7r+uVWr0NtpsNiboYn4KIDOPyxtJ6T156ZQ3XfDU51WZDaMUIxY35AF5QoowQ==
+
 "@tanstack/query-core@4.26.1":
   version "4.26.1"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.26.1.tgz#7a441086c4d3d79e1d156c0a355bd3567213626e"
@@ -4062,7 +4075,7 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -4570,11 +4583,6 @@ tabbable@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.0.1.tgz#427a09b13c83ae41eed3e88abb76a4af28bde1a6"
   integrity sha512-SYJSIgeyXW7EuX1ytdneO5e8jip42oHWg9xl/o3oTYhmXusZVgiA+VlPvjIN+kHii9v90AmzTZEBcsEvuAY+TA==
-
-tabler-icons-react@^1.56.0:
-  version "1.56.0"
-  resolved "https://registry.yarnpkg.com/tabler-icons-react/-/tabler-icons-react-1.56.0.tgz#d2a6cf9160f25b370c38c356fa6284c254e5113e"
-  integrity sha512-FOme3w6PJIWDpeXqQ4xjArQqdxzrr9xNy7PSSgWpRzOUQ71RyZ7jt6WThsfyLBz5os78TPJRA8f/0NLjnKcx9A==
 
 tapable@^2.2.0:
   version "2.2.1"

@@ -1,7 +1,7 @@
 import { Box, Button, createStyles, Grid, Group, TextInput } from '@mantine/core';
+import { IconArrowBackUp, IconCheck } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
-import { ArrowBackUp, Check } from 'tabler-icons-react';
 import { companies as companyData, Company } from '~/data';
 
 const initialRecords = companyData.slice(0, 5);
@@ -57,12 +57,12 @@ function CompanyEditor({ initialData, onDone, onCancel }: CompanyEditorProps) {
         {/* example-resume */}
         <Grid.Col span={12}>
           <Group position="center">
-            <Button variant="default" size="xs" leftIcon={<ArrowBackUp size={16} />} onClick={() => onCancel()}>
+            <Button variant="default" size="xs" leftIcon={<IconArrowBackUp size={16} />} onClick={() => onCancel()}>
               Cancel
             </Button>
             <Button
               size="xs"
-              leftIcon={<Check size={16} />}
+              leftIcon={<IconCheck size={16} />}
               onClick={() =>
                 onDone({
                   ...initialData,

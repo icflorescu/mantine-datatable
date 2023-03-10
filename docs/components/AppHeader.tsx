@@ -10,7 +10,7 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
-import { Menu2, Moon, Sun } from 'tabler-icons-react';
+import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, REPO_LINK } from '~/config';
 import GitHubIcon from './GitHubIcon';
 import Logo from './Logo';
@@ -123,14 +123,14 @@ export default function AppHeader({
   onShowNavbarClick: () => void;
 }) {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const ColorSchemeIcon = colorScheme === 'dark' ? Sun : Moon;
+  const ColorSchemeIcon = colorScheme === 'dark' ? IconSun : IconMoon;
   const [{ y: windowScrollY }] = useWindowScroll();
 
   const { classes, cx } = useStyles();
 
   return (
     <Group className={cx(classes.root, { [classes.windowScrolledOnY]: windowScrollY !== 0 })} px="sm" spacing="xs">
-      <Menu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} />
+      <IconMenu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} />
       <Button
         classNames={{ root: classes.sourceCodeButton, icon: classes.sourceCodeButtonIcon }}
         size="xs"
@@ -177,7 +177,7 @@ export default function AppHeader({
               value: 'light',
               label: (
                 <Center>
-                  <Sun size={14} />
+                  <IconSun size={14} />
                   <Box ml={10}>Light</Box>
                 </Center>
               ),
@@ -186,7 +186,7 @@ export default function AppHeader({
               value: 'dark',
               label: (
                 <Center>
-                  <Moon size={14} />
+                  <IconMoon size={14} />
                   <Box ml={10}>Dark</Box>
                 </Center>
               ),

@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { ActionIcon, Box, Button, Center, Group } from '@mantine/core';
+import { IconArrowDown, IconArrowsUpDown, IconArrowUp, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
-import { ArrowDown, ArrowsUpDown, ArrowUp, Trash, TrashX } from 'tabler-icons-react';
 
 type User = {
   id: string;
@@ -80,7 +80,7 @@ export default function UsingWithAutoAnimateExample() {
             accessor: 'move',
             title: (
               <Center>
-                <ArrowsUpDown size={14} />
+                <IconArrowsUpDown size={14} />
               </Center>
             ),
             render: (_, index) => (
@@ -91,7 +91,7 @@ export default function UsingWithAutoAnimateExample() {
                   disabled={index === 0}
                   onClick={() => moveUserUp(index)}
                 >
-                  <ArrowUp size={18} />
+                  <IconArrowUp size={18} />
                 </ActionIcon>
                 <ActionIcon
                   variant="transparent"
@@ -99,7 +99,7 @@ export default function UsingWithAutoAnimateExample() {
                   disabled={index === records.length - 1}
                   onClick={() => moveUserDown(index)}
                 >
-                  <ArrowDown size={18} />
+                  <IconArrowDown size={18} />
                 </ActionIcon>
               </Box>
             ),
@@ -110,12 +110,12 @@ export default function UsingWithAutoAnimateExample() {
             accessor: 'delete',
             title: (
               <ActionIcon variant="transparent" color="red" disabled={records.length === 0} onClick={handleDeleteAll}>
-                <TrashX size={18} />
+                <IconTrashX size={18} />
               </ActionIcon>
             ),
             render: ({ id }) => (
               <ActionIcon variant="transparent" color="red" onClick={() => deleteUser(id)}>
-                <Trash size={18} />
+                <IconTrash size={18} />
               </ActionIcon>
             ),
           },
@@ -139,6 +139,5 @@ export default function UsingWithAutoAnimateExample() {
       {/* example-resume */}
     </>
   );
-
   // example-end
 }

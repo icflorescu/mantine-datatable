@@ -1,6 +1,6 @@
 import { MantineColor } from '@mantine/core';
+import { IconAdjustments, IconHeartHandshake, IconHome, IconLifebuoy, IconList, IconRocket } from '@tabler/icons-react';
 import { FC } from 'react';
-import { Adjustments, HeartHandshake, Home, Lifebuoy, List, Rocket } from 'tabler-icons-react';
 
 export const SEO_DEFAULT_TITLE = 'Mantine DataTable';
 export const SEO_DEFAULT_DESCRIPTION =
@@ -28,13 +28,13 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
       items: { path: string; title: string; description?: string }[];
     }
 ))[] = [
-  { title: 'Home', description: SEO_DEFAULT_DESCRIPTION, icon: Home },
+  { title: 'Home', description: SEO_DEFAULT_DESCRIPTION, icon: IconHome },
   {
     path: 'getting-started',
     title: 'Getting started',
     description: 'How to install Mantine DataTable, its dependencies and how to import and use it in your application',
     color: 'orange',
-    icon: Rocket,
+    icon: IconRocket,
   },
   {
     path: 'examples',
@@ -166,7 +166,7 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
     description:
       'Mantine DataTable component is written in TypeScript and its properties are well documented with additional JSDoc annotations',
     color: 'grape',
-    icon: Adjustments,
+    icon: IconAdjustments,
   },
   {
     path: 'contribute-and-support',
@@ -174,20 +174,20 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
     description:
       'Contribute and support the development of Mantine DataTable by raising issues, bringing up new ideas, coming up with pull-requests, starring the repo or hiring its author',
     color: 'teal',
-    icon: Lifebuoy,
+    icon: IconLifebuoy,
   },
   {
     path: 'hire-the-author',
     title: 'Hire the author',
     description: 'Hire the author of Mantine DataTable - a fullstack/frontend developer with 20+ years of experience',
     color: 'red',
-    icon: HeartHandshake,
+    icon: IconHeartHandshake,
   },
   {
     external: true,
     path: 'https://github.com/icflorescu/mantine-datatable/blob/main/CHANGELOG.md',
     title: 'Changelog',
     color: 'gray',
-    icon: List,
+    icon: IconList,
   },
 ];
