@@ -21,7 +21,7 @@ export default function SortingExample() {
         { accessor: 'name', width: '40%', sortable: true },
         { accessor: 'streetAddress', width: '60%' },
         { accessor: 'city', width: 160, sortable: true },
-        { accessor: 'state', width: 80, sortable: true },
+        { accessor: 'state', sortable: true },
       ]}
       sortStatus={sortStatus}
       onSortStatusChange={setSortStatus}
