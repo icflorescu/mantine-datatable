@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.7 (2023-03-10)
+- Fix incorrect sorting arrow direction (#191)
+- Decrease space between column name and sorting arrow
+
 ## 1.8.6 (2023-02-20)
 - Fix row column border color not being applied correctly
 

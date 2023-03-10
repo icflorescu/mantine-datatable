@@ -1,6 +1,6 @@
 import { Box, Center, createStyles, Group, type MantineTheme, type Sx } from '@mantine/core';
 import type { CSSProperties, ReactNode } from 'react';
-import { ArrowDown, ArrowsVertical } from 'tabler-icons-react';
+import { ArrowsVertical, ArrowUp } from 'tabler-icons-react';
 import type { DataTableColumn, DataTableSortStatus } from './types';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
 
@@ -11,6 +11,9 @@ const useStyles = createStyles((theme) => ({
     '&:hover': {
       background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
     },
+  },
+  sortableColumnHeaderGroup: {
+    gap: '0.25em',
   },
   columnHeaderText: {
     overflow: 'hidden',
@@ -90,13 +93,13 @@ export default function DataTableHeaderCell<T>({
       }
     >
       {sortable || sortStatus?.columnAccessor === accessor ? (
-        <Group position="apart" noWrap spacing="xs">
+        <Group className={classes.sortableColumnHeaderGroup} position="apart" noWrap>
           <Box className={cx(classes.columnHeaderText, classes.sortableColumnHeaderText)} title={tooltip}>
             {text}
           </Box>
           <Center>
             {sortStatus?.columnAccessor === accessor ? (
-              <ArrowDown
+              <ArrowUp
                 className={cx(classes.sortableColumnHeaderIcon, {
                   [classes.sortableColumnHeaderIconRotated]: sortStatus.direction === 'desc',
                 })}
