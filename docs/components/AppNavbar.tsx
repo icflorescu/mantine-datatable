@@ -1,5 +1,5 @@
 import { Box, createStyles, Navbar, ScrollArea } from '@mantine/core';
-import { X } from 'tabler-icons-react';
+import { IconX } from '@tabler/icons-react';
 import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, PAGES } from '~/config';
 import AppNavbarButton from './AppNavbarButton';
 import AppNavbarLink from './AppNavbarLink';
@@ -73,7 +73,7 @@ export default function AppNavbar({ visible, onHideClick }: { visible: boolean; 
       <Navbar className={cx(classes.root, { [classes.rootVisible]: visible })} onClick={onHideClick}>
         <Box className={classes.header} px="sm">
           <Logo />
-          <X className={classes.closeIcon} strokeWidth={1} />
+          <IconX className={classes.closeIcon} strokeWidth={1} />
         </Box>
         <Navbar.Section grow component={ScrollArea}>
           <Box my="xs">

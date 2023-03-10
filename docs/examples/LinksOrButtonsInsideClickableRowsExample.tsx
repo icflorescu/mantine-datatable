@@ -1,8 +1,8 @@
 import { ActionIcon, Button, createStyles, Grid, Group, Stack, Text } from '@mantine/core';
 import { closeModal, openModal } from '@mantine/modals';
+import { IconEdit, IconTrash } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { MouseEvent } from 'react';
-import { Edit, Trash } from 'tabler-icons-react';
 import { companies, Company } from '~/data';
 
 const records = companies.slice(0, 5);
@@ -75,7 +75,7 @@ export default function LinksOrButtonsInsideClickableRowsExample() {
                   editInfo(company);
                 }}
               >
-                <Edit size={16} />
+                <IconEdit size={16} />
               </ActionIcon>
               <ActionIcon
                 color="red"
@@ -84,7 +84,7 @@ export default function LinksOrButtonsInsideClickableRowsExample() {
                   deleteCompany(company);
                 }}
               >
-                <Trash size={16} />
+                <IconTrash size={16} />
               </ActionIcon>
             </Group>
           ),

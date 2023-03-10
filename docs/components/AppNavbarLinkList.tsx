@@ -1,8 +1,8 @@
 import { Box, Collapse, createStyles } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
+import { IconChevronRight } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { ChevronRight } from 'tabler-icons-react';
 import AppNavbarButton, { AppNavbarButtonDisplayProps } from './AppNavbarButton';
 import AppNavbarLinkListItem from './AppNavbarLinkListItem';
 
@@ -65,7 +65,7 @@ export default function AppNavbarLinkList({ color, title, items }: AppNavbarLink
   return (
     <>
       <AppNavbarButton
-        icon={ChevronRight}
+        icon={IconChevronRight}
         rotateIcon={open}
         color={color}
         title={title}

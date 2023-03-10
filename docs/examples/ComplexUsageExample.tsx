@@ -1,11 +1,11 @@
 import { Box, Button, createStyles, Group, Stack, Text, useMantineTheme } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
+import { IconEdit, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { DataTable, DataTableSortStatus } from 'mantine-datatable';
 import { useState } from 'react';
-import { Edit, Trash, TrashX } from 'tabler-icons-react';
 import { Employee, getEmployeesAsync } from '~/data';
 
 const useStyles = createStyles((theme) => ({
@@ -131,14 +131,14 @@ export default function ComplexUsageExample() {
           items: ({ id, firstName, lastName }) => [
             {
               key: 'edit',
-              icon: <Edit size={14} />,
+              icon: <IconEdit size={14} />,
               title: `Edit ${firstName} ${lastName}`,
               onClick: () => showNotification({ color: 'orange', message: `Should edit ${firstName} ${lastName}` }),
             },
             {
               key: 'delete',
               title: `Delete ${firstName} ${lastName}`,
-              icon: <TrashX size={14} />,
+              icon: <IconTrashX size={14} />,
               color: 'red',
               onClick: () => showNotification({ color: 'red', message: `Should delete ${firstName} ${lastName}` }),
             },
@@ -147,7 +147,7 @@ export default function ComplexUsageExample() {
               key: 'deleteMany',
               hidden: selectedRecords.length <= 1 || !selectedRecords.map((r) => r.id).includes(id),
               title: `Delete ${selectedRecords.length} selected records`,
-              icon: <Trash size={14} />,
+              icon: <IconTrash size={14} />,
               color: 'red',
               onClick: () =>
                 showNotification({ color: 'red', message: `Should delete ${selectedRecords.length} records` }),

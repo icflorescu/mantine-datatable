@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 import { Prism, PrismProps } from '@mantine/prism';
-import { Braces, Terminal2 } from 'tabler-icons-react';
+import { IconBraces, IconTerminal2 } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   tab: {
@@ -26,7 +26,7 @@ export default function CodeBlockTabs({ items }: CodeBlockTabsProps) {
     <Prism.Tabs my="xl" defaultValue={items[0].title}>
       <Prism.TabsList>
         {items.map(({ title, language }) => {
-          const Icon = language === 'bash' ? Terminal2 : Braces;
+          const Icon = language === 'bash' ? IconTerminal2 : IconBraces;
           return (
             <Prism.Tab key={title} className={classes.tab} value={title} icon={<Icon width={16} height={16} />}>
               {title}

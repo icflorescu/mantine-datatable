@@ -1,9 +1,9 @@
 import { Box, Checkbox, Grid, TextInput } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
+import { IconSearch } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { DataTable } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
-import { Search } from 'tabler-icons-react';
 import { employees } from '~/data';
 
 const initialRecords = employees.slice(0, 100);
@@ -42,7 +42,7 @@ export default function SearchingAndFilteringExample() {
           <TextInput
             sx={{ flexBasis: '60%' }}
             placeholder="Search employees..."
-            icon={<Search size={16} />}
+            icon={<IconSearch size={16} />}
             value={query}
             onChange={(e) => setQuery(e.currentTarget.value)}
           />

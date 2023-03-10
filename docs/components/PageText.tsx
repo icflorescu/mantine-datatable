@@ -1,6 +1,6 @@
 import { Alert, Text } from '@mantine/core';
+import { IconAlertCircle, IconInfoCircle } from '@tabler/icons-react';
 import { ReactNode } from 'react';
-import { AlertCircle, InfoCircle } from 'tabler-icons-react';
 
 export default function PageText({
   info,
@@ -16,7 +16,7 @@ export default function PageText({
       my="xl"
       color={warning ? 'red' : undefined}
       styles={{ message: { lineHeight: 1.6 } }}
-      icon={info ? <InfoCircle /> : <AlertCircle />}
+      icon={info ? <IconInfoCircle /> : <IconAlertCircle />}
     >
       {children}
     </Alert>

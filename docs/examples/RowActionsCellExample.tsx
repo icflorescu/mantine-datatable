@@ -1,7 +1,7 @@
 import { ActionIcon, Button, Grid, Group, Stack, Text } from '@mantine/core';
 import { closeModal, openModal } from '@mantine/modals';
+import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
-import { Edit, Eye, Trash } from 'tabler-icons-react';
 import { companies, Company } from '~/data';
 
 const records = companies.slice(0, 5);
@@ -80,13 +80,13 @@ export default function RowActionsCellExample() {
           render: (company) => (
             <Group spacing={4} position="right" noWrap>
               <ActionIcon color="green" onClick={() => showInfo(company)}>
-                <Eye size={16} />
+                <IconEye size={16} />
               </ActionIcon>
               <ActionIcon color="blue" onClick={() => editInfo(company)}>
-                <Edit size={16} />
+                <IconEdit size={16} />
               </ActionIcon>
               <ActionIcon color="red" onClick={() => deleteCompany(company)}>
-                <Trash size={16} />
+                <IconTrash size={16} />
               </ActionIcon>
             </Group>
           ),

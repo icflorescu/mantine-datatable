@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.8 (2023-03-10)
+- Switch from `tabler-icons-react` to `@tabler/icons-react`
+
 ## 1.8.7 (2023-03-10)
 - Fix incorrect sorting arrow direction (#191)
 - Decrease space between column name and sorting arrow

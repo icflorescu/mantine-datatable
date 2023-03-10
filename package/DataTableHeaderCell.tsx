@@ -1,6 +1,6 @@
 import { Box, Center, createStyles, Group, type MantineTheme, type Sx } from '@mantine/core';
+import { IconArrowsVertical, IconArrowUp } from '@tabler/icons-react';
 import type { CSSProperties, ReactNode } from 'react';
-import { ArrowsVertical, ArrowUp } from 'tabler-icons-react';
 import type { DataTableColumn, DataTableSortStatus } from './types';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
 
@@ -99,14 +99,14 @@ export default function DataTableHeaderCell<T>({
           </Box>
           <Center>
             {sortStatus?.columnAccessor === accessor ? (
-              <ArrowUp
+              <IconArrowUp
                 className={cx(classes.sortableColumnHeaderIcon, {
                   [classes.sortableColumnHeaderIconRotated]: sortStatus.direction === 'desc',
                 })}
                 size={14}
               />
             ) : (
-              <ArrowsVertical className={classes.sortableColumnHeaderNeutralIcon} size={14} />
+              <IconArrowsVertical className={classes.sortableColumnHeaderNeutralIcon} size={14} />
             )}
           </Center>
         </Group>
