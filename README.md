@@ -6,7 +6,9 @@
 [![Last commit][last-commit-image]][repo-url]
 [![Closed issues][closed-issues-image]][closed-issues-url]
 [![Downloads][downloads-image]][npm-url]
-[![Language][language-image]][repo-url]
+[![Language][language-image]][repo-url]  
+
+![Publish NPM & deploy docs workflow](https://github.com/icflorescu/mantine-datatable/actions/workflows/publish-and-deploy.yml/badge.svg)
 
 A "dark-theme aware" **table component** for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multiple rows selection, column sorting, custom cell data rendering, row context menu, row expansion, and more.
 

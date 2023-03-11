@@ -42,7 +42,7 @@
   "devDependencies": {
     "@mantine/core": "^6.0.1",
     "@mantine/hooks": "^6.0.1",
-    "@tabler/icons-react": "^2.9.0",
+    "@tabler/icons-react": "^2.10.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "esbuild": "^0.17.11",
