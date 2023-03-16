@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0 (2023-03-16)
+
+- Update to TypeScript 5.x
+  
 ## 2.1.2 (2023-03-16)
 
 - Add `scrollViewportRef` property to access the scroll viewport element
