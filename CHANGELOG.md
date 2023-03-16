@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.1 (2023-03-16)
+
+- Minor performance improvements
+- Fix left scroll shadow (when row selection enabled) regression due to Mantine 6.x upgrade
+
 ## 2.2.0 (2023-03-16)
 
 - Update to TypeScript 5.x
