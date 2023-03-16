@@ -1,4 +1,4 @@
-import { Checkbox, createStyles, type CSSObject } from '@mantine/core';
+import { Checkbox, createStyles, px, type CSSObject } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef } from 'react';
 import DataTableHeaderCell from './DataTableHeaderCell';
 import type { DataTableColumn, DataTableSortStatus } from './types';
@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => {
         content: '""',
         position: 'absolute',
         top: 0,
-        right: -theme.spacing.sm,
+        right: -px(theme.spacing.sm),
         bottom: 0,
         borderLeft: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
         width: theme.spacing.sm,
