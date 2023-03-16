@@ -152,6 +152,11 @@ export type DataTableProps<T> = {
   customRowAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
 
   /**
+   * Ref pointing to the scrollable viewport element; useful for imperative scrolling
+   */
+  scrollViewportRef?: RefObject<HTMLDivElement>;
+
+  /**
    * Ref pointing to the table body element
    */
   bodyRef?: ((instance: HTMLTableSectionElement | null) => void) | RefObject<HTMLTableSectionElement>;
