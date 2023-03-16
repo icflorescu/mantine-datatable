@@ -1,7 +1,7 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useElementSize, useMergedRef } from '@mantine/hooks';
 import {
-  useEffect,
+  useCallback,
   useState,
   type ChangeEventHandler,
   type CSSProperties,
@@ -19,8 +19,8 @@ import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
 import { useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion } from './hooks';
-import { DataTableProps } from './types';
-import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
+import type { DataTableProps } from './types';
+import { differenceBy, getValueAtPath, humanize, uniqBy, useIsomorphicLayoutEffect } from './utils';
 
 const EMPTY_OBJECT = {};
 
@@ -184,7 +184,7 @@ export default function DataTable<T>({
   const { rowContextMenuInfo, setRowContextMenuInfo } = useRowContextMenu<T>(fetching);
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
-  const handleScrollPositionChange = () => {
+  const handleScrollPositionChange = useCallback(() => {
     if (!fetching && rowContextMenu) {
       setRowContextMenuInfo(null);
     }
@@ -214,9 +214,7 @@ export default function DataTable<T>({
       if (newScrolledToLeft && newScrolledToLeft !== scrolledToLeft) onScrollToLeft?.();
       if (newScrolledToRight && newScrolledToRight !== scrolledToRight) onScrollToRight?.();
     }
-  };
-
-  useEffect(handleScrollPositionChange, [
+  }, [
     fetching,
     onScrollToBottom,
     onScrollToLeft,
@@ -235,10 +233,15 @@ export default function DataTable<T>({
     tableWidth,
   ]);
 
-  const handlePageChange = (page: number) => {
-    scrollViewportRef.current.scrollTo({ top: 0, left: 0 });
-    onPageChange!(page);
-  };
+  useIsomorphicLayoutEffect(handleScrollPositionChange, [handleScrollPositionChange]);
+
+  const handlePageChange = useCallback(
+    (page: number) => {
+      scrollViewportRef.current.scrollTo({ top: 0, left: 0 });
+      onPageChange!(page);
+    },
+    [onPageChange, scrollViewportRef]
+  );
 
   const recordsLength = records?.length;
   const recordIds = records?.map((record) => getValueAtPath(record, idAccessor));
@@ -254,16 +257,20 @@ export default function DataTable<T>({
   const someRecordsSelected =
     hasRecordsAndSelectedRecords && selectableRecordIds!.some((id) => selectedRecordIds.includes(id));
 
-  let handleHeaderSelectionChange: (() => void) | undefined;
-  if (onSelectedRecordsChange) {
-    handleHeaderSelectionChange = () => {
-      onSelectedRecordsChange(
-        allSelectableRecordsSelected
-          ? selectedRecords.filter((record) => !selectableRecordIds!.includes(getValueAtPath(record, idAccessor)))
-          : uniqBy([...selectedRecords, ...selectableRecords!], (record) => getValueAtPath(record, idAccessor))
-      );
-    };
-  }
+  const handleHeaderSelectionChange = useCallback(() => {
+    onSelectedRecordsChange?.(
+      allSelectableRecordsSelected
+        ? selectedRecords.filter((record) => !selectableRecordIds!.includes(getValueAtPath(record, idAccessor)))
+        : uniqBy([...selectedRecords, ...selectableRecords!], (record) => getValueAtPath(record, idAccessor))
+    );
+  }, [
+    allSelectableRecordsSelected,
+    idAccessor,
+    onSelectedRecordsChange,
+    selectableRecordIds,
+    selectableRecords,
+    selectedRecords,
+  ]);
 
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
   const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;

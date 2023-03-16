@@ -1,5 +1,8 @@
 import { useMantineTheme, type MantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useEffect, useLayoutEffect } from 'react';
+
+export const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export function useMediaQueryStringOrFunction(mediaQuery: string | ((theme: MantineTheme) => string) | undefined) {
   const theme = useMantineTheme();

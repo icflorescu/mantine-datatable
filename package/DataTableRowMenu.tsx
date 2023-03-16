@@ -1,4 +1,4 @@
-import { createStyles, Paper, px, useMantineTheme, type MantineNumberSize, type MantineShadow } from '@mantine/core';
+import { createStyles, Paper, px, type MantineNumberSize, type MantineShadow } from '@mantine/core';
 import { useClickOutside, useElementSize, useMergedRef, useWindowEvent } from '@mantine/hooks';
 import type { ReactNode } from 'react';
 
@@ -36,12 +36,14 @@ export default function DataTableRowMenu({
   const { ref: sizeRef, width, height } = useElementSize();
   const ref = useMergedRef(clickOutsideRef, sizeRef);
 
-  const { dir, spacing } = useMantineTheme();
-  const mdSpacing = px(spacing.md);
-
   const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
 
-  const { classes } = useStyles();
+  const {
+    classes,
+    theme: { dir, spacing },
+  } = useStyles();
+
+  const mdSpacing = px(spacing.md);
 
   return (
     <Paper
