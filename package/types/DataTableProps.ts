@@ -100,6 +100,26 @@ export type DataTableProps<T> = {
   onRowClick?: (record: T, recordIndex: number) => void;
 
   /**
+   * Function to call when the DataTable is scrolled to top
+   */
+  onScrollToTop?: () => void;
+
+  /**
+   * Function to call when the DataTable is scrolled to bottom
+   */
+  onScrollToBottom?: () => void;
+
+  /**
+   * Function to call when the DataTable is scrolled to left
+   */
+  onScrollToLeft?: () => void;
+
+  /**
+   * Function to call when the DataTable is scrolled to right
+   */
+  onScrollToRight?: () => void;
+
+  /**
    * Defines a context-menu to show when user right-clicks or clicks on a row
    */
   rowContextMenu?: DataTableContextMenuProps<T>;

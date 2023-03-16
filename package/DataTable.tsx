@@ -1,6 +1,13 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
 import { useElementSize } from '@mantine/hooks';
-import { useEffect, type ChangeEventHandler, type CSSProperties, type Key, type MouseEventHandler } from 'react';
+import {
+  useEffect,
+  useState,
+  type ChangeEventHandler,
+  type CSSProperties,
+  type Key,
+  type MouseEventHandler,
+} from 'react';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
 import DataTableFooter from './DataTableFooter';
@@ -11,7 +18,7 @@ import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
-import { useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion, useScrollStatus } from './hooks';
+import { useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion } from './hooks';
 import { DataTableProps } from './types';
 import { differenceBy, getValueAtPath, humanize, uniqBy } from './utils';
 
@@ -133,6 +140,10 @@ export default function DataTable<T>({
   striped,
   onRowClick,
   onCellClick,
+  onScrollToTop,
+  onScrollToBottom,
+  onScrollToLeft,
+  onScrollToRight,
   rowContextMenu,
   rowExpansion,
   rowClassName,
@@ -163,21 +174,15 @@ export default function DataTable<T>({
   const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementSize<HTMLTableElement>();
   const { ref: footerRef, height: footerHeight } = useElementSize<HTMLDivElement>();
 
-  const {
-    scrolledToTop,
-    setScrolledToTop,
-    scrolledToBottom,
-    setScrolledToBottom,
-    scrolledToLeft,
-    setScrolledToLeft,
-    scrolledToRight,
-    setScrolledToRight,
-  } = useScrollStatus();
+  const [scrolledToTop, setScrolledToTop] = useState(true);
+  const [scrolledToBottom, setScrolledToBottom] = useState(true);
+  const [scrolledToLeft, setScrolledToLeft] = useState(true);
+  const [scrolledToRight, setScrolledToRight] = useState(true);
 
   const { rowContextMenuInfo, setRowContextMenuInfo } = useRowContextMenu<T>(fetching);
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
-  const onScrollPositionChange = () => {
+  const handleScrollPositionChange = () => {
     if (!fetching && rowContextMenu) {
       setRowContextMenuInfo(null);
     }
@@ -187,8 +192,12 @@ export default function DataTable<T>({
       setScrolledToBottom(true);
     } else {
       const scrollTop = scrollViewportRef.current.scrollTop;
-      setScrolledToTop(scrollTop === 0);
-      setScrolledToBottom(Math.round(tableHeight - scrollTop) === Math.round(scrollViewportHeight));
+      const newScrolledToTop = scrollTop === 0;
+      const newScrolledToBottom = tableHeight - scrollTop - scrollViewportHeight < 1;
+      setScrolledToTop(newScrolledToTop);
+      setScrolledToBottom(newScrolledToBottom);
+      if (newScrolledToTop && newScrolledToTop !== scrolledToTop) onScrollToTop?.();
+      if (newScrolledToBottom && newScrolledToBottom !== scrolledToBottom) onScrollToBottom?.();
     }
 
     if (fetching || tableWidth === scrollViewportWidth) {
@@ -196,22 +205,30 @@ export default function DataTable<T>({
       setScrolledToRight(true);
     } else {
       const scrollLeft = scrollViewportRef.current.scrollLeft;
-      setScrolledToLeft(scrollLeft === 0);
-      setScrolledToRight(Math.round(tableWidth - scrollLeft) === Math.round(scrollViewportWidth));
+      const newScrolledToLeft = scrollLeft === 0;
+      const newScrolledToRight = tableWidth - scrollLeft - scrollViewportWidth < 1;
+      setScrolledToLeft(newScrolledToLeft);
+      setScrolledToRight(newScrolledToRight);
+      if (newScrolledToLeft && newScrolledToLeft !== scrolledToLeft) onScrollToLeft?.();
+      if (newScrolledToRight && newScrolledToRight !== scrolledToRight) onScrollToRight?.();
     }
   };
 
-  /**
-   * React hooks linting rule would recommend to also include the `useDobouncedState` setters
-   * (setScrolledToBottom, setScrolledToLeft, setScrolledToRight, setScrolledToTop) in the effect
-   * dependecies, but it looks like there's actually no need to.
-   */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(onScrollPositionChange, [
+  useEffect(handleScrollPositionChange, [
     fetching,
+    onScrollToBottom,
+    onScrollToLeft,
+    onScrollToRight,
+    onScrollToTop,
+    rowContextMenu,
     scrollViewportHeight,
     scrollViewportRef,
     scrollViewportWidth,
+    scrolledToBottom,
+    scrolledToLeft,
+    scrolledToRight,
+    scrolledToTop,
+    setRowContextMenuInfo,
     tableHeight,
     tableWidth,
   ]);
@@ -274,7 +291,7 @@ export default function DataTable<T>({
         rightShadowVisible={!scrolledToRight}
         bottomShadowVisible={!scrolledToBottom}
         headerHeight={headerHeight}
-        onScrollPositionChange={onScrollPositionChange}
+        onScrollPositionChange={handleScrollPositionChange}
       >
         <Table
           ref={tableRef}
