@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0 (2023-03-16)
+
+- Add `onScrollToTop`, `onScrollToBottom`, `onScrollToLeft` and `onScrollToRight` callbacks
+- Add infinite scrolling example
+  
 ## 2.0.0 (2023-03-10)
 
 - Ensure Mantine 6.x compatibility
