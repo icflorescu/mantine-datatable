@@ -1,5 +1,5 @@
 import { Box, createStyles, ScrollArea } from '@mantine/core';
-import { forwardRef, type ForwardedRef, type ReactNode } from 'react';
+import { Ref, type ReactNode } from 'react';
 
 const useStyles = createStyles((theme) => {
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;
@@ -84,25 +84,24 @@ type DataTableScrollAreaProps = {
   bottomShadowVisible: boolean;
   headerHeight: number;
   onScrollPositionChange: () => void;
+  viewportRef: Ref<HTMLDivElement>;
   children: ReactNode;
 };
 
-export default forwardRef(function DataTableScrollArea(
-  {
-    topShadowVisible,
-    leftShadowVisible,
-    rightShadowVisible,
-    bottomShadowVisible,
-    headerHeight,
-    onScrollPositionChange,
-    children,
-  }: DataTableScrollAreaProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
+export default function DataTableScrollArea({
+  topShadowVisible,
+  leftShadowVisible,
+  rightShadowVisible,
+  bottomShadowVisible,
+  headerHeight,
+  onScrollPositionChange,
+  children,
+  viewportRef,
+}: DataTableScrollAreaProps) {
   const { cx, classes } = useStyles();
   return (
     <ScrollArea
-      viewportRef={ref}
+      viewportRef={viewportRef}
       classNames={{ root: classes.root, scrollbar: classes.scrollbar, thumb: classes.thumb, corner: classes.corner }}
       styles={{ scrollbar: { marginTop: headerHeight } }}
       onScrollPositionChange={onScrollPositionChange}
@@ -117,4 +116,4 @@ export default forwardRef(function DataTableScrollArea(
       <div className={cx(classes.shadow, classes.bottomShadow, { [classes.shadowVisible]: bottomShadowVisible })} />
     </ScrollArea>
   );
-}) as (props: DataTableScrollAreaProps & { ref: ForwardedRef<HTMLDivElement> }) => JSX.Element;
+}

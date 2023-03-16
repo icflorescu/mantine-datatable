@@ -1,5 +1,5 @@
 import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
-import { useElementSize } from '@mantine/hooks';
+import { useElementSize, useMergedRef } from '@mantine/hooks';
 import {
   useEffect,
   useState,
@@ -150,6 +150,7 @@ export default function DataTable<T>({
   rowStyle,
   rowSx,
   customRowAttributes,
+  scrollViewportRef: scrollViewportRefProp,
   bodyRef,
   m,
   my,
@@ -170,6 +171,7 @@ export default function DataTable<T>({
     width: scrollViewportWidth,
     height: scrollViewportHeight,
   } = useElementSize<HTMLDivElement>();
+
   const { ref: headerRef, height: headerHeight } = useElementSize<HTMLTableSectionElement>();
   const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementSize<HTMLTableElement>();
   const { ref: footerRef, height: footerHeight } = useElementSize<HTMLDivElement>();
@@ -285,7 +287,7 @@ export default function DataTable<T>({
       style={{ ...styleProperties?.root, ...style } as CSSProperties}
     >
       <DataTableScrollArea
-        ref={scrollViewportRef}
+        viewportRef={useMergedRef(scrollViewportRef, scrollViewportRefProp || null)}
         topShadowVisible={!scrolledToTop}
         leftShadowVisible={!(selectedRecords || scrolledToLeft)}
         rightShadowVisible={!scrolledToRight}
