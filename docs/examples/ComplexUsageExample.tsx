@@ -1,4 +1,4 @@
-import { Box, Button, createStyles, Group, Stack, Text, useMantineTheme } from '@mantine/core';
+import { Box, Button, createStyles, Group, Stack, Text } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { IconEdit, IconTrash, IconTrashX } from '@tabler/icons-react';
@@ -43,11 +43,12 @@ export default function ComplexUsageExample() {
   const [selectedRecords, setSelectedRecords] = useState<Employee[]>([]);
 
   const {
-    breakpoints: { xs: xsBreakpoint },
-  } = useMantineTheme();
+    classes,
+    theme: {
+      breakpoints: { xs: xsBreakpoint },
+    },
+  } = useStyles();
   const aboveXsMediaQuery = `(min-width: ${xsBreakpoint})`;
-
-  const { classes } = useStyles();
   const now = dayjs();
 
   return (

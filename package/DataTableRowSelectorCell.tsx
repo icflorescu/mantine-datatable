@@ -1,4 +1,4 @@
-import { Checkbox, createStyles } from '@mantine/core';
+import { Checkbox, createStyles, px } from '@mantine/core';
 import type { ChangeEventHandler } from 'react';
 
 const useStyles = createStyles((theme) => {
@@ -13,7 +13,7 @@ const useStyles = createStyles((theme) => {
         content: '""',
         position: 'absolute',
         top: 0,
-        right: -theme.spacing.sm,
+        right: -px(theme.spacing.sm),
         bottom: 0,
         borderLeft: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
         width: theme.spacing.sm,
