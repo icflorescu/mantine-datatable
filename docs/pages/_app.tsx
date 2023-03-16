@@ -5,11 +5,24 @@ import { Notifications } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Router } from 'next/router';
+import { useEffect } from 'react';
 import AppWrapper from '~/components/AppWrapper';
 import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE } from '~/config';
+import { logPageView } from '~/lib/analytics';
 
 export default function _App(props: AppProps) {
   const { Component, pageProps } = props;
+
+  useEffect(() => {
+    logPageView();
+
+    Router.events.on('routeChangeComplete', logPageView);
+
+    return () => {
+      Router.events.off('routeChangeComplete', logPageView);
+    };
+  }, []);
 
   const queryClient = new QueryClient();
 
