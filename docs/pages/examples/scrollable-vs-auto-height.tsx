@@ -47,7 +47,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <ExternalLink to="https://mantine.dev/core/scroll-area/">Mantine ScrollArea</ExternalLink> and has a default{' '}
         <Code>height</Code> of <Code>100%</Code>.
         <br />
-        Thus, placing the component inside a height-restricted container will turn on its{' '}
+        Thus, setting the component height or placing it inside a height-restricted container will turn on its{' '}
         <em>“vertically-scrollable”</em> behavior.
         <br />
       </PageText>
