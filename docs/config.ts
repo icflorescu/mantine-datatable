@@ -93,6 +93,11 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: sorting data with Mantine DataTable',
       },
       {
+        path: 'infinite-scrolling',
+        title: 'Implementing infinite scrolling',
+        description: 'Example: implementing infinite scrolling with Mantine DataTable',
+      },
+      {
         path: 'searching-and-filtering',
         title: 'Searching and filtering',
         description: 'Example: searching and filtering data with Mantine DataTable',
