@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Datatable component for Mantine UI, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu, row expansion and more",
   "keywords": [
     "ui",
@@ -47,7 +47,7 @@
     "@types/react-dom": "^18.0.11",
     "esbuild": "^0.17.11",
     "react": "^18.2.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.2"
   },
   "peerDependencies": {
     "@mantine/core": "^6.0.2",
