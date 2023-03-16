@@ -8,13 +8,14 @@ export const SEO_DEFAULT_DESCRIPTION =
 export const SEO_CREATOR = '@icflorescu';
 
 export const HEADER_HEIGHT = 56;
-export const FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT = 128;
-export const FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT = 48;
+export const FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT = 164;
+export const FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT = 64;
 export const NAVBAR_WIDTH = 280;
 export const NAVBAR_BREAKPOINT = 'md';
 
 export const AUTHOR_LINK = 'https://github.com/icflorescu';
 export const REPO_LINK = 'https://github.com/icflorescu/mantine-datatable';
+export const SPONSOR_LINK = 'https://github.com/sponsors/icflorescu';
 
 export const PAGES: ({ external?: true; title: string; color?: MantineColor; description?: string } & (
   | {
