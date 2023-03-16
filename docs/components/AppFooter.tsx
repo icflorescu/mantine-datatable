@@ -6,6 +6,7 @@ import {
   NAVBAR_BREAKPOINT,
   NAVBAR_WIDTH,
   REPO_LINK,
+  SPONSOR_LINK,
 } from '~/config';
 import ExternalLink from './ExternalLink';
 
@@ -66,6 +67,8 @@ export default function AppFooter() {
           these awesome people
         </ExternalLink>
         .
+        <br />
+        Please <ExternalLink to={SPONSOR_LINK}>sponsor my work</ExternalLink> if you find it useful.
       </Text>
       <Group spacing="xs">
         <ExternalLink to={REPO_LINK}>

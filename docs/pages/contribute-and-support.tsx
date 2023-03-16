@@ -87,16 +87,21 @@ export default function Page() {
       </PageText>
       <PageSubtitle value="Other means of support" />
       <PageText>
-        If you find this project useful, it would help a lot if you could 🙏
+        If you find this project useful, it would help a lot if you could:
+        <br />
+        🙏{' '}
         <strong>
           <ExternalLink to={REPO_LINK}>star the repository</ExternalLink>
         </strong>
-        , 💕
+        <br />
+        💕{' '}
         <ExternalLink to="https://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu">
           spread the word
         </ExternalLink>
-        , 👍<ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>, or — better
-        yet — <InternalLink to="/hire-the-author">hire my services</InternalLink>.
+        <br />
+        👍 <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>
+        <br />
+        or, better yet, <InternalLink to="/hire-the-author">hire my services</InternalLink>.
       </PageText>
       <PageSubtitle value="Why do repository stars matter" />
       <PageText>
@@ -109,7 +114,7 @@ export default function Page() {
       </PageText>
       <PageSubtitle value="Acknowledgements" />
       <PageText>
-        🙏Special thanks to <ExternalLink to="https://github.com/aniravi24">Ani Ravi</ExternalLink> for being the first
+        🙏 Special thanks to <ExternalLink to="https://github.com/aniravi24">Ani Ravi</ExternalLink> for being the first
         person to sponsor my work on this project!
       </PageText>
       <PageText>
