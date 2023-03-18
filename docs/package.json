@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -20,7 +20,7 @@
     "@mantine/notifications": "^6.0.2",
     "@mantine/prism": "^6.0.2",
     "@tabler/icons-react": "^2.10.0",
-    "@tanstack/react-query": "^4.26.1",
+    "@tanstack/react-query": "^4.27.0",
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
