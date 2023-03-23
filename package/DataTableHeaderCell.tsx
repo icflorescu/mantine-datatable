@@ -104,7 +104,7 @@ export default function DataTableHeaderCell<T>({
                 className={cx(classes.sortableColumnHeaderIcon, {
                   [classes.sortableColumnHeaderIconRotated]: sortStatus.direction === 'desc',
                 })}
-                ariaLabel={`Sorted ${sortStatus.direction === 'desc' ? 'descending' : 'ascending'}`}
+                aria-label={`Sorted ${sortStatus.direction === 'desc' ? 'descending' : 'ascending'}`}
                 size={14}
               />
             ) : (
