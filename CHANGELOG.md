@@ -8,17 +8,17 @@
 ## 2.2.0 (2023-03-16)
 
 - Update to TypeScript 5.x
-  
+
 ## 2.1.2 (2023-03-16)
 
 - Add `scrollViewportRef` property to access the scroll viewport element
 - Adjust the infinite scrolling example to use the new `scrollViewportRef` property
-  
+
 ## 2.1.0 (2023-03-16)
 
 - Add `onScrollToTop`, `onScrollToBottom`, `onScrollToLeft` and `onScrollToRight` callbacks
 - Add infinite scrolling example
-  
+
 ## 2.0.0 (2023-03-10)
 
 - Ensure Mantine 6.x compatibility
