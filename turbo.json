@@ -6,6 +6,8 @@
     },
     "lint": { "outputs": [] },
     "dev": { "cache": false },
-    "start": { "cache": false }
+    "start": { "cache": false },
+    "test": { "cache": true },
+    "test:watch": { "cache": true }
   }
 }
