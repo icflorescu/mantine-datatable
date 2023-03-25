@@ -66,14 +66,15 @@ export default function DataTableHeaderCell<T>({
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   const text = title ?? humanize(accessor);
   const tooltip = typeof text === 'string' ? text : undefined;
-  const sortAction = sortable && onSortStatusChange
-    ? () => {
-        onSortStatusChange({
-          columnAccessor: accessor,
-          direction: sortStatus?.direction === 'asc' ? 'desc' : 'asc',
-        });
-      }
-    : undefined;
+  const sortAction =
+    sortable && onSortStatusChange
+      ? () => {
+          onSortStatusChange({
+            columnAccessor: accessor,
+            direction: sortStatus?.direction === 'asc' ? 'desc' : 'asc',
+          });
+        }
+      : undefined;
   return (
     <Box
       component="th"
@@ -91,7 +92,7 @@ export default function DataTableHeaderCell<T>({
       role={sortable ? 'button' : undefined}
       tabIndex={sortable ? 0 : undefined}
       onClick={sortAction}
-      onKeyDown={(e) => e.key === 'Enter' && sortAction()}
+      onKeyDown={(e) => e.key === 'Enter' && sortAction?.()}
     >
       {sortable || sortStatus?.columnAccessor === accessor ? (
         <Group className={classes.sortableColumnHeaderGroup} position="apart" noWrap>
