@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.6 (2023-03-25)
+
+- Add Jest tests (thanks to @AlexcastroDev)
+- Improve sort column header accessibility (thanks to @arperry)
+
 ## 2.2.1 (2023-03-16)
 
 - Minor performance improvements
