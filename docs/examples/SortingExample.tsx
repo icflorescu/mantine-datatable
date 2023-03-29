@@ -1,14 +1,14 @@
 import sortBy from 'lodash/sortBy';
 import { DataTable, DataTableSortStatus } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
-import { companies } from '~/data';
+import { companies, type Company } from '~/data';
 
 export default function SortingExample() {
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({ columnAccessor: 'name', direction: 'asc' });
   const [records, setRecords] = useState(sortBy(companies, 'name'));
 
   useEffect(() => {
-    const data = sortBy(companies, sortStatus.columnAccessor);
+    const data = sortBy(companies, sortStatus.columnAccessor) as Company[];
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 
