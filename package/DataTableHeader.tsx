@@ -1,55 +1,20 @@
-import { Checkbox, createStyles, px, type CSSObject } from '@mantine/core';
+import { createStyles, type CSSObject } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef } from 'react';
 import DataTableHeaderCell from './DataTableHeaderCell';
+import DataTableHeaderSelectorCell from './DataTableHeaderSelectorCell';
 import type { DataTableColumn, DataTableSortStatus } from './types';
 
-const useStyles = createStyles((theme) => {
-  const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;
-  return {
-    root: {
-      zIndex: 2,
-      position: 'sticky',
-      top: 0,
-      background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-    },
-    textSelectionDisabled: {
-      userSelect: 'none',
-    },
-    selectorColumnHeader: {
-      position: 'sticky',
-      width: 0,
-      left: 0,
-      background: 'inherit',
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        right: -px(theme.spacing.sm),
-        bottom: 0,
-        borderLeft: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
-        width: theme.spacing.sm,
-        background: `linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )}), linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )} 30%)`,
-        pointerEvents: 'none',
-        opacity: 0,
-        transition: 'opacity .15s ease',
-      },
-    },
-    selectorColumnHeaderWithRightShadow: {
-      '&::after': {
-        opacity: 1,
-      },
-    },
-    selectionCheckboxInput: {
-      cursor: 'pointer',
-    },
-  };
-});
+const useStyles = createStyles((theme) => ({
+  root: {
+    zIndex: 2,
+    position: 'sticky',
+    top: 0,
+    background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+  },
+  textSelectionDisabled: {
+    userSelect: 'none',
+  },
+}));
 
 type DataTableHeaderProps<T> = {
   className?: string;
@@ -85,19 +50,12 @@ export default forwardRef(function DataTableHeader<T>(
     <thead className={cx(classes.root, className)} style={style as CSSProperties} ref={ref}>
       <tr>
         {selectionVisible && (
-          <th
-            className={cx(classes.selectorColumnHeader, {
-              [classes.selectorColumnHeaderWithRightShadow]: leftShadowVisible,
-            })}
-          >
-            <Checkbox
-              classNames={{ input: classes.selectionCheckboxInput }}
-              checked={selectionChecked}
-              indeterminate={selectionIndeterminate}
-              disabled={!onSelectionChange}
-              onChange={onSelectionChange}
-            />
-          </th>
+          <DataTableHeaderSelectorCell
+            shadowVisible={leftShadowVisible}
+            checked={selectionChecked}
+            indeterminate={selectionIndeterminate}
+            onChange={onSelectionChange}
+          />
         )}
         {columns.map(
           ({
