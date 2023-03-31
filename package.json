@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-turborepo",
-  "version": "2.2.9",
+  "version": "2.2.10",
   "description": "This is a monorepo; see package/package.json for more info",
   "private": true,
   "workspaces": [
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.21.0",
+    "@babel/preset-typescript": "^7.21.4",
     "@faker-js/faker": "^7.6.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -37,7 +37,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "prettier": "^2.8.7",
     "turbo": "^1.8.8",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.3"
   },
   "engines": {
     "npm": ">=8.13.2",
