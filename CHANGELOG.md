@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0 (2023-04-01)
+
+- Export utility functions: `differenceBy`, `getValueAtPath`, `humanize`, `uniqBy`
+
 ## 2.2.6 (2023-03-25)
 
 - Add Jest tests (thanks to @AlexcastroDev)
