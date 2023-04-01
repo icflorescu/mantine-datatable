@@ -2068,18 +2068,18 @@
   dependencies:
     tslib "^2.4.0"
 
-"@tabler/icons-react@^2.12.0":
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-2.12.0.tgz#a1f317de5b4e4c50fde31ddd09a42f40d7a48a0c"
-  integrity sha512-5O26fB0sigZ9UaDnMTPsht8clU6KYyClvTwhLPud0ZjeTnOMzGhe2Yx5qvfhDkCBNQqz+hIV8kBUe7fvNGv1Ng==
+"@tabler/icons-react@^2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-2.13.0.tgz#2396687e9f5a20912c465f39bb291e1bc719365d"
+  integrity sha512-d1eAnD4+JhFxLnRFwE1h0ukt7el0/KnbqTZ4acSvtZ8yuHuqff266yZU587aCU3ovaX/6zxkgaxJsDnBXiLTEw==
   dependencies:
-    "@tabler/icons" "2.12.0"
+    "@tabler/icons" "2.13.0"
     prop-types "^15.7.2"
 
-"@tabler/icons@2.12.0":
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.12.0.tgz#cb4300ec52677b30f9f36c351dcb54cb4fc2ee63"
-  integrity sha512-PiYD2zUOewNAtfJKU9tBZfyv3NeFlTlUe5LSGTTplvBcM0iuHrNVnd30+HIcUGJQhi3Uf0Ng9FRi/kPqm/q6ZA==
+"@tabler/icons@2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.13.0.tgz#46d1f3b0ab50c01928204302ce0a2f3e2d70b1d4"
+  integrity sha512-YF1cl17cdhaAHQayv3zDRzYLT6AX49gm6RGTNkIfFiEcefMsJtyCt1qXbI/mxzFCugrb3LdlPmZPLceYl9kn8A==
 
 "@tanstack/query-core@4.27.0":
   version "4.27.0"
