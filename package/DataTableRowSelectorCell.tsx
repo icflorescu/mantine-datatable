@@ -50,8 +50,11 @@ type DataTableRowSelectorCellProps = {
 export default function DataTableRowSelectorCell({ withRightShadow, ...otherProps }: DataTableRowSelectorCellProps) {
   const { cx, classes } = useStyles();
   return (
-    <td className={cx(classes.root, { [classes.withRightShadow]: withRightShadow })}>
-      <Checkbox classNames={{ input: classes.checkbox }} {...otherProps} onClick={(e) => e.stopPropagation()} />
+    <td
+      className={cx(classes.root, { [classes.withRightShadow]: withRightShadow })}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <Checkbox classNames={{ input: classes.checkbox }} {...otherProps} />
     </td>
   );
 }
