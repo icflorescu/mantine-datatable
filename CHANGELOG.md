@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.2 (2023-04-03)
+
+- Prevent row click when clicking the selector cell (issue #238)
+
 ## 2.3.0 (2023-04-01)
 
 - Export utility functions: `differenceBy`, `getValueAtPath`, `humanize`, `uniqBy`
