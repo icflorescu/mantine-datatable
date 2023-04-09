@@ -193,7 +193,7 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
   },
   {
     external: true,
-    path: 'https://github.com/icflorescu/mantine-datatable/blob/main/CHANGELOG.md',
+    path: `${REPO_LINK}/blob/main/CHANGELOG.md`,
     title: 'Changelog',
     color: 'gray',
     icon: IconList,

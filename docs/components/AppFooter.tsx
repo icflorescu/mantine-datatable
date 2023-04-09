@@ -63,9 +63,7 @@ export default function AppFooter() {
       </ExternalLink>
       <Text size="sm" align="center">
         Built by <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink> and{' '}
-        <ExternalLink to="https://github.com/icflorescu/mantine-datatable/graphs/contributors">
-          these awesome people
-        </ExternalLink>
+        <ExternalLink to={`${REPO_LINK}/graphs/contributors`}>these awesome people</ExternalLink>
         .
         <br />
         Please <ExternalLink to={SPONSOR_LINK}>sponsor my work</ExternalLink> if you find it useful.
