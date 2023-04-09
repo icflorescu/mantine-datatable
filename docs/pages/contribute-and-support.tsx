@@ -7,7 +7,7 @@ import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import { AUTHOR_LINK, REPO_LINK } from '~/config';
+import { AUTHOR_LINK, REPO_LINK, SPONSOR_LINK } from '~/config';
 
 const PATH = 'contribute-and-support';
 
@@ -82,8 +82,7 @@ export default function Page() {
       <PageText>
         As mentioned above, I’ve dedicated a sizeable amount of my own free time to build this project. Its maintenance
         requires a constant effort. So, if you find <Code>Mantine DataTable</Code> useful and you want to support its
-        development, you can do so by{' '}
-        <ExternalLink to="https://github.com/sponsors/icflorescu">sponsoring my work</ExternalLink>.
+        development, you can do so by <ExternalLink to={SPONSOR_LINK}>sponsoring my work</ExternalLink>.
       </PageText>
       <PageSubtitle value="Other means of support" />
       <PageText>

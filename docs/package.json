@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -26,7 +26,7 @@
     "mantine-datatable": "*",
     "next": "^13.3.0",
     "next-pwa": "^5.6.0",
-    "next-sitemap": "^4.0.6",
+    "next-sitemap": "^4.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -36,6 +36,6 @@
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.33",
     "mixpanel-browser": "^2.46.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.4"
   }
 }
