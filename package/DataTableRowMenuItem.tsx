@@ -1,4 +1,4 @@
-import { Box, createStyles, px, Text, UnstyledButton, type MantineColor } from '@mantine/core';
+import { Box, Text, UnstyledButton, createStyles, px, type MantineColor } from '@mantine/core';
 import type { ReactNode } from 'react';
 
 const useStyles = createStyles((theme, { color }: { color?: MantineColor }) => {
@@ -8,7 +8,6 @@ const useStyles = createStyles((theme, { color }: { color?: MantineColor }) => {
       width: '100%',
       display: 'flex',
       alignItems: 'center',
-      // borderRadius: theme.radius.xs,
       paddingTop: verticalPadding,
       paddingBottom: verticalPadding,
       paddingLeft: theme.spacing.sm,
