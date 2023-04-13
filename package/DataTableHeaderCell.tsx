@@ -1,7 +1,7 @@
 import { Box, Center, createStyles, Group, type MantineTheme, type Sx } from '@mantine/core';
 import { IconArrowsVertical, IconArrowUp } from '@tabler/icons-react';
 import type { CSSProperties, ReactNode } from 'react';
-import type { DataTableColumn, DataTableSortProps, DataTableSortStatus } from './types';
+import type { DataTableColumn, DataTableSortProps } from './types';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
 
 const useStyles = createStyles((theme) => ({
@@ -45,9 +45,9 @@ type DataTableHeaderCellProps<T> = {
   style?: CSSProperties;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: ReactNode | undefined;
-  sortStatus: DataTableSortStatus | undefined;
+  sortStatus: DataTableSortProps['sortStatus'];
   sortIcons: DataTableSortProps['sortIcons'];
-  onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
+  onSortStatusChange: DataTableSortProps['onSortStatusChange'];
 } & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlignment' | 'width'>;
 
 export default function DataTableHeaderCell<T>({

@@ -1,6 +1,6 @@
-import React from 'react';
 import { render, renderHook, screen } from '@testing-library/react';
-import DataTableFooter from '../../DataTableFooter';
+import React from 'react';
+import DataTableFooter from '../../DataTablePaginationFooter';
 import { defaultProps } from './DefaultProps';
 
 describe('DataTableFooter', () => {
