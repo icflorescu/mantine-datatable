@@ -136,7 +136,7 @@ export default function DataTableRow<T>({
 
           let handleCellClick: MouseEventHandler<HTMLTableCellElement> | undefined;
           if (onCellClick) {
-            handleCellClick = () => onCellClick({ record, recordIndex, column, columnIndex });
+            handleCellClick = (event) => onCellClick({ event, record, recordIndex, column, columnIndex });
           }
 
           return hidden ? null : (

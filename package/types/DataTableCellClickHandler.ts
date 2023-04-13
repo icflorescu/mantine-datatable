@@ -1,6 +1,12 @@
+import type { MouseEvent } from 'react';
 import type { DataTableColumn } from './DataTableColumn';
 
 export type DataTableCellClickHandler<T> = (params: {
+  /**
+   * Click event
+   */
+  event: MouseEvent;
+
   /**
    * Clicked record
    */
