@@ -45,7 +45,7 @@
     "@mantine/core": "^6.0.7",
     "@mantine/hooks": "^6.0.7",
     "@tabler/icons-react": "^2.15.0",
-    "@types/react": "^18.0.34",
+    "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
     "esbuild": "^0.17.16",
     "react": "^18.2.0",
