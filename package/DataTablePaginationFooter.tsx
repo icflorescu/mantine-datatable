@@ -1,14 +1,14 @@
 import {
   Box,
-  createStyles,
   Pagination,
   Text,
+  createStyles,
   type CSSObject,
   type MantineNumberSize,
   type MantineTheme,
 } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef, type ReactNode } from 'react';
-import DataTablePageSizeSelector from './DataTablePageSizeSelector';
+import DataTablePaginationFooterPageSizeSelector from './DataTablePaginationFooterPageSizeSelector';
 import type { DataTablePaginationProps } from './types';
 import type { WithOptional, WithRequired } from './types/utils';
 
@@ -43,7 +43,7 @@ const useStyles = createStyles(
   })
 );
 
-type DataTableFooterProps = WithOptional<
+type DataTablePaginationFooterProps = WithOptional<
   WithRequired<
     DataTablePaginationProps,
     'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint'
@@ -59,7 +59,7 @@ type DataTableFooterProps = WithOptional<
   noRecordsText: string;
 };
 
-export default forwardRef(function DataTableFooter(
+export default forwardRef(function DataTablePaginationFooter(
   {
     className,
     style,
@@ -80,7 +80,7 @@ export default forwardRef(function DataTableFooter(
     recordsLength,
     horizontalSpacing,
     paginationWrapBreakpoint,
-  }: DataTableFooterProps,
+  }: DataTablePaginationFooterProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   let paginationTextValue: ReactNode;
@@ -108,7 +108,7 @@ export default forwardRef(function DataTableFooter(
         {paginationTextValue}
       </Text>
       {recordsPerPageOptions && (
-        <DataTablePageSizeSelector
+        <DataTablePaginationFooterPageSizeSelector
           size={paginationSize}
           label={recordsPerPageLabel}
           values={recordsPerPageOptions}
@@ -126,4 +126,4 @@ export default forwardRef(function DataTableFooter(
       />
     </Box>
   );
-}) as (props: DataTableFooterProps & { ref: ForwardedRef<HTMLDivElement> }) => JSX.Element;
+}) as (props: DataTablePaginationFooterProps & { ref: ForwardedRef<HTMLDivElement> }) => JSX.Element;

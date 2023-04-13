@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.0 (2023-04-13)
+
+- Implement custom sort icons
+
 ## 2.3.2 (2023-04-03)
 
 - Prevent row click when clicking the selector cell (issue #238)

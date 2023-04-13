@@ -10,9 +10,9 @@ import {
 } from 'react';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
-import DataTableFooter from './DataTableFooter';
 import DataTableHeader from './DataTableHeader';
 import DataTableLoader from './DataTableLoader';
+import DataTablePaginationFooter from './DataTablePaginationFooter';
 import DataTableRow from './DataTableRow';
 import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
@@ -115,6 +115,7 @@ export default function DataTable<T>({
   onSelectedRecordsChange,
   isRecordSelectable,
   sortStatus,
+  sortIcons,
   onSortStatusChange,
   horizontalSpacing,
   page,
@@ -321,6 +322,7 @@ export default function DataTable<T>({
             style={styleProperties?.header}
             columns={columns}
             sortStatus={sortStatus}
+            sortIcons={sortIcons}
             onSortStatusChange={onSortStatusChange}
             selectionVisible={!!selectedRecords}
             selectionChecked={allSelectableRecordsSelected}
@@ -431,7 +433,7 @@ export default function DataTable<T>({
         </Table>
       </DataTableScrollArea>
       {page && (
-        <DataTableFooter
+        <DataTablePaginationFooter
           ref={footerRef}
           className={classNames?.pagination}
           style={styleProperties?.pagination}
