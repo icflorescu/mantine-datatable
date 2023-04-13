@@ -384,11 +384,11 @@ export default function DataTable<T>({
                 if (showContextMenuOnClick) {
                   handleClick = (e) => {
                     setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
-                    onRowClick?.(record, recordIndex);
+                    onRowClick?.(record, recordIndex, e);
                   };
                 } else if (onRowClick) {
-                  handleClick = () => {
-                    onRowClick(record, recordIndex);
+                  handleClick = (e) => {
+                    onRowClick(record, recordIndex, e);
                   };
                 }
 

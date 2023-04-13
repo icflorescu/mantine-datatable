@@ -1,5 +1,5 @@
 import type { DefaultProps, MantineShadow, MantineTheme, Sx, TableProps } from '@mantine/core';
-import type { CSSProperties, ReactNode, RefObject } from 'react';
+import type { CSSProperties, MouseEvent, ReactNode, RefObject } from 'react';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumn } from './DataTableColumn';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
@@ -95,9 +95,9 @@ export type DataTableProps<T> = {
   onCellClick?: DataTableCellClickHandler<T>;
 
   /**
-   * Function to call when a row is clicked, accepting the current record and its index in `records`
+   * Function to call when a row is clicked, receiving the current record, its index in `records` and the click event
    */
-  onRowClick?: (record: T, recordIndex: number) => void;
+  onRowClick?: (record: T, recordIndex: number, event: MouseEvent) => void;
 
   /**
    * Function to call when the DataTable is scrolled to top

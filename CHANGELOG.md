@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.1 (2023-04-13)
+
+- Pass the original event to the `onCellClick` and `onRowClick` callbacks
+
 ## 2.4.0 (2023-04-13)
 
 - Implement custom sort icons
