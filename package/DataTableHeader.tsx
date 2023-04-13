@@ -2,7 +2,7 @@ import { createStyles, type CSSObject } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef } from 'react';
 import DataTableHeaderCell from './DataTableHeaderCell';
 import DataTableHeaderSelectorCell from './DataTableHeaderSelectorCell';
-import type { DataTableColumn, DataTableSortStatus } from './types';
+import type { DataTableColumn, DataTableSortProps, DataTableSortStatus } from './types';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -20,6 +20,7 @@ type DataTableHeaderProps<T> = {
   className?: string;
   style?: CSSObject;
   sortStatus: DataTableSortStatus | undefined;
+  sortIcons: DataTableSortProps['sortIcons'];
   onSortStatusChange: ((sortStatus: DataTableSortStatus) => void) | undefined;
   columns: DataTableColumn<T>[];
   selectionVisible: boolean;
@@ -34,6 +35,7 @@ export default forwardRef(function DataTableHeader<T>(
     className,
     style,
     sortStatus,
+    sortIcons,
     onSortStatusChange,
     columns,
     selectionVisible,
@@ -83,6 +85,7 @@ export default forwardRef(function DataTableHeader<T>(
                 title={title}
                 sortable={sortable}
                 sortStatus={sortStatus}
+                sortIcons={sortIcons}
                 onSortStatusChange={onSortStatusChange}
               />
             )

@@ -115,6 +115,7 @@ export default function DataTable<T>({
   onSelectedRecordsChange,
   isRecordSelectable,
   sortStatus,
+  sortIcons,
   onSortStatusChange,
   horizontalSpacing,
   page,
@@ -321,6 +322,7 @@ export default function DataTable<T>({
             style={styleProperties?.header}
             columns={columns}
             sortStatus={sortStatus}
+            sortIcons={sortIcons}
             onSortStatusChange={onSortStatusChange}
             selectionVisible={!!selectedRecords}
             selectionChecked={allSelectableRecordsSelected}
