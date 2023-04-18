@@ -43,6 +43,7 @@ type DataTableHeaderSelectorCellProps = {
   shadowVisible: boolean;
   checked: boolean;
   indeterminate: boolean;
+  checkboxProps: Record<string, unknown>;
   onChange: (() => void) | undefined;
 };
 
@@ -50,6 +51,7 @@ export default function DataTableHeaderSelectorCell({
   shadowVisible,
   checked,
   indeterminate,
+  checkboxProps,
   onChange,
 }: DataTableHeaderSelectorCellProps) {
   const { cx, classes } = useStyles();
@@ -61,6 +63,7 @@ export default function DataTableHeaderSelectorCell({
         indeterminate={indeterminate}
         disabled={!onChange}
         onChange={onChange}
+        {...checkboxProps}
       />
     </th>
   );

@@ -8,13 +8,14 @@ import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import PaginationExample from '~/examples/PaginationExample';
+import PaginationExampleWithControlProps from '~/examples/PaginationExampleWithControlProps';
 import PaginationExampleWithPageSizeSelector from '~/examples/PaginationExampleWithPageSizeSelector';
 import allPromiseProps from '~/lib/allPromiseProps';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/pagination';
 
-type Example = 'standard' | 'with-page-size-selector';
+type Example = 'standard' | 'with-page-size-selector' | 'with-control-props';
 
 export const getStaticProps: GetStaticProps<{ code: Record<Example, string> }> = async () => ({
   props: {
@@ -23,6 +24,7 @@ export const getStaticProps: GetStaticProps<{ code: Record<Example, string> }> =
       'with-page-size-selector': readCodeExample(
         'examples/PaginationExampleWithPageSizeSelector.tsx'
       ) as Promise<string>,
+      'with-control-props': readCodeExample('examples/PaginationExampleWithControlProps.tsx') as Promise<string>,
     }),
   },
 });
@@ -101,6 +103,14 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <CodeBlock language="typescript" content={code['with-page-size-selector']} />
       <PaginationExampleWithPageSizeSelector />
+      <PageSubtitle value="Using pagination control props" />
+      <PageText>
+        You can provide additional props to pagination controls by using the <Code>getPaginationControlProps</Code>{' '}
+        callback. For example, if you’re not happy with the default accesibility aria-labels, you can override them like
+        so:
+      </PageText>
+      <CodeBlock language="typescript" content={code['with-control-props']} />
+      <PaginationExampleWithControlProps />
       <PageNavigation of={PATH} />
     </Container>
   );

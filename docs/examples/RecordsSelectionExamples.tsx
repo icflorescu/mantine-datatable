@@ -3,7 +3,7 @@ import { showNotification } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
-import { companies, Company } from '~/data';
+import { Company, companies } from '~/data';
 
 export function RecordsSelectionExample() {
   // example-start standard
@@ -67,4 +67,30 @@ export function RecordsSelectionWithDisabledItemsExample() {
     />
   );
   // example-end
+}
+
+export function RecordsSelectionWithAdditionalCheckboxProps() {
+  const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);
+
+  return (
+    // example-start with-additional-checkbox-props
+    <DataTable
+      // example-skip other props
+      withBorder
+      withColumnBorders
+      records={companies}
+      columns={[
+        { accessor: 'name', width: '40%' },
+        { accessor: 'streetAddress', width: '60%' },
+        { accessor: 'city', width: 160 },
+        { accessor: 'state', width: 80 },
+      ]}
+      selectedRecords={selectedRecords}
+      onSelectedRecordsChange={setSelectedRecords}
+      // example-resume
+      allRecordsSelectionCheckboxProps={{ 'aria-label': 'Select all records' }}
+      getRecordSelectionCheckboxProps={(record) => ({ 'aria-label': `Select ${record.name}` })}
+    />
+    // example-end
+  );
 }

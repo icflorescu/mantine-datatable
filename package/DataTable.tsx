@@ -114,6 +114,8 @@ export default function DataTable<T>({
   selectedRecords,
   onSelectedRecordsChange,
   isRecordSelectable,
+  allRecordsSelectionCheckboxProps = { 'aria-label': 'Select all records' },
+  getRecordSelectionCheckboxProps = (_, index) => ({ 'aria-label': `Select record ${index + 1}` }),
   sortStatus,
   sortIcons,
   onSortStatusChange,
@@ -129,6 +131,14 @@ export default function DataTable<T>({
   paginationSize = 'sm',
   paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
   paginationWrapBreakpoint = 'sm',
+  getPaginationControlProps = (control) => {
+    if (control === 'previous') {
+      return { 'aria-label': 'Previous page' };
+    } else if (control === 'next') {
+      return { 'aria-label': 'Next page' };
+    }
+    return {};
+  },
   loaderBackgroundBlur,
   customLoader,
   loaderSize,
@@ -328,6 +338,7 @@ export default function DataTable<T>({
             selectionChecked={allSelectableRecordsSelected}
             selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
             onSelectionChange={handleHeaderSelectionChange}
+            selectionCheckboxProps={allRecordsSelectionCheckboxProps}
             leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
           />
           <tbody ref={bodyRef}>
@@ -411,6 +422,7 @@ export default function DataTable<T>({
                     selectionChecked={isSelected}
                     onSelectionChange={handleSelectionChange}
                     isRecordSelectable={isRecordSelectable}
+                    getSelectionCheckboxProps={getRecordSelectionCheckboxProps}
                     onClick={handleClick}
                     onCellClick={onCellClick}
                     onContextMenu={handleContextMenu}
@@ -451,6 +463,7 @@ export default function DataTable<T>({
           paginationSize={paginationSize}
           paginationText={paginationText}
           paginationWrapBreakpoint={paginationWrapBreakpoint}
+          getPaginationControlProps={getPaginationControlProps}
           noRecordsText={noRecordsText}
           loadingText={loadingText}
           recordsLength={recordsLength}

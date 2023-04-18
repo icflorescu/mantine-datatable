@@ -46,6 +46,7 @@ type DataTableRowProps<T> = {
   selectionChecked: boolean;
   onSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
   isRecordSelectable: ((record: T, index: number) => boolean) | undefined;
+  getSelectionCheckboxProps: (record: T, recordIndex: number) => Record<string, unknown>;
   onClick: MouseEventHandler<HTMLTableRowElement> | undefined;
   onCellClick: DataTableCellClickHandler<T> | undefined;
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
@@ -67,6 +68,7 @@ export default function DataTableRow<T>({
   selectionChecked,
   onSelectionChange,
   isRecordSelectable,
+  getSelectionCheckboxProps,
   onClick,
   onCellClick,
   onContextMenu,
@@ -111,11 +113,14 @@ export default function DataTableRow<T>({
         onContextMenu={onContextMenu}
       >
         {selectionVisible && (
-          <DataTableRowSelectorCell
+          <DataTableRowSelectorCell<T>
+            record={record}
+            recordIndex={recordIndex}
             withRightShadow={leftShadowVisible}
             checked={selectionChecked}
             disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable(record, recordIndex) : false)}
             onChange={onSelectionChange}
+            getCheckboxProps={getSelectionCheckboxProps}
           />
         )}
         {columns.map((column, columnIndex) => {

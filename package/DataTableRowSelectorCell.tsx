@@ -40,21 +40,30 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-type DataTableRowSelectorCellProps = {
+type DataTableRowSelectorCellProps<T> = {
+  record: T;
+  recordIndex: number;
   withRightShadow: boolean;
   checked: boolean;
   disabled: boolean;
   onChange: ChangeEventHandler<HTMLInputElement> | undefined;
+  getCheckboxProps: (record: T, recordIndex: number) => Record<string, unknown>;
 };
 
-export default function DataTableRowSelectorCell({ withRightShadow, ...otherProps }: DataTableRowSelectorCellProps) {
+export default function DataTableRowSelectorCell<T>({
+  record,
+  recordIndex,
+  withRightShadow,
+  getCheckboxProps,
+  ...otherProps
+}: DataTableRowSelectorCellProps<T>) {
   const { cx, classes } = useStyles();
   return (
     <td
       className={cx(classes.root, { [classes.withRightShadow]: withRightShadow })}
       onClick={(e) => e.stopPropagation()}
     >
-      <Checkbox classNames={{ input: classes.checkbox }} {...otherProps} />
+      <Checkbox classNames={{ input: classes.checkbox }} {...otherProps} {...getCheckboxProps(record, recordIndex)} />
     </td>
   );
 }
