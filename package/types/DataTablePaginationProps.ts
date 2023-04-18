@@ -13,6 +13,7 @@ export type DataTablePaginationProps = (
       loadingText?: never;
       paginationText?: never;
       paginationWrapBreakpoint?: never;
+      getPaginationControlProps?: never;
     }
   | {
       /**
@@ -57,11 +58,16 @@ export type DataTablePaginationProps = (
       paginationText?: (options: { from: number; to: number; totalRecords: number }) => ReactNode;
 
       /**
-       * Pagination wrap breakpints; defaults to `sm`.
+       * Pagination wrap breakpoints; defaults to `sm`.
        * Below this breakpoint the content will be displayed on multiple lines;
        * above it the content will be displayed on a single line.
        */
       paginationWrapBreakpoint?: MantineNumberSize;
+
+      /**
+       * Function that returns props object for pagination control; useful for improving accessibility
+       */
+      getPaginationControlProps?: (control: 'previous' | 'next') => Record<string, unknown>;
     }
 ) &
   DataTablePageSizeSelectorProps;

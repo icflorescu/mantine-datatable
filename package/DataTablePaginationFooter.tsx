@@ -46,7 +46,7 @@ const useStyles = createStyles(
 type DataTablePaginationFooterProps = WithOptional<
   WithRequired<
     DataTablePaginationProps,
-    'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint'
+    'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint' | 'getPaginationControlProps'
   >,
   'onRecordsPerPageChange' | 'recordsPerPageOptions'
 > & {
@@ -80,6 +80,7 @@ export default forwardRef(function DataTablePaginationFooter(
     recordsLength,
     horizontalSpacing,
     paginationWrapBreakpoint,
+    getPaginationControlProps,
   }: DataTablePaginationFooterProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -123,6 +124,7 @@ export default forwardRef(function DataTablePaginationFooter(
         onChange={onPageChange}
         size={paginationSize}
         total={Math.ceil(totalRecords! / recordsPerPage!)}
+        getControlProps={getPaginationControlProps}
       />
     </Box>
   );

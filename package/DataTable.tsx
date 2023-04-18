@@ -129,6 +129,14 @@ export default function DataTable<T>({
   paginationSize = 'sm',
   paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
   paginationWrapBreakpoint = 'sm',
+  getPaginationControlProps = (control) => {
+    if (control === 'previous') {
+      return { 'aria-label': 'Previous page' };
+    } else if (control === 'next') {
+      return { 'aria-label': 'Next page' };
+    }
+    return {};
+  },
   loaderBackgroundBlur,
   customLoader,
   loaderSize,
@@ -451,6 +459,7 @@ export default function DataTable<T>({
           paginationSize={paginationSize}
           paginationText={paginationText}
           paginationWrapBreakpoint={paginationWrapBreakpoint}
+          getPaginationControlProps={getPaginationControlProps}
           noRecordsText={noRecordsText}
           loadingText={loadingText}
           recordsLength={recordsLength}
