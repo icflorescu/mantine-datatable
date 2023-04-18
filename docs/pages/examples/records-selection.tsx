@@ -6,12 +6,16 @@ import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import { RecordsSelectionExample, RecordsSelectionWithDisabledItemsExample } from '~/examples/RecordsSelectionExamples';
+import {
+  RecordsSelectionExample,
+  RecordsSelectionWithAdditionalCheckboxProps,
+  RecordsSelectionWithDisabledItemsExample,
+} from '~/examples/RecordsSelectionExamples';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/records-selection';
 
-type ExampleName = 'standard' | 'disabled-records';
+type ExampleName = 'standard' | 'disabled-records' | 'with-additional-checkbox-props';
 
 export const getStaticProps: GetStaticProps<{ code: Record<ExampleName, string> }> = async () => ({
   props: { code: (await readCodeExample('examples/RecordsSelectionExamples.tsx')) as Record<ExampleName, string> },
@@ -61,6 +65,16 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <CodeBlock language="typescript" content={code['disabled-records']} />
       <RecordsSelectionWithDisabledItemsExample />
+      <PageSubtitle value="Additional selection checkbox props" />
+      <PageText>
+        You can pass additional props to the selection checkboxes by providing the{' '}
+        <Code>allRecordsSelectionCheckboxProps</Code> and <Code>getRecordSelectionCheckboxProps</Code> properties. The
+        former is an object of props that will be applied to the column header checkbox, while the latter is a function
+        that receives the underlying record and record index and returns an object of props. will be applied to the row
+        selection checkboxes.
+      </PageText>
+      <CodeBlock language="typescript" content={code['with-additional-checkbox-props']} />
+      <RecordsSelectionWithAdditionalCheckboxProps />
       <PageNavigation of={PATH} />
     </Container>
   );

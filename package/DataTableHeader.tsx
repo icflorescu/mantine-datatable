@@ -27,6 +27,7 @@ type DataTableHeaderProps<T> = {
   selectionChecked: boolean;
   selectionIndeterminate: boolean;
   onSelectionChange: (() => void) | undefined;
+  selectionCheckboxProps: Record<string, unknown>;
   leftShadowVisible: boolean;
 };
 
@@ -42,6 +43,7 @@ export default forwardRef(function DataTableHeader<T>(
     selectionChecked,
     selectionIndeterminate,
     onSelectionChange,
+    selectionCheckboxProps,
     leftShadowVisible,
   }: DataTableHeaderProps<T>,
   ref: ForwardedRef<HTMLTableSectionElement>
@@ -56,6 +58,7 @@ export default forwardRef(function DataTableHeader<T>(
             shadowVisible={leftShadowVisible}
             checked={selectionChecked}
             indeterminate={selectionIndeterminate}
+            checkboxProps={selectionCheckboxProps}
             onChange={onSelectionChange}
           />
         )}
