@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.4 (2023-04-18)
+
+- Fix `paginationColor` not being applied correctly to the page size selector (issue #261)
+
 ## 2.4.3 (2023-04-18)
 
 - Implement additional properies to improve accesibility: `allRecordsSelectionCheckboxProps`, `getRecordSelectionCheckboxProps`, `getPaginationControlProps`

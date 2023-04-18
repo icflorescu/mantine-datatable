@@ -39,6 +39,7 @@ export default function PaginationExampleWithPageSizeSelector() {
           },
         ]}
         totalRecords={employees.length}
+        paginationColor="grape"
         recordsPerPage={pageSize}
         page={page}
         onPageChange={(p) => setPage(p)}
