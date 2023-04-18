@@ -113,6 +113,7 @@ export default forwardRef(function DataTablePaginationFooter(
           size={paginationSize}
           label={recordsPerPageLabel}
           values={recordsPerPageOptions}
+          color={paginationColor}
           value={recordsPerPage!}
           onChange={onRecordsPerPageChange!}
         />
