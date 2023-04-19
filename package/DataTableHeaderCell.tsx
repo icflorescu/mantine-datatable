@@ -106,12 +106,13 @@ export default function DataTableHeaderCell<T>({
               className={cx(classes.sortableColumnHeaderIcon, {
                 [classes.sortableColumnHeaderIconRotated]: sortStatus.direction === 'desc',
               })}
+              role="img"
               aria-label={`Sorted ${sortStatus.direction === 'desc' ? 'descending' : 'ascending'}`}
             >
               {sortIcons?.sorted || <IconArrowUp size={14} />}
             </Center>
           ) : (
-            <Center className={classes.sortableColumnHeaderUnsortedIcon}>
+            <Center className={classes.sortableColumnHeaderUnsortedIcon} role="img" aria-label="Not sorted">
               {sortIcons?.unsorted || <IconArrowsVertical size={14} />}
             </Center>
           )}
