@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.5 (2023-04-19)
+
+- Improve sort icons accessibility (issue #263)
+
 ## 2.4.4 (2023-04-18)
 
 - Fix `paginationColor` not being applied correctly to the page size selector (issue #261)
