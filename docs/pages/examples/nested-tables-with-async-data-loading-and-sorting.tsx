@@ -10,15 +10,15 @@ import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/nested-tables-with-async-data-loading-and-sorting';
 
-type ExampleName = 'useStyles' | 'NestedTablesExampleAsyncWithSorting' | 'DepartmentsTable' | 'EmployeesTable';
+type ExampleBlockName = 'useStyles' | 'Example' | 'DepartmentsTable' | 'EmployeesTable';
 
 export const getStaticProps: GetStaticProps<{
-  code: { example: Record<ExampleName, string>; data: string };
+  code: { example: Record<ExampleBlockName, string>; data: string };
 }> = async () => ({
   props: {
     code: await allPromiseProps({
       example: readCodeExample('examples/NestedTablesExampleAsyncWithSorting.tsx') as Promise<
-        Record<ExampleName, string>
+        Record<ExampleBlockName, string>
       >,
       data: readCodeExample('data/nested.ts') as Promise<string>,
     }),
@@ -34,9 +34,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <CodeBlockTabs
         items={[
           {
-            title: 'NestedTablesExampleAsyncWithSorting.tsx',
+            title: 'Example.tsx',
             language: 'typescript',
-            content: code.example['NestedTablesExampleAsyncWithSorting'],
+            content: code.example['Example'],
           },
           {
             title: 'DepartmentsTable.tsx',
@@ -49,7 +49,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
             content: code.example['EmployeesTable'],
           },
           { title: 'useStyles.ts', language: 'typescript', content: code.example['useStyles'] },
-          { title: 'data/nested.ts', language: 'typescript', content: code.data },
+          { title: 'data.ts', language: 'typescript', content: code.data },
         ]}
       />
       <PageNavigation of={PATH} />

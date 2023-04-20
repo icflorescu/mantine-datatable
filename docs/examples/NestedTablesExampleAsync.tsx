@@ -94,7 +94,7 @@ function DepartmentsTable({ companyId }: { companyId: string }) {
 }
 // example-end
 
-// example-start NestedTablesExampleAsync
+// example-start Example
 export default function NestedTablesExampleAsync() {
   const [expandedRecordIds, setExpandedRecordIds] = useState<string[]>([]);
 

@@ -94,7 +94,7 @@ function DepartmentsTable({ companyId, sortStatus }: { companyId: string; sortSt
 }
 // example-end
 
-// example-start NestedTablesExampleAsyncWithSorting
+// example-start Example
 export default function NestedTablesExampleAsyncWithSorting() {
   const [expandedRecordIds, setExpandedRecordIds] = useState<string[]>([]);
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({ columnAccessor: 'name', direction: 'asc' });
