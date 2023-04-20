@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<{
   props: {
     code: await allPromiseProps({
       'column-properties': readCodeExample('examples/ColumnPropertiesExample.tsx') as Promise<string>,
-      'column-properties-data': readCodeExample('data.ts') as Promise<string>,
+      'column-properties-data': readCodeExample('data/index.ts') as Promise<string>,
       'column-properties-styling-cells': readCodeExample(
         'examples/ColumnPropertiesExampleStylingCells.tsx'
       ) as Promise<string>,
@@ -96,7 +96,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
             language: 'typescript',
             content: code['column-properties'],
           },
-          { title: 'data.ts', language: 'typescript', content: code['column-properties-data'] },
+          { title: 'data/index.ts', language: 'typescript', content: code['column-properties-data'] },
         ]}
       />
       <PageText>The code above will produce the following result:</PageText>
