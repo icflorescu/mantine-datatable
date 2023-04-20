@@ -150,6 +150,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows-or-cells">this example</InternalLink> for
         more information.
       </PageText>
+      <PageText>
+        Head over to the <InternalLink to="/examples/nested-tables">next example</InternalLink> to see how you can abuse
+        the row expansion feature to display nested tables.
+      </PageText>
       <PageNavigation of={PATH} />
     </Container>
   );

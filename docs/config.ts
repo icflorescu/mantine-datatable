@@ -131,6 +131,21 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: expanding and collapsing rows on Mantine DataTable',
       },
       {
+        path: 'nested-tables',
+        title: 'Nested tables',
+        description: 'Example: how to implement nested tables with Mantine DataTable',
+      },
+      {
+        path: 'nested-tables-with-async-data-loading',
+        title: 'Nested tables with async data loading',
+        description: 'Example: how to implement nested Mantine DataTables with async data loading',
+      },
+      {
+        path: 'nested-tables-with-async-data-loading-and-sorting',
+        title: 'Nested tables with async data loading and sorting',
+        description: 'Example: how to implement nested Mantine DataTables with async data loading and sorting',
+      },
+      {
         path: 'row-actions-cell',
         title: 'Row actions cell',
         description: 'Example: how to implement a row actions cell on Mantine DataTable',
@@ -139,11 +154,6 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         path: 'links-or-buttons-inside-clickable-rows-or-cells',
         title: 'Links or buttons inside clickable rows/cells',
         description: 'Example: how to add links or buttons inside Mantine DataTable clickable rows or cells',
-      },
-      {
-        path: 'nested-tables',
-        title: 'Nested tables',
-        description: 'Example: how to implement nested tables with Mantine DataTable',
       },
       {
         path: 'disabling-text-selection',

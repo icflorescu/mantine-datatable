@@ -5,19 +5,17 @@ import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
 import { companies, departments, employees } from '~/data/nested';
 
-const useStyles = createStyles((theme) => {
-  return {
-    expandIcon: {
-      transition: 'transform 0.2s ease',
-    },
-    expandIconRotated: {
-      transform: 'rotate(90deg)',
-    },
-    employeeName: {
-      marginLeft: px(theme.spacing.xl) * 2,
-    },
-  };
-});
+const useStyles = createStyles((theme) => ({
+  expandIcon: {
+    transition: 'transform 0.2s ease',
+  },
+  expandIconRotated: {
+    transform: 'rotate(90deg)',
+  },
+  employeeName: {
+    marginLeft: px(theme.spacing.xl) * 2,
+  },
+}));
 
 export default function NestedTablesExample() {
   const [expandedCompanyIds, setExpandedCompanyIds] = useState<string[]>([]);
@@ -29,10 +27,11 @@ export default function NestedTablesExample() {
     <DataTable
       withBorder
       withColumnBorders
+      highlightOnHover
       columns={[
         {
           accessor: 'name',
-          title: 'Company › department › employee',
+          title: 'Company › Department › Employee',
           render: ({ id, name }) => (
             <Group spacing="xs">
               <IconChevronRight
@@ -46,7 +45,7 @@ export default function NestedTablesExample() {
             </Group>
           ),
         },
-        { accessor: 'employees', title: 'Employees › birth date', textAlignment: 'right', width: 200 },
+        { accessor: 'employees', title: 'Employees › Birth date', textAlignment: 'right', width: 200 },
       ]}
       records={companies}
       rowExpansion={{
