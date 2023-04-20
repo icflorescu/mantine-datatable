@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import lodash from 'lodash';
 import { writeFile } from 'node:fs/promises';
 
 const companies = [];
@@ -14,7 +15,7 @@ for (let i = 0; i < 10; i++) {
     streetAddress: faker.address.streetAddress(),
     city: faker.address.cityName(),
     state: faker.address.stateAbbr(),
-    missionStatement: faker.company.bs(),
+    missionStatement: lodash.upperFirst(faker.company.bs()) + '.',
   });
 
   const departmentCount = faker.datatype.number({ min: 5, max: 15 });
