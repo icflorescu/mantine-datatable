@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.6 (2023-04-20)
+
+- Make `rowExpansion.expanded.onRecordIdsChange` optional
+- Implement `noHeader` property to hide the table header (issue #253)
+- Add nested tables examples
+
 ## 2.4.5 (2023-04-19)
 
 - Improve sort icons accessibility (issue #263)
