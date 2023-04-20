@@ -2,7 +2,7 @@ import { ActionIcon, Button, Grid, Group, Stack, Text } from '@mantine/core';
 import { closeModal, openModal } from '@mantine/modals';
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
-import { companies, Company } from '~/data';
+import { Company, companies } from '~/data';
 
 const records = companies.slice(0, 5);
 

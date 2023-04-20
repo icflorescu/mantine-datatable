@@ -3,6 +3,11 @@ import { Prism, PrismProps } from '@mantine/prism';
 import { IconBraces, IconTerminal2 } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
+  tabList: {
+    flexWrap: 'nowrap',
+    overflowX: 'auto',
+    overflowY: 'hidden',
+  },
   tab: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[6],
     fontWeight: 500,
@@ -24,7 +29,7 @@ export default function CodeBlockTabs({ items }: CodeBlockTabsProps) {
   const { classes } = useStyles();
   return (
     <Prism.Tabs my="xl" defaultValue={items[0].title}>
-      <Prism.TabsList>
+      <Prism.TabsList className={classes.tabList}>
         {items.map(({ title, language }) => {
           const Icon = language === 'bash' ? IconTerminal2 : IconBraces;
           return (

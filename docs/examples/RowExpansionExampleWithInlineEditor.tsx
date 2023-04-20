@@ -2,7 +2,7 @@ import { Box, Button, createStyles, Grid, Group, TextInput } from '@mantine/core
 import { IconArrowBackUp, IconCheck } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
-import { companies as companyData, Company } from '~/data';
+import { Company, companies as companyData } from '~/data';
 
 const initialRecords = companyData.slice(0, 5);
 

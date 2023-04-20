@@ -149,6 +149,7 @@ export default function DataTable<T>({
   noRecordsText = 'No records',
   noRecordsIcon,
   striped,
+  noHeader: withoutHeader,
   onRowClick,
   onCellClick,
   onScrollToTop,
@@ -326,21 +327,23 @@ export default function DataTable<T>({
           striped={recordsLength ? striped : false}
           {...otherProps}
         >
-          <DataTableHeader<T>
-            ref={headerRef}
-            className={classNames?.header}
-            style={styleProperties?.header}
-            columns={columns}
-            sortStatus={sortStatus}
-            sortIcons={sortIcons}
-            onSortStatusChange={onSortStatusChange}
-            selectionVisible={!!selectedRecords}
-            selectionChecked={allSelectableRecordsSelected}
-            selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
-            onSelectionChange={handleHeaderSelectionChange}
-            selectionCheckboxProps={allRecordsSelectionCheckboxProps}
-            leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
-          />
+          {withoutHeader ? null : (
+            <DataTableHeader<T>
+              ref={headerRef}
+              className={classNames?.header}
+              style={styleProperties?.header}
+              columns={columns}
+              sortStatus={sortStatus}
+              sortIcons={sortIcons}
+              onSortStatusChange={onSortStatusChange}
+              selectionVisible={!!selectedRecords}
+              selectionChecked={allSelectableRecordsSelected}
+              selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
+              onSelectionChange={handleHeaderSelectionChange}
+              selectionCheckboxProps={allRecordsSelectionCheckboxProps}
+              leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
+            />
+          )}
           <tbody ref={bodyRef}>
             {recordsLength ? (
               records.map((record, recordIndex) => {

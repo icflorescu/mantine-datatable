@@ -37,7 +37,7 @@ export type DataTableRowExpansionProps<T> = {
      * receives an array containing the newly expanded record IDs
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onRecordIdsChange: Dispatch<SetStateAction<any[]>> | ((recordIds: unknown[]) => void);
+    onRecordIdsChange?: Dispatch<SetStateAction<any[]>> | ((recordIds: unknown[]) => void);
   };
 
   /**

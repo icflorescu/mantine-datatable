@@ -1,4 +1,4 @@
-import { Code, Container, createStyles, MantineSize, MANTINE_SIZES, Paper, Switch } from '@mantine/core';
+import { Code, Container, MANTINE_SIZES, MantineSize, Paper, Switch, createStyles } from '@mantine/core';
 import { DataTableVerticalAlignment } from 'mantine-datatable';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
@@ -47,6 +47,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function Page({ code: initialCode }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [withBorder, setWithBorder] = useState(false);
+  const [noHeader, setNoHeader] = useState(false);
   const [customizeBorderRadius, setCustomizeBorderRadius] = useState(false);
   const [borderRadius, setBorderRadius] = useState<MantineSize>(INITIAL_BORDER_RADIUS);
   const [customizeShadow, setCustomizeShadow] = useState(false);
@@ -91,6 +92,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
     () =>
       initialCode
         .replace(/( +)withBorder=.*\n/, (_, spaces) => (withBorder ? `${spaces}withBorder\n` : ''))
+        .replace(/( +)noHeader=.*\n/, (_, spaces) => (noHeader ? `${spaces}noHeader\n` : ''))
         .replace(/( +)borderRadius=.*\n/, (_, spaces) =>
           customizeBorderRadius ? `${spaces}borderRadius="${borderRadius}"\n` : ''
         )
@@ -125,6 +127,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
       verticalAlignment,
       verticalSpacing,
       withBorder,
+      noHeader,
       withColumnBorders,
     ]
   );
@@ -171,6 +174,12 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
               label="Table border"
               checked={withBorder}
               onChange={() => setWithBorder((v) => !v)}
+            />
+            <Switch
+              className={classes.control}
+              label="No header"
+              checked={noHeader}
+              onChange={() => setNoHeader((v) => !v)}
             />
             <CheckableSegmentedControl
               className={classes.control}
@@ -233,6 +242,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
       </Paper>
       <BasicTablePropertiesExample
         withBorder={withBorder}
+        noHeader={noHeader}
         customizeBorderRadius={customizeBorderRadius}
         borderRadius={borderRadius}
         customizeShadow={customizeShadow}

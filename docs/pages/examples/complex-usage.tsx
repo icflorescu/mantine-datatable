@@ -12,12 +12,12 @@ import readCodeExample from '~/lib/readCodeExample';
 const PATH = 'examples/complex-usage';
 
 export const getStaticProps: GetStaticProps<{
-  code: { 'ComplexUsageExample.tsx': string; 'data.ts': string };
+  code: { 'ComplexUsageExample.tsx': string; 'data/index.ts': string };
 }> = async () => ({
   props: {
     code: await allPromiseProps({
       'ComplexUsageExample.tsx': readCodeExample('examples/ComplexUsageExample.tsx') as Promise<string>,
-      'data.ts': readCodeExample('data.ts') as Promise<string>,
+      'data/index.ts': readCodeExample('data/index.ts') as Promise<string>,
     }),
   },
 });
@@ -35,7 +35,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <CodeBlockTabs
         items={[
           { title: 'ComplexUsageExample.tsx', language: 'typescript', content: code['ComplexUsageExample.tsx'] },
-          { title: 'data.ts', language: 'typescript', content: code['data.ts'] },
+          { title: 'data/index.ts', language: 'typescript', content: code['data/index.ts'] },
         ]}
       />
       <PageNavigation of={PATH} />

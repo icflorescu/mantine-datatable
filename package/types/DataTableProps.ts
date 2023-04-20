@@ -90,6 +90,11 @@ export type DataTableProps<T> = {
   noRecordsText?: string;
 
   /**
+   * If true, the table will not show the header with column titles
+   */
+  noHeader?: boolean;
+
+  /**
    * Function to call when a row cell is clicked
    */
   onCellClick?: DataTableCellClickHandler<T>;
