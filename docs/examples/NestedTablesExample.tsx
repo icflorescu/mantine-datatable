@@ -3,7 +3,7 @@ import { IconChevronRight, IconUser } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
-import { companies as companyData, departments as departmentData, employees } from '~/data';
+import { companies, departments, employees } from '~/data/nested';
 
 const useStyles = createStyles((theme) => {
   return {
@@ -19,18 +19,6 @@ const useStyles = createStyles((theme) => {
     },
   };
 });
-
-const departments = departmentData.map((department) => ({
-  ...department,
-  employees: employees.filter((employee) => employee.department.id === department.id)?.length || 0,
-}));
-
-const companies = companyData.map((company) => ({
-  ...company,
-  employees: departments
-    .filter((department) => department.company.id === company.id)
-    .reduce((sum, department) => sum + department.employees, 0),
-}));
 
 export default function NestedTablesExample() {
   const [expandedCompanyIds, setExpandedCompanyIds] = useState<string[]>([]);
