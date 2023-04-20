@@ -141,6 +141,11 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: how to add links or buttons inside Mantine DataTable clickable rows or cells',
       },
       {
+        path: 'nested-tables',
+        title: 'Nested tables',
+        description: 'Example: how to implement nested tables with Mantine DataTable',
+      },
+      {
         path: 'disabling-text-selection',
         title: 'Disabling text selection',
         description: 'Example: disabling text selection on Mantine DataTable',

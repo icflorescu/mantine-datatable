@@ -6,6 +6,7 @@ const records = companies.slice(0, 5);
 
 export default function BasicTablePropertiesExample({
   withBorder,
+  noHeader,
   customizeBorderRadius,
   borderRadius,
   customizeShadow,
@@ -23,6 +24,7 @@ export default function BasicTablePropertiesExample({
   verticalAlignment,
 }: {
   withBorder: boolean;
+  noHeader: boolean;
   customizeBorderRadius: boolean;
   borderRadius: MantineSize;
   customizeShadow: boolean;
@@ -44,6 +46,7 @@ export default function BasicTablePropertiesExample({
     // prettier-ignore
     <DataTable
       withBorder={withBorder}
+      noHeader={noHeader}
       borderRadius={customizeBorderRadius ? borderRadius : undefined}
       shadow={customizeShadow ? shadow : undefined}
       withColumnBorders={withColumnBorders}
