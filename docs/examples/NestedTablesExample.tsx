@@ -1,5 +1,5 @@
-import { ActionIcon, Group, Text, createStyles, px } from '@mantine/core';
-import { IconChevronRight, IconUser } from '@tabler/icons-react';
+import { Group, Text, createStyles, px } from '@mantine/core';
+import { IconBuilding, IconChevronRight, IconUser, IconUsers } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { DataTable } from 'mantine-datatable';
 import { useState } from 'react';
@@ -8,7 +8,6 @@ import { companies, departments, employees } from '~/data/nested';
 const useStyles = createStyles((theme) => {
   return {
     expandIcon: {
-      marginBottom: -1,
       transition: 'transform 0.2s ease',
     },
     expandIconRotated: {
@@ -24,41 +23,25 @@ export default function NestedTablesExample() {
   const [expandedCompanyIds, setExpandedCompanyIds] = useState<string[]>([]);
   const [expandedDepartmentIds, setExpandedDepartmentIds] = useState<string[]>([]);
 
-  const toggleCompanyExpansion = (id: string) => {
-    if (expandedCompanyIds.includes(id)) {
-      setExpandedCompanyIds(expandedCompanyIds.filter((companyId) => companyId !== id));
-    } else {
-      setExpandedCompanyIds([...expandedCompanyIds, id]);
-    }
-  };
-
-  const toggleDepartmentExpansion = (id: string) => {
-    if (expandedDepartmentIds.includes(id)) {
-      setExpandedDepartmentIds(expandedDepartmentIds.filter((departmentId) => departmentId !== id));
-    } else {
-      setExpandedDepartmentIds([...expandedDepartmentIds, id]);
-    }
-  };
-
   const { cx, classes } = useStyles();
 
   return (
     <DataTable
       withBorder
+      withColumnBorders
       columns={[
         {
           accessor: 'name',
           title: 'Company › department › employee',
           render: ({ id, name }) => (
             <Group spacing="xs">
-              <ActionIcon size="sm" variant="default" onClick={() => toggleCompanyExpansion(id)}>
-                <IconChevronRight
-                  size="0.9em"
-                  className={cx(classes.expandIcon, {
-                    [classes.expandIconRotated]: expandedCompanyIds.includes(id),
-                  })}
-                />
-              </ActionIcon>
+              <IconChevronRight
+                size="0.9em"
+                className={cx(classes.expandIcon, {
+                  [classes.expandIconRotated]: expandedCompanyIds.includes(id),
+                })}
+              />
+              <IconBuilding size="0.9em" />
               <Text>{name}</Text>
             </Group>
           ),
@@ -68,8 +51,7 @@ export default function NestedTablesExample() {
       records={companies}
       rowExpansion={{
         allowMultiple: true,
-        trigger: 'never',
-        expanded: { recordIds: expandedCompanyIds },
+        expanded: { recordIds: expandedCompanyIds, onRecordIdsChange: setExpandedCompanyIds },
         content: (company) => (
           <DataTable
             noHeader
@@ -78,14 +60,13 @@ export default function NestedTablesExample() {
                 accessor: 'name',
                 render: ({ id, name }) => (
                   <Group ml="lg" spacing="xs" noWrap>
-                    <ActionIcon size="sm" variant="default" onClick={() => toggleDepartmentExpansion(id)}>
-                      <IconChevronRight
-                        size="0.9em"
-                        className={cx(classes.expandIcon, {
-                          [classes.expandIconRotated]: expandedDepartmentIds.includes(id),
-                        })}
-                      />
-                    </ActionIcon>
+                    <IconChevronRight
+                      size="0.9em"
+                      className={cx(classes.expandIcon, {
+                        [classes.expandIconRotated]: expandedDepartmentIds.includes(id),
+                      })}
+                    />
+                    <IconUsers size="0.9em" />
                     <Text>{name}</Text>
                   </Group>
                 ),
@@ -95,13 +76,10 @@ export default function NestedTablesExample() {
             records={departments.filter((department) => department.company.id === company.record.id)}
             rowExpansion={{
               allowMultiple: true,
-              trigger: 'never',
-              expanded: { recordIds: expandedDepartmentIds },
+              expanded: { recordIds: expandedDepartmentIds, onRecordIdsChange: setExpandedDepartmentIds },
               content: (department) => (
                 <DataTable
-                  striped
                   noHeader
-                  withColumnBorders
                   columns={[
                     {
                       accessor: 'name',
