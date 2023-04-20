@@ -14,8 +14,8 @@ export default function AdditionalStylingExampleWithRowStyling() {
   return (
     <DataTable
       withBorder
-      rowClassName={({ name }) => (name === 'Hettinger, Willms and Connelly' ? classes.blueishRow : undefined)}
-      rowStyle={({ name }) => (name === 'Champlin - Spencer' ? { color: '#FA5639' } : undefined)}
+      rowClassName={({ name }) => (name === 'Runolfsdottir - Cummerata' ? classes.blueishRow : undefined)}
+      rowStyle={({ name }) => (name === 'Johnston LLC' ? { color: '#FA5639' } : undefined)}
       // example-skip
       columns={[
         { accessor: 'name' },

@@ -70,7 +70,7 @@ export default function ColumnPropertiesExampleStylingCells() {
           titleClassName: classes.birthdayColumnTitle,
           // style cells with a class name depending on current record
           cellsClassName: ({ birthDate }) =>
-            cx({ [classes.birthdayInDecember]: dayjs(birthDate).format('MM') === '12' }),
+            cx({ [classes.birthdayInDecember]: dayjs(birthDate).format('MM') === '04' }),
           render: ({ birthDate }) => dayjs(birthDate).format('MMM D'),
         },
         {

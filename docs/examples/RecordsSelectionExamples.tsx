@@ -63,7 +63,7 @@ export function RecordsSelectionWithDisabledItemsExample() {
       ]}
       selectedRecords={selectedRecords}
       onSelectedRecordsChange={setSelectedRecords}
-      isRecordSelectable={(record) => record.name.length < 18}
+      isRecordSelectable={(record) => record.name.length < 14}
     />
   );
   // example-end
