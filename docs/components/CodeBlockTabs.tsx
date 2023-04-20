@@ -5,7 +5,7 @@ import { IconBraces, IconTerminal2 } from '@tabler/icons-react';
 const useStyles = createStyles((theme) => ({
   tabList: {
     flexWrap: 'nowrap',
-    overflowX: 'scroll',
+    overflowX: 'auto',
     overflowY: 'hidden',
   },
   tab: {
