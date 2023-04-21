@@ -12,9 +12,15 @@ const useStyles = createStyles((theme) => ({
   },
   icon: {
     background: theme.fn.gradient({ from: theme.colors.blue[6], to: theme.colors.cyan[6] }),
+    marginTop: -2,
+    [`@media (min-width: ${theme.breakpoints.xs})`]: {
+      marginTop: 0,
+    },
   },
   title: {
-    marginTop: '-0.33em',
+    margin: '-0.33em 0 0.33em',
+    fontWeight: 700,
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[7],
   },
   description: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[8],
@@ -35,9 +41,7 @@ export default function HomePageFeature({ icon: Icon, title, children }: HopePag
         <Icon />
       </ThemeIcon>
       <div>
-        <Text className={classes.title} weight="500">
-          {title}
-        </Text>
+        <Text className={classes.title}>{title}</Text>
         <Text className={classes.description} size="sm">
           {children}
         </Text>
