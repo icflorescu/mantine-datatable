@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.7 (2023-04-21)
+
+- Internal refactoring of the pagination component
+
 ## 2.4.6 (2023-04-20)
 
 - Make `rowExpansion.expanded.onRecordIdsChange` optional
