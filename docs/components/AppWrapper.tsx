@@ -82,13 +82,11 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
       />
       {navbarVisible && (
         <Global
-          styles={(theme) => ({
+          styles={{
             body: {
-              [`@media (max-width: ${px(theme.breakpoints.md) - 1}px)`]: {
-                overflow: 'hidden',
-              },
+              overflow: 'hidden',
             },
-          })}
+          }}
         />
       )}
       <AppNavbar visible={navbarVisible} onHideClick={() => setNavbarVisible(false)} />
