@@ -23,6 +23,7 @@ export default function DefaultColumnRenderExample() {
         { bookTitle: 'The Book of Lost Tales, Part Two', published: new Date(1984, 9, 25) },
         // example-resume
       ]}
+      idAccessor="bookTitle"
       columns={[
         { accessor: 'bookTitle', width: '100%' },
         { accessor: 'published', textAlignment: 'right', ellipsis: true },

@@ -12,7 +12,7 @@ import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
 import DataTableHeader from './DataTableHeader';
 import DataTableLoader from './DataTableLoader';
-import DataTablePaginationFooter from './DataTablePaginationFooter';
+import DataTablePagination from './DataTablePagination';
 import DataTableRow from './DataTableRow';
 import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
@@ -186,7 +186,7 @@ export default function DataTable<T>({
 
   const { ref: headerRef, height: headerHeight } = useElementSize<HTMLTableSectionElement>();
   const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementSize<HTMLTableElement>();
-  const { ref: footerRef, height: footerHeight } = useElementSize<HTMLDivElement>();
+  const { ref: paginationRef, height: paginationHeight } = useElementSize<HTMLDivElement>();
 
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
@@ -448,8 +448,8 @@ export default function DataTable<T>({
         </Table>
       </DataTableScrollArea>
       {page && (
-        <DataTablePaginationFooter
-          ref={footerRef}
+        <DataTablePagination
+          ref={paginationRef}
           className={classNames?.pagination}
           style={styleProperties?.pagination}
           topBorderColor={borderColor}
@@ -474,7 +474,7 @@ export default function DataTable<T>({
       )}
       <DataTableLoader
         pt={headerHeight}
-        pb={footerHeight}
+        pb={paginationHeight}
         fetching={fetching}
         backgroundBlur={loaderBackgroundBlur}
         customContent={customLoader}
@@ -484,7 +484,7 @@ export default function DataTable<T>({
       />
       <DataTableEmptyState
         pt={headerHeight}
-        pb={footerHeight}
+        pb={paginationHeight}
         icon={noRecordsIcon}
         text={noRecordsText}
         active={!fetching && !recordsLength}

@@ -1,6 +1,6 @@
 import { Button, Group, Menu, Text, type MantineColor, type MantineSize } from '@mantine/core';
 
-type DataTablePaginationFooterPageSizeSelectorProps = {
+type DataTablePageSizeSelectorComponentProps = {
   size: MantineSize;
   label: string;
   values: number[];
@@ -11,14 +11,14 @@ type DataTablePaginationFooterPageSizeSelectorProps = {
 
 const HEIGHT: Record<MantineSize, number> = { xs: 22, sm: 26, md: 32, lg: 38, xl: 44 };
 
-export default function DataTablePaginationFooterPageSizeSelector({
+export default function DataTablePageSizeSelector({
   size,
   label,
   values,
   value,
   onChange,
   color,
-}: DataTablePaginationFooterPageSizeSelectorProps) {
+}: DataTablePageSizeSelectorComponentProps) {
   return (
     <Group spacing="xs">
       <Text size={size}>{label}</Text>
