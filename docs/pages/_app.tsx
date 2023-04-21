@@ -2,7 +2,6 @@ import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Router } from 'next/router';
@@ -23,8 +22,6 @@ export default function _App(props: AppProps) {
       Router.events.off('routeChangeComplete', logPageView);
     };
   }, []);
-
-  const queryClient = new QueryClient();
 
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
@@ -48,52 +45,50 @@ export default function _App(props: AppProps) {
         <meta name="twitter:description" content={SEO_DEFAULT_DESCRIPTION} />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <QueryClientProvider client={queryClient}>
-        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-          <MantineProvider
-            withGlobalStyles
-            withNormalizeCSS
-            theme={{
-              colorScheme,
-              components: {
-                Code: {
-                  styles: (theme) => ({
-                    root: {
-                      border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
-                    },
-                  }),
-                },
-                Prism: {
-                  styles: (theme) => {
-                    const border = `1px solid ${
-                      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-                    }`;
-                    return {
-                      root: {
-                        border,
-                        '&&': { borderRadius: 0 },
-                      },
-                      copy: {
-                        '&&': {
-                          border,
-                          background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
-                        },
-                      },
-                    };
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            colorScheme,
+            components: {
+              Code: {
+                styles: (theme) => ({
+                  root: {
+                    border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
                   },
+                }),
+              },
+              Prism: {
+                styles: (theme) => {
+                  const border = `1px solid ${
+                    theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+                  }`;
+                  return {
+                    root: {
+                      border,
+                      '&&': { borderRadius: 0 },
+                    },
+                    copy: {
+                      '&&': {
+                        border,
+                        background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
+                      },
+                    },
+                  };
                 },
               },
-            }}
-          >
-            <Notifications />
-            <ModalsProvider>
-              <AppWrapper>
-                <Component {...pageProps} />
-              </AppWrapper>
-            </ModalsProvider>
-          </MantineProvider>
-        </ColorSchemeProvider>
-      </QueryClientProvider>
+            },
+          }}
+        >
+          <Notifications />
+          <ModalsProvider>
+            <AppWrapper>
+              <Component {...pageProps} />
+            </AppWrapper>
+          </ModalsProvider>
+        </MantineProvider>
+      </ColorSchemeProvider>
     </>
   );
 }
