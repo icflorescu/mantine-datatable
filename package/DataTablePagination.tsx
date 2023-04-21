@@ -8,7 +8,7 @@ import {
   type MantineTheme,
 } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef, type ReactNode } from 'react';
-import DataTablePaginationFooterPageSizeSelector from './DataTablePaginationFooterPageSizeSelector';
+import DataTablePageSizeSelector from './DataTablePageSizeSelector';
 import type { DataTablePaginationProps } from './types';
 import type { WithOptional, WithRequired } from './types/utils';
 
@@ -43,7 +43,7 @@ const useStyles = createStyles(
   })
 );
 
-type DataTablePaginationFooterProps = WithOptional<
+type DataTablePaginationComponentProps = WithOptional<
   WithRequired<
     DataTablePaginationProps,
     'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint' | 'getPaginationControlProps'
@@ -59,7 +59,7 @@ type DataTablePaginationFooterProps = WithOptional<
   noRecordsText: string;
 };
 
-export default forwardRef(function DataTablePaginationFooter(
+export default forwardRef(function DataTablePagination(
   {
     className,
     style,
@@ -81,7 +81,7 @@ export default forwardRef(function DataTablePaginationFooter(
     horizontalSpacing,
     paginationWrapBreakpoint,
     getPaginationControlProps,
-  }: DataTablePaginationFooterProps,
+  }: DataTablePaginationComponentProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   let paginationTextValue: ReactNode;
@@ -109,7 +109,7 @@ export default forwardRef(function DataTablePaginationFooter(
         {paginationTextValue}
       </Text>
       {recordsPerPageOptions && (
-        <DataTablePaginationFooterPageSizeSelector
+        <DataTablePageSizeSelector
           size={paginationSize}
           label={recordsPerPageLabel}
           values={recordsPerPageOptions}
@@ -129,4 +129,4 @@ export default forwardRef(function DataTablePaginationFooter(
       />
     </Box>
   );
-}) as (props: DataTablePaginationFooterProps & { ref: ForwardedRef<HTMLDivElement> }) => JSX.Element;
+}) as (props: DataTablePaginationComponentProps & { ref: ForwardedRef<HTMLDivElement> }) => JSX.Element;
