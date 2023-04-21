@@ -36,7 +36,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <Paper my="xl" p="sm" withBorder>
         <Switch
           className={classes.control}
-          label="Place component in a height-restricted container to make it vertically-scrollable"
+          label="Set height to make it vertically-scrollable"
           checked={scrollable}
           onChange={() => setScrollable((value) => !value)}
         />
