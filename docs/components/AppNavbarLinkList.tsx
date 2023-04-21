@@ -12,13 +12,13 @@ const useStyles = createStyles({
   },
   connector: {
     position: 'absolute',
-    top: -12,
+    top: -8,
     left: 24,
     width: 2,
     bottom: 20,
     transform: 'scale3d(1, 0, 1)',
     transformOrigin: 'top',
-    transition: 'transform .3s ease',
+    transition: 'transform .75s ease-out',
   },
   connectorVisible: {
     transform: 'scale3d(1, 1, 1)',
