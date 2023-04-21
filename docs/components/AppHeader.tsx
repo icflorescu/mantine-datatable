@@ -152,7 +152,7 @@ export default function AppHeader({
       <Logo className={cx(classes.logo, { [classes.logoWithNavbarVisible]: navbarVisible })} insideHeader />
       <Group className={classes.actionIcons} spacing="xs">
         <ActionIcon
-          aria-label="Soure code"
+          aria-label="Source code"
           className={classes.actionIcon}
           variant="outline"
           component="a"
