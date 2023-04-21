@@ -92,7 +92,7 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
         />
       )}
       <AppNavbar visible={navbarVisible} onHideClick={() => setNavbarVisible(false)} />
-      <AppHeader navbarVisible={navbarVisible} onShowNavbarClick={() => setNavbarVisible(true)} />
+      <AppHeader onShowNavbarClick={() => setNavbarVisible(true)} />
       <div className={classes.main}>{children}</div>
       <AppFooter />
     </>

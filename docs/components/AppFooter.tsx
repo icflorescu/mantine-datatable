@@ -57,7 +57,7 @@ export default function AppFooter() {
     classes,
     theme: { colors },
   } = useStyles();
-  const badgeParams = `?style=flat&color=${colors.blue[9].substring(1)}`;
+  const badgeParams = `?style=flat&color=${colors.blue[7].substring(1)}`;
   return (
     <div className={classes.root}>
       <ExternalLink to={`${REPO_LINK}/blob/main/LICENSE`} rel="license">

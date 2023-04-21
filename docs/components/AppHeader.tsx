@@ -1,8 +1,6 @@
 import {
   ActionIcon,
-  Box,
   Button,
-  Center,
   createStyles,
   Group,
   px,
@@ -11,15 +9,19 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
-import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
-import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, REPO_LINK } from '~/config';
+import { IconHeartFilled, IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
+import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, REPO_LINK, SPONSOR_LINK } from '~/config';
+import AppHeaderColorSchemeLabel from './AppHeaderColorSchemeLabel';
 import GitHubIcon from './GitHubIcon';
 import Logo from './Logo';
+
+const REPO_LINK_ARIA_LABEL = 'View Mantine DataTable source code on GitHub';
+const SPONSORS_LINK_ARIA_LABEL = 'Sponsor Mantine DataTable project on GitHub Sponsors';
 
 const useStyles = createStyles((theme) => {
   const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`;
   const buttonBorder = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
-  const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6];
+  const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[7];
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.3 : 0.03;
 
   return {
@@ -69,20 +71,15 @@ const useStyles = createStyles((theme) => {
       },
     },
     menuIcon: {
-      color: actionIconColor,
+      color: theme.fn[theme.colorScheme === 'dark' ? 'lighten' : 'darken'](actionIconColor, 0.75),
       [breakpointMediaQuery]: {
         display: 'none',
       },
     },
     logo: {
-      opacity: 1,
-      transition: 'opacity .15s ease',
       [breakpointMediaQuery]: {
         display: 'none',
       },
-    },
-    logoWithNavbarVisible: {
-      opacity: 0,
     },
     actionIcons: {
       [breakpointMediaQuery]: {
@@ -90,20 +87,29 @@ const useStyles = createStyles((theme) => {
       },
     },
     actionIcon: {
-      border: `1px solid ${actionIconColor}`,
+      border: `1px solid ${theme.fn[theme.colorScheme === 'dark' ? 'darken' : 'lighten'](actionIconColor, 0.25)}`,
       color: actionIconColor,
     },
-    sourceCodeButton: {
-      border: buttonBorder,
+    actionIconRed: {
+      color: theme.colors.red[theme.colorScheme === 'dark' ? 8 : 6],
+    },
+    buttons: {
       display: 'none',
       [breakpointMediaQuery]: {
         display: 'inherit',
       },
     },
-    sourceCodeButtonIcon: {
-      '&&': { marginRight: 5 },
+    button: {
+      border: buttonBorder,
+      paddingRight: theme.spacing.xs,
     },
-    sourceCodeButtonLabel: {
+    buttonIcon: {
+      '&&': { marginRight: 8 },
+    },
+    buttonIconRed: {
+      color: theme.colors.red[theme.colorScheme === 'dark' ? 8 : 6],
+    },
+    buttonLabel: {
       marginBottom: -2,
     },
     colorSchemeSegmentedControlContainer: {
@@ -118,13 +124,7 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-export default function AppHeader({
-  navbarVisible,
-  onShowNavbarClick,
-}: {
-  navbarVisible: boolean;
-  onShowNavbarClick: () => void;
-}) {
+export default function AppHeader({ onShowNavbarClick }: { onShowNavbarClick: () => void }) {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const ColorSchemeIcon = colorScheme === 'dark' ? IconSun : IconMoon;
   const [{ y: windowScrollY }] = useWindowScroll();
@@ -132,34 +132,65 @@ export default function AppHeader({
   const { classes, cx } = useStyles();
 
   return (
-    <Group className={cx(classes.root, { [classes.windowScrolledOnY]: windowScrollY !== 0 })} px="sm" spacing="xs">
-      <IconMenu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} />
-      <Button
-        classNames={{
-          root: classes.sourceCodeButton,
-          icon: classes.sourceCodeButtonIcon,
-          label: classes.sourceCodeButtonLabel,
-        }}
-        size="xs"
-        variant="default"
-        leftIcon={<GitHubIcon size={16} />}
-        component="a"
-        href={REPO_LINK}
-        target="_blank"
-      >
-        Source code
-      </Button>
-      <Logo className={cx(classes.logo, { [classes.logoWithNavbarVisible]: navbarVisible })} insideHeader />
+    <Group className={cx(classes.root, { [classes.windowScrolledOnY]: windowScrollY !== 0 })} px="sm" spacing={0}>
+      <Group spacing="xs">
+        <IconMenu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} />
+        <Group spacing="xs" className={classes.buttons}>
+          <Button
+            classNames={{
+              root: classes.button,
+              icon: classes.buttonIcon,
+              label: classes.buttonLabel,
+            }}
+            size="xs"
+            variant="default"
+            leftIcon={<GitHubIcon size={16} />}
+            component="a"
+            href={REPO_LINK}
+            target="_blank"
+            aria-label={REPO_LINK_ARIA_LABEL}
+          >
+            Source code
+          </Button>
+          <Button
+            classNames={{
+              root: classes.button,
+              icon: cx(classes.buttonIcon, classes.buttonIconRed),
+              label: classes.buttonLabel,
+            }}
+            size="xs"
+            variant="default"
+            leftIcon={<IconHeartFilled size={16} />}
+            component="a"
+            href={SPONSOR_LINK}
+            target="_blank"
+            aria-label={SPONSORS_LINK_ARIA_LABEL}
+          >
+            Sponsor
+          </Button>
+        </Group>
+        <Logo className={classes.logo} insideHeader />
+      </Group>
       <Group className={classes.actionIcons} spacing="xs">
         <ActionIcon
-          aria-label="Source code"
           className={classes.actionIcon}
           variant="outline"
           component="a"
           href={REPO_LINK}
           target="_blank"
+          aria-label={REPO_LINK_ARIA_LABEL}
         >
           <GitHubIcon size={16} />
+        </ActionIcon>
+        <ActionIcon
+          className={cx(classes.actionIcon, classes.actionIconRed)}
+          variant="outline"
+          component="a"
+          href={SPONSOR_LINK}
+          target="_blank"
+          aria-label={SPONSORS_LINK_ARIA_LABEL}
+        >
+          <IconHeartFilled size={16} />
         </ActionIcon>
         <ActionIcon
           aria-label="Toggle color scheme"
@@ -180,28 +211,8 @@ export default function AppHeader({
           value={colorScheme}
           onChange={() => toggleColorScheme()}
           data={[
-            {
-              value: 'light',
-              label: (
-                <Center>
-                  <IconSun size={14} />
-                  <Box ml={10} mb={-2}>
-                    Light
-                  </Box>
-                </Center>
-              ),
-            },
-            {
-              value: 'dark',
-              label: (
-                <Center>
-                  <IconMoon size={14} />
-                  <Box ml={10} mb={-2}>
-                    Dark
-                  </Box>
-                </Center>
-              ),
-            },
+            { value: 'light', label: <AppHeaderColorSchemeLabel value="Light" /> },
+            { value: 'dark', label: <AppHeaderColorSchemeLabel value="Dark" /> },
           ]}
         />
       </Group>
