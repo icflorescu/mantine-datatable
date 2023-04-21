@@ -64,12 +64,23 @@ export default function _App(props: AppProps) {
                   }),
                 },
                 Prism: {
-                  styles: (theme) => ({
-                    root: {
-                      border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
-                      '&&': { borderRadius: 0 },
-                    },
-                  }),
+                  styles: (theme) => {
+                    const border = `1px solid ${
+                      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+                    }`;
+                    return {
+                      root: {
+                        border,
+                        '&&': { borderRadius: 0 },
+                      },
+                      copy: {
+                        '&&': {
+                          border,
+                          background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
+                        },
+                      },
+                    };
+                  },
                 },
               },
             }}
