@@ -19,12 +19,12 @@
     "@mantine/next": "^6.0.8",
     "@mantine/notifications": "^6.0.8",
     "@mantine/prism": "^6.0.8",
-    "@tabler/icons-react": "^2.16.0",
+    "@tabler/icons-react": "^2.17.0",
     "@tanstack/react-query": "^4.29.3",
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
-    "next": "^13.3.0",
+    "next": "^13.3.1",
     "next-pwa": "^5.6.0",
     "next-sitemap": "^4.0.7",
     "react": "^18.2.0",
@@ -34,7 +34,7 @@
     "@types/lodash": "^4.14.194",
     "@types/mixpanel-browser": "^2.38.1",
     "@types/node": "^18.15.13",
-    "@types/react": "^18.0.37",
+    "@types/react": "^18.0.38",
     "mixpanel-browser": "^2.46.0",
     "typescript": "^5.0.4"
   }
