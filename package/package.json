@@ -1,12 +1,15 @@
 {
   "name": "mantine-datatable",
-  "version": "2.4.10",
+  "version": "2.4.11",
   "description": "Datatable component for Mantine UI, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu, row expansion and more",
   "keywords": [
     "ui",
     "mantine",
     "datatable",
     "datagrid",
+    "data",
+    "table",
+    "grid",
     "async",
     "sorting",
     "pagination",
