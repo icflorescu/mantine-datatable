@@ -76,6 +76,10 @@ export default function GettingStartedExample() {
 
 Have a look at the available [component properties](https://icflorescu.github.io/mantine-datatable/component-properties) and make sure to browse the comprehensive list of [usage examples](https://icflorescu.github.io/mantine-datatable/examples/basic-usage).
 
+## Other useful resources
+
+Mantine DataTable had the context-menu functionality baked in since its early days. If you're looking to use a context menu in other parts of your application, you might want to check out [Mantine Context Menu](https://icflorescu.github.io/mantine-contextmenu/).
+
 ## Code contributors
 
 [![Contributors list](https://contrib.rocks/image?repo=icflorescu/mantine-datatable)](https://github.com/icflorescu/mantine-datatable/graphs/contributors)

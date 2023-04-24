@@ -7,7 +7,7 @@ import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import { AUTHOR_LINK, REPO_LINK, SPONSOR_LINK } from '~/config';
+import { AUTHOR_LINK, MANTINE_CONTEXTMENU_LINK, REPO_LINK, SPONSOR_LINK } from '~/config';
 
 const PATH = 'contribute-and-support';
 
@@ -80,9 +80,12 @@ export default function Page() {
       </Box>
       <PageSubtitle value="Sponsoring" />
       <PageText>
-        As mentioned above, I’ve dedicated a sizeable amount of my own free time to build this project. Its maintenance
-        requires a constant effort. So, if you find <Code>Mantine DataTable</Code> useful and you want to support its
-        development, you can do so by <ExternalLink to={SPONSOR_LINK}>sponsoring my work</ExternalLink>.
+        As mentioned above, I’ve dedicated my own free time to build <Code>Mantine DataTable</Code>,{' '}
+        <ExternalLink to={MANTINE_CONTEXTMENU_LINK}>Mantine ContextMenu</ExternalLink> and{' '}
+        <ExternalLink to={AUTHOR_LINK}>other open-source projects</ExternalLink>. I did out of passion, but its
+        maintenance requires a constant effort and passion alone doesn’t pay the bills. So, if you find{' '}
+        <Code>Mantine DataTable</Code> useful and you want to support its development, you can do so by{' '}
+        <ExternalLink to={SPONSOR_LINK}>sponsoring my work</ExternalLink>.
       </PageText>
       <PageSubtitle value="Other means of support" />
       <PageText>
