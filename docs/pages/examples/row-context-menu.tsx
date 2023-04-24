@@ -7,6 +7,7 @@ import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
+import { MANTINE_CONTEXTMENU_LINK } from '~/config';
 import {
   RowContextMenuExample1,
   RowContextMenuExample10,
@@ -111,6 +112,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         <br />
         See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows-or-cells">this example</InternalLink> for
         more information.
+      </PageText>
+      <PageText idea>
+        If you’re interested in using context menus in other places in your application’s UI, have a look at{' '}
+        <ExternalLink to={MANTINE_CONTEXTMENU_LINK}>Mantine ContextMenu</ExternalLink>.
       </PageText>
       <PageText>
         If you’re not a fan of context menus,{' '}
