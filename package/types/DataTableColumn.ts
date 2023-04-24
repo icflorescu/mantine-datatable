@@ -82,6 +82,26 @@ export type DataTableColumn<T> = {
    * Optional function returning an object of custom attributes to be applied to each cell in the column
    */
   customCellAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
+
+  /**
+   * Optional column footer content; if at least one column has a footer, the table will display a footer row
+   */
+  footer?: ReactNode;
+
+  /**
+   * Optional class name passed to the column footer
+   */
+  footerClassName?: string;
+
+  /**
+   * Optional style passed to the column footer
+   */
+  footerStyle?: CSSProperties;
+
+  /**
+   * Optional style passed to the column footer; see https://mantine.dev/styles/sx/
+   */
+  footerSx?: Sx;
 } & (
   | {
       /**

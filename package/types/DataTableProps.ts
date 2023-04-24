@@ -167,7 +167,7 @@ export type DataTableProps<T> = {
   bodyRef?: ((instance: HTMLTableSectionElement | null) => void) | RefObject<HTMLTableSectionElement>;
 } & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing' | 'fontSize'> &
   Omit<
-    DefaultProps<'root' | 'header' | 'pagination', CSSProperties>,
+    DefaultProps<'root' | 'header' | 'footer' | 'pagination', CSSProperties>,
     'unstyled' | 'p' | 'px' | 'py' | 'pt' | 'pb' | 'pl' | 'pr'
   > &
   DataTableOuterBorderProps &

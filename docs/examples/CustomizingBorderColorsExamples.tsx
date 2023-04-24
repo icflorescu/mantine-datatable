@@ -1,20 +1,20 @@
 import sortBy from 'lodash/sortBy';
-import { DataTable } from 'mantine-datatable';
+import { DataTable, uniqBy } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
 import { companies } from '~/data';
 
 const PAGE_SIZE = 4;
 
-const initialRecords = sortBy(companies, 'name');
+const allCompanies = sortBy(companies, 'name');
 
 export function CustomizingBorderColorsWithStringsExample() {
   const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(initialRecords.slice(0, PAGE_SIZE));
+  const [records, setRecords] = useState(allCompanies.slice(0, PAGE_SIZE));
 
   useEffect(() => {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE;
-    setRecords(initialRecords.slice(from, to));
+    setRecords(allCompanies.slice(from, to));
   }, [page]);
 
   return (
@@ -27,12 +27,12 @@ export function CustomizingBorderColorsWithStringsExample() {
       // example-skip
       records={records}
       columns={[
-        { accessor: 'name', width: '40%' },
+        { accessor: 'name', width: '40%', footer: `${allCompanies.length} companies` },
         { accessor: 'streetAddress', width: '60%' },
-        { accessor: 'city', width: 160 },
-        { accessor: 'state', width: 80 },
+        { accessor: 'city', width: 160, footer: `${uniqBy(allCompanies, (c) => c.city).length} cities` },
+        { accessor: 'state', width: 80, footer: `${uniqBy(allCompanies, (c) => c.state).length} states` },
       ]}
-      totalRecords={initialRecords.length}
+      totalRecords={allCompanies.length}
       recordsPerPage={PAGE_SIZE}
       page={page}
       onPageChange={(p) => setPage(p)}
@@ -44,12 +44,12 @@ export function CustomizingBorderColorsWithStringsExample() {
 
 export function CustomizingBorderColorsWithFunctionsExample() {
   const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(initialRecords.slice(0, PAGE_SIZE));
+  const [records, setRecords] = useState(allCompanies.slice(0, PAGE_SIZE));
 
   useEffect(() => {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE;
-    setRecords(initialRecords.slice(from, to));
+    setRecords(allCompanies.slice(from, to));
   }, [page]);
 
   return (
@@ -66,12 +66,12 @@ export function CustomizingBorderColorsWithFunctionsExample() {
       // example-skip
       records={records}
       columns={[
-        { accessor: 'name', width: '40%' },
+        { accessor: 'name', width: '40%', footer: `${allCompanies.length} companies` },
         { accessor: 'streetAddress', width: '60%' },
-        { accessor: 'city', width: 160 },
-        { accessor: 'state', width: 80 },
+        { accessor: 'city', width: 160, footer: `${uniqBy(allCompanies, (c) => c.city).length} cities` },
+        { accessor: 'state', width: 80, footer: `${uniqBy(allCompanies, (c) => c.state).length} states` },
       ]}
-      totalRecords={initialRecords.length}
+      totalRecords={allCompanies.length}
       recordsPerPage={PAGE_SIZE}
       page={page}
       onPageChange={(p) => setPage(p)}

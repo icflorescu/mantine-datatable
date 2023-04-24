@@ -1,5 +1,5 @@
 import { createStyles } from '@mantine/core';
-import { DataTable } from 'mantine-datatable';
+import { DataTable, uniqBy } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
 import companies from '~/data/companies.json';
 
@@ -13,6 +13,11 @@ const useStyles = createStyles((theme) => ({
   },
   header: {
     fontStyle: 'italic',
+    '&& th': { color: theme.colors.red[6] },
+  },
+  footer: {
+    fontStyle: 'italic',
+    '&& th': { color: theme.colors.red[6] },
   },
   pagination: {
     color: theme.colors.orange[6],
@@ -43,11 +48,17 @@ export default function AdditionalStylingExampleWithClassNames() {
       classNames={classes}
       // example-skip
       columns={[
-        { accessor: 'name' },
-        { accessor: 'missionStatement', width: 150 },
+        { accessor: 'name', footer: `${companies.length} companies` },
+        {
+          accessor: 'missionStatement',
+          width: 150,
+          footer: `Avg. chars: ${
+            companies.map((c) => c.missionStatement.length).reduce((acc, len) => acc + len) / companies.length
+          }`,
+        },
         { accessor: 'streetAddress' },
         { accessor: 'city' },
-        { accessor: 'state' },
+        { accessor: 'state', footer: `${uniqBy(companies, (c) => c.state).length} states` },
       ]}
       records={records}
       totalRecords={companies.length}
