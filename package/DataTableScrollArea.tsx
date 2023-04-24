@@ -23,7 +23,6 @@ const useStyles = createStyles((theme) => {
     },
     topShadow: {
       zIndex: 2,
-      top: 0,
       left: 0,
       right: 0,
       height: theme.spacing.sm,
@@ -64,7 +63,6 @@ const useStyles = createStyles((theme) => {
       zIndex: 2,
       left: 0,
       right: 0,
-      bottom: 0,
       height: theme.spacing.sm,
       background: `linear-gradient(${theme.fn.rgba(theme.black, 0)}, ${theme.fn.rgba(
         theme.black,
@@ -83,6 +81,7 @@ type DataTableScrollAreaProps = {
   rightShadowVisible: boolean;
   bottomShadowVisible: boolean;
   headerHeight: number;
+  footerHeight: number;
   onScrollPositionChange: () => void;
   viewportRef: Ref<HTMLDivElement>;
   children: ReactNode;
@@ -94,16 +93,18 @@ export default function DataTableScrollArea({
   rightShadowVisible,
   bottomShadowVisible,
   headerHeight,
+  footerHeight,
   onScrollPositionChange,
   children,
   viewportRef,
 }: DataTableScrollAreaProps) {
+  const bottom = footerHeight ? footerHeight - 1 : 0;
   const { cx, classes } = useStyles();
   return (
     <ScrollArea
       viewportRef={viewportRef}
       classNames={{ root: classes.root, scrollbar: classes.scrollbar, thumb: classes.thumb, corner: classes.corner }}
-      styles={{ scrollbar: { marginTop: headerHeight } }}
+      styles={{ scrollbar: { marginTop: headerHeight, marginBottom: bottom } }}
       onScrollPositionChange={onScrollPositionChange}
     >
       {children}
@@ -113,7 +114,10 @@ export default function DataTableScrollArea({
       />
       <div className={cx(classes.shadow, classes.leftShadow, { [classes.shadowVisible]: leftShadowVisible })} />
       <div className={cx(classes.shadow, classes.rightShadow, { [classes.shadowVisible]: rightShadowVisible })} />
-      <div className={cx(classes.shadow, classes.bottomShadow, { [classes.shadowVisible]: bottomShadowVisible })} />
+      <Box
+        className={cx(classes.shadow, classes.bottomShadow, { [classes.shadowVisible]: bottomShadowVisible })}
+        sx={{ bottom }}
+      />
     </ScrollArea>
   );
 }

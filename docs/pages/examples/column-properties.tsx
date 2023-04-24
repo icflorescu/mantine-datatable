@@ -8,22 +8,27 @@ import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import ColumnPropertiesExample from '~/examples/ColumnPropertiesExample';
-import ColumnPropertiesExampleStylingCells from '~/examples/ColumnPropertiesExampleStylingCells';
+import ColumnPropertiesExampleStyling from '~/examples/ColumnPropertiesExampleStyling';
+import ColumnPropertiesExampleWithFooter from '~/examples/ColumnPropertiesExampleWithFooter';
 import allPromiseProps from '~/lib/allPromiseProps';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/column-properties';
 
 export const getStaticProps: GetStaticProps<{
-  code: Record<'column-properties' | 'column-properties-data' | 'column-properties-styling-cells', string>;
+  code: Record<
+    'column-properties' | 'column-properties-data' | 'column-properties-with-footer' | 'column-properties-styling',
+    string
+  >;
 }> = async () => ({
   props: {
     code: await allPromiseProps({
       'column-properties': readCodeExample('examples/ColumnPropertiesExample.tsx') as Promise<string>,
       'column-properties-data': readCodeExample('data/index.ts') as Promise<string>,
-      'column-properties-styling-cells': readCodeExample(
-        'examples/ColumnPropertiesExampleStylingCells.tsx'
+      'column-properties-with-footer': readCodeExample(
+        'examples/ColumnPropertiesExampleWithFooter.tsx'
       ) as Promise<string>,
+      'column-properties-styling': readCodeExample('examples/ColumnPropertiesExampleStyling.tsx') as Promise<string>,
     }),
   },
 });
@@ -101,28 +106,26 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       />
       <PageText>The code above will produce the following result:</PageText>
       <ColumnPropertiesExample />
-      <PageSubtitle value="Styling column titles and cells" />
+      <PageSubtitle value="Column footers" />
+      <PageText>
+        The <Code>DataTable</Code> component will display a footer row at the bottom of the table if you specify a{' '}
+        <Code>footer</Code> property for at least one column:
+      </PageText>
+      <CodeBlock language="typescript" content={code['column-properties-with-footer']} />
+      <PageText>The code above will produce the following result:</PageText>
+      <ColumnPropertiesExampleWithFooter />
+      <PageSubtitle value="Styling column titles, cells and footers" />
       <PageText>
         In addition, each column can be further customized by specifying the following styling properties:
         <ul>
           <li>
-            <Code>titleClassName</Code> (it may be necessary to increase selector specificity to override the default
-            styling; see{' '}
-            <ExternalLink to="https://stackoverflow.com/questions/62660480/is-there-a-way-to-increase-specificity-by-adding-the-element-with-emotion">
-              here
-            </ExternalLink>
-            )
+            <Code>titleClassName</Code> *
           </li>
           <li>
             <Code>titleStyle</Code>
           </li>
           <li>
-            <Code>titleSx</Code> (it may be necessary to increase selector specificity to override the default styling;
-            see{' '}
-            <ExternalLink to="https://stackoverflow.com/questions/62660480/is-there-a-way-to-increase-specificity-by-adding-the-element-with-emotion">
-              here
-            </ExternalLink>
-            )
+            <Code>titleSx</Code> *
           </li>
           <li>
             <Code>cellsClassName</Code>
@@ -133,10 +136,28 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           <li>
             <Code>cellsSx</Code>
           </li>
+          <li>
+            <Code>footerClassName</Code> *
+          </li>
+          <li>
+            <Code>footerStyle</Code>
+          </li>
+          <li>
+            <Code>footerSx</Code> *
+          </li>
         </ul>
       </PageText>
-      <CodeBlock language="typescript" content={code['column-properties-styling-cells']} />
-      <ColumnPropertiesExampleStylingCells />
+      <PageText info>
+        When styling column titles and footers with class names or <Code>Sx</Code>, you may need to increase selector
+        specificity to override the default styling. See{' '}
+        <ExternalLink to="https://stackoverflow.com/questions/62660480/is-there-a-way-to-increase-specificity-by-adding-the-element-with-emotion">
+          this StackOverflow question
+        </ExternalLink>{' '}
+        for more information.
+      </PageText>
+      <CodeBlock language="typescript" content={code['column-properties-styling']} />
+      <PageText>The code above will produce the following result:</PageText>
+      <ColumnPropertiesExampleStyling />
       <PageNavigation of={PATH} />
     </Container>
   );

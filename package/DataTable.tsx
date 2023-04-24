@@ -10,6 +10,7 @@ import {
 } from 'react';
 import DataTableEmptyRow from './DataTableEmptyRow';
 import DataTableEmptyState from './DataTableEmptyState';
+import DataTableFooter from './DataTableFooter';
 import DataTableHeader from './DataTableHeader';
 import DataTableLoader from './DataTableLoader';
 import DataTablePagination from './DataTablePagination';
@@ -186,6 +187,7 @@ export default function DataTable<T>({
 
   const { ref: headerRef, height: headerHeight } = useElementSize<HTMLTableSectionElement>();
   const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementSize<HTMLTableElement>();
+  const { ref: footerRef, height: footerHeight } = useElementSize<HTMLTableSectionElement>();
   const { ref: paginationRef, height: paginationHeight } = useElementSize<HTMLDivElement>();
 
   const [scrolledToTop, setScrolledToTop] = useState(true);
@@ -257,6 +259,7 @@ export default function DataTable<T>({
 
   const recordsLength = records?.length;
   const recordIds = records?.map((record) => getValueAtPath(record, idAccessor));
+  const selectionColumnVisible = !!selectedRecords;
   const selectedRecordIds = selectedRecords?.map((record) => getValueAtPath(record, idAccessor));
   const hasRecordsAndSelectedRecords =
     recordIds !== undefined && selectedRecordIds !== undefined && selectedRecordIds.length > 0;
@@ -285,7 +288,8 @@ export default function DataTable<T>({
   ]);
 
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
-  const selectionVisibleAndNotScrolledToLeft = !!selectedRecords && !scrolledToLeft;
+  const selectionVisibleAndNotScrolledToLeft = selectionColumnVisible && !scrolledToLeft;
+
   const { cx, classes, theme } = useStyles({ borderColor, rowBorderColor });
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
   const styleProperties = typeof styles === 'function' ? styles(theme, EMPTY_OBJECT, EMPTY_OBJECT) : styles;
@@ -312,6 +316,7 @@ export default function DataTable<T>({
         rightShadowVisible={!scrolledToRight}
         bottomShadowVisible={!scrolledToBottom}
         headerHeight={headerHeight}
+        footerHeight={footerHeight}
         onScrollPositionChange={handleScrollPositionChange}
       >
         <Table
@@ -336,7 +341,7 @@ export default function DataTable<T>({
               sortStatus={sortStatus}
               sortIcons={sortIcons}
               onSortStatusChange={onSortStatusChange}
-              selectionVisible={!!selectedRecords}
+              selectionVisible={selectionColumnVisible}
               selectionChecked={allSelectableRecordsSelected}
               selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
               onSelectionChange={handleHeaderSelectionChange}
@@ -421,7 +426,7 @@ export default function DataTable<T>({
                     recordIndex={recordIndex}
                     columns={columns}
                     defaultColumnRender={defaultColumnRender}
-                    selectionVisible={!!selectedRecords}
+                    selectionVisible={selectionColumnVisible}
                     selectionChecked={isSelected}
                     onSelectionChange={handleSelectionChange}
                     isRecordSelectable={isRecordSelectable}
@@ -445,6 +450,18 @@ export default function DataTable<T>({
               <DataTableEmptyRow />
             )}
           </tbody>
+          {columns.some((column) => column.footer) && (
+            <DataTableFooter<T>
+              ref={footerRef}
+              className={classNames?.footer}
+              style={styleProperties?.footer}
+              borderColor={borderColor}
+              columns={columns}
+              selectionVisible={selectionColumnVisible}
+              leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
+              scrollDiff={tableHeight - scrollViewportHeight}
+            />
+          )}
         </Table>
       </DataTableScrollArea>
       {page && (

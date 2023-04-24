@@ -67,7 +67,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <AdditionalStylingExampleWithClassName />
       <PageSubtitle value="With inline style" />
       <PageText>
-        You can provide an <Code>style</Code> object that will target the <Code>Mantine DataTable</Code> component root:
+        You can provide a <Code>style</Code> object that will target the <Code>Mantine DataTable</Code> component root:
       </PageText>
       <CodeBlock language="typescript" content={code['with-style-object']} />
       <AdditionalStylingExampleWithStyleObject />
@@ -87,14 +87,23 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <CodeBlock language="typescript" content={code['with-sx-function']} />
       <AdditionalStylingExampleWithSxFunction />
       <PageSubtitle value="With multiple class names" />
+      <PageText info>
+        When styling with class names, you may need to increase selector specificity to override the default styling.
+        <br />
+        See{' '}
+        <ExternalLink to="https://stackoverflow.com/questions/62660480/is-there-a-way-to-increase-specificity-by-adding-the-element-with-emotion">
+          this StackOverflow question
+        </ExternalLink>{' '}
+        for more information.
+      </PageText>
       <PageText>
-        You can specifically target the component root, its header and/or its pagination footer with different{' '}
+        You can specifically target the component root, its header, footer and/or its pagination with different{' '}
         <Code>classNames</Code>:
       </PageText>
       <CodeBlock language="typescript" content={code['with-class-names']} />
       <AdditionalStylingExampleWithClassNames />
       <PageText>
-        You can specifically target the component root, its header and/or its pagination footer with a{' '}
+        You can specifically target the component root, its header, footer and/or its pagination with a{' '}
         <Code>styles</Code> property:
       </PageText>
       <CodeBlock language="typescript" content={code['with-styles-object']} />

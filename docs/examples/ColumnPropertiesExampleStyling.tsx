@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 import dayjs from 'dayjs';
-import { DataTable } from 'mantine-datatable';
+import { DataTable, uniqBy } from 'mantine-datatable';
 import { employees } from '~/data';
 
 const records = employees.slice(0, 10);
@@ -8,14 +8,18 @@ const records = employees.slice(0, 10);
 const useStyles = createStyles((theme) => ({
   idColumnCells: { fontWeight: 700 },
   birthdayColumnTitle: { '&&': { color: theme.colors.blue[6] } },
-  birthdayInDecember: {
+  birthdayInApril: {
     fontWeight: 700,
     color: theme.colors.blue[6],
     background: theme.fn.rgba(theme.colors.yellow[6], 0.25),
   },
+  ageFooter: {
+    '&&': { color: theme.colors.red[6] },
+    background: theme.fn.rgba(theme.colors.yellow[6], 0.25),
+  },
 }));
 
-export default function ColumnPropertiesExampleStylingCells() {
+export default function ColumnPropertiesExampleStyling() {
   const { classes, cx } = useStyles();
 
   return (
@@ -39,10 +43,11 @@ export default function ColumnPropertiesExampleStylingCells() {
           title: 'Full name',
           width: 160,
           // style cells with a CSS properties object
-          cellsStyle: {
-            fontStyle: 'italic',
-          },
+          cellsStyle: { fontStyle: 'italic' },
           render: ({ firstName, lastName }) => `${firstName} ${lastName}`,
+          footer: `${records.length} employees`,
+          // style footer with a CSS properties object
+          footerStyle: { fontStyle: 'italic' },
         },
         { accessor: 'email' },
         {
@@ -61,6 +66,9 @@ export default function ColumnPropertiesExampleStylingCells() {
           title: 'Company',
           width: 150,
           ellipsis: true,
+          footer: `${uniqBy(records, (record) => record.department.company.name).length} companies`,
+          // style footer with an Sx object
+          footerSx: (theme) => ({ '&&': { color: theme.colors.blue[6] } }),
         },
         {
           accessor: 'birthDate',
@@ -69,13 +77,12 @@ export default function ColumnPropertiesExampleStylingCells() {
           // style title with a custom class name
           titleClassName: classes.birthdayColumnTitle,
           // style cells with a class name depending on current record
-          cellsClassName: ({ birthDate }) =>
-            cx({ [classes.birthdayInDecember]: dayjs(birthDate).format('MM') === '04' }),
+          cellsClassName: ({ birthDate }) => cx({ [classes.birthdayInApril]: dayjs(birthDate).format('MM') === '04' }),
           render: ({ birthDate }) => dayjs(birthDate).format('MMM D'),
         },
         {
           accessor: 'age',
-          width: 60,
+          width: 80,
           textAlignment: 'right',
           // style title with a CSS properties object
           titleStyle: { fontStyle: 'italic' },
@@ -89,6 +96,10 @@ export default function ColumnPropertiesExampleStylingCells() {
                 }
               : undefined,
           render: ({ birthDate }) => dayjs().diff(birthDate, 'years'),
+          footer: `Avg: ${Math.round(
+            records.map((record) => dayjs().diff(record.birthDate, 'years')).reduce((a, b) => a + b, 0) / records.length
+          )}`,
+          footerClassName: classes.ageFooter,
         },
       ]}
     />

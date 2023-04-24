@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "2.4.8",
+  "version": "2.4.9",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -33,7 +33,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.194",
     "@types/mixpanel-browser": "^2.38.1",
-    "@types/node": "^18.15.13",
+    "@types/node": "^18.16.0",
     "@types/react": "^18.0.38",
     "mixpanel-browser": "^2.46.0",
     "typescript": "^5.0.4"

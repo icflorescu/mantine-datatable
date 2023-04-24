@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.9 (2023-04-24)
+
+- Implement column footers (issue #252)
+
 ## 2.4.7 (2023-04-21)
 
 - Internal refactoring of the pagination component
