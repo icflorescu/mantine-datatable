@@ -45,8 +45,8 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@mantine/core": "^6.0.8",
-    "@mantine/hooks": "^6.0.8",
+    "@mantine/core": "^6.0.9",
+    "@mantine/hooks": "^6.0.9",
     "@tabler/icons-react": "^2.17.0",
     "@types/react": "^18.0.38",
     "@types/react-dom": "^18.0.11",
@@ -55,8 +55,8 @@
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "@mantine/core": "^6.0.8",
-    "@mantine/hooks": "^6.0.8",
+    "@mantine/core": "^6.0.9",
+    "@mantine/hooks": "^6.0.9",
     "react": "^18.2.0"
   }
 }
