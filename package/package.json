@@ -28,6 +28,10 @@
     "email": "ionut.florescu@gmail.com",
     "url": "https://github.com/icflorescu"
   },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/icflorescu"
+  },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
