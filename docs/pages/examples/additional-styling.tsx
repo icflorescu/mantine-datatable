@@ -102,6 +102,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <CodeBlock language="typescript" content={code['with-class-names']} />
       <AdditionalStylingExampleWithClassNames />
+      <PageSubtitle value="With styles property" />
       <PageText>
         You can specifically target the component root, its header, footer and/or its pagination with a{' '}
         <Code>styles</Code> property:
