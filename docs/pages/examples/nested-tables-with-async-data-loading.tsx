@@ -59,8 +59,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       />
       <PageText>
         Head over to{' '}
-        <InternalLink to="/examples/nested-tables-with-async-loading-and-sorting">the next example</InternalLink> to see
-        how you could combine this behavior with sorting.
+        <InternalLink to="/examples/nested-tables-with-async-data-loading-and-sorting">the next example</InternalLink>{' '}
+        to see how you could combine this behavior with sorting.
       </PageText>
       <PageNavigation of={PATH} />
     </Container>
