@@ -8,6 +8,7 @@ const nextConfig = (phase) => {
    * @type {import('next').NextConfig}
    */
   const config = {
+    output: 'export',
     reactStrictMode: true,
     transpilePackages: ['mantine-datatable'],
     env: {

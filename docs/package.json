@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_NO_WARNINGS=1 next dev",
-    "build": "NODE_NO_WARNINGS=1 next build && next-sitemap && NODE_NO_WARNINGS=1 next export",
+    "build": "next-sitemap && NODE_NO_WARNINGS=1 next build",
     "lint": "eslint . --ext=.ts,.tsx && tsc --noEmit"
   },
   "dependencies": {
