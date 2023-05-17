@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.5.0 (2023-05-17)
+
+- Slight change in the default sorting behavior (issue #295)
+
 ## 2.4.9 (2023-04-24)
 
 - Implement column footers (issue #252)
