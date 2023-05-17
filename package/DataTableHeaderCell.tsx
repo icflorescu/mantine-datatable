@@ -73,7 +73,12 @@ export default function DataTableHeaderCell<T>({
       ? () => {
           onSortStatusChange({
             columnAccessor: accessor,
-            direction: sortStatus?.direction === 'asc' ? 'desc' : 'asc',
+            direction:
+              sortStatus?.columnAccessor === accessor
+                ? sortStatus.direction === 'asc'
+                  ? 'desc'
+                  : 'asc'
+                : sortStatus?.direction ?? 'asc',
           });
         }
       : undefined;
