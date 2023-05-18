@@ -32,6 +32,16 @@ export type DataTableColumn<T> = {
   sortable?: boolean;
 
   /**
+   * If assigned, 
+   */
+  filter?: ReactNode | ((filterProps: { close: () => void }) => ReactNode);
+  
+  /**
+   * If true, filter icon will be styled differently to indicate it is in effect.
+   */
+  filtering?: boolean;
+
+  /**
    * Desired column width
    */
   width?: string | number;
