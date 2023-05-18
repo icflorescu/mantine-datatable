@@ -1,69 +1,99 @@
-import { Box, Checkbox, Grid, TextInput } from '@mantine/core';
+import { Box, Button, TextInput, MultiSelect, Stack, Group } from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
+import { DatePicker, type DatesRangeValue } from "@mantine/dates";
 import { IconSearch } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { DataTable } from 'mantine-datatable';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { employees } from '~/data';
 
 const initialRecords = employees.slice(0, 100);
 
 export default function SearchingAndFilteringExample() {
   const [records, setRecords] = useState(initialRecords);
+  const departments = useMemo(() => {
+    const departments = new Set(employees.map(e => e.department.name));
+    return [...departments];
+  }, [employees]);
 
   const [query, setQuery] = useState('');
-  const [veteransOnly, setVeteransOnly] = useState(false);
+  const [selectedDepartments, setSelectedDepartments] = useState<string[]>([]);
+  const [birthdaySearchRange, setBirthdaySearchRange] = useState<DatesRangeValue>();
   const [debouncedQuery] = useDebouncedValue(query, 200);
 
   useEffect(() => {
-    const now = dayjs();
     setRecords(
       initialRecords.filter(({ firstName, lastName, department, birthDate }) => {
-        if (veteransOnly && now.diff(birthDate, 'years') < 40) {
-          return false;
-        }
         if (
           debouncedQuery !== '' &&
-          !`${firstName} ${lastName} ${department.name} ${department.company.name}`
+          !`${firstName} ${lastName}`
             .toLowerCase()
             .includes(debouncedQuery.trim().toLowerCase())
         ) {
           return false;
         }
+
+        if (
+          birthdaySearchRange 
+          && birthdaySearchRange[0]
+          && birthdaySearchRange[1]
+          && (dayjs(birthdaySearchRange[0]).isAfter(birthDate, 'day') || dayjs(birthdaySearchRange[1]).isBefore(birthDate, 'day'))) {
+          return false;
+        }
+
+        if (selectedDepartments.length && !selectedDepartments.some(d => d === department.name)) {
+          return false;
+        }
         return true;
       })
     );
-  }, [debouncedQuery, veteransOnly]);
+  }, [debouncedQuery, birthdaySearchRange, selectedDepartments]);
 
   return (
     <>
-      <Grid align="center" mb="md">
-        <Grid.Col xs={8} sm={9}>
-          <TextInput
-            sx={{ flexBasis: '60%' }}
-            placeholder="Search employees..."
-            icon={<IconSearch size={16} />}
-            value={query}
-            onChange={(e) => setQuery(e.currentTarget.value)}
-          />
-        </Grid.Col>
-        <Grid.Col xs={4} sm={3}>
-          <Checkbox
-            label="Over 40 years old"
-            checked={veteransOnly}
-            onChange={(e) => setVeteransOnly(e.currentTarget.checked)}
-          />
-        </Grid.Col>
-      </Grid>
       <Box sx={{ height: 300 }}>
         <DataTable
           withBorder
           records={records}
           columns={[
-            { accessor: 'name', render: ({ firstName, lastName }) => `${firstName} ${lastName}` },
-            { accessor: 'department.name' },
+            { 
+              accessor: 'name', 
+              render: ({ firstName, lastName }) => `${firstName} ${lastName}`, 
+              filter: <TextInput
+                  label="Employees"
+                  description="Show employees whose names include the specified text"
+                  placeholder="Search employees..."
+                  icon={<IconSearch size={16} />}
+                  value={query}
+                  onChange={(e) => setQuery(e.currentTarget.value)}
+                />,
+              filtering: query !== '',
+            },
+            { 
+              accessor: 'department.name',
+              filter: <MultiSelect 
+                label="Departments " 
+                description="Show all employees working at the selected departments" 
+                data={departments} 
+                value={selectedDepartments} 
+                placeholder="Search departments…"
+                onChange={setSelectedDepartments}
+                icon={<IconSearch size={16} />}
+                clearable 
+                searchable 
+              />,
+              filtering: selectedDepartments.length > 0
+            },
             { accessor: 'department.company.name' },
-            { accessor: 'birthDate', render: ({ birthDate }) => dayjs(birthDate).format('MMM DD YYYY') },
+            { 
+              accessor: 'birthDate', 
+              render: ({ birthDate }) => dayjs(birthDate).format('MMM DD YYYY'),
+              filter: ({ close }) => <Stack>
+                <DatePicker maxDate={new Date()} type="range" value={birthdaySearchRange} onChange={setBirthdaySearchRange} /> 
+                  <Button disabled={!birthdaySearchRange} color='red' onClick={() => { setBirthdaySearchRange(undefined); close()}}>Reset</Button>
+              </Stack>,
+              filtering: Boolean(birthdaySearchRange)
+            },
             { accessor: 'age', render: ({ birthDate }) => dayjs().diff(birthDate, 'y') },
           ]}
         />
