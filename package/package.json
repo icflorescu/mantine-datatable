@@ -50,7 +50,6 @@
   },
   "devDependencies": {
     "@mantine/core": "^6.0.11",
-    "@mantine/dates": "^6.0.11",
     "@mantine/hooks": "^6.0.11",
     "@tabler/icons-react": "^2.19.0",
     "@types/react": "^18.2.6",
