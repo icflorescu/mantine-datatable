@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.5.1 (2023-05-22)
+
+- Implement filtering support, thanks to @MatthijsMud (PR #297)
+
 ## 2.5.0 (2023-05-17)
 
 - Slight change in the default sorting behavior (issue #295)
