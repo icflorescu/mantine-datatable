@@ -771,7 +771,7 @@
   dependencies:
     "@babel/plugin-transform-react-jsx" "^7.18.6"
 
-"@babel/plugin-transform-react-jsx@^7.18.6", "@babel/plugin-transform-react-jsx@^7.22.0":
+"@babel/plugin-transform-react-jsx@^7.18.6":
   version "7.22.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.22.0.tgz#5b187d73d43f726a332823012711fd3f3391965c"
   integrity sha512-Li7gdm7eGZJidME4KlXmzQdnuUwE4jhPnICgGpWN56W7GWhmCQ2LmDepyZX4zBsoSNWP9bqDcJo5wQFndcAd9Q==
@@ -781,6 +781,17 @@
     "@babel/helper-plugin-utils" "^7.21.5"
     "@babel/plugin-syntax-jsx" "^7.21.4"
     "@babel/types" "^7.22.0"
+
+"@babel/plugin-transform-react-jsx@^7.22.3":
+  version "7.22.3"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.22.3.tgz#5a1f380df3703ba92eb1a930a539c6d88836f690"
+  integrity sha512-JEulRWG2f04a7L8VWaOngWiK6p+JOSpB+DAtwfJgOaej1qdbNxqtK7MwTBHjUA10NeFcszlFNqCdbRcirzh2uQ==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.18.6"
+    "@babel/helper-module-imports" "^7.21.4"
+    "@babel/helper-plugin-utils" "^7.21.5"
+    "@babel/plugin-syntax-jsx" "^7.21.4"
+    "@babel/types" "^7.22.3"
 
 "@babel/plugin-transform-react-pure-annotations@^7.18.6":
   version "7.18.6"
@@ -978,15 +989,15 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-react@^7.22.0":
-  version "7.22.0"
-  resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.22.0.tgz#29848f0a9c17cadaf93c3ad3a4bc44c15b2f9f63"
-  integrity sha512-C3U/lfsKJv3eQj0AMoXQTPqGgYXaqiJRLD+FPIKpUv7uppWJAifMCn4CrclCCIW0NH0jY1IXSNYgdKZO0gUEzQ==
+"@babel/preset-react@^7.22.3":
+  version "7.22.3"
+  resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.22.3.tgz#2ec7f91d0c924fa2ea0c7cfbbf690bc62b79cd84"
+  integrity sha512-lxDz1mnZ9polqClBCVBjIVUypoB4qV3/tZUDb/IlYbW1kiiLaXaX+bInbRjl+lNQ/iUZraQ3+S8daEmoELMWug==
   dependencies:
     "@babel/helper-plugin-utils" "^7.21.5"
     "@babel/helper-validator-option" "^7.21.0"
     "@babel/plugin-transform-react-display-name" "^7.18.6"
-    "@babel/plugin-transform-react-jsx" "^7.22.0"
+    "@babel/plugin-transform-react-jsx" "^7.22.3"
     "@babel/plugin-transform-react-jsx-development" "^7.18.6"
     "@babel/plugin-transform-react-pure-annotations" "^7.18.6"
 
@@ -1042,6 +1053,15 @@
   version "7.22.0"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.22.0.tgz#b7383f76a5fedf967c57c1f940066fb31ca3e97a"
   integrity sha512-NtXlm3f6cNWIv003cETdlz9sss0VMNtplyatFohxWPz90AbwuhCbHbQopkGis6bG1vOunDLN0FF/4Uv5i8LFZQ==
+  dependencies:
+    "@babel/helper-string-parser" "^7.21.5"
+    "@babel/helper-validator-identifier" "^7.19.1"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@^7.22.3":
+  version "7.22.4"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.22.4.tgz#56a2653ae7e7591365dabf20b76295410684c071"
+  integrity sha512-Tx9x3UBHTTsMSW85WB2kphxYQVvrZ/t1FxD88IpSgIjiUJlCm9z+xWIDwyo1vffTwSqteqyznB8ZE9vYYk16zA==
   dependencies:
     "@babel/helper-string-parser" "^7.21.5"
     "@babel/helper-validator-identifier" "^7.19.1"
@@ -1297,10 +1317,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.41.0.tgz#080321c3b68253522f7646b55b577dd99d2950b3"
   integrity sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==
 
-"@faker-js/faker@^8.0.1":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.0.1.tgz#2157068931aaab555eda5ff87f50330aeeb6153a"
-  integrity sha512-kbh5MenpTN9U0B4QcOI1NoTPlZHniSYQ3BHbhAnPjJGAmmFqxoxTE4sGdpy7ZOO9038DPGCuhXyMkjOr05uVwA==
+"@faker-js/faker@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.0.2.tgz#bab698c5d3da9c52744e966e0e3eedb6c8b05c37"
+  integrity sha512-Uo3pGspElQW91PCvKSIAXoEgAUlRnH29sX2/p89kg7sP1m2PzCufHINd0FhTXQf6DYGiUlVncdSPa2F9wxed2A==
 
 "@floating-ui/core@^1.2.6":
   version "1.2.6"
@@ -1954,17 +1974,17 @@
   resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.20.0.tgz#42a11bb91b9d347fdf6b296274cf68998122bb10"
   integrity sha512-BsUEJoqREs8bqcrf5HfJBq6/rDvsRI3h+T+0X1o7i8LBHonsH0iAngcyL0I82YKoSy9NiVDvM3LV63zDP0nPYQ==
 
-"@tanstack/query-core@4.29.7":
-  version "4.29.7"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.29.7.tgz#9fe4587e23cb9566b937c518ffa44226041d388d"
-  integrity sha512-GXG4b5hV2Loir+h2G+RXhJdoZhJLnrBWsuLB2r0qBRyhWuXq9w/dWxzvpP89H0UARlH6Mr9DiVj4SMtpkF/aUA==
+"@tanstack/query-core@4.29.11":
+  version "4.29.11"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.29.11.tgz#fa338f7d6897c6be5de6d8dabd603d9b78ee48c7"
+  integrity sha512-8C+hF6SFAb/TlFZyS9FItgNwrw4PMa7YeX+KQYe2ZAiEz6uzg6yIr+QBzPkUwZ/L0bXvGd1sufTm3wotoz+GwQ==
 
-"@tanstack/react-query@^4.29.7":
-  version "4.29.7"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.29.7.tgz#772996905a81ca64172582891c5a82e88dbafccd"
-  integrity sha512-ijBWEzAIo09fB1yd22slRZzprrZ5zMdWYzBnCg5qiXuFbH78uGN1qtGz8+Ed4MuhaPaYSD+hykn+QEKtQviEtg==
+"@tanstack/react-query@^4.29.12":
+  version "4.29.12"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.29.12.tgz#de111cf1d6c389b86acacfaf972302914cfa1208"
+  integrity sha512-zhcN6+zF6cxprxhTHQajHGlvxgK8npnp9uLe9yaWhGc6sYcPWXzyO4raL4HomUzQOPzu3jLvkriJQ7BOrDM8vA==
   dependencies:
-    "@tanstack/query-core" "4.29.7"
+    "@tanstack/query-core" "4.29.11"
     use-sync-external-store "^1.2.0"
 
 "@testing-library/dom@^9.0.0":
@@ -2142,10 +2162,15 @@
   resolved "https://registry.yarnpkg.com/@types/mixpanel-browser/-/mixpanel-browser-2.38.1.tgz#914cc726194cc0358129b6d84657f078e47f7697"
   integrity sha512-XzQbwgiOPsFXUQnjz3vSwcwrvJDbQ35bCiwa/1VXGrHvU1ti9+eqO1GY91DShzkEzKkkEEkxfNshS5dbBZqd7w==
 
-"@types/node@*", "@types/node@^20.2.4":
+"@types/node@*":
   version "20.2.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.2.4.tgz#e6c3345f7ed9c6df41fdc288a94e2633167bc15d"
   integrity sha512-ni5f8Xlf4PwnT/Z3f0HURc3ZSw8UyrqMqmM3L5ysa7VjHu8c3FOmIo1nKCcLrV/OAmtf3N4kFna/aJqxsfEtnA==
+
+"@types/node@^20.2.5":
+  version "20.2.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.2.5.tgz#26d295f3570323b2837d322180dfbf1ba156fefb"
+  integrity sha512-JJulVEQXmiY9Px5axXHeYGLSjhkZEnD+MDPDGbCbIAbMslkKwmygtZFy1X6s/075Yo94sf8GuSlFfPzysQrWZQ==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
