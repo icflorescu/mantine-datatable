@@ -32,18 +32,18 @@ export type DataTableColumn<T> = {
   sortable?: boolean;
 
   /**
-   * Optional node which provides the user with filtering options.
+   * Optional node providing the user with filtering options.
    * If present, a filter button will be added to the column's header. Upon clicking that button,
-   * a pop-over will be opened which shows the provided node.
-   * 
-   * Alternatively a method returning a node can be provided. It is provided props with a `close`
+   * a pop-over showing the provided node will be opened.
+   *
+   * Alternatively, a function returning a node can be provided. The function receives props with a `close`
    * method which allows programatically closing the pop-over.
-   * 
+   *
    * ```tsx
    * // …
    * columns={[
-   *   { 
-   *     accessor: 'name', 
+   *   {
+   *     accessor: 'name',
    *     filter: ({ close }) => {
    *       return <Stack>
    *         <Button onClick={() => { setFilter(undefined); close(); }}>Reset</Button>
@@ -53,12 +53,12 @@ export type DataTableColumn<T> = {
    * ]}
    * // …
    * ```
-   * 
+   *
    * Note: this property only takes care of rendering the node which provides the filtering options.
-   * It is assumed that the actual filtering is performed somewhere in user-land. 
+   * It is assumed that the actual filtering is performed somewhere in user code.
    */
   filter?: ReactNode | ((filterProps: { close: () => void }) => ReactNode);
-  
+
   /**
    * If true, filter icon will be styled differently to indicate the filter is in effect.
    */

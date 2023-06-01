@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.5.5 (2023-06-01)
+
+- Improve filtering support documentation
+
 ## 2.5.1 (2023-05-22)
 
 - Implement filtering support, thanks to @MatthijsMud (PR #297)
