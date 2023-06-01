@@ -1,6 +1,7 @@
 import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
+import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
@@ -21,8 +22,13 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <SearchingAndFilteringExample />
       <PageText>
         Adjust the array of <Code>records</Code> you’re feeding to <Code>Mantine DataTable</Code> based on your own
-        logic in order to perform searching and filtering. Here’s a possible (rather naive) implementation:
+        logic in order to perform searching and filtering.
       </PageText>
+      <PageText>
+        In order to support column-based filtering you can use the <Code>filter</Code> and <Code>filtering</Code>{' '}
+        <InternalLink to="/examples/column-properties">column properties</InternalLink>.
+      </PageText>
+      <PageText>Here’s a possible (rather naive) implementation:</PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText info>
         <PageSubtitle mt={0} mb="xs" value="Why no built-in “Excel-like” searching and filtering support?" />
