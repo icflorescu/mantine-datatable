@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -20,7 +20,7 @@
     "@mantine/next": "^6.0.13",
     "@mantine/notifications": "^6.0.13",
     "@mantine/prism": "^6.0.13",
-    "@tabler/icons-react": "^2.20.0",
+    "@tabler/icons-react": "^2.21.0",
     "@tanstack/react-query": "^4.29.12",
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
@@ -35,8 +35,8 @@
     "@types/lodash": "^4.14.195",
     "@types/mixpanel-browser": "^2.38.1",
     "@types/node": "^20.2.5",
-    "@types/react": "^18.2.7",
+    "@types/react": "^18.2.8",
     "mixpanel-browser": "^2.47.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
