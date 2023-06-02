@@ -1961,18 +1961,18 @@
   dependencies:
     tslib "^2.4.0"
 
-"@tabler/icons-react@^2.20.0":
-  version "2.20.0"
-  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-2.20.0.tgz#419ff7e494dc287a2aadc431bcfa84b1fc371bde"
-  integrity sha512-r2uC0Mi3ozHD2G+IYi0A0Iy2203dbQo5EAFxn055MyIhH7U2VNsvyopTqOj+AVedy7cqR86T9zhryRUGC78WZA==
+"@tabler/icons-react@^2.21.0":
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-2.21.0.tgz#66fd990c431c280114dc72dde7c7490c421aadc0"
+  integrity sha512-iW/Eqqb7gILb8w/BgzCLZ/8DFZxojgiu12BYJFVuWIblLysXTZ2FjahY7m0VQ41vsyfDFWKofn1uvIPCfa8yGQ==
   dependencies:
-    "@tabler/icons" "2.20.0"
+    "@tabler/icons" "2.21.0"
     prop-types "^15.7.2"
 
-"@tabler/icons@2.20.0":
-  version "2.20.0"
-  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.20.0.tgz#42a11bb91b9d347fdf6b296274cf68998122bb10"
-  integrity sha512-BsUEJoqREs8bqcrf5HfJBq6/rDvsRI3h+T+0X1o7i8LBHonsH0iAngcyL0I82YKoSy9NiVDvM3LV63zDP0nPYQ==
+"@tabler/icons@2.21.0":
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.21.0.tgz#fe120abcdcc3ca8ab9d439628c08086646c5c256"
+  integrity sha512-XKrTEHMX6XzCOwcOU8ZNA+Xqm51sI+0abn2jk1fyQUpWeFnGsOEiC+fpQ4EISc+v+U9jqgTSbh8bZ6JBuKU5sw==
 
 "@tanstack/query-core@4.29.11":
   version "4.29.11"
@@ -2202,10 +2202,19 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.2.7":
+"@types/react@*":
   version "18.2.7"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.7.tgz#dfb4518042a3117a045b8c222316f83414a783b3"
   integrity sha512-ojrXpSH2XFCmHm7Jy3q44nXDyN54+EYKP2lBhJ2bqfyPj6cIUW/FZW/Csdia34NQgq7KYcAlHi5184m4X88+yw==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^18.2.8":
+  version "18.2.8"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.8.tgz#a77dcffe4e9af148ca4aa8000c51a1e8ed99e2c8"
+  integrity sha512-lTyWUNrd8ntVkqycEEplasWy2OxNlShj3zqS0LuB1ENUGis5HodmhM7DtCoUGbxj3VW/WsGA0DUhpG6XrM7gPA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -6688,10 +6697,10 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
-typescript@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.4.tgz#b217fd20119bd61a94d4011274e0ab369058da3b"
-  integrity sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==
+typescript@^5.1.3:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.1.3.tgz#8d84219244a6b40b6fb2b33cc1c062f715b9e826"
+  integrity sha512-XH627E9vkeqhlZFQuL+UsyAXEnibT0kWR2FWONlr4sTjvxyJYnyefgrkyECLzM5NenmKzRAy2rR/OlYLA1HkZw==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
