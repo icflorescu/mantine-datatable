@@ -1,10 +1,10 @@
-import { Box, Center, createStyles, Group, ActionIcon, Popover, Slider, type MantineTheme, type Sx } from '@mantine/core';
+import { ActionIcon, Box, Center, Group, Popover, createStyles, type MantineTheme, type Sx } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconArrowsVertical, IconArrowUp, IconFilter } from '@tabler/icons-react';
+import { IconArrowUp, IconArrowsVertical, IconFilter } from '@tabler/icons-react';
 import type { CSSProperties, ReactNode } from 'react';
+import { type BaseSyntheticEvent } from 'react';
 import type { DataTableColumn, DataTableSortProps } from './types';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
-import { type BaseSyntheticEvent } from 'react';
 
 const useStyles = createStyles((theme) => ({
   sortableColumnHeader: {
@@ -52,19 +52,25 @@ type DataTableHeaderCellProps<T> = {
   onSortStatusChange: DataTableSortProps['onSortStatusChange'];
 } & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlignment' | 'width' | 'filter' | 'filtering'>;
 
-function Filter<T>({ children, isActive }: { children: DataTableColumn<T>['filter'], isActive: boolean }) {
-  const [isOpen, {close, toggle}] = useDisclosure(false);
+function Filter<T>({ children, isActive }: { children: DataTableColumn<T>['filter']; isActive: boolean }) {
+  const [isOpen, { close, toggle }] = useDisclosure(false);
 
-  return <Popover withArrow withinPortal shadow="md" opened={isOpen} onClose={close} trapFocus>
-    <Popover.Target>
-      <ActionIcon onClick={e => { e.preventDefault(); toggle(); }} variant={isActive ? 'default' : 'subtle'}>
-        <IconFilter size={14} />
-      </ActionIcon>
-    </Popover.Target>
-    <Popover.Dropdown>
-      {typeof children === 'function' ? children({ close }) : children}
-    </Popover.Dropdown>
-  </Popover>
+  return (
+    <Popover withArrow withinPortal shadow="md" opened={isOpen} onClose={close} trapFocus>
+      <Popover.Target>
+        <ActionIcon
+          onClick={(e) => {
+            e.preventDefault();
+            toggle();
+          }}
+          variant={isActive ? 'default' : 'subtle'}
+        >
+          <IconFilter size={14} />
+        </ActionIcon>
+      </Popover.Target>
+      <Popover.Dropdown>{typeof children === 'function' ? children({ close }) : children}</Popover.Dropdown>
+    </Popover>
+  );
 }
 
 export default function DataTableHeaderCell<T>({
@@ -81,7 +87,7 @@ export default function DataTableHeaderCell<T>({
   sortStatus,
   onSortStatusChange,
   filter,
-  filtering
+  filtering,
 }: DataTableHeaderCellProps<T>) {
   const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
@@ -90,7 +96,9 @@ export default function DataTableHeaderCell<T>({
   const sortAction =
     sortable && onSortStatusChange
       ? (e?: BaseSyntheticEvent) => {
-          if (e?.defaultPrevented) { return; }
+          if (e?.defaultPrevented) {
+            return;
+          }
           onSortStatusChange({
             columnAccessor: accessor,
             direction:
@@ -126,7 +134,7 @@ export default function DataTableHeaderCell<T>({
           {text}
         </Box>
         {sortable || sortStatus?.columnAccessor === accessor ? (
-            <>
+          <>
             {sortStatus?.columnAccessor === accessor ? (
               <Center
                 className={cx(classes.sortableColumnHeaderIcon, {
@@ -142,7 +150,7 @@ export default function DataTableHeaderCell<T>({
                 {sortIcons?.unsorted || <IconArrowsVertical size={14} />}
               </Center>
             )}
-            </>
+          </>
         ) : null}
         {filter ? <Filter isActive={!!filtering}>{filter}</Filter> : null}
       </Group>

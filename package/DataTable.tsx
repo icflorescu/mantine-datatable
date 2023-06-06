@@ -21,7 +21,7 @@ import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
 import { useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion } from './hooks';
 import type { DataTableProps } from './types';
-import { differenceBy, getValueAtPath, humanize, uniqBy, useIsomorphicLayoutEffect } from './utils';
+import { differenceBy, getRecordId, humanize, uniqBy, useIsomorphicLayoutEffect } from './utils';
 
 const EMPTY_OBJECT = {};
 
@@ -258,14 +258,14 @@ export default function DataTable<T>({
   );
 
   const recordsLength = records?.length;
-  const recordIds = records?.map((record) => getValueAtPath(record, idAccessor));
+  const recordIds = records?.map((record) => getRecordId(record, idAccessor));
   const selectionColumnVisible = !!selectedRecords;
-  const selectedRecordIds = selectedRecords?.map((record) => getValueAtPath(record, idAccessor));
+  const selectedRecordIds = selectedRecords?.map((record) => getRecordId(record, idAccessor));
   const hasRecordsAndSelectedRecords =
     recordIds !== undefined && selectedRecordIds !== undefined && selectedRecordIds.length > 0;
 
   const selectableRecords = isRecordSelectable ? records?.filter(isRecordSelectable) : records;
-  const selectableRecordIds = selectableRecords?.map((record) => getValueAtPath(record, idAccessor));
+  const selectableRecordIds = selectableRecords?.map((record) => getRecordId(record, idAccessor));
 
   const allSelectableRecordsSelected =
     hasRecordsAndSelectedRecords && selectableRecordIds!.every((id) => selectedRecordIds.includes(id));
@@ -275,8 +275,8 @@ export default function DataTable<T>({
   const handleHeaderSelectionChange = useCallback(() => {
     onSelectedRecordsChange?.(
       allSelectableRecordsSelected
-        ? selectedRecords.filter((record) => !selectableRecordIds!.includes(getValueAtPath(record, idAccessor)))
-        : uniqBy([...selectedRecords, ...selectableRecords!], (record) => getValueAtPath(record, idAccessor))
+        ? selectedRecords.filter((record) => !selectableRecordIds!.includes(getRecordId(record, idAccessor)))
+        : uniqBy([...selectedRecords, ...selectableRecords!], (record) => getRecordId(record, idAccessor))
     );
   }, [
     allSelectableRecordsSelected,
@@ -352,7 +352,7 @@ export default function DataTable<T>({
           <tbody ref={bodyRef}>
             {recordsLength ? (
               records.map((record, recordIndex) => {
-                const recordId = getValueAtPath(record, idAccessor);
+                const recordId = getRecordId(record, idAccessor);
                 const isSelected = selectedRecordIds?.includes(recordId) || false;
 
                 let showContextMenuOnClick = false;
@@ -385,14 +385,14 @@ export default function DataTable<T>({
                       );
                       onSelectedRecordsChange(
                         isSelected
-                          ? differenceBy(selectedRecords, targetRecords, (r) => getValueAtPath(r, idAccessor))
-                          : uniqBy([...selectedRecords, ...targetRecords], (r) => getValueAtPath(r, idAccessor))
+                          ? differenceBy(selectedRecords, targetRecords, (r) => getRecordId(r, idAccessor))
+                          : uniqBy([...selectedRecords, ...targetRecords], (r) => getRecordId(r, idAccessor))
                       );
                     } else {
                       onSelectedRecordsChange(
                         isSelected
-                          ? selectedRecords.filter((record) => getValueAtPath(record, idAccessor) !== recordId)
-                          : uniqBy([...selectedRecords, record], (record) => getValueAtPath(record, idAccessor))
+                          ? selectedRecords.filter((record) => getRecordId(record, idAccessor) !== recordId)
+                          : uniqBy([...selectedRecords, record], (record) => getRecordId(record, idAccessor))
                       );
                     }
                     setLastSelectionChangeIndex(recordIndex);
@@ -435,7 +435,7 @@ export default function DataTable<T>({
                     onCellClick={onCellClick}
                     onContextMenu={handleContextMenu}
                     contextMenuVisible={
-                      rowContextMenuInfo ? getValueAtPath(rowContextMenuInfo.record, idAccessor) === recordId : false
+                      rowContextMenuInfo ? getRecordId(rowContextMenuInfo.record, idAccessor) === recordId : false
                     }
                     expansion={rowExpansionInfo}
                     className={rowClassName}
