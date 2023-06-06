@@ -2,15 +2,25 @@ import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import PageNavigation from '~/components/PageNavigation';
+import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import NonStandardRecordIdsExample from '~/examples/NonStandardRecordIdsExample';
+import NonStandardRecordIdsFunctionExample from '~/examples/NonStandardRecordIdsFunctionExample';
+import NonStandardRecordIdsStringExample from '~/examples/NonStandardRecordIdsStringExample';
+import allPromiseProps from '~/lib/allPromiseProps';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/non-standard-record-ids';
 
-export const getStaticProps: GetStaticProps<{ code: string }> = async () => ({
-  props: { code: (await readCodeExample('examples/NonStandardRecordIdsExample.tsx')) as string },
+export const getStaticProps: GetStaticProps<{
+  code: Record<'string' | 'function', string>;
+}> = async () => ({
+  props: {
+    code: await allPromiseProps({
+      string: readCodeExample('examples/NonStandardRecordIdsStringExample.tsx') as Promise<string>,
+      function: readCodeExample('examples/NonStandardRecordIdsFunctionExample.tsx') as Promise<string>,
+    }),
+  },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -27,9 +37,17 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         You can override the default ID property name by adding an <Code>idAccessor</Code> property on the{' '}
         <Code>DataTable</Code> like so:
       </PageText>
-      <CodeBlock language="typescript" content={code} />
+      <CodeBlock language="typescript" content={code.string} />
       <PageText>The code above will produce the following result:</PageText>
-      <NonStandardRecordIdsExample />
+      <NonStandardRecordIdsStringExample />
+      <PageSubtitle value="Using functions to generate composite record IDs" />
+      <PageText>
+        You can also use a function to generate record IDs. This is useful for composite IDs, for example, when you need
+        to generate a unique ID based on multiple record properties:
+      </PageText>
+      <CodeBlock language="typescript" content={code.function} />
+      <PageText>The code above will produce the following result:</PageText>
+      <NonStandardRecordIdsFunctionExample />
       <PageNavigation of={PATH} />
     </Container>
   );
