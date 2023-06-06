@@ -22,7 +22,7 @@
     "@mantine/prism": "^6.0.13",
     "@tabler/icons-react": "^2.21.0",
     "@tanstack/react-query": "^4.29.12",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
     "next": "^13.4.4",
