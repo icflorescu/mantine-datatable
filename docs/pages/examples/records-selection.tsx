@@ -1,4 +1,4 @@
-import { Code, Container } from '@mantine/core';
+import { Code, Container, createStyles } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import InternalLink from '~/components/InternalLink';
@@ -21,11 +21,24 @@ export const getStaticProps: GetStaticProps<{ code: Record<ExampleName, string> 
   props: { code: (await readCodeExample('examples/RecordsSelectionExamples.tsx')) as Record<ExampleName, string> },
 });
 
+const useStyles = createStyles((theme) => ({
+  batchSelectionEmphasis: {
+    color: theme.colorScheme === 'dark' ? theme.colors.red[4] : theme.colors.red[9],
+  },
+}));
+
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { classes } = useStyles();
+
   return (
     <Container>
       <PageTitle of={PATH} />
       <RecordsSelectionExample />
+      <PageText idea>
+        Mantine DataTable is probably the only data-table component for Mantine that supports an intuitive batch
+        selection of records, similar to the one you can find in Gmail: shift-clicking a row selection checkbox will
+        result in selecting/deselecting all records between the last selected record and the current one.
+      </PageText>
       <PageText>
         In order to enable records selection, you’ll have to add the following properties to the <Code>DataTable</Code>:
         <ul>
@@ -47,9 +60,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
           <li>
             <em>Clicking the column header checkbox</em> will result in selecting/deselecting all visible records;
           </li>
-          <li>
-            <em>Shift-clicking a row selection checkbox</em> will result in naturally extending/reducing the current
-            selection.
+          <li className={classes.batchSelectionEmphasis}>
+            <em>Shift-clicking a row selection checkbox</em> will result in intuitively selecting all records between
+            the last clicked record and the current one.
           </li>
         </ul>
       </PageText>

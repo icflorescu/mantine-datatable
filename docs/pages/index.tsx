@@ -60,7 +60,12 @@ export default function Page() {
           <img src={`${process.env.BASE_PATH}/mantine-datatable.png`} alt="Mantine DataTable supports dark mode" />
         </div>
         <Text className={classes.subtitle}>
-          Mantine DataTable brings datagrid-like functionality to your data-rich user interfaces.
+          Mantine DataTable is a lightweight, dependency-free component that brings datagrid-like functionality to your
+          data-rich user interfaces. Features context-menu support and{' '}
+          <InternalLink to="/examples/records-selection">
+            intuitive Gmail-style additive batch rows selection
+          </InternalLink>{' '}
+          out of the box.
         </Text>
         <div className={classes.features}>
           <HomePageFeature icon={IconSettings} title="Feature rich">
