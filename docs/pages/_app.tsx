@@ -26,7 +26,6 @@ export default function _App(props: AppProps) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: 'light',
-    getInitialValueInEffect: true,
   });
 
   const toggleColorScheme = (value?: ColorScheme) =>
