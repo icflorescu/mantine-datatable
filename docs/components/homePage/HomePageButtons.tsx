@@ -8,7 +8,7 @@ import { getFirstExamplePagePath } from '~/lib/page';
 const useStyles = createStyles((theme) => ({
   root: {
     margin: '2em 0 0',
-    '@media (min-width: 586px)': {
+    '@media (min-width: 600px)': {
       gap: theme.spacing.xl,
       margin: '3em 0 1em',
     },
@@ -18,7 +18,7 @@ const useStyles = createStyles((theme) => ({
     '@media (min-width: 420px)': {
       width: `calc(50% - ${theme.spacing.md} / 2)`,
     },
-    '@media (min-width: 586px)': {
+    '@media (min-width: 600px)': {
       width: 'auto',
     },
   },
@@ -29,7 +29,7 @@ const useStyles = createStyles((theme) => ({
     '@media (min-width: 420px)': {
       width: '100%',
     },
-    '@media (min-width: 586px)': {
+    '@media (min-width: 600px)': {
       width: 'initial',
     },
   },
@@ -48,6 +48,7 @@ export default function HomePageButtons() {
         leftIcon={<IconRocket />}
         component={Link}
         href="/getting-started"
+        aria-label="Get started with Mantine Table"
       >
         Get started
       </Button>
@@ -59,6 +60,7 @@ export default function HomePageButtons() {
         leftIcon={<GitHubIcon size={20} />}
         component="a"
         href={REPO_LINK}
+        aria-label="View Mantine Table source code on GitHub"
         target="_blank"
       >
         View code
@@ -70,6 +72,7 @@ export default function HomePageButtons() {
         gradient={{ from: 'green.7', to: 'green.6' }}
         leftIcon={<IconBulb />}
         component={Link}
+        aria-label="Learn how to use Mantine Table by example"
         href={getFirstExamplePagePath()}
       >
         Learn by example

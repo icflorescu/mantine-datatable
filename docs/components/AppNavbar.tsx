@@ -77,9 +77,19 @@ export default function AppNavbar({ visible, onHideClick }: { visible: boolean; 
         </Box>
         <Navbar.Section grow component={ScrollArea}>
           <Box my="xs">
-            {PAGES.map(({ icon, title, color, path, external, items }) => {
+            {PAGES.map(({ icon, title, description, color, path, external, items }) => {
               if (external) {
-                return <AppNavbarButton key={path} icon={icon!} title={title} color={color} href={path} externalLink />;
+                return (
+                  <AppNavbarButton
+                    key={path}
+                    icon={icon!}
+                    title={title}
+                    description={description}
+                    color={color}
+                    href={path}
+                    externalLink
+                  />
+                );
               }
               const to = `/${path || ''}`;
               return items ? (
@@ -87,13 +97,14 @@ export default function AppNavbar({ visible, onHideClick }: { visible: boolean; 
                   key={to}
                   title={title}
                   color={color}
-                  items={items.map(({ title: itemTitle, path: itemPath }) => ({
+                  items={items.map(({ title: itemTitle, description: itemDescription, path: itemPath }) => ({
                     title: itemTitle,
+                    description: itemDescription,
                     to: `${to}/${itemPath}`,
                   }))}
                 />
               ) : (
-                <AppNavbarLink key={to} icon={icon} title={title} color={color} to={to} />
+                <AppNavbarLink key={to} icon={icon} title={title} description={description} color={color} to={to} />
               );
             })}
           </Box>

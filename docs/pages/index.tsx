@@ -1,8 +1,20 @@
-import { Container, createStyles, Text } from '@mantine/core';
+import { Container, Text, createStyles } from '@mantine/core';
 import { IconLifebuoy, IconRocket, IconScale, IconSettings } from '@tabler/icons-react';
+import ExternalLink from '~/components/ExternalLink';
+import InternalLink from '~/components/InternalLink';
 import HomePageButtons from '~/components/homePage/HomePageButtons';
 import HomePageFeature from '~/components/homePage/HomePageFeature';
 import HomePageTitle from '~/components/homePage/HomePageTitle';
+import {
+  CRA_LINK,
+  GATSBY_LINK,
+  LICENSE_LINK,
+  MANTINE_LINK,
+  NEXTJS_LINK,
+  REMIX_LINK,
+  REPO_LINK,
+  VITE_LINK,
+} from '~/config';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -52,20 +64,31 @@ export default function Page() {
         </Text>
         <div className={classes.features}>
           <HomePageFeature icon={IconSettings} title="Feature rich">
-            Supports asynchronous data loading, pagination, multiple rows selection, column sorting, custom cell data
-            rendering, row context menu, row expansion, dark theme and more
+            Supports <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink>,{' '}
+            <InternalLink to="/examples/pagination">pagination</InternalLink>,{' '}
+            <InternalLink to="/examples/records-selection">multiple rows selection</InternalLink>,{' '}
+            <InternalLink to="/examples/sorting">column sorting</InternalLink>,{' '}
+            <InternalLink to="/examples/column-properties">custom cell data rendering</InternalLink>,{' '}
+            <InternalLink to="/examples/row-context-menu">row context menu</InternalLink>,{' '}
+            <InternalLink to="/examples/expanding-rows">row expansion</InternalLink>,{' '}
+            <InternalLink to="/examples/nested-tables">nesting</InternalLink> and more
           </HomePageFeature>
           <HomePageFeature icon={IconLifebuoy} title="Typescript based">
-            The entire codebase is written in TypeScript, component properties are well typed and documented with JSDoc,
-            so you can build type safe applications with confidence
+            The entire codebase is <ExternalLink to={REPO_LINK}>written in TypeScript</ExternalLink>, component
+            properties are <InternalLink to="/component-properties">well typed</InternalLink> and documented with JSDoc,
+            so you can build type-safe applications with confidence
           </HomePageFeature>
           <HomePageFeature icon={IconScale} title="Free and open-source">
-            This package is released under the MIT license, same as Mantine, so you can freely build fantastic data-rich
+            The package is released under the <ExternalLink to={LICENSE_LINK}>MIT license</ExternalLink>, same as{' '}
+            <ExternalLink to={MANTINE_LINK}>Mantine library</ExternalLink>, so you can freely build fantastic data-rich
             applications with it
           </HomePageFeature>
           <HomePageFeature icon={IconRocket} title="Use anywhere">
-            You can use this component in any modern React framework supported by Mantine, such as Next.js, Vite, Create
-            React App, Remix or Gatsby
+            You can use it in any modern React framework supported by{' '}
+            <ExternalLink to={MANTINE_LINK}>Mantine</ExternalLink>, such as{' '}
+            <ExternalLink to={NEXTJS_LINK}>Next.js</ExternalLink>, <ExternalLink to={VITE_LINK}>Vite</ExternalLink>,{' '}
+            <ExternalLink to={CRA_LINK}>Create React App</ExternalLink>,{' '}
+            <ExternalLink to={REMIX_LINK}>Remix</ExternalLink> or <ExternalLink to={GATSBY_LINK}>Gatsby</ExternalLink>
           </HomePageFeature>
         </div>
         <HomePageButtons />

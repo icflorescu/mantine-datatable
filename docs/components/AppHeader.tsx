@@ -9,11 +9,12 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
-import { IconHeartFilled, IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
-import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, REPO_LINK, SPONSOR_LINK } from '~/config';
+import { IconBrandNpm, IconHeartFilled, IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
+import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, NPM_LINK, REPO_LINK, SPONSOR_LINK } from '~/config';
 import AppHeaderColorSchemeLabel from './AppHeaderColorSchemeLabel';
 import GitHubIcon from './GitHubIcon';
 import Logo from './Logo';
+import { NpmDownloads } from './NpmDownloads';
 
 const REPO_LINK_ARIA_LABEL = 'View Mantine DataTable source code on GitHub';
 const SPONSORS_LINK_ARIA_LABEL = 'Sponsor Mantine DataTable project on GitHub Sponsors';
@@ -102,6 +103,7 @@ const useStyles = createStyles((theme) => {
     button: {
       border: buttonBorder,
       paddingRight: theme.spacing.xs,
+      minWidth: 120,
     },
     buttonIcon: {
       '&&': { marginRight: 8 },
@@ -167,6 +169,22 @@ export default function AppHeader({ onShowNavbarClick }: { onShowNavbarClick: ()
             aria-label={SPONSORS_LINK_ARIA_LABEL}
           >
             Sponsor
+          </Button>
+          <Button
+            classNames={{
+              root: classes.button,
+              icon: cx(classes.buttonIcon),
+              label: classes.buttonLabel,
+            }}
+            size="xs"
+            variant="default"
+            leftIcon={<IconBrandNpm size={16} />}
+            component="a"
+            href={NPM_LINK}
+            target="_blank"
+            aria-label="View Mantine DataTable on npm"
+          >
+            <NpmDownloads />
           </Button>
         </Group>
         <Logo className={classes.logo} insideHeader />

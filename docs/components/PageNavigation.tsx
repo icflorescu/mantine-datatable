@@ -48,6 +48,7 @@ export default function PageNavigation({ of }: { of: string }) {
         className={cx(classes.button, { [classes.withoutNext]: !next })}
         component={Link}
         href={`/${back.path}`}
+        aria-label={back.description || 'Go back'}
         rel="prev"
       >
         <Group px="sm" py="xs" position="apart" noWrap>
@@ -63,7 +64,13 @@ export default function PageNavigation({ of }: { of: string }) {
         </Group>
       </UnstyledButton>
       {next && (
-        <UnstyledButton className={classes.button} component={Link} href={`/${next.path}`} rel="next">
+        <UnstyledButton
+          className={classes.button}
+          component={Link}
+          href={`/${next.path}`}
+          aria-label={next.description || 'Up next'}
+          rel="next"
+        >
           <Group px="sm" py="xs" position="apart" noWrap>
             <div>
               <Text weight={500}>Up next</Text>

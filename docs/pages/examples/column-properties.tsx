@@ -38,7 +38,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
-      <PageSubtitle value="Accessor" />
+      <PageSubtitle value="The accessor" />
       <PageText>
         The only property you <strong>have</strong> to specify for a column is its <Code>accessor</Code> (the name of
         the record property you want to display in each column cell).

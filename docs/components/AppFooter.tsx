@@ -3,8 +3,10 @@ import {
   AUTHOR_LINK,
   FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
   FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT,
+  LICENSE_LINK,
   NAVBAR_BREAKPOINT,
   NAVBAR_WIDTH,
+  NPM_LINK,
   REPO_LINK,
   SPONSOR_LINK,
 } from '~/config';
@@ -60,7 +62,7 @@ export default function AppFooter() {
   const badgeParams = `?style=flat&color=${colors.blue[7].substring(1)}`;
   return (
     <div className={classes.root}>
-      <ExternalLink to={`${REPO_LINK}/blob/main/LICENSE`} rel="license">
+      <ExternalLink to={LICENSE_LINK} rel="license">
         <img src={`https://img.shields.io/npm/l/mantine-datatable.svg${badgeParams}`} alt="MIT License" />
       </ExternalLink>
       <Text size="sm" align="center">
@@ -77,7 +79,7 @@ export default function AppFooter() {
             alt="GitHub Stars"
           />
         </ExternalLink>
-        <ExternalLink to="https://npmjs.org/package/mantine-datatable">
+        <ExternalLink to={NPM_LINK}>
           <img src={`https://img.shields.io/npm/dm/mantine-datatable.svg${badgeParams}`} alt="NPM Downloads" />
         </ExternalLink>
       </Group>
