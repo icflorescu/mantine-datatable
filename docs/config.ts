@@ -12,13 +12,21 @@ export const SEO_CREATOR = '@icflorescu';
 export const HEADER_HEIGHT = 56;
 export const FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT = 164;
 export const FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT = 64;
-export const NAVBAR_WIDTH = 280;
+export const NAVBAR_WIDTH = 300;
 export const NAVBAR_BREAKPOINT = 'md';
 
 export const AUTHOR_LINK = 'https://github.com/icflorescu';
 export const REPO_LINK = 'https://github.com/icflorescu/mantine-datatable';
+export const NPM_LINK = 'https://www.npmjs.com/package/mantine-datatable';
+export const LICENSE_LINK = `${REPO_LINK}/blob/main/LICENSE`;
 export const SPONSOR_LINK = 'https://github.com/sponsors/icflorescu';
 export const MANTINE_CONTEXTMENU_LINK = 'https://icflorescu.github.io/mantine-contextmenu/';
+export const MANTINE_LINK = 'https://mantine.dev';
+export const NEXTJS_LINK = 'https://nextjs.org';
+export const VITE_LINK = 'https://vitejs.dev';
+export const REMIX_LINK = 'https://remix.run';
+export const CRA_LINK = 'https://create-react-app.dev';
+export const GATSBY_LINK = 'https://www.gatsbyjs.com';
 
 export const PAGES: ({ external?: true; title: string; color?: MantineColor; description?: string } & (
   | {
@@ -45,7 +53,7 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
     title: 'Examples',
     color: 'green',
     items: [
-      { path: 'basic-usage', title: 'Basic usage', description: 'Example: basic usage' },
+      { path: 'basic-usage', title: 'Basic usage', description: 'Example: basic usage of Mantine DataTable' },
       {
         path: 'basic-table-properties',
         title: 'Basic table properties',
@@ -211,6 +219,7 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
     external: true,
     path: `${REPO_LINK}/blob/main/CHANGELOG.md`,
     title: 'Changelog',
+    description: 'Mantine DataTable changelog',
     color: 'gray',
     icon: IconList,
   },

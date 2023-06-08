@@ -9,7 +9,7 @@
 [![Downloads][downloads-image]][npm-url]
 [![Language][language-image]][repo-url]
 
-A "dark-theme aware" **table component** for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multiple rows selection, column sorting, custom cell data rendering, row context menu, row expansion, and more.
+The "dark-theme aware" **table component** for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, multiple rows selection, column sorting, custom cell data rendering, row context menu, row expansion, and more.
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/189911698-369ba48e-65f0-4772-aad3-cb5e6d4cb59d.png)](https://icflorescu.github.io/mantine-datatable/)
 
@@ -24,6 +24,8 @@ Install the package and its dependencies:
 ```sh
 npm i @mantine/core @mantine/hooks @emotion/react mantine-datatable
 ```
+
+If you're using Next.js, Vite, CRA, Remix or Gatsby, you might need to install additional dependencies. Please refer to Mantine's [getting started page](https://mantine.dev/pages/getting-started/) for more details.
 
 Use it in your code:
 
@@ -74,7 +76,7 @@ export default function GettingStartedExample() {
 }
 ```
 
-Have a look at the available [component properties](https://icflorescu.github.io/mantine-datatable/component-properties) and make sure to browse the comprehensive list of [usage examples](https://icflorescu.github.io/mantine-datatable/examples/basic-usage).
+Make sure to browse the comprehensive list of [usage examples](https://icflorescu.github.io/mantine-datatable/examples/basic-usage) to learn how to unleash the full power of Mantine DataTable.
 
 ## Other useful resources
 

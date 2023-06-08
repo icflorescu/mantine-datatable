@@ -25,7 +25,9 @@ const useStyles = createStyles({
   },
 });
 
-type AppNavbarLinkList = Omit<AppNavbarButtonDisplayProps, 'icon'> & { items: { title: string; to: string }[] };
+type AppNavbarLinkList = Omit<AppNavbarButtonDisplayProps, 'icon'> & {
+  items: { title: string; description?: string; to: string }[];
+};
 
 export default function AppNavbarLinkList({ color, title, items }: AppNavbarLinkList) {
   const localStorageKey = `${title}-navlinks-open`;
@@ -79,8 +81,15 @@ export default function AppNavbarLinkList({ color, title, items }: AppNavbarLink
           className={cx(classes.connector, { [classes.connectorVisible]: connectorVisible })}
           sx={(theme) => ({ background: theme.fn.rgba(theme.colors[color || 'blue'][6], 0.5) })}
         />
-        {items.map(({ title, to }) => (
-          <AppNavbarLinkListItem key={to} title={title} to={to} color={color} active={to === asPath} />
+        {items.map(({ title, description, to }) => (
+          <AppNavbarLinkListItem
+            key={to}
+            title={title}
+            description={description}
+            to={to}
+            color={color}
+            active={to === asPath}
+          />
         ))}
       </Collapse>
     </>

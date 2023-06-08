@@ -30,6 +30,7 @@ export default function PageTitle({ of }: { of: string }) {
             fontSize: '2rem',
           },
           [`@media (min-width: ${theme.breakpoints.lg})`]: {
+            fontSize: '2.25rem',
             marginTop: '1em',
           },
         })}

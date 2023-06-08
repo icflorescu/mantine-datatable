@@ -4,14 +4,18 @@ import { PAGES } from '~/config';
 type PageInfo = { path: string; title: string; description?: string };
 
 const flattenedPages: PageInfo[] = [];
-for (const { external, path, title, items } of PAGES) {
+for (const { external, path, title, description, items } of PAGES) {
   if (!items) {
     if (!external) {
-      flattenedPages.push({ path: path || '', title });
+      flattenedPages.push({ path: path || '', title, description });
     }
   } else {
-    for (const { title: itemTitle, path: itemPath } of items) {
-      flattenedPages.push({ path: `${path}/${itemPath}`, title: `${title} › ${itemTitle}` });
+    for (const { title: itemTitle, path: itemPath, description: itemDescription } of items) {
+      flattenedPages.push({
+        path: `${path}/${itemPath}`,
+        title: `${title} › ${itemTitle}`,
+        description: itemDescription,
+      });
     }
   }
 }

@@ -37,11 +37,11 @@ export default function HomePageTitle() {
   const { classes } = useStyles();
   return (
     <Title className={classes.root} order={2}>
-      A table component
+      The table component
       <br />
       for your Mantine
       <br />
-      <span className={classes.gradientText}>data-rich applications.</span>
+      <span className={classes.gradientText}>data-rich applications</span>
     </Title>
   );
 }
