@@ -21,11 +21,11 @@ const REPO_LINK_ARIA_LABEL = 'View Mantine DataTable source code on GitHub';
 const SPONSORS_LINK_ARIA_LABEL = 'Sponsor Mantine DataTable project on GitHub Sponsors';
 
 const BEAT_ANIMATION = keyframes({
-  '0%': { transform: 'scale(1)' },
-  '7%': { transform: 'scale(1.1)' },
-  '14%': { transform: 'scale(1)' },
-  '21%': { transform: 'scale(1.1)' },
-  '30%': { transform: 'scale(1)' },
+  '0%': { transform: 'scale(1)', opacity: 1 },
+  '7%': { transform: 'scale(1.1)', opacity: 0.5 },
+  '14%': { transform: 'scale(1)', opacity: 1 },
+  '21%': { transform: 'scale(1.1)', opacity: 0.5 },
+  '30%': { transform: 'scale(1)', opacity: 1 },
 });
 
 const useStyles = createStyles((theme) => {
