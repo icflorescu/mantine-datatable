@@ -164,6 +164,7 @@ export default function DataTable<T>({
   rowSx,
   customRowAttributes,
   scrollViewportRef: scrollViewportRefProp,
+  scrollAreaProps,
   bodyRef,
   m,
   my,
@@ -318,6 +319,7 @@ export default function DataTable<T>({
         headerHeight={headerHeight}
         footerHeight={footerHeight}
         onScrollPositionChange={handleScrollPositionChange}
+        scrollAreaProps={scrollAreaProps}
       >
         <Table
           ref={tableRef}

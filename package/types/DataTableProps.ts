@@ -1,4 +1,4 @@
-import type { DefaultProps, MantineShadow, MantineTheme, Sx, TableProps } from '@mantine/core';
+import type { DefaultProps, MantineShadow, MantineTheme, ScrollAreaProps, Sx, TableProps } from '@mantine/core';
 import type { CSSProperties, Key, MouseEvent, ReactNode, RefObject } from 'react';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumn } from './DataTableColumn';
@@ -163,6 +163,7 @@ export type DataTableProps<T> = {
    */
   scrollViewportRef?: RefObject<HTMLDivElement>;
 
+  scrollAreaProps?: ScrollAreaProps;
   /**
    * Ref pointing to the table body element
    */
