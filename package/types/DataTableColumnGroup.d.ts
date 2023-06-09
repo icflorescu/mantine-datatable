@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import type { Sx } from "@mantine/core";
+import type { CSSProperties, ReactNode } from "react";
 import type { DataTableColumn } from "./DataTableColumn";
 
 export type DataTableColumnGroup<T> = {
@@ -9,9 +10,12 @@ export type DataTableColumnGroup<T> = {
   /**
    * Component to render inside the column group header
    */
-  component?: ReactNode;
+  title?: ReactNode;
   /**
    * Columns which are part of the group.
    */
   columns: readonly DataTableColumn<T>[];
+  className?: string;
+  sx?: Sx;
+  style?: CSSProperties;
 }

@@ -9,7 +9,6 @@ export default function ColumnGroupingExample() {
     groups={[
       { 
         id: "company", 
-        component: "Company",
         columns: [
           { accessor: "name" },
           { accessor: "missionStatement", visibleMediaQuery: theme => `(min-width: ${theme.breakpoints.md})` }
@@ -17,7 +16,7 @@ export default function ColumnGroupingExample() {
       },
       { 
         id: "contact-info", 
-        component: "Contact info",
+        title: <i>Contact info</i>,
         columns: [
           { accessor: "streetAddress" },
           { accessor: "city" },
@@ -32,7 +31,7 @@ export default function ColumnGroupingExample() {
       },
       {
         id: "empty-group",
-        component: "Empty group",
+        title: "Empty group",
         columns: []
       }
     ]}

@@ -38,7 +38,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <List>
         <List.Item>
           <Code>id</Code>: Used as a <ExternalLink to="https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key">key</ExternalLink>.
-          Can be any string, as long as it is unique among the groups.
+          Can be any string, as long as it is unique among the groups. If <Code>component</Code> is not specified, 
         </List.Item>
         <List.Item>
           <Code>columns</Code>: An array of column definitions that are part of this group. It supports all the same options as the one provided directly to the data table.
@@ -49,7 +49,18 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       In addition to the aforementioned required properties, a group accepts some optional props for customization purposes:
       <List>
         <List.Item>
-          <Code>component</Code>: A React component which will be rendered inside the column group.
+          <Code>title</Code>: A React component which will be rendered inside the column group. If not specified (or set to <Code>undefined</Code>), 
+          the <Code>id</Code> is humanized.
+          to generate a string
+        </List.Item>
+        <List.Item>
+          <Code>className</Code>: Class to apply to the <Code>{"<th/>"}</Code>
+        </List.Item>
+        <List.Item>
+          <Code>sx</Code>: See <ExternalLink to="https://mantine.dev/styles/sx/">Mantine's documentation</ExternalLink> for more information.
+        </List.Item>
+        <List.Item>
+          <Code>style</Code>: Object with CSS styles to be applied to the <Code>{"<th/>"}</Code>
         </List.Item>
       </List>
     </PageText>
