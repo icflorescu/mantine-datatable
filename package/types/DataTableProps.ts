@@ -2,6 +2,7 @@ import type { DefaultProps, MantineShadow, MantineTheme, Sx, TableProps } from '
 import type { CSSProperties, MouseEvent, ReactNode, RefObject } from 'react';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumn } from './DataTableColumn';
+import type { DataTableColumnGroup } from './DataTableColumnGroup';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
 import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';
 import type { DataTableLoaderProps } from './DataTableLoaderProps';
@@ -60,11 +61,6 @@ export type DataTableProps<T> = {
    * If true, will show a loader with semi-transparent background, centered over the table
    */
   fetching?: boolean;
-
-  /**
-   * Visible columns
-   */
-  columns: DataTableColumn<T>[];
 
   /**
    * A default render function for all columns; accepts the current record, its index in `records`
@@ -175,4 +171,20 @@ export type DataTableProps<T> = {
   DataTableEmptyStateProps &
   DataTablePaginationProps &
   DataTableSortProps &
-  DataTableSelectionProps<T>;
+  DataTableSelectionProps<T> & (
+    | {
+      /**
+       * Grouped columns
+       */
+      groups: readonly DataTableColumnGroup<T>[];
+      columns?: never;
+    }
+    | {
+
+      /**
+       * Visible columns
+       */
+      columns: DataTableColumn<T>[];
+      groups?: never;
+    }
+  )
