@@ -57,6 +57,11 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: setting Mantine DataTable column properties',
       },
       {
+        path: 'column-grouping',
+        title: 'Column grouping',
+        description: 'Example: group multiple columns under a shared header'
+      },
+      {
         path: 'customizing-border-colors',
         title: 'Customizing border colors',
         description: 'Example: how to customize the border colors of Mantine DataTable',
