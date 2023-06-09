@@ -9,7 +9,7 @@ export default function DataTableColumnGroupHeaderCell<T>({
   group: { columns, component }
 }: DataTableColumnGroupHeaderCellProps<T>) {
   const queries = useMemo(() => columns.map(column => column.visibleMediaQuery), [columns]);
-  const colSpan = useMemo(() => columns.length, [columns]);
+  const colSpan = useMemo(() => columns.filter(column => !column.hidden).length, [columns]);
 
   return colSpan > 0 ? <th colSpan={columns.length}>
     { component }

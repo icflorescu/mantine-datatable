@@ -54,23 +54,25 @@ export default forwardRef(function DataTableHeader<T>(
 ) {
   const { classes, cx } = useStyles();
 
+  const selectAll = selectionVisible ? <DataTableHeaderSelectorCell
+        shadowVisible={leftShadowVisible}
+        checked={selectionChecked}
+        indeterminate={selectionIndeterminate}
+        checkboxProps={selectionCheckboxProps}
+        onChange={onSelectionChange}
+        rowSpan={groups ? 2 : undefined}
+      /> : null;
+
   return (
     <thead className={cx(classes.root, className)} style={style as CSSProperties} ref={ref}>
       {
         groups && <tr>
-          {groups.map(group => <DataTableColumnGroupHeaderCell group={group} />)}
+          { selectAll }
+          { groups.map(group => <DataTableColumnGroupHeaderCell group={group} />) }
         </tr>
       }
       <tr>
-        {selectionVisible && (
-          <DataTableHeaderSelectorCell
-            shadowVisible={leftShadowVisible}
-            checked={selectionChecked}
-            indeterminate={selectionIndeterminate}
-            checkboxProps={selectionCheckboxProps}
-            onChange={onSelectionChange}
-          />
-        )}
+        { !groups && selectAll }
         {columns.map(
           ({
             accessor,
