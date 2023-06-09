@@ -68,7 +68,7 @@ export default forwardRef(function DataTableHeader<T>(
       {
         groups && <tr>
           { selectAll }
-          { groups.map(group => <DataTableColumnGroupHeaderCell group={group} />) }
+          { groups.map(group => <DataTableColumnGroupHeaderCell key={group.id} group={group} />) }
         </tr>
       }
       <tr>
