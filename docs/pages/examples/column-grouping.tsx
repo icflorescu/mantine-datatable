@@ -38,7 +38,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <List>
         <List.Item>
           <Code>id</Code>: Used as a <ExternalLink to="https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key">key</ExternalLink>.
-          Can be any string, as long as it is unique among the groups. If <Code>component</Code> is not specified, 
+          Can be any string, as long as it is unique among the groups. A humanized verion of this value is used as header if no <Code>title</Code> is provided.
         </List.Item>
         <List.Item>
           <Code>columns</Code>: An array of column definitions that are part of this group. It supports all the same options as the one provided directly to the data table.
