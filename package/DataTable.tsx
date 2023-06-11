@@ -82,6 +82,15 @@ const useStyles = createStyles(
           },
         },
       },
+      tableWithColumnBordersAndSelectableRecords: {
+        'thead': {
+          'tr + tr': {
+            th: {
+              borderLeft: `1px solid ${rowBorderColorValue}`,
+            }
+          }
+        } 
+      },
       verticalAlignmentTop: {
         td: {
           verticalAlign: 'top',
@@ -334,6 +343,7 @@ export default function DataTable<T>({
             [classes.textSelectionDisabled]: textSelectionDisabled,
             [classes.verticalAlignmentTop]: verticalAlignment === 'top',
             [classes.verticalAlignmentBottom]: verticalAlignment === 'bottom',
+            [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
           })}
           striped={recordsLength ? striped : false}
           {...otherProps}
