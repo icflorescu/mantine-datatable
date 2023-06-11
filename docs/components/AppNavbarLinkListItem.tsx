@@ -58,12 +58,13 @@ const useStyles = createStyles((theme, { color = 'blue' }: { color?: MantineColo
 
 type AppNavbarLinkListItemProps = {
   title: string;
+  description?: string;
   to: string;
   color?: MantineColor;
   active: boolean;
 };
 
-export default function AppNavbarLinkListItem({ title, to, color, active }: AppNavbarLinkListItemProps) {
+export default function AppNavbarLinkListItem({ title, description, to, color, active }: AppNavbarLinkListItemProps) {
   const { classes, cx } = useStyles({ color });
 
   return (
@@ -73,6 +74,7 @@ export default function AppNavbarLinkListItem({ title, to, color, active }: AppN
       className={cx(classes.root, { [classes.active]: active })}
       component={Link}
       href={to}
+      aria-label={description}
     >
       <div className={classes.content}>
         <Box className={classes.bullet} />

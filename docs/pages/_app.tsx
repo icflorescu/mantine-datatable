@@ -26,12 +26,11 @@ export default function _App(props: AppProps) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: 'light',
-    getInitialValueInEffect: true,
   });
 
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
-
+  const toggleColorScheme = () => {
+    setColorScheme(colorScheme === 'dark' ? 'light' : 'dark');
+  };
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
   return (

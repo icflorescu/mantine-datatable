@@ -1,7 +1,7 @@
 import { useTimeout } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type Key } from 'react';
 import type { DataTableRowExpansionProps } from './types';
-import { getValueAtPath } from './utils';
+import { getRecordId } from './utils';
 
 export function useLastSelectionChangeIndex(recordIds: unknown[] | undefined) {
   const [lastSelectionChangeIndex, setLastSelectionChangeIndex] = useState<number | null>(null);
@@ -33,15 +33,15 @@ export function useRowExpansion<T>({
 }: {
   rowExpansion?: DataTableRowExpansionProps<T>;
   records: T[] | undefined;
-  idAccessor: string;
+  idAccessor: string | ((record: T) => Key);
 }) {
   let initiallyExpandedRecordIds: unknown[] = [];
   if (rowExpansion && records) {
     const { trigger, allowMultiple, initiallyExpanded } = rowExpansion;
     if (records && trigger === 'always') {
-      initiallyExpandedRecordIds = records.map((r) => getValueAtPath(r, idAccessor));
+      initiallyExpandedRecordIds = records.map((r) => getRecordId(r, idAccessor));
     } else if (initiallyExpanded) {
-      initiallyExpandedRecordIds = records.filter(initiallyExpanded).map((r) => getValueAtPath(r, idAccessor));
+      initiallyExpandedRecordIds = records.filter(initiallyExpanded).map((r) => getRecordId(r, idAccessor));
       if (!allowMultiple) {
         initiallyExpandedRecordIds = [initiallyExpandedRecordIds[0]];
       }
@@ -61,14 +61,14 @@ export function useRowExpansion<T>({
     }
 
     const collapseRow = (record: T) =>
-      setExpandedRecordIds?.(expandedRecordIds.filter((id) => id !== getValueAtPath(record, idAccessor)));
+      setExpandedRecordIds?.(expandedRecordIds.filter((id) => id !== getRecordId(record, idAccessor)));
 
     return {
       expandOnClick: trigger !== 'always' && trigger !== 'never',
       isRowExpanded: (record: T) =>
-        trigger === 'always' ? true : expandedRecordIds.includes(getValueAtPath(record, idAccessor)),
+        trigger === 'always' ? true : expandedRecordIds.includes(getRecordId(record, idAccessor)),
       expandRow: (record: T) => {
-        const recordId = getValueAtPath(record, idAccessor);
+        const recordId = getRecordId(record, idAccessor);
         setExpandedRecordIds?.(allowMultiple ? [...expandedRecordIds, recordId] : [recordId]);
       },
       collapseRow,

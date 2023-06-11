@@ -3,7 +3,11 @@ import pkg from '../package/package.json' assert { type: 'json' };
 
 const withPWA = pwa({ dest: 'public', disable: process.env.NODE_ENV === 'development' });
 
-const nextConfig = (phase) => {
+const nextConfig = async (phase) => {
+  const { downloads: INITIAL_NPM_DOWNLOADS } = await fetch(
+    'https://api.npmjs.org/downloads/point/last-month/mantine-datatable'
+  ).then((res) => res.json());
+
   /**
    * @type {import('next').NextConfig}
    */
@@ -14,6 +18,7 @@ const nextConfig = (phase) => {
     env: {
       PACKAGE_VERSION: pkg.version,
       BASE_PATH: '',
+      INITIAL_NPM_DOWNLOADS,
     },
   };
 

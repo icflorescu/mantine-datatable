@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.5.6 (2023-06-06)
+
+- Allow `idAccessor` to be a string **or** a function, in order to support composite keys (issue #315)
+
+## 2.5.5 (2023-06-01)
+
+- Improve filtering support documentation
+
+## 2.5.1 (2023-05-22)
+
+- Implement filtering support, thanks to @MatthijsMud (PR #297)
+
 ## 2.5.0 (2023-05-17)
 
 - Slight change in the default sorting behavior (issue #295)

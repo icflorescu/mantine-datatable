@@ -1,6 +1,6 @@
 import { useMantineTheme, type MantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { useEffect, useLayoutEffect, useMemo } from 'react';
+import { Key, useEffect, useLayoutEffect, useMemo } from 'react';
 import { useMediaQueries } from './useMediaQueries';
 
 export const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -51,4 +51,11 @@ export function getValueAtPath(obj: unknown, path: string) {
   if (!path) return undefined;
   const pathArray = path.match(/([^[.\]])+/g) as string[];
   return pathArray.reduce((prevObj: unknown, key) => prevObj && (prevObj as Record<string, unknown>)[key], obj);
+}
+
+/**
+ * Utility function that returns the record id using idAccessor
+ */
+export function getRecordId<T>(record: T, idAccessor: string | ((record: T) => Key)) {
+  return typeof idAccessor === 'string' ? getValueAtPath(record, idAccessor) : idAccessor(record);
 }

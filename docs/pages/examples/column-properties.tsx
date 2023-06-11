@@ -3,6 +3,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
 import ExternalLink from '~/components/ExternalLink';
+import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
@@ -37,7 +38,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
-      <PageSubtitle value="Accessor" />
+      <PageSubtitle value="The accessor" />
       <PageText>
         The only property you <strong>have</strong> to specify for a column is its <Code>accessor</Code> (the name of
         the record property you want to display in each column cell).
@@ -58,35 +59,50 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         In addition, each column can be customized by specifying the following properties:
         <ul>
           <li>
-            <Code>width</Code> → desired column width as a <Code>number</Code> or <Code>string</Code>;
+            <Code>width</Code> → desired column width as a <Code>number</Code> or <Code>string</Code>.
           </li>
           <li>
             <Code>ellipsis</Code> → <Code>boolean</Code>; if true, cell content in this column will not wrap to multiple
             lines and will be truncated with ellipsis if/as needed; you can either set this property to{' '}
-            <Code>true</Code> or set <Code>noWrap</Code> to <Code>true</Code>, but not both;
+            <Code>true</Code> or set <Code>noWrap</Code> to <Code>true</Code>, but not both.
           </li>
           <li>
             <Code>noWrap</Code> → <Code>boolean</Code>; if true, cell content in this column will not wrap on multiple
             lines (i.e. <Code>white-space: nowrap</Code>); you can either set this property to <Code>true</Code> or set{' '}
-            <Code>ellipsis</Code> to <Code>true</Code>, but not both;
+            <Code>ellipsis</Code> to <Code>true</Code>, but not both.
           </li>
           <li>
             <Code>textAlignment</Code> → <Code>&apos;left&apos; | &apos;center&apos; | &apos;right&apos;</Code>;
-            defaults to <Code>&apos;left&apos;</Code> if not specified;
+            defaults to <Code>&apos;left&apos;</Code> if not specified.
           </li>
           <li>
-            <Code>hidden</Code> → if true, the column will not be visible;
+            <Code>hidden</Code> → if true, the column will not be visible.
           </li>
           <li>
             <Code>visibleMediaQuery</Code> → a media query <Code>string</Code> or a function accepting the current{' '}
             <Code>MantineTheme</Code> as its argument and returning a media-query string; if set, the column will only
-            be visible according to the specified media query;
+            be visible according to the specified media query.
           </li>
           <li>
             <Code>render</Code> → a method that accepts the current record as its argument and must return a{' '}
             <Code>ReactNode</Code>.
           </li>
+          <li>
+            <Code>filter</Code> * → an optional node which provides the user with filtering options. If present, a
+            filter button will be added to the column header. Upon clicking the button, a pop-over showing the provided
+            node will be opened. Alternatively, you can provide a function returning a <Code>ReactNode</Code>. The
+            function will be called with an object containing a <Code>close</Code> method, which you can call to close
+            the pop-over.
+          </li>
+          <li>
+            <Code>filtering</Code> * → if true, the column will be styled as an active filtering column; defaults to{' '}
+            <Code>false</Code> if not specified.
+          </li>
         </ul>
+      </PageText>
+      <PageText info>
+        See the <InternalLink to="/examples/searching-and-filtering">searching and filtering</InternalLink> example to
+        learn how to use the <Code>filter</Code> and <Code>filtering</Code> properties.
       </PageText>
       <PageText>
         You can create a <em>“virtual column”</em> by providing an accessor that doesn’t to refer an existing property

@@ -40,6 +40,7 @@ export type AppNavbarButtonDisplayProps = {
   color?: MantineColor;
   icon: FC<{ size?: string | number }>;
   title: string;
+  description?: string;
 };
 
 type AppNavbarButtonProps = AppNavbarButtonDisplayProps & {
@@ -51,7 +52,7 @@ type AppNavbarButtonProps = AppNavbarButtonDisplayProps & {
 };
 
 export default forwardRef(function AppNavbarButton(
-  { color, icon: Icon, title, href, externalLink, onClick, active, rotateIcon }: AppNavbarButtonProps,
+  { color, icon: Icon, title, description, href, externalLink, onClick, active, rotateIcon }: AppNavbarButtonProps,
   ref: ForwardedRef<HTMLButtonElement | HTMLAnchorElement>
 ) {
   const { classes, cx } = useStyles({ color });
@@ -63,6 +64,7 @@ export default forwardRef(function AppNavbarButton(
       ref={ref}
       component={href ? 'a' : 'button'}
       href={href}
+      aria-label={description}
       target={externalLink ? '_blank' : undefined}
       onClick={onClick}
     >

@@ -3,20 +3,30 @@ import {
   Button,
   createStyles,
   Group,
+  keyframes,
   px,
   SegmentedControl,
   Text,
   useMantineColorScheme,
 } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
-import { IconHeartFilled, IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
-import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, REPO_LINK, SPONSOR_LINK } from '~/config';
+import { IconBrandNpm, IconHeartFilled, IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
+import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, NPM_LINK, REPO_LINK, SPONSOR_LINK } from '~/config';
 import AppHeaderColorSchemeLabel from './AppHeaderColorSchemeLabel';
 import GitHubIcon from './GitHubIcon';
 import Logo from './Logo';
+import { NpmDownloads } from './NpmDownloads';
 
 const REPO_LINK_ARIA_LABEL = 'View Mantine DataTable source code on GitHub';
 const SPONSORS_LINK_ARIA_LABEL = 'Sponsor Mantine DataTable project on GitHub Sponsors';
+
+const BEAT_ANIMATION = keyframes({
+  '0%': { transform: 'scale(1)', opacity: 1 },
+  '7%': { transform: 'scale(1.1)', opacity: 0.5 },
+  '14%': { transform: 'scale(1)', opacity: 1 },
+  '21%': { transform: 'scale(1.1)', opacity: 0.5 },
+  '30%': { transform: 'scale(1)', opacity: 1 },
+});
 
 const useStyles = createStyles((theme) => {
   const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`;
@@ -106,8 +116,11 @@ const useStyles = createStyles((theme) => {
     buttonIcon: {
       '&&': { marginRight: 8 },
     },
-    buttonIconRed: {
+    buttonIconSponsor: {
+      transformOrigin: 'center bottom',
+      '&&': { marginRight: 6 },
       color: theme.colors.red[theme.colorScheme === 'dark' ? 8 : 6],
+      animation: `${BEAT_ANIMATION} 3s ease-in-out infinite`,
     },
     buttonLabel: {
       marginBottom: -2,
@@ -155,18 +168,34 @@ export default function AppHeader({ onShowNavbarClick }: { onShowNavbarClick: ()
           <Button
             classNames={{
               root: classes.button,
-              icon: cx(classes.buttonIcon, classes.buttonIconRed),
+              icon: cx(classes.buttonIcon, classes.buttonIconSponsor),
               label: classes.buttonLabel,
             }}
             size="xs"
             variant="default"
-            leftIcon={<IconHeartFilled size={16} />}
+            leftIcon={<IconHeartFilled size={18} />}
             component="a"
             href={SPONSOR_LINK}
             target="_blank"
             aria-label={SPONSORS_LINK_ARIA_LABEL}
           >
             Sponsor
+          </Button>
+          <Button
+            classNames={{
+              root: classes.button,
+              icon: cx(classes.buttonIcon),
+              label: classes.buttonLabel,
+            }}
+            size="xs"
+            variant="default"
+            leftIcon={<IconBrandNpm color="#CC3534" />}
+            component="a"
+            href={NPM_LINK}
+            target="_blank"
+            aria-label="View Mantine DataTable on npm"
+          >
+            <NpmDownloads />
           </Button>
         </Group>
         <Logo className={classes.logo} insideHeader />

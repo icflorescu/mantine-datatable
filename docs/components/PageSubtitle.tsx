@@ -16,9 +16,9 @@ export default function PageSubtitle({
       mb={mb}
       sx={(theme) => ({
         color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[8],
-        fontSize: '1.2rem',
+        fontSize: '1.25rem',
         [`@media (min-width: ${theme.breakpoints.sm})`]: {
-          fontSize: '1.3rem',
+          fontSize: '1.375rem',
         },
         [`@media (min-width: ${theme.breakpoints.md})`]: {
           fontSize: '1.5rem',

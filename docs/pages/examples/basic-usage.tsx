@@ -1,7 +1,6 @@
 import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlockTabs from '~/components/CodeBlockTabs';
-import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
@@ -38,8 +37,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         ]}
       />
       <PageText>
-        However, <InternalLink to="/component-properties">there’s much more</InternalLink> you can do with{' '}
-        <Code>Mantine DataTable</Code>.
+        However, there’s much more you can do with Mantine DataTable.
         <br />
         Head over to the next example to discover other features.
       </PageText>

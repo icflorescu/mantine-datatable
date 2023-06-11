@@ -85,6 +85,8 @@ export default forwardRef(function DataTableHeader<T>(
             titleClassName,
             titleStyle,
             titleSx,
+            filter,
+            filtering,
           }) =>
             hidden ? null : (
               <DataTableHeaderCell<T>
@@ -101,6 +103,8 @@ export default forwardRef(function DataTableHeader<T>(
                 sortStatus={sortStatus}
                 sortIcons={sortIcons}
                 onSortStatusChange={onSortStatusChange}
+                filter={filter}
+                filtering={filtering}
               />
             )
         )}

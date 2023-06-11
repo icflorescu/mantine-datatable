@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "2.5.0",
+  "version": "2.5.9",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -9,33 +9,34 @@
     "lint": "eslint . --ext=.ts,.tsx && tsc --noEmit"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.0",
+    "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
-    "@faker-js/faker": "^8.0.1",
+    "@faker-js/faker": "^8.0.2",
     "@formkit/auto-animate": "^1.0.0-beta.6",
-    "@mantine/core": "^6.0.11",
-    "@mantine/hooks": "^6.0.11",
-    "@mantine/modals": "^6.0.11",
-    "@mantine/next": "^6.0.11",
-    "@mantine/notifications": "^6.0.11",
-    "@mantine/prism": "^6.0.11",
-    "@tabler/icons-react": "^2.19.0",
-    "@tanstack/react-query": "^4.29.7",
-    "dayjs": "^1.11.7",
+    "@mantine/core": "^6.0.13",
+    "@mantine/dates": "^6.0.13",
+    "@mantine/hooks": "^6.0.13",
+    "@mantine/modals": "^6.0.13",
+    "@mantine/next": "^6.0.13",
+    "@mantine/notifications": "^6.0.13",
+    "@mantine/prism": "^6.0.13",
+    "@tabler/icons-react": "^2.22.0",
+    "@tanstack/react-query": "^4.29.12",
+    "dayjs": "^1.11.8",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
-    "next": "^13.4.2",
+    "next": "^13.4.4",
     "next-pwa": "^5.6.0",
-    "next-sitemap": "^4.0.9",
+    "next-sitemap": "^4.1.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.194",
+    "@types/lodash": "^4.14.195",
     "@types/mixpanel-browser": "^2.38.1",
-    "@types/node": "^20.1.7",
-    "@types/react": "^18.2.6",
+    "@types/node": "^20.2.5",
+    "@types/react": "^18.2.9",
     "mixpanel-browser": "^2.47.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
