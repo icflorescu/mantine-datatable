@@ -163,7 +163,10 @@ export type DataTableProps<T> = {
    */
   scrollViewportRef?: RefObject<HTMLDivElement>;
 
-  scrollAreaProps?: ScrollAreaProps;
+  /**
+   * Props passed to the underlying `ScrollArea` element
+   */
+  scrollAreaProps?: Pick<ScrollAreaProps, 'type' | 'scrollbarSize' | 'scrollHideDelay'>;
   /**
    * Ref pointing to the table body element
    */

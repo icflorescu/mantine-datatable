@@ -84,7 +84,7 @@ type DataTableScrollAreaProps = {
   footerHeight: number;
   onScrollPositionChange: () => void;
   viewportRef: Ref<HTMLDivElement>;
-  scrollAreaProps?: ScrollAreaProps;
+  scrollAreaProps?: Pick<ScrollAreaProps, 'type' | 'scrollbarSize' | 'scrollHideDelay'>;
   children: ReactNode;
 };
 
