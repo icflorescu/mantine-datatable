@@ -1,6 +1,7 @@
 import { useMantineTheme, type MantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { Key, useEffect, useLayoutEffect } from 'react';
+import { Key, useEffect, useLayoutEffect, useMemo } from 'react';
+import { useMediaQueries } from './useMediaQueries';
 
 export const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -8,6 +9,16 @@ export function useMediaQueryStringOrFunction(mediaQuery: string | ((theme: Mant
   const theme = useMantineTheme();
   const mediaQueryValue = typeof mediaQuery === 'function' ? mediaQuery(theme) : mediaQuery;
   return useMediaQuery(mediaQueryValue || '', true);
+}
+
+export function useMediaQueriesStringOrFunction(queries: (string | ((theme: MantineTheme) => string) | undefined)[]) {
+  const theme = useMantineTheme();
+  const values = useMemo(
+    () => queries.map((query) => (typeof query === 'function' ? query(theme) : query) ?? ''),
+    [queries, theme]
+  );
+  const defaults = useMemo(() => queries.map(() => true), [queries]);
+  return useMediaQueries(values, defaults);
 }
 
 /**

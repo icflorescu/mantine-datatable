@@ -1,8 +1,10 @@
 import { createStyles, type CSSObject } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef } from 'react';
+import DataTableColumnGroupHeaderCell from './DataTableColumnGroupHeaderCell';
 import DataTableHeaderCell from './DataTableHeaderCell';
 import DataTableHeaderSelectorCell from './DataTableHeaderSelectorCell';
 import type { DataTableColumn, DataTableSortProps } from './types';
+import { DataTableColumnGroup } from './types/DataTableColumnGroup';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -23,6 +25,7 @@ type DataTableHeaderProps<T> = {
   sortIcons: DataTableSortProps['sortIcons'];
   onSortStatusChange: DataTableSortProps['onSortStatusChange'];
   columns: DataTableColumn<T>[];
+  groups: readonly DataTableColumnGroup<T>[] | undefined;
   selectionVisible: boolean;
   selectionChecked: boolean;
   selectionIndeterminate: boolean;
@@ -39,6 +42,7 @@ export default forwardRef(function DataTableHeader<T>(
     sortIcons,
     onSortStatusChange,
     columns,
+    groups,
     selectionVisible,
     selectionChecked,
     selectionIndeterminate,
@@ -50,18 +54,29 @@ export default forwardRef(function DataTableHeader<T>(
 ) {
   const { classes, cx } = useStyles();
 
+  const selectAll = selectionVisible ? (
+    <DataTableHeaderSelectorCell
+      shadowVisible={leftShadowVisible}
+      checked={selectionChecked}
+      indeterminate={selectionIndeterminate}
+      checkboxProps={selectionCheckboxProps}
+      onChange={onSelectionChange}
+      rowSpan={groups ? 2 : undefined}
+    />
+  ) : null;
+
   return (
     <thead className={cx(classes.root, className)} style={style as CSSProperties} ref={ref}>
+      {groups && (
+        <tr>
+          {selectAll}
+          {groups.map((group) => (
+            <DataTableColumnGroupHeaderCell key={group.id} group={group} />
+          ))}
+        </tr>
+      )}
       <tr>
-        {selectionVisible && (
-          <DataTableHeaderSelectorCell
-            shadowVisible={leftShadowVisible}
-            checked={selectionChecked}
-            indeterminate={selectionIndeterminate}
-            checkboxProps={selectionCheckboxProps}
-            onChange={onSelectionChange}
-          />
-        )}
+        {!groups && selectAll}
         {columns.map(
           ({
             accessor,

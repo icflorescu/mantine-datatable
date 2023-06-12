@@ -2,6 +2,7 @@ import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@ma
 import { useElementSize, useMergedRef } from '@mantine/hooks';
 import {
   useCallback,
+  useMemo,
   useState,
   type ChangeEventHandler,
   type CSSProperties,
@@ -81,6 +82,15 @@ const useStyles = createStyles(
           },
         },
       },
+      tableWithColumnBordersAndSelectableRecords: {
+        thead: {
+          'tr + tr': {
+            th: {
+              borderLeft: `1px solid ${rowBorderColorValue}`,
+            },
+          },
+        },
+      },
       verticalAlignmentTop: {
         td: {
           verticalAlign: 'top',
@@ -109,6 +119,7 @@ export default function DataTable<T>({
   verticalAlignment = 'center',
   fetching,
   columns,
+  groups,
   defaultColumnRender,
   idAccessor = 'id',
   records,
@@ -185,6 +196,10 @@ export default function DataTable<T>({
     width: scrollViewportWidth,
     height: scrollViewportHeight,
   } = useElementSize<HTMLDivElement>();
+
+  const effectiveColumns = useMemo(() => {
+    return groups?.flatMap((group) => group.columns) ?? columns!;
+  }, [columns, groups]);
 
   const { ref: headerRef, height: headerHeight } = useElementSize<HTMLTableSectionElement>();
   const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementSize<HTMLTableElement>();
@@ -330,6 +345,7 @@ export default function DataTable<T>({
             [classes.textSelectionDisabled]: textSelectionDisabled,
             [classes.verticalAlignmentTop]: verticalAlignment === 'top',
             [classes.verticalAlignmentBottom]: verticalAlignment === 'bottom',
+            [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
           })}
           striped={recordsLength ? striped : false}
           {...otherProps}
@@ -339,7 +355,8 @@ export default function DataTable<T>({
               ref={headerRef}
               className={classNames?.header}
               style={styleProperties?.header}
-              columns={columns}
+              columns={effectiveColumns}
+              groups={groups}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
               onSortStatusChange={onSortStatusChange}
@@ -426,7 +443,7 @@ export default function DataTable<T>({
                     key={recordId as Key}
                     record={record}
                     recordIndex={recordIndex}
-                    columns={columns}
+                    columns={effectiveColumns}
                     defaultColumnRender={defaultColumnRender}
                     selectionVisible={selectionColumnVisible}
                     selectionChecked={isSelected}
@@ -452,13 +469,13 @@ export default function DataTable<T>({
               <DataTableEmptyRow />
             )}
           </tbody>
-          {columns.some((column) => column.footer) && (
+          {effectiveColumns.some((column) => column.footer) && (
             <DataTableFooter<T>
               ref={footerRef}
               className={classNames?.footer}
               style={styleProperties?.footer}
               borderColor={borderColor}
-              columns={columns}
+              columns={effectiveColumns}
               selectionVisible={selectionColumnVisible}
               leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
               scrollDiff={tableHeight - scrollViewportHeight}
