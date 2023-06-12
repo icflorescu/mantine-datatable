@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.0 (2023-06-12)
+
+- Accept `scrollAreaProps` (issue [#327](https://github.com/icflorescu/mantine-datatable/issues/327)/ PR [#328](https://github.com/icflorescu/mantine-datatable/issues/327))
+
 ## 2.5.6 (2023-06-06)
 
 - Allow `idAccessor` to be a string **or** a function, in order to support composite keys (issue #315)

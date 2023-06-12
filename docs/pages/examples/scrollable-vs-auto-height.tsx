@@ -1,17 +1,22 @@
-import { Code, Container, createStyles, Paper, Switch } from '@mantine/core';
+import { Code, Container, Paper, Switch, createStyles } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
 import CodeBlock from '~/components/CodeBlock';
 import ExternalLink from '~/components/ExternalLink';
 import PageNavigation from '~/components/PageNavigation';
+import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import { AutoHeightExample, ScrollableExample } from '~/examples/ScrollableVsAutoHeightExamples';
+import {
+  AutoHeightExample,
+  ScrollAreaPropsExample,
+  ScrollableExample,
+} from '~/examples/ScrollableVsAutoHeightExamples';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/scrollable-vs-auto-height';
 
-type ExampleName = 'scrollable' | 'auto-height';
+type ExampleName = 'scrollable' | 'auto-height' | 'scroll-area-props';
 
 export const getStaticProps: GetStaticProps<{
   code: Record<ExampleName, string>;
@@ -56,6 +61,16 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         container width.
       </PageText>
       <CodeBlock language="typescript" content={code[scrollable ? 'scrollable' : 'auto-height']} />
+      <PageSubtitle value="Customize the underlying ScrollArea" />
+      <PageText>
+        You can customize the underlying scroll area by passing <Code>scrollAreaProps</Code> to the{' '}
+        <Code>DataTable</Code> component. The <Code>scrollAreaProps</Code> accepts a subset of{' '}
+        <ExternalLink to="https://mantine.dev/core/scroll-area/?t=props">Mantine ScrollArea props</ExternalLink>:{' '}
+        <Code>type</Code>, <Code>scrollbarSize</Code> and <Code>scrollHideDelay</Code>. For instance, here’s how you
+        could make the scrollbars invisible:
+      </PageText>
+      <CodeBlock language="typescript" content={code['scroll-area-props']} />
+      <ScrollAreaPropsExample />
       <PageNavigation of={PATH} />
     </Container>
   );

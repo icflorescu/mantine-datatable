@@ -1,4 +1,4 @@
-import { Box, createStyles, ScrollArea } from '@mantine/core';
+import { Box, createStyles, ScrollArea, ScrollAreaProps } from '@mantine/core';
 import { Ref, type ReactNode } from 'react';
 
 const useStyles = createStyles((theme) => {
@@ -84,6 +84,7 @@ type DataTableScrollAreaProps = {
   footerHeight: number;
   onScrollPositionChange: () => void;
   viewportRef: Ref<HTMLDivElement>;
+  scrollAreaProps?: Omit<ScrollAreaProps, 'classNames' | 'styles' | 'onScrollPositionChange'>;
   children: ReactNode;
 };
 
@@ -97,11 +98,13 @@ export default function DataTableScrollArea({
   onScrollPositionChange,
   children,
   viewportRef,
+  scrollAreaProps,
 }: DataTableScrollAreaProps) {
   const bottom = footerHeight ? footerHeight - 1 : 0;
   const { cx, classes } = useStyles();
   return (
     <ScrollArea
+      {...scrollAreaProps}
       viewportRef={viewportRef}
       classNames={{ root: classes.root, scrollbar: classes.scrollbar, thumb: classes.thumb, corner: classes.corner }}
       styles={{ scrollbar: { marginTop: headerHeight, marginBottom: bottom } }}

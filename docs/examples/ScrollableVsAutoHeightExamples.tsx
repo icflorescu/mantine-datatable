@@ -35,3 +35,21 @@ export function AutoHeightExample() {
   );
   // example-end
 }
+
+export function ScrollAreaPropsExample() {
+  return (
+    // example-start scroll-area-props
+    <DataTable
+      height={300}
+      // example-skip other props
+      withBorder
+      withColumnBorders
+      striped
+      records={records}
+      columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
+      // example-resume
+      scrollAreaProps={{ type: 'never' }}
+    />
+    // example-end
+  );
+}
