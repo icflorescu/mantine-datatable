@@ -2,6 +2,7 @@
 
 ## 2.6.0 (2023-06-12)
 
+- Implement column groups (issue [#207](https://github.com/icflorescu/mantine-datatable/issues/207) / PR [#330](https://github.com/icflorescu/mantine-datatable/pull/330) / thanks to [@MatthijsMud](https://github.com/MatthijsMud))
 - Accept `scrollAreaProps` (issue [#327](https://github.com/icflorescu/mantine-datatable/issues/327)/ PR [#328](https://github.com/icflorescu/mantine-datatable/issues/327))
 
 ## 2.5.6 (2023-06-06)

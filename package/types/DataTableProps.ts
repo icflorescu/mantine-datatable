@@ -1,8 +1,7 @@
 import type { DefaultProps, MantineShadow, MantineTheme, ScrollAreaProps, Sx, TableProps } from '@mantine/core';
 import type { CSSProperties, Key, MouseEvent, ReactNode, RefObject } from 'react';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
-import type { DataTableColumn } from './DataTableColumn';
-import type { DataTableColumnGroup } from './DataTableColumnGroup';
+import { DataTableColumnProps } from './DataTableColumnProps';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
 import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';
 import type { DataTableLoaderProps } from './DataTableLoaderProps';
@@ -172,25 +171,10 @@ export type DataTableProps<T> = {
     DefaultProps<'root' | 'header' | 'footer' | 'pagination', CSSProperties>,
     'unstyled' | 'p' | 'px' | 'py' | 'pt' | 'pb' | 'pl' | 'pr'
   > &
+  DataTableColumnProps<T> &
   DataTableOuterBorderProps &
   DataTableLoaderProps &
   DataTableEmptyStateProps &
   DataTablePaginationProps &
   DataTableSortProps &
-  DataTableSelectionProps<T> &
-  (
-    | {
-        /**
-         * Grouped columns
-         */
-        groups: readonly DataTableColumnGroup<T>[];
-        columns?: never;
-      }
-    | {
-        /**
-         * Visible columns
-         */
-        columns: DataTableColumn<T>[];
-        groups?: never;
-      }
-  );
+  DataTableSelectionProps<T>;
