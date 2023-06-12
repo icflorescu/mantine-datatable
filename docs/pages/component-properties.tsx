@@ -10,7 +10,9 @@ const PATH = 'component-properties';
 
 const TYPE_DEFINITION_FILES = [
   'DataTableProps.ts',
+  'DataTableColumnProps.ts',
   'DataTableColumn.ts',
+  'DataTableColumnGroup.ts',
   'DataTableColumnTextAlignment.ts',
   'DataTableVerticalAlignment.ts',
   'DataTableOuterBorderProps.ts',
