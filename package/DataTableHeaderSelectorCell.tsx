@@ -45,6 +45,7 @@ type DataTableHeaderSelectorCellProps = {
   indeterminate: boolean;
   checkboxProps: Record<string, unknown>;
   onChange: (() => void) | undefined;
+  rowSpan?: number;
 };
 
 export default function DataTableHeaderSelectorCell({
@@ -53,10 +54,11 @@ export default function DataTableHeaderSelectorCell({
   indeterminate,
   checkboxProps,
   onChange,
+  rowSpan,
 }: DataTableHeaderSelectorCellProps) {
   const { cx, classes } = useStyles();
   return (
-    <th className={cx(classes.root, { [classes.shadowVisible]: shadowVisible })}>
+    <th className={cx(classes.root, { [classes.shadowVisible]: shadowVisible })} rowSpan={rowSpan}>
       <Checkbox
         classNames={{ input: classes.checkboxInput }}
         checked={checked}
