@@ -13,7 +13,10 @@ export function useMediaQueryStringOrFunction(mediaQuery: string | ((theme: Mant
 
 export function useMediaQueriesStringOrFunction(queries: (string | ((theme: MantineTheme) => string) | undefined)[]) {
   const theme = useMantineTheme();
-  const values = useMemo(() => queries.map(query => (typeof query === 'function' ? query(theme) : query) ?? ''), [queries]);
+  const values = useMemo(
+    () => queries.map((query) => (typeof query === 'function' ? query(theme) : query) ?? ''),
+    [queries, theme]
+  );
   const defaults = useMemo(() => queries.map(() => true), [queries]);
   return useMediaQueries(values, defaults);
 }

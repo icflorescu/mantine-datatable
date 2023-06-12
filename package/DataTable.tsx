@@ -2,8 +2,8 @@ import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@ma
 import { useElementSize, useMergedRef } from '@mantine/hooks';
 import {
   useCallback,
-  useState,
   useMemo,
+  useState,
   type ChangeEventHandler,
   type CSSProperties,
   type Key,
@@ -83,13 +83,13 @@ const useStyles = createStyles(
         },
       },
       tableWithColumnBordersAndSelectableRecords: {
-        'thead': {
+        thead: {
           'tr + tr': {
             th: {
               borderLeft: `1px solid ${rowBorderColorValue}`,
-            }
-          }
-        } 
+            },
+          },
+        },
       },
       verticalAlignmentTop: {
         td: {
@@ -197,7 +197,7 @@ export default function DataTable<T>({
   } = useElementSize<HTMLDivElement>();
 
   const effectiveColumns = useMemo(() => {
-    return groups?.flatMap(group => group.columns) ?? columns!;
+    return groups?.flatMap((group) => group.columns) ?? columns!;
   }, [columns, groups]);
 
   const { ref: headerRef, height: headerHeight } = useElementSize<HTMLTableSectionElement>();

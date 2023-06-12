@@ -1,6 +1,6 @@
 // Modified from https://github.com/mantinedev/mantine/blob/8c12a76c56da51af34213f18dd67c8b72a0ddb44/src/mantine-hooks/src/use-media-query/use-media-query.ts
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export interface UseMediaQueryOptions {
   getInitialValueInEffect: boolean;
@@ -12,18 +12,20 @@ export interface UseMediaQueryOptions {
  * */
 function attachMediaListeners(queries: MediaQueryList[], callback: (matches: boolean[]) => void) {
   const callbackWrapper = () => {
-    callback(queries.map(query => query.matches));
-  }
+    callback(queries.map((query) => query.matches));
+  };
   const subscriptions = queries.map((query) => {
     try {
       query.addEventListener('change', callbackWrapper);
       return () => query.removeEventListener('change', callbackWrapper);
-    } catch(e) {
+    } catch (e) {
       query.addListener(callbackWrapper);
       return () => query.removeListener(callbackWrapper);
     }
   });
-  return () => { subscriptions.forEach(unsubscribe => unsubscribe()) };
+  return () => {
+    subscriptions.forEach((unsubscribe) => unsubscribe());
+  };
 }
 
 function getInitialValue(queries: string[], initialValues?: boolean[]) {
@@ -32,8 +34,7 @@ function getInitialValue(queries: string[], initialValues?: boolean[]) {
   }
 
   if (typeof window !== 'undefined' && 'matchMedia' in window) {
-
-    return queries.map(query => window.matchMedia(query).matches);
+    return queries.map((query) => window.matchMedia(query).matches);
   }
 
   return queries.map(() => false);
@@ -53,9 +54,11 @@ export function useMediaQueries(
 
   useEffect(() => {
     if ('matchMedia' in window) {
-      queryRef.current = queries.map(query => window.matchMedia(query));
-      setMatches(queryRef.current.map(queryResult => queryResult.matches));
-      return attachMediaListeners(queryRef.current, (event) =>  { setMatches(event) });
+      queryRef.current = queries.map((query) => window.matchMedia(query));
+      setMatches(queryRef.current.map((queryResult) => queryResult.matches));
+      return attachMediaListeners(queryRef.current, (event) => {
+        setMatches(event);
+      });
     }
 
     return undefined;

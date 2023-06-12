@@ -67,7 +67,7 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
       {
         path: 'column-grouping',
         title: 'Column grouping',
-        description: 'Example: group multiple columns under a shared header'
+        description: 'Example: group multiple columns under a shared header',
       },
       {
         path: 'customizing-border-colors',

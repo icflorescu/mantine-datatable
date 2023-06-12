@@ -1,7 +1,7 @@
 import { createStyles, type CSSObject } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef } from 'react';
-import DataTableHeaderCell from './DataTableHeaderCell';
 import DataTableColumnGroupHeaderCell from './DataTableColumnGroupHeaderCell';
+import DataTableHeaderCell from './DataTableHeaderCell';
 import DataTableHeaderSelectorCell from './DataTableHeaderSelectorCell';
 import type { DataTableColumn, DataTableSortProps } from './types';
 import { DataTableColumnGroup } from './types/DataTableColumnGroup';
@@ -54,25 +54,29 @@ export default forwardRef(function DataTableHeader<T>(
 ) {
   const { classes, cx } = useStyles();
 
-  const selectAll = selectionVisible ? <DataTableHeaderSelectorCell
-        shadowVisible={leftShadowVisible}
-        checked={selectionChecked}
-        indeterminate={selectionIndeterminate}
-        checkboxProps={selectionCheckboxProps}
-        onChange={onSelectionChange}
-        rowSpan={groups ? 2 : undefined}
-      /> : null;
+  const selectAll = selectionVisible ? (
+    <DataTableHeaderSelectorCell
+      shadowVisible={leftShadowVisible}
+      checked={selectionChecked}
+      indeterminate={selectionIndeterminate}
+      checkboxProps={selectionCheckboxProps}
+      onChange={onSelectionChange}
+      rowSpan={groups ? 2 : undefined}
+    />
+  ) : null;
 
   return (
     <thead className={cx(classes.root, className)} style={style as CSSProperties} ref={ref}>
-      {
-        groups && <tr>
-          { selectAll }
-          { groups.map(group => <DataTableColumnGroupHeaderCell key={group.id} group={group} />) }
+      {groups && (
+        <tr>
+          {selectAll}
+          {groups.map((group) => (
+            <DataTableColumnGroupHeaderCell key={group.id} group={group} />
+          ))}
         </tr>
-      }
+      )}
       <tr>
-        { !groups && selectAll }
+        {!groups && selectAll}
         {columns.map(
           ({
             accessor,

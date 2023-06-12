@@ -173,20 +173,20 @@ export type DataTableProps<T> = {
   DataTableEmptyStateProps &
   DataTablePaginationProps &
   DataTableSortProps &
-  DataTableSelectionProps<T> & (
+  DataTableSelectionProps<T> &
+  (
     | {
-      /**
-       * Grouped columns
-       */
-      groups: readonly DataTableColumnGroup<T>[];
-      columns?: never;
-    }
+        /**
+         * Grouped columns
+         */
+        groups: readonly DataTableColumnGroup<T>[];
+        columns?: never;
+      }
     | {
-
-      /**
-       * Visible columns
-       */
-      columns: DataTableColumn<T>[];
-      groups?: never;
-    }
-  )
+        /**
+         * Visible columns
+         */
+        columns: DataTableColumn<T>[];
+        groups?: never;
+      }
+  );

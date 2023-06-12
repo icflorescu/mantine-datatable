@@ -54,7 +54,7 @@ export default function DataTableHeaderSelectorCell({
   indeterminate,
   checkboxProps,
   onChange,
-  rowSpan
+  rowSpan,
 }: DataTableHeaderSelectorCellProps) {
   const { cx, classes } = useStyles();
   return (
