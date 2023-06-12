@@ -84,7 +84,7 @@ type DataTableScrollAreaProps = {
   footerHeight: number;
   onScrollPositionChange: () => void;
   viewportRef: Ref<HTMLDivElement>;
-  scrollAreaProps?: Pick<ScrollAreaProps, 'type' | 'scrollbarSize' | 'scrollHideDelay'>;
+  scrollAreaProps?: Omit<ScrollAreaProps, 'classNames' | 'styles' | 'onScrollPositionChange'>;
   children: ReactNode;
 };
 
@@ -104,13 +104,11 @@ export default function DataTableScrollArea({
   const { cx, classes } = useStyles();
   return (
     <ScrollArea
+      {...scrollAreaProps}
       viewportRef={viewportRef}
       classNames={{ root: classes.root, scrollbar: classes.scrollbar, thumb: classes.thumb, corner: classes.corner }}
       styles={{ scrollbar: { marginTop: headerHeight, marginBottom: bottom } }}
       onScrollPositionChange={onScrollPositionChange}
-      type={scrollAreaProps?.type ?? 'hover'}
-      scrollbarSize={scrollAreaProps?.scrollbarSize ?? 12}
-      scrollHideDelay={scrollAreaProps?.scrollHideDelay ?? 1000}
     >
       {children}
       <Box

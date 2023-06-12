@@ -65,8 +65,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>
         You can customize the underlying scroll area by passing <Code>scrollAreaProps</Code> to the{' '}
         <Code>DataTable</Code> component. The <Code>scrollAreaProps</Code> accepts a subset of{' '}
-        <ExternalLink to="https://mantine.dev/core/scroll-area/?t=props">Mantine ScrollArea props</ExternalLink>,
-        respectivelly
+        <ExternalLink to="https://mantine.dev/core/scroll-area/?t=props">Mantine ScrollArea props</ExternalLink>:{' '}
         <Code>type</Code>, <Code>scrollbarSize</Code> and <Code>scrollHideDelay</Code>. For instance, here’s how you
         could make the scrollbars invisible:
       </PageText>
