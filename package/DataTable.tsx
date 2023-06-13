@@ -1,11 +1,11 @@
-import { Box, createStyles, MantineSize, MantineTheme, packSx, Table } from '@mantine/core';
+import { Box, MantineSize, Table, createStyles, packSx, type MantineTheme } from '@mantine/core';
 import { useElementSize, useMergedRef } from '@mantine/hooks';
 import {
   useCallback,
   useMemo,
   useState,
-  type ChangeEventHandler,
   type CSSProperties,
+  type ChangeEventHandler,
   type Key,
   type MouseEventHandler,
 } from 'react';
