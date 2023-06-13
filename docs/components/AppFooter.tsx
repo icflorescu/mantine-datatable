@@ -1,8 +1,9 @@
 import { createStyles, Group, Text } from '@mantine/core';
 import {
   AUTHOR_LINK,
-  FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
-  FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT,
+  FOOTER_BREAKPOINT,
+  FOOTER_HEIGHT_ABOVE_BREAKPOINT,
+  FOOTER_HEIGHT_BELOW_BREAKPOINT,
   LICENSE_LINK,
   NAVBAR_BREAKPOINT,
   NAVBAR_WIDTH,
@@ -21,7 +22,7 @@ const useStyles = createStyles((theme) => {
       left: 0,
       right: 0,
       bottom: 0,
-      height: FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT,
+      height: FOOTER_HEIGHT_BELOW_BREAKPOINT,
       background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
       padding: theme.spacing.sm,
       display: 'flex',
@@ -29,11 +30,13 @@ const useStyles = createStyles((theme) => {
       justifyContent: 'center',
       alignItems: 'center',
       gap: theme.spacing.xs,
-      [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`]: {
-        marginLeft: NAVBAR_WIDTH,
-        height: FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
+      [`@media (min-width: ${FOOTER_BREAKPOINT}px)`]: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        height: FOOTER_HEIGHT_ABOVE_BREAKPOINT,
+      },
+      [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`]: {
+        marginLeft: NAVBAR_WIDTH,
         '&::before': {
           position: 'absolute',
           content: '""',
