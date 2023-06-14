@@ -11,6 +11,7 @@ import {
 import AppFooter from './AppFooter';
 import AppHeader from './AppHeader';
 import AppNavbar from './AppNavbar';
+import AppPartners from './AppPartners';
 
 const useStyles = createStyles((theme) => {
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.2 : 0.015;
@@ -94,7 +95,10 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
       )}
       <AppNavbar visible={navbarVisible} onHideClick={() => setNavbarVisible(false)} />
       <AppHeader onShowNavbarClick={() => setNavbarVisible(true)} />
-      <div className={classes.main}>{children}</div>
+      <div className={classes.main}>
+        {children}
+        <AppPartners />
+      </div>
       <AppFooter />
     </>
   );

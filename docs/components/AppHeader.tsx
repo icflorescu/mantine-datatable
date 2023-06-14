@@ -147,7 +147,7 @@ export default function AppHeader({ onShowNavbarClick }: { onShowNavbarClick: ()
   return (
     <Group className={cx(classes.root, { [classes.windowScrolledOnY]: windowScrollY !== 0 })} px="sm" spacing={0}>
       <Group spacing="xs">
-        <IconMenu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} />
+        <IconMenu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} role="button" />
         <Group spacing="xs" className={classes.buttons}>
           <Button
             classNames={{

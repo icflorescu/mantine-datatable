@@ -1,4 +1,4 @@
-import { createStyles, Group, Text } from '@mantine/core';
+import { createStyles, Text } from '@mantine/core';
 import {
   AUTHOR_LINK,
   FOOTER_BREAKPOINT,
@@ -7,7 +7,6 @@ import {
   LICENSE_LINK,
   NAVBAR_BREAKPOINT,
   NAVBAR_WIDTH,
-  NPM_LINK,
   REPO_LINK,
   SPONSOR_LINK,
 } from '~/config';
@@ -66,26 +65,26 @@ export default function AppFooter() {
   return (
     <div className={classes.root}>
       <ExternalLink to={LICENSE_LINK} rel="license">
-        <img src={`https://img.shields.io/npm/l/mantine-datatable.svg${badgeParams}`} alt="MIT License" />
+        <img
+          src={`https://img.shields.io/npm/l/mantine-datatable.svg${badgeParams}`}
+          alt="MIT License"
+          aria-label="MantineDataTable is released under MIT license"
+        />
       </ExternalLink>
       <Text size="sm" align="center">
         Built by <ExternalLink to={AUTHOR_LINK}>Ionut-Cristian Florescu</ExternalLink> and{' '}
         <ExternalLink to={`${REPO_LINK}/graphs/contributors`}>these awesome people</ExternalLink>
         .
         <br />
-        Please <ExternalLink to={SPONSOR_LINK}>sponsor this project</ExternalLink> if you find it useful.
+        Please <ExternalLink to={SPONSOR_LINK}>sponsor the project</ExternalLink> if you find it useful.
       </Text>
-      <Group spacing="xs">
-        <ExternalLink to={REPO_LINK}>
-          <img
-            src={`https://img.shields.io/github/stars/icflorescu/mantine-datatable${badgeParams}`}
-            alt="GitHub Stars"
-          />
-        </ExternalLink>
-        <ExternalLink to={NPM_LINK}>
-          <img src={`https://img.shields.io/npm/dm/mantine-datatable.svg${badgeParams}`} alt="NPM Downloads" />
-        </ExternalLink>
-      </Group>
+      <ExternalLink to={REPO_LINK}>
+        <img
+          src={`https://img.shields.io/github/stars/icflorescu/mantine-datatable${badgeParams}`}
+          alt="GitHub Stars"
+          aria-label="Star Mantine DataTable on GitHub"
+        />
+      </ExternalLink>
     </div>
   );
 }
