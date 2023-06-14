@@ -98,7 +98,7 @@ export default function AppPartners() {
           >
             <img
               style={{ height: `${scale || '100'}%`, marginTop: shift ? `-${shift}%` : undefined }}
-              src={`/partners/${base}${themed ? `-${colorScheme}` : ''}.${ext}`}
+              src={`${process.env.BASE_PATH}/partners/${base}${themed ? `-${colorScheme}` : ''}.${ext}`}
               alt={name}
             />
           </a>
