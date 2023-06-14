@@ -1,5 +1,5 @@
-import { DataTableColumn } from './DataTableColumn';
-import { DataTableColumnGroup } from './DataTableColumnGroup';
+import type { DataTableColumn } from './DataTableColumn';
+import type { DataTableColumnGroup } from './DataTableColumnGroup';
 
 export type DataTableColumnProps<T> =
   | {

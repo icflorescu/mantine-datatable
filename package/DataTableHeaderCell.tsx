@@ -1,8 +1,7 @@
 import { ActionIcon, Box, Center, Group, Popover, createStyles, type MantineTheme, type Sx } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconArrowUp, IconArrowsVertical, IconFilter } from '@tabler/icons-react';
-import type { CSSProperties, ReactNode } from 'react';
-import { type BaseSyntheticEvent } from 'react';
+import type { BaseSyntheticEvent, CSSProperties, ReactNode } from 'react';
 import type { DataTableColumn, DataTableSortProps } from './types';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
 

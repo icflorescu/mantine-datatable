@@ -1,8 +1,9 @@
 import { createStyles, Global, px } from '@mantine/core';
 import { ReactNode, useState } from 'react';
 import {
-  FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
-  FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT,
+  FOOTER_BREAKPOINT,
+  FOOTER_HEIGHT_ABOVE_BREAKPOINT,
+  FOOTER_HEIGHT_BELOW_BREAKPOINT,
   HEADER_HEIGHT,
   NAVBAR_BREAKPOINT,
   NAVBAR_WIDTH,
@@ -10,6 +11,7 @@ import {
 import AppFooter from './AppFooter';
 import AppHeader from './AppHeader';
 import AppNavbar from './AppNavbar';
+import AppPartners from './AppPartners';
 
 const useStyles = createStyles((theme) => {
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.2 : 0.015;
@@ -19,8 +21,8 @@ const useStyles = createStyles((theme) => {
       background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.fn.lighten(theme.colors.gray[0], 0.9),
       borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]}`,
       marginTop: HEADER_HEIGHT,
-      marginBottom: FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT,
-      minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT_BELOW_NAVBAR_BREAKPOINT}px)`,
+      marginBottom: FOOTER_HEIGHT_BELOW_BREAKPOINT,
+      minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT_BELOW_BREAKPOINT}px)`,
       padding: `${theme.spacing.lg} 0`,
       '&::after': {
         position: 'absolute',
@@ -34,10 +36,12 @@ const useStyles = createStyles((theme) => {
           0
         )}), linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(theme.black, 0)} 30%)`,
       },
+      [`@media (min-width: ${FOOTER_BREAKPOINT}px)`]: {
+        minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT_ABOVE_BREAKPOINT}px)`,
+        marginBottom: FOOTER_HEIGHT_ABOVE_BREAKPOINT,
+      },
       [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`]: {
         marginLeft: NAVBAR_WIDTH,
-        marginBottom: FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT,
-        minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT_ABOVE_NAVBAR_BREAKPOINT}px)`,
       },
     },
   };
@@ -91,7 +95,10 @@ export default function AppWrapper({ children }: { children: ReactNode }) {
       )}
       <AppNavbar visible={navbarVisible} onHideClick={() => setNavbarVisible(false)} />
       <AppHeader onShowNavbarClick={() => setNavbarVisible(true)} />
-      <div className={classes.main}>{children}</div>
+      <div className={classes.main}>
+        {children}
+        <AppPartners />
+      </div>
       <AppFooter />
     </>
   );

@@ -73,7 +73,7 @@ export default function AppNavbar({ visible, onHideClick }: { visible: boolean; 
       <Navbar className={cx(classes.root, { [classes.rootVisible]: visible })} onClick={onHideClick}>
         <Box className={classes.header} px="sm">
           <Logo />
-          <IconX className={classes.closeIcon} strokeWidth={1} />
+          <IconX className={classes.closeIcon} strokeWidth={1} role="button" />
         </Box>
         <Navbar.Section grow component={ScrollArea}>
           <Box my="xs">

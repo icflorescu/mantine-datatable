@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-turborepo",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "description": "This is a monorepo; see package/package.json for more info",
   "private": true,
   "workspaces": [
@@ -27,8 +27,8 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.2",
-    "@typescript-eslint/eslint-plugin": "^5.59.9",
-    "@typescript-eslint/parser": "^5.59.9",
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
     "babel-jest": "^29.5.0",
     "eslint": "^8.42.0",
     "eslint-config-next": "^13.4.5",

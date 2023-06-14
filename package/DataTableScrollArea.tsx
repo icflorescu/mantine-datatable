@@ -1,5 +1,5 @@
 import { Box, createStyles, ScrollArea, ScrollAreaProps } from '@mantine/core';
-import { Ref, type ReactNode } from 'react';
+import type { ReactNode, Ref } from 'react';
 
 const useStyles = createStyles((theme) => {
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;
