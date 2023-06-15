@@ -10,7 +10,7 @@ export const SEO_DEFAULT_DESCRIPTION =
 export const SEO_CREATOR = '@icflorescu';
 
 export const HEADER_HEIGHT = 56;
-export const FOOTER_BREAKPOINT = 1024;
+export const FOOTER_BREAKPOINT = 1200;
 export const FOOTER_HEIGHT_BELOW_BREAKPOINT = 164;
 export const FOOTER_HEIGHT_ABOVE_BREAKPOINT = 64;
 export const NAVBAR_WIDTH = 300;
