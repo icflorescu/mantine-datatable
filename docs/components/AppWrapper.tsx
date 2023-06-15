@@ -36,12 +36,12 @@ const useStyles = createStyles((theme) => {
           0
         )}), linear-gradient(${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(theme.black, 0)} 30%)`,
       },
+      [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`]: {
+        marginLeft: NAVBAR_WIDTH,
+      },
       [`@media (min-width: ${FOOTER_BREAKPOINT}px)`]: {
         minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT_ABOVE_BREAKPOINT}px)`,
         marginBottom: FOOTER_HEIGHT_ABOVE_BREAKPOINT,
-      },
-      [`@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`]: {
-        marginLeft: NAVBAR_WIDTH,
       },
     },
   };
