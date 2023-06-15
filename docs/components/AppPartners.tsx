@@ -1,4 +1,4 @@
-import { Container, createStyles } from '@mantine/core';
+import { Container, Text, createStyles } from '@mantine/core';
 
 const PARTNERS = [
   {
@@ -28,16 +28,19 @@ const PARTNERS = [
   },
   {
     name: 'Pachtop',
-    logo: { base: 'pachtop', ext: 'png', scale: 84, shift: 8 },
+    showText: true,
+    logo: { base: 'pachtop', ext: 'png', scale: 84, shift: 4 },
     link: 'https://github.com/pacholoamit/pachtop',
   },
   {
     name: 'Ganymede',
-    logo: { base: 'ganymede', ext: 'png', scale: 80, shift: 8 },
+    showText: true,
+    logo: { base: 'ganymede', ext: 'png', scale: 80, shift: 4 },
     link: 'https://github.com/Zibbp/ganymede',
   },
   {
     name: 'COH3 Stats',
+    showText: true,
     logo: { base: 'coh3-stats', ext: 'png', scale: 80, shift: 4 },
     link: 'https://coh3stats.com',
   },
@@ -71,10 +74,15 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: theme.spacing.xs,
     height: 24,
+    textDecoration: 'none',
     [`@media (min-width: ${theme.breakpoints.sm})`]: {
       height: 36,
     },
+  },
+  text: {
+    fontWeight: 700,
   },
 }));
 
@@ -87,7 +95,7 @@ export default function AppPartners() {
     <div className={classes.root}>
       <h2 className={classes.title}>Mantine DataTable is trusted by</h2>
       <Container className={classes.links}>
-        {PARTNERS.map(({ name, logo: { base, ext, themed, scale, shift }, link }) => (
+        {PARTNERS.map(({ name, logo: { base, ext, themed, scale, shift }, link, showText }) => (
           <a
             key={name}
             className={classes.link}
@@ -101,6 +109,11 @@ export default function AppPartners() {
               src={`${process.env.BASE_PATH}/partners/${base}${themed ? `-${colorScheme}` : ''}.${ext}`}
               alt={name}
             />
+            {showText && (
+              <Text color="dimmed" size="lg" className={classes.text}>
+                {name}
+              </Text>
+            )}
           </a>
         ))}
       </Container>
