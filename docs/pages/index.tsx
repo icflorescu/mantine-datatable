@@ -61,7 +61,8 @@ export default function Page() {
         </div>
         <Text className={classes.subtitle}>
           Mantine DataTable is a lightweight, dependency-free component that brings datagrid-like functionality to your
-          data-rich user interfaces. Features context-menu support and{' '}
+          data-rich user interfaces. Features{' '}
+          <InternalLink to="/examples/row-context-menu">context-menu support</InternalLink> and{' '}
           <InternalLink to="/examples/records-selection">
             intuitive Gmail-style additive batch rows selection
           </InternalLink>{' '}
