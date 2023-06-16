@@ -13,6 +13,23 @@ The lightweight, dependency-free, "dark-theme aware" **table component** for you
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/189911698-369ba48e-65f0-4772-aad3-cb5e6d4cb59d.png)](https://icflorescu.github.io/mantine-datatable/)
 
+## Features
+
+- **Lightweight** - no external dependencies, no bloat
+- **Dark theme aware** - works out of the box with Mantine's dark theme
+- **Fully customizable** - you can customize the look and feel of the table and its components
+- **[Asynchronous data loading](https://icflorescu.github.io/mantine-datatable/examples/asynchronous-data-loading)** - load data from a remote API endpoint and show a loading indicator while waiting for the response
+- **[Pagination](https://icflorescu.github.io/mantine-datatable/examples/pagination)** - split large data sets into pages
+- **[Column sorting](https://icflorescu.github.io/mantine-datatable/examples/sorting)** - sort data by one or more columns
+- **[Custom cell data rendering](https://icflorescu.github.io/mantine-datatable/examples/column-properties)** - render cell data using custom components
+- **[Row context menu](https://icflorescu.github.io/mantine-datatable/examples/row-context-menu)** - show a context menu when right-clicking on a row
+- **[Row expansion](https://icflorescu.github.io/mantine-datatable/examples/expanding-rows)** - expand a row to show additional details
+- **[Nesting](https://icflorescu.github.io/mantine-datatable/examples/nested-tables)** - nest tables to show hierarchical data
+- **[Additive batch rows selection](https://icflorescu.github.io/mantine-datatable/examples/records-selection)** - select or deselect ranges of rows using the Shift key
+- **[Automatically-scrollable](https://icflorescu.github.io/mantine-datatable/examples/scrollable-vs-auto-height)** - automatically scrollable or auto-height
+- **[AutoAnimate support](https://icflorescu.github.io/mantine-datatable/examples/using-with-auto-animate)** - animate row sorting, addition and removal
+- **More** - check out the [full documentation](https://icflorescu.github.io/mantine-datatable/)
+
 ## Full documentation and examples
 
 Visit [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mantine-datatable/) to view the full documentation and learn how to use it by browsing a comprehensive list of examples.
