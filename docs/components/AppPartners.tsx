@@ -44,6 +44,12 @@ const PARTNERS = [
     logo: { base: 'coh3-stats', ext: 'png', scale: 80, shift: 4 },
     link: 'https://coh3stats.com',
   },
+  {
+    name: 'ccrentals.org',
+    showText: true,
+    logo: { base: 'ccrentals', ext: 'svg', themed: true, scale: 80, shift: 2 },
+    link: 'https://www.ccrentals.org',
+  },
 ];
 
 const useStyles = createStyles((theme) => ({
@@ -110,7 +116,7 @@ export default function AppPartners() {
               alt={name}
             />
             {showText && (
-              <Text color="dimmed" size="lg" className={classes.text}>
+              <Text color="dimmed" size="md" className={classes.text}>
                 {name}
               </Text>
             )}
