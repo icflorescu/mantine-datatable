@@ -61,7 +61,7 @@
     "@tabler/icons-react": "^2.22.0",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
-    "esbuild": "^0.18.3",
+    "esbuild": "^0.18.4",
     "react": "^18.2.0",
     "typescript": "^5.1.3"
   },
