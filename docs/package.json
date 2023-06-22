@@ -9,6 +9,7 @@
     "lint": "eslint . --ext=.ts,.tsx && tsc --noEmit"
   },
   "dependencies": {
+    "@docsearch/react": "^3.5.1",
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
     "@faker-js/faker": "^8.0.2",

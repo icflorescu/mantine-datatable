@@ -29,6 +29,10 @@ export const REMIX_LINK = 'https://remix.run';
 export const CRA_LINK = 'https://create-react-app.dev';
 export const GATSBY_LINK = 'https://www.gatsbyjs.com';
 
+export const DOCSEARCH_APP_ID = 'QTPWIJ4FEH';
+export const DOCSEARCH_INDEX_NAME = 'mantine-datatable';
+export const DOCSEARCH_API_KEY = 'b6e1b8f8ada26b807cb65d32ad33ac21';
+
 export const PAGES: ({ external?: true; title: string; color?: MantineColor; description?: string } & (
   | {
       path?: string;

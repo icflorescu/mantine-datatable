@@ -11,5 +11,5 @@ export function NpmDownloads() {
       .then((res) => !!isMounted && setDownloads(res.downloads));
   }, [isMounted]);
 
-  return <>{downloads ? `${(downloads / 1000).toFixed(1)}k/month` : '...'}</>;
+  return <>{downloads ? `${(downloads / 1000).toFixed(1)}k/mo` : '...'}</>;
 }
