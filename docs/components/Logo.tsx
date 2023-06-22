@@ -10,21 +10,13 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     gap: theme.spacing.xs,
   },
-  iconInsideHeader: {
-    '@media (min-width: 310px)': {
-      display: 'none',
-    },
-    '@media (min-width: 340px)': {
-      display: 'inherit',
-    },
-  },
   title: {
     font: '24px/1 BenchNine, sans-serif',
     margin: '0 0 -3px',
   },
   titleInsideHeader: {
     display: 'none',
-    '@media (min-width: 310px)': {
+    '@media (min-width: 390px)': {
       display: 'block',
     },
   },
@@ -36,7 +28,7 @@ const useStyles = createStyles((theme) => ({
   },
   versionInsideHeader: {
     display: 'none',
-    '@media (min-width: 400px)': {
+    '@media (min-width: 448px)': {
       display: 'inherit',
     },
   },
@@ -46,7 +38,7 @@ export default function Logo({ className, insideHeader }: { className?: string; 
   const { classes, cx } = useStyles();
   return (
     <Link className={cx(classes.root, className)} href="/">
-      <ThemeIcon className={cx({ [classes.iconInsideHeader]: insideHeader })} size="md" radius="lg">
+      <ThemeIcon size="md" radius="lg">
         <IconTable size={16} />
       </ThemeIcon>
       <Text className={cx(classes.title, { [classes.titleInsideHeader]: insideHeader })} component="h1">

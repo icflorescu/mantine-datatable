@@ -1,37 +1,18 @@
-import {
-  ActionIcon,
-  Button,
-  createStyles,
-  Group,
-  keyframes,
-  px,
-  SegmentedControl,
-  Text,
-  useMantineColorScheme,
-} from '@mantine/core';
+import { createStyles, Group, px } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
-import { IconBrandNpm, IconHeartFilled, IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
-import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH, NPM_LINK, REPO_LINK, SPONSOR_LINK } from '~/config';
-import AppHeaderColorSchemeLabel from './AppHeaderColorSchemeLabel';
-import GitHubIcon from './GitHubIcon';
+import { IconMenu2 } from '@tabler/icons-react';
+import { HEADER_HEIGHT, NAVBAR_BREAKPOINT, NAVBAR_WIDTH } from '~/config';
+import ColorSchemeActionIcon from './appHeader/ColorSchemeActionIcon';
+import ColorSchemeControl from './appHeader/ColorSchemeControl';
+import NpmLinkButton from './appHeader/NpmLinkButton';
+import SearchButton from './appHeader/SearchButton';
+import SourceLinkActionIcon from './appHeader/SourceLinkActionIcon';
+import SourceLinkButton from './appHeader/SourceLinkButton';
+import SponsorsLinkButton from './appHeader/SponsorsLinkButton';
 import Logo from './Logo';
-import { NpmDownloads } from './NpmDownloads';
-
-const REPO_LINK_ARIA_LABEL = 'View Mantine DataTable source code on GitHub';
-const SPONSORS_LINK_ARIA_LABEL = 'Sponsor Mantine DataTable project on GitHub Sponsors';
-
-const BEAT_ANIMATION = keyframes({
-  '0%': { transform: 'scale(1)', opacity: 1 },
-  '7%': { transform: 'scale(1.1)', opacity: 0.5 },
-  '14%': { transform: 'scale(1)', opacity: 1 },
-  '21%': { transform: 'scale(1.1)', opacity: 0.5 },
-  '30%': { transform: 'scale(1)', opacity: 1 },
-});
 
 const useStyles = createStyles((theme) => {
   const breakpointMediaQuery = `@media (min-width: ${theme.breakpoints[NAVBAR_BREAKPOINT]})`;
-  const buttonBorder = `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`;
-  const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[7];
   const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.3 : 0.03;
 
   return {
@@ -81,7 +62,10 @@ const useStyles = createStyles((theme) => {
       },
     },
     menuIcon: {
-      color: theme.fn[theme.colorScheme === 'dark' ? 'lighten' : 'darken'](actionIconColor, 0.75),
+      color: theme.fn[theme.colorScheme === 'dark' ? 'lighten' : 'darken'](
+        theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[7],
+        0.75
+      ),
       [breakpointMediaQuery]: {
         display: 'none',
       },
@@ -91,55 +75,21 @@ const useStyles = createStyles((theme) => {
         display: 'none',
       },
     },
-    actionIcons: {
-      [breakpointMediaQuery]: {
-        display: 'none',
-      },
-    },
-    actionIcon: {
-      border: `1px solid ${theme.fn[theme.colorScheme === 'dark' ? 'darken' : 'lighten'](actionIconColor, 0.25)}`,
-      color: actionIconColor,
-    },
-    actionIconRed: {
-      color: theme.colors.red[theme.colorScheme === 'dark' ? 8 : 6],
-    },
     buttons: {
       display: 'none',
       [breakpointMediaQuery]: {
         display: 'inherit',
       },
     },
-    button: {
-      border: buttonBorder,
-      paddingRight: theme.spacing.xs,
-    },
-    buttonIcon: {
-      '&&': { marginRight: 8 },
-    },
-    buttonIconSponsor: {
-      transformOrigin: 'center bottom',
-      '&&': { marginRight: 6 },
-      color: theme.colors.red[theme.colorScheme === 'dark' ? 8 : 6],
-      animation: `${BEAT_ANIMATION} 3s ease-in-out infinite`,
-    },
-    buttonLabel: {
-      marginBottom: -2,
-    },
-    colorSchemeSegmentedControlContainer: {
-      display: 'none',
+    actionIcons: {
       [breakpointMediaQuery]: {
-        display: 'inherit',
+        display: 'none',
       },
-    },
-    colorSchemeSegmentedControl: {
-      border: buttonBorder,
     },
   };
 });
 
 export default function AppHeader({ onShowNavbarClick }: { onShowNavbarClick: () => void }) {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const ColorSchemeIcon = colorScheme === 'dark' ? IconSun : IconMoon;
   const [{ y: windowScrollY }] = useWindowScroll();
 
   const { classes, cx } = useStyles();
@@ -149,101 +99,20 @@ export default function AppHeader({ onShowNavbarClick }: { onShowNavbarClick: ()
       <Group spacing="xs">
         <IconMenu2 className={classes.menuIcon} strokeWidth={1} onClick={onShowNavbarClick} role="button" />
         <Group spacing="xs" className={classes.buttons}>
-          <Button
-            classNames={{
-              root: classes.button,
-              icon: classes.buttonIcon,
-              label: classes.buttonLabel,
-            }}
-            size="xs"
-            variant="default"
-            leftIcon={<GitHubIcon size={16} />}
-            component="a"
-            href={REPO_LINK}
-            target="_blank"
-            aria-label={REPO_LINK_ARIA_LABEL}
-          >
-            Source code
-          </Button>
-          <Button
-            classNames={{
-              root: classes.button,
-              icon: cx(classes.buttonIcon, classes.buttonIconSponsor),
-              label: classes.buttonLabel,
-            }}
-            size="xs"
-            variant="default"
-            leftIcon={<IconHeartFilled size={18} />}
-            component="a"
-            href={SPONSOR_LINK}
-            target="_blank"
-            aria-label={SPONSORS_LINK_ARIA_LABEL}
-          >
-            Sponsor
-          </Button>
-          <Button
-            classNames={{
-              root: classes.button,
-              icon: cx(classes.buttonIcon),
-              label: classes.buttonLabel,
-            }}
-            size="xs"
-            variant="default"
-            leftIcon={<IconBrandNpm color="#CC3534" />}
-            component="a"
-            href={NPM_LINK}
-            target="_blank"
-            aria-label="View Mantine DataTable on npm"
-          >
-            <NpmDownloads />
-          </Button>
+          <SourceLinkButton />
+          <SponsorsLinkButton />
+          <NpmLinkButton />
         </Group>
         <Logo className={classes.logo} insideHeader />
       </Group>
-      <Group className={classes.actionIcons} spacing="xs">
-        <ActionIcon
-          className={classes.actionIcon}
-          variant="outline"
-          component="a"
-          href={REPO_LINK}
-          target="_blank"
-          aria-label={REPO_LINK_ARIA_LABEL}
-        >
-          <GitHubIcon size={16} />
-        </ActionIcon>
-        <ActionIcon
-          className={cx(classes.actionIcon, classes.actionIconRed)}
-          variant="outline"
-          component="a"
-          href={SPONSOR_LINK}
-          target="_blank"
-          aria-label={SPONSORS_LINK_ARIA_LABEL}
-        >
-          <IconHeartFilled size={16} />
-        </ActionIcon>
-        <ActionIcon
-          aria-label="Toggle color scheme"
-          className={classes.actionIcon}
-          variant="outline"
-          onClick={() => toggleColorScheme()}
-        >
-          <ColorSchemeIcon size={16} />
-        </ActionIcon>
-      </Group>
-      <Group className={classes.colorSchemeSegmentedControlContainer} spacing="xs">
-        <Text size="xs" weight={500}>
-          Switch theme
-        </Text>
-        <SegmentedControl
-          size="xs"
-          className={classes.colorSchemeSegmentedControl}
-          value={colorScheme}
-          onChange={() => toggleColorScheme()}
-          data={[
-            { value: 'light', label: <AppHeaderColorSchemeLabel value="Light" /> },
-            { value: 'dark', label: <AppHeaderColorSchemeLabel value="Dark" /> },
-          ]}
-        />
+      <Group spacing="xs">
+        <SearchButton />
+        <Group className={classes.actionIcons} spacing="xs">
+          <SourceLinkActionIcon />
+          <SourceLinkActionIcon />
+          <ColorSchemeActionIcon />
+        </Group>
+        <ColorSchemeControl />
       </Group>
     </Group>
   );

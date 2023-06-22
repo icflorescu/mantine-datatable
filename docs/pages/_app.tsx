@@ -1,3 +1,6 @@
+import '@docsearch/css';
+import './docsearch-overrides.css';
+
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { ModalsProvider } from '@mantine/modals';
@@ -15,9 +18,7 @@ export default function _App(props: AppProps) {
 
   useEffect(() => {
     logPageView();
-
     Router.events.on('routeChangeComplete', logPageView);
-
     return () => {
       Router.events.off('routeChangeComplete', logPageView);
     };
@@ -28,9 +29,16 @@ export default function _App(props: AppProps) {
     defaultValue: 'light',
   });
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', colorScheme);
+  }, [colorScheme]);
+
   const toggleColorScheme = () => {
-    setColorScheme(colorScheme === 'dark' ? 'light' : 'dark');
+    const newColorScheme = colorScheme === 'dark' ? 'light' : 'dark';
+    setColorScheme(newColorScheme);
+    document.documentElement.setAttribute('data-theme', newColorScheme);
   };
+
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
   return (

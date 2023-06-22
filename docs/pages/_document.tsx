@@ -1,6 +1,6 @@
 import { createGetInitialProps } from '@mantine/next';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { SEO_CREATOR, SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE } from '~/config';
+import { DOCSEARCH_APP_ID, SEO_CREATOR, SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE } from '~/config';
 
 const getInitialProps = createGetInitialProps();
 
@@ -36,6 +36,7 @@ export default class _Document extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href={`${process.env.BASE_PATH}/favicon-16x16.png`} />
           <link rel="manifest" href={`${process.env.BASE_PATH}/site.webmanifest`} />
           <link rel="mask-icon" href={`${process.env.BASE_PATH}/safari-pinned-tab.svg`} color="#5bbad5" />
+          <link rel="preconnect" href={`https://${DOCSEARCH_APP_ID}-dsn.algolia.net`} crossOrigin="anonymous" />
           <meta name="msapplication-TileColor" content="#2b5797" />
           <meta name="theme-color" content="#1971c2" />
         </Head>
