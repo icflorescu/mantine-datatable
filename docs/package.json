@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.195",
-    "@types/mixpanel-browser": "^2.38.2",
+    "@types/mixpanel-browser": "^2.47.0",
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
     "mixpanel-browser": "^2.47.0",
