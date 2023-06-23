@@ -31,8 +31,8 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageTitle of={PATH} />
       <PageText>
         Here is a complex usage scenario featuring custom column definitions, asynchronous data loading with{' '}
-        <ExternalLink to="https://tanstack.com/query/v4/docs/adapters/react-query">React Query</ExternalLink>, sorting,
-        pagination, custom cell data rendering, multiple row selection, and row context-menu.
+        <ExternalLink to="https://tanstack.com/query/v4/docs/adapters/react-query">TanStack React Query</ExternalLink>,
+        sorting, pagination, custom cell data rendering, multiple row selection, and row context-menu.
       </PageText>
       <QueryClientProvider client={queryClient}>
         <ComplexUsageExample />

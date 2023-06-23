@@ -1,4 +1,13 @@
-import { Code, Container, createStyles, DefaultMantineColor, MantineSize, MANTINE_SIZES, Paper } from '@mantine/core';
+import {
+  Box,
+  Code,
+  Container,
+  DefaultMantineColor,
+  MANTINE_SIZES,
+  MantineSize,
+  Paper,
+  createStyles,
+} from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
 import CheckableSegmentedControl from '~/components/CheckableSegmentedControl';
@@ -112,10 +121,11 @@ export default function Page({
     <Container>
       <PageTitle of={PATH} />
       <Paper my="xl" px="xl" py="sm" withBorder>
-        <div className={cx(classes.controlGroups, classes.controls)}>
+        <Box py="sm" className={cx(classes.controlGroups, classes.controls)}>
           <div className={classes.controls}>
             <CheckableSegmentedControl
               label="Loader variant"
+              documentAs="loaderVariant"
               data={VARIANTS}
               checked={customizeLoaderVariant}
               onCheckedChange={setCustomizeLoaderVariant}
@@ -124,6 +134,7 @@ export default function Page({
             />
             <CheckableSegmentedControl
               label="Loader size"
+              documentAs="loaderSize"
               data={MANTINE_SIZES as unknown as string[]}
               checked={customizeLoaderSize}
               onCheckedChange={setCustomizeLoaderSize}
@@ -134,6 +145,7 @@ export default function Page({
           <div className={classes.controls}>
             <CheckableSegmentedControl
               label="Loader color"
+              documentAs="loaderColor"
               data={['blue', 'green', 'grape']}
               checked={customizeLoaderColor}
               onCheckedChange={setCustomizeLoaderColor}
@@ -142,6 +154,7 @@ export default function Page({
             />
             <CheckableSegmentedControl
               label="Background blur"
+              documentAs="loaderBackgroundBlur"
               data={BLURS.map(String)}
               checked={customizeLoaderBackgroundBlur}
               onCheckedChange={setCustomizeLoaderBackgroundBlur}
@@ -149,7 +162,7 @@ export default function Page({
               onChange={(v) => setLoaderBackgroundBlur(Number(v))}
             />
           </div>
-        </div>
+        </Box>
       </Paper>
       <AsynchronousDataLoadingExample
         customizeLoaderVariant={customizeLoaderVariant}

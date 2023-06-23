@@ -35,9 +35,9 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageTitle of={PATH} />
       <RecordsSelectionExample />
       <PageText idea>
-        Mantine DataTable is probably the only data-table component for Mantine that supports an intuitive batch
-        selection of records, similar to the one you can find in Gmail: shift-clicking a row selection checkbox will
-        result in selecting/deselecting all records between the last selected record and the current one.
+        Mantine <Code>DataTable</Code> is probably the only data-table component for Mantine that supports an intuitive
+        batch selection of records, similar to the one you can find in Gmail: shift-clicking a row selection checkbox
+        will result in selecting/deselecting all records between the last selected record and the current one.
       </PageText>
       <PageText>
         In order to enable records selection, you’ll have to add the following properties to the <Code>DataTable</Code>:
