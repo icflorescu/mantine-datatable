@@ -156,33 +156,39 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
               checked={withColumnBorders}
               onChange={() => setWithColumnBorders((v) => !v)}
             />
+            <Code hidden>Column borders, withColumnBorders</Code>
             <Switch
               className={classes.control}
               label="Striped"
               checked={striped}
               onChange={() => setStriped((v) => !v)}
             />
+            <Code hidden>Striped</Code>
             <Switch
               className={classes.control}
               label="Hightlight on hover"
               checked={highlightOnHover}
               onChange={() => setHighlightOnHover((v) => !v)}
             />
+            <Code hidden>Hightlight on hover, highlightOnHover</Code>
             <Switch
               className={classes.control}
               label="Table border"
               checked={withBorder}
               onChange={() => setWithBorder((v) => !v)}
             />
+            <Code hidden>Table border, withBorder</Code>
             <Switch
               className={classes.control}
               label="No header"
               checked={noHeader}
               onChange={() => setNoHeader((v) => !v)}
             />
+            <Code hidden>No header, noHeader</Code>
             <CheckableSegmentedControl
               className={classes.control}
               label="Border radius"
+              documentAs="borderRadius"
               data={MANTINE_SIZES as unknown as string[]}
               checked={customizeBorderRadius}
               onCheckedChange={setCustomizeBorderRadius}
@@ -194,6 +200,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Shadow"
+              documentAs="shadow"
               data={MANTINE_SIZES as unknown as string[]}
               checked={customizeShadow}
               onCheckedChange={setCustomizeShadow}
@@ -203,6 +210,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Horizontal spacing"
+              documentAs="horizontalSpacing"
               data={MANTINE_SIZES as unknown as string[]}
               checked={customizeHorizontalSpacing}
               onCheckedChange={setCustomizeHorizontalSpacing}
@@ -212,6 +220,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Vertical spacing"
+              documentAs="verticalSpacing"
               data={MANTINE_SIZES as unknown as string[]}
               checked={customizeVerticalSpacing}
               onCheckedChange={setCustomizeVerticalSpacing}
@@ -221,6 +230,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Font size"
+              documentAs="fontSize"
               data={MANTINE_SIZES as unknown as string[]}
               checked={customizeFontSize}
               onCheckedChange={setCustomizeFontSize}
@@ -230,6 +240,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
             <CheckableSegmentedControl
               className={classes.control}
               label="Vertical alignment"
+              documentAs="verticalAlignment"
               data={VERTICAL_ALIGNMENTS}
               checked={customizeVerticalAlignment}
               onCheckedChange={setCustomizeVerticalAlignment}
