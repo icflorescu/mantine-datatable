@@ -1,6 +1,7 @@
 import { DocSearch } from '@docsearch/react';
 import { createStyles } from '@mantine/core';
 import { DOCSEARCH_API_KEY, DOCSEARCH_APP_ID, DOCSEARCH_INDEX_NAME, NAVBAR_BREAKPOINT } from '~/config';
+import SearchHit from './SearchHit';
 
 const useStyles = createStyles((theme) => {
   const actionIconColor = theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[7];
@@ -54,7 +55,12 @@ export default function SearchButton() {
   const { classes } = useStyles();
   return (
     <div className={classes.root}>
-      <DocSearch appId={DOCSEARCH_APP_ID} indexName={DOCSEARCH_INDEX_NAME} apiKey={DOCSEARCH_API_KEY} />
+      <DocSearch
+        appId={DOCSEARCH_APP_ID}
+        indexName={DOCSEARCH_INDEX_NAME}
+        apiKey={DOCSEARCH_API_KEY}
+        hitComponent={SearchHit}
+      />
     </div>
   );
 }
