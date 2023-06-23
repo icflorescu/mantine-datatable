@@ -6,3 +6,8 @@
 .DocSearch-Container {
   z-index: 1000;
 }
+
+.DocSearch-Logo .cls-1,
+.DocSearch-Logo .cls-2 {
+  fill: var(--docsearch-logo-color);
+}
