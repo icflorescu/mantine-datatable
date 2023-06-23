@@ -41,6 +41,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
   return (
     <Container>
       <PageTitle of={PATH} />
+      <Code hidden>textSelectionDisabled</Code>
       <PageText>
         The <Code>DataTable</Code> component conveniently allows you to disable text selection.
         <br />
@@ -61,7 +62,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
           </li>
         </ul>
       </PageText>
-      <Paper my="xl" px="xl" py="sm" withBorder>
+      <Paper my="xl" px="xl" py="md" withBorder>
         <Switch
           className={classes.control}
           label="Disable text selection"

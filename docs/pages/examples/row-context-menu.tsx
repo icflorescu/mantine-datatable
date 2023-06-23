@@ -75,7 +75,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageText>Try it in the interactive example below:</PageText>
       <Paper my="xl" px="xl" py="sm" withBorder>
         <Radio.Group value={String(example)} onChange={setExample}>
-          <div className={classes.controls}>
+          <Box py="sm" className={classes.controls}>
             <Stack>
               <Radio value="1" label="Simple context menu, triggered by right-clicking" />
               <Radio value="2" label="Trigger context menu on row clicking instead of right-clicking" />
@@ -90,7 +90,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
               <Radio value="9" label="Customize “delete” action color for a specific record" />
               <Radio value="10" label="Customize border radius, shadow and add an actions divider" />
             </Stack>
-          </div>
+          </Box>
         </Radio.Group>
       </Paper>
       <Box sx={{ height: 300 }}>

@@ -88,7 +88,7 @@ export default function AppNavbarLinkList({ color, title, items }: AppNavbarLink
             description={description}
             to={to}
             color={color}
-            active={to === asPath}
+            active={asPath === to || asPath.startsWith(`${to}#`)}
           />
         ))}
       </Collapse>

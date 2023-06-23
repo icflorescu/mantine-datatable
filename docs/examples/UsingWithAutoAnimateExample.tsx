@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { ActionIcon, Box, Button, Center, Group } from '@mantine/core';
-import { IconArrowDown, IconArrowsUpDown, IconArrowUp, IconTrash, IconTrashX } from '@tabler/icons-react';
+import { IconArrowDown, IconArrowUp, IconArrowsUpDown, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
 
@@ -74,7 +74,7 @@ export default function UsingWithAutoAnimateExample() {
       <DataTable
         mb="xl"
         withBorder
-        minHeight={200}
+        minHeight={160}
         columns={[
           {
             accessor: 'move',

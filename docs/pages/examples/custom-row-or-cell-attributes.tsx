@@ -19,11 +19,16 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
   return (
     <Container>
       <PageTitle of={PATH} />
-      <PageText>Adding custom attributes to table rows could be useful for testing purposes.</PageText>
+      <PageText>Adding custom attributes to table rows or table cells could be useful for testing purposes.</PageText>
       <PageText>
-        You can do so using the <Code>customRowAttributes</Code> property. It accepts a function that receives two
-        arguments, <Code>record</Code> and <Code>recordIndex</Code> and returns an object with attributes to add to the
-        row.
+        You can add custom attributes to the table rows using the <Code>customRowAttributes</Code> property. It accepts
+        a function that receives two arguments, <Code>record</Code> and <Code>recordIndex</Code> and returns an object
+        with attributes to add to the row.
+      </PageText>
+      <PageText>
+        Similarly, each column can have its own <Code>customCellAttributes</Code> property that accepts a function that
+        receives two arguments, <Code>record</Code> and <Code>recordIndex</Code> and returns an object with attributes
+        to add to the cell.
       </PageText>
       <PageText>Inspect the table below to see the attributes generated for each row and cell:</PageText>
       <CustomRowOrCellAttributesExample />

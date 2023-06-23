@@ -1,4 +1,4 @@
-import { Code, Container, MANTINE_SIZES, MantineSize, Paper, Switch, createStyles } from '@mantine/core';
+import { Box, Code, Container, MANTINE_SIZES, MantineSize, Paper, Switch, createStyles } from '@mantine/core';
 import { DataTableVerticalAlignment } from 'mantine-datatable';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useCallback, useEffect, useState } from 'react';
@@ -148,7 +148,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
         number of additional ones. Try customizing some of them interactively below:
       </PageText>
       <Paper my="xl" px="xl" py="sm" withBorder>
-        <div className={cx(classes.controlGroups, classes.controls)}>
+        <Box py="sm" className={cx(classes.controlGroups, classes.controls)}>
           <div className={classes.controls}>
             <Switch
               className={classes.control}
@@ -248,7 +248,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
               onChange={(value) => setVerticalAlignment(value as DataTableVerticalAlignment)}
             />
           </div>
-        </div>
+        </Box>
       </Paper>
       <BasicTablePropertiesExample
         withBorder={withBorder}
@@ -271,7 +271,7 @@ export default function Page({ code: initialCode }: InferGetStaticPropsType<type
       />
       <CodeBlock language="typescript" content={code} />
       <PageText>
-        However, there’s much more you can do with <Code>Mantine DataTable</Code>.
+        However, there’s much more you can do with Mantine DataTable.
         <br />
         Head over to the next example to discover other features.
       </PageText>
