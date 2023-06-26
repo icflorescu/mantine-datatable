@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.5 (2023-06-12)
+
+- Relax `peerDependencies` (to Mantine 6.x)
+
 ## 2.6.0 (2023-06-12)
 
 - Implement column groups (issue [#207](https://github.com/icflorescu/mantine-datatable/issues/207) / PR [#330](https://github.com/icflorescu/mantine-datatable/pull/330) / thanks to [@MatthijsMud](https://github.com/MatthijsMud))
