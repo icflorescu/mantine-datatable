@@ -21,8 +21,8 @@
     "@mantine/next": "^6.0.14",
     "@mantine/notifications": "^6.0.14",
     "@mantine/prism": "^6.0.14",
-    "@tabler/icons-react": "^2.22.0",
-    "@tanstack/react-query": "^4.29.15",
+    "@tabler/icons-react": "^2.23.0",
+    "@tanstack/react-query": "^4.29.17",
     "dayjs": "^1.11.8",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
@@ -36,7 +36,7 @@
     "@types/lodash": "^4.14.195",
     "@types/mixpanel-browser": "^2.47.0",
     "@types/node": "^20.3.1",
-    "@types/react": "^18.2.13",
+    "@types/react": "^18.2.14",
     "mixpanel-browser": "^2.47.0",
     "typescript": "^5.1.3"
   }
