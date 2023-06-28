@@ -56,14 +56,14 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@mantine/core": "^6.0.14",
-    "@mantine/hooks": "^6.0.14",
+    "@mantine/core": "^6.0.15",
+    "@mantine/hooks": "^6.0.15",
     "@tabler/icons-react": "^2.23.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "esbuild": "^0.18.9",
+    "esbuild": "^0.18.10",
     "react": "^18.2.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.5"
   },
   "peerDependencies": {
     "@mantine/core": ">=6",
