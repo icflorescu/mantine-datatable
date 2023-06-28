@@ -45,7 +45,7 @@ type DataTableHeaderSelectorCellProps = {
   indeterminate: boolean;
   checkboxProps: Record<string, unknown>;
   onChange: (() => void) | undefined;
-  rowSpan?: number;
+  rowSpan: number | undefined;
 };
 
 export default function DataTableHeaderSelectorCell({
