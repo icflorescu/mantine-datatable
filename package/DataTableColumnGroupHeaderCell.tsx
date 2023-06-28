@@ -1,6 +1,6 @@
 import { Box } from '@mantine/core';
 import { useMemo } from 'react';
-import type { DataTableColumnGroup } from './types/DataTableColumnGroup';
+import type { DataTableColumnGroup } from './types';
 import { humanize, useMediaQueriesStringOrFunction } from './utils';
 
 type DataTableColumnGroupHeaderCellProps<T> = {
@@ -10,10 +10,10 @@ type DataTableColumnGroupHeaderCellProps<T> = {
 export default function DataTableColumnGroupHeaderCell<T>({
   group: { id, columns, title, className, style, sx },
 }: DataTableColumnGroupHeaderCellProps<T>) {
-  const queries = useMemo(() => columns.map((column) => column.visibleMediaQuery), [columns]);
+  const queries = useMemo(() => columns.map(({ visibleMediaQuery }) => visibleMediaQuery), [columns]);
   const visibles = useMediaQueriesStringOrFunction(queries);
   const colSpan = useMemo(
-    () => columns.filter((column, i) => !column.hidden && visibles?.[i]).length,
+    () => columns.filter(({ hidden }, i) => !hidden && visibles?.[i]).length,
     [columns, visibles]
   );
 

@@ -19,8 +19,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <PageTitle of={PATH} />
       <PageText>
         If you provide a <Code>defaultColumnRender</Code> prop to the table, it will be used to render all columns that
-        do not have a custom <Code>render</Code> function. The <Code>defaultColumnRender</Code> function receives the
-        current row, its index and accessor name and should return a React node.
+        do not provide a custom <Code>render</Code> function.
+        <br />
+        The <Code>defaultColumnRender</Code> function receives the current row, its index and accessor name and should
+        return a <Code>ReactNode</Code>:
       </PageText>
       <CodeBlock language="typescript" content={code} />
       <PageText>The code above will produce the following result:</PageText>

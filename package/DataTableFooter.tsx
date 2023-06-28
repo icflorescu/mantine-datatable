@@ -2,7 +2,7 @@ import { Box, createStyles, type CSSObject, type MantineTheme } from '@mantine/c
 import { CSSProperties, forwardRef, type ForwardedRef } from 'react';
 import DataTableFooterCell from './DataTableFooterCell';
 import DataTableFooterSelectorPlaceholderCell from './DataTableFooterSelectorPlaceholderCell';
-import type { DataTableColumn } from './types';
+import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
 
 const useStyles = createStyles(
   (
@@ -37,13 +37,23 @@ type DataTableFooterProps<T> = {
   className?: string;
   style?: CSSObject;
   columns: DataTableColumn<T>[];
+  defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
   selectionVisible: boolean;
   leftShadowVisible: boolean;
   scrollDiff: number;
 };
 
 export default forwardRef(function DataTableFooter<T>(
-  { className, style, borderColor, columns, selectionVisible, leftShadowVisible, scrollDiff }: DataTableFooterProps<T>,
+  {
+    className,
+    style,
+    borderColor,
+    columns,
+    defaultColumnProps,
+    selectionVisible,
+    leftShadowVisible,
+    scrollDiff,
+  }: DataTableFooterProps<T>,
   ref: ForwardedRef<HTMLTableSectionElement>
 ) {
   const { cx, classes } = useStyles({ scrollDiff, borderColor });
@@ -52,10 +62,10 @@ export default forwardRef(function DataTableFooter<T>(
     <Box component="tfoot" ref={ref} className={cx(classes.root, className)} style={style as CSSProperties}>
       <tr>
         {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={leftShadowVisible} />}
-        {columns.map(
-          ({
+        {columns.map(({ hidden, ...columnProps }) => {
+          if (hidden) return null;
+          const {
             accessor,
-            hidden,
             visibleMediaQuery,
             textAlignment,
             width,
@@ -65,22 +75,22 @@ export default forwardRef(function DataTableFooter<T>(
             footerSx,
             noWrap,
             ellipsis,
-          }) =>
-            hidden ? null : (
-              <DataTableFooterCell<T>
-                key={accessor}
-                className={footerClassName}
-                style={footerStyle}
-                sx={footerSx}
-                visibleMediaQuery={visibleMediaQuery}
-                textAlignment={textAlignment}
-                width={width}
-                title={footer}
-                noWrap={noWrap}
-                ellipsis={ellipsis}
-              />
-            )
-        )}
+          } = { ...defaultColumnProps, ...columnProps };
+          return (
+            <DataTableFooterCell<T>
+              key={accessor}
+              className={footerClassName}
+              style={footerStyle}
+              sx={footerSx}
+              visibleMediaQuery={visibleMediaQuery}
+              textAlignment={textAlignment}
+              width={width}
+              title={footer}
+              noWrap={noWrap}
+              ellipsis={ellipsis}
+            />
+          );
+        })}
       </tr>
     </Box>
   );

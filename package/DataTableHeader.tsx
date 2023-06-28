@@ -3,8 +3,7 @@ import { forwardRef, type CSSProperties, type ForwardedRef } from 'react';
 import DataTableColumnGroupHeaderCell from './DataTableColumnGroupHeaderCell';
 import DataTableHeaderCell from './DataTableHeaderCell';
 import DataTableHeaderSelectorCell from './DataTableHeaderSelectorCell';
-import type { DataTableColumn, DataTableSortProps } from './types';
-import type { DataTableColumnGroup } from './types/DataTableColumnGroup';
+import type { DataTableColumn, DataTableColumnGroup, DataTableSortProps } from './types';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -25,6 +24,7 @@ type DataTableHeaderProps<T> = {
   sortIcons: DataTableSortProps['sortIcons'];
   onSortStatusChange: DataTableSortProps['onSortStatusChange'];
   columns: DataTableColumn<T>[];
+  defaultColumnProps: Omit<DataTableColumn<T>, 'accessor'> | undefined;
   groups: readonly DataTableColumnGroup<T>[] | undefined;
   selectionVisible: boolean;
   selectionChecked: boolean;
@@ -42,6 +42,7 @@ export default forwardRef(function DataTableHeader<T>(
     sortIcons,
     onSortStatusChange,
     columns,
+    defaultColumnProps,
     groups,
     selectionVisible,
     selectionChecked,
@@ -77,10 +78,11 @@ export default forwardRef(function DataTableHeader<T>(
       )}
       <tr>
         {!groups && selectAll}
-        {columns.map(
-          ({
+        {columns.map(({ hidden, ...columnProps }) => {
+          if (hidden) return null;
+
+          const {
             accessor,
-            hidden,
             visibleMediaQuery,
             textAlignment,
             width,
@@ -91,27 +93,27 @@ export default forwardRef(function DataTableHeader<T>(
             titleSx,
             filter,
             filtering,
-          }) =>
-            hidden ? null : (
-              <DataTableHeaderCell<T>
-                key={accessor}
-                className={titleClassName}
-                style={titleStyle}
-                sx={titleSx}
-                accessor={accessor}
-                visibleMediaQuery={visibleMediaQuery}
-                textAlignment={textAlignment}
-                width={width}
-                title={title}
-                sortable={sortable}
-                sortStatus={sortStatus}
-                sortIcons={sortIcons}
-                onSortStatusChange={onSortStatusChange}
-                filter={filter}
-                filtering={filtering}
-              />
-            )
-        )}
+          } = { ...defaultColumnProps, ...columnProps };
+          return (
+            <DataTableHeaderCell<T>
+              key={accessor}
+              accessor={accessor}
+              className={titleClassName}
+              style={titleStyle}
+              sx={titleSx}
+              visibleMediaQuery={visibleMediaQuery}
+              textAlignment={textAlignment}
+              width={width}
+              title={title}
+              sortable={sortable}
+              sortStatus={sortStatus}
+              sortIcons={sortIcons}
+              onSortStatusChange={onSortStatusChange}
+              filter={filter}
+              filtering={filtering}
+            />
+          );
+        })}
       </tr>
     </thead>
   );
