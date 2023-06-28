@@ -95,9 +95,8 @@ export default function DataTableHeaderCell<T>({
   const sortAction =
     sortable && onSortStatusChange
       ? (e?: BaseSyntheticEvent) => {
-          if (e?.defaultPrevented) {
-            return;
-          }
+          if (e?.defaultPrevented) return;
+
           onSortStatusChange({
             columnAccessor: accessor,
             direction:

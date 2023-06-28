@@ -127,6 +127,7 @@ export default function DataTableRow<T>({
         )}
         {columns.map(({ hidden, ...columnProps }, columnIndex) => {
           if (hidden) return null;
+
           const {
             accessor,
             visibleMediaQuery,

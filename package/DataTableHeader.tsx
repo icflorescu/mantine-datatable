@@ -55,7 +55,7 @@ export default forwardRef(function DataTableHeader<T>(
 ) {
   const { classes, cx } = useStyles();
 
-  const selectAll = selectionVisible ? (
+  const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
       shadowVisible={leftShadowVisible}
       checked={selectionChecked}
@@ -70,14 +70,14 @@ export default forwardRef(function DataTableHeader<T>(
     <thead className={cx(classes.root, className)} style={style as CSSProperties} ref={ref}>
       {groups && (
         <tr>
-          {selectAll}
+          {allRecordsSelectorCell}
           {groups.map((group) => (
             <DataTableColumnGroupHeaderCell key={group.id} group={group} />
           ))}
         </tr>
       )}
       <tr>
-        {!groups && selectAll}
+        {!groups && allRecordsSelectorCell}
         {columns.map(({ hidden, ...columnProps }) => {
           if (hidden) return null;
 
@@ -94,6 +94,7 @@ export default forwardRef(function DataTableHeader<T>(
             filter,
             filtering,
           } = { ...defaultColumnProps, ...columnProps };
+
           return (
             <DataTableHeaderCell<T>
               key={accessor}

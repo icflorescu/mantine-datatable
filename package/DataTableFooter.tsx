@@ -64,6 +64,7 @@ export default forwardRef(function DataTableFooter<T>(
         {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={leftShadowVisible} />}
         {columns.map(({ hidden, ...columnProps }) => {
           if (hidden) return null;
+
           const {
             accessor,
             visibleMediaQuery,
@@ -76,6 +77,7 @@ export default forwardRef(function DataTableFooter<T>(
             noWrap,
             ellipsis,
           } = { ...defaultColumnProps, ...columnProps };
+
           return (
             <DataTableFooterCell<T>
               key={accessor}
