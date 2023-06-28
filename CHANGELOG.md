@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.6.5 (2023-06-12)
+## 2.7.0 (2023-06-28)
+
+- Add `defaultColumnProps` (see [#340](https://github.com/icflorescu/mantine-datatable/issues/340))
+
+## 2.6.5 (2023-06-27)
 
 - Relax `peerDependencies` (to Mantine 6.x)
 

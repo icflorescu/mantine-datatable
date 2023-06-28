@@ -1,16 +1,19 @@
 import type { DefaultProps, MantineShadow, MantineTheme, ScrollAreaProps, Sx, TableProps } from '@mantine/core';
 import type { CSSProperties, Key, MouseEvent, ReactNode, RefObject } from 'react';
-import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
+import type {
+  DataTableCellClickHandler,
+  DataTableContextMenuProps,
+  DataTableDefaultColumnProps,
+  DataTableEmptyStateProps,
+  DataTableOuterBorderProps,
+  DataTablePaginationProps,
+  DataTableRowExpansionProps,
+  DataTableSelectionProps,
+  DataTableSortProps,
+  DataTableVerticalAlignment,
+} from './';
 import type { DataTableColumnProps } from './DataTableColumnProps';
-import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
-import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';
 import type { DataTableLoaderProps } from './DataTableLoaderProps';
-import type { DataTableOuterBorderProps } from './DataTableOuterBorderProps';
-import type { DataTablePaginationProps } from './DataTablePaginationProps';
-import type { DataTableRowExpansionProps } from './DataTableRowExpansionProps';
-import type { DataTableSelectionProps } from './DataTableSelectionProps';
-import type { DataTableSortProps } from './DataTableSortProps';
-import type { DataTableVerticalAlignment } from './DataTableVerticalAlignment';
 
 export type DataTableProps<T> = {
   /**
@@ -60,6 +63,11 @@ export type DataTableProps<T> = {
    * If true, will show a loader with semi-transparent background, centered over the table
    */
   fetching?: boolean;
+
+  /**
+   * Default column props; will be merged with column props provided to each column
+   */
+  defaultColumnProps?: DataTableDefaultColumnProps<T>;
 
   /**
    * A default render function for all columns; accepts the current record, its index in `records`

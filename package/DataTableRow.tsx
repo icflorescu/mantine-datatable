@@ -4,7 +4,7 @@ import DataTableRowCell from './DataTableRowCell';
 import DataTableRowExpansion from './DataTableRowExpansion';
 import DataTableRowSelectorCell from './DataTableRowSelectorCell';
 import { useRowExpansion } from './hooks';
-import type { DataTableCellClickHandler, DataTableColumn } from './types';
+import type { DataTableCellClickHandler, DataTableColumn, DataTableDefaultColumnProps } from './types';
 
 const useStyles = createStyles((theme) => {
   const baseColor = theme.colors[theme.primaryColor][6];
@@ -41,6 +41,7 @@ type DataTableRowProps<T> = {
   record: T;
   recordIndex: number;
   columns: DataTableColumn<T>[];
+  defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
   defaultColumnRender: ((record: T, index: number, accessor: string) => ReactNode) | undefined;
   selectionVisible: boolean;
   selectionChecked: boolean;
@@ -63,6 +64,7 @@ export default function DataTableRow<T>({
   record,
   recordIndex,
   columns,
+  defaultColumnProps,
   defaultColumnRender,
   selectionVisible,
   selectionChecked,
@@ -123,10 +125,11 @@ export default function DataTableRow<T>({
             getCheckboxProps={getSelectionCheckboxProps}
           />
         )}
-        {columns.map((column, columnIndex) => {
+        {columns.map(({ hidden, ...columnProps }, columnIndex) => {
+          if (hidden) return null;
+
           const {
             accessor,
-            hidden,
             visibleMediaQuery,
             textAlignment,
             noWrap,
@@ -137,14 +140,14 @@ export default function DataTableRow<T>({
             cellsStyle,
             cellsSx,
             customCellAttributes,
-          } = column;
+          } = { ...defaultColumnProps, ...columnProps };
 
           let handleCellClick: MouseEventHandler<HTMLTableCellElement> | undefined;
           if (onCellClick) {
-            handleCellClick = (event) => onCellClick({ event, record, recordIndex, column, columnIndex });
+            handleCellClick = (event) => onCellClick({ event, record, recordIndex, column: columnProps, columnIndex });
           }
 
-          return hidden ? null : (
+          return (
             <DataTableRowCell<T>
               key={accessor}
               className={typeof cellsClassName === 'function' ? cellsClassName(record, recordIndex) : cellsClassName}
@@ -168,7 +171,7 @@ export default function DataTableRow<T>({
       </Box>
       {expansion && (
         <DataTableRowExpansion
-          colSpan={columns.filter((c) => !c.hidden).length + (selectionVisible ? 1 : 0)}
+          colSpan={columns.filter(({ hidden }) => !hidden).length + (selectionVisible ? 1 : 0)}
           open={expansion.isRowExpanded(record)}
           content={expansion.content(record, recordIndex)}
           collapseProps={expansion.collapseProps}

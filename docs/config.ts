@@ -90,6 +90,11 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
         description: 'Example: using non-standard record IDs with Mantine DataTable',
       },
       {
+        path: 'default-column-properties',
+        title: 'Default column properties',
+        description: 'Example: using default column properties with Mantine DataTable',
+      },
+      {
         path: 'default-column-render',
         title: 'Default column render',
         description: 'Example: using a default column render function with Mantine DataTable',

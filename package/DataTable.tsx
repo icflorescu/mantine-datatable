@@ -120,6 +120,7 @@ export default function DataTable<T>({
   fetching,
   columns,
   groups,
+  defaultColumnProps,
   defaultColumnRender,
   idAccessor = 'id',
   records,
@@ -356,6 +357,7 @@ export default function DataTable<T>({
               className={classNames?.header}
               style={styleProperties?.header}
               columns={effectiveColumns}
+              defaultColumnProps={defaultColumnProps}
               groups={groups}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
@@ -444,6 +446,7 @@ export default function DataTable<T>({
                     record={record}
                     recordIndex={recordIndex}
                     columns={effectiveColumns}
+                    defaultColumnProps={defaultColumnProps}
                     defaultColumnRender={defaultColumnRender}
                     selectionVisible={selectionColumnVisible}
                     selectionChecked={isSelected}
@@ -476,6 +479,7 @@ export default function DataTable<T>({
               style={styleProperties?.footer}
               borderColor={borderColor}
               columns={effectiveColumns}
+              defaultColumnProps={defaultColumnProps}
               selectionVisible={selectionColumnVisible}
               leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
               scrollDiff={tableHeight - scrollViewportHeight}

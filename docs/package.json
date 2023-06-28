@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "2.6.5",
+  "version": "2.7.0",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -14,15 +14,15 @@
     "@emotion/server": "^11.11.0",
     "@faker-js/faker": "^8.0.2",
     "@formkit/auto-animate": "^1.0.0-beta.6",
-    "@mantine/core": "^6.0.14",
-    "@mantine/dates": "^6.0.14",
-    "@mantine/hooks": "^6.0.14",
-    "@mantine/modals": "^6.0.14",
-    "@mantine/next": "^6.0.14",
-    "@mantine/notifications": "^6.0.14",
-    "@mantine/prism": "^6.0.14",
+    "@mantine/core": "^6.0.15",
+    "@mantine/dates": "^6.0.15",
+    "@mantine/hooks": "^6.0.15",
+    "@mantine/modals": "^6.0.15",
+    "@mantine/next": "^6.0.15",
+    "@mantine/notifications": "^6.0.15",
+    "@mantine/prism": "^6.0.15",
     "@tabler/icons-react": "^2.23.0",
-    "@tanstack/react-query": "^4.29.17",
+    "@tanstack/react-query": "^4.29.19",
     "dayjs": "^1.11.8",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
@@ -35,9 +35,9 @@
   "devDependencies": {
     "@types/lodash": "^4.14.195",
     "@types/mixpanel-browser": "^2.47.0",
-    "@types/node": "^20.3.1",
+    "@types/node": "^20.3.2",
     "@types/react": "^18.2.14",
     "mixpanel-browser": "^2.47.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.5"
   }
 }
