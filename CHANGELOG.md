@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.1 (2023-06-29)
+
+- Fix row context menu not showing properly when used on tables inside modals (see [#354](https://github.com/icflorescu/mantine-datatable/issues/354))
+
 ## 2.7.0 (2023-06-28)
 
 - Add `defaultColumnProps` (see [#340](https://github.com/icflorescu/mantine-datatable/issues/340))

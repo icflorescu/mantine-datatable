@@ -1,4 +1,4 @@
-import { Box, MantineSize, Table, createStyles, packSx, type MantineTheme } from '@mantine/core';
+import { Box, MantineSize, Portal, Table, createStyles, packSx, type MantineTheme } from '@mantine/core';
 import { useElementSize, useMergedRef } from '@mantine/hooks';
 import {
   useCallback,
@@ -532,34 +532,36 @@ export default function DataTable<T>({
         {emptyState}
       </DataTableEmptyState>
       {rowContextMenu && rowContextMenuInfo && (
-        <DataTableRowMenu
-          zIndex={rowContextMenu.zIndex}
-          borderRadius={rowContextMenu.borderRadius}
-          shadow={rowContextMenu.shadow}
-          y={rowContextMenuInfo.y}
-          x={rowContextMenuInfo.x}
-          onDestroy={() => setRowContextMenuInfo(null)}
-        >
-          {rowContextMenu
-            .items(rowContextMenuInfo.record, rowContextMenuInfo.recordIndex)
-            .map(({ divider, key, title, icon, color, hidden, disabled, onClick }) =>
-              divider ? (
-                <DataTableRowMenuDivider key={key} />
-              ) : hidden ? null : (
-                <DataTableRowMenuItem
-                  key={key}
-                  title={title ?? humanize(key)}
-                  icon={icon}
-                  color={color}
-                  disabled={disabled}
-                  onClick={() => {
-                    setRowContextMenuInfo(null);
-                    onClick();
-                  }}
-                />
-              )
-            )}
-        </DataTableRowMenu>
+        <Portal>
+          <DataTableRowMenu
+            zIndex={rowContextMenu.zIndex}
+            borderRadius={rowContextMenu.borderRadius}
+            shadow={rowContextMenu.shadow}
+            y={rowContextMenuInfo.y}
+            x={rowContextMenuInfo.x}
+            onDestroy={() => setRowContextMenuInfo(null)}
+          >
+            {rowContextMenu
+              .items(rowContextMenuInfo.record, rowContextMenuInfo.recordIndex)
+              .map(({ divider, key, title, icon, color, hidden, disabled, onClick }) =>
+                divider ? (
+                  <DataTableRowMenuDivider key={key} />
+                ) : hidden ? null : (
+                  <DataTableRowMenuItem
+                    key={key}
+                    title={title ?? humanize(key)}
+                    icon={icon}
+                    color={color}
+                    disabled={disabled}
+                    onClick={() => {
+                      setRowContextMenuInfo(null);
+                      onClick();
+                    }}
+                  />
+                )
+              )}
+          </DataTableRowMenu>
+        </Portal>
       )}
     </Box>
   );
