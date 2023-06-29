@@ -3,7 +3,7 @@ import { Title, createStyles } from '@mantine/core';
 const useStyles = createStyles((theme) => ({
   root: {
     textIndent: '-0.1em',
-    marginBottom: '.75em',
+    marginBottom: '.5em',
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[8],
     '@media (min-width: 320px)': {
       fontSize: 28,
@@ -16,15 +16,11 @@ const useStyles = createStyles((theme) => ({
     },
     [`@media (min-width: ${theme.breakpoints.xs})`]: {
       marginTop: '.5em',
-      marginBottom: '1em',
       lineHeight: 1.1,
       fontSize: 50,
     },
     [`@media (min-width: ${theme.breakpoints.sm})`]: {
       fontSize: 60,
-    },
-    [`@media (min-width: ${theme.breakpoints.md})`]: {
-      marginTop: '.66em',
     },
   },
   gradientText: {

@@ -5,6 +5,7 @@ import InternalLink from '~/components/InternalLink';
 import HomePageButtons from '~/components/homePage/HomePageButtons';
 import HomePageFeature from '~/components/homePage/HomePageFeature';
 import HomePageTitle from '~/components/homePage/HomePageTitle';
+import { HomePageWhoIsUsing } from '~/components/homePage/HomePageWhoIsUsing';
 import {
   CRA_LINK,
   GATSBY_LINK,
@@ -56,6 +57,7 @@ export default function Page() {
     <Container>
       <div className={classes.root}>
         <HomePageTitle />
+        <HomePageWhoIsUsing />
         <div className={classes.image}>
           <img src={`${process.env.BASE_PATH}/mantine-datatable.png`} alt="Mantine DataTable supports dark mode" />
         </div>
