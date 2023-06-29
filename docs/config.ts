@@ -1,5 +1,13 @@
 import { MantineColor } from '@mantine/core';
-import { IconAdjustments, IconHeartHandshake, IconHome, IconLifebuoy, IconList, IconRocket } from '@tabler/icons-react';
+import {
+  IconAdjustments,
+  IconHeartHandshake,
+  IconHome,
+  IconLifebuoy,
+  IconList,
+  IconRocket,
+  IconSpeakerphone,
+} from '@tabler/icons-react';
 import { FC } from 'react';
 
 export const MIXPANEL_PROJECT_TOKEN = '97d21d6a91975d52c246d8a4f0fa18f3';
@@ -224,9 +232,18 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
     icon: IconLifebuoy,
   },
   {
+    path: 'who-is-using-mantine-datatable',
+    title: 'Who is using Mantine DataTable',
+    description:
+      'Mantine DataTable is used by awesome companies and developers all around the world. Are you one of them?',
+    color: 'violet',
+    icon: IconSpeakerphone,
+  },
+  {
     path: 'hire-the-author',
     title: 'Hire the author',
-    description: 'Hire the author of Mantine DataTable - a fullstack/frontend developer with 20+ years of experience',
+    description:
+      'If you’re looking for expertise and want to support the project, hire the author of Mantine DataTable - a fullstack/frontend developer with 20+ years of experience',
     color: 'red',
     icon: IconHeartHandshake,
   },
