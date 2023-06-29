@@ -472,7 +472,7 @@ export default function DataTable<T>({
               <DataTableEmptyRow />
             )}
           </tbody>
-          {effectiveColumns.some((column) => column.footer) && (
+          {effectiveColumns.some(({ footer }) => footer) && (
             <DataTableFooter<T>
               ref={footerRef}
               className={classNames?.footer}
