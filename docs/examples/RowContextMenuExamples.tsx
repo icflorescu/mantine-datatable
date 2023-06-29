@@ -1,5 +1,7 @@
+import { Button } from '@mantine/core';
+import { modals } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
-import { IconEdit, IconSend, IconTrash, IconX } from '@tabler/icons-react';
+import { IconAppWindow, IconEdit, IconSend, IconTrash, IconX } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import companies from '~/data/companies.json';
 
@@ -116,7 +118,7 @@ export function RowContextMenuExample4() {
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        // hide the context menu for the 1st row
+        // 👇 hide the context menu for the 1st row
         hidden: (record) => companies.indexOf(record) === 0,
         items: (record) => [
           // example-skip
@@ -202,7 +204,7 @@ export function RowContextMenuExample6() {
           {
             key: 'delete',
             color: 'red',
-            // hide this item for the 1st row
+            // 👇 hide this item for the 1st row
             hidden: companies.indexOf(record) === 0,
             title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
@@ -278,7 +280,7 @@ export function RowContextMenuExample8() {
           {
             key: 'delete',
             color: 'red',
-            // set a specific icon for the 1st row
+            // 👇 set a specific icon for the 1st row
             icon: companies.indexOf(record) === 0 ? <IconX size={16} /> : <IconTrash size={16} />,
             title: `Delete company ${record.name}`,
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
@@ -318,7 +320,7 @@ export function RowContextMenuExample9() {
           // example-resume
           {
             key: 'delete',
-            // set a specific color for the 1st row
+            // 👇 set a specific color for the 1st row
             color: companies.indexOf(record) === 0 ? 'orange' : 'red',
             icon: <IconTrash size={16} />,
             title: `Delete company ${record.name}`,
@@ -349,8 +351,8 @@ export function RowContextMenuExample10() {
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       rowContextMenu={{
-        shadow: 'xl', // custom shadow
-        borderRadius: 'md', // custom border radius
+        shadow: 'xl', // 👈 custom shadow
+        borderRadius: 'md', // 👈 custom border radius
         items: (record) => [
           {
             key: 'edit',
@@ -361,7 +363,7 @@ export function RowContextMenuExample10() {
             color: 'red',
             onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
           },
-          // add a divider between `delete` and `sendMessage` items
+          // 👇 add a divider between `delete` and `sendMessage` items
           { key: 'divider1', divider: true },
           {
             key: 'sendMessage',
@@ -372,6 +374,61 @@ export function RowContextMenuExample10() {
         ],
       }}
     />
+    // example-end
+  );
+}
+
+export function RowContextMenuExampleInsideModal() {
+  return (
+    // example-start inside-modal
+    <Button
+      leftIcon={<IconAppWindow size={16} />}
+      onClick={() =>
+        modals.open({
+          title: 'Right-click on a row',
+          children: (
+            <DataTable
+              height={300}
+              withBorder
+              borderRadius="sm"
+              columns={[
+                { accessor: 'name', title: 'Company name' },
+                { accessor: 'city', textAlignment: 'right' },
+              ]}
+              records={companies}
+              rowContextMenu={{
+                zIndex: 202, // 👈 make sure the context menu is above the modal
+                // example-skip items
+                items: (record) => [
+                  {
+                    key: 'edit',
+                    icon: <IconEdit size={16} />,
+                    onClick: () => showNotification({ message: `Should edit company ${record.name}` }),
+                  },
+                  {
+                    key: 'delete',
+                    icon: <IconTrash size={16} />,
+                    color: 'red',
+                    onClick: () => showNotification({ color: 'red', message: `Should delete company ${record.name}` }),
+                  },
+                  { key: 'divider', divider: true },
+                  {
+                    key: 'sendMessage',
+                    icon: <IconSend size={16} />,
+                    onClick: () => {
+                      showNotification({ message: 'Should send a message to this company' });
+                    },
+                  },
+                ],
+              }}
+              // example-resume
+            />
+          ),
+        })
+      }
+    >
+      Open modal
+    </Button>
     // example-end
   );
 }

@@ -5,6 +5,7 @@ import CodeBlock from '~/components/CodeBlock';
 import ExternalLink from '~/components/ExternalLink';
 import InternalLink from '~/components/InternalLink';
 import PageNavigation from '~/components/PageNavigation';
+import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
 import { MANTINE_CONTEXTMENU_LINK } from '~/config';
@@ -19,6 +20,7 @@ import {
   RowContextMenuExample7,
   RowContextMenuExample8,
   RowContextMenuExample9,
+  RowContextMenuExampleInsideModal,
 } from '~/examples/RowContextMenuExamples';
 import readCodeExample from '~/lib/readCodeExample';
 
@@ -99,12 +101,10 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       <CodeBlock language="typescript" content={code[example]} />
       <PageText info>
         When using a row context menu triggered by click instead of right-click, you might want to{' '}
-        <InternalLink to="/examples/disabling-text-selection">disable text selection</InternalLink>.
-      </PageText>
-      <PageText info>
-        If you need to combine context menus triggered by <Code>click</Code> instead of <Code>right-click</Code> with
-        links, buttons, <InternalLink to="/examples/row-actions-cell">row action cells</InternalLink> or any kind of
-        clickable components inside cells, make sure to intercept the <Code>click</Code> event on those components and{' '}
+        <InternalLink to="/examples/disabling-text-selection">disable text selection</InternalLink>. If you need to
+        combine context menus triggered by <Code>click</Code> instead of <Code>right-click</Code> with links, buttons,{' '}
+        <InternalLink to="/examples/row-actions-cell">row action cells</InternalLink> or any kind of clickable
+        components inside cells, make sure to intercept the <Code>click</Code> event on those components and{' '}
         <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">
           invoke its <Code>.stopPropagation()</Code> method
         </ExternalLink>
@@ -117,6 +117,14 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         If you’re interested in using context menus in other places in your application’s UI, have a look at{' '}
         <ExternalLink to={MANTINE_CONTEXTMENU_LINK}>Mantine ContextMenu</ExternalLink>.
       </PageText>
+      <PageSubtitle value="Using row context menus inside modals" />
+      <PageText>
+        When using row context menus on data tables inside modals, you need to make sure that the context menu is
+        rendered above the modal. To do so, you need to set its <Code>zIndex</Code> property to a value higher than the
+        modal’s <Code>zIndex</Code>:
+      </PageText>
+      <RowContextMenuExampleInsideModal />
+      <CodeBlock language="typescript" content={code['inside-modal']} />
       <PageText>
         If you’re not a fan of context menus,{' '}
         <InternalLink to="/examples/row-actions-cell">implementing a row actions cell</InternalLink> should’t be

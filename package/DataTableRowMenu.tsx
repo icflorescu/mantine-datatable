@@ -1,4 +1,5 @@
-import { createStyles, Paper, px, type MantineNumberSize, type MantineShadow } from '@mantine/core';
+import type { MantineNumberSize, MantineShadow } from '@mantine/core';
+import { Paper, createStyles, px } from '@mantine/core';
 import { useClickOutside, useElementSize, useMergedRef, useWindowEvent } from '@mantine/hooks';
 import type { ReactNode } from 'react';
 
