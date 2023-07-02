@@ -8,6 +8,7 @@ import NpmLinkButton from './appHeader/NpmLinkButton';
 import SearchButton from './appHeader/SearchButton';
 import SourceLinkActionIcon from './appHeader/SourceLinkActionIcon';
 import SourceLinkButton from './appHeader/SourceLinkButton';
+import SponsorsLinkActionIcon from './appHeader/SponsorsLinkActionIcon';
 import SponsorsLinkButton from './appHeader/SponsorsLinkButton';
 import Logo from './Logo';
 
@@ -109,7 +110,7 @@ export default function AppHeader({ onShowNavbarClick }: { onShowNavbarClick: ()
         <SearchButton />
         <Group className={classes.actionIcons} spacing="xs">
           <SourceLinkActionIcon />
-          <SourceLinkActionIcon />
+          <SponsorsLinkActionIcon />
           <ColorSchemeActionIcon />
         </Group>
         <ColorSchemeControl />
