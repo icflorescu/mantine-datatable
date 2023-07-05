@@ -9,7 +9,7 @@
 [![Downloads][downloads-image]][npm-url]
 [![Language][language-image]][repo-url]
 
-The lightweight, dependency-free, "dark-theme aware" **table component** for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row context menu, row expansion, nesting, and more.
+The lightweight, dependency-free, "dark-theme aware" [**table component**](https://icflorescu.github.io/mantine-datatable/) for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row context menu, row expansion, nesting, and more.
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/189911698-369ba48e-65f0-4772-aad3-cb5e6d4cb59d.png)](https://icflorescu.github.io/mantine-datatable/)
 
@@ -32,9 +32,11 @@ The lightweight, dependency-free, "dark-theme aware" **table component** for you
 
 ## Trusted by the community
 
+[![Who's using Mantine DataTable](https://github.com/icflorescu/mantine-datatable/assets/581999/ae327a7f-4444-4c83-8333-39b024c9810e)](https://icflorescu.github.io/mantine-datatable/)
+
 [Mantine DataTable](https://icflorescu.github.io/mantine-datatable/) is used by developers and startups around the world, including: [exdatis.ai](https://exdatis.ai/), [teachfloor](https://www.teachfloor.com/), [MARKUP](https://www.getmarkup.com/), [BookieBase](https://bookiebase.ie/), [zipline](https://zipline.diced.tech/), [Pachtop](https://github.com/pacholoamit/pachtop), [Ganymede](https://github.com/Zibbp/ganymede), [COH3 Stats](https://coh3stats.com/), [Culver City Rental Registry](https://www.ccrentals.org/) and many more.
 
-If you're using Mantine DataTable in your project, please drop me a line at the email address listed in my [GitHub profile](https://github.com/icflorescu) and I'll be happy to add your project to the list and on the [documentation website](https://icflorescu.github.io/mantine-datatable/).
+If you're using [Mantine DataTable](https://icflorescu.github.io/mantine-datatable/) in your project, please drop me a line at the email address listed in my [GitHub profile](https://github.com/icflorescu) and I'll be happy to add your project to the list and on the [documentation website](https://icflorescu.github.io/mantine-datatable/).
 
 ## Full documentation and examples
 

@@ -10,7 +10,7 @@ export type DataTableSelectionProps<T> =
       /**
        * Currently-selected records
        */
-      selectedRecords: T[];
+      selectedRecords?: T[];
 
       /**
        * Callback fired when selected records change

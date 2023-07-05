@@ -290,11 +290,13 @@ export default function DataTable<T>({
     hasRecordsAndSelectedRecords && selectableRecordIds!.some((id) => selectedRecordIds.includes(id));
 
   const handleHeaderSelectionChange = useCallback(() => {
-    onSelectedRecordsChange?.(
-      allSelectableRecordsSelected
-        ? selectedRecords.filter((record) => !selectableRecordIds!.includes(getRecordId(record, idAccessor)))
-        : uniqBy([...selectedRecords, ...selectableRecords!], (record) => getRecordId(record, idAccessor))
-    );
+    if (selectedRecords && onSelectedRecordsChange) {
+      onSelectedRecordsChange(
+        allSelectableRecordsSelected
+          ? selectedRecords.filter((record) => !selectableRecordIds!.includes(getRecordId(record, idAccessor)))
+          : uniqBy([...selectedRecords, ...selectableRecords!], (record) => getRecordId(record, idAccessor))
+      );
+    }
   }, [
     allSelectableRecordsSelected,
     idAccessor,
@@ -390,7 +392,7 @@ export default function DataTable<T>({
                 }
 
                 let handleSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
-                if (onSelectedRecordsChange) {
+                if (onSelectedRecordsChange && selectedRecords) {
                   handleSelectionChange = (e) => {
                     if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
                       const targetRecords = records.filter(
