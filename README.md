@@ -32,7 +32,7 @@ The lightweight, dependency-free, "dark-theme aware" [**table component**](https
 
 ## Trusted by the community
 
-![Who's using Mantine DataTable](https://github.com/icflorescu/mantine-datatable/assets/581999/ae327a7f-4444-4c83-8333-39b024c9810e)
+[![Who's using Mantine DataTable](https://github.com/icflorescu/mantine-datatable/assets/581999/ae327a7f-4444-4c83-8333-39b024c9810e)](https://icflorescu.github.io/mantine-datatable/)
 
 [Mantine DataTable](https://icflorescu.github.io/mantine-datatable/) is used by developers and startups around the world, including: [exdatis.ai](https://exdatis.ai/), [teachfloor](https://www.teachfloor.com/), [MARKUP](https://www.getmarkup.com/), [BookieBase](https://bookiebase.ie/), [zipline](https://zipline.diced.tech/), [Pachtop](https://github.com/pacholoamit/pachtop), [Ganymede](https://github.com/Zibbp/ganymede), [COH3 Stats](https://coh3stats.com/), [Culver City Rental Registry](https://www.ccrentals.org/) and many more.
 
