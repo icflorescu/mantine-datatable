@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "description": "The dependency-free datatable component for Mantine UI, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu, row expansion and more",
   "keywords": [
     "mantine",
