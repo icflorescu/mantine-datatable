@@ -8,6 +8,7 @@
 [![Closed issues][closed-issues-image]][closed-issues-url]
 [![Downloads][downloads-image]][npm-url]
 [![Language][language-image]][repo-url]
+[![Sponsor the author][sponsor-image]][sponsor-url]
 
 The lightweight, dependency-free, "dark-theme aware" [**table component**](https://icflorescu.github.io/mantine-datatable/) for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row context menu, row expansion, nesting, and more.
 
@@ -154,3 +155,5 @@ The [MIT License](https://github.com/icflorescu/mantine-datatable/blob/master/LI
 [last-commit-image]: https://img.shields.io/github/last-commit/icflorescu/mantine-datatable?style=flat-square
 [closed-issues-image]: https://img.shields.io/github/issues-closed-raw/icflorescu/mantine-datatable?style=flat-square
 [language-image]: https://img.shields.io/github/languages/top/icflorescu/mantine-datatable?style=flat-square
+[sponsor-image]: https://img.shields.io/badge/sponsor-violet?style=flat-square
+[sponsor-url]: https://github.com/sponsors/icflorescu
