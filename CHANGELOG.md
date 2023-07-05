@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.8.0 (2023-07-05)
+
+- Make records selection feature optional for generic usage (see [#361](https://github.com/icflorescu/mantine-datatable/issues/361))
+
 ## 2.7.1 (2023-06-29)
 
 - Fix row context menu not showing properly when used on tables inside modals (see [#354](https://github.com/icflorescu/mantine-datatable/issues/354))
