@@ -4,7 +4,7 @@ import { DOCSEARCH_APP_ID, SEO_CREATOR, SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TIT
 
 const getInitialProps = createGetInitialProps();
 
-export default class _Document extends Document {
+export default class CustomDocument extends Document {
   static getInitialProps = getInitialProps;
 
   render() {
