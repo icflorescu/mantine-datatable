@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import AppWrapper from '~/components/AppWrapper';
 import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE } from '~/config';
 
-export default function _App(props: AppProps) {
+export default function CustomApp(props: AppProps) {
   const { Component, pageProps } = props;
 
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
