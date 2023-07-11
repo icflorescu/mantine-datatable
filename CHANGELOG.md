@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.8.3 (2023-07-12)
+
+- Fix a bug when filtering popover triggers sorting button (see [#368](https://github.com/icflorescu/mantine-datatable/issues/368))
+
 # 2.8.0 (2023-07-05)
 
 - Make records selection feature optional for generic usage (see [#361](https://github.com/icflorescu/mantine-datatable/issues/361))
