@@ -1,7 +1,7 @@
-import { ActionIcon, Box, Center, Group, Popover, createStyles, type MantineTheme, type Sx } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconArrowUp, IconArrowsVertical, IconFilter } from '@tabler/icons-react';
+import { Box, Center, Group, createStyles, type MantineTheme, type Sx } from '@mantine/core';
+import { IconArrowUp, IconArrowsVertical } from '@tabler/icons-react';
 import type { BaseSyntheticEvent, CSSProperties, ReactNode } from 'react';
+import DataTableHeaderCellFilter from './DataTableHeaderCellFilter';
 import type { DataTableColumn, DataTableSortProps } from './types';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
 
@@ -50,29 +50,6 @@ type DataTableHeaderCellProps<T> = {
   sortIcons: DataTableSortProps['sortIcons'];
   onSortStatusChange: DataTableSortProps['onSortStatusChange'];
 } & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlignment' | 'width' | 'filter' | 'filtering'>;
-
-function Filter<T>({ children, isActive }: { children: DataTableColumn<T>['filter']; isActive: boolean }) {
-  const [isOpen, { close, toggle }] = useDisclosure(false);
-
-  return (
-    <Popover withArrow withinPortal shadow="md" opened={isOpen} onClose={close} trapFocus>
-      <Popover.Target>
-        <ActionIcon
-          onClick={(e) => {
-            e.preventDefault();
-            toggle();
-          }}
-          variant={isActive ? 'default' : 'subtle'}
-        >
-          <IconFilter size={14} />
-        </ActionIcon>
-      </Popover.Target>
-      <Popover.Dropdown onClick={(e) => e.preventDefault()}>
-        {typeof children === 'function' ? children({ close }) : children}
-      </Popover.Dropdown>
-    </Popover>
-  );
-}
 
 export default function DataTableHeaderCell<T>({
   className,
@@ -152,7 +129,7 @@ export default function DataTableHeaderCell<T>({
             )}
           </>
         ) : null}
-        {filter ? <Filter isActive={!!filtering}>{filter}</Filter> : null}
+        {filter ? <DataTableHeaderCellFilter isActive={!!filtering}>{filter}</DataTableHeaderCellFilter> : null}
       </Group>
     </Box>
   );
