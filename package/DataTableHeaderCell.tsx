@@ -67,7 +67,9 @@ function Filter<T>({ children, isActive }: { children: DataTableColumn<T>['filte
           <IconFilter size={14} />
         </ActionIcon>
       </Popover.Target>
-      <Popover.Dropdown>{typeof children === 'function' ? children({ close }) : children}</Popover.Dropdown>
+      <Popover.Dropdown onClick={(e) => e.preventDefault()}>
+        {typeof children === 'function' ? children({ close }) : children}
+      </Popover.Dropdown>
     </Popover>
   );
 }
