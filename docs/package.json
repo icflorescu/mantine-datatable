@@ -14,13 +14,13 @@
     "@emotion/server": "^11.11.0",
     "@faker-js/faker": "^8.0.2",
     "@formkit/auto-animate": "^0.7.0",
-    "@mantine/core": "^6.0.16",
-    "@mantine/dates": "^6.0.16",
-    "@mantine/hooks": "^6.0.16",
-    "@mantine/modals": "^6.0.16",
-    "@mantine/next": "^6.0.16",
-    "@mantine/notifications": "^6.0.16",
-    "@mantine/prism": "^6.0.16",
+    "@mantine/core": "^6.0.17",
+    "@mantine/dates": "^6.0.17",
+    "@mantine/hooks": "^6.0.17",
+    "@mantine/modals": "^6.0.17",
+    "@mantine/next": "^6.0.17",
+    "@mantine/notifications": "^6.0.17",
+    "@mantine/prism": "^6.0.17",
     "@tabler/icons-react": "^2.26.0",
     "@tanstack/react-query": "^4.29.25",
     "dayjs": "^1.11.9",
@@ -37,6 +37,6 @@
     "@types/node": "^20.4.2",
     "@types/react": "^18.2.15",
     "typescript": "^5.1.6",
-    "webpack": "^5.88.1"
+    "webpack": "^5.88.2"
   }
 }
