@@ -2,17 +2,25 @@ import { Code, Container } from '@mantine/core';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import CodeBlock from '~/components/CodeBlock';
 import PageNavigation from '~/components/PageNavigation';
+import PageSubtitle from '~/components/PageSubtitle';
 import PageText from '~/components/PageText';
 import PageTitle from '~/components/PageTitle';
-import CustomRowOrCellAttributesExample from '~/examples/CustomRowOrCellAttributesExample';
+import {
+  CustomRowOrCellAttributesExample,
+  CustomRowOrCellAttributesMiddleClickExample,
+} from '~/examples/CustomRowOrCellAttributesExamples';
 import readCodeExample from '~/lib/readCodeExample';
 
 const PATH = 'examples/custom-row-or-cell-attributes';
 
+type ExampleName = 'custom-row-or-cell-attributes' | 'middle-click';
+
 export const getStaticProps: GetStaticProps<{
-  code: string;
+  code: Record<ExampleName, string>;
 }> = async () => ({
-  props: { code: (await readCodeExample('examples/CustomRowOrCellAttributesExample.tsx')) as string },
+  props: {
+    code: (await readCodeExample('examples/CustomRowOrCellAttributesExamples.tsx')) as Record<ExampleName, string>,
+  },
 });
 
 export default function Page({ code }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -32,7 +40,13 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
       </PageText>
       <PageText>Inspect the table below to see the attributes generated for each row and cell:</PageText>
       <CustomRowOrCellAttributesExample />
-      <CodeBlock language="typescript" content={code} />
+      <CodeBlock language="typescript" content={code['custom-row-or-cell-attributes']} />
+      <PageSubtitle value="Handling middle-clicks" />
+      <PageText>
+        Here is how you could use the <Code>customRowAttributes</Code> property to handle middle-clicks on table rows:
+      </PageText>
+      <CustomRowOrCellAttributesMiddleClickExample />
+      <CodeBlock language="typescript" content={code['custom-row-or-cell-attributes']} />
       <PageNavigation of={PATH} />
     </Container>
   );

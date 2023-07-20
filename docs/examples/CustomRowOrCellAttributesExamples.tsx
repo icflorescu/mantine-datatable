@@ -3,8 +3,8 @@ import { companies } from '~/data';
 
 const records = companies.slice(0, 5);
 
-export default function CustomRowOrCellAttributesExample() {
-  // example-start
+export function CustomRowOrCellAttributesExample() {
+  // example-start custom-row-or-cell-attributes
   return (
     <DataTable
       withBorder
@@ -19,6 +19,26 @@ export default function CustomRowOrCellAttributesExample() {
         'data-cy-id': id,
         'data-cy-name': name,
         'data-cy-index': recordIndex,
+      })}
+    />
+  );
+  // example-end
+}
+
+export function CustomRowOrCellAttributesMiddleClickExample() {
+  // example-start middle-click
+  return (
+    <DataTable
+      withBorder
+      shadow="xs"
+      columns={[{ accessor: 'name' }, { accessor: 'city' }, { accessor: 'state' }]}
+      records={records}
+      customRowAttributes={({ name }) => ({
+        onMouseDown: (e: MouseEvent) => {
+          if (e.button === 1) {
+            alert(`Middle-click on row ${name}`);
+          }
+        },
       })}
     />
   );
