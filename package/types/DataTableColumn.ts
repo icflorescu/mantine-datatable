@@ -112,9 +112,11 @@ export type DataTableColumn<T> = {
   cellsSx?: Sx;
 
   /**
-   * Optional function returning an object of custom attributes to be applied to each cell in the column
+   * Optional function returning an object of custom attributes to be applied to each cell in the column.
+   * Receives the current record and its index as arguments.
+   * Useful for adding data attributes, handling middle-clicks, etc.
    */
-  customCellAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
+  customCellAttributes?: (record: T, recordIndex: number) => Record<string, unknown>;
 
   /**
    * Optional column footer content; if at least one column has a footer, the table will display a footer row

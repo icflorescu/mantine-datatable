@@ -465,7 +465,7 @@ export default function DataTable<T>({
                     className={rowClassName}
                     style={rowStyle}
                     sx={rowSx}
-                    customRowAttributes={customRowAttributes}
+                    customAttributes={customRowAttributes}
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
                 );
