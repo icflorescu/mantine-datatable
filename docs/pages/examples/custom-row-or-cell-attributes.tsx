@@ -46,7 +46,7 @@ export default function Page({ code }: InferGetStaticPropsType<typeof getStaticP
         Here is how you could use the <Code>customRowAttributes</Code> property to handle middle-clicks on table rows:
       </PageText>
       <CustomRowOrCellAttributesMiddleClickExample />
-      <CodeBlock language="typescript" content={code['custom-row-or-cell-attributes']} />
+      <CodeBlock language="typescript" content={code['middle-click']} />
       <PageNavigation of={PATH} />
     </Container>
   );
