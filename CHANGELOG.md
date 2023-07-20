@@ -1,7 +1,11 @@
 # Changelog
 
-The following is a list of notable changes to the Mantine Datatable component.  
+The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
+
+## 2.9.0 (2023-07-20)
+
+- Relax `customRowAttributes` & `customCellAttributes` return types to `Record<string, unknown>` in order to support custom event handlers (see [#380](https://github.com/icflorescu/mantine-datatable/discussions/380))
 
 ## 2.8.3 (2023-07-12)
 

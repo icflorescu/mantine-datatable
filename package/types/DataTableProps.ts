@@ -157,9 +157,11 @@ export type DataTableProps<T> = {
   rowSx?: Sx;
 
   /**
-   * Optional function returning an object of custom attributes to be applied to each row in the table
+   * Optional function returning an object of custom attributes to be applied to each row in the table.
+   * Receives the current record and its index as arguments.
+   * Useful for adding data attributes, handling middle-clicks, etc.
    */
-  customRowAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
+  customRowAttributes?: (record: T, recordIndex: number) => Record<string, unknown>;
 
   /**
    * Ref pointing to the scrollable viewport element; useful for imperative scrolling

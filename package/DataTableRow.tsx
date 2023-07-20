@@ -52,7 +52,7 @@ type DataTableRowProps<T> = {
   onCellClick: DataTableCellClickHandler<T> | undefined;
   onContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
   expansion: ReturnType<typeof useRowExpansion<T>>;
-  customRowAttributes?: (record: T, recordIndex: number) => Record<string, string | number>;
+  customAttributes?: (record: T, recordIndex: number) => Record<string, unknown>;
   className?: string | ((record: T, recordIndex: number) => string | undefined);
   style?: CSSProperties | ((record: T, recordIndex: number) => CSSProperties | undefined);
   sx?: Sx;
@@ -75,7 +75,7 @@ export default function DataTableRow<T>({
   onCellClick,
   onContextMenu,
   expansion,
-  customRowAttributes,
+  customAttributes,
   className,
   style,
   sx,
@@ -111,7 +111,7 @@ export default function DataTableRow<T>({
         }}
         style={typeof style === 'function' ? style(record, recordIndex) : style}
         sx={sx}
-        {...customRowAttributes?.(record, recordIndex)}
+        {...customAttributes?.(record, recordIndex)}
         onContextMenu={onContextMenu}
       >
         {selectionVisible && (
