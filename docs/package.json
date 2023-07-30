@@ -21,7 +21,7 @@
     "@mantine/next": "^6.0.17",
     "@mantine/notifications": "^6.0.17",
     "@mantine/prism": "^6.0.17",
-    "@tabler/icons-react": "^2.29.0",
+    "@tabler/icons-react": "^2.30.0",
     "@tanstack/react-query": "^4.32.0",
     "dayjs": "^1.11.9",
     "lodash": "^4.17.21",
@@ -33,9 +33,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.195",
-    "@types/node": "^20.4.4",
-    "@types/react": "^18.2.16",
+    "@types/lodash": "^4.14.196",
+    "@types/node": "^20.4.5",
+    "@types/react": "^18.2.17",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2"
   }
