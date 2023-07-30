@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 2.9.3 (2023-07-30)
+
+- Fix a minor display bug when using rows selection inside nested tables (see [#387](https://github.com/icflorescu/mantine-datatable/issues/387))
+
 ## 2.9.0 (2023-07-20)
 
 - Relax `customRowAttributes` & `customCellAttributes` return types to `Record<string, unknown>` in order to support custom event handlers (see [#380](https://github.com/icflorescu/mantine-datatable/discussions/380))
