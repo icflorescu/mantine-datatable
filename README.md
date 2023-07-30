@@ -16,8 +16,8 @@ The lightweight, dependency-free, "dark-theme aware" [**table component**](https
 
 ## Features
 
-- **Lightweight** - no external dependencies, no bloat
-- **Dark theme aware** - works out of the box with Mantine's dark theme
+- **Lightweight** - no external dependencies, [no bloat](https://bundlephobia.com/package/mantine-datatable)
+- **Dark theme aware** - works out of the box with [Mantine's dark theme](https://mantine.dev/guides/dark-theme/)
 - **[Fully customizable](https://icflorescu.github.io/mantine-datatable/examples/additional-styling)** - you can customize the look and feel of the table and its components
 - **[Asynchronous data loading](https://icflorescu.github.io/mantine-datatable/examples/asynchronous-data-loading)** - load data from a remote API endpoint and show a loading indicator while waiting for the response
 - **[Pagination](https://icflorescu.github.io/mantine-datatable/examples/pagination)** - split large data sets into pages
