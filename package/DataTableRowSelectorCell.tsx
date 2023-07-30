@@ -7,6 +7,7 @@ const useStyles = createStyles((theme) => {
     root: {
       position: 'sticky',
       zIndex: 1,
+      width: 0,
       left: 0,
       background: 'inherit',
       '&::after': {
