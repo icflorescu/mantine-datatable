@@ -35,9 +35,9 @@ The lightweight, dependency-free, "dark-theme aware" [**table component**](https
 
 [![Who's using Mantine DataTable](https://user-images.githubusercontent.com/581999/251123401-ae327a7f-4444-4c83-8333-39b024c9810e.png)](https://icflorescu.github.io/mantine-datatable/)
 
-[Mantine DataTable](https://icflorescu.github.io/mantine-datatable/) is used by developers and startups around the world, including: [exdatis.ai](https://exdatis.ai/), [teachfloor](https://www.teachfloor.com/), [MARKUP](https://www.getmarkup.com/), [BookieBase](https://bookiebase.ie/), [zipline](https://zipline.diced.tech/), [Pachtop](https://github.com/pacholoamit/pachtop), [Ganymede](https://github.com/Zibbp/ganymede), [COH3 Stats](https://coh3stats.com/), [Culver City Rental Registry](https://www.ccrentals.org/) and many more.
+[Mantine DataTable](https://icflorescu.github.io/mantine-datatable/) is used by developers and startups around the world, such as: [exdatis.ai](https://exdatis.ai/), [teachfloor](https://www.teachfloor.com/), [MARKUP](https://www.getmarkup.com/), [BookieBase](https://bookiebase.ie/), [zipline](https://zipline.diced.tech/), [Pachtop](https://github.com/pacholoamit/pachtop), [Ganymede](https://github.com/Zibbp/ganymede), [COH3 Stats](https://coh3stats.com/), [Culver City Rental Registry](https://www.ccrentals.org/) and many more.
 
-If you're using [Mantine DataTable](https://icflorescu.github.io/mantine-datatable/) in your project, please drop me a line at the email address listed in my [GitHub profile](https://github.com/icflorescu) and I'll be happy to add your project to the list and on the [documentation website](https://icflorescu.github.io/mantine-datatable/).
+If you're using [Mantine DataTable](https://icflorescu.github.io/mantine-datatable/) in your project, please drop me a line at the email address listed in my [GitHub profile](https://github.com/icflorescu) and I'll be happy to add it to the list and on the [documentation website](https://icflorescu.github.io/mantine-datatable/).
 
 ## Full documentation and examples
 

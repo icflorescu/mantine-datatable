@@ -40,6 +40,7 @@ export default function CustomApp(props: AppProps) {
         <meta name="description" content={SEO_DEFAULT_DESCRIPTION} />
         <meta property="og:description" content={SEO_DEFAULT_DESCRIPTION} />
         <meta name="twitter:description" content={SEO_DEFAULT_DESCRIPTION} />
+        <meta name="author" content="Ionut-Cristian Florescu" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
