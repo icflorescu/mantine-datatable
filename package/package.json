@@ -59,7 +59,7 @@
     "@mantine/core": "^6.0.17",
     "@mantine/hooks": "^6.0.17",
     "@tabler/icons-react": "^2.30.0",
-    "@types/react": "^18.2.17",
+    "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "esbuild": "^0.18.17",
     "react": "^18.2.0",
