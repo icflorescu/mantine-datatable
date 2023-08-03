@@ -10,7 +10,7 @@ import {
 } from '@tabler/icons-react';
 import { FC } from 'react';
 
-export const SEO_DEFAULT_TITLE = 'Mantine DataTable';
+export const SEO_DEFAULT_TITLE = 'Mantine DataTable: the React table component for Mantine';
 export const SEO_DEFAULT_DESCRIPTION =
   'A fully-featured data-table/data-grid React component for building data-rich applications with Mantine UI';
 export const SEO_CREATOR = '@icflorescu';
