@@ -25,6 +25,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function HomePageQuote() {
   const { classes } = useStyles();
+  // todo: make this dynamic when we have more quotes
   return (
     <Stack spacing="sm" my="xl" className={classes.root}>
       <Text component="blockquote" className={classes.quote}>
