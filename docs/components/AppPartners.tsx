@@ -29,25 +29,25 @@ const PARTNERS = [
   {
     name: 'Pachtop',
     showText: true,
-    logo: { base: 'pachtop', ext: 'png', scale: 84, shift: 4 },
+    logo: { base: 'pachtop', ext: 'png', scale: 84, shift: 2 },
     link: 'https://github.com/pacholoamit/pachtop',
   },
   {
     name: 'Ganymede',
     showText: true,
-    logo: { base: 'ganymede', ext: 'png', scale: 80, shift: 4 },
+    logo: { base: 'ganymede', ext: 'png', scale: 82, shift: 2 },
     link: 'https://github.com/Zibbp/ganymede',
   },
   {
     name: 'COH3 Stats',
     showText: true,
-    logo: { base: 'coh3-stats', ext: 'png', scale: 80, shift: 4 },
+    logo: { base: 'coh3-stats', ext: 'png', scale: 80, shift: 1 },
     link: 'https://coh3stats.com',
   },
   {
     name: 'ccrentals.org',
     showText: true,
-    logo: { base: 'ccrentals', ext: 'svg', themed: true, scale: 80, shift: 2 },
+    logo: { base: 'ccrentals', ext: 'svg', themed: true, scale: 84, shift: 1 },
     link: 'https://www.ccrentals.org',
   },
 ];
@@ -68,8 +68,8 @@ const useStyles = createStyles((theme) => ({
   },
   links: {
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
     flexWrap: 'wrap',
     gap: theme.spacing.lg,
     [`@media (min-width: ${theme.breakpoints.sm})`]: {
@@ -89,6 +89,9 @@ const useStyles = createStyles((theme) => ({
   },
   text: {
     fontWeight: 700,
+    [`@media (min-width: ${theme.breakpoints.sm})`]: {
+      fontSize: '1.25rem',
+    },
   },
 }));
 
