@@ -4,8 +4,9 @@ import ExternalLink from '~/components/ExternalLink';
 import InternalLink from '~/components/InternalLink';
 import HomePageButtons from '~/components/homePage/HomePageButtons';
 import HomePageFeature from '~/components/homePage/HomePageFeature';
+import HomePageQuote from '~/components/homePage/HomePageQuote';
 import HomePageTitle from '~/components/homePage/HomePageTitle';
-import { HomePageWhoIsUsing } from '~/components/homePage/HomePageWhoIsUsing';
+import HomePageTrustedBy from '~/components/homePage/HomePageTrustedBy';
 import {
   CRA_LINK,
   GATSBY_LINK,
@@ -27,7 +28,7 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.sm,
   },
   subtitle: {
-    margin: '1em 0 2em',
+    margin: '1em 0',
     fontWeight: 700,
     color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[8],
     [`@media (min-width: ${theme.breakpoints.xs})`]: {
@@ -57,7 +58,7 @@ export default function Page() {
     <Container>
       <div className={classes.root}>
         <HomePageTitle />
-        <HomePageWhoIsUsing />
+        <HomePageTrustedBy />
         <div className={classes.image}>
           <img src={`${process.env.BASE_PATH}/mantine-datatable.png`} alt="Mantine DataTable supports dark mode" />
         </div>
@@ -71,6 +72,7 @@ export default function Page() {
           </InternalLink>{' '}
           out of the box.
         </Text>
+        <HomePageQuote />
         <div className={classes.features}>
           <HomePageFeature icon={IconSettings} title="Feature rich">
             Supports <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink>,{' '}

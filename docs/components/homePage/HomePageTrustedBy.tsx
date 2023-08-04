@@ -5,7 +5,7 @@ const useStyles = createStyles((theme) => ({
   root: {
     marginBottom: '2em',
     display: 'flex',
-    gap: '.25em',
+    gap: '.5em',
     alignItems: 'flex-start',
   },
   checkIcon: {
@@ -32,7 +32,7 @@ function handleLinkClick() {
   window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
-export function HomePageWhoIsUsing() {
+export default function HomePageTrustedBy() {
   const { classes } = useStyles();
   return (
     <div className={classes.root}>
