@@ -2,6 +2,11 @@ import { Container, Text, createStyles } from '@mantine/core';
 
 const PARTNERS = [
   {
+    name: 'kappa.ai',
+    logo: { base: 'kapa', ext: 'png', themed: true, scale: 98, shift: 1 },
+    link: 'https://kapa.ai',
+  },
+  {
     name: 'exdatis',
     logo: { base: 'exdatis', ext: 'svg', themed: true, scale: 92, shift: 2 },
     link: 'https://exdatis.ai',
@@ -90,6 +95,7 @@ const useStyles = createStyles((theme) => ({
   text: {
     fontWeight: 700,
     [`@media (min-width: ${theme.breakpoints.sm})`]: {
+      marginTop: -4,
       fontSize: '1.25rem',
     },
   },
