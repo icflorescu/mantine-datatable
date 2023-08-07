@@ -13,9 +13,9 @@ export default function Page() {
     <Container>
       <PageTitle of={PATH} />
       <PageText>
-        Mantine DataTable is used by many companies and fellow developers around the world; some of them were kind
-        enough to let me know about it, offered sponsorship or asked for private support, and gave me permission to list
-        them in the footer of this website.
+        Mantine DataTable is used by thousands of developers, startups and community projects around the world; some of
+        them were kind enough to let me know about it, offered sponsorship or asked for private support, and gave me
+        permission to list them in the footer of this website.
       </PageText>
       <PageText>
         If you are using Mantine DataTable in your project and would like to be listed here, please let me know by
