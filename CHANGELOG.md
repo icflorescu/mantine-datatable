@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 2.9.9 (2023-08-10)
+
+- Fix `@mantine/core` & `@mantine/hooks` peer dependencies version numbers in `package.json` to `>=6 <=6.0.17 || >=6.0.19`
+
 ## 2.9.8 (2023-08-10)
 
 - Try to lock `@mantine/hooks` and `@mantine/core` peer dependencies to `!= 6.0.18`, to avoid a [bug](https://github.com/icflorescu/mantine-datatable/issues/398) introduced by the [`use-element-size` hook](https://mantine.dev/hooks/use-element-size/)
