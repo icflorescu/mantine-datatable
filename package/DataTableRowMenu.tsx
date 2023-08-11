@@ -1,7 +1,8 @@
 import type { MantineNumberSize, MantineShadow } from '@mantine/core';
 import { Paper, createStyles, px } from '@mantine/core';
-import { useClickOutside, useElementSize, useMergedRef, useWindowEvent } from '@mantine/hooks';
+import { useClickOutside, useMergedRef, useWindowEvent } from '@mantine/hooks';
 import type { ReactNode } from 'react';
+import { useElementOuterSize } from './hooks';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -34,7 +35,7 @@ export default function DataTableRowMenu({
   useWindowEvent('resize', onDestroy);
   useWindowEvent('scroll', onDestroy);
   const clickOutsideRef = useClickOutside<HTMLDivElement>(onDestroy);
-  const { ref: sizeRef, width, height } = useElementSize();
+  const { ref: sizeRef, width, height } = useElementOuterSize<HTMLDivElement>();
   const ref = useMergedRef(clickOutsideRef, sizeRef);
 
   const { innerWidth: windowWidth, innerHeight: windowHeight } = window;

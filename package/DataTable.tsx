@@ -1,5 +1,5 @@
 import { Box, MantineSize, Portal, Table, createStyles, packSx, type MantineTheme } from '@mantine/core';
-import { useElementSize, useMergedRef } from '@mantine/hooks';
+import { useMergedRef } from '@mantine/hooks';
 import {
   useCallback,
   useMemo,
@@ -20,7 +20,7 @@ import DataTableRowMenu from './DataTableRowMenu';
 import DataTableRowMenuDivider from './DataTableRowMenuDivider';
 import DataTableRowMenuItem from './DataTableRowMenuItem';
 import DataTableScrollArea from './DataTableScrollArea';
-import { useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion } from './hooks';
+import { useElementOuterSize, useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion } from './hooks';
 import type { DataTableProps } from './types';
 import { differenceBy, getRecordId, humanize, uniqBy, useIsomorphicLayoutEffect } from './utils';
 
@@ -196,16 +196,16 @@ export default function DataTable<T>({
     ref: scrollViewportRef,
     width: scrollViewportWidth,
     height: scrollViewportHeight,
-  } = useElementSize<HTMLDivElement>();
+  } = useElementOuterSize<HTMLDivElement>();
 
   const effectiveColumns = useMemo(() => {
     return groups?.flatMap((group) => group.columns) ?? columns!;
   }, [columns, groups]);
 
-  const { ref: headerRef, height: headerHeight } = useElementSize<HTMLTableSectionElement>();
-  const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementSize<HTMLTableElement>();
-  const { ref: footerRef, height: footerHeight } = useElementSize<HTMLTableSectionElement>();
-  const { ref: paginationRef, height: paginationHeight } = useElementSize<HTMLDivElement>();
+  const { ref: headerRef, height: headerHeight } = useElementOuterSize<HTMLTableSectionElement>();
+  const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementOuterSize<HTMLTableElement>();
+  const { ref: footerRef, height: footerHeight } = useElementOuterSize<HTMLTableSectionElement>();
+  const { ref: paginationRef, height: paginationHeight } = useElementOuterSize<HTMLDivElement>();
 
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);

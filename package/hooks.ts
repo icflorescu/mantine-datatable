@@ -1,4 +1,4 @@
-import { useTimeout } from '@mantine/hooks';
+import { useResizeObserver, useTimeout } from '@mantine/hooks';
 import { useEffect, useState, type Key } from 'react';
 import type { DataTableRowExpansionProps } from './types';
 import { getRecordId } from './utils';
@@ -99,4 +99,9 @@ export function useRowExpansionStatus(open: boolean, transitionDuration?: number
   }, [expand, hide, open]);
 
   return { expanded, visible };
+}
+
+export function useElementOuterSize<T extends HTMLElement>() {
+  const [ref] = useResizeObserver<T>();
+  return { ref, width: ref.current?.offsetWidth || 0, height: ref.current?.offsetHeight || 0 };
 }

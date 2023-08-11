@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-turborepo",
-  "version": "2.9.9",
+  "version": "2.9.10",
   "description": "Monorepo for mantine-datatable; see package/package.json for more info",
   "private": true,
   "workspaces": [
@@ -30,7 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "babel-jest": "^29.6.2",
-    "eslint": "^8.46.0",
+    "eslint": "^8.47.0",
     "eslint-config-next": "^13.4.13",
     "eslint-config-prettier": "^9.0.0",
     "jest": "^29.6.2",
