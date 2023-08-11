@@ -103,5 +103,6 @@ export function useRowExpansionStatus(open: boolean, transitionDuration?: number
 
 export function useElementOuterSize<T extends HTMLElement>() {
   const [ref] = useResizeObserver<T>();
-  return { ref, width: ref.current?.offsetWidth || 0, height: ref.current?.offsetHeight || 0 };
+  const { width, height } = ref.current?.getBoundingClientRect() || { width: 0, height: 0 };
+  return { ref, width, height };
 }
