@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 2.9.11 (2023-08-11)
+
+- The internal `useElementOuterSize` hook now return floats instead of integers, for better shadow rendering
+
 ## 2.9.10 (2023-08-11)
 
 - Use a custom `useElementOuterSize` hook instead of Mantine's `useElementSize` to avoid [this bug](https://github.com/icflorescu/mantine-datatable/issues/404)
