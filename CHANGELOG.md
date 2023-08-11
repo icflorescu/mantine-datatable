@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 2.9.10 (2023-08-11)
+
+- Use a custom `useElementOuterSize` hook instead of Mantine's `useElementSize` to avoid [this bug](https://github.com/icflorescu/mantine-datatable/issues/404)
+
 ## 2.9.9 (2023-08-10)
 
 - Fix `@mantine/core` & `@mantine/hooks` peer dependencies version numbers in `package.json` to `>=6 <=6.0.17 || >=6.0.19`
