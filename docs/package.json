@@ -9,7 +9,7 @@
     "lint": "eslint . --ext=.ts,.tsx && tsc --noEmit"
   },
   "dependencies": {
-    "@docsearch/react": "^3.5.1",
+    "@docsearch/react": "^3.5.2",
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
     "@faker-js/faker": "^8.0.2",
@@ -21,12 +21,12 @@
     "@mantine/next": "^6.0.18",
     "@mantine/notifications": "^6.0.18",
     "@mantine/prism": "^6.0.18",
-    "@tabler/icons-react": "^2.30.0",
-    "@tanstack/react-query": "^4.32.6",
+    "@tabler/icons-react": "^2.32.0",
+    "@tanstack/react-query": "^4.33.0",
     "dayjs": "^1.11.9",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
-    "next": "^13.4.13",
+    "next": "^13.4.19",
     "next-pwa": "^5.6.0",
     "next-sitemap": "^4.1.8",
     "react": "^18.2.0",
@@ -34,9 +34,9 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.196",
-    "@types/node": "^20.4.9",
-    "@types/react": "^18.2.19",
-    "typescript": "^5.1.6",
+    "@types/node": "^20.5.7",
+    "@types/react": "^18.2.21",
+    "typescript": "^5.2.2",
     "webpack": "^5.88.2"
   }
 }

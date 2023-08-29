@@ -58,12 +58,12 @@
   "devDependencies": {
     "@mantine/core": "^6.0.18",
     "@mantine/hooks": "^6.0.18",
-    "@tabler/icons-react": "^2.30.0",
-    "@types/react": "^18.2.19",
+    "@tabler/icons-react": "^2.32.0",
+    "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
-    "esbuild": "^0.19.0",
+    "esbuild": "^0.19.2",
     "react": "^18.2.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "@mantine/core": ">=6 <=6.0.17 || >=6.0.19",
