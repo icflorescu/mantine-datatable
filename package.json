@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-turborepo",
-  "version": "2.9.12",
+  "version": "2.9.13",
   "description": "Monorepo for mantine-datatable; see package/package.json for more info",
   "private": true,
   "workspaces": [
@@ -19,8 +19,8 @@
     "test:watch": "turbo run test:watch"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.22.5",
-    "@babel/preset-typescript": "^7.22.11",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.22.15",
     "@faker-js/faker": "^8.0.2",
     "@testing-library/jest-dom": "^6.1.2",
     "@testing-library/react": "^14.0.0",

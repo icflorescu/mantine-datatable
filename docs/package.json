@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "2.9.12",
+  "version": "2.9.13",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.196",
-    "@types/node": "^20.5.7",
+    "@types/node": "^20.5.9",
     "@types/react": "^18.2.21",
     "typescript": "^5.2.2",
     "webpack": "^5.88.2"
