@@ -8,7 +8,7 @@ type DataTableColumnGroupHeaderCellProps<T> = {
 };
 
 export default function DataTableColumnGroupHeaderCell<T>({
-  group: { id, columns, title, className, style, sx },
+  group: { id, columns, title, className, style },
 }: DataTableColumnGroupHeaderCellProps<T>) {
   const queries = useMemo(() => columns.map(({ visibleMediaQuery }) => visibleMediaQuery), [columns]);
   const visibles = useMediaQueriesStringOrFunction(queries);
@@ -18,7 +18,7 @@ export default function DataTableColumnGroupHeaderCell<T>({
   );
 
   return colSpan > 0 ? (
-    <Box component="th" colSpan={colSpan} className={className} sx={sx} style={style}>
+    <Box component="th" colSpan={colSpan} className={className} style={style}>
       {title ?? humanize(id)}
     </Box>
   ) : null;

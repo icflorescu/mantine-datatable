@@ -1,0 +1,10 @@
+
+
+  .root {
+    z-index: 2;
+    background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  }
+
+  .textSelectionDisabled {
+    user-select: none;
+  }

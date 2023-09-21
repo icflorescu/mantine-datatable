@@ -1,41 +1,12 @@
-import { Box, createStyles, type Sx } from '@mantine/core';
+import { Box } from '@mantine/core';
 import type { ChangeEventHandler, CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import DataTableRowCell from './DataTableRowCell';
 import DataTableRowExpansion from './DataTableRowExpansion';
 import DataTableRowSelectorCell from './DataTableRowSelectorCell';
 import { useRowExpansion } from './hooks';
 import type { DataTableCellClickHandler, DataTableColumn, DataTableDefaultColumnProps } from './types';
-
-const useStyles = createStyles((theme) => {
-  const baseColor = theme.colors[theme.primaryColor][6];
-  return {
-    withPointerCursor: {
-      cursor: 'pointer',
-    },
-    selected: {
-      '&&': {
-        'tr&': {
-          background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.6) : theme.fn.lighten(baseColor, 0.9),
-        },
-        'table[data-striped] tbody &:nth-of-type(odd)': {
-          background:
-            theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.55) : theme.fn.lighten(baseColor, 0.85),
-        },
-      },
-    },
-    contextMenuVisible: {
-      '&&': {
-        'tr&': {
-          background: theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.5) : theme.fn.lighten(baseColor, 0.7),
-        },
-        'table[data-striped] tbody &:nth-of-type(odd)': {
-          background:
-            theme.colorScheme === 'dark' ? theme.fn.darken(baseColor, 0.45) : theme.fn.lighten(baseColor, 0.65),
-        },
-      },
-    },
-  };
-});
+import classes from './styles./DataTableRow.css';
+import cx from 'clsx';
 
 type DataTableRowProps<T> = {
   record: T;
@@ -55,7 +26,6 @@ type DataTableRowProps<T> = {
   customAttributes?: (record: T, recordIndex: number) => Record<string, unknown>;
   className?: string | ((record: T, recordIndex: number) => string | undefined);
   style?: CSSProperties | ((record: T, recordIndex: number) => CSSProperties | undefined);
-  sx?: Sx;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
 };
@@ -78,11 +48,9 @@ export default function DataTableRow<T>({
   customAttributes,
   className,
   style,
-  sx,
   contextMenuVisible,
   leftShadowVisible,
 }: DataTableRowProps<T>) {
-  const { cx, classes } = useStyles();
 
   return (
     <>
@@ -110,7 +78,6 @@ export default function DataTableRow<T>({
           onClick?.(e);
         }}
         style={typeof style === 'function' ? style(record, recordIndex) : style}
-        sx={sx}
         {...customAttributes?.(record, recordIndex)}
         onContextMenu={onContextMenu}
       >
@@ -152,7 +119,6 @@ export default function DataTableRow<T>({
               key={accessor}
               className={typeof cellsClassName === 'function' ? cellsClassName(record, recordIndex) : cellsClassName}
               style={typeof cellsStyle === 'function' ? cellsStyle(record, recordIndex) : cellsStyle}
-              sx={cellsSx}
               visibleMediaQuery={visibleMediaQuery}
               record={record}
               recordIndex={recordIndex}

@@ -1,0 +1,32 @@
+  .sortableColumnHeader {
+    cursor: pointer;
+    transition: background .15s ease;
+    &:hover:not(:has(button:hover)) {
+      background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+    }
+  }
+  .sortableColumnHeaderGroup {
+    gap: 0.25em;
+  }
+  .columnHeaderText {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .sortableColumnHeaderText {
+    min-width: 0;
+    flex-grow: 1;
+  }
+  .sortableColumnHeaderIcon {
+    transition: transform .15s ease;
+  }
+  .sortableColumnHeaderIconRotated {
+    transform: rotate3d(0, 0, 1, 180deg);
+  }
+  .sortableColumnHeaderUnsortedIcon {
+    color: light-dark(var(--mantine-color-dark-5), var(--mantine-color-gray-3));
+    transition: color .15s ease;
+    th:hover & {
+      color: light-dark(var(--mantine-color-dark-6), var(--mantine-color-gray-2));
+    }
+  }

@@ -1,0 +1,11 @@
+cell {
+  &&: {
+    borderBottomWidth: 0;
+    padding: 0;
+  }
+}
+expandedCell {
+  &&: {
+    borderBottomWidth: 1;
+  }
+}

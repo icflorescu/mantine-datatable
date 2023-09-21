@@ -1,10 +1,9 @@
-import { Box, MantineSize, Portal, Table, createStyles, packSx, type MantineTheme } from '@mantine/core';
+import { Box, MantineSize, Portal, Table, useMantineTheme } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import {
   useCallback,
   useMemo,
   useState,
-  type CSSProperties,
   type ChangeEventHandler,
   type Key,
   type MouseEventHandler,
@@ -23,94 +22,16 @@ import DataTableScrollArea from './DataTableScrollArea';
 import { useElementOuterSize, useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion } from './hooks';
 import type { DataTableProps } from './types';
 import { differenceBy, getRecordId, humanize, uniqBy, useIsomorphicLayoutEffect } from './utils';
+import classes from './styles/DataTable.css';
+import cx from 'clsx';
 
 const EMPTY_OBJECT = {};
-
-const useStyles = createStyles(
-  (
-    theme,
-    {
-      borderColor,
-      rowBorderColor,
-    }: {
-      borderColor: string | ((theme: MantineTheme) => string);
-      rowBorderColor: string | ((theme: MantineTheme) => string);
-    }
-  ) => {
-    const borderColorValue = typeof borderColor === 'function' ? borderColor(theme) : borderColor;
-    const rowBorderColorValue = typeof rowBorderColor === 'function' ? rowBorderColor(theme) : rowBorderColor;
-
-    return {
-      root: {
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        tr: {
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-        },
-        '&&': {
-          'thead tr th': {
-            borderBottomColor: borderColorValue,
-          },
-          'tbody tr td': {
-            borderTopColor: rowBorderColorValue,
-          },
-        },
-      },
-      lastRowBorderBottomVisible: {
-        'tbody tr:last-of-type td': {
-          borderBottom: `1px solid ${rowBorderColorValue}`,
-        },
-      },
-      textSelectionDisabled: {
-        userSelect: 'none',
-      },
-      table: {
-        borderCollapse: 'separate',
-        borderSpacing: 0,
-      },
-      tableWithBorder: {
-        border: `1px solid ${borderColorValue}`,
-      },
-      tableWithColumnBorders: {
-        '&&': {
-          'th, td': {
-            ':not(:first-of-type)': {
-              borderLeft: `1px solid ${rowBorderColorValue}`,
-            },
-          },
-        },
-      },
-      tableWithColumnBordersAndSelectableRecords: {
-        thead: {
-          'tr + tr': {
-            th: {
-              borderLeft: `1px solid ${rowBorderColorValue}`,
-            },
-          },
-        },
-      },
-      verticalAlignmentTop: {
-        td: {
-          verticalAlign: 'top',
-        },
-      },
-      verticalAlignmentBottom: {
-        td: {
-          verticalAlign: 'bottom',
-        },
-      },
-    };
-  }
-);
 
 export default function DataTable<T>({
   withBorder,
   borderRadius,
-  borderColor = (theme) => (theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]),
-  rowBorderColor = (theme) =>
-    theme.fn.rgba(theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3], 0.65),
+  borderColor = (theme) => (theme === 'dark' ? 'var(--mantine-color-dark-4)' : 'var(--mantine-color-gray-3)'),
+  rowBorderColor = (theme) => `rgb(${theme === 'dark' ? 'var(--mantine-color-dark-4)' : 'var(--mantine-color-gray-3)'} / 65%)`,
   withColumnBorders,
   textSelectionDisabled,
   height = '100%',
@@ -173,7 +94,6 @@ export default function DataTable<T>({
   rowExpansion,
   rowClassName,
   rowStyle,
-  rowSx,
   customRowAttributes,
   scrollViewportRef: scrollViewportRefProp,
   scrollAreaProps,
@@ -185,7 +105,6 @@ export default function DataTable<T>({
   mb,
   ml,
   mr,
-  sx,
   className,
   classNames,
   style,
@@ -197,7 +116,6 @@ export default function DataTable<T>({
     width: scrollViewportWidth,
     height: scrollViewportHeight,
   } = useElementOuterSize<HTMLDivElement>();
-
   const effectiveColumns = useMemo(() => {
     return groups?.flatMap((group) => group.columns) ?? columns!;
   }, [columns, groups]);
@@ -309,24 +227,23 @@ export default function DataTable<T>({
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
   const selectionVisibleAndNotScrolledToLeft = selectionColumnVisible && !scrolledToLeft;
 
-  const { cx, classes, theme } = useStyles({ borderColor, rowBorderColor });
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
+  const theme = useMantineTheme();
   const styleProperties = typeof styles === 'function' ? styles(theme, EMPTY_OBJECT, EMPTY_OBJECT) : styles;
 
   return (
     <Box
       {...marginProperties}
       className={cx(classes.root, { [classes.tableWithBorder]: withBorder }, className, classNames?.root)}
-      sx={[
-        (theme) => ({
+      style={[
+        {
           borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
           boxShadow: theme.shadows[shadow as MantineSize] || shadow,
           height,
           minHeight,
-        }),
-        ...packSx(sx),
+        },
+        { ...styleProperties?.root, ...style }
       ]}
-      style={{ ...styleProperties?.root, ...style } as CSSProperties}
     >
       <DataTableScrollArea
         viewportRef={useMergedRef(scrollViewportRef, scrollViewportRefProp || null)}
@@ -464,7 +381,6 @@ export default function DataTable<T>({
                     expansion={rowExpansionInfo}
                     className={rowClassName}
                     style={rowStyle}
-                    sx={rowSx}
                     customAttributes={customRowAttributes}
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />

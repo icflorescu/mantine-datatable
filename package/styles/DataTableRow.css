@@ -1,0 +1,25 @@
+withPointerCursor {
+    cursor: 'pointer';
+}
+
+selected {
+  && {
+    tr& {
+      background: light-dark(rgb(var(--mantine-color-primary-6) / 90%), rgb(var(--mantine-color-primary-6) / 60%));
+    }
+    table[data-striped] tbody &:nth-of-type(odd) {
+        background: light-dark(rgb(var(--mantine-color-primary-6) / 85%), rgb(var(--mantine-color-primary-6) / 55%));
+    }
+  }
+}
+
+contextMenuVisible {
+  && {
+    tr& {
+      background: light-dark(rgb(var(--mantine-color-primary-6) / 70%), rgb(var(--mantine-color-primary-6) / 50%));
+    }
+    table[data-striped] tbody &:nth-of-type(odd) {
+        background: light-dark(rgb(var(--mantine-color-primary-6) / 65%), rgb(var(--mantine-color-primary-6) / 45%));
+    }
+  }
+}

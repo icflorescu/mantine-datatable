@@ -1,21 +1,9 @@
-import { Collapse, createStyles } from '@mantine/core';
+import { Collapse } from '@mantine/core';
 import type { ReactNode } from 'react';
 import { useRowExpansionStatus } from './hooks';
 import type { DataTableRowExpansionCollapseProps } from './types';
-
-const useStyles = createStyles({
-  cell: {
-    '&&': {
-      borderBottomWidth: 0,
-      padding: 0,
-    },
-  },
-  expandedCell: {
-    '&&': {
-      borderBottomWidth: 1,
-    },
-  },
-});
+import classes from './styles/DataTableRowExpansion.css';
+import cx from 'clsx';
 
 type DataTableRowExpansionProps = {
   open: boolean;
@@ -26,8 +14,6 @@ type DataTableRowExpansionProps = {
 
 export default function DataTableRowExpansion({ open, colSpan, content, collapseProps }: DataTableRowExpansionProps) {
   const { expanded, visible } = useRowExpansionStatus(open, collapseProps?.transitionDuration);
-
-  const { cx, classes } = useStyles();
 
   return visible ? (
     <>

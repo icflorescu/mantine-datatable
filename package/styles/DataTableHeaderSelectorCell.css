@@ -1,0 +1,33 @@
+:root {
+    --shadow-gradient-alpha: 0.05;
+  }
+  
+  .root {
+    position: sticky;
+    width: 0;
+    left: 0;
+    background: inherit;
+  }
+  
+  .root::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: var(--mantine-spacing-sm);
+    bottom: 0;
+    border-left: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    width: var(--mantine-spacing-sm);
+    background: linear-gradient(to right, rgba(var(--mantine-color-black) / light-dark(0.05, 0.5)), rgba(var(--mantine-color-black) / 0)), linear-gradient(to right, rgba(var(--mantine-color-black), / light-dark(0.05, 0.5)), rgba(var(--mantine-color-black) / 0) 30%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  
+  .shadowVisible::after {
+    opacity: 1;
+  }
+  
+  .checkboxInput {
+    cursor: pointer;
+  }
+  

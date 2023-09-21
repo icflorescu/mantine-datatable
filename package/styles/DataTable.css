@@ -1,0 +1,43 @@
+.root {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .root tr {
+    background-color: light-dark(var(--mantine-color-white, var(--mantine-color-dark-7)));
+  }
+  .root thead tr th {
+    border-bottom-color: rgb(light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)));
+  }
+  .root tbody tr td {
+    border-top-color: rgb(light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)));
+  }
+
+  .root.lastRowBorderBottomVisible tbody tr:last-of-type td {
+    border-bottom: 1px solid rgb(light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4) / 65%));
+  }
+
+  .textSelectionDisabled {
+    user-select: none;
+  }
+  .table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .tableWithBorder {
+    border: 1px solid rgb(light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)));
+  }
+  .tableWithColumnBorders th:not(:first-of-type),
+  .tableWithColumnBorders td:not(:first-of-type) {
+    border-left: 1px solid rgb(light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4) / 65%));
+  }
+  .tableWithColumnBordersAndSelectableRecords thead tr + tr th {
+    border-left: 1px solid rgb(light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4) / 65%));
+  }
+  .verticalAlignmentTop td {
+    vertical-align: top;
+  }
+  .verticalAlignmentBottom td {
+    vertical-align: bottom;
+  }

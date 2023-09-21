@@ -1,45 +1,40 @@
-import { Checkbox, createStyles, px } from '@mantine/core';
+import { Checkbox } from '@mantine/core';
 import type { ChangeEventHandler } from 'react';
+import classes from './styles/DataTableRowSelectorCell.css';
+import cx from 'clsx';
 
-const useStyles = createStyles((theme) => {
-  const shadowGradientAlpha = theme.colorScheme === 'dark' ? 0.5 : 0.05;
-  return {
-    root: {
-      position: 'sticky',
-      zIndex: 1,
-      width: 0,
-      left: 0,
-      background: 'inherit',
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        right: -px(theme.spacing.sm),
-        bottom: 0,
-        borderLeft: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
-        width: theme.spacing.sm,
-        background: `linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )}), linear-gradient(to right, ${theme.fn.rgba(theme.black, shadowGradientAlpha)}, ${theme.fn.rgba(
-          theme.black,
-          0
-        )} 30%)`,
-        pointerEvents: 'none',
-        opacity: 0,
-        transition: 'opacity .15s ease',
-      },
+const shadowGradientAlpha = 'light-dark(0.05, 0.5)';
+const classes = {
+  root: {
+    position: 'sticky',
+    zIndex: 1,
+    width: 0,
+    left: 0,
+    background: 'inherit',
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      right: '-px(var(--mantine-spacing-sm))',
+      bottom: 0,
+      borderLeft: `1px solid light-dark(var(--mantine-color-dark-4), var(--mantine-color-gray-3))`,
+      width: 'var(--mantine-spacing-sm)',
+      background: `linear-gradient(to right, rgb(var(--mantine-color-black), ${shadowGradientAlpha})}, rgb(var(--mantine-color-black), 0)), 
+      linear-gradient(to right, rgb(var(--mantine-color-black), ${shadowGradientAlpha})}, rgb(var(--mantine-color-black), 30%))`,
+      pointerEvents: 'none',
+      opacity: 0,
+      transition: 'opacity .15s ease',
     },
-    withRightShadow: {
-      '&::after': {
-        opacity: 1,
-      },
+  },
+  withRightShadow: {
+    '&::after': {
+      opacity: 1,
     },
-    checkbox: {
-      cursor: 'pointer',
-    },
-  };
-});
+  },
+  checkbox: {
+    cursor: 'pointer',
+  },
+};
 
 type DataTableRowSelectorCellProps<T> = {
   record: T;
@@ -58,13 +53,12 @@ export default function DataTableRowSelectorCell<T>({
   getCheckboxProps,
   ...otherProps
 }: DataTableRowSelectorCellProps<T>) {
-  const { cx, classes } = useStyles();
   return (
     <td
-      className={cx(classes.root, { [classes.withRightShadow]: withRightShadow })}
+      className={cx(classes.root, withRightShadow ? classes.withRightShadow : null)}
       onClick={(e) => e.stopPropagation()}
     >
-      <Checkbox classNames={{ input: classes.checkbox }} {...otherProps} {...getCheckboxProps(record, recordIndex)} />
+      <Checkbox styles={{ input: {cursor: 'pointer'} }} {...otherProps} {...getCheckboxProps(record, recordIndex)} />
     </td>
   );
 }

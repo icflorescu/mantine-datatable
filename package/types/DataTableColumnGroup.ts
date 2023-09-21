@@ -1,4 +1,3 @@
-import type { Sx } from '@mantine/core';
 import type { CSSProperties, ReactNode } from 'react';
 import type { DataTableColumn } from './DataTableColumn';
 
@@ -16,6 +15,5 @@ export type DataTableColumnGroup<T> = {
    */
   columns: readonly DataTableColumn<T>[];
   className?: string;
-  sx?: Sx;
   style?: CSSProperties;
 };

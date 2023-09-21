@@ -1,20 +1,13 @@
-import type { MantineNumberSize, MantineShadow } from '@mantine/core';
-import { Paper, createStyles, px } from '@mantine/core';
+import type { MantineRadius, MantineShadow } from '@mantine/core';
+import { Paper, px, useDirection, useMantineTheme } from '@mantine/core';
 import { useClickOutside, useMergedRef, useWindowEvent } from '@mantine/hooks';
 import type { ReactNode } from 'react';
 import { useElementOuterSize } from './hooks';
-
-const useStyles = createStyles((theme) => ({
-  root: {
-    position: 'fixed',
-    border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
-    overflow: 'hidden',
-    transition: 'all .15s ease',
-  },
-}));
+import classes from './styles/DataTableRowMenu.css';
+import cx from 'clsx';
 
 type DataTableRowMenuProps = {
-  borderRadius: MantineNumberSize | undefined;
+  borderRadius: MantineRadius | undefined;
   shadow: MantineShadow | undefined;
   zIndex: number | undefined;
   y: number;
@@ -40,20 +33,18 @@ export default function DataTableRowMenu({
 
   const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
 
-  const {
-    classes,
-    theme: { dir, spacing },
-  } = useStyles();
+  const theme = useMantineTheme();
+  const { dir } = useDirection();
 
-  const mdSpacing = px(spacing.md);
+  const mdSpacing = px(theme.spacing.md) as number;
 
   return (
     <Paper
       ref={ref}
       shadow={shadow}
       radius={borderRadius}
-      className={classes.root}
-      sx={{
+      className={cx(classes.root)}
+      style={{
         zIndex,
         top: desiredY + height + mdSpacing > windowHeight ? windowHeight - height - mdSpacing : desiredY,
         left:

@@ -1,4 +1,4 @@
-import { Button, Group, Menu, Text, type MantineColor, type MantineSize } from '@mantine/core';
+import { Button, Group, Menu, Text, type MantineColor, type MantineSize, useMantineTheme } from '@mantine/core';
 
 type DataTablePageSizeSelectorComponentProps = {
   size: MantineSize;
@@ -19,21 +19,22 @@ export default function DataTablePageSizeSelector({
   onChange,
   color,
 }: DataTablePageSizeSelectorComponentProps) {
+  const theme = useMantineTheme();
   return (
-    <Group spacing="xs">
+    <Group gap="xs">
       <Text size={size}>{label}</Text>
       <Menu withinPortal withArrow>
         <Menu.Target>
           <Button
             size={size}
             variant="default"
-            sx={[
+            style={[
               { fontWeight: 'normal' },
-              (theme) => ({
+              {
                 height: HEIGHT[size],
                 paddingLeft: theme.spacing[size],
                 paddingRight: theme.spacing[size],
-              }),
+              },
             ]}
           >
             {value}
@@ -45,14 +46,12 @@ export default function DataTablePageSizeSelector({
             return (
               <Menu.Item
                 key={v}
-                sx={[
+                style={[
                   { height: HEIGHT[size] },
-                  (theme) => ({
-                    '&&': {
-                      color: isCurrent ? theme.white : undefined,
-                    },
+                  {
+                    color: isCurrent ? theme.white : undefined,
                     background: isCurrent ? theme.colors[color || theme.primaryColor][6] : undefined,
-                  }),
+                  },
                 ]}
                 disabled={isCurrent}
                 onClick={() => onChange(v)}

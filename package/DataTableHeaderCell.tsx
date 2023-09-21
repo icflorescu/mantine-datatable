@@ -1,48 +1,14 @@
-import { Box, Center, Group, createStyles, type MantineTheme, type Sx } from '@mantine/core';
+import { Box, Center, Group, type MantineTheme } from '@mantine/core';
 import { IconArrowUp, IconArrowsVertical } from '@tabler/icons-react';
 import type { BaseSyntheticEvent, CSSProperties, ReactNode } from 'react';
 import DataTableHeaderCellFilter from './DataTableHeaderCellFilter';
 import type { DataTableColumn, DataTableSortProps } from './types';
 import { humanize, useMediaQueryStringOrFunction } from './utils';
-
-const useStyles = createStyles((theme) => ({
-  sortableColumnHeader: {
-    cursor: 'pointer',
-    transition: 'background .15s ease',
-    '&:hover:not(:has(button:hover))': {
-      background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    },
-  },
-  sortableColumnHeaderGroup: {
-    gap: '0.25em',
-  },
-  columnHeaderText: {
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-  },
-  sortableColumnHeaderText: {
-    minWidth: 0,
-    flexGrow: 1,
-  },
-  sortableColumnHeaderIcon: {
-    transition: 'transform .15s ease',
-  },
-  sortableColumnHeaderIconRotated: {
-    transform: 'rotate3d(0, 0, 1, 180deg)',
-  },
-  sortableColumnHeaderUnsortedIcon: {
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[5],
-    transition: 'color .15s ease',
-    'th:hover &': {
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6],
-    },
-  },
-}));
+import classes from './styles/DataTableHeaderCell.css';
+import cx from 'clsx';
 
 type DataTableHeaderCellProps<T> = {
   className?: string;
-  sx?: Sx;
   style?: CSSProperties;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: ReactNode | undefined;
@@ -53,7 +19,6 @@ type DataTableHeaderCellProps<T> = {
 
 export default function DataTableHeaderCell<T>({
   className,
-  sx,
   style,
   accessor,
   visibleMediaQuery,
@@ -67,7 +32,6 @@ export default function DataTableHeaderCell<T>({
   filter,
   filtering,
 }: DataTableHeaderCellProps<T>) {
-  const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   const text = title ?? humanize(accessor);
   const tooltip = typeof text === 'string' ? text : undefined;
@@ -91,22 +55,21 @@ export default function DataTableHeaderCell<T>({
     <Box
       component="th"
       className={cx({ [classes.sortableColumnHeader]: sortable }, className)}
-      sx={[
+      style={[
         {
-          '&&': { textAlign: textAlignment },
+          textAlign: textAlignment,
           width,
           minWidth: width,
           maxWidth: width,
         },
-        sx,
+        style,
       ]}
-      style={style}
       role={sortable ? 'button' : undefined}
       tabIndex={sortable ? 0 : undefined}
       onClick={sortAction}
       onKeyDown={(e) => e.key === 'Enter' && sortAction?.()}
     >
-      <Group className={classes.sortableColumnHeaderGroup} position="apart" noWrap>
+      <Group className={classes.sortableColumnHeaderGroup} justify="apart">
         <Box className={cx(classes.columnHeaderText, classes.sortableColumnHeaderText)} title={tooltip}>
           {text}
         </Box>

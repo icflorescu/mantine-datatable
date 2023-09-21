@@ -2,46 +2,16 @@ import {
   Box,
   Pagination,
   Text,
-  createStyles,
-  type CSSObject,
-  type MantineNumberSize,
-  type MantineTheme,
+  type MantineColorScheme,
+  MantineSpacing,
+  useMantineColorScheme,
 } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef, type ReactNode } from 'react';
 import DataTablePageSizeSelector from './DataTablePageSizeSelector';
 import type { DataTablePaginationProps } from './types';
 import type { WithOptional, WithRequired } from './types/utils';
-
-const useStyles = createStyles(
-  (
-    theme,
-    {
-      topBorderColor,
-      paginationWrapBreakpoint,
-    }: { topBorderColor: string | ((theme: MantineTheme) => string); paginationWrapBreakpoint: MantineNumberSize }
-  ) => ({
-    root: {
-      background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-      borderTop: `1px solid ${typeof topBorderColor === 'function' ? topBorderColor(theme) : topBorderColor}`,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: theme.spacing.xs,
-      [theme.fn.largerThan(paginationWrapBreakpoint)]: { flexDirection: 'row' },
-    },
-    text: {
-      flex: '1 1 auto',
-    },
-    pagination: {
-      opacity: 1,
-      transition: 'opacity .15s ease',
-    },
-    paginationFetching: {
-      opacity: 0,
-    },
-  })
-);
+import classes from './style/DataTablePagination.css';
+import cx from 'clsx';
 
 type DataTablePaginationComponentProps = WithOptional<
   WithRequired<
@@ -51,11 +21,11 @@ type DataTablePaginationComponentProps = WithOptional<
   'onRecordsPerPageChange' | 'recordsPerPageOptions'
 > & {
   className?: string;
-  style?: CSSObject;
-  topBorderColor: string | ((theme: MantineTheme) => string);
+  style?: CSSProperties;
+  topBorderColor: string | ((theme: MantineColorScheme) => string);
   fetching: boolean | undefined;
   recordsLength: number | undefined;
-  horizontalSpacing: MantineNumberSize | undefined;
+  horizontalSpacing: MantineSpacing | undefined;
   noRecordsText: string;
 };
 
@@ -79,7 +49,6 @@ export default forwardRef(function DataTablePagination(
     recordsPerPageOptions,
     recordsLength,
     horizontalSpacing,
-    paginationWrapBreakpoint,
     getPaginationControlProps,
   }: DataTablePaginationComponentProps,
   ref: ForwardedRef<HTMLDivElement>
@@ -95,7 +64,7 @@ export default forwardRef(function DataTablePagination(
     paginationTextValue = paginationText!({ from, to, totalRecords });
   }
 
-  const { classes, cx } = useStyles({ topBorderColor, paginationWrapBreakpoint });
+  const {colorScheme} = useMantineColorScheme();
 
   return (
     <Box
@@ -103,7 +72,7 @@ export default forwardRef(function DataTablePagination(
       px={horizontalSpacing ?? 'xs'}
       py="xs"
       className={cx(classes.root, className)}
-      style={style as CSSProperties}
+      style={{borderTop: `1px solid ${typeof topBorderColor === 'function' ? topBorderColor(colorScheme) : topBorderColor}`, ...style}}
     >
       <Text className={classes.text} size={paginationSize}>
         {paginationTextValue}

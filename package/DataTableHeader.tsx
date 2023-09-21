@@ -1,25 +1,14 @@
-import { createStyles, type CSSObject } from '@mantine/core';
 import { forwardRef, type CSSProperties, type ForwardedRef } from 'react';
 import DataTableColumnGroupHeaderCell from './DataTableColumnGroupHeaderCell';
 import DataTableHeaderCell from './DataTableHeaderCell';
 import DataTableHeaderSelectorCell from './DataTableHeaderSelectorCell';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSortProps } from './types';
-
-const useStyles = createStyles((theme) => ({
-  root: {
-    zIndex: 2,
-    position: 'sticky',
-    top: 0,
-    background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-  },
-  textSelectionDisabled: {
-    userSelect: 'none',
-  },
-}));
+import classes from './styles/DataTableHeader.css';
+import cx from 'clsx';
 
 type DataTableHeaderProps<T> = {
   className?: string;
-  style?: CSSObject;
+  style?: CSSProperties;
   sortStatus: DataTableSortProps['sortStatus'];
   sortIcons: DataTableSortProps['sortIcons'];
   onSortStatusChange: DataTableSortProps['onSortStatusChange'];
@@ -53,8 +42,6 @@ export default forwardRef(function DataTableHeader<T>(
   }: DataTableHeaderProps<T>,
   ref: ForwardedRef<HTMLTableSectionElement>
 ) {
-  const { classes, cx } = useStyles();
-
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
       shadowVisible={leftShadowVisible}
@@ -90,7 +77,6 @@ export default forwardRef(function DataTableHeader<T>(
             sortable,
             titleClassName,
             titleStyle,
-            titleSx,
             filter,
             filtering,
           } = { ...defaultColumnProps, ...columnProps };
@@ -101,7 +87,6 @@ export default forwardRef(function DataTableHeader<T>(
               accessor={accessor}
               className={titleClassName}
               style={titleStyle}
-              sx={titleSx}
               visibleMediaQuery={visibleMediaQuery}
               textAlignment={textAlignment}
               width={width}

@@ -1,0 +1,10 @@
+.withPointerCursor {
+  cursor: pointer;
+}
+.noWrap {
+  white-space: nowrap;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

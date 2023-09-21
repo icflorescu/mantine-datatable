@@ -1,21 +1,12 @@
-import { Box, createStyles, type MantineTheme, type Sx } from '@mantine/core';
+import { Box, type MantineTheme } from '@mantine/core';
 import type { CSSProperties, ReactNode } from 'react';
 import type { DataTableColumn } from './types';
 import { useMediaQueryStringOrFunction } from './utils';
-
-const useStyles = createStyles({
-  noWrap: {
-    whiteSpace: 'nowrap',
-  },
-  ellipsis: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-});
+import classes from './styles/DataTableFooterCell.css';
+import cx from 'clsx';
 
 type DataTableFooterCellProps<T> = {
   className?: string;
-  sx?: Sx;
   style?: CSSProperties;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: ReactNode | undefined;
@@ -23,7 +14,6 @@ type DataTableFooterCellProps<T> = {
 
 export default function DataTableFooterCell<T>({
   className,
-  sx,
   style,
   visibleMediaQuery,
   title,
@@ -32,22 +22,20 @@ export default function DataTableFooterCell<T>({
   textAlignment,
   width,
 }: DataTableFooterCellProps<T>) {
-  const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
     <Box
       component="th"
       className={cx({ [classes.noWrap]: noWrap || ellipsis, [classes.ellipsis]: ellipsis }, className)}
-      sx={[
+      style={[
         {
-          '&&': { textAlign: textAlignment },
+          textAlign: textAlignment,
           width,
           minWidth: width,
           maxWidth: width,
         },
-        sx,
+        style
       ]}
-      style={style}
     >
       {title}
     </Box>

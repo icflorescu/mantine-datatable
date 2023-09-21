@@ -1,4 +1,4 @@
-import type { DefaultProps, MantineShadow, MantineTheme, ScrollAreaProps, Sx, TableProps } from '@mantine/core';
+import type { MantineColorScheme, MantineShadow, ScrollAreaProps, TableProps } from '@mantine/core';
 import type { CSSProperties, Key, MouseEvent, ReactNode, RefObject } from 'react';
 import type {
   DataTableCellClickHandler,
@@ -41,13 +41,13 @@ export type DataTableProps<T> = {
    * footer top border; defaults to
    * `(theme) => (theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3])`
    */
-  borderColor?: string | ((theme: MantineTheme) => string);
+  borderColor?: string | ((theme: MantineColorScheme) => string);
 
   /**
    * Row border color; defaults to
    * `(theme) => (theme.fn.rgba(theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3], 0.65))`
    */
-  rowBorderColor?: string | ((theme: MantineTheme) => string);
+  rowBorderColor?: string | ((theme: MantineColorScheme) => string);
 
   /**
    * If true, the user will not be able to select text
@@ -150,11 +150,6 @@ export type DataTableProps<T> = {
    * a function receiving the current record and its index as arguments and returning a CSS properties object
    */
   rowStyle?: CSSProperties | ((record: T, recordIndex: number) => CSSProperties | undefined);
-
-  /**
-   * Optional style passed to each row; see https://mantine.dev/styles/sx/
-   */
-  rowSx?: Sx;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each row in the table.

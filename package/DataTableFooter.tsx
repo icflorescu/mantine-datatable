@@ -1,41 +1,15 @@
-import { Box, createStyles, type CSSObject, type MantineTheme } from '@mantine/core';
-import { CSSProperties, forwardRef, type ForwardedRef } from 'react';
+import { Box, useMantineColorScheme, type MantineColorScheme } from '@mantine/core';
+import { forwardRef, type ForwardedRef, CSSProperties } from 'react';
 import DataTableFooterCell from './DataTableFooterCell';
 import DataTableFooterSelectorPlaceholderCell from './DataTableFooterSelectorPlaceholderCell';
 import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
-
-const useStyles = createStyles(
-  (
-    theme,
-    { scrollDiff, borderColor }: { scrollDiff: number; borderColor: string | ((theme: MantineTheme) => string) }
-  ) => {
-    const relative = scrollDiff < 0;
-    const borderColorValue = typeof borderColor === 'function' ? borderColor(theme) : borderColor;
-
-    return {
-      root: {
-        zIndex: 2,
-        position: relative ? 'relative' : 'sticky',
-        bottom: relative ? scrollDiff : -1,
-        background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-        '&& tr th': {
-          borderTopColor: borderColorValue,
-        },
-      },
-      relative: {
-        position: 'relative',
-      },
-      textSelectionDisabled: {
-        userSelect: 'none',
-      },
-    };
-  }
-);
+import classes from './styles/DataTableFooter.css';
+import cx from 'clsx';
 
 type DataTableFooterProps<T> = {
-  borderColor: string | ((theme: MantineTheme) => string);
+  borderColor: string | ((theme: MantineColorScheme) => string);
   className?: string;
-  style?: CSSObject;
+  style?: CSSProperties;
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
   selectionVisible: boolean;
@@ -56,10 +30,22 @@ export default forwardRef(function DataTableFooter<T>(
   }: DataTableFooterProps<T>,
   ref: ForwardedRef<HTMLTableSectionElement>
 ) {
-  const { cx, classes } = useStyles({ scrollDiff, borderColor });
+
+  const {colorScheme} = useMantineColorScheme();
+  const relative = scrollDiff < 0;
+  const borderColorValue = typeof borderColor === 'function' ? borderColor(colorScheme) : borderColor;
 
   return (
-    <Box component="tfoot" ref={ref} className={cx(classes.root, className)} style={style as CSSProperties}>
+    <Box component="tfoot" ref={ref} className={cx(classes.root, className)} style={{
+      position: relative ? 'relative' : 'sticky',
+      bottom: relative ? scrollDiff : -1,
+      tr: {
+        th: {
+          borderTopColor: borderColorValue,
+        }
+      },
+      ...style
+    }}>
       <tr>
         {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={leftShadowVisible} />}
         {columns.map(({ hidden, ...columnProps }) => {
@@ -73,7 +59,6 @@ export default forwardRef(function DataTableFooter<T>(
             footer,
             footerClassName,
             footerStyle,
-            footerSx,
             noWrap,
             ellipsis,
           } = { ...defaultColumnProps, ...columnProps };
@@ -83,7 +68,6 @@ export default forwardRef(function DataTableFooter<T>(
               key={accessor}
               className={footerClassName}
               style={footerStyle}
-              sx={footerSx}
               visibleMediaQuery={visibleMediaQuery}
               textAlignment={textAlignment}
               width={width}

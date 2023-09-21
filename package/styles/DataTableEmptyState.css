@@ -1,0 +1,24 @@
+
+  .root {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    flex-direction: column;
+    pointer-events: none;
+    color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-3));
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .active {
+    opacity: 1;
+  }
+
+  .standardIcon {
+    font-size: 0;
+    border-radius: 50%;
+    padding: var(--spacing-xs);
+    background: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  }

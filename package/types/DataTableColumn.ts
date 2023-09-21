@@ -90,11 +90,6 @@ export type DataTableColumn<T> = {
   titleStyle?: CSSProperties;
 
   /**
-   * Optional style passed to the column title; see https://mantine.dev/styles/sx/
-   */
-  titleSx?: Sx;
-
-  /**
    * Optional class name passed to each data cell in the column; can be a string or a function
    * receiving the current record and its index as arguments and returning a string
    */
@@ -105,11 +100,6 @@ export type DataTableColumn<T> = {
    * a function receiving the current record and its index as arguments and returning a CSS properties object
    */
   cellsStyle?: CSSProperties | ((record: T, recordIndex: number) => CSSProperties | undefined);
-
-  /**
-   * Optional style passed to each data cell in the column; see https://mantine.dev/styles/sx/
-   */
-  cellsSx?: Sx;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each cell in the column.
@@ -133,12 +123,8 @@ export type DataTableColumn<T> = {
    */
   footerStyle?: CSSProperties;
 
-  /**
-   * Optional style passed to the column footer; see https://mantine.dev/styles/sx/
-   */
-  footerSx?: Sx;
 } & (
-  | {
+    | {
       /**
        * If true, cell content in this column will be truncated with ellipsis as needed and will not wrap
        * to multiple lines.
@@ -149,7 +135,7 @@ export type DataTableColumn<T> = {
 
       noWrap?: never;
     }
-  | {
+    | {
       ellipsis?: never;
 
       /**
@@ -159,4 +145,4 @@ export type DataTableColumn<T> = {
        */
       noWrap?: boolean;
     }
-);
+  );

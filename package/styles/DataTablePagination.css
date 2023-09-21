@@ -1,0 +1,27 @@
+.root {
+  background: var(--colorScheme-dark-7, #1c1c1c);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+}
+
+@media (min-width: var(--mantine-breakpoint-sm)) {
+  .root {
+    flex-direction: row;
+  }
+}
+
+.text {
+  flex: 1 1 auto;
+}
+
+.pagination {
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+.paginationFetching {
+  opacity: 0;
+}
