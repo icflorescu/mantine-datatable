@@ -5,7 +5,7 @@ import DataTableRowExpansion from './DataTableRowExpansion';
 import DataTableRowSelectorCell from './DataTableRowSelectorCell';
 import { useRowExpansion } from './hooks';
 import type { DataTableCellClickHandler, DataTableColumn, DataTableDefaultColumnProps } from './types';
-import classes from './styles./DataTableRow.css';
+import classes from './styles/DataTableRow.css';
 import cx from 'clsx';
 
 type DataTableRowProps<T> = {

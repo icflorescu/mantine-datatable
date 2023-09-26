@@ -10,7 +10,7 @@ import { forwardRef, type CSSProperties, type ForwardedRef, type ReactNode } fro
 import DataTablePageSizeSelector from './DataTablePageSizeSelector';
 import type { DataTablePaginationProps } from './types';
 import type { WithOptional, WithRequired } from './types/utils';
-import classes from './style/DataTablePagination.css';
+import classes from './styles/DataTablePagination.css';
 import cx from 'clsx';
 
 type DataTablePaginationComponentProps = WithOptional<

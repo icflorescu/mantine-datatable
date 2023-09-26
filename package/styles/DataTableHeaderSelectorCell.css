@@ -1,7 +1,3 @@
-:root {
-    --shadow-gradient-alpha: 0.05;
-  }
-  
   .root {
     position: sticky;
     width: 0;
