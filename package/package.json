@@ -66,8 +66,8 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "@mantine/core": ">=6 <=6.0.17 || >=6.0.19",
-    "@mantine/hooks": ">=6 <=6.0.17 || >=6.0.19",
+    "@mantine/core": ">=6 <=6.0.17 || >=6.0.19 < 7",
+    "@mantine/hooks": ">=6 <=6.0.17 || >=6.0.19 < 7",
     "react": ">=18"
   }
 }
