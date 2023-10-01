@@ -1,6 +1,7 @@
 import { MantineColor } from '@mantine/core';
 import {
   IconAdjustments,
+  IconBellFilled,
   IconHeartHandshake,
   IconHome,
   IconLifebuoy,
@@ -244,6 +245,14 @@ export const PAGES: ({ external?: true; title: string; color?: MantineColor; des
       'If you’re looking for expertise and want to support the project, hire the author of Mantine DataTable - a fullstack/frontend developer with 20+ years of experience',
     color: 'red',
     icon: IconHeartHandshake,
+  },
+  {
+    path: 'mantine-v7-support',
+    title: 'Mantine V7 support',
+    description:
+      'Mantine DataTable v6.x supports Mantine v6.x. Mantine v7.x support is on the roadmap. You can speed up the process by sponsoring me on GitHub.',
+    color: 'pink',
+    icon: IconBellFilled,
   },
   {
     external: true,
