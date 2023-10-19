@@ -4,15 +4,16 @@
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
-    "dev": "NODE_NO_WARNINGS=1 next dev",
-    "build": "NODE_NO_WARNINGS=1 next build && next-sitemap",
+    "dev": "next dev",
+    "build": "next build && next-sitemap",
     "lint": "eslint . --ext=.ts,.tsx && tsc --noEmit"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^9.7.2",
     "@docsearch/react": "^3.5.2",
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
-    "@faker-js/faker": "^8.1.0",
+    "@faker-js/faker": "^8.2.0",
     "@formkit/auto-animate": "^0.8.0",
     "@mantine/core": "^6.0.21",
     "@mantine/dates": "^6.0.21",
@@ -21,22 +22,21 @@
     "@mantine/next": "^6.0.21",
     "@mantine/notifications": "^6.0.21",
     "@mantine/prism": "^6.0.21",
-    "@tabler/icons-react": "^2.38.0",
-    "@tanstack/react-query": "^4.35.7",
+    "@tabler/icons-react": "^2.39.0",
+    "@tanstack/react-query": "^4.36.1",
     "dayjs": "^1.11.10",
     "lodash": "^4.17.21",
     "mantine-datatable": "*",
-    "next": "^13.5.3",
-    "next-pwa": "^5.6.0",
+    "next": "^13.5.6",
     "next-sitemap": "^4.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.199",
-    "@types/node": "^20.8.0",
-    "@types/react": "^18.2.24",
+    "@types/lodash": "^4.14.200",
+    "@types/node": "^20.8.7",
+    "@types/react": "^18.2.30",
     "typescript": "^5.2.2",
-    "webpack": "^5.88.2"
+    "webpack": "^5.89.0"
   }
 }

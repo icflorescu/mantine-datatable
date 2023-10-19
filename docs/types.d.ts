@@ -4,6 +4,6 @@ namespace NodeJS {
     PACKAGE_VERSION: string;
     BASE_PATH: string;
     CANONICAL_URL: string;
-    INITIAL_NPM_DOWNLOADS: number;
+    INITIAL_NPM_DOWNLOADS: string;
   }
 }
