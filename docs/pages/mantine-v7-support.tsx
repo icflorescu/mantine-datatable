@@ -13,10 +13,10 @@ export default function Page() {
     <Container>
       <PageTitle of={PATH} />
       <PageText idea>
-        Mantine DataTable v6.x supports <ExternalLink to="https://v6.mantine.dev/">Mantine v6.x</ExternalLink>.
+        Mantine DataTable V6 supports <ExternalLink to="https://v6.mantine.dev/">Mantine V6</ExternalLink>.
         <br />
-        <ExternalLink to={MANTINE_LINK}>Mantine v7.x</ExternalLink> support is on the roadmap. You can help speed up the
-        process by <ExternalLink to={SPONSOR_LINK}>sponsoring me on GitHub</ExternalLink>.
+        <ExternalLink to={MANTINE_LINK}>Mantine V7</ExternalLink> support is under development. You can help speed up
+        the process by <ExternalLink to={SPONSOR_LINK}>sponsoring me on GitHub</ExternalLink>.
       </PageText>
       <PageText>
         As most of you already know, Mantine v7 came up with{' '}
@@ -43,21 +43,21 @@ export default function Page() {
         <ExternalLink to="https://icflorescu.github.io/mantine-contextmenu">Mantine-ContextMenu</ExternalLink>,{' '}
         <ExternalLink to="https://pocketbase-uml.github.io/">PocketBaseUML</ExternalLink>,{' '}
         <ExternalLink to="https://icflorescu.github.io/trpc-sveltekit">tRPC-SvelteKit</ExternalLink>,{' '}
-        <ExternalLink to="https://github.com/icflorescu/expose-wsl">Expose-WSL</ExternalLink> and{' '}
-        <ExternalLink to={AUTHOR_LINK}>others</ExternalLink>. But I can’t be a full-time open-source developer; I wasn’t
-        born rich (on the contrary). Therefore, I have to make a living, so I have to spend most of my time working on
-        commercial projects as a <InternalLink to="/hire-the-author">freelancer or contractor</InternalLink>.
+        <ExternalLink to="https://github.com/icflorescu/expose-wsl">Expose-WSL</ExternalLink> and a few{' '}
+        <ExternalLink to={AUTHOR_LINK}>others</ExternalLink>.
+        <br />
+        But I can’t be a full-time open-source developer; I wasn’t born rich (on the contrary).
+        <br />
+        Therefore, I have to make a living, so I have to spend most of my time working on commercial projects as a{' '}
+        <InternalLink to="/hire-the-author">freelancer or contractor</InternalLink>.
       </PageText>
       <PageText>
         Please understand that this is not a rant, but a simple explanation of why I can’t dedicate as much time as I
         (and you) would like to this project.
       </PageText>
       <PageText warning>
-        To sum it up, Mantine V7 support is on the roadmap, but it will take a while to get there.
-        <br />
-        I’m doing my best to keep this project alive, but I can’t do it alone.
-        <br />
-        I need <ExternalLink to={SPONSOR_LINK}>your help</ExternalLink>.
+        To sum it up, Mantine V7 support is under development, but I can’t do it alone. I need{' '}
+        <ExternalLink to={SPONSOR_LINK}>your help</ExternalLink>.
       </PageText>
       <PageText>
         Thank you for your support and understanding,

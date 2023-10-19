@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useIsMounted from '~/lib/useIsMounted';
 
 export function NpmDownloads() {
-  const [downloads, setDownloads] = useState(process.env.INITIAL_NPM_DOWNLOADS);
+  const [downloads, setDownloads] = useState(Number(process.env.INITIAL_NPM_DOWNLOADS));
   const isMounted = useIsMounted();
 
   useEffect(() => {
