@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable-docs",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Docs website for mantine-datatable; see ../package/package.json for more info",
   "private": true,
   "scripts": {
@@ -9,8 +9,8 @@
     "lint": "eslint . --ext=.ts,.tsx && tsc --noEmit"
   },
   "dependencies": {
-    "@ducanh2912/next-pwa": "^9.7.2",
     "@docsearch/react": "^3.5.2",
+    "@ducanh2912/next-pwa": "^9.7.2",
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
     "@faker-js/faker": "^8.2.0",
