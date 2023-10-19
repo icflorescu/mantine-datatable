@@ -52,10 +52,10 @@ Visit [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mant
 
 ## Quickstart
 
-Install the package and its dependencies:
+Install the package and its dependencies (Mantine v7 is not currently supported, so use v6.0.21):
 
 ```sh
-npm i @mantine/core @mantine/hooks @emotion/react mantine-datatable
+npm i @mantine/core@6.0.21 @mantine/hooks@6.0.21 @emotion/react mantine-datatable
 ```
 
 If you're using Next.js, Vite, CRA, Remix or Gatsby, you might need to install additional dependencies. Please refer to Mantine's [getting started page](https://mantine.dev/pages/getting-started/) for more details.
