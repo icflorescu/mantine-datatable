@@ -1,0 +1,29 @@
+.root {
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0));
+  margin: calc(1em - var(--app-shell-header-height)) 0 0.5em;
+  pointer-events: none;
+  font-size: 1.2rem;
+  @media (min-width: $mantine-breakpoint-sm) {
+    font-size: 1.3rem;
+  }
+  @media (min-width: $mantine-breakpoint-md) {
+    font-size: 1.5rem;
+  }
+}
+
+.anchor {
+  display: inline-block;
+  margin-top: var(--app-shell-header-height);
+  pointer-events: all;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.icon {
+  height: 0.8em;
+  width: auto;
+  vertical-align: rem(-2px);
+  margin-left: 0.25em;
+}

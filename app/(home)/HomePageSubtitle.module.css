@@ -1,0 +1,24 @@
+.leftIcon {
+  flex-shrink: 0;
+  margin-top: rem(1px);
+  width: rem(18px);
+  height: auto;
+}
+
+.iconTrust {
+  color: var(--mantine-color-green-filled);
+}
+
+.iconCompat {
+  color: var(--mantine-color-blue-filled);
+}
+
+.iconOldVersion {
+  color: var(--mantine-color-red-filled);
+}
+
+.linkIcon {
+  width: rem(15px);
+  height: auto;
+  vertical-align: rem(-2px);
+}

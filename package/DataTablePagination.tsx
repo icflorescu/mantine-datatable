@@ -10,7 +10,7 @@ import {
 import { forwardRef, type CSSProperties, type ForwardedRef, type ReactNode } from 'react';
 import DataTablePageSizeSelector from './DataTablePageSizeSelector';
 import type { DataTablePaginationProps } from './types';
-import type { WithOptional, WithRequired } from './types/utils';
+import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
 
 const useStyles = createStyles(
   (
@@ -43,8 +43,8 @@ const useStyles = createStyles(
   })
 );
 
-type DataTablePaginationComponentProps = WithOptional<
-  WithRequired<
+type DataTablePaginationComponentProps = WithOptionalProperty<
+  WithRequiredProperty<
     DataTablePaginationProps,
     'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint' | 'getPaginationControlProps'
   >,

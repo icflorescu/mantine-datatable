@@ -1,47 +1,111 @@
 {
-  "name": "mantine-datatable-turborepo",
-  "version": "6.0.1",
-  "description": "Monorepo for mantine-datatable; see package/package.json for more info",
-  "private": true,
-  "workspaces": [
-    "docs",
-    "package"
+  "name": "mantine-datatable",
+  "version": "7.0.0-alpha.1",
+  "description": "The dependency-free datatable component for Mantine UI, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu, row expansion and more",
+  "keywords": [
+    "mantine",
+    "data",
+    "table",
+    "grid",
+    "datatable",
+    "datagrid",
+    "data table",
+    "data grid",
+    "async",
+    "nested",
+    "sorting",
+    "pagination",
+    "context menu",
+    "react",
+    "component",
+    "typescript",
+    "ui",
+    "user interface",
+    "ux",
+    "user experience"
+  ],
+  "repository": "icflorescu/mantine-datatable",
+  "homepage": "https://icflorescu.github.io/mantine-datatable/",
+  "bugs": {
+    "url": "https://github.com/icflorescu/mantine-datatable/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Ionut-Cristian Florescu",
+    "email": "ionut.florescu@gmail.com",
+    "url": "https://github.com/icflorescu"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/icflorescu"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./styles.css": "./dist/css/styles.css",
+    "./styles.layer.css": "./dist/css/styles.layer.css"
+  },
+  "files": [
+    "./dist",
+    "./README.md",
+    "./LICENSE"
   ],
   "scripts": {
-    "generate-docs-data": "node scripts/generate-docs-data.mjs",
-    "set-package-versions": "NODE_NO_WARNINGS=1 node scripts/set-package-versions.mjs",
-    "build": "turbo run build --no-daemon",
-    "dev": "turbo run dev --parallel --no-daemon",
-    "start": "npx serve docs/out",
-    "lint": "turbo run lint --no-daemon",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "turbo run test",
-    "test:watch": "turbo run test:watch"
+    "dev": "next dev",
+    "build:package": "rm -rf dist; tsc -p package/tsconfig.esm.json; tsc -p package/tsconfig.cjs.json; postcss package/styles*.css --dir dist/css",
+    "build:docs": "next build",
+    "build": "yarn build:package && yarn build:docs",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.22.15",
-    "@babel/preset-typescript": "^7.23.2",
-    "@faker-js/faker": "^8.2.0",
-    "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/react-hooks": "^8.0.1",
-    "@testing-library/user-event": "^14.5.1",
-    "@types/jest": "^29.5.6",
+    "@ducanh2912/next-pwa": "^9.7.2",
+    "@mantine/code-highlight": "^7.1.5",
+    "@mantine/core": "^7.1.5",
+    "@mantine/hooks": "^7.1.5",
+    "@mantine/notifications": "^7.1.5",
+    "@tabler/icons-react": "^2.39.0",
+    "@types/lodash": "^4.14.200",
+    "@types/node": "^20.8.7",
+    "@types/react": "^18.2.29",
+    "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
-    "babel-jest": "^29.7.0",
+    "clsx": "^2.0.0",
     "eslint": "^8.51.0",
     "eslint-config-next": "^13.5.6",
     "eslint-config-prettier": "^9.0.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
+    "lodash": "^4.17.21",
+    "mantine-contextmenu": "^7.0.0-alpha.5",
+    "next": "13.5.6",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-preset-mantine": "^1.9.0",
+    "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.0.3",
-    "turbo": "^1.10.16",
-    "typescript": "^5.2.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.32.6",
+    "swr": "^2.2.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.89.0"
   },
-  "engines": {
-    "npm": ">=9.5.1",
-    "node": ">=18.16.1"
-  },
-  "packageManager": "yarn@1.22.19"
+  "peerDependencies": {
+    "@mantine/core": ">=7",
+    "@mantine/hooks": ">=7",
+    "clsx": ">=2",
+    "mantine-contextmenu": ">=7"
+  }
 }

@@ -15,3 +15,4 @@ export * from './DataTableSelectionProps';
 export * from './DataTableSortProps';
 export * from './DataTableSortStatus';
 export * from './DataTableVerticalAlignment';
+export * from './utils';

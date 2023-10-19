@@ -1,0 +1,10 @@
+.root {
+  display: none;
+  @media (min-width: $mantine-breakpoint-sm) {
+    display: flex;
+    cursor: pointer;
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}

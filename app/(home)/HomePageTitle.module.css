@@ -1,0 +1,19 @@
+.root {
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-1));
+  text-indent: -0.1em;
+  margin: 0.25em 0 0 0.1em;
+  line-height: 1.15;
+  font-size: 8vw;
+  @media (min-width: $mantine-breakpoint-sm) {
+    margin-top: 0.125em;
+    font-size: rem(42px);
+  }
+  @media (min-width: $mantine-breakpoint-md) {
+    font-size: rem(60px);
+    margin-top: 0.5em;
+  }
+}
+
+.mantineDataTableIcon {
+  margin: rem(1px);
+}

@@ -1,0 +1,15 @@
+@import '@mantine/core/esm/index.css' layer(mantine-core);
+@import '@mantine/notifications/esm/index.css' layer(mantine-notifications);
+@import '@mantine/code-highlight/esm/index.css' layer(mantine-code-highlight);
+@import 'mantine-contextmenu/dist/css/styles.css' layer(mantine-contextmenu);
+@import '../package/styles.css' layer(mantine-datatable);
+
+@layer mantine-core, mantine-notifications, mantine-code-highlight, mantine-datatable;
+
+.noscroll {
+  overflow: hidden;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

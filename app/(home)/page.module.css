@@ -1,0 +1,22 @@
+.button {
+  width: 100%;
+
+  @media (min-width: $mantine-breakpoint-md) {
+    width: 40%;
+    flex: 1 1 auto;
+  }
+}
+
+.buttonHalf {
+  @media (min-width: rem(420px)) {
+    width: calc(50% - var(--mantine-spacing-md) / 2);
+  }
+  @media (min-width: $mantine-breakpoint-md) {
+    width: 20%;
+    flex: 1 1 auto;
+  }
+}
+
+.buttonLabel {
+  margin-bottom: rem(-2px);
+}

@@ -1,0 +1,11 @@
+.root {
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0));
+  font-size: 1.5rem;
+  margin: 0.25em 0 1em;
+  @media (min-width: $mantine-breakpoint-sm) {
+    font-size: 1.75rem;
+  }
+  @media (min-width: $mantine-breakpoint-md) {
+    font-size: 2rem;
+  }
+}
