@@ -1,8 +1,8 @@
 import {
   AUTHOR_LINK,
   AUTHOR_NAME,
-  MANTINE_DATATABLE_LINK,
-  MANTINE_DATATABLE_PRODUCT_NAME,
+  MANTINE_CONTEXTMENU_LINK,
+  MANTINE_CONTEXTMENU_PRODUCT_NAME,
   PRODUCT_NAME,
 } from '~/app/config';
 import { ExternalLink } from '~/components/ExternalLink';
@@ -28,23 +28,16 @@ export default function HireTheAuthorPage() {
       <PageTitle of={PATH} />
       <Txt>
         Hey, I’m <ExternalLink to={AUTHOR_LINK}>{AUTHOR_NAME}</ExternalLink> &mdash; the creator of {PRODUCT_NAME},{' '}
-        <ExternalLink to={MANTINE_DATATABLE_LINK}>{MANTINE_DATATABLE_PRODUCT_NAME}</ExternalLink> and other open-source
-        projects.
+        <ExternalLink to={MANTINE_CONTEXTMENU_LINK}>{MANTINE_CONTEXTMENU_PRODUCT_NAME}</ExternalLink> and other
+        open-source projects.
       </Txt>
       <Txt>
         I’m a full-stack developer (with a strong affinity for front-end) from Bucharest, Romania, EU, with more than
         two decades of experience in building commercial web applications and open-source projects.
       </Txt>
       <Txt>
-        <ExternalLink to={MANTINE_DATATABLE_LINK}>{MANTINE_DATATABLE_PRODUCT_NAME}</ExternalLink>, one of my dearest
-        open-source projects, was much appreciated by the community partially due to its rather unique row context-menu
-        functionality since its early days.
-      </Txt>
-      <Txt>
-        That’s why I decided to package the functionality into a separate component, so people can use it anywhere in
-        their applications.
-        <br />
-        Hence the birth of {PRODUCT_NAME}.
+        {PRODUCT_NAME} is one of my dearest open-source projects and I have dedicated countless hours to its development
+        and maintenance.
       </Txt>
       <Txt>
         You can learn more about who I am, what I do, what my current top skills are and how I like to put them to use
@@ -67,7 +60,7 @@ export default function HireTheAuthorPage() {
       <Txt idea>
         I’m getting a constant flow of approaches, some of them relevant, others not so relevant.
         <br />
-        Mentioning <strong>“{PRODUCT_NAME}”</strong> or <strong>“{MANTINE_DATATABLE_PRODUCT_NAME}”</strong> in your
+        Mentioning <strong>“{PRODUCT_NAME}”</strong> or <strong>“{MANTINE_CONTEXTMENU_PRODUCT_NAME}”</strong> in your
         message will help me <strong>prioritize your message</strong> and get back to you faster.
       </Txt>
       <Txt>

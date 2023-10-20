@@ -32,6 +32,9 @@ export const REMIX_LINK = 'https://remix.run';
 export const CRA_LINK = 'https://create-react-app.dev';
 export const GATSBY_LINK = 'https://www.gatsbyjs.com';
 
+export const MANTINE_CONTEXTMENU_LINK = `${WEB_ROOT}/mantine-contextmenu`;
+export const MANTINE_CONTEXTMENU_PRODUCT_NAME = 'Mantine ContextMenu';
+
 export const DOWNLOADS_REFRESH_INTERVAL = 1000 * 60 * 60 * 24; // 1 day
 
 export type RouteInfo = {
