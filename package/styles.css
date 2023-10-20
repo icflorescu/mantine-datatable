@@ -1,2 +1,10 @@
-/* todo: import styles here, i.e.: */
-/* @import './DataTable.css'; */
+/* todo: import styles here... */
+@import './DataTableEmptyRow.css';
+@import './DataTableEmptyState.css';
+@import './DataTableFooterCell.css';
+@import './DataTableFooterSelectorPlaceholderCell.css';
+@import './DataTableHeader.css';
+@import './DataTableHeaderCell.css';
+@import './DataTableLoader.css';
+@import './DataTablePagination.css';
+@import './DataTableRowSelectorCell.css';

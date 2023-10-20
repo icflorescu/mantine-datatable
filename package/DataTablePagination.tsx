@@ -2,46 +2,18 @@ import {
   Box,
   Pagination,
   Text,
-  createStyles,
-  type CSSObject,
-  type MantineNumberSize,
-  type MantineTheme,
+  parseThemeColor,
+  type MantineColor,
+  type MantineSpacing,
+  type MantineStyleProp,
+  type StyleProp,
 } from '@mantine/core';
-import { forwardRef, type CSSProperties, type ForwardedRef, type ReactNode } from 'react';
+import { useMediaQuery } from '@mantine/hooks';
+import clsx from 'clsx';
+import { forwardRef, type ForwardedRef } from 'react';
 import DataTablePageSizeSelector from './DataTablePageSizeSelector';
 import type { DataTablePaginationProps } from './types';
 import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
-
-const useStyles = createStyles(
-  (
-    theme,
-    {
-      topBorderColor,
-      paginationWrapBreakpoint,
-    }: { topBorderColor: string | ((theme: MantineTheme) => string); paginationWrapBreakpoint: MantineNumberSize }
-  ) => ({
-    root: {
-      background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-      borderTop: `1px solid ${typeof topBorderColor === 'function' ? topBorderColor(theme) : topBorderColor}`,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: theme.spacing.xs,
-      [theme.fn.largerThan(paginationWrapBreakpoint)]: { flexDirection: 'row' },
-    },
-    text: {
-      flex: '1 1 auto',
-    },
-    pagination: {
-      opacity: 1,
-      transition: 'opacity .15s ease',
-    },
-    paginationFetching: {
-      opacity: 0,
-    },
-  })
-);
 
 type DataTablePaginationComponentProps = WithOptionalProperty<
   WithRequiredProperty<
@@ -51,15 +23,15 @@ type DataTablePaginationComponentProps = WithOptionalProperty<
   'onRecordsPerPageChange' | 'recordsPerPageOptions'
 > & {
   className?: string;
-  style?: CSSObject;
-  topBorderColor: string | ((theme: MantineTheme) => string);
+  style?: MantineStyleProp;
+  topBorderColor: StyleProp<MantineColor>;
   fetching: boolean | undefined;
   recordsLength: number | undefined;
-  horizontalSpacing: MantineNumberSize | undefined;
+  horizontalSpacing: MantineSpacing | undefined;
   noRecordsText: string;
 };
 
-export default forwardRef(function DataTablePagination(
+export const DataTablePagination = forwardRef(function DataTablePagination(
   {
     className,
     style,
@@ -84,7 +56,7 @@ export default forwardRef(function DataTablePagination(
   }: DataTablePaginationComponentProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
-  let paginationTextValue: ReactNode;
+  let paginationTextValue: React.ReactNode;
   if (fetching) {
     paginationTextValue = loadingText;
   } else if (!totalRecords) {
@@ -95,17 +67,27 @@ export default forwardRef(function DataTablePagination(
     paginationTextValue = paginationText!({ from, to, totalRecords });
   }
 
-  const { classes, cx } = useStyles({ topBorderColor, paginationWrapBreakpoint });
+  const isAbovePaginationWrapBreakpoint = useMediaQuery(
+    `(min-width: ${
+      typeof paginationWrapBreakpoint === 'number' ? `${paginationWrapBreakpoint}px` : paginationWrapBreakpoint
+    })`
+  );
 
   return (
     <Box
       ref={ref}
       px={horizontalSpacing ?? 'xs'}
       py="xs"
-      className={cx(classes.root, className)}
-      style={style as CSSProperties}
+      className={clsx('mantine-datatable-pagination', className)}
+      style={[
+        (theme) => ({
+          '--mantine-datatable-pagination-border-color': parseThemeColor({ color: topBorderColor, theme }),
+        }),
+        { flexDirection: isAbovePaginationWrapBreakpoint ? 'row' : 'column' },
+        style,
+      ]}
     >
-      <Text className={classes.text} size={paginationSize}>
+      <Text className="mantine-datatable-pagination-text" size={paginationSize}>
         {paginationTextValue}
       </Text>
       {recordsPerPageOptions && (
@@ -120,7 +102,9 @@ export default forwardRef(function DataTablePagination(
       )}
       <Pagination
         color={paginationColor}
-        className={cx(classes.pagination, { [classes.paginationFetching]: fetching || !recordsLength })}
+        className={clsx('mantine-datatable-pagination-pages', {
+          'mantine-datatable-pagination-pages-fetching': fetching || !recordsLength,
+        })}
         value={page}
         onChange={onPageChange}
         size={paginationSize}

@@ -1,4 +1,4 @@
-import type { MantineTheme } from '@mantine/core';
+import type { MantineStyleProp, MantineTheme } from '@mantine/core';
 import type { DataTableColumnTextAlignment } from './DataTableColumnTextAlignment';
 
 export type DataTableColumn<T> = {
@@ -60,7 +60,7 @@ export type DataTableColumn<T> = {
    * Note: this property only takes care of rendering the node which provides the filtering options.
    * It is assumed that the actual filtering is performed somewhere in user code.
    */
-  filter?: React.ReactNode | ((options: { close: () => void }) => React.ReactNode);
+  filter?: React.ReactNode | ((params: { close: () => void }) => React.ReactNode);
 
   /**
    * If true, filter icon will be styled differently to indicate the filter is in effect.
@@ -79,9 +79,9 @@ export type DataTableColumn<T> = {
 
   /**
    * If set, the column will only be visible according to the specified media query.
-   * Can be a string, or a function receiving an object with a theme property, and returning a string.
+   * Can be a string, or a function receiving the current theme and returning a string.
    */
-  visibleMediaQuery?: string | ((options: { theme: MantineTheme }) => string);
+  visibleMediaQuery?: string | ((theme: MantineTheme) => string);
 
   /**
    * Optional class name passed to the column title
@@ -90,33 +90,31 @@ export type DataTableColumn<T> = {
 
   /**
    * Optional style passed to the column title.
-   * Can be a CSS properties object or a function receiving an object with a theme property
-   * and returning a CSS properties object.
    */
-  titleStyle?: React.CSSProperties | ((options: { theme: MantineTheme }) => React.CSSProperties);
+  titleStyle?: MantineStyleProp;
 
   /**
    * Optional class name passed to each data cell in the column.
    * Can be a string, or a function receiving an object with the current record and its index
    * as properties, and returning a string.
    */
-  cellsClassName?: string | ((options: { record: T; index: number }) => string | undefined);
+  cellsClassName?: string | ((params: { record: T; index: number }) => string | undefined);
 
   /**
    * Optional style passed to each data cell in the column.
-   * Can be a CSS properties object, or a function receiving an object with the current record
-   * and its index as properties, and returning a CSS properties object.
+   * Can be a style object, or a function receiving an object with the current record
+   * and its index as properties, and returning a style object.
    */
   cellsStyle?:
-    | React.CSSProperties
-    | ((options: { record: T; index: number; theme: MantineTheme }) => React.CSSProperties | undefined);
+    | MantineStyleProp
+    | ((params: { record: T; index: number; theme: MantineTheme }) => MantineStyleProp | undefined);
 
   /**
    * Optional function returning an object of custom attributes to be applied to each cell in the column.
    * Receives an object with the current record and its index as properties.
    * Useful for adding data attributes, handling middle-clicks, etc.
    */
-  customCellAttributes?: (options: { record: T; index: number }) => Record<string, unknown>;
+  customCellAttributes?: (params: { record: T; index: number }) => Record<string, unknown>;
 
   /**
    * Optional column footer content.
@@ -131,10 +129,8 @@ export type DataTableColumn<T> = {
 
   /**
    * Optional style passed to the column footer.
-   * Can be a CSS properties object, or a function receiving the current theme as argument,
-   * and returning a CSS properties object.
    */
-  footerStyle?: React.CSSProperties | ((theme: MantineTheme) => React.CSSProperties);
+  footerStyle?: MantineStyleProp;
 } & (
   | {
       /**

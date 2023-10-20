@@ -20,14 +20,14 @@ export default function DataTablePageSizeSelector({
   color,
 }: DataTablePageSizeSelectorComponentProps) {
   return (
-    <Group spacing="xs">
+    <Group gap="xs">
       <Text size={size}>{label}</Text>
       <Menu withinPortal withArrow>
         <Menu.Target>
           <Button
             size={size}
             variant="default"
-            sx={[
+            style={[
               { fontWeight: 'normal' },
               (theme) => ({
                 height: HEIGHT[size],
@@ -45,12 +45,10 @@ export default function DataTablePageSizeSelector({
             return (
               <Menu.Item
                 key={v}
-                sx={[
+                style={[
                   { height: HEIGHT[size] },
                   (theme) => ({
-                    '&&': {
-                      color: isCurrent ? theme.white : undefined,
-                    },
+                    color: isCurrent ? theme.white : undefined,
                     background: isCurrent ? theme.colors[color || theme.primaryColor][6] : undefined,
                   }),
                 ]}

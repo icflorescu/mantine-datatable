@@ -1,0 +1,21 @@
+.mantine-datatable-pagination {
+  background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  border-top: 1px solid var(--mantine-datatable-pagination-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-xs);
+}
+
+.mantine-datatable-pagination-text {
+  flex: 1 1 auto;
+}
+
+.mantine-datatable-pagination-pages {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.mantine-datatable-pagination-pages-fetching {
+  opacity: 0;
+}

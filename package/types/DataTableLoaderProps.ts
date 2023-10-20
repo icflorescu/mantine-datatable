@@ -1,4 +1,4 @@
-import type { DefaultMantineColor, MantineLoader, MantineSize } from '@mantine/core';
+import type { MantineColor, MantineLoader, MantineSize } from '@mantine/core';
 
 export type DataTableLoaderProps = {
   /**
@@ -18,7 +18,8 @@ export type DataTableLoaderProps = {
     }
   | {
       /**
-       * Loader size; defaults to `lg`.
+       * Loader size.
+       * @default `lg`.
        */
       loaderSize?: MantineSize | (string & NonNullable<unknown>) | number;
 
@@ -30,7 +31,7 @@ export type DataTableLoaderProps = {
       /**
        * Loader color.
        */
-      loaderColor?: DefaultMantineColor;
+      loaderColor?: MantineColor;
 
       customLoader?: never;
     }

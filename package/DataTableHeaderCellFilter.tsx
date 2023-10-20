@@ -1,4 +1,4 @@
-import { ActionIcon, Popover } from '@mantine/core';
+import { ActionIcon, Popover, PopoverTarget } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter } from '@tabler/icons-react';
 import type { DataTableColumn } from './types';
@@ -8,12 +8,12 @@ type DataTableHeaderCellFilterProps<T> = {
   isActive: boolean;
 };
 
-export default function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHeaderCellFilterProps<T>) {
+export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHeaderCellFilterProps<T>) {
   const [isOpen, { close, toggle }] = useDisclosure(false);
 
   return (
     <Popover withArrow withinPortal shadow="md" opened={isOpen} onClose={close} trapFocus>
-      <Popover.Target>
+      <PopoverTarget>
         <ActionIcon
           onClick={(e) => {
             e.preventDefault();
@@ -23,7 +23,7 @@ export default function DataTableHeaderCellFilter<T>({ children, isActive }: Dat
         >
           <IconFilter size={14} />
         </ActionIcon>
-      </Popover.Target>
+      </PopoverTarget>
       <Popover.Dropdown onClick={(e) => e.preventDefault()}>
         {typeof children === 'function' ? children({ close }) : children}
       </Popover.Dropdown>

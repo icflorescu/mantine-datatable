@@ -1,0 +1,6 @@
+.mantine-datatable-header {
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+}

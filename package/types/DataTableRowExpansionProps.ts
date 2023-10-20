@@ -48,5 +48,5 @@ export type DataTableRowExpansionProps<T> = {
    * and a `collapse()` callback that can be used to collapse the expanded row.
    * Must return a React node.
    */
-  content: (props: { record: T; index: number; collapse: () => void }) => React.ReactNode;
+  content: (params: { record: T; index: number; collapse: () => void }) => React.ReactNode;
 };

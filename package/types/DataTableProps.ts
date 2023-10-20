@@ -1,18 +1,23 @@
-import type { MantineShadow, MantineTheme, ScrollAreaProps, TableProps } from '@mantine/core';
 import type {
-  DataTableCellClickHandler,
-  DataTableContextMenuProps,
-  DataTableDefaultColumnProps,
-  DataTableEmptyStateProps,
-  DataTableOuterBorderProps,
-  DataTablePaginationProps,
-  DataTableRowExpansionProps,
-  DataTableSelectionProps,
-  DataTableSortProps,
-  DataTableVerticalAlignment,
-} from './';
+  MantineColor,
+  MantineShadow,
+  MantineStyleProp,
+  ScrollAreaProps,
+  StyleProp,
+  TableProps,
+} from '@mantine/core';
+import type { DataTableVerticalAlignment } from './';
+import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumnProps } from './DataTableColumnProps';
+import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
+import type { DataTableDefaultColumnProps } from './DataTableDefaultColumnProps';
+import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';
 import type { DataTableLoaderProps } from './DataTableLoaderProps';
+import type { DataTableOuterBorderProps } from './DataTableOuterBorderProps';
+import type { DataTablePaginationProps } from './DataTablePaginationProps';
+import type { DataTableRowExpansionProps } from './DataTableRowExpansionProps';
+import type { DataTableSelectionProps } from './DataTableSelectionProps';
+import type { DataTableSortProps } from './DataTableSortProps';
 
 export type DataTableProps<T> = {
   /**
@@ -34,15 +39,13 @@ export type DataTableProps<T> = {
   /**
    * Table border color.
    * Applied to the outer border, the header bottom border, and the pagination footer top border.
-   * Defaults to `(theme) => (theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3])`.
    */
-  borderColor?: string | ((theme: MantineTheme) => string);
+  borderColor?: StyleProp<MantineColor>;
 
   /**
    * Row border color.
-   * Defaults to `(theme) => (theme.fn.rgba(theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3], 0.65))`.
    */
-  rowBorderColor?: string | ((theme: MantineTheme) => string);
+  rowBorderColor?: StyleProp<MantineColor>;
 
   /**
    * If true, the user will not be able to select text.
@@ -70,7 +73,7 @@ export type DataTableProps<T> = {
    * Accepts an object with current record, its index in `records` and the column accessor as
    * properties and returns a React node (remember that a string is a valid React node too).
    */
-  defaultColumnRender?: (options: { record: T; index: number; accesor: string }) => React.ReactNode;
+  defaultColumnRender?: (params: { record: T; index: number; accesor: string }) => React.ReactNode;
 
   /**
    * Accessor to use as unique record key.
@@ -105,9 +108,10 @@ export type DataTableProps<T> = {
 
   /**
    * Function to call when a row is clicked.
-   * Receives the current record, its index in `records` and the click event.
+   * Receives an object with the current record, its index in `records` and the click event
+   * as properties.
    */
-  onRowClick?: (record: T, recordIndex: number, event: MouseEvent) => void;
+  onRowClick?: (params: { record: T; index: number; event: MouseEvent }) => void;
 
   /**
    * Function to call when the DataTable is scrolled to top.
@@ -141,22 +145,24 @@ export type DataTableProps<T> = {
 
   /**
    * Optional class name passed to each row.
-   * Can be a string or a function receiving the current record and its index as arguments and returning a string.
+   * Can be a string or a function receiving an object with the current record and its index
+   * as properties and returning a string.
    */
-  rowClassName?: string | ((record: T, recordIndex: number) => string | undefined);
+  rowClassName?: string | ((params: { record: T; index: number }) => string | undefined);
 
   /**
    * Optional style passed to each row.
-   * Can be a CSS properties object or a function receiving the current record and its index as arguments and returning a CSS properties object
+   * Can be a CSS properties object or a function receiving an object with the current record and
+   * its index as properties and returning a CSS properties object.
    */
-  rowStyle?: React.CSSProperties | ((record: T, recordIndex: number) => React.CSSProperties | undefined);
+  rowStyle?: MantineStyleProp | ((params: { record: T; index: number }) => MantineStyleProp | undefined);
 
   /**
    * Optional function returning an object of custom attributes to be applied to each row in the table.
-   * Receives the current record and its index as arguments.
+   * Receives an object with current record and its index as properties.
    * Useful for adding data attributes, handling middle-clicks, etc.
    */
-  customRowAttributes?: (record: T, recordIndex: number) => Record<string, unknown>;
+  customRowAttributes?: (params: { record: T; index: number }) => Record<string, unknown>;
 
   /**
    * Ref pointing to the scrollable viewport element.
@@ -172,7 +178,7 @@ export type DataTableProps<T> = {
    * Ref pointing to the table body element.
    */
   bodyRef?: ((instance: HTMLTableSectionElement | null) => void) | React.RefObject<HTMLTableSectionElement>;
-} & Pick<TableProps, 'striped' | 'highlightOnHover' | 'horizontalSpacing' | 'verticalSpacing'> &
+} & TableProps &
   DataTableColumnProps<T> &
   DataTableOuterBorderProps &
   DataTableLoaderProps &

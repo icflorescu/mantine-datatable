@@ -23,13 +23,13 @@ export type DataTableSelectionProps<T> =
        * if the function returns false, the row selection checkbox is disabled.
        * Accepts an object with `record` and `index` properties and returns a boolean.
        */
-      isRecordSelectable?: (options: { record: T; index: number }) => boolean;
+      isRecordSelectable?: (params: { record: T; index: number }) => boolean;
 
       /**
        * A function used to determine additional props of the row selection checkbox.
        * Accepts an object with `record` and `index` properties and returns an object.
        */
-      getRecordSelectionCheckboxProps?: (options: { record: T; index: number }) => Record<string, unknown>;
+      getRecordSelectionCheckboxProps?: (params: { record: T; index: number }) => Record<string, unknown>;
 
       /**
        * Additional props for the header checkbox that toggles selection of all records.

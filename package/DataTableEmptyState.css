@@ -1,0 +1,23 @@
+.mantine-datatable-empty-state {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  flex-direction: column;
+  pointer-events: none;
+  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-3));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.mantine-datatable-empty-state-active {
+  opacity: 1;
+}
+
+.mantine-datatable-empty-state-icon {
+  font-size: 0;
+  border-radius: 50%;
+  padding: var(--mantine-spacing-xs);
+  background: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}

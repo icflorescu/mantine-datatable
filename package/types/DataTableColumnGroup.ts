@@ -1,4 +1,4 @@
-import { MantineTheme } from '@mantine/core';
+import type { MantineStyleProp } from '@mantine/core';
 import type { DataTableColumn } from './DataTableColumn';
 
 export type DataTableColumnGroup<T> = {
@@ -25,5 +25,5 @@ export type DataTableColumnGroup<T> = {
    * Can be a React.CSSProperties object or a function which receives the current theme and
    * returns a React.CSSProperties object.
    */
-  style?: React.CSSProperties | ((theme: MantineTheme) => React.CSSProperties);
+  style?: MantineStyleProp;
 };

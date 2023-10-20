@@ -1,25 +1,14 @@
-import { createStyles, type CSSObject } from '@mantine/core';
-import { forwardRef, type CSSProperties, type ForwardedRef } from 'react';
-import DataTableColumnGroupHeaderCell from './DataTableColumnGroupHeaderCell';
-import DataTableHeaderCell from './DataTableHeaderCell';
-import DataTableHeaderSelectorCell from './DataTableHeaderSelectorCell';
+import { Box, type MantineStyleProp } from '@mantine/core';
+import clsx from 'clsx';
+import { forwardRef } from 'react';
+import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
+import { DataTableHeaderCell } from './DataTableHeaderCell';
+import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSortProps } from './types';
-
-const useStyles = createStyles((theme) => ({
-  root: {
-    zIndex: 2,
-    position: 'sticky',
-    top: 0,
-    background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-  },
-  textSelectionDisabled: {
-    userSelect: 'none',
-  },
-}));
 
 type DataTableHeaderProps<T> = {
   className?: string;
-  style?: CSSObject;
+  style?: MantineStyleProp;
   sortStatus: DataTableSortProps['sortStatus'];
   sortIcons: DataTableSortProps['sortIcons'];
   onSortStatusChange: DataTableSortProps['onSortStatusChange'];
@@ -34,7 +23,7 @@ type DataTableHeaderProps<T> = {
   leftShadowVisible: boolean;
 };
 
-export default forwardRef(function DataTableHeader<T>(
+export const DataTableHeader = forwardRef(function DataTableHeader<T>(
   {
     className,
     style,
@@ -51,10 +40,8 @@ export default forwardRef(function DataTableHeader<T>(
     selectionCheckboxProps,
     leftShadowVisible,
   }: DataTableHeaderProps<T>,
-  ref: ForwardedRef<HTMLTableSectionElement>
+  ref: React.ForwardedRef<HTMLTableSectionElement>
 ) {
-  const { classes, cx } = useStyles();
-
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
       shadowVisible={leftShadowVisible}
@@ -67,7 +54,7 @@ export default forwardRef(function DataTableHeader<T>(
   ) : null;
 
   return (
-    <thead className={cx(classes.root, className)} style={style as CSSProperties} ref={ref}>
+    <Box component="thead" className={clsx('mantine-datatable-header', className)} style={style} ref={ref}>
       {groups && (
         <tr>
           {allRecordsSelectorCell}
@@ -90,7 +77,6 @@ export default forwardRef(function DataTableHeader<T>(
             sortable,
             titleClassName,
             titleStyle,
-            titleSx,
             filter,
             filtering,
           } = { ...defaultColumnProps, ...columnProps };
@@ -101,7 +87,6 @@ export default forwardRef(function DataTableHeader<T>(
               accessor={accessor}
               className={titleClassName}
               style={titleStyle}
-              sx={titleSx}
               visibleMediaQuery={visibleMediaQuery}
               textAlignment={textAlignment}
               width={width}
@@ -116,6 +101,6 @@ export default forwardRef(function DataTableHeader<T>(
           );
         })}
       </tr>
-    </thead>
+    </Box>
   );
-}) as <T>(props: DataTableHeaderProps<T> & { ref: ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;
+}) as <T>(props: DataTableHeaderProps<T> & { ref: React.ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;

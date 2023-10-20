@@ -1,0 +1,8 @@
+.mantine-datatable-footer-cell-nowrap {
+  white-space: nowrap;
+}
+
+.mantine-datatable-footer-cell-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

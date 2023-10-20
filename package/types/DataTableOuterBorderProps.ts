@@ -2,14 +2,14 @@ import type { MantineSize } from '@mantine/core';
 
 export type DataTableOuterBorderProps =
   | {
-      withBorder?: never;
+      withTableBorder?: never;
       borderRadius?: never;
     }
   | {
       /**
        * If true, table will have border.
        */
-      withBorder: boolean;
+      withTableBorder: boolean;
 
       /**
        * Table border radius.

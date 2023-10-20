@@ -58,7 +58,7 @@ export type DataTablePaginationProps = (
        * Pagination text. Defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`
        * ```
        */
-      paginationText?: (options: { from: number; to: number; totalRecords: number }) => React.ReactNode;
+      paginationText?: (params: { from: number; to: number; totalRecords: number }) => React.ReactNode;
 
       /**
        * Pagination wrap breakpoints.
@@ -72,7 +72,7 @@ export type DataTablePaginationProps = (
        * Function that returns props object for pagination control.
        * Useful for improving accessibility.
        */
-      getPaginationControlProps?: (control: 'previous' | 'next') => Record<string, unknown>;
+      getPaginationControlProps?: (control: 'first' | 'last' | 'previous' | 'next') => Record<string, unknown>;
     }
 ) &
   DataTablePageSizeSelectorProps;

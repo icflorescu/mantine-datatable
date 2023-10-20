@@ -1,0 +1,6 @@
+.mantine-datatable-empty-row {
+  background: transparent;
+  :last-of-type td {
+    border-bottom: none;
+  }
+}

@@ -1,0 +1,7 @@
+.mantine-datatable-footer {
+  z-index: 2;
+  background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  tr th {
+    border-top-color: var(--mantine-datatable-footer-border-color);
+  }
+}
