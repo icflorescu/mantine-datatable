@@ -4,14 +4,14 @@ import type { DataTableColumnGroup } from './DataTableColumnGroup';
 export type DataTableColumnProps<T> =
   | {
       /**
-       * Grouped columns
+       * Grouped columns.
        */
       groups: readonly DataTableColumnGroup<T>[];
       columns?: never;
     }
   | {
       /**
-       * Visible columns
+       * Visible columns.
        */
       columns: DataTableColumn<T>[];
       groups?: never;

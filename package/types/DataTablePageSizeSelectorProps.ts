@@ -6,17 +6,18 @@ export type DataTablePageSizeSelectorProps =
     }
   | {
       /**
-       * Callback fired a new page size is selected
+       * Callback fired a new page size is selected.
+       * Receives new page size as argument.
        */
       onRecordsPerPageChange: (recordsPerPage: number) => void;
 
       /**
-       * Array of options to show in records per page selector
+       * Array of page sizes (numbers) to show in records per page selector.
        */
       recordsPerPageOptions: number[];
 
       /**
-       * Label for records per page selector
+       * Label for records per page selector.
        */
       recordsPerPageLabel?: string;
     };

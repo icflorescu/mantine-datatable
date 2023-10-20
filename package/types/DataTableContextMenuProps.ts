@@ -1,24 +1,29 @@
-import type { MantineNumberSize, MantineShadow } from '@mantine/core';
+import type { MantineShadow, MantineSize } from '@mantine/core';
 import type { DataTableContextMenuItemProps } from './DataTableContextMenuItemProps';
 
+// todo: can we use Mantine ContextMenu as an external dependency?
 export type DataTableContextMenuProps<T> = {
   /**
-   * Context menu trigger; defaults to `rightClick` for classic behavior
+   * Context menu trigger.
+   * @default `rightClick`
    */
   trigger?: 'rightClick' | 'click';
 
   /**
-   * Menu z-index; defaults to `3`
+   * Menu z-index.
+   * @default `3`
    */
   zIndex?: number;
 
   /**
-   * Menu border radius; defaults to `xs`
+   * Menu border radius.
+   * @default `xs`
    */
-  borderRadius?: MantineNumberSize;
+  borderRadius?: MantineSize | (string & NonNullable<unknown>) | number;
 
   /**
-   * Menu shadow; defaults to `sm`
+   * Menu shadow.
+   * @default `sm`
    */
   shadow?: MantineShadow;
 

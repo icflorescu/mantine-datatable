@@ -1,5 +1,4 @@
-import type { MantineColor, MantineNumberSize, MantineSize } from '@mantine/core';
-import type { ReactNode } from 'react';
+import type { MantineColor, MantineSize } from '@mantine/core';
 import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelectorProps';
 
 export type DataTablePaginationProps = (
@@ -17,55 +16,61 @@ export type DataTablePaginationProps = (
     }
   | {
       /**
-       * Current page number (1-based); if provided, a pagination component is shown
+       * Current page number (1-based).
+       * If provided, a pagination component is shown.
        */
       page: number;
 
       /**
-       * Callback fired after change of each page
+       * Callback fired after page change.
+       * Receives the new page number as argument.
        */
       onPageChange: (page: number) => void;
 
       /**
-       * Total number of records in the dataset
+       * Total number of records in the dataset.
        */
       totalRecords: number | undefined;
 
       /**
-       * Number of records per page
+       * Number of records per page.
        */
       recordsPerPage: number;
 
       /**
-       * Pagination component size; defaults to `sm`
+       * Pagination component size.
+       * @default `sm`
        */
       paginationSize?: MantineSize;
 
       /**
-       * Pagination component color; defaults to primary theme color
+       * Pagination component color.
+       * Defaults to primary theme color.
        */
       paginationColor?: MantineColor;
 
       /**
-       * Text to show while records are loading
+       * Text to show while records are loading.
        */
       loadingText?: string;
 
       /**
-       * Pagination text; defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`
+       * Pagination text. Defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`
        * ```
        */
-      paginationText?: (options: { from: number; to: number; totalRecords: number }) => ReactNode;
+      paginationText?: (options: { from: number; to: number; totalRecords: number }) => React.ReactNode;
 
       /**
-       * Pagination wrap breakpoints; defaults to `sm`.
-       * Below this breakpoint the content will be displayed on multiple lines;
+       * Pagination wrap breakpoints.
+       * Below this breakpoint the content will be displayed on multiple lines,
        * above it the content will be displayed on a single line.
+       * @default `sm`
        */
-      paginationWrapBreakpoint?: MantineNumberSize;
+      paginationWrapBreakpoint?: MantineSize | (string & NonNullable<unknown>) | number;
 
       /**
-       * Function that returns props object for pagination control; useful for improving accessibility
+       * Function that returns props object for pagination control.
+       * Useful for improving accessibility.
        */
       getPaginationControlProps?: (control: 'previous' | 'next') => Record<string, unknown>;
     }

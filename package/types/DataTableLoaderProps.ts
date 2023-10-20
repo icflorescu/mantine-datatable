@@ -1,9 +1,8 @@
-import type { DefaultMantineColor, MantineNumberSize, MantineTheme } from '@mantine/core';
-import type { ReactNode } from 'react';
+import type { DefaultMantineColor, MantineLoader, MantineSize } from '@mantine/core';
 
 export type DataTableLoaderProps = {
   /**
-   * Loader background blur (in pixels)
+   * Loader background blur (in pixels).
    */
   loaderBackgroundBlur?: number;
 } & (
@@ -13,23 +12,23 @@ export type DataTableLoaderProps = {
       loaderColor?: never;
 
       /**
-       * Custom loader component to use instead of default one
+       * Custom loader component to use instead of default one.
        */
-      customLoader?: ReactNode;
+      customLoader?: React.ReactNode;
     }
   | {
       /**
-       * Loader size; defaults to `lg`
+       * Loader size; defaults to `lg`.
        */
-      loaderSize?: MantineNumberSize;
+      loaderSize?: MantineSize | (string & NonNullable<unknown>) | number;
 
       /**
-       * Loader variant
+       * Loader type.
        */
-      loaderVariant?: MantineTheme['loader'];
+      loaderType?: MantineLoader;
 
       /**
-       * Loader color
+       * Loader color.
        */
       loaderColor?: DefaultMantineColor;
 
