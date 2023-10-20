@@ -35,7 +35,7 @@ export default function HomePage() {
       <HeroImage />
       <Text component="div">
         Mantine DataTable is a lightweight, dependency-free component that brings datagrid-like functionality to your
-        data-rich user interfaces. Features intuitive Gmail-style additive batch rows selection out of the box.
+        data-rich user interfaces, with intuitive Gmail-style additive batch rows selection out of the box.
       </Text>
       <Flex direction={{ base: 'column', xs: 'row' }} gap="xl" wrap={{ base: 'nowrap', xs: 'wrap' }}>
         <Feature icon={IconSettings} title="Lightweight yet customizable">
