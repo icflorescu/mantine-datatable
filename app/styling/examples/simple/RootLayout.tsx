@@ -4,8 +4,8 @@ import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 //    this will automatically place it in a `mantine` layer
 import '@mantine/core/styles.layer.css';
 
-// 👇 Import the mantine-contextmenu layer CSS file;
-//    this will automatically place it in a `mantine-contextmenu` layer
+// 👇 Import the mantine-datatable layer CSS file;
+//    this will automatically place it in a `mantine-datatable` layer
 import '__PACKAGE__/styles.layer.css';
 
 // 👇 Import your own CSS file;

@@ -4,7 +4,6 @@ import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
-import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
@@ -46,9 +45,7 @@ export default async function GettingStartedPage() {
         ]}
       />
       <Txt>
-        Wrap your application in a <Code>ContextMenuProvider</Code> <strong>inside</strong> the{' '}
-        <Code>MantineProvider</Code> and don’t forget to import the necessary CSS files{' '}
-        <strong>in the correct order</strong>.
+        Don’t forget to import the necessary CSS files <strong>in the correct order</strong>.
       </Txt>
       <Txt idea>
         The <Code>@mantine/core</Code> package styles must be applied before {PRODUCT_NAME} styles.
@@ -58,15 +55,9 @@ export default async function GettingStartedPage() {
         application with an app router, your <Code>layout.tsx</Code> could look like this:
       </Txt>
       <CodeBlock tabs={{ code, keys: ['RootLayout.tsx', 'layout.css'] }} />
-      <PageSubtitle value="Use the hook in your code" />
-      <Txt>
-        Import the <Code>useContextMenu</Code> hook and use it in your components like so:
-      </Txt>
+      <Txt>Then you can import the component and use it in your application like so:</Txt>
       <CodeBlock code={code['SimpleExample.tsx']} />
-      <Txt>
-        The above code will produce the following result &mdash; right-click on the image (or long-tap on mobile
-        devices) to trigger the context menu:
-      </Txt>
+      <Txt>The above code will produce the following result:</Txt>
       <SimpleExample />
       <Txt>
         Next, let’s make sure you have a good understanding of how <InternalLink to="/styling">styling</InternalLink>{' '}

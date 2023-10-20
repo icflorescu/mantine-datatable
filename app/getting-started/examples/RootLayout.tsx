@@ -1,5 +1,4 @@
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import { ContextMenuProvider } from '__PACKAGE__';
 
 import '@mantine/core/styles.layer.css';
 import '__PACKAGE__/styles.layer.css';
@@ -12,9 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body>
-        <MantineProvider defaultColorScheme="auto">
-          <ContextMenuProvider>{children}</ContextMenuProvider>
-        </MantineProvider>
+        <MantineProvider defaultColorScheme="auto">{children}</MantineProvider>
       </body>
     </html>
   );
