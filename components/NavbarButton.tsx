@@ -23,10 +23,10 @@ export function NavbarButton({ color, icon, title, description, href, onClick, e
   const content = (
     <Box
       style={({ colors }) => ({
-        '--docs-button-bg-color-light': isCurrent ? rgba(colors[color][6], 0.1) : 'transparent',
-        '--docs-button-bg-color-dark': isCurrent ? rgba(colors[color][6], 0.2) : 'transparent',
-        '--docs-button-hover-bg-color-light': isCurrent ? rgba(colors[color][6], 0.2) : rgba(colors.gray[6], 0.1),
-        '--docs-button-hover-bg-color-dark': isCurrent ? rgba(colors[color][6], 0.3) : rgba(colors.gray[6], 0.2),
+        '--navbar-button-bg-color-light': isCurrent ? rgba(colors[color][6], 0.1) : 'transparent',
+        '--navbar-button-bg-color-dark': isCurrent ? rgba(colors[color][6], 0.2) : 'transparent',
+        '--navbar-button-hover-bg-color-light': isCurrent ? rgba(colors[color][6], 0.2) : rgba(colors.gray[6], 0.1),
+        '--navbar-button-hover-bg-color-dark': isCurrent ? rgba(colors[color][6], 0.3) : rgba(colors.gray[6], 0.2),
       })}
       className={classes.root}
       component="a"

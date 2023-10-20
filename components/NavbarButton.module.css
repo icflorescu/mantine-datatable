@@ -7,10 +7,10 @@
   cursor: pointer;
   user-select: none;
   color: var(--mantine-color-text);
-  background: light-dark(var(--docs-button-bg-color-light), var(--docs-button-bg-color-dark));
+  background: light-dark(var(--navbar-button-bg-color-light), var(--navbar-button-bg-color-dark));
   transition: background 0.2s;
   &:hover {
-    background: light-dark(var(--docs-button-hover-bg-color-light), var(--docs-button-hover-bg-color-dark));
+    background: light-dark(var(--navbar-button-hover-bg-color-light), var(--navbar-button-hover-bg-color-dark));
   }
   &:active {
     .icon:not(.expanded),
