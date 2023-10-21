@@ -81,6 +81,12 @@ const useStyles = createStyles(
     light-dark(var(--mantine-datatable-border-color-light), var(--mantine-datatable-border-color-dark));
 }
 
+.mantine-datatable-table {
+  tbody tr:last-of-type {
+    /* border-bottom: 0; */
+  }
+}
+
 .mantine-datatable-table-text-selection-disabled {
   user-select: none;
 }

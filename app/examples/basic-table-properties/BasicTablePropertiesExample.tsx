@@ -6,6 +6,7 @@ const records = companies.slice(0, 5);
 
 export function BasicTablePropertiesExample({
   withTableBorder,
+  withRowBorders,
   noHeader,
   customizeBorderRadius,
   borderRadius,
@@ -24,6 +25,7 @@ export function BasicTablePropertiesExample({
   verticalAlignment,
 }: {
   withTableBorder: boolean;
+  withRowBorders: boolean;
   noHeader: boolean;
   customizeBorderRadius: boolean;
   borderRadius: MantineSize;
@@ -49,6 +51,7 @@ export function BasicTablePropertiesExample({
       noHeader={noHeader}
       borderRadius={customizeBorderRadius ? borderRadius : undefined}
       shadow={customizeShadow ? shadow : undefined}
+      withRowBorders={withRowBorders}
       withColumnBorders={withColumnBorders}
       striped={striped}
       highlightOnHover={highlightOnHover}

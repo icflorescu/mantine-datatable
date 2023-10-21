@@ -21,6 +21,7 @@ const VERTICAL_ALIGNMENTS: DataTableVerticalAlignment[] = ['top', 'center', 'bot
 
 export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: string }) {
   const [withTableBorder, setWithTableBorder] = useState(false);
+  const [withRowBorders, setWithRowBorders] = useState(true);
   const [noHeader, setNoHeader] = useState(false);
   const [customizeBorderRadius, setCustomizeBorderRadius] = useState(false);
   const [borderRadius, setBorderRadius] = useState<MantineSize>(INITIAL_BORDER_RADIUS);
@@ -66,6 +67,7 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
     () =>
       initialCode
         .replace(/( +)withTableBorder=.*\n/, (_, spaces) => (withTableBorder ? `${spaces}withTableBorder\n` : ''))
+        .replace(/( +)withRowBorders=.*\n/, (_, spaces) => (withRowBorders ? '' : `${spaces}withRowBorders={false}\n`))
         .replace(/( +)noHeader=.*\n/, (_, spaces) => (noHeader ? `${spaces}noHeader\n` : ''))
         .replace(/( +)borderRadius=.*\n/, (_, spaces) =>
           customizeBorderRadius ? `${spaces}borderRadius="${borderRadius}"\n` : ''
@@ -85,24 +87,25 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
           customizeVerticalAlignment ? `${spaces}verticalAlignment="${verticalAlignment}"\n` : ''
         ),
     [
-      borderRadius,
-      customizeBorderRadius,
-      customizeFz,
-      customizeHorizontalSpacing,
-      customizeShadow,
-      customizeVerticalAlignment,
-      customizeVerticalSpacing,
-      fz,
-      highlightOnHover,
-      horizontalSpacing,
       initialCode,
-      shadow,
-      striped,
-      verticalAlignment,
-      verticalSpacing,
       withTableBorder,
+      withRowBorders,
       noHeader,
+      customizeBorderRadius,
+      borderRadius,
+      customizeShadow,
+      shadow,
       withColumnBorders,
+      striped,
+      highlightOnHover,
+      customizeHorizontalSpacing,
+      horizontalSpacing,
+      customizeVerticalSpacing,
+      verticalSpacing,
+      customizeFz,
+      fz,
+      customizeVerticalAlignment,
+      verticalAlignment,
     ]
   );
 
@@ -114,8 +117,15 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
 
   return (
     <>
-      <Paper className={clsx(classes.controlGroups, classes.controls)} my="xl" px="xl" py="sm" withBorder>
+      <Paper className={clsx(classes.controlGroups)} mt="lg" mb="xl" mx="auto" p="md" withBorder>
         <div className={classes.controls}>
+          <Switch
+            className={classes.control}
+            label="Row borders"
+            checked={withRowBorders}
+            onChange={() => setWithRowBorders((v) => !v)}
+          />
+          <Code hidden>Row borders, withRowBorders</Code>
           <Switch
             className={classes.control}
             label="Column borders"
@@ -185,16 +195,6 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
           />
           <CheckableSegmentedControl
             className={classes.control}
-            label="Border radius"
-            documentAs="borderRadius"
-            data={MANTINE_SIZES}
-            checked={customizeBorderRadius}
-            onCheckedChange={setCustomizeBorderRadius}
-            value={borderRadius}
-            onChange={(value) => setBorderRadius(value as MantineSize)}
-          />
-          <CheckableSegmentedControl
-            className={classes.control}
             label="Font size"
             documentAs="fontSize"
             data={MANTINE_SIZES}
@@ -202,6 +202,16 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
             onCheckedChange={setCustomizeFz}
             value={fz}
             onChange={(value) => setFz(value as MantineSize)}
+          />
+          <CheckableSegmentedControl
+            className={classes.control}
+            label="Border radius"
+            documentAs="borderRadius"
+            data={MANTINE_SIZES}
+            checked={customizeBorderRadius}
+            onCheckedChange={setCustomizeBorderRadius}
+            value={borderRadius}
+            onChange={(value) => setBorderRadius(value as MantineSize)}
           />
           <CheckableSegmentedControl
             className={classes.control}
@@ -217,6 +227,7 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
       </Paper>
       <BasicTablePropertiesExample
         withTableBorder={withTableBorder}
+        withRowBorders={withRowBorders}
         noHeader={noHeader}
         customizeBorderRadius={customizeBorderRadius}
         borderRadius={borderRadius}

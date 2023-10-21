@@ -1,18 +1,20 @@
 .controlGroups {
-  width: fit-content;
-}
-
-@media (min-width: rem(880px)) {
-  .controlGroups.controls {
+  display: flex;
+  flex-direction: column;
+  max-width: rem(340px);
+  gap: var(--mantine-spacing-md);
+  @media (min-width: rem(880px)) {
+    max-width: rem(600px);
     flex-direction: row;
-    gap: var(--mantine-spacing-xl);
+    justify-content: space-between;
   }
 }
 
 .controls {
   display: flex;
   flex-direction: column;
-  gap: var(--mantine-spacing-sm);
+  align-items: flex-start;
+  gap: var(--mantine-spacing-xs);
 }
 
 .control {

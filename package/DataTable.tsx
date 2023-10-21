@@ -271,7 +271,7 @@ export function DataTable<T>({
           ref={tableRef}
           horizontalSpacing={horizontalSpacing}
           className={clsx(
-            classNames?.table,
+            'mantine-datatable-table',
             /* classes.table, */ {
               // [classes.tableWithColumnBorders]: withColumnBorders,
               // [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
@@ -279,7 +279,8 @@ export function DataTable<T>({
               'mantine-datatable-table-vertical-alignment-top': verticalAlignment === 'top',
               'mantine-datatable-table-vertical-alignment-bottom': verticalAlignment === 'bottom',
               // [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
-            }
+            },
+            classNames?.table
           )}
           style={styles?.table}
           striped={recordsLength ? striped : false}
