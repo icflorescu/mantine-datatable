@@ -3,17 +3,17 @@ import clsx from 'clsx';
 
 type DataTableRowSelectorCellProps<T> = {
   record: T;
-  recordIndex: number;
+  index: number;
   withRightShadow: boolean;
   checked: boolean;
   disabled: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  getCheckboxProps: (record: T, recordIndex: number) => Record<string, unknown>;
+  getCheckboxProps: (params: { record: T; index: number }) => Record<string, unknown>;
 };
 
 export function DataTableRowSelectorCell<T>({
   record,
-  recordIndex,
+  index,
   withRightShadow,
   getCheckboxProps,
   ...otherProps
@@ -28,7 +28,7 @@ export function DataTableRowSelectorCell<T>({
       <Checkbox
         classNames={{ input: 'mantine-datatable-row-selector-cell-checkbox' }}
         {...otherProps}
-        {...getCheckboxProps(record, recordIndex)}
+        {...getCheckboxProps({ record, index })}
       />
     </td>
   );

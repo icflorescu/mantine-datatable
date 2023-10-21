@@ -13,7 +13,7 @@ export type DataTableCellClickHandler<T> = (params: {
   /**
    * Clicked record index.
    */
-  recordIndex: number;
+  index: number;
   /**
    * Clicked column information.
    */

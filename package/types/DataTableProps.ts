@@ -1,12 +1,4 @@
-import type {
-  MantineColor,
-  MantineShadow,
-  MantineStyleProp,
-  ScrollAreaProps,
-  StyleProp,
-  TableProps,
-} from '@mantine/core';
-import type { DataTableVerticalAlignment } from './';
+import type { MantineShadow, MantineStyleProp, ScrollAreaProps, StylesRecord, TableProps } from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumnProps } from './DataTableColumnProps';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
@@ -18,8 +10,34 @@ import type { DataTablePaginationProps } from './DataTablePaginationProps';
 import type { DataTableRowExpansionProps } from './DataTableRowExpansionProps';
 import type { DataTableSelectionProps } from './DataTableSelectionProps';
 import type { DataTableSortProps } from './DataTableSortProps';
+import type { DataTableVerticalAlignment } from './DataTableVerticalAlignment';
 
 export type DataTableProps<T> = {
+  /**
+   * Data table container class name.
+   */
+  className?: string;
+
+  /**
+   * Data table container style.
+   */
+  style?: MantineStyleProp;
+
+  /**
+   * Data table elements class names.
+   * An object with `root`, `table`, `header`, `footer` and `pagination` keys and class names
+   * as values.
+   */
+  classNames?: Partial<Record<'root' | 'table' | 'header' | 'footer' | 'pagination', string>>;
+
+  /**
+   * Data table elements styles.
+   * Can be an object with `root`, `table`, `header`, `footer` and `pagination` keys and
+   * style objects as values, or a function that accepts the current theme and returns a
+   * similarly structured object.
+   */
+  styles?: StylesRecord<'root' | 'table' | 'header' | 'footer' | 'pagination', MantineStyleProp>;
+
   /**
    * Table height.
    * @default '100%'
@@ -35,17 +53,6 @@ export type DataTableProps<T> = {
    * DataTable component shadow.
    */
   shadow?: MantineShadow;
-
-  /**
-   * Table border color.
-   * Applied to the outer border, the header bottom border, and the pagination footer top border.
-   */
-  borderColor?: StyleProp<MantineColor>;
-
-  /**
-   * Row border color.
-   */
-  rowBorderColor?: StyleProp<MantineColor>;
 
   /**
    * If true, the user will not be able to select text.
@@ -70,10 +77,10 @@ export type DataTableProps<T> = {
 
   /**
    * A default render function for all columns.
-   * Accepts an object with current record, its index in `records` and the column accessor as
+   * Accepts an object with current record, its index in `records` and the column `accessor` as
    * properties and returns a React node (remember that a string is a valid React node too).
    */
-  defaultColumnRender?: (params: { record: T; index: number; accesor: string }) => React.ReactNode;
+  defaultColumnRender?: (params: { record: T; index: number; accessor: string }) => React.ReactNode;
 
   /**
    * Accessor to use as unique record key.
@@ -111,7 +118,7 @@ export type DataTableProps<T> = {
    * Receives an object with the current record, its index in `records` and the click event
    * as properties.
    */
-  onRowClick?: (params: { record: T; index: number; event: MouseEvent }) => void;
+  onRowClick?: (params: { record: T; index: number; event: React.MouseEvent<HTMLTableRowElement, MouseEvent> }) => void;
 
   /**
    * Function to call when the DataTable is scrolled to top.
@@ -152,10 +159,10 @@ export type DataTableProps<T> = {
 
   /**
    * Optional style passed to each row.
-   * Can be a CSS properties object or a function receiving an object with the current record and
-   * its index as properties and returning a CSS properties object.
+   * A function receiving an object with the current record and
+   * its index as properties and returning a style object.
    */
-  rowStyle?: MantineStyleProp | ((params: { record: T; index: number }) => MantineStyleProp | undefined);
+  rowStyle?: (params: { record: T; index: number }) => MantineStyleProp | undefined;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each row in the table.

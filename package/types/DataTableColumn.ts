@@ -105,9 +105,7 @@ export type DataTableColumn<T> = {
    * Can be a style object, or a function receiving an object with the current record
    * and its index as properties, and returning a style object.
    */
-  cellsStyle?:
-    | MantineStyleProp
-    | ((params: { record: T; index: number; theme: MantineTheme }) => MantineStyleProp | undefined);
+  cellsStyle?: (params: { record: T; index: number }) => MantineStyleProp | undefined;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each cell in the column.

@@ -1,0 +1,8 @@
+.mantine-datatable-row-expansion-cell {
+  border-bottom-width: 0;
+  padding: 0;
+}
+
+.mantine-datatable-row-expansion-expanded {
+  border-bottom-width: rem(1px);
+}

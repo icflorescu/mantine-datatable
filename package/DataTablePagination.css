@@ -1,6 +1,6 @@
 .mantine-datatable-pagination {
   background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
-  border-top: 1px solid var(--mantine-datatable-pagination-border-color);
+  /* border-top: 1px solid var(--mantine-datatable-pagination-border-color); */
   display: flex;
   align-items: center;
   justify-content: space-between;

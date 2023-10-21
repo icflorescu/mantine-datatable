@@ -1,117 +1,30 @@
-import { Box, MantineSize, Portal, Table, createStyles, packSx, type MantineTheme } from '@mantine/core';
+import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
+import clsx from 'clsx';
+import { useCallback, useMemo, useState, type ChangeEventHandler, type Key } from 'react';
+import { DataTableEmptyRow } from './DataTableEmptyRow';
+import { DataTableEmptyState } from './DataTableEmptyState';
+import { DataTableFooter } from './DataTableFooter';
+import { DataTableHeader } from './DataTableHeader';
+import { DataTableLoader } from './DataTableLoader';
+import { DataTablePagination } from './DataTablePagination';
+import { DataTableRow } from './DataTableRow';
+// import DataTableRowMenu from './DataTableRowMenu';
+// import DataTableRowMenuDivider from './DataTableRowMenuDivider';
+// import DataTableRowMenuItem from './DataTableRowMenuItem';
+import { DataTableScrollArea } from './DataTableScrollArea';
 import {
-  useCallback,
-  useMemo,
-  useState,
-  type CSSProperties,
-  type ChangeEventHandler,
-  type Key,
-  type MouseEventHandler,
-} from 'react';
-import DataTableEmptyRow from './DataTableEmptyRow';
-import DataTableEmptyState from './DataTableEmptyState';
-import DataTableFooter from './DataTableFooter';
-import DataTableHeader from './DataTableHeader';
-import DataTableLoader from './DataTableLoader';
-import DataTablePagination from './DataTablePagination';
-import DataTableRow from './DataTableRow';
-import DataTableRowMenu from './DataTableRowMenu';
-import DataTableRowMenuDivider from './DataTableRowMenuDivider';
-import DataTableRowMenuItem from './DataTableRowMenuItem';
-import DataTableScrollArea from './DataTableScrollArea';
-import { useElementOuterSize, useLastSelectionChangeIndex, useRowContextMenu, useRowExpansion } from './hooks';
+  useElementOuterSize,
+  useIsomorphicLayoutEffect,
+  useLastSelectionChangeIndex,
+  useRowContextMenu,
+  useRowExpansion,
+} from './hooks';
 import type { DataTableProps } from './types';
-import { differenceBy, getRecordId, humanize, uniqBy, useIsomorphicLayoutEffect } from './utils';
+import { differenceBy, getRecordId, uniqBy } from './utils';
 
-const EMPTY_OBJECT = {};
-
-const useStyles = createStyles(
-  (
-    theme,
-    {
-      borderColor,
-      rowBorderColor,
-    }: {
-      borderColor: string | ((theme: MantineTheme) => string);
-      rowBorderColor: string | ((theme: MantineTheme) => string);
-    }
-  ) => {
-    const borderColorValue = typeof borderColor === 'function' ? borderColor(theme) : borderColor;
-    const rowBorderColorValue = typeof rowBorderColor === 'function' ? rowBorderColor(theme) : rowBorderColor;
-
-    return {
-      root: {
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        tr: {
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-        },
-        '&&': {
-          'thead tr th': {
-            borderBottomColor: borderColorValue,
-          },
-          'tbody tr td': {
-            borderTopColor: rowBorderColorValue,
-          },
-        },
-      },
-      lastRowBorderBottomVisible: {
-        'tbody tr:last-of-type td': {
-          borderBottom: `1px solid ${rowBorderColorValue}`,
-        },
-      },
-      textSelectionDisabled: {
-        userSelect: 'none',
-      },
-      table: {
-        borderCollapse: 'separate',
-        borderSpacing: 0,
-      },
-      tableWithBorder: {
-        border: `1px solid ${borderColorValue}`,
-      },
-      tableWithColumnBorders: {
-        '&&': {
-          'th, td': {
-            ':not(:first-of-type)': {
-              borderLeft: `1px solid ${rowBorderColorValue}`,
-            },
-          },
-        },
-      },
-      tableWithColumnBordersAndSelectableRecords: {
-        thead: {
-          'tr + tr': {
-            th: {
-              borderLeft: `1px solid ${rowBorderColorValue}`,
-            },
-          },
-        },
-      },
-      verticalAlignmentTop: {
-        td: {
-          verticalAlign: 'top',
-        },
-      },
-      verticalAlignmentBottom: {
-        td: {
-          verticalAlign: 'bottom',
-        },
-      },
-    };
-  }
-);
-
-export default function DataTable<T>({
-  withBorder,
+export function DataTable<T>({
   borderRadius,
-  borderColor = (theme) => (theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]),
-  rowBorderColor = (theme) =>
-    theme.fn.rgba(theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3], 0.65),
-  withColumnBorders,
   textSelectionDisabled,
   height = '100%',
   minHeight,
@@ -128,7 +41,7 @@ export default function DataTable<T>({
   onSelectedRecordsChange,
   isRecordSelectable,
   allRecordsSelectionCheckboxProps = { 'aria-label': 'Select all records' },
-  getRecordSelectionCheckboxProps = (_, index) => ({ 'aria-label': `Select record ${index + 1}` }),
+  getRecordSelectionCheckboxProps = ({ index }) => ({ 'aria-label': `Select record ${index + 1}` }),
   sortStatus,
   sortIcons,
   onSortStatusChange,
@@ -155,7 +68,7 @@ export default function DataTable<T>({
   loaderBackgroundBlur,
   customLoader,
   loaderSize,
-  loaderVariant,
+  loaderType,
   loaderColor,
   loadingText = '...',
   emptyState,
@@ -173,7 +86,6 @@ export default function DataTable<T>({
   rowExpansion,
   rowClassName,
   rowStyle,
-  rowSx,
   customRowAttributes,
   scrollViewportRef: scrollViewportRefProp,
   scrollAreaProps,
@@ -185,7 +97,6 @@ export default function DataTable<T>({
   mb,
   ml,
   mr,
-  sx,
   className,
   classNames,
   style,
@@ -224,7 +135,7 @@ export default function DataTable<T>({
       setScrolledToTop(true);
       setScrolledToBottom(true);
     } else {
-      const scrollTop = scrollViewportRef.current.scrollTop;
+      const scrollTop = scrollViewportRef.current?.scrollTop || 0;
       const newScrolledToTop = scrollTop === 0;
       const newScrolledToBottom = tableHeight - scrollTop - scrollViewportHeight < 1;
       setScrolledToTop(newScrolledToTop);
@@ -237,7 +148,7 @@ export default function DataTable<T>({
       setScrolledToLeft(true);
       setScrolledToRight(true);
     } else {
-      const scrollLeft = scrollViewportRef.current.scrollLeft;
+      const scrollLeft = scrollViewportRef.current?.scrollLeft || 0;
       const newScrolledToLeft = scrollLeft === 0;
       const newScrolledToRight = tableWidth - scrollLeft - scrollViewportWidth < 1;
       setScrolledToLeft(newScrolledToLeft);
@@ -268,7 +179,7 @@ export default function DataTable<T>({
 
   const handlePageChange = useCallback(
     (page: number) => {
-      scrollViewportRef.current.scrollTo({ top: 0, left: 0 });
+      scrollViewportRef.current?.scrollTo({ top: 0, left: 0 });
       onPageChange!(page);
     },
     [onPageChange, scrollViewportRef]
@@ -281,7 +192,9 @@ export default function DataTable<T>({
   const hasRecordsAndSelectedRecords =
     recordIds !== undefined && selectedRecordIds !== undefined && selectedRecordIds.length > 0;
 
-  const selectableRecords = isRecordSelectable ? records?.filter(isRecordSelectable) : records;
+  const selectableRecords = isRecordSelectable
+    ? records?.filter((record, index) => isRecordSelectable({ record, index }))
+    : records;
   const selectableRecordIds = selectableRecords?.map((record) => getRecordId(record, idAccessor));
 
   const allSelectableRecordsSelected =
@@ -309,27 +222,25 @@ export default function DataTable<T>({
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
   const selectionVisibleAndNotScrolledToLeft = selectionColumnVisible && !scrolledToLeft;
 
-  const { cx, classes, theme } = useStyles({ borderColor, rowBorderColor });
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
-  const styleProperties = typeof styles === 'function' ? styles(theme, EMPTY_OBJECT, EMPTY_OBJECT) : styles;
 
   return (
     <Box
       {...marginProperties}
-      className={cx(classes.root, { [classes.tableWithBorder]: withBorder }, className, classNames?.root)}
-      sx={[
+      className={clsx('mantine-datatable', className, classNames?.root)}
+      style={[
         (theme) => ({
           borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
           boxShadow: theme.shadows[shadow as MantineSize] || shadow,
           height,
           minHeight,
         }),
-        ...packSx(sx),
+        style,
+        styles?.root,
       ]}
-      style={{ ...styleProperties?.root, ...style } as CSSProperties}
     >
       <DataTableScrollArea
-        viewportRef={useMergedRef(scrollViewportRef, scrollViewportRefProp || null)}
+        viewportRef={useMergedRef(scrollViewportRef, scrollViewportRefProp)}
         topShadowVisible={!scrolledToTop}
         leftShadowVisible={!(selectedRecords || scrolledToLeft)}
         rightShadowVisible={!scrolledToRight}
@@ -342,14 +253,18 @@ export default function DataTable<T>({
         <Table
           ref={tableRef}
           horizontalSpacing={horizontalSpacing}
-          className={cx(classes.table, {
-            [classes.tableWithColumnBorders]: withColumnBorders,
-            [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
-            [classes.textSelectionDisabled]: textSelectionDisabled,
-            [classes.verticalAlignmentTop]: verticalAlignment === 'top',
-            [classes.verticalAlignmentBottom]: verticalAlignment === 'bottom',
-            [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
-          })}
+          className={clsx(
+            classNames?.table,
+            /* classes.table, */ {
+              // [classes.tableWithColumnBorders]: withColumnBorders,
+              // [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
+              'mantine-datatable-text-selection-disabled': textSelectionDisabled,
+              'mantine-datatable-vertical-alignment-top': verticalAlignment === 'top',
+              'mantine-datatable-vertical-alignment-bottom': verticalAlignment === 'bottom',
+              // [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
+            }
+          )}
+          style={styles?.table}
           striped={recordsLength ? striped : false}
           {...otherProps}
         >
@@ -357,7 +272,7 @@ export default function DataTable<T>({
             <DataTableHeader<T>
               ref={headerRef}
               className={classNames?.header}
-              style={styleProperties?.header}
+              style={styles?.header}
               columns={effectiveColumns}
               defaultColumnProps={defaultColumnProps}
               groups={groups}
@@ -374,37 +289,37 @@ export default function DataTable<T>({
           )}
           <tbody ref={bodyRef}>
             {recordsLength ? (
-              records.map((record, recordIndex) => {
+              records.map((record, index) => {
                 const recordId = getRecordId(record, idAccessor);
                 const isSelected = selectedRecordIds?.includes(recordId) || false;
 
-                let showContextMenuOnClick = false;
-                let showContextMenuOnRightClick = false;
-                if (rowContextMenu) {
-                  const { hidden } = rowContextMenu;
-                  if (!hidden || !(typeof hidden === 'function' ? hidden(record, recordIndex) : hidden)) {
-                    if (rowContextMenu.trigger === 'click') {
-                      showContextMenuOnClick = true;
-                    } else {
-                      showContextMenuOnRightClick = true;
-                    }
-                  }
-                }
+                // let showContextMenuOnClick = false;
+                // let showContextMenuOnRightClick = false;
+                // if (rowContextMenu) {
+                //   const { hidden } = rowContextMenu;
+                //   if (!hidden || !(typeof hidden === 'function' ? hidden(record, recordIndex) : hidden)) {
+                //     if (rowContextMenu.trigger === 'click') {
+                //       showContextMenuOnClick = true;
+                //     } else {
+                //       showContextMenuOnRightClick = true;
+                //     }
+                //   }
+                // }
 
                 let handleSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
                 if (onSelectedRecordsChange && selectedRecords) {
                   handleSelectionChange = (e) => {
                     if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
                       const targetRecords = records.filter(
-                        recordIndex > lastSelectionChangeIndex
-                          ? (r, index) =>
-                              index >= lastSelectionChangeIndex &&
-                              index <= recordIndex &&
-                              (isRecordSelectable ? isRecordSelectable(r, index) : true)
-                          : (r, index) =>
-                              index >= recordIndex &&
-                              index <= lastSelectionChangeIndex &&
-                              (isRecordSelectable ? isRecordSelectable(r, index) : true)
+                        index > lastSelectionChangeIndex
+                          ? (rec, idx) =>
+                              idx >= lastSelectionChangeIndex &&
+                              idx <= index &&
+                              (isRecordSelectable ? isRecordSelectable({ record: rec, index: idx }) : true)
+                          : (rec, idx) =>
+                              idx >= index &&
+                              idx <= lastSelectionChangeIndex &&
+                              (isRecordSelectable ? isRecordSelectable({ record: rec, index: idx }) : true)
                       );
                       onSelectedRecordsChange(
                         isSelected
@@ -414,39 +329,39 @@ export default function DataTable<T>({
                     } else {
                       onSelectedRecordsChange(
                         isSelected
-                          ? selectedRecords.filter((record) => getRecordId(record, idAccessor) !== recordId)
-                          : uniqBy([...selectedRecords, record], (record) => getRecordId(record, idAccessor))
+                          ? selectedRecords.filter((rec) => getRecordId(rec, idAccessor) !== recordId)
+                          : uniqBy([...selectedRecords, record], (rec) => getRecordId(rec, idAccessor))
                       );
                     }
-                    setLastSelectionChangeIndex(recordIndex);
+                    setLastSelectionChangeIndex(index);
                   };
                 }
 
-                let handleClick: MouseEventHandler<HTMLTableRowElement> | undefined;
-                if (showContextMenuOnClick) {
-                  handleClick = (e) => {
-                    setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
-                    onRowClick?.(record, recordIndex, e);
-                  };
-                } else if (onRowClick) {
-                  handleClick = (e) => {
-                    onRowClick(record, recordIndex, e);
-                  };
-                }
+                // let handleClick: MouseEventHandler<HTMLTableRowElement> | undefined;
+                // if (showContextMenuOnClick) {
+                //   handleClick = (e) => {
+                //     setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
+                //     onRowClick?.(record, recordIndex, e);
+                //   };
+                // } else if (onRowClick) {
+                //   handleClick = (e) => {
+                //     onRowClick(record, recordIndex, e);
+                //   };
+                // }
 
-                let handleContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
-                if (showContextMenuOnRightClick) {
-                  handleContextMenu = (e) => {
-                    e.preventDefault();
-                    setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
-                  };
-                }
+                // let handleContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
+                // if (showContextMenuOnRightClick) {
+                //   handleContextMenu = (e) => {
+                //     e.preventDefault();
+                //     setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
+                //   };
+                // }
 
                 return (
                   <DataTableRow<T>
                     key={recordId as Key}
                     record={record}
-                    recordIndex={recordIndex}
+                    index={index}
                     columns={effectiveColumns}
                     defaultColumnProps={defaultColumnProps}
                     defaultColumnRender={defaultColumnRender}
@@ -455,16 +370,16 @@ export default function DataTable<T>({
                     onSelectionChange={handleSelectionChange}
                     isRecordSelectable={isRecordSelectable}
                     getSelectionCheckboxProps={getRecordSelectionCheckboxProps}
-                    onClick={handleClick}
+                    // onClick={handleClick}
+                    onClick={onRowClick ? (event) => onRowClick({ record, index, event }) : undefined}
                     onCellClick={onCellClick}
-                    onContextMenu={handleContextMenu}
+                    // onContextMenu={handleContextMenu}
                     contextMenuVisible={
                       rowContextMenuInfo ? getRecordId(rowContextMenuInfo.record, idAccessor) === recordId : false
                     }
                     expansion={rowExpansionInfo}
                     className={rowClassName}
                     style={rowStyle}
-                    sx={rowSx}
                     customAttributes={customRowAttributes}
                     leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
@@ -478,8 +393,8 @@ export default function DataTable<T>({
             <DataTableFooter<T>
               ref={footerRef}
               className={classNames?.footer}
-              style={styleProperties?.footer}
-              borderColor={borderColor}
+              style={styles?.footer}
+              // borderColor={borderColor}
               columns={effectiveColumns}
               defaultColumnProps={defaultColumnProps}
               selectionVisible={selectionColumnVisible}
@@ -493,8 +408,8 @@ export default function DataTable<T>({
         <DataTablePagination
           ref={paginationRef}
           className={classNames?.pagination}
-          style={styleProperties?.pagination}
-          topBorderColor={borderColor}
+          style={styles?.pagination}
+          // topBorderColor={borderColor}
           horizontalSpacing={horizontalSpacing}
           fetching={fetching}
           page={page}
@@ -521,7 +436,7 @@ export default function DataTable<T>({
         backgroundBlur={loaderBackgroundBlur}
         customContent={customLoader}
         size={loaderSize}
-        variant={loaderVariant}
+        type={loaderType}
         color={loaderColor}
       />
       <DataTableEmptyState
@@ -533,7 +448,7 @@ export default function DataTable<T>({
       >
         {emptyState}
       </DataTableEmptyState>
-      {rowContextMenu && rowContextMenuInfo && (
+      {/* {rowContextMenu && rowContextMenuInfo && (
         <Portal>
           <DataTableRowMenu
             zIndex={rowContextMenu.zIndex}
@@ -564,7 +479,7 @@ export default function DataTable<T>({
               )}
           </DataTableRowMenu>
         </Portal>
-      )}
+      )} */}
     </Box>
   );
 }

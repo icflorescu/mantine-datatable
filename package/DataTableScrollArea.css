@@ -1,0 +1,69 @@
+.mantine-datatable-scroll-area {
+  flex: 1 1 100%;
+}
+
+.mantine-datatable-scroll-area-corner {
+  background: transparent;
+}
+
+.mantine-datatable-scroll-area-thumb {
+  z-index: 3;
+}
+
+.mantine-datatable-scroll-area-scrollbar {
+  &[data-state='visible'] {
+    background: transparent;
+  }
+  div::before {
+    pointer-events: none;
+  }
+}
+
+.mantine-datatable-scroll-area-shadow {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.mantine-datatable-scroll-area-top-shadow {
+  z-index: 2;
+  left: 0;
+  right: 0;
+  height: var(--mantine-spacing-sm);
+  background: linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.5)), rgba(0, 0, 0, 0)),
+    linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.5)) 30%, rgba(0, 0, 0, 0));
+}
+
+.mantine-datatable-scroll-area-left-shadow {
+  z-index: 3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--mantine-spacing-sm);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, light-dark(0.05, 0.5))),
+    linear-gradient(to right, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, light-dark(0.05, 0.5)));
+}
+
+.mantine-datatable-scroll-area-right-shadow {
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: var(--mantine-spacing-sm);
+  background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, light-dark(0.05, 0.5))),
+    linear-gradient(to left, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, light-dark(0.05, 0.5)));
+}
+
+.mantine-datatable-scroll-area-bottom-shadow {
+  z-index: 2;
+  left: 0;
+  right: 0;
+  height: var(--mantine-spacing-sm);
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, light-dark(0.05, 0.5))),
+    linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, light-dark(0.05, 0.5)));
+}
+
+.mantine-datatable-scroll-area-shadow-visible {
+  opacity: 1;
+}

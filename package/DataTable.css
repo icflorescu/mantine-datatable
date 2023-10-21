@@ -1,0 +1,89 @@
+/*
+const useStyles = createStyles(
+  (
+    theme,
+    {
+      borderColor,
+      rowBorderColor,
+    }: {
+      borderColor: string | ((theme: MantineTheme) => string);
+      rowBorderColor: string | ((theme: MantineTheme) => string);
+    }
+  ) => {
+    const borderColorValue = typeof borderColor === 'function' ? borderColor(theme) : borderColor;
+    const rowBorderColorValue = typeof rowBorderColor === 'function' ? rowBorderColor(theme) : rowBorderColor;
+
+    return {
+      root: {
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        tr: {
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+        },
+        '&&': {
+          'thead tr th': {
+            borderBottomColor: borderColorValue,
+          },
+          'tbody tr td': {
+            borderTopColor: rowBorderColorValue,
+          },
+        },
+      },
+      lastRowBorderBottomVisible: {
+        'tbody tr:last-of-type td': {
+          borderBottom: `1px solid ${rowBorderColorValue}`,
+        },
+      },
+      textSelectionDisabled: {
+        userSelect: 'none',
+      },
+      table: {
+        borderCollapse: 'separate',
+        borderSpacing: 0,
+      },
+      tableWithBorder: {
+        border: `1px solid ${borderColorValue}`,
+      },
+      tableWithColumnBorders: {
+        '&&': {
+          'th, td': {
+            ':not(:first-of-type)': {
+              borderLeft: `1px solid ${rowBorderColorValue}`,
+            },
+          },
+        },
+      },
+      tableWithColumnBordersAndSelectableRecords: {
+        thead: {
+          'tr + tr': {
+            th: {
+              borderLeft: `1px solid ${rowBorderColorValue}`,
+            },
+          },
+        },
+      },
+    };
+  }
+);
+*/
+
+.mantine-datatable {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mantine-datatable-text-selection-disabled {
+  user-select: none;
+}
+
+.mantine-datatable-vertical-alignment-top td {
+  vertical-align: top;
+}
+
+.mantine-datatable-vertical-alignment-bottom td {
+  vertical-align: bottom;
+}

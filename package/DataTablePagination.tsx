@@ -1,17 +1,8 @@
-import {
-  Box,
-  Pagination,
-  Text,
-  parseThemeColor,
-  type MantineColor,
-  type MantineSpacing,
-  type MantineStyleProp,
-  type StyleProp,
-} from '@mantine/core';
+import { Box, Pagination, Text, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import clsx from 'clsx';
 import { forwardRef, type ForwardedRef } from 'react';
-import DataTablePageSizeSelector from './DataTablePageSizeSelector';
+import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import type { DataTablePaginationProps } from './types';
 import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
 
@@ -24,7 +15,7 @@ type DataTablePaginationComponentProps = WithOptionalProperty<
 > & {
   className?: string;
   style?: MantineStyleProp;
-  topBorderColor: StyleProp<MantineColor>;
+  // topBorderColor: StyleProp<MantineColor>;
   fetching: boolean | undefined;
   recordsLength: number | undefined;
   horizontalSpacing: MantineSpacing | undefined;
@@ -35,7 +26,7 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
   {
     className,
     style,
-    topBorderColor,
+    // topBorderColor,
     fetching,
     page,
     onPageChange,
@@ -80,9 +71,9 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
       py="xs"
       className={clsx('mantine-datatable-pagination', className)}
       style={[
-        (theme) => ({
-          '--mantine-datatable-pagination-border-color': parseThemeColor({ color: topBorderColor, theme }),
-        }),
+        // (theme) => ({
+        //   '--mantine-datatable-pagination-border-color': parseThemeColor({ color: topBorderColor, theme }),
+        // }),
         { flexDirection: isAbovePaginationWrapBreakpoint ? 'row' : 'column' },
         style,
       ]}

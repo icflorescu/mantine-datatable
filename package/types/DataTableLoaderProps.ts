@@ -8,7 +8,7 @@ export type DataTableLoaderProps = {
 } & (
   | {
       loaderSize?: never;
-      loaderVariant?: never;
+      loaderType?: never;
       loaderColor?: never;
 
       /**

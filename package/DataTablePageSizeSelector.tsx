@@ -11,7 +11,7 @@ type DataTablePageSizeSelectorComponentProps = {
 
 const HEIGHT: Record<MantineSize, number> = { xs: 22, sm: 26, md: 32, lg: 38, xl: 44 };
 
-export default function DataTablePageSizeSelector({
+export function DataTablePageSizeSelector({
   size,
   label,
   values,

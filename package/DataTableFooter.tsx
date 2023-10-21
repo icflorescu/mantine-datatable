@@ -1,4 +1,4 @@
-import { Box, parseThemeColor, rem, type MantineColor, type MantineStyleProp, type StyleProp } from '@mantine/core';
+import { Box, rem, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { DataTableFooterCell } from './DataTableFooterCell';
@@ -6,7 +6,7 @@ import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelecto
 import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
 
 type DataTableFooterProps<T> = {
-  borderColor: StyleProp<MantineColor>;
+  // borderColor: StyleProp<MantineColor>;
   className?: string;
   style?: MantineStyleProp;
   columns: DataTableColumn<T>[];
@@ -20,7 +20,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
   {
     className,
     style,
-    borderColor,
+    // borderColor,
     columns,
     defaultColumnProps,
     selectionVisible,
@@ -36,9 +36,9 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
       ref={ref}
       className={clsx('mantine-datatable-footer', className)}
       style={[
-        (theme) => ({
-          '--mantine-datatable-footer-border-color': parseThemeColor({ color: borderColor, theme }).value,
-        }),
+        // (theme) => ({
+        //   '--mantine-datatable-footer-border-color': parseThemeColor({ color: borderColor, theme }).value,
+        // }),
         {
           position: relative ? 'relative' : 'sticky',
           bottom: rem(`${relative ? scrollDiff : -1}px`),

@@ -1,29 +1,16 @@
-import { Box, createStyles, type Sx } from '@mantine/core';
-import type { CSSProperties, MouseEventHandler, ReactNode } from 'react';
+import { Box, type MantineStyleProp } from '@mantine/core';
+import clsx from 'clsx';
+import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
-import { getValueAtPath, useMediaQueryStringOrFunction } from './utils';
-
-const useStyles = createStyles({
-  withPointerCursor: {
-    cursor: 'pointer',
-  },
-  noWrap: {
-    whiteSpace: 'nowrap',
-  },
-  ellipsis: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-});
+import { getValueAtPath } from './utils';
 
 type DataTableRowCellProps<T> = {
   className?: string;
-  sx?: Sx;
-  style?: CSSProperties;
+  style?: MantineStyleProp;
   record: T;
-  recordIndex: number;
-  defaultRender: ((record: T, index: number, accessor: string) => ReactNode) | undefined;
-  onClick?: MouseEventHandler<HTMLTableCellElement>;
+  index: number;
+  defaultRender: ((params: { record: T; index: number; accessor: string }) => React.ReactNode) | undefined;
+  onClick?: React.MouseEventHandler<HTMLTableCellElement>;
 } & Pick<
   DataTableColumn<T>,
   | 'accessor'
@@ -36,13 +23,12 @@ type DataTableRowCellProps<T> = {
   | 'customCellAttributes'
 >;
 
-export default function DataTableRowCell<T>({
+export function DataTableRowCell<T>({
   className,
-  sx,
   style,
   visibleMediaQuery,
   record,
-  recordIndex,
+  index,
   onClick,
   noWrap,
   ellipsis,
@@ -53,33 +39,35 @@ export default function DataTableRowCell<T>({
   defaultRender,
   customCellAttributes,
 }: DataTableRowCellProps<T>) {
-  const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
     <Box
       component="td"
-      className={cx(
-        { [classes.noWrap]: noWrap || ellipsis, [classes.ellipsis]: ellipsis, [classes.withPointerCursor]: onClick },
+      className={clsx(
+        {
+          'mantine-datatable-row-cell-no-wrap': noWrap || ellipsis,
+          'mantine-datatable-row-cell-ellipsis': ellipsis,
+          'mantine-datatable-row-cell-with-pointer-cursor': onClick,
+        },
         className
       )}
-      sx={[
+      style={[
         {
           width,
           minWidth: width,
           maxWidth: width,
           textAlign: textAlignment,
         },
-        sx,
+        style,
       ]}
-      style={style}
       onClick={onClick}
-      {...customCellAttributes?.(record, recordIndex)}
+      {...customCellAttributes?.({ record, index })}
     >
       {render
-        ? render(record, recordIndex)
+        ? render({ record, index })
         : defaultRender
-        ? defaultRender(record, recordIndex, accessor)
-        : (getValueAtPath(record, accessor) as ReactNode)}
+        ? defaultRender({ record, index, accessor })
+        : (getValueAtPath(record, accessor) as React.ReactNode)}
     </Box>
   );
 }

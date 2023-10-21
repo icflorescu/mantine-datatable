@@ -1,0 +1,12 @@
+.mantine-datatable-row-cell-with-pointer-cursor {
+  cursor: pointer;
+}
+
+.mantine-datatable-row-cell-no-wrap {
+  white-space: nowrap;
+}
+
+.mantine-datatable-row-cell-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
