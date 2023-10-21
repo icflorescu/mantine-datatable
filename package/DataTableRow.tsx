@@ -1,4 +1,4 @@
-import { Box, darken, lighten, type MantineStyleProp } from '@mantine/core';
+import { TableTr, darken, lighten, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
@@ -11,19 +11,19 @@ type DataTableRowProps<T> = {
   index: number;
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
-  defaultColumnRender: ((params: { record: T; index: number; accessor: string }) => React.ReactNode) | undefined;
+  defaultColumnRender: ((record: T, index: number, accessor: string) => React.ReactNode) | undefined;
   selectionVisible: boolean;
   selectionChecked: boolean;
   onSelectionChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  isRecordSelectable: ((params: { record: T; index: number }) => boolean) | undefined;
-  getSelectionCheckboxProps: (params: { record: T; index: number }) => Record<string, unknown>;
+  isRecordSelectable: ((record: T, index: number) => boolean) | undefined;
+  getSelectionCheckboxProps: (record: T, index: number) => Record<string, unknown>;
   onClick: React.MouseEventHandler<HTMLTableRowElement> | undefined;
   onCellClick: DataTableCellClickHandler<T> | undefined;
   // onContextMenu: React.MouseEventHandler<HTMLTableRowElement> | undefined;
   expansion: ReturnType<typeof useRowExpansion<T>>;
-  customAttributes?: (params: { record: T; index: number }) => Record<string, unknown>;
-  className?: string | ((params: { record: T; index: number }) => string | undefined);
-  style?: (params: { record: T; index: number }) => MantineStyleProp | undefined;
+  customAttributes?: (record: T, index: number) => Record<string, unknown>;
+  className?: string | ((record: T, index: number) => string | undefined);
+  style?: (record: T, index: number) => MantineStyleProp | undefined;
   contextMenuVisible: boolean;
   leftShadowVisible: boolean;
 };
@@ -51,15 +51,14 @@ export function DataTableRow<T>({
 }: DataTableRowProps<T>) {
   return (
     <>
-      <Box
-        component="tr"
+      <TableTr
         className={clsx(
           {
             'mantine-datatable-row-with-pointer-cursor': onClick || expansion?.expandOnClick,
             'mantine-datatable-row-selected': selectionChecked,
             'mantine-datatable-row-context-menu-visible': contextMenuVisible,
           },
-          typeof className === 'function' ? className({ record, index }) : className
+          typeof className === 'function' ? className(record, index) : className
         )}
         onClick={(e) => {
           if (expansion) {
@@ -88,9 +87,9 @@ export function DataTableRow<T>({
               '--mantine-datatable-row-context-menu-visible-background-odd-dark': darken(baseColor, 0.45),
             };
           },
-          style?.({ record, index }),
+          style?.(record, index),
         ]}
-        {...customAttributes?.({ record, index })}
+        {...customAttributes?.(record, index)}
         // onContextMenu={onContextMenu}
       >
         {selectionVisible && (
@@ -99,7 +98,7 @@ export function DataTableRow<T>({
             index={index}
             withRightShadow={leftShadowVisible}
             checked={selectionChecked}
-            disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable({ record, index }) : false)}
+            disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable(record, index) : false)}
             onChange={onSelectionChange}
             getCheckboxProps={getSelectionCheckboxProps}
           />
@@ -128,8 +127,8 @@ export function DataTableRow<T>({
           return (
             <DataTableRowCell<T>
               key={accessor}
-              className={typeof cellsClassName === 'function' ? cellsClassName({ record, index }) : cellsClassName}
-              style={cellsStyle?.({ record, index })}
+              className={typeof cellsClassName === 'function' ? cellsClassName(record, index) : cellsClassName}
+              style={cellsStyle?.(record, index)}
               visibleMediaQuery={visibleMediaQuery}
               record={record}
               index={index}
@@ -145,7 +144,7 @@ export function DataTableRow<T>({
             />
           );
         })}
-      </Box>
+      </TableTr>
       {expansion && (
         <DataTableRowExpansion
           colSpan={columns.filter(({ hidden }) => !hidden).length + (selectionVisible ? 1 : 0)}

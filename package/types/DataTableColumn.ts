@@ -18,10 +18,10 @@ export type DataTableColumn<T> = {
 
   /**
    * Custom cell data render function.
-   * Accepts an object with current record and its index in `records` as properties and returns a React node
+   * Accepts the current record and its index in `records` as arguments and returns a React node
    * (remember that a string is a valid React node too).
    */
-  render?: (options: { record: T; index: number }) => React.ReactNode;
+  render?: (record: T, index: number) => React.ReactNode;
 
   /**
    * Column text alignment.
@@ -95,24 +95,24 @@ export type DataTableColumn<T> = {
 
   /**
    * Optional class name passed to each data cell in the column.
-   * Can be a string, or a function receiving an object with the current record and its index
-   * as properties, and returning a string.
+   * Can be a string, or a function receiving the current record and its index
+   * as parameters and returning a string.
    */
-  cellsClassName?: string | ((params: { record: T; index: number }) => string | undefined);
+  cellsClassName?: string | ((record: T, index: number) => string | undefined);
 
   /**
    * Optional style passed to each data cell in the column.
-   * Can be a style object, or a function receiving an object with the current record
-   * and its index as properties, and returning a style object.
+   * Can be a style object, or a function receiving the current record
+   * and its index as arguments, and returning a style object.
    */
-  cellsStyle?: (params: { record: T; index: number }) => MantineStyleProp | undefined;
+  cellsStyle?: (record: T, index: number) => MantineStyleProp | undefined;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each cell in the column.
-   * Receives an object with the current record and its index as properties.
+   * Receives the current record and its index as arguments.
    * Useful for adding data attributes, handling middle-clicks, etc.
    */
-  customCellAttributes?: (params: { record: T; index: number }) => Record<string, unknown>;
+  customCellAttributes?: (precord: T, index: number) => Record<string, unknown>;
 
   /**
    * Optional column footer content.

@@ -1,4 +1,4 @@
-import { Box, type MantineStyleProp } from '@mantine/core';
+import { TableThead, TableTr, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
@@ -54,16 +54,16 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
   ) : null;
 
   return (
-    <Box component="thead" className={clsx('mantine-datatable-header', className)} style={style} ref={ref}>
+    <TableThead className={clsx('mantine-datatable-header', className)} style={style} ref={ref}>
       {groups && (
-        <tr>
+        <TableTr>
           {allRecordsSelectorCell}
           {groups.map((group) => (
             <DataTableColumnGroupHeaderCell key={group.id} group={group} />
           ))}
-        </tr>
+        </TableTr>
       )}
-      <tr>
+      <TableTr>
         {!groups && allRecordsSelectorCell}
         {columns.map(({ hidden, ...columnProps }) => {
           if (hidden) return null;
@@ -100,7 +100,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
             />
           );
         })}
-      </tr>
-    </Box>
+      </TableTr>
+    </TableThead>
   );
 }) as <T>(props: DataTableHeaderProps<T> & { ref: React.ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;

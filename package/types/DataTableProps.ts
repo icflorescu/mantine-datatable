@@ -77,10 +77,10 @@ export type DataTableProps<T> = {
 
   /**
    * A default render function for all columns.
-   * Accepts an object with current record, its index in `records` and the column `accessor` as
-   * properties and returns a React node (remember that a string is a valid React node too).
+   * Accepts the current record, its index in `records` and the column `accessor` as
+   * arguments and returns a React node (remember that a string is a valid React node too).
    */
-  defaultColumnRender?: (params: { record: T; index: number; accessor: string }) => React.ReactNode;
+  defaultColumnRender?: (record: T, index: number, accessor: string) => React.ReactNode;
 
   /**
    * Accessor to use as unique record key.
@@ -115,10 +115,10 @@ export type DataTableProps<T> = {
 
   /**
    * Function to call when a row is clicked.
-   * Receives an object with the current record, its index in `records` and the click event
-   * as properties.
+   * Receives the current record, its index in `records` and the click event
+   * as parameters.
    */
-  onRowClick?: (params: { record: T; index: number; event: React.MouseEvent<HTMLTableRowElement, MouseEvent> }) => void;
+  onRowClick?: (record: T, index: number, event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void;
 
   /**
    * Function to call when the DataTable is scrolled to top.
@@ -152,24 +152,22 @@ export type DataTableProps<T> = {
 
   /**
    * Optional class name passed to each row.
-   * Can be a string or a function receiving an object with the current record and its index
-   * as properties and returning a string.
+   * Can be a string or a function receiving the current record and its index as arguments and returning a string.
    */
-  rowClassName?: string | ((params: { record: T; index: number }) => string | undefined);
+  rowClassName?: string | ((record: T, index: number) => string | undefined);
 
   /**
    * Optional style passed to each row.
-   * A function receiving an object with the current record and
-   * its index as properties and returning a style object.
+   * A function receiving the current record and its index as arguments and returning a style object.
    */
-  rowStyle?: (params: { record: T; index: number }) => MantineStyleProp | undefined;
+  rowStyle?: (record: T, index: number) => MantineStyleProp | undefined;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each row in the table.
-   * Receives an object with current record and its index as properties.
+   * Receives the current record and its index as arguments.
    * Useful for adding data attributes, handling middle-clicks, etc.
    */
-  customRowAttributes?: (params: { record: T; index: number }) => Record<string, unknown>;
+  customRowAttributes?: (record: T, index: number) => Record<string, unknown>;
 
   /**
    * Ref pointing to the scrollable viewport element.

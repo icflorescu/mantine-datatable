@@ -1,4 +1,6 @@
-import { Box, Table, type MantineSize } from '@mantine/core';
+'use client';
+
+import { Box, Table, parseThemeColor, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
@@ -24,6 +26,8 @@ import type { DataTableProps } from './types';
 import { differenceBy, getRecordId, uniqBy } from './utils';
 
 export function DataTable<T>({
+  withTableBorder,
+  borderColor,
   borderRadius,
   textSelectionDisabled,
   height = '100%',
@@ -41,7 +45,7 @@ export function DataTable<T>({
   onSelectedRecordsChange,
   isRecordSelectable,
   allRecordsSelectionCheckboxProps = { 'aria-label': 'Select all records' },
-  getRecordSelectionCheckboxProps = ({ index }) => ({ 'aria-label': `Select record ${index + 1}` }),
+  getRecordSelectionCheckboxProps = (_, index) => ({ 'aria-label': `Select record ${index + 1}` }),
   sortStatus,
   sortIcons,
   onSortStatusChange,
@@ -192,9 +196,7 @@ export function DataTable<T>({
   const hasRecordsAndSelectedRecords =
     recordIds !== undefined && selectedRecordIds !== undefined && selectedRecordIds.length > 0;
 
-  const selectableRecords = isRecordSelectable
-    ? records?.filter((record, index) => isRecordSelectable({ record, index }))
-    : records;
+  const selectableRecords = isRecordSelectable ? records?.filter(isRecordSelectable) : records;
   const selectableRecordIds = selectableRecords?.map((record) => getRecordId(record, idAccessor));
 
   const allSelectableRecordsSelected =
@@ -227,8 +229,23 @@ export function DataTable<T>({
   return (
     <Box
       {...marginProperties}
-      className={clsx('mantine-datatable', className, classNames?.root)}
+      className={clsx(
+        'mantine-datatable',
+        { 'mantine-datatable-with-border': withTableBorder },
+        className,
+        classNames?.root
+      )}
       style={[
+        withTableBorder
+          ? (theme) => ({
+              '--mantine-datatable-border-color-light': borderColor
+                ? parseThemeColor({ color: borderColor, theme }).value
+                : theme.colors.gray[3],
+              '--mantine-datatable-border-color-dark': borderColor
+                ? parseThemeColor({ color: borderColor, theme }).value
+                : theme.colors.dark[4],
+            })
+          : undefined,
         (theme) => ({
           borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
           boxShadow: theme.shadows[shadow as MantineSize] || shadow,
@@ -258,9 +275,9 @@ export function DataTable<T>({
             /* classes.table, */ {
               // [classes.tableWithColumnBorders]: withColumnBorders,
               // [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
-              'mantine-datatable-text-selection-disabled': textSelectionDisabled,
-              'mantine-datatable-vertical-alignment-top': verticalAlignment === 'top',
-              'mantine-datatable-vertical-alignment-bottom': verticalAlignment === 'bottom',
+              'mantine-datatable-table-text-selection-disabled': textSelectionDisabled,
+              'mantine-datatable-table-vertical-alignment-top': verticalAlignment === 'top',
+              'mantine-datatable-table-vertical-alignment-bottom': verticalAlignment === 'bottom',
               // [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
             }
           )}
@@ -315,11 +332,11 @@ export function DataTable<T>({
                           ? (rec, idx) =>
                               idx >= lastSelectionChangeIndex &&
                               idx <= index &&
-                              (isRecordSelectable ? isRecordSelectable({ record: rec, index: idx }) : true)
+                              (isRecordSelectable ? isRecordSelectable(rec, idx) : true)
                           : (rec, idx) =>
                               idx >= index &&
                               idx <= lastSelectionChangeIndex &&
-                              (isRecordSelectable ? isRecordSelectable({ record: rec, index: idx }) : true)
+                              (isRecordSelectable ? isRecordSelectable(rec, idx) : true)
                       );
                       onSelectedRecordsChange(
                         isSelected
@@ -371,7 +388,7 @@ export function DataTable<T>({
                     isRecordSelectable={isRecordSelectable}
                     getSelectionCheckboxProps={getRecordSelectionCheckboxProps}
                     // onClick={handleClick}
-                    onClick={onRowClick ? (event) => onRowClick({ record, index, event }) : undefined}
+                    onClick={onRowClick ? (event) => onRowClick(record, index, event) : undefined}
                     onCellClick={onCellClick}
                     // onContextMenu={handleContextMenu}
                     contextMenuVisible={

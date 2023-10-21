@@ -8,7 +8,7 @@ import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getFirstExampleRoute, getRouteMetadata } from '~/lib/utils';
-import { SimpleExample } from './examples/SimpleExample';
+import { GettingStartedExample } from './examples/GettingStartedExample';
 
 const PATH = '/getting-started';
 
@@ -18,7 +18,7 @@ export default async function GettingStartedPage() {
   const code = await allPromiseProps({
     'RootLayout.tsx': readCodeFile<string>(`${PATH}/examples/RootLayout.tsx`),
     'layout.css': readCodeFile<string>(`${PATH}/examples/layout.css`),
-    'SimpleExample.tsx': readCodeFile<string>(`${PATH}/examples/SimpleExample.tsx`),
+    'GettingStartedExample.tsx': readCodeFile<string>(`${PATH}/examples/GettingStartedExample.tsx`),
   });
 
   const { href: firstExampleHref } = getFirstExampleRoute();
@@ -56,9 +56,9 @@ export default async function GettingStartedPage() {
       </Txt>
       <CodeBlock tabs={{ code, keys: ['RootLayout.tsx', 'layout.css'] }} />
       <Txt>Then you can import the component and use it in your application like so:</Txt>
-      <CodeBlock code={code['SimpleExample.tsx']} />
+      <CodeBlock code={code['GettingStartedExample.tsx']} />
       <Txt>The above code will produce the following result:</Txt>
-      <SimpleExample />
+      <GettingStartedExample />
       <Txt>
         Next, let’s make sure you have a good understanding of how <InternalLink to="/styling">styling</InternalLink>{' '}
         works before browsing the <InternalLink to={firstExampleHref}>usage examples</InternalLink> and taking a look at

@@ -73,6 +73,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: basic usage of ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/basic-table-properties',
+    title: 'Basic table properties',
+    description: `Example: how to set the basic ${PRODUCT_NAME} properties`,
+  },
+  {
     href: '/type-definitions',
     title: 'Type definitions',
     description: `${PRODUCT_NAME} is written in TypeScript and its options are well documented with additional JSDoc annotations`,

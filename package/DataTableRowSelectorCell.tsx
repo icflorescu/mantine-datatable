@@ -8,7 +8,7 @@ type DataTableRowSelectorCellProps<T> = {
   checked: boolean;
   disabled: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  getCheckboxProps: (params: { record: T; index: number }) => Record<string, unknown>;
+  getCheckboxProps: (record: T, index: number) => Record<string, unknown>;
 };
 
 export function DataTableRowSelectorCell<T>({
@@ -28,7 +28,7 @@ export function DataTableRowSelectorCell<T>({
       <Checkbox
         classNames={{ input: 'mantine-datatable-row-selector-cell-checkbox' }}
         {...otherProps}
-        {...getCheckboxProps({ record, index })}
+        {...getCheckboxProps(record, index)}
       />
     </td>
   );

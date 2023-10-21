@@ -1,4 +1,4 @@
-import { Box, type MantineStyleProp, type MantineTheme } from '@mantine/core';
+import { TableTh, type MantineStyleProp, type MantineTheme } from '@mantine/core';
 import clsx from 'clsx';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
@@ -22,8 +22,7 @@ export function DataTableFooterCell<T>({
 }: DataTableFooterCellProps<T>) {
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
-    <Box
-      component="th"
+    <TableTh
       className={clsx(
         {
           'mantine-datatable-footer-cell-nowrap': noWrap || ellipsis,
@@ -42,6 +41,6 @@ export function DataTableFooterCell<T>({
       ]}
     >
       {title}
-    </Box>
+    </TableTh>
   );
 }

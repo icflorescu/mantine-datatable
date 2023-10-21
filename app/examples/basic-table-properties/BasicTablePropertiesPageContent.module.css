@@ -1,0 +1,22 @@
+.controlGroups {
+  width: fit-content;
+}
+
+@media (min-width: rem(880px)) {
+  .controlGroups.controls {
+    flex-direction: row;
+    gap: var(--mantine-spacing-xl);
+  }
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-sm);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  min-height: rem(34px);
+}

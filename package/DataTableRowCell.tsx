@@ -1,4 +1,4 @@
-import { Box, type MantineStyleProp } from '@mantine/core';
+import { TableTd, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
@@ -9,7 +9,7 @@ type DataTableRowCellProps<T> = {
   style?: MantineStyleProp;
   record: T;
   index: number;
-  defaultRender: ((params: { record: T; index: number; accessor: string }) => React.ReactNode) | undefined;
+  defaultRender: ((record: T, index: number, accessor: string) => React.ReactNode) | undefined;
   onClick?: React.MouseEventHandler<HTMLTableCellElement>;
 } & Pick<
   DataTableColumn<T>,
@@ -41,8 +41,7 @@ export function DataTableRowCell<T>({
 }: DataTableRowCellProps<T>) {
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
-    <Box
-      component="td"
+    <TableTd
       className={clsx(
         {
           'mantine-datatable-row-cell-no-wrap': noWrap || ellipsis,
@@ -61,13 +60,13 @@ export function DataTableRowCell<T>({
         style,
       ]}
       onClick={onClick}
-      {...customCellAttributes?.({ record, index })}
+      {...customCellAttributes?.(record, index)}
     >
       {render
-        ? render({ record, index })
+        ? render(record, index)
         : defaultRender
-        ? defaultRender({ record, index, accessor })
+        ? defaultRender(record, index, accessor)
         : (getValueAtPath(record, accessor) as React.ReactNode)}
-    </Box>
+    </TableTd>
   );
 }

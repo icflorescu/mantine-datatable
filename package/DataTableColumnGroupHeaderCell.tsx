@@ -1,4 +1,4 @@
-import { Box } from '@mantine/core';
+import { TableTh } from '@mantine/core';
 import { useMemo } from 'react';
 import { useMediaQueriesStringOrFunction } from './hooks';
 import type { DataTableColumnGroup } from './types';
@@ -19,8 +19,8 @@ export function DataTableColumnGroupHeaderCell<T>({
   );
 
   return colSpan > 0 ? (
-    <Box component="th" colSpan={colSpan} className={className} style={style}>
+    <TableTh colSpan={colSpan} className={className} style={style}>
       {title ?? humanize(id)}
-    </Box>
+    </TableTh>
   ) : null;
 }

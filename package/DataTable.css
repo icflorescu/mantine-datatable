@@ -76,14 +76,24 @@ const useStyles = createStyles(
   overflow: hidden;
 }
 
-.mantine-datatable-text-selection-disabled {
+.mantine-datatable-with-border {
+  border: rem(1px) solid
+    light-dark(var(--mantine-datatable-border-color-light), var(--mantine-datatable-border-color-dark));
+}
+
+.mantine-datatable-table-text-selection-disabled {
   user-select: none;
 }
 
-.mantine-datatable-vertical-alignment-top td {
+.mantine-datatable-table-vertical-alignment-top td {
   vertical-align: top;
 }
 
-.mantine-datatable-vertical-alignment-bottom td {
+.mantine-datatable-table-vertical-alignment-bottom td {
   vertical-align: bottom;
+}
+
+.mantine-datatable-table-last-row-border-bottom-visible tbody tr:last-of-type td {
+  border-bottom: rem(1px) solid
+    light-dark(var(--mantine-datatable-row-border-color-light), var(--mantine-datatable-row-border-color-dark));
 }

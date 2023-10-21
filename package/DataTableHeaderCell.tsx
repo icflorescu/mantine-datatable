@@ -1,4 +1,4 @@
-import { Box, Center, Group, MantineStyleProp, type MantineTheme } from '@mantine/core';
+import { Box, Center, Group, MantineStyleProp, TableTh, type MantineTheme } from '@mantine/core';
 import { IconArrowUp, IconArrowsVertical } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
@@ -51,8 +51,7 @@ export function DataTableHeaderCell<T>({
         }
       : undefined;
   return (
-    <Box
-      component="th"
+    <TableTh
       className={clsx({ 'mantine-datatable-header-cell-sortable-column-header': sortable }, className)}
       style={[{ textAlign: textAlignment, width, minWidth: width, maxWidth: width }, style]}
       role={sortable ? 'button' : undefined}
@@ -99,6 +98,6 @@ export function DataTableHeaderCell<T>({
         ) : null}
         {filter ? <DataTableHeaderCellFilter isActive={!!filtering}>{filter}</DataTableHeaderCellFilter> : null}
       </Group>
-    </Box>
+    </TableTh>
   );
 }

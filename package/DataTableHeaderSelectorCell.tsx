@@ -1,4 +1,4 @@
-import { Checkbox } from '@mantine/core';
+import { Checkbox, TableTh } from '@mantine/core';
 import clsx from 'clsx';
 
 type DataTableHeaderSelectorCellProps = {
@@ -19,7 +19,7 @@ export function DataTableHeaderSelectorCell({
   rowSpan,
 }: DataTableHeaderSelectorCellProps) {
   return (
-    <th
+    <TableTh
       className={clsx('mantine-datatable-header-selector-cell', {
         'mantine-datatable-header-selector-cell-shadow-visible': shadowVisible,
       })}
@@ -33,6 +33,6 @@ export function DataTableHeaderSelectorCell({
         onChange={onChange}
         {...checkboxProps}
       />
-    </th>
+    </TableTh>
   );
 }

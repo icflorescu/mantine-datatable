@@ -1,4 +1,4 @@
-import { Box, rem, type MantineStyleProp } from '@mantine/core';
+import { TableTfoot, rem, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { DataTableFooterCell } from './DataTableFooterCell';
@@ -31,8 +31,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
 ) {
   const relative = scrollDiff < 0;
   return (
-    <Box
-      component="tfoot"
+    <TableTfoot
       ref={ref}
       className={clsx('mantine-datatable-footer', className)}
       style={[
@@ -78,6 +77,6 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
           );
         })}
       </tr>
-    </Box>
+    </TableTfoot>
   );
 }) as <T>(props: DataTableFooterProps<T> & { ref: React.ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;
