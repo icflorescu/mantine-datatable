@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useMemo, useState, type ChangeEventHandler, type Key } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
 import { DataTableFooter } from './DataTableFooter';
@@ -306,7 +306,7 @@ export function DataTable<T>({
                 //   }
                 // }
 
-                let handleSelectionChange: ChangeEventHandler<HTMLInputElement> | undefined;
+                let handleSelectionChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
                 if (onSelectedRecordsChange && selectedRecords) {
                   handleSelectionChange = (e) => {
                     if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
@@ -359,7 +359,7 @@ export function DataTable<T>({
 
                 return (
                   <DataTableRow<T>
-                    key={recordId as Key}
+                    key={recordId as React.Key}
                     record={record}
                     index={index}
                     columns={effectiveColumns}
