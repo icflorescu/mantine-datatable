@@ -78,6 +78,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to set the basic ${PRODUCT_NAME} properties`,
   },
   {
+    href: '/examples/column-properties',
+    title: 'Column properties',
+    description: `Example: setting ${PRODUCT_NAME} column properties`,
+  },
+  {
     href: '/examples/empty-state',
     title: 'Empty state',
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,

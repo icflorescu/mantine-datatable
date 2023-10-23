@@ -1,6 +1,6 @@
-import companies from './companies.json';
-
-export { companies };
+import companyData from './companies.json';
+import departmentData from './departments.json';
+import employeeData from './employees.json';
 
 export type Company = {
   id: string;
@@ -25,3 +25,15 @@ export type Employee = {
   birthDate: string;
   department: Department;
 };
+
+export const companies: Company[] = companyData;
+
+export const departments: Department[] = departmentData.map(({ companyId, ...rest }) => ({
+  ...rest,
+  company: companies.find(({ id }) => id === companyId)!,
+}));
+
+export const employees: Employee[] = employeeData.map(({ departmentId, ...rest }) => ({
+  ...rest,
+  department: departments.find(({ id }) => id === departmentId)!,
+}));
