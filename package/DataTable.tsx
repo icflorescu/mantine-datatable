@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Table, parseThemeColor, type MantineSize } from '@mantine/core';
+import { Box, Table, parseThemeColor, rgba, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
@@ -78,6 +78,7 @@ export function DataTable<T>({
   emptyState,
   noRecordsText = 'No records',
   noRecordsIcon,
+  highlightOnHover,
   striped,
   noHeader: withoutHeader,
   onRowClick,
@@ -272,18 +273,40 @@ export function DataTable<T>({
           horizontalSpacing={horizontalSpacing}
           className={clsx(
             'mantine-datatable-table',
-            /* classes.table, */ {
-              // [classes.tableWithColumnBorders]: withColumnBorders,
+            {
               // [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
-              'mantine-datatable-table-text-selection-disabled': textSelectionDisabled,
               'mantine-datatable-table-vertical-alignment-top': verticalAlignment === 'top',
               'mantine-datatable-table-vertical-alignment-bottom': verticalAlignment === 'bottom',
               // [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
             },
             classNames?.table
           )}
-          style={styles?.table}
-          striped={recordsLength ? striped : false}
+          style={[
+            ({ black, white, colors, primaryColor }) => {
+              const baseColor = colors[primaryColor][6];
+              return {
+                '--mantine-datatable-row-odd-bg-color-light': rgba(black, 0.02),
+                '--mantine-datatable-row-odd-bg-color-dark': rgba(white, 0.025),
+
+                '--mantine-datatable-row-hover-bg-color-light': rgba(black, 0.04),
+                '--mantine-datatable-row-hover-bg-color-dark': rgba(white, 0.045),
+
+                '--mantine-datatable-row-selected-bg-color-light': rgba(baseColor, 0.05),
+                '--mantine-datatable-row-selected-bg-color-dark': rgba(baseColor, 0.1),
+
+                '--mantine-datatable-row-odd-selected-bg-color-light': rgba(baseColor, 0.08),
+                '--mantine-datatable-row-odd-selected-bg-color-dark': rgba(baseColor, 0.15),
+
+                '--mantine-datatable-row-hover-selected-bg-color-light': rgba(baseColor, 0.1),
+                '--mantine-datatable-row-hover-selected-bg-color-dark': rgba(baseColor, 0.2),
+              };
+            },
+            styles?.table,
+          ]}
+          data-striped={(recordsLength && striped) || undefined}
+          data-row-highlight-on-hover={highlightOnHover || undefined}
+          data-text-selection-disabled={textSelectionDisabled || undefined}
+          data-vertical-alignment={verticalAlignment === 'center' ? undefined : verticalAlignment}
           {...otherProps}
         >
           {withoutHeader ? null : (

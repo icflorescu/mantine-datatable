@@ -9,10 +9,10 @@
   color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-3));
   opacity: 0;
   transition: opacity 0.2s;
-}
 
-.mantine-datatable-empty-state-active {
-  opacity: 1;
+  &[data-active] {
+    opacity: 1;
+  }
 }
 
 .mantine-datatable-empty-state-icon {

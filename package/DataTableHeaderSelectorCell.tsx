@@ -1,5 +1,4 @@
 import { Checkbox, TableTh } from '@mantine/core';
-import clsx from 'clsx';
 
 type DataTableHeaderSelectorCellProps = {
   shadowVisible: boolean;
@@ -20,10 +19,9 @@ export function DataTableHeaderSelectorCell({
 }: DataTableHeaderSelectorCellProps) {
   return (
     <TableTh
-      className={clsx('mantine-datatable-header-selector-cell', {
-        'mantine-datatable-header-selector-cell-shadow-visible': shadowVisible,
-      })}
+      className="mantine-datatable-header-selector-cell"
       rowSpan={rowSpan}
+      data-shadow-visible={shadowVisible || undefined}
     >
       <Checkbox
         classNames={{ input: 'mantine-datatable-header-selector-cell-checkbox-input' }}

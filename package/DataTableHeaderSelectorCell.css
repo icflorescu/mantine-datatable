@@ -17,10 +17,10 @@
     opacity: 0;
     transition: opacity 0.2s;
   }
-}
 
-.mantine-datatable-header-selector-cell-shadow-visible::after {
-  opacity: 1;
+  &[data-shadow-visible] {
+    opacity: 1;
+  }
 }
 
 .mantine-datatable-header-selector-cell-checkbox-input {

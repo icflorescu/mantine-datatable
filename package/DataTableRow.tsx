@@ -1,5 +1,4 @@
-import { TableTr, darken, lighten, type MantineStyleProp } from '@mantine/core';
-import clsx from 'clsx';
+import { TableTr, type MantineStyleProp } from '@mantine/core';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
@@ -52,14 +51,10 @@ export function DataTableRow<T>({
   return (
     <>
       <TableTr
-        className={clsx(
-          {
-            'mantine-datatable-row-with-pointer-cursor': onClick || expansion?.expandOnClick,
-            'mantine-datatable-row-selected': selectionChecked,
-            'mantine-datatable-row-context-menu-visible': contextMenuVisible,
-          },
-          typeof className === 'function' ? className(record, index) : className
-        )}
+        className={typeof className === 'function' ? className(record, index) : className}
+        data-row-with-pointer-cursor={!!(onClick || expansion?.expandOnClick) || undefined}
+        data-row-selected={selectionChecked || undefined}
+        data-row-context-menu-visible={contextMenuVisible || undefined}
         onClick={(e) => {
           if (expansion) {
             const { isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
@@ -73,22 +68,7 @@ export function DataTableRow<T>({
           }
           onClick?.(e);
         }}
-        style={[
-          ({ colors, primaryColor }) => {
-            const baseColor = colors[primaryColor][6];
-            return {
-              '--mantine-datatable-row-selected-background-light': lighten(baseColor, 0.9),
-              '--mantine-datatable-row-selected-background-dark': darken(baseColor, 0.6),
-              '--mantine-datatable-row-selected-background-odd-light': lighten(baseColor, 0.85),
-              '--mantine-datatable-row-selected-background-odd-dark': darken(baseColor, 0.55),
-              '--mantine-datatable-row-context-menu-visible-background-light': lighten(baseColor, 0.7),
-              '--mantine-datatable-row-context-menu-visible-background-dark': darken(baseColor, 0.5),
-              '--mantine-datatable-row-context-menu-visible-background-odd-light': lighten(baseColor, 0.65),
-              '--mantine-datatable-row-context-menu-visible-background-odd-dark': darken(baseColor, 0.45),
-            };
-          },
-          style?.(record, index),
-        ]}
+        style={style?.(record, index)}
         {...customAttributes?.(record, index)}
         // onContextMenu={onContextMenu}
       >

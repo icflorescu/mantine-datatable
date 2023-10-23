@@ -3,7 +3,6 @@
   z-index: 1;
   width: 0;
   left: 0;
-  background: inherit;
   &::after {
     content: '';
     position: absolute;
@@ -18,10 +17,10 @@
     opacity: 0;
     transition: opacity 0.2s;
   }
-}
 
-.mantine-datatable-row-selector-cell-with-right-shadow::after {
-  opacity: 1;
+  &[data-shadow-visible]::after {
+    opacity: 1;
+  }
 }
 
 .mantine-datatable-row-selector-cell-checkbox {

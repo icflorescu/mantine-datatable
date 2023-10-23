@@ -78,6 +78,21 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to set the basic ${PRODUCT_NAME} properties`,
   },
   {
+    href: '/examples/empty-state',
+    title: 'Empty state',
+    description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,
+  },
+  {
+    href: '/examples/records-selection',
+    title: 'Records selection',
+    description: `Example: how to enable multiple records selection on ${PRODUCT_NAME}`,
+  },
+  {
+    href: '/examples/disabling-text-selection',
+    title: 'Disabling text selection',
+    description: `Example: disabling text selection on ${PRODUCT_NAME}`,
+  },
+  {
     href: '/type-definitions',
     title: 'Type definitions',
     description: `${PRODUCT_NAME} is written in TypeScript and its options are well documented with additional JSDoc annotations`,

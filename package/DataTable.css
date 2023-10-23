@@ -1,4 +1,6 @@
 /*
+todo: remove this
+From V6:
 const useStyles = createStyles(
   (
     theme,
@@ -82,24 +84,80 @@ const useStyles = createStyles(
 }
 
 .mantine-datatable-table {
+  background: var(--mantine-color-body);
+  thead,
+  tfoot,
+  tbody,
+  th,
+  tr,
+  td {
+    background: inherit;
+  }
+
   tbody tr:last-of-type {
-    /* border-bottom: 0; */
+    border-bottom: 0;
+  }
+
+  &[data-striped] {
+    tbody tr:nth-of-type(odd) {
+      background: light-dark(
+        var(--mantine-datatable-row-odd-bg-color-light),
+        var(--mantine-datatable-row-odd-bg-color-dark)
+      );
+    }
+  }
+
+  &[data-row-highlight-on-hover] {
+    tbody tr:hover {
+      background: light-dark(
+        var(--mantine-datatable-row-hover-bg-color-light),
+        var(--mantine-datatable-row-hover-bg-color-dark)
+      );
+    }
+  }
+
+  tbody tr[data-row-selected] {
+    background: light-dark(
+      var(--mantine-datatable-row-selected-bg-color-light),
+      var(--mantine-datatable-row-selected-bg-color-dark)
+    );
+    &:nth-of-type(odd) {
+      background: light-dark(
+        var(--mantine-datatable-row-odd-selected-bg-color-light),
+        var(--mantine-datatable-row-odd-selected-bg-color-dark)
+      );
+    }
+  }
+
+  &[data-row-highlight-on-hover] tbody tr[data-row-selected]:hover,
+  tbody tr[data-row-context-menu-visible] {
+    background: light-dark(
+      var(--mantine-datatable-row-hover-selected-bg-color-light),
+      var(--mantine-datatable-row-hover-selected-bg-color-dark)
+    );
+  }
+
+  [data-row-with-pointer-cursor] {
+    cursor: pointer;
+  }
+
+  &[data-text-selection-disabled] {
+    user-select: none;
+  }
+
+  &[data-vertical-alignment='top'] td {
+    vertical-align: top;
+  }
+
+  &[data-vertical-alignment='bottom'] td {
+    vertical-align: bottom;
   }
 }
 
-.mantine-datatable-table-text-selection-disabled {
-  user-select: none;
-}
-
-.mantine-datatable-table-vertical-alignment-top td {
-  vertical-align: top;
-}
-
-.mantine-datatable-table-vertical-alignment-bottom td {
-  vertical-align: bottom;
-}
-
+/*
+todo: remove this ??
 .mantine-datatable-table-last-row-border-bottom-visible tbody tr:last-of-type td {
   border-bottom: rem(1px) solid
     light-dark(var(--mantine-datatable-row-border-color-light), var(--mantine-datatable-row-border-color-dark));
 }
+*/

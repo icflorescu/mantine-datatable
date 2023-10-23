@@ -1,6 +1,5 @@
 import { Center, Text, type MantineSpacing, type StyleProp } from '@mantine/core';
 import { IconDatabaseOff } from '@tabler/icons-react';
-import clsx from 'clsx';
 
 type DataTableEmptyStateProps = {
   icon: React.ReactNode | undefined;
@@ -13,11 +12,7 @@ type DataTableEmptyStateProps = {
 
 export function DataTableEmptyState({ icon, text, pt, pb, active, children }: DataTableEmptyStateProps) {
   return (
-    <Center
-      pt={pt}
-      pb={pb}
-      className={clsx('mantine-datatable-empty-state', { 'mantine-datatable-empty-state-active': active })}
-    >
+    <Center pt={pt} pb={pb} className="mantine-datatable-empty-state" data-active={active || undefined}>
       {children || (
         <>
           {icon || (

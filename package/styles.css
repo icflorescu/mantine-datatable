@@ -6,9 +6,9 @@
 @import './DataTableFooterSelectorPlaceholderCell.css';
 @import './DataTableHeader.css';
 @import './DataTableHeaderCell.css';
+@import './DataTableHeaderSelectorCell.css';
 @import './DataTableLoader.css';
 @import './DataTablePagination.css';
-@import './DataTableRow.css';
 @import './DataTableRowCell.css';
 @import './DataTableRowExpansion.css';
 @import './DataTableRowSelectorCell.css';

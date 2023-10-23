@@ -1,0 +1,7 @@
+.noRecordsBox {
+  font-size: 0;
+  color: light-dark(var(--mantine-colors-dark-3), var(--mantine-colors-gray-5));
+  border: 2px solid light-dark(var(--mantine-colors-gray-4), var(--mantine-colors-dark-5));
+  border-radius: var(--mantine-radius-md);
+  background: light-dark(var(--mantine-colors-gray-1), var(--mantine-colors-dark-6));
+}

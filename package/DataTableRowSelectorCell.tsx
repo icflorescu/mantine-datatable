@@ -1,5 +1,4 @@
-import { Checkbox } from '@mantine/core';
-import clsx from 'clsx';
+import { Checkbox, TableTd } from '@mantine/core';
 
 type DataTableRowSelectorCellProps<T> = {
   record: T;
@@ -19,10 +18,9 @@ export function DataTableRowSelectorCell<T>({
   ...otherProps
 }: DataTableRowSelectorCellProps<T>) {
   return (
-    <td
-      className={clsx('mantine-datatable-row-selector-cell', {
-        'mantine-datatable-row-selector-cell-with-right-shadow': withRightShadow,
-      })}
+    <TableTd
+      className="mantine-datatable-row-selector-cell"
+      data-shadow-visible={withRightShadow || undefined}
       onClick={(e) => e.stopPropagation()}
     >
       <Checkbox
@@ -30,6 +28,6 @@ export function DataTableRowSelectorCell<T>({
         {...otherProps}
         {...getCheckboxProps(record, index)}
       />
-    </td>
+    </TableTd>
   );
 }
