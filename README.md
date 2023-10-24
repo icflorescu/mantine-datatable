@@ -10,12 +10,12 @@
 [![Language][language-image]][repo-url]
 [![Sponsor the author][sponsor-image]][sponsor-url]
 
-⚠️ Mantine DataTable V6 supports Mantine V6.  
-💡 Mantine V7 support is in the works, and I could really use your help to speed things up. Please consider [sponsoring my work](https://github.com/sponsors/icflorescu) 🙏
-
 The lightweight, dependency-free, "dark-theme aware" [**table component**](https://icflorescu.github.io/mantine-datatable/) for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row context menu, row expansion, nesting, and more.
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/189911698-369ba48e-65f0-4772-aad3-cb5e6d4cb59d.png)](https://icflorescu.github.io/mantine-datatable/)
+
+⚠️ Mantine DataTable V7.1 supports Mantine V7.1.  
+If you're looking for the old version that works with [Mantine V6](https://v6.mantine.dev), head over to [Mantine DataTable V6](https://icflorescu.github.io/mantine-datatable-v6).
 
 ## Features
 
