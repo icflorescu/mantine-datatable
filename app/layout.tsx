@@ -3,7 +3,7 @@ import { Notifications } from '@mantine/notifications';
 import { ContextMenuProvider } from 'mantine-contextmenu';
 import { Metadata } from 'next';
 import { AppWrapper } from '~/components/AppWrapper';
-import { PRODUCT_NAME, WEBSITE_LINK } from './config';
+import { AUTHOR_LINK, AUTHOR_NAME, PRODUCT_NAME, WEBSITE_LINK } from './config';
 import './layout.css';
 import classes from './layout.module.css';
 
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: `${PRODUCT_NAME}: enhance your users’ experience`,
   description:
     'Design your Mantine applications for productivity and meet your users’ expectations by enhancing your UIs with desktop-grade context menus',
+  authors: [{ name: AUTHOR_NAME, url: AUTHOR_LINK }],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
