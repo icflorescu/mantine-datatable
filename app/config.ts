@@ -123,6 +123,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: disabling text selection on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/custom-row-or-cell-attributes',
+    title: 'Custom row or cell attributes',
+    description: `Example: How to add custom attributes to ${PRODUCT_NAME} rows or cells`,
+  },
+  {
     href: '/examples/using-with-auto-animate',
     title: 'Using bodyRef with AutoAnimate',
     description: `Example: How to use ${PRODUCT_NAME} bodyRef property with AutoAnimate`,
