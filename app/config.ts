@@ -123,6 +123,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: disabling text selection on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/using-with-auto-animate',
+    title: 'Using bodyRef with AutoAnimate',
+    description: `Example: How to use ${PRODUCT_NAME} bodyRef property with AutoAnimate`,
+  },
+  {
     href: '/type-definitions',
     title: 'Type definitions',
     description: `${PRODUCT_NAME} is written in TypeScript and its options are well documented with additional JSDoc annotations`,
