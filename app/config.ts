@@ -83,6 +83,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: setting ${PRODUCT_NAME} column properties`,
   },
   {
+    href: '/examples/column-grouping',
+    title: 'Column grouping',
+    description: `Example: group multiple ${PRODUCT_NAME} columns under a shared header`,
+  },
+  {
     href: '/examples/empty-state',
     title: 'Empty state',
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,

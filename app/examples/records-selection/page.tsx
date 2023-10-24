@@ -81,6 +81,7 @@ export default async function RecordsSelectionExamplePage() {
       </Txt>
       <CodeBlock language="tsx" code={code['with-additional-checkbox-props']} />
       <RecordsSelectionWithAdditionalCheckboxProps />
+      <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
   );

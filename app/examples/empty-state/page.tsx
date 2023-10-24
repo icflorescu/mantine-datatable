@@ -63,6 +63,7 @@ export default async function EmptyStateExamplePage() {
       </Txt>
       <EmptyStateExampleCustomContent />
       <CodeBlock code={code['custom-content']} />
+      <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
   );

@@ -146,6 +146,7 @@ export default async function ColumnPropertiesExamplePage() {
       />
       <Txt>The code above will produce the following result:</Txt>
       <ColumnPropertiesExampleStyling />
+      <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
   );
