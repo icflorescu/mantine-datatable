@@ -93,6 +93,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to customize the border colors of ${PRODUCT_NAME} and its displayed rows`,
   },
   {
+    href: '/examples/non-standard-record-ids',
+    title: 'Non-standard record IDs',
+    description: `Example: using non-standard record IDs with ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/empty-state',
     title: 'Empty state',
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,
