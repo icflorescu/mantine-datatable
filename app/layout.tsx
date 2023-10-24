@@ -9,7 +9,7 @@ import classes from './layout.module.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.GITHUB_PAGES === 'TRUE' ? 'https://icflorescu.github.io' : 'http://localhost:3000'),
-  alternates: { canonical: '/' },
+  alternates: { canonical: process.env.GITHUB_PAGES === 'TRUE' ? `/${process.env.PACKAGE_NAME}/` : '/' },
   manifest: `${process.env.GITHUB_PAGES === 'TRUE' ? WEBSITE_LINK : ''}/manifest.webmanifest`,
   title: `${PRODUCT_NAME}: enhance your users’ experience`,
   description:
