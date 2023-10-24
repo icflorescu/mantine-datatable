@@ -40,7 +40,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
         style,
       ]}
     >
-      <TableTr className="mantine-datatable-footer-row">
+      <TableTr>
         {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={leftShadowVisible} />}
         {columns.map(({ hidden, ...columnProps }) => {
           if (hidden) return null;

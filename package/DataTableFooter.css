@@ -1,8 +1,7 @@
 .mantine-datatable-footer {
   z-index: 2;
-  border-top: rem(1px) solid var(--mantine-datatable-border-color);
-}
 
-.mantine-datatable-footer-row {
-  border-bottom: 0;
+  th {
+    border-top: rem(1px) solid var(--mantine-datatable-border-color);
+  }
 }

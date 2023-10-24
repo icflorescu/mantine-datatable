@@ -1,4 +1,11 @@
-import type { MantineShadow, MantineStyleProp, ScrollAreaProps, StylesRecord, TableProps } from '@mantine/core';
+import type {
+  MantineColor,
+  MantineShadow,
+  MantineStyleProp,
+  ScrollAreaProps,
+  StylesRecord,
+  TableProps,
+} from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumnProps } from './DataTableColumnProps';
 import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
@@ -139,6 +146,11 @@ export type DataTableProps<T> = {
    * Function to call when the DataTable is scrolled to right.
    */
   onScrollToRight?: () => void;
+
+  /**
+   * Color of row borders, key of `theme.colors` or any valid CSS color.
+   */
+  rowBorderColor?: MantineColor;
 
   /**
    * Defines a context-menu to show when user right-clicks or clicks on a row.

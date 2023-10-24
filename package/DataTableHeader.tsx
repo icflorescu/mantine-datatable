@@ -71,7 +71,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
           const {
             accessor,
             visibleMediaQuery,
-            textAlignment,
+            textAlign,
             width,
             title,
             sortable,
@@ -88,7 +88,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               className={titleClassName}
               style={titleStyle}
               visibleMediaQuery={visibleMediaQuery}
-              textAlignment={textAlignment}
+              textAlign={textAlign}
               width={width}
               title={title}
               sortable={sortable}

@@ -1,4 +1,8 @@
 .mantine-datatable-row {
+  &[data-with-row-border]:not(:last-of-type) td {
+    border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
+  }
+
   table[data-striped] &:nth-of-type(odd) {
     background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
   }

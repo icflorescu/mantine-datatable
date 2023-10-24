@@ -1,8 +1,8 @@
 import { Box, Pagination, Text, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
 import clsx from 'clsx';
 import { forwardRef, type ForwardedRef } from 'react';
 import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
+import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTablePaginationProps } from './types';
 import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
 
@@ -15,7 +15,6 @@ type DataTablePaginationComponentProps = WithOptionalProperty<
 > & {
   className?: string;
   style?: MantineStyleProp;
-  // topBorderColor: StyleProp<MantineColor>;
   fetching: boolean | undefined;
   recordsLength: number | undefined;
   horizontalSpacing: MantineSpacing | undefined;
@@ -26,7 +25,6 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
   {
     className,
     style,
-    // topBorderColor,
     fetching,
     page,
     onPageChange,
@@ -58,10 +56,13 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
     paginationTextValue = paginationText!({ from, to, totalRecords });
   }
 
-  const isAbovePaginationWrapBreakpoint = useMediaQuery(
-    `(min-width: ${
-      typeof paginationWrapBreakpoint === 'number' ? `${paginationWrapBreakpoint}px` : paginationWrapBreakpoint
-    })`
+  const isAbovePaginationWrapBreakpoint = useMediaQueryStringOrFunction(
+    ({ breakpoints }) =>
+      `(min-width: ${
+        typeof paginationWrapBreakpoint === 'number'
+          ? `${paginationWrapBreakpoint}px`
+          : breakpoints[paginationWrapBreakpoint] || paginationWrapBreakpoint
+      })`
   );
 
   return (
@@ -70,13 +71,7 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
       px={horizontalSpacing ?? 'xs'}
       py="xs"
       className={clsx('mantine-datatable-pagination', className)}
-      style={[
-        // (theme) => ({
-        //   '--mantine-datatable-pagination-border-color': parseThemeColor({ color: topBorderColor, theme }),
-        // }),
-        { flexDirection: isAbovePaginationWrapBreakpoint ? 'row' : 'column' },
-        style,
-      ]}
+      style={[{ flexDirection: isAbovePaginationWrapBreakpoint ? 'row' : 'column' }, style]}
     >
       <Text className="mantine-datatable-pagination-text" size={paginationSize}>
         {paginationTextValue}

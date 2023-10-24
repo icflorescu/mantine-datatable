@@ -1,4 +1,4 @@
-import { Center, Loader, rgba, type DefaultMantineColor, type MantineLoader, type MantineSize } from '@mantine/core';
+import { Center, Loader, type DefaultMantineColor, type MantineLoader, type MantineSize } from '@mantine/core';
 import clsx from 'clsx';
 
 type DataTableLoaderProps = {
@@ -27,13 +27,7 @@ export function DataTableLoader({
       pt={pt}
       pb={pb}
       className={clsx('mantine-datatable-loader', { 'mantine-datatable-loader-fetching': fetching })}
-      style={[
-        { backdropFilter: backgroundBlur ? `blur(${backgroundBlur}px)` : undefined },
-        (theme) => ({
-          '--mantine-datatable-loader-backdrop-background-light': rgba(theme.white, 0.75),
-          '--mantine-datatable-loader-backdrop-background-dark': rgba(theme.colors.dark[8], 0.75),
-        }),
-      ]}
+      style={[{ backdropFilter: backgroundBlur ? `blur(${backgroundBlur}px)` : undefined }]}
     >
       {fetching && (customContent || <Loader size={size} type={type} color={color} />)}
     </Center>

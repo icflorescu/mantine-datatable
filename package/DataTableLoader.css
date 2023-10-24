@@ -6,10 +6,7 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
-  background: light-dark(
-    var(--mantine-datatable-loader-backdrop-background-light),
-    var(--mantine-datatable-loader-backdrop-background-dark)
-  );
+  background: light-dark(var(--mantine-color-gray-light), var(--mantine-color-dark-light));
   opacity: 0;
   transition: opacity 0.2s;
 }

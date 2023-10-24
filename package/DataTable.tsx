@@ -88,6 +88,7 @@ export function DataTable<T>({
   onScrollToBottom,
   onScrollToLeft,
   onScrollToRight,
+  rowBorderColor,
   rowContextMenu,
   rowExpansion,
   rowClassName,
@@ -242,6 +243,9 @@ export function DataTable<T>({
           '--mantine-datatable-custom-border-color': borderColor
             ? parseThemeColor({ color: borderColor, theme }).value
             : undefined,
+          '--mantine-datatable-custom-row-border-color': borderColor
+            ? parseThemeColor({ color: rowBorderColor, theme }).value
+            : undefined,
           borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
           boxShadow: theme.shadows[shadow as MantineSize] || shadow,
           height,
@@ -271,6 +275,7 @@ export function DataTable<T>({
               [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
               'mantine-datatable-vertical-alignment-top': verticalAlignment === 'top',
               'mantine-datatable-vertical-alignment-bottom': verticalAlignment === 'bottom',
+              'mantine-datatable-table-last-row-border-bottom-visible': tableHeight < scrollViewportHeight,
             },
             classNames?.table
           )}
@@ -405,7 +410,6 @@ export function DataTable<T>({
               ref={footerRef}
               className={classNames?.footer}
               style={styles?.footer}
-              // borderColor={borderColor}
               columns={effectiveColumns}
               defaultColumnProps={defaultColumnProps}
               selectionVisible={selectionColumnVisible}
@@ -420,7 +424,6 @@ export function DataTable<T>({
           ref={paginationRef}
           className={classNames?.pagination}
           style={styles?.pagination}
-          // topBorderColor={borderColor}
           horizontalSpacing={horizontalSpacing}
           fetching={fetching}
           page={page}

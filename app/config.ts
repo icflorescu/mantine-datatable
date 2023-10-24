@@ -88,6 +88,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: group multiple ${PRODUCT_NAME} columns under a shared header`,
   },
   {
+    href: '/examples/customizing-border-colors',
+    title: 'Customizing border colors',
+    description: `Example: how to customize the border colors of ${PRODUCT_NAME} and its displayed rows`,
+  },
+  {
     href: '/examples/empty-state',
     title: 'Empty state',
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,

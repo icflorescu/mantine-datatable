@@ -8,6 +8,10 @@
     --mantine-datatable-custom-border-color,
     light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))
   );
+  --mantine-datatable-row-border-color: var(
+    --mantine-datatable-custom-row-border-color,
+    var(--mantine-datatable-border-color)
+  );
 }
 
 .mantine-datatable-with-border {
@@ -15,7 +19,14 @@
 }
 
 .mantine-datatable-table {
+  border-collapse: separate;
+  border-spacing: 0;
   background: var(--mantine-color-body);
+
+  th,
+  td {
+    border-color: var(--mantine-datatable-row-border-color);
+  }
 
   thead,
   tfoot,
@@ -37,4 +48,8 @@
 
 .mantine-datatable-vertical-alignment-bottom td {
   vertical-align: bottom;
+}
+
+.mantine-datatable-table-last-row-border-bottom-visible tr:last-of-type td {
+  border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
 }
