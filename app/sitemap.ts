@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 import { ROUTES, WEBSITE_LINK } from './config';
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -13,7 +13,7 @@ import '__PACKAGE__/styles.layer.css';
 //    inside that file
 import './layout.css';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>

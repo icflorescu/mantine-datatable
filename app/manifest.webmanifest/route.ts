@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 import { PRODUCT_DESCRIPTION, PRODUCT_NAME, WEBSITE_LINK } from '~/app/config';
 
 /**

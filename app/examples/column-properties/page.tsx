@@ -7,9 +7,9 @@ import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
-import ColumnPropertiesExample from './ColumnPropertiesExample';
-import ColumnPropertiesExampleStyling from './ColumnPropertiesExampleStyling';
-import ColumnPropertiesExampleWithFooter from './ColumnPropertiesExampleWithFooter';
+import { ColumnPropertiesExample } from './ColumnPropertiesExample';
+import { ColumnPropertiesExampleStyling } from './ColumnPropertiesExampleStyling';
+import { ColumnPropertiesExampleWithFooter } from './ColumnPropertiesExampleWithFooter';
 
 const PATH = '/examples/column-properties';
 

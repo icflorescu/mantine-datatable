@@ -3,7 +3,7 @@ import companies from '~/data/companies.json';
 
 const records = companies.slice(0, 5);
 
-export default function DisablingTextSelectionExample({ textSelectionDisabled }: { textSelectionDisabled: boolean }) {
+export function DisablingTextSelectionExample({ textSelectionDisabled }: { textSelectionDisabled: boolean }) {
   // example-start
   return (
     // prettier-ignore

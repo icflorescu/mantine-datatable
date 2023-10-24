@@ -1,7 +1,7 @@
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { ContextMenuProvider } from 'mantine-contextmenu';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { AppWrapper } from '~/components/AppWrapper';
 import { AUTHOR_LINK, AUTHOR_NAME, PRODUCT_NAME, WEBSITE_LINK } from './config';
 import './layout.css';

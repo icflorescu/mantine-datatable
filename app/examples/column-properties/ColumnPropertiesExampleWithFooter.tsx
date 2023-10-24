@@ -8,7 +8,7 @@ import { employees } from '~/data';
 
 const records = employees.slice(0, 10);
 
-export default function ColumnPropertiesExampleWithFooter() {
+export function ColumnPropertiesExampleWithFooter() {
   return (
     // example-start
     <DataTable

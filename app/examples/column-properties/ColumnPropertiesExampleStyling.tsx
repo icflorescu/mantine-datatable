@@ -9,7 +9,7 @@ import classes from './ColumnPropertiesExampleStyling.module.css';
 
 const records = employees.slice(0, 10);
 
-export default function ColumnPropertiesExampleStyling() {
+export function ColumnPropertiesExampleStyling() {
   return (
     <DataTable
       withTableBorder
@@ -20,7 +20,7 @@ export default function ColumnPropertiesExampleStyling() {
         {
           accessor: 'index',
           title: '#',
-          textAlignment: 'right',
+          textAlign: 'right',
           width: 40,
           // 👇 style cells with a class name
           cellsClassName: classes.idColumnCells,
@@ -73,7 +73,7 @@ export default function ColumnPropertiesExampleStyling() {
         {
           accessor: 'age',
           width: 80,
-          textAlignment: 'right',
+          textAlign: 'right',
           // 👇 style title with a style object
           titleStyle: { fontStyle: 'italic' },
           // 👇 style cells depending on current record, with a function returning a style object

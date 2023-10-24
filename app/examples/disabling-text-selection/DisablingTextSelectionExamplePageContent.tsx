@@ -3,7 +3,7 @@
 import { Paper, Switch } from '@mantine/core';
 import { useCallback, useEffect, useState } from 'react';
 import { CodeBlock } from '~/components/CodeBlock';
-import DisablingTextSelectionExample from './DisablingTextSelectionExample';
+import { DisablingTextSelectionExample } from './DisablingTextSelectionExample';
 
 export function DisablingTextSelectionExamplePageContent({ initialCode }: { initialCode: string }) {
   const [textSelectionDisabled, setTextSelectionDisabled] = useState(false);

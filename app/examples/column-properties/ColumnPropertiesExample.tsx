@@ -6,7 +6,7 @@ import { employees } from '~/data';
 
 const records = employees.slice(0, 10);
 
-export default function ColumnPropertiesExample() {
+export function ColumnPropertiesExample() {
   return (
     <DataTable
       withTableBorder
