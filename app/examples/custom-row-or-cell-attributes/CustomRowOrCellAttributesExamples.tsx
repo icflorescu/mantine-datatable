@@ -11,7 +11,6 @@ export function CustomRowOrCellAttributesExample() {
   return (
     <DataTable
       withTableBorder
-      shadow="xs"
       columns={[
         { accessor: 'name' },
         { accessor: 'city', customCellAttributes: ({ city }) => ({ 'data-cy-city': city }) },
@@ -33,7 +32,6 @@ export function CustomRowOrCellAttributesMiddleClickExample() {
   return (
     <DataTable
       withTableBorder
-      shadow="xs"
       columns={[{ accessor: 'name' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={records}
       customRowAttributes={({ name }) => ({
