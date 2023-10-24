@@ -96,14 +96,13 @@ export type DataTableColumn<T> = {
   /**
    * Optional class name passed to each data cell in the column.
    * Can be a string, or a function receiving the current record and its index
-   * as parameters and returning a string.
+   * as arguments and returning a string.
    */
   cellsClassName?: string | ((record: T, index: number) => string | undefined);
 
   /**
    * Optional style passed to each data cell in the column.
-   * Can be a style object, or a function receiving the current record
-   * and its index as arguments, and returning a style object.
+   * A function that receives the current record and its index as arguments and returns the style.
    */
   cellsStyle?: (record: T, index: number) => MantineStyleProp | undefined;
 

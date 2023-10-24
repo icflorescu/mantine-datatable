@@ -98,6 +98,16 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: using non-standard record IDs with ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/default-column-properies',
+    title: 'Default column properties',
+    description: `Example: using default column properties with ${PRODUCT_NAME}`,
+  },
+  {
+    href: '/examples/default-column-render',
+    title: 'Default column render',
+    description: `Example: using a default column render function with ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/empty-state',
     title: 'Empty state',
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,

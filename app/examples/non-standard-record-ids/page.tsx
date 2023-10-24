@@ -43,7 +43,6 @@ export default async function NonStandardRecordIdsExamplePage() {
       <CodeBlock code={code['NonStandardRecordIdsFunctionExample.tsx']} />
       <Txt>The code above will produce the following result:</Txt>
       <NonStandardRecordIdsFunctionExample />
-      <PageNavigation of={PATH} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
