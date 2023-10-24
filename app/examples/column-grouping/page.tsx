@@ -13,7 +13,7 @@ const PATH = '/examples/column-grouping';
 
 export const metadata = getRouteMetadata(PATH);
 
-export default async function BasicUsageExamplePage() {
+export default async function ColumnGroupingExamplePage() {
   const code = await allPromiseProps({
     'ColumnGroupingExample.tsx': readCodeFile<string>(`${PATH}/ColumnGroupingExample.tsx`),
     'companies.json': readCodeFile<string>('/../data/companies.json'),
