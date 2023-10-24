@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn, DataTableSortProps } from './types';
+import { ELLIPSIS, NOWRAP, TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
 import { humanize } from './utils';
 
 type DataTableHeaderCellProps<T> = {
@@ -14,7 +15,7 @@ type DataTableHeaderCellProps<T> = {
   sortStatus: DataTableSortProps['sortStatus'];
   sortIcons: DataTableSortProps['sortIcons'];
   onSortStatusChange: DataTableSortProps['onSortStatusChange'];
-} & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlignment' | 'width' | 'filter' | 'filtering'>;
+} & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlign' | 'width' | 'filter' | 'filtering'>;
 
 export function DataTableHeaderCell<T>({
   className,
@@ -24,7 +25,7 @@ export function DataTableHeaderCell<T>({
   title,
   sortable,
   sortIcons,
-  textAlignment,
+  textAlign,
   width,
   sortStatus,
   onSortStatusChange,
@@ -52,8 +53,16 @@ export function DataTableHeaderCell<T>({
       : undefined;
   return (
     <TableTh
-      className={clsx({ 'mantine-datatable-header-cell-sortable-column-header': sortable }, className)}
-      style={[{ textAlign: textAlignment, width, minWidth: width, maxWidth: width }, style]}
+      className={clsx(
+        {
+          [TEXT_ALIGN_LEFT]: textAlign === 'left',
+          [TEXT_ALIGN_CENTER]: textAlign === 'center',
+          [TEXT_ALIGN_RIGHT]: textAlign === 'right',
+          'mantine-datatable-header-cell-sortable-column-header': sortable,
+        },
+        className
+      )}
+      style={[{ width, minWidth: width, maxWidth: width }, style]}
       role={sortable ? 'button' : undefined}
       tabIndex={sortable ? 0 : undefined}
       onClick={sortAction}
@@ -65,10 +74,7 @@ export function DataTableHeaderCell<T>({
         wrap="nowrap"
       >
         <Box
-          className={clsx(
-            'mantine-datatable-header-cell-column-header-text',
-            'mantine-datatable-header-cell-sortable-column-header-text'
-          )}
+          className={clsx('mantine-datatable-header-cell-sortable-column-header-text', NOWRAP, ELLIPSIS)}
           title={tooltip}
         >
           {text}

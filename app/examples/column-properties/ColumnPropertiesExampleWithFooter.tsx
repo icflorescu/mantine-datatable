@@ -2,8 +2,8 @@
 
 import { Group, Text } from '@mantine/core';
 import { IconSum } from '@tabler/icons-react';
+import { DataTable, uniqBy } from '__PACKAGE__';
 import dayjs from 'dayjs';
-import { DataTable, uniqBy } from 'mantine-datatable';
 import { employees } from '~/data';
 
 const records = employees.slice(0, 10);
@@ -48,7 +48,7 @@ export default function ColumnPropertiesExampleWithFooter() {
         {
           accessor: 'age',
           width: 60,
-          textAlignment: 'right',
+          textAlign: 'right',
           visibleMediaQuery: (theme) => `(min-width: ${theme.breakpoints.xs})`,
           render: ({ birthDate }) => dayjs().diff(birthDate, 'years'),
           // 👇 this column has a footer

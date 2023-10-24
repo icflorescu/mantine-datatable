@@ -2,6 +2,14 @@ import { TableTd, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
+import {
+  ELLIPSIS,
+  NOWRAP,
+  POINTER_CURSOR,
+  TEXT_ALIGN_CENTER,
+  TEXT_ALIGN_LEFT,
+  TEXT_ALIGN_RIGHT,
+} from './utilityClasses';
 import { getValueAtPath } from './utils';
 
 type DataTableRowCellProps<T> = {
@@ -13,14 +21,7 @@ type DataTableRowCellProps<T> = {
   onClick?: React.MouseEventHandler<HTMLTableCellElement>;
 } & Pick<
   DataTableColumn<T>,
-  | 'accessor'
-  | 'visibleMediaQuery'
-  | 'textAlignment'
-  | 'width'
-  | 'noWrap'
-  | 'ellipsis'
-  | 'render'
-  | 'customCellAttributes'
+  'accessor' | 'visibleMediaQuery' | 'textAlign' | 'width' | 'noWrap' | 'ellipsis' | 'render' | 'customCellAttributes'
 >;
 
 export function DataTableRowCell<T>({
@@ -32,7 +33,7 @@ export function DataTableRowCell<T>({
   onClick,
   noWrap,
   ellipsis,
-  textAlignment,
+  textAlign,
   width,
   accessor,
   render,
@@ -44,9 +45,12 @@ export function DataTableRowCell<T>({
     <TableTd
       className={clsx(
         {
-          'mantine-datatable-row-cell-no-wrap': noWrap || ellipsis,
-          'mantine-datatable-row-cell-ellipsis': ellipsis,
-          'mantine-datatable-row-cell-with-pointer-cursor': onClick,
+          [NOWRAP]: noWrap || ellipsis,
+          [ELLIPSIS]: ellipsis,
+          [POINTER_CURSOR]: onClick,
+          [TEXT_ALIGN_LEFT]: textAlign === 'left',
+          [TEXT_ALIGN_CENTER]: textAlign === 'center',
+          [TEXT_ALIGN_RIGHT]: textAlign === 'right',
         },
         className
       )}
@@ -55,7 +59,6 @@ export function DataTableRowCell<T>({
           width,
           minWidth: width,
           maxWidth: width,
-          textAlign: textAlignment,
         },
         style,
       ]}

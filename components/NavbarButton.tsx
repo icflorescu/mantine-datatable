@@ -1,15 +1,14 @@
 import { Box, Center, Text, rgba } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
-import { WithOptionalProperty, WithRequiredProperty } from '__PACKAGE__';
+import type { WithOptionalProperty, WithRequiredProperty } from '__PACKAGE__';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MouseEventHandler } from 'react';
-import { RouteInfo } from '~/app/config';
+import type { RouteInfo } from '~/app/config';
 import classes from './NavbarButton.module.css';
 
 export type NavbarButtonProps = WithRequiredProperty<WithOptionalProperty<RouteInfo, 'href'>, 'color'> & {
-  onClick?: MouseEventHandler<HTMLAnchorElement>;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   expanded?: boolean;
 };
 

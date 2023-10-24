@@ -1,4 +1,5 @@
 import { Checkbox, TableTd } from '@mantine/core';
+import { POINTER_CURSOR } from './utilityClasses';
 
 type DataTableRowSelectorCellProps<T> = {
   record: T;
@@ -23,11 +24,7 @@ export function DataTableRowSelectorCell<T>({
       data-shadow-visible={withRightShadow || undefined}
       onClick={(e) => e.stopPropagation()}
     >
-      <Checkbox
-        classNames={{ input: 'mantine-datatable-row-selector-cell-checkbox' }}
-        {...otherProps}
-        {...getCheckboxProps(record, index)}
-      />
+      <Checkbox classNames={{ input: POINTER_CURSOR }} {...otherProps} {...getCheckboxProps(record, index)} />
     </TableTd>
   );
 }

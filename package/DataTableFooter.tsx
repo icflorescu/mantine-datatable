@@ -1,4 +1,4 @@
-import { TableTfoot, rem, type MantineStyleProp } from '@mantine/core';
+import { TableTfoot, TableTr, rem, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { DataTableFooterCell } from './DataTableFooterCell';
@@ -6,7 +6,6 @@ import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelecto
 import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
 
 type DataTableFooterProps<T> = {
-  // borderColor: StyleProp<MantineColor>;
   className?: string;
   style?: MantineStyleProp;
   columns: DataTableColumn<T>[];
@@ -20,7 +19,6 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
   {
     className,
     style,
-    // borderColor,
     columns,
     defaultColumnProps,
     selectionVisible,
@@ -35,9 +33,6 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
       ref={ref}
       className={clsx('mantine-datatable-footer', className)}
       style={[
-        // (theme) => ({
-        //   '--mantine-datatable-footer-border-color': parseThemeColor({ color: borderColor, theme }).value,
-        // }),
         {
           position: relative ? 'relative' : 'sticky',
           bottom: rem(`${relative ? scrollDiff : -1}px`),
@@ -45,7 +40,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
         style,
       ]}
     >
-      <tr>
+      <TableTr>
         {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={leftShadowVisible} />}
         {columns.map(({ hidden, ...columnProps }) => {
           if (hidden) return null;
@@ -76,7 +71,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
             />
           );
         })}
-      </tr>
+      </TableTr>
     </TableTfoot>
   );
 }) as <T>(props: DataTableFooterProps<T> & { ref: React.ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;

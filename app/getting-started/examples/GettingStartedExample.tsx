@@ -34,7 +34,7 @@ export function GettingStartedExample() {
           // this column has a custom title
           title: '#',
           // right-align column
-          textAlignment: 'right',
+          textAlign: 'right',
         },
         { accessor: 'name' },
         {

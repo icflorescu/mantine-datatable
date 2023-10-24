@@ -1,11 +1,10 @@
-import clsx from 'clsx';
+import { TableTh } from '@mantine/core';
 
 export function DataTableFooterSelectorPlaceholderCell({ shadowVisible }: { shadowVisible: boolean }) {
   return (
-    <th
-      className={clsx('mantine-datatable-footer-selector-placeholder-cell', {
-        'mantine-datatable-footer-selector-placeholder-cell-shadow-visible': shadowVisible,
-      })}
-    ></th>
+    <TableTh
+      className="mantine-datatable-footer-selector-placeholder-cell"
+      data-shadow-visible={shadowVisible || undefined}
+    />
   );
 }

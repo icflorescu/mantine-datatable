@@ -1,4 +1,5 @@
 import { Checkbox, TableTh } from '@mantine/core';
+import { POINTER_CURSOR } from './utilityClasses';
 
 type DataTableHeaderSelectorCellProps = {
   shadowVisible: boolean;
@@ -24,7 +25,7 @@ export function DataTableHeaderSelectorCell({
       data-shadow-visible={shadowVisible || undefined}
     >
       <Checkbox
-        classNames={{ input: 'mantine-datatable-header-selector-cell-checkbox-input' }}
+        classNames={{ input: POINTER_CURSOR }}
         checked={checked}
         indeterminate={indeterminate}
         disabled={!onChange}

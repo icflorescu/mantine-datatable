@@ -1,86 +1,25 @@
-/*
-todo: remove this
-From V6:
-const useStyles = createStyles(
-  (
-    theme,
-    {
-      borderColor,
-      rowBorderColor,
-    }: {
-      borderColor: string | ((theme: MantineTheme) => string);
-      rowBorderColor: string | ((theme: MantineTheme) => string);
-    }
-  ) => {
-    const borderColorValue = typeof borderColor === 'function' ? borderColor(theme) : borderColor;
-    const rowBorderColorValue = typeof rowBorderColor === 'function' ? rowBorderColor(theme) : rowBorderColor;
-
-    return {
-      root: {
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        tr: {
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-        },
-        '&&': {
-          'thead tr th': {
-            borderBottomColor: borderColorValue,
-          },
-          'tbody tr td': {
-            borderTopColor: rowBorderColorValue,
-          },
-        },
-      },
-      lastRowBorderBottomVisible: {
-        'tbody tr:last-of-type td': {
-          borderBottom: `1px solid ${rowBorderColorValue}`,
-        },
-      },
-      textSelectionDisabled: {
-        userSelect: 'none',
-      },
-      table: {
-        borderCollapse: 'separate',
-        borderSpacing: 0,
-      },
-      tableWithBorder: {
-        border: `1px solid ${borderColorValue}`,
-      },
-      tableWithColumnBorders: {
-        '&&': {
-          'th, td': {
-            ':not(:first-of-type)': {
-              borderLeft: `1px solid ${rowBorderColorValue}`,
-            },
-          },
-        },
-      },
-      tableWithColumnBordersAndSelectableRecords: {
-        thead: {
-          'tr + tr': {
-            th: {
-              borderLeft: `1px solid ${rowBorderColorValue}`,
-            },
-          },
-        },
-      },
-    };
-  }
-);
-*/
-
 .mantine-datatable {
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  --mantine-datatable-border-color: var(
+    --mantine-datatable-custom-border-color,
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))
+  );
 }
 
 .mantine-datatable-with-border {
-  border: rem(1px) solid
-    light-dark(var(--mantine-datatable-border-color-light), var(--mantine-datatable-border-color-dark));
+  border: rem(1px) solid var(--mantine-datatable-border-color);
+}
+
+.mantine-datatable-vertical-alignment-top td {
+  vertical-align: top;
+}
+
+.mantine-datatable-vertical-alignment-bottom td {
+  vertical-align: bottom;
 }
 
 .mantine-datatable-table {
@@ -136,28 +75,4 @@ const useStyles = createStyles(
       var(--mantine-datatable-row-hover-selected-bg-color-dark)
     );
   }
-
-  [data-row-with-pointer-cursor] {
-    cursor: pointer;
-  }
-
-  &[data-text-selection-disabled] {
-    user-select: none;
-  }
-
-  &[data-vertical-alignment='top'] td {
-    vertical-align: top;
-  }
-
-  &[data-vertical-alignment='bottom'] td {
-    vertical-align: bottom;
-  }
 }
-
-/*
-todo: remove this ??
-.mantine-datatable-table-last-row-border-bottom-visible tbody tr:last-of-type td {
-  border-bottom: rem(1px) solid
-    light-dark(var(--mantine-datatable-row-border-color-light), var(--mantine-datatable-row-border-color-dark));
-}
-*/

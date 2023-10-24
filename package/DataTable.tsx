@@ -23,6 +23,7 @@ import {
   useRowExpansion,
 } from './hooks';
 import type { DataTableProps } from './types';
+import { TEXT_SELECTION_DISABLED } from './utilityClasses';
 import { differenceBy, getRecordId, uniqBy } from './utils';
 
 export function DataTable<T>({
@@ -237,17 +238,10 @@ export function DataTable<T>({
         classNames?.root
       )}
       style={[
-        withTableBorder
-          ? (theme) => ({
-              '--mantine-datatable-border-color-light': borderColor
-                ? parseThemeColor({ color: borderColor, theme }).value
-                : theme.colors.gray[3],
-              '--mantine-datatable-border-color-dark': borderColor
-                ? parseThemeColor({ color: borderColor, theme }).value
-                : theme.colors.dark[4],
-            })
-          : undefined,
         (theme) => ({
+          '--mantine-datatable-custom-border-color': borderColor
+            ? parseThemeColor({ color: borderColor, theme }).value
+            : undefined,
           borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
           boxShadow: theme.shadows[shadow as MantineSize] || shadow,
           height,
@@ -274,9 +268,10 @@ export function DataTable<T>({
           className={clsx(
             'mantine-datatable-table',
             {
+              [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
+              'mantine-datatable-vertical-alignment-top': verticalAlignment === 'top',
+              'mantine-datatable-vertical-alignment-bottom': verticalAlignment === 'bottom',
               // [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
-              'mantine-datatable-table-vertical-alignment-top': verticalAlignment === 'top',
-              'mantine-datatable-table-vertical-alignment-bottom': verticalAlignment === 'bottom',
               // [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
             },
             classNames?.table
@@ -305,8 +300,6 @@ export function DataTable<T>({
           ]}
           data-striped={(recordsLength && striped) || undefined}
           data-row-highlight-on-hover={highlightOnHover || undefined}
-          data-text-selection-disabled={textSelectionDisabled || undefined}
-          data-vertical-alignment={verticalAlignment === 'center' ? undefined : verticalAlignment}
           {...otherProps}
         >
           {withoutHeader ? null : (

@@ -10,12 +10,6 @@
   gap: 0.25em;
 }
 
-.mantine-datatable-header-cell-column-header-text {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .mantine-datatable-header-cell-sortable-column-header-text {
   min-width: 0;
   flex-grow: 1;
@@ -26,7 +20,7 @@
 }
 
 .mantine-datatable-header-cell-sortable-column-header-icon-rotated {
-  transform: rotate3d(0, 0, 1, 180deg);
+  transform: rotateZ(180deg);
 }
 
 .mantine-datatable-header-cell-sortable-column-header-unsorted-icon {

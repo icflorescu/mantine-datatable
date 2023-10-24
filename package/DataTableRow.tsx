@@ -1,9 +1,11 @@
 import { TableTr, type MantineStyleProp } from '@mantine/core';
+import clsx from 'clsx';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
 import { useRowExpansion } from './hooks';
 import type { DataTableCellClickHandler, DataTableColumn, DataTableDefaultColumnProps } from './types';
+import { POINTER_CURSOR } from './utilityClasses';
 
 type DataTableRowProps<T> = {
   record: T;
@@ -51,8 +53,10 @@ export function DataTableRow<T>({
   return (
     <>
       <TableTr
-        className={typeof className === 'function' ? className(record, index) : className}
-        data-row-with-pointer-cursor={!!(onClick || expansion?.expandOnClick) || undefined}
+        className={clsx(
+          { [POINTER_CURSOR]: onClick || expansion?.expandOnClick },
+          typeof className === 'function' ? className(record, index) : className
+        )}
         data-row-selected={selectionChecked || undefined}
         data-row-context-menu-visible={contextMenuVisible || undefined}
         onClick={(e) => {

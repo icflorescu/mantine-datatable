@@ -1,7 +1,7 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import dayjs from 'dayjs';
-import { DataTable } from 'mantine-datatable';
 import { employees } from '~/data';
 
 const records = employees.slice(0, 10);
@@ -17,7 +17,7 @@ export default function ColumnPropertiesExample() {
         {
           accessor: 'index',
           title: '#',
-          textAlignment: 'right',
+          textAlign: 'right',
           width: 40,
           render: (record) => records.indexOf(record) + 1,
         },
@@ -49,7 +49,7 @@ export default function ColumnPropertiesExample() {
           // 👇 "virtual column"
           accessor: 'age',
           width: 60,
-          textAlignment: 'right',
+          textAlign: 'right',
           // 👇 column is only visible when screen width is over `theme.breakpoints.xs`
           visibleMediaQuery: (theme) => `(min-width: ${theme.breakpoints.xs})`,
           render: ({ birthDate }) => dayjs().diff(birthDate, 'years'),

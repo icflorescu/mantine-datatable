@@ -23,7 +23,7 @@ export default async function ColumnPropertiesExamplePage() {
       `${PATH}/ColumnPropertiesExampleStyling.module.css`
     ),
     'ColumnPropertiesExampleWithFooter.tsx': readCodeFile<string>(`${PATH}/ColumnPropertiesExampleWithFooter.tsx`),
-    'data/index.ts': readCodeFile<string>(`/../data/index.ts`),
+    'data/index.ts': readCodeFile<string>('/../data/index.ts'),
   });
 
   return (
@@ -62,8 +62,8 @@ export default async function ColumnPropertiesExamplePage() {
           <Code>ellipsis</Code> to <Code>true</Code>, but not both.
         </li>
         <li>
-          <Code>textAlignment</Code> → <Code>&apos;left&apos; | &apos;center&apos; | &apos;right&apos;</Code>; defaults
-          to <Code>&apos;left&apos;</Code> if not specified.
+          <Code>textAlign</Code> → <Code>&apos;left&apos; | &apos;center&apos; | &apos;right&apos;</Code>; defaults to{' '}
+          <Code>&apos;left&apos;</Code> if not specified.
         </li>
         <li>
           <Code>hidden</Code> → if true, the column will not be visible.

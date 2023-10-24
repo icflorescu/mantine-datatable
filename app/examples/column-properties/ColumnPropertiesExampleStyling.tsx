@@ -1,9 +1,9 @@
 'use client';
 
 import { rgba } from '@mantine/core';
+import { DataTable, uniqBy } from '__PACKAGE__';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import { DataTable, uniqBy } from 'mantine-datatable';
 import { employees } from '~/data';
 import classes from './ColumnPropertiesExampleStyling.module.css';
 

@@ -2,7 +2,6 @@
   position: sticky;
   width: 0;
   left: 0;
-  background: inherit;
   &::after {
     content: '';
     position: absolute;
@@ -17,8 +16,8 @@
     opacity: 0;
     transition: opacity 0.2s;
   }
-}
 
-.mantine-datatable-footer-selector-placeholder-cell-shadow-visible::after {
-  opacity: 1;
+  &[data-shadow-visible]::after {
+    opacity: 1;
+  }
 }

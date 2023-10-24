@@ -1,5 +1,5 @@
 import type { MantineStyleProp, MantineTheme } from '@mantine/core';
-import type { DataTableColumnTextAlignment } from './DataTableColumnTextAlignment';
+import type { DataTableColumnTextAlign } from './DataTableColumnTextAlign';
 
 export type DataTableColumn<T> = {
   /**
@@ -27,7 +27,7 @@ export type DataTableColumn<T> = {
    * Column text alignment.
    * @default `left`
    */
-  textAlignment?: DataTableColumnTextAlignment;
+  textAlign?: DataTableColumnTextAlign;
 
   /**
    * If true, column will be sortable.

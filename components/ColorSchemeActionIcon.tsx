@@ -1,20 +1,26 @@
-import { ActionIcon, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, Tooltip, useMantineColorScheme } from '@mantine/core';
+import { useHotkeys, useOs } from '@mantine/hooks';
 import { IconMoon, IconSun } from '@tabler/icons-react';
 import classes from './ColorSchemeActionIcon.module.css';
 
 export function ColorSchemeActionIcon() {
-  const { setColorScheme } = useMantineColorScheme();
-  const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
+  const { toggleColorScheme } = useMantineColorScheme();
+  useHotkeys([['mod+j', toggleColorScheme]]);
+
+  const os = useOs();
+  let label = 'Toggle color scheme';
+  if (os === 'macos') {
+    label += ' (⌘J)';
+  } else if (os === 'windows' || os === 'linux') {
+    label += ' (Ctrl+J)';
+  }
 
   return (
-    <ActionIcon
-      onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
-      variant="default"
-      size={30}
-      aria-label="Toggle color scheme"
-    >
-      <IconSun className={classes.light} size={16} />
-      <IconMoon className={classes.dark} size={16} />
-    </ActionIcon>
+    <Tooltip label={label} position="bottom-end" withArrow>
+      <ActionIcon onClick={() => toggleColorScheme()} variant="default" size={30} aria-label={label}>
+        <IconSun className={classes.light} size={16} />
+        <IconMoon className={classes.dark} size={16} />
+      </ActionIcon>
+    </Tooltip>
   );
 }

@@ -2,13 +2,14 @@ import { TableTh, type MantineStyleProp, type MantineTheme } from '@mantine/core
 import clsx from 'clsx';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
+import { ELLIPSIS, NOWRAP, TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
 
 type DataTableFooterCellProps<T> = {
   className?: string;
   style?: MantineStyleProp;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: React.ReactNode | undefined;
-} & Pick<DataTableColumn<T>, 'noWrap' | 'ellipsis' | 'textAlignment' | 'width'>;
+} & Pick<DataTableColumn<T>, 'noWrap' | 'ellipsis' | 'textAlign' | 'width'>;
 
 export function DataTableFooterCell<T>({
   className,
@@ -17,7 +18,7 @@ export function DataTableFooterCell<T>({
   title,
   noWrap,
   ellipsis,
-  textAlignment,
+  textAlign,
   width,
 }: DataTableFooterCellProps<T>) {
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
@@ -25,14 +26,16 @@ export function DataTableFooterCell<T>({
     <TableTh
       className={clsx(
         {
-          'mantine-datatable-footer-cell-nowrap': noWrap || ellipsis,
-          'mantine-datatable-footer-cell-ellipsis': ellipsis,
+          [NOWRAP]: noWrap || ellipsis,
+          [ELLIPSIS]: ellipsis,
+          [TEXT_ALIGN_LEFT]: textAlign === 'left',
+          [TEXT_ALIGN_CENTER]: textAlign === 'center',
+          [TEXT_ALIGN_RIGHT]: textAlign === 'right',
         },
         className
       )}
       style={[
         {
-          textAlign: textAlignment,
           width,
           minWidth: width,
           maxWidth: width,

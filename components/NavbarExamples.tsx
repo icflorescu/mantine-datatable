@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { PRODUCT_NAME } from '~/app/config';
-import { NavbarButton, NavbarButtonProps } from './NavbarButton';
+import { NavbarButton, type NavbarButtonProps } from './NavbarButton';
 import classes from './NavbarExamples.module.css';
 
 const EXPANSION_STATE_STORAGE_KEY = `${process.env.PACKAGE_NAME}-examples-expanded`;

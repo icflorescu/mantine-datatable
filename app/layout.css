@@ -6,6 +6,10 @@
 
 @layer mantine-core, mantine-notifications, mantine-code-highlight, mantine-datatable;
 
+a code {
+  color: var(--mantine-color-anchor);
+}
+
 .noscroll {
   overflow: hidden;
 }
