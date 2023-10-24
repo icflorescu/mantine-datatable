@@ -1,0 +1,14 @@
+.mantine-datatable-row {
+  table[data-striped] &:nth-of-type(odd) {
+    background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  }
+
+  table[data-highlight-on-hover] &:hover {
+    background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+  }
+
+  &[data-selected] td,
+  &[data-context-menu-visible] td {
+    background: var(--mantine-primary-color-light);
+  }
+}

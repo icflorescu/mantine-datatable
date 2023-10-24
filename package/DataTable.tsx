@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Table, parseThemeColor, rgba, type MantineSize } from '@mantine/core';
+import { Box, Table, parseThemeColor, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
@@ -271,35 +271,12 @@ export function DataTable<T>({
               [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
               'mantine-datatable-vertical-alignment-top': verticalAlignment === 'top',
               'mantine-datatable-vertical-alignment-bottom': verticalAlignment === 'bottom',
-              // [classes.lastRowBorderBottomVisible]: tableHeight < scrollViewportHeight,
-              // [classes.tableWithColumnBordersAndSelectableRecords]: selectionColumnVisible && withColumnBorders,
             },
             classNames?.table
           )}
-          style={[
-            ({ black, white, colors, primaryColor }) => {
-              const baseColor = colors[primaryColor][6];
-              return {
-                '--mantine-datatable-row-odd-bg-color-light': rgba(black, 0.02),
-                '--mantine-datatable-row-odd-bg-color-dark': rgba(white, 0.025),
-
-                '--mantine-datatable-row-hover-bg-color-light': rgba(black, 0.04),
-                '--mantine-datatable-row-hover-bg-color-dark': rgba(white, 0.045),
-
-                '--mantine-datatable-row-selected-bg-color-light': rgba(baseColor, 0.05),
-                '--mantine-datatable-row-selected-bg-color-dark': rgba(baseColor, 0.1),
-
-                '--mantine-datatable-row-odd-selected-bg-color-light': rgba(baseColor, 0.08),
-                '--mantine-datatable-row-odd-selected-bg-color-dark': rgba(baseColor, 0.15),
-
-                '--mantine-datatable-row-hover-selected-bg-color-light': rgba(baseColor, 0.1),
-                '--mantine-datatable-row-hover-selected-bg-color-dark': rgba(baseColor, 0.2),
-              };
-            },
-            styles?.table,
-          ]}
+          style={styles?.table}
           data-striped={(recordsLength && striped) || undefined}
-          data-row-highlight-on-hover={highlightOnHover || undefined}
+          data-highlight-on-hover={highlightOnHover || undefined}
           {...otherProps}
         >
           {withoutHeader ? null : (

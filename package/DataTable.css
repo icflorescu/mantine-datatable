@@ -14,16 +14,9 @@
   border: rem(1px) solid var(--mantine-datatable-border-color);
 }
 
-.mantine-datatable-vertical-alignment-top td {
-  vertical-align: top;
-}
-
-.mantine-datatable-vertical-alignment-bottom td {
-  vertical-align: bottom;
-}
-
 .mantine-datatable-table {
   background: var(--mantine-color-body);
+
   thead,
   tfoot,
   tbody,
@@ -36,43 +29,12 @@
   tbody tr:last-of-type {
     border-bottom: 0;
   }
+}
 
-  &[data-striped] {
-    tbody tr:nth-of-type(odd) {
-      background: light-dark(
-        var(--mantine-datatable-row-odd-bg-color-light),
-        var(--mantine-datatable-row-odd-bg-color-dark)
-      );
-    }
-  }
+.mantine-datatable-vertical-alignment-top td {
+  vertical-align: top;
+}
 
-  &[data-row-highlight-on-hover] {
-    tbody tr:hover {
-      background: light-dark(
-        var(--mantine-datatable-row-hover-bg-color-light),
-        var(--mantine-datatable-row-hover-bg-color-dark)
-      );
-    }
-  }
-
-  tbody tr[data-row-selected] {
-    background: light-dark(
-      var(--mantine-datatable-row-selected-bg-color-light),
-      var(--mantine-datatable-row-selected-bg-color-dark)
-    );
-    &:nth-of-type(odd) {
-      background: light-dark(
-        var(--mantine-datatable-row-odd-selected-bg-color-light),
-        var(--mantine-datatable-row-odd-selected-bg-color-dark)
-      );
-    }
-  }
-
-  &[data-row-highlight-on-hover] tbody tr[data-row-selected]:hover,
-  tbody tr[data-row-context-menu-visible] {
-    background: light-dark(
-      var(--mantine-datatable-row-hover-selected-bg-color-light),
-      var(--mantine-datatable-row-hover-selected-bg-color-dark)
-    );
-  }
+.mantine-datatable-vertical-alignment-bottom td {
+  vertical-align: bottom;
 }

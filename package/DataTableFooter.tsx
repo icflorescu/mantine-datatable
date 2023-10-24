@@ -40,7 +40,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
         style,
       ]}
     >
-      <TableTr>
+      <TableTr className="mantine-datatable-footer-row">
         {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={leftShadowVisible} />}
         {columns.map(({ hidden, ...columnProps }) => {
           if (hidden) return null;
@@ -48,7 +48,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
           const {
             accessor,
             visibleMediaQuery,
-            textAlignment,
+            textAlign,
             width,
             footer,
             footerClassName,
@@ -63,7 +63,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
               className={footerClassName}
               style={footerStyle}
               visibleMediaQuery={visibleMediaQuery}
-              textAlignment={textAlignment}
+              textAlign={textAlign}
               width={width}
               title={footer}
               noWrap={noWrap}

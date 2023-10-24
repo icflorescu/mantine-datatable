@@ -1,6 +1,6 @@
 'use client';
 
-import { Group, Text } from '@mantine/core';
+import { Box, Group } from '@mantine/core';
 import { IconSum } from '@tabler/icons-react';
 import { DataTable, uniqBy } from '__PACKAGE__';
 import dayjs from 'dayjs';
@@ -26,7 +26,7 @@ export function ColumnPropertiesExampleWithFooter() {
           footer: (
             <Group gap="xs">
               <IconSum size="1.25em" />
-              <Text mb={-2}>{records.length} employees</Text>
+              <Box mb={-2}>{records.length} employees</Box>
             </Group>
           ),
         },
@@ -41,7 +41,7 @@ export function ColumnPropertiesExampleWithFooter() {
           footer: (
             <Group gap="xs">
               <IconSum size="1.25em" />
-              <Text mb={-2}>{uniqBy(records, (record) => record.department.company.name).length} companies</Text>
+              <Box mb={-2}>{uniqBy(records, (record) => record.department.company.name).length} companies</Box>
             </Group>
           ),
         },

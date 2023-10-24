@@ -54,11 +54,12 @@ export function DataTableRow<T>({
     <>
       <TableTr
         className={clsx(
+          'mantine-datatable-row',
           { [POINTER_CURSOR]: onClick || expansion?.expandOnClick },
           typeof className === 'function' ? className(record, index) : className
         )}
-        data-row-selected={selectionChecked || undefined}
-        data-row-context-menu-visible={contextMenuVisible || undefined}
+        data-selected={selectionChecked || undefined}
+        data-context-menu-visible={contextMenuVisible || undefined}
         onClick={(e) => {
           if (expansion) {
             const { isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
@@ -93,7 +94,7 @@ export function DataTableRow<T>({
           const {
             accessor,
             visibleMediaQuery,
-            textAlignment,
+            textAlign,
             noWrap,
             ellipsis,
             width,
@@ -118,7 +119,7 @@ export function DataTableRow<T>({
               index={index}
               onClick={handleCellClick}
               accessor={accessor}
-              textAlignment={textAlignment}
+              textAlign={textAlign}
               noWrap={noWrap}
               ellipsis={ellipsis}
               width={width}

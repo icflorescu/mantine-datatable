@@ -10,6 +10,7 @@
 @import './DataTableHeaderSelectorCell.css';
 @import './DataTableLoader.css';
 @import './DataTablePagination.css';
+@import './DataTableRow.css';
 @import './DataTableRowExpansion.css';
 @import './DataTableRowSelectorCell.css';
 @import './DataTableScrollArea.css';
