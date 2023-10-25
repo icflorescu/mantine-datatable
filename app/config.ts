@@ -118,6 +118,16 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,
   },
   {
+    href: '/examples/pagination',
+    title: 'Pagination',
+    description: `Example: using paged data with ${PRODUCT_NAME}`,
+  },
+  {
+    href: '/examples/sorting',
+    title: 'Sorting',
+    description: `Example: sorting data with ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/infinite-scrolling',
     title: 'Infinite scrolling',
     description: `Example: how to implement infinite scrolling with ${PRODUCT_NAME}`,
