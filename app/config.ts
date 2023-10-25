@@ -113,6 +113,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,
   },
   {
+    href: '/examples/infinite-scrolling',
+    title: 'Infinite scrolling',
+    description: `Example: how to implement infinite scrolling with ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/records-selection',
     title: 'Records selection',
     description: `Example: how to enable multiple records selection on ${PRODUCT_NAME}`,
