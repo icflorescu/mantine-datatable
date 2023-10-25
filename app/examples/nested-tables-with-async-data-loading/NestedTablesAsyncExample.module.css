@@ -1,0 +1,17 @@
+.icon {
+  margin-top: rem(-2px);
+  width: rem(14px);
+  height: auto;
+}
+
+.expandIcon {
+  transition: transform 0.2s;
+}
+
+.expandIconRotated {
+  transform: rotate(90deg);
+}
+
+.employeeName {
+  margin-left: calc(var(--mantine-spacing-xl) * 2);
+}

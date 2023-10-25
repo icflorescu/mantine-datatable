@@ -133,6 +133,21 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: the row expansion feature of ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/nested-tables',
+    title: 'Nested tables',
+    description: `Example: how to implement nested tables with ${PRODUCT_NAME}`,
+  },
+  {
+    href: '/examples/nested-tables-with-async-data-loading',
+    title: 'Nested tables with async data loading',
+    description: `Example: how to implement nested ${PRODUCT_NAME}s with async data loading`,
+  },
+  {
+    href: '/examples/nested-tables-with-async-data-loading-and-sorting',
+    title: 'Nested tables with async data loading and sorting',
+    description: `Example: how to implement nested ${PRODUCT_NAME}s with async data loading and sorting`,
+  },
+  {
     href: '/examples/row-actions-cell',
     title: 'Row actions cell',
     description: `Example: how to implement a row actions cell on ${PRODUCT_NAME}`,
