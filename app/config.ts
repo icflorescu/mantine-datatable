@@ -108,6 +108,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: using a default column render function with ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/scrollable-vs-auto-height',
+    title: 'Scrollable vs. auto-height',
+    description: `Example: how to make ${PRODUCT_NAME} vertically scrollable`,
+  },
+  {
     href: '/examples/empty-state',
     title: 'Empty state',
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,

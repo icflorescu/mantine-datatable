@@ -11,7 +11,7 @@ const PATH = '/examples/disabling-text-selection';
 
 export const metadata = getRouteMetadata(PATH);
 
-export default async function BasicTablePropertiesExamplePage() {
+export default async function DisablingTextSelectionExamplePage() {
   const code = await readCodeFile<string>(`${PATH}/DisablingTextSelectionExample.tsx`);
 
   return (
