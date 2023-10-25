@@ -20,7 +20,7 @@ export function DataTableRowExpansion({ open, colSpan, content, collapseProps }:
       <TableTr>
         <TableTd className="mantine-datatable-row-expansion-cell" colSpan={colSpan}>
           <Collapse in={expanded} {...collapseProps}>
-            {content()}
+            <div className="mantine-datatable-row-expansion-cell-content">{content()}</div>
           </Collapse>
         </TableTd>
       </TableTr>

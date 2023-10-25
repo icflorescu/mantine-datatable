@@ -128,6 +128,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: handling cell click events on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/expanding-rows',
+    title: 'Expanding rows',
+    description: `Example: the row expansion feature of ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/row-actions-cell',
     title: 'Row actions cell',
     description: `Example: how to implement a row actions cell on ${PRODUCT_NAME}`,

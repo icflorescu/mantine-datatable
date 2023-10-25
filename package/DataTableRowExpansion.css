@@ -1,4 +1,11 @@
 .mantine-datatable-row-expansion-cell {
   padding: 0;
+}
+
+.mantine-datatable-row-expansion-cell-content {
   border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
+  border-top: rem(1px) solid var(--mantine-datatable-row-border-color);
+  [data-with-row-border] & {
+    border-top: 0;
+  }
 }
