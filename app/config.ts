@@ -118,9 +118,24 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to enable multiple records selection on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/handling-row-clicks',
+    title: 'Handling row clicks',
+    description: `Example: handling row click events on ${PRODUCT_NAME}`,
+  },
+  {
+    href: '/examples/handling-cell-clicks',
+    title: 'Handling cell clicks',
+    description: `Example: handling cell click events on ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/row-actions-cell',
     title: 'Row actions cell',
     description: `Example: how to implement a row actions cell on ${PRODUCT_NAME}`,
+  },
+  {
+    href: '/examples/links-or-buttons-inside-clickable-rows-or-cells',
+    title: 'Links or buttons inside clickable rows or cells',
+    description: `Example: how to add links or buttons inside ${PRODUCT_NAME} clickable rows or cells`,
   },
   {
     href: '/examples/disabling-text-selection',

@@ -1,5 +1,4 @@
-import { Collapse } from '@mantine/core';
-import clsx from 'clsx';
+import { Collapse, TableTd, TableTr } from '@mantine/core';
 import type { ReactNode } from 'react';
 import { useRowExpansionStatus } from './hooks';
 import type { DataTableRowExpansionCollapseProps } from './types';
@@ -17,19 +16,14 @@ export function DataTableRowExpansion({ open, colSpan, content, collapseProps }:
   return visible ? (
     <>
       {/* add an empty row to maintain striped rows consistency */}
-      <tr />
-      <tr>
-        <td
-          className={clsx('mantine-datatable-row-expansion-cell', {
-            'mantine-datatable-row-expansion-expanded': expanded,
-          })}
-          colSpan={colSpan}
-        >
+      <TableTr />
+      <TableTr>
+        <TableTd className="mantine-datatable-row-expansion-cell" colSpan={colSpan}>
           <Collapse in={expanded} {...collapseProps}>
             {content()}
           </Collapse>
-        </td>
-      </tr>
+        </TableTd>
+      </TableTr>
     </>
   ) : null;
 }

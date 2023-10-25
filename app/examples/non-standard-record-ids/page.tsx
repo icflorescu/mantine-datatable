@@ -23,14 +23,14 @@ export default async function NonStandardRecordIdsExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        By default, the <Code>DataTable</Code> will assume each record to have a property called <Code>id</Code>,
-        holding a unique value of a primitive data type.
+        By default, the DataTable will assume each record to have a property called <Code>id</Code>, holding a unique
+        value of a primitive data type.
         <br />
         The record IDs are used internally as <Code>.map()</Code> keys and to compare records when necessary.
       </Txt>
       <Txt>
-        You can override the default ID property name by adding an <Code>idAccessor</Code> property on the{' '}
-        <Code>DataTable</Code> like so:
+        You can override the default ID property name by adding an <Code>idAccessor</Code> property on the DataTable,
+        like so:
       </Txt>
       <CodeBlock code={code['NonStandardRecordIdsStringExample.tsx']} />
       <Txt>The code above will produce the following result:</Txt>

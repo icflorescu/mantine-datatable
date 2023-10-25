@@ -3,10 +3,6 @@
     border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
   }
 
-  table[data-striped] &:nth-of-type(odd) {
-    background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
-  }
-
   table[data-highlight-on-hover] &:hover {
     background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
   }
