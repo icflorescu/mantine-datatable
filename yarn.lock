@@ -1126,6 +1126,13 @@
     react-textarea-autosize "8.5.3"
     type-fest "^3.13.1"
 
+"@mantine/dates@^7.1.5":
+  version "7.1.5"
+  resolved "https://registry.yarnpkg.com/@mantine/dates/-/dates-7.1.5.tgz#d9686c2f598abf7cf7eb0a0616e41dba1c270cb9"
+  integrity sha512-rvlOFcjTpYQ8SFBH8fPWeIaBTXfhZUg5Rq7ANBD/6jizWN9I9bZIXIBan6Q4fA2i90eU6u6tidzeIsr1s4fU7w==
+  dependencies:
+    clsx "2.0.0"
+
 "@mantine/hooks@^7.1.5":
   version "7.1.5"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.1.5.tgz#445854b2e35d7a99c5ecd19bca8d39203b2dc686"

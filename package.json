@@ -75,6 +75,7 @@
     "@formkit/auto-animate": "^0.8.0",
     "@mantine/code-highlight": "^7.1.5",
     "@mantine/core": "^7.1.5",
+    "@mantine/dates": "^7.1.5",
     "@mantine/hooks": "^7.1.5",
     "@mantine/modals": "^7.1.5",
     "@mantine/notifications": "^7.1.5",
