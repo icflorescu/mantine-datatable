@@ -26,10 +26,14 @@ export default async function RecordsSelectionExamplePage() {
   return (
     <>
       <PageTitle of={PATH} />
-      <Txt>
+      <Txt idea title="Top feature">
         {PRODUCT_NAME} is probably the only data-table component for Mantine that supports an intuitive batch selection
-        of records, similar to the one you can find in Gmail: shift-clicking a row selection checkbox will result in
-        selecting/deselecting all records between the last selected record and the current one.
+        of records, similar to the one you can find in Gmail:{' '}
+        <strong>
+          shift-clicking a row selection checkbox will result in selecting/deselecting all records between the last
+          selected record and the current one
+        </strong>
+        .
       </Txt>
       <Txt>In order to enable records selection, you’ll have to add the following properties to the DataTable:</Txt>
       <ul>
