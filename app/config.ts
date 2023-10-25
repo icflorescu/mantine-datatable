@@ -118,6 +118,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to enable multiple records selection on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/row-actions-cell',
+    title: 'Row actions cell',
+    description: `Example: how to implement a row actions cell on ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/disabling-text-selection',
     title: 'Disabling text selection',
     description: `Example: disabling text selection on ${PRODUCT_NAME}`,

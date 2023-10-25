@@ -55,9 +55,6 @@ export function DataTableHeaderCell<T>({
     <TableTh
       className={clsx(
         {
-          [TEXT_ALIGN_LEFT]: textAlign === 'left',
-          [TEXT_ALIGN_CENTER]: textAlign === 'center',
-          [TEXT_ALIGN_RIGHT]: textAlign === 'right',
           'mantine-datatable-header-cell-sortable-column-header': sortable,
         },
         className
@@ -74,7 +71,16 @@ export function DataTableHeaderCell<T>({
         wrap="nowrap"
       >
         <Box
-          className={clsx('mantine-datatable-header-cell-sortable-column-header-text', NOWRAP, ELLIPSIS)}
+          className={clsx(
+            'mantine-datatable-header-cell-sortable-column-header-text',
+            {
+              [TEXT_ALIGN_LEFT]: textAlign === 'left',
+              [TEXT_ALIGN_CENTER]: textAlign === 'center',
+              [TEXT_ALIGN_RIGHT]: textAlign === 'right',
+            },
+            NOWRAP,
+            ELLIPSIS
+          )}
           title={tooltip}
         >
           {text}

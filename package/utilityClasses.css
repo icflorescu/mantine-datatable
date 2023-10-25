@@ -15,14 +15,14 @@
   user-select: none;
 }
 
-.mantine-datatable-text-align-left: {
+.mantine-datatable-text-align-left {
   text-align: left;
 }
 
-.mantine-datatable-text-align-center: {
+.mantine-datatable-text-align-center {
   text-align: center;
 }
 
-.mantine-datatable-text-align-right: {
+.mantine-datatable-text-align-right {
   text-align: right;
 }

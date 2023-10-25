@@ -1,4 +1,5 @@
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { ContextMenuProvider } from 'mantine-contextmenu';
 import type { Metadata } from 'next';
@@ -36,9 +37,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         >
           <Notifications />
-          <ContextMenuProvider>
-            <AppWrapper>{children}</AppWrapper>
-          </ContextMenuProvider>
+          <ModalsProvider>
+            <ContextMenuProvider>
+              <AppWrapper>{children}</AppWrapper>
+            </ContextMenuProvider>
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>
