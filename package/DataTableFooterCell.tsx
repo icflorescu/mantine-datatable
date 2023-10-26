@@ -5,8 +5,8 @@ import type { DataTableColumn } from './types';
 import { ELLIPSIS, NOWRAP, TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
 
 type DataTableFooterCellProps<T> = {
-  className?: string;
-  style?: MantineStyleProp;
+  className: string | undefined;
+  style: MantineStyleProp | undefined;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: React.ReactNode | undefined;
 } & Pick<DataTableColumn<T>, 'noWrap' | 'ellipsis' | 'textAlign' | 'width'>;

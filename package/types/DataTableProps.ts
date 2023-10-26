@@ -8,13 +8,14 @@ import type {
 } from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import type { DataTableColumnProps } from './DataTableColumnProps';
-import type { DataTableContextMenuProps } from './DataTableContextMenuProps';
 import type { DataTableDefaultColumnProps } from './DataTableDefaultColumnProps';
 import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';
 import type { DataTableLoaderProps } from './DataTableLoaderProps';
 import type { DataTableOuterBorderProps } from './DataTableOuterBorderProps';
 import type { DataTablePaginationProps } from './DataTablePaginationProps';
+import type { DataTableRowClickHandler } from './DataTableRowClickHandler';
 import type { DataTableRowExpansionProps } from './DataTableRowExpansionProps';
+import type { DataTableScrollProps } from './DataTableScrollProps';
 import type { DataTableSelectionProps } from './DataTableSelectionProps';
 import type { DataTableSortProps } from './DataTableSortProps';
 import type { DataTableVerticalAlignment } from './DataTableVerticalAlignment';
@@ -117,45 +118,36 @@ export type DataTableProps<T> = {
 
   /**
    * Function to call when a row cell is clicked.
+   * Receives the current record, its index in `records`, the current column, its index in `columns`
+   * and the click event as parameters.
    */
   onCellClick?: DataTableCellClickHandler<T>;
+
+  /**
+   * Function to call when the user right-clicks on a row cell.
+   * Receives the current record, its index in `records`, the current column, its index in `columns`
+   * and the click event as parameters.
+   */
+  onCellContextMenu?: DataTableCellClickHandler<T>;
 
   /**
    * Function to call when a row is clicked.
    * Receives the current record, its index in `records` and the click event
    * as parameters.
    */
-  onRowClick?: (record: T, index: number, event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void;
+  onRowClick?: DataTableRowClickHandler<T>;
 
   /**
-   * Function to call when the DataTable is scrolled to top.
+   * Function to call when the user right-clicks on a row.
+   * Receives the current record, its index in `records` and the click event
+   * as parameters.
    */
-  onScrollToTop?: () => void;
-
-  /**
-   * Function to call when the DataTable is scrolled to bottom.
-   */
-  onScrollToBottom?: () => void;
-
-  /**
-   * Function to call when the DataTable is scrolled to left.
-   */
-  onScrollToLeft?: () => void;
-
-  /**
-   * Function to call when the DataTable is scrolled to right.
-   */
-  onScrollToRight?: () => void;
+  onRowContextMenu?: DataTableRowClickHandler<T>;
 
   /**
    * Color of row borders, key of `theme.colors` or any valid CSS color.
    */
   rowBorderColor?: MantineColor;
-
-  /**
-   * Defines a context-menu to show when user right-clicks or clicks on a row.
-   */
-  rowContextMenu?: DataTableContextMenuProps<T>;
 
   /**
    * Defines the row expansion behavior.
@@ -195,11 +187,26 @@ export type DataTableProps<T> = {
    * Ref pointing to the table body element.
    */
   bodyRef?: ((instance: HTMLTableSectionElement | null) => void) | React.RefObject<HTMLTableSectionElement>;
-} & TableProps &
+} & Omit<
+  TableProps,
+  | 'onScroll'
+  | 'className'
+  | 'classNames'
+  | 'style'
+  | 'styles'
+  | 'p'
+  | 'px'
+  | 'py'
+  | 'pt'
+  | 'pb'
+  | 'layout'
+  | 'captionSide'
+> &
   DataTableColumnProps<T> &
   DataTableOuterBorderProps &
   DataTableLoaderProps &
   DataTableEmptyStateProps &
   DataTablePaginationProps &
   DataTableSortProps &
+  DataTableScrollProps &
   DataTableSelectionProps<T>;

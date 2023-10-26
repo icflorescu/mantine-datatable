@@ -7,7 +7,7 @@ type DataTableRowExpansionProps = {
   open: boolean;
   colSpan: number;
   content: () => ReactNode;
-  collapseProps?: DataTableRowExpansionCollapseProps;
+  collapseProps: DataTableRowExpansionCollapseProps | undefined;
 };
 
 export function DataTableRowExpansion({ open, colSpan, content, collapseProps }: DataTableRowExpansionProps) {

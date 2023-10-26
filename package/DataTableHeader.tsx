@@ -7,7 +7,7 @@ import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSortProps } from './types';
 
 type DataTableHeaderProps<T> = {
-  className?: string;
+  className: string | undefined;
   style?: MantineStyleProp;
   sortStatus: DataTableSortProps['sortStatus'];
   sortIcons: DataTableSortProps['sortIcons'];

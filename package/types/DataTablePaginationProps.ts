@@ -10,11 +10,17 @@ export type DataTablePaginationProps = (
       paginationColor?: never;
       paginationSize?: never;
       loadingText?: never;
+      paginationWithEdges?: never;
       paginationText?: never;
       paginationWrapBreakpoint?: never;
       getPaginationControlProps?: never;
     }
   | {
+      /**
+       * Whenther to show first and last page navigation buttons.
+       */
+      paginationWithEdges?: boolean;
+
       /**
        * Current page number (1-based).
        * If provided, a pagination component is shown.

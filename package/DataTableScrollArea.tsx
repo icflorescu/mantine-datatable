@@ -1,18 +1,17 @@
 import { Box, ScrollArea, type ScrollAreaProps } from '@mantine/core';
 import clsx from 'clsx';
 
-type DataTableScrollAreaProps = {
+type DataTableScrollAreaProps = React.PropsWithChildren<{
   topShadowVisible: boolean;
   leftShadowVisible: boolean;
   rightShadowVisible: boolean;
   bottomShadowVisible: boolean;
   headerHeight: number;
   footerHeight: number;
-  onScrollPositionChange: () => void;
+  onScrollPositionChange: ScrollAreaProps['onScrollPositionChange'];
   viewportRef: React.Ref<HTMLDivElement>;
-  scrollAreaProps?: Omit<ScrollAreaProps, 'classNames' | 'styles' | 'onScrollPositionChange'>;
-  children: React.ReactNode;
-};
+  scrollAreaProps: Omit<ScrollAreaProps, 'classNames' | 'styles' | 'onScrollPositionChange'> | undefined;
+}>;
 
 export function DataTableScrollArea({
   topShadowVisible,

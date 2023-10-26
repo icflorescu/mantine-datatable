@@ -13,8 +13,8 @@ type DataTablePaginationComponentProps = WithOptionalProperty<
   >,
   'onRecordsPerPageChange' | 'recordsPerPageOptions'
 > & {
-  className?: string;
-  style?: MantineStyleProp;
+  className: string | undefined;
+  style: MantineStyleProp | undefined;
   fetching: boolean | undefined;
   recordsLength: number | undefined;
   horizontalSpacing: MantineSpacing | undefined;
@@ -28,6 +28,7 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
     fetching,
     page,
     onPageChange,
+    paginationWithEdges,
     paginationColor,
     paginationSize,
     loadingText,
@@ -91,6 +92,7 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
         className={clsx('mantine-datatable-pagination-pages', {
           'mantine-datatable-pagination-pages-fetching': fetching || !recordsLength,
         })}
+        withEdges={paginationWithEdges}
         value={page}
         onChange={onPageChange}
         size={paginationSize}

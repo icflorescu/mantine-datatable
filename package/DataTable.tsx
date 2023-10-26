@@ -11,17 +11,8 @@ import { DataTableHeader } from './DataTableHeader';
 import { DataTableLoader } from './DataTableLoader';
 import { DataTablePagination } from './DataTablePagination';
 import { DataTableRow } from './DataTableRow';
-// import DataTableRowMenu from './DataTableRowMenu';
-// import DataTableRowMenuDivider from './DataTableRowMenuDivider';
-// import DataTableRowMenuItem from './DataTableRowMenuItem';
 import { DataTableScrollArea } from './DataTableScrollArea';
-import {
-  useElementOuterSize,
-  useIsomorphicLayoutEffect,
-  useLastSelectionChangeIndex,
-  useRowContextMenu,
-  useRowExpansion,
-} from './hooks';
+import { useElementOuterSize, useIsomorphicLayoutEffect, useLastSelectionChangeIndex, useRowExpansion } from './hooks';
 import type { DataTableProps } from './types';
 import { TEXT_SELECTION_DISABLED } from './utilityClasses';
 import { differenceBy, getRecordId, uniqBy } from './utils';
@@ -81,15 +72,17 @@ export function DataTable<T>({
   noRecordsIcon,
   highlightOnHover,
   striped,
-  noHeader: withoutHeader,
+  noHeader,
   onRowClick,
+  onRowContextMenu,
   onCellClick,
+  onCellContextMenu,
+  onScroll,
   onScrollToTop,
   onScrollToBottom,
   onScrollToLeft,
   onScrollToRight,
   rowBorderColor,
-  rowContextMenu,
   rowExpansion,
   rowClassName,
   rowStyle,
@@ -130,19 +123,16 @@ export function DataTable<T>({
   const [scrolledToLeft, setScrolledToLeft] = useState(true);
   const [scrolledToRight, setScrolledToRight] = useState(true);
 
-  const { rowContextMenuInfo, setRowContextMenuInfo } = useRowContextMenu<T>(fetching);
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
   const handleScrollPositionChange = useCallback(() => {
-    if (!fetching && rowContextMenu) {
-      setRowContextMenuInfo(null);
-    }
+    const scrollTop = scrollViewportRef.current?.scrollTop || 0;
+    const scrollLeft = scrollViewportRef.current?.scrollLeft || 0;
 
     if (fetching || tableHeight <= scrollViewportHeight) {
       setScrolledToTop(true);
       setScrolledToBottom(true);
     } else {
-      const scrollTop = scrollViewportRef.current?.scrollTop || 0;
       const newScrolledToTop = scrollTop === 0;
       const newScrolledToBottom = tableHeight - scrollTop - scrollViewportHeight < 1;
       setScrolledToTop(newScrolledToTop);
@@ -155,7 +145,6 @@ export function DataTable<T>({
       setScrolledToLeft(true);
       setScrolledToRight(true);
     } else {
-      const scrollLeft = scrollViewportRef.current?.scrollLeft || 0;
       const newScrolledToLeft = scrollLeft === 0;
       const newScrolledToRight = tableWidth - scrollLeft - scrollViewportWidth < 1;
       setScrolledToLeft(newScrolledToLeft);
@@ -163,13 +152,15 @@ export function DataTable<T>({
       if (newScrolledToLeft && newScrolledToLeft !== scrolledToLeft) onScrollToLeft?.();
       if (newScrolledToRight && newScrolledToRight !== scrolledToRight) onScrollToRight?.();
     }
+
+    onScroll?.({ x: scrollLeft, y: scrollTop });
   }, [
     fetching,
+    onScroll,
     onScrollToBottom,
     onScrollToLeft,
     onScrollToRight,
     onScrollToTop,
-    rowContextMenu,
     scrollViewportHeight,
     scrollViewportRef,
     scrollViewportWidth,
@@ -177,7 +168,6 @@ export function DataTable<T>({
     scrolledToLeft,
     scrolledToRight,
     scrolledToTop,
-    setRowContextMenuInfo,
     tableHeight,
     tableWidth,
   ]);
@@ -284,7 +274,7 @@ export function DataTable<T>({
           data-highlight-on-hover={highlightOnHover || undefined}
           {...otherProps}
         >
-          {withoutHeader ? null : (
+          {noHeader ? null : (
             <DataTableHeader<T>
               ref={headerRef}
               className={classNames?.header}
@@ -308,19 +298,6 @@ export function DataTable<T>({
               records.map((record, index) => {
                 const recordId = getRecordId(record, idAccessor);
                 const isSelected = selectedRecordIds?.includes(recordId) || false;
-
-                // let showContextMenuOnClick = false;
-                // let showContextMenuOnRightClick = false;
-                // if (rowContextMenu) {
-                //   const { hidden } = rowContextMenu;
-                //   if (!hidden || !(typeof hidden === 'function' ? hidden(record, recordIndex) : hidden)) {
-                //     if (rowContextMenu.trigger === 'click') {
-                //       showContextMenuOnClick = true;
-                //     } else {
-                //       showContextMenuOnRightClick = true;
-                //     }
-                //   }
-                // }
 
                 let handleSelectionChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
                 if (onSelectedRecordsChange && selectedRecords) {
@@ -353,26 +330,6 @@ export function DataTable<T>({
                   };
                 }
 
-                // let handleClick: MouseEventHandler<HTMLTableRowElement> | undefined;
-                // if (showContextMenuOnClick) {
-                //   handleClick = (e) => {
-                //     setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
-                //     onRowClick?.(record, recordIndex, e);
-                //   };
-                // } else if (onRowClick) {
-                //   handleClick = (e) => {
-                //     onRowClick(record, recordIndex, e);
-                //   };
-                // }
-
-                // let handleContextMenu: MouseEventHandler<HTMLTableRowElement> | undefined;
-                // if (showContextMenuOnRightClick) {
-                //   handleContextMenu = (e) => {
-                //     e.preventDefault();
-                //     setRowContextMenuInfo({ y: e.clientY, x: e.clientX, record, recordIndex });
-                //   };
-                // }
-
                 return (
                   <DataTableRow<T>
                     key={recordId as React.Key}
@@ -386,13 +343,10 @@ export function DataTable<T>({
                     onSelectionChange={handleSelectionChange}
                     isRecordSelectable={isRecordSelectable}
                     getSelectionCheckboxProps={getRecordSelectionCheckboxProps}
-                    // onClick={handleClick}
-                    onClick={onRowClick ? (event) => onRowClick(record, index, event) : undefined}
+                    onClick={onRowClick}
                     onCellClick={onCellClick}
-                    // onContextMenu={handleContextMenu}
-                    contextMenuVisible={
-                      rowContextMenuInfo ? getRecordId(rowContextMenuInfo.record, idAccessor) === recordId : false
-                    }
+                    onContextMenu={onRowContextMenu}
+                    onCellContextMenu={onCellContextMenu}
                     expansion={rowExpansionInfo}
                     className={rowClassName}
                     style={rowStyle}
@@ -462,38 +416,6 @@ export function DataTable<T>({
       >
         {emptyState}
       </DataTableEmptyState>
-      {/* {rowContextMenu && rowContextMenuInfo && (
-        <Portal>
-          <DataTableRowMenu
-            zIndex={rowContextMenu.zIndex}
-            borderRadius={rowContextMenu.borderRadius}
-            shadow={rowContextMenu.shadow}
-            y={rowContextMenuInfo.y}
-            x={rowContextMenuInfo.x}
-            onDestroy={() => setRowContextMenuInfo(null)}
-          >
-            {rowContextMenu
-              .items(rowContextMenuInfo.record, rowContextMenuInfo.recordIndex)
-              .map(({ divider, key, title, icon, color, hidden, disabled, onClick }) =>
-                divider ? (
-                  <DataTableRowMenuDivider key={key} />
-                ) : hidden ? null : (
-                  <DataTableRowMenuItem
-                    key={key}
-                    title={title ?? humanize(key)}
-                    icon={icon}
-                    color={color}
-                    disabled={disabled}
-                    onClick={() => {
-                      setRowContextMenuInfo(null);
-                      onClick();
-                    }}
-                  />
-                )
-              )}
-          </DataTableRowMenu>
-        </Portal>
-      )} */}
     </Box>
   );
 }

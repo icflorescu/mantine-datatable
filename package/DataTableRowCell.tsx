@@ -13,12 +13,13 @@ import {
 import { getValueAtPath } from './utils';
 
 type DataTableRowCellProps<T> = {
-  className?: string;
-  style?: MantineStyleProp;
+  className: string | undefined;
+  style: MantineStyleProp | undefined;
   record: T;
   index: number;
   defaultRender: ((record: T, index: number, accessor: string) => React.ReactNode) | undefined;
-  onClick?: React.MouseEventHandler<HTMLTableCellElement>;
+  onClick: React.MouseEventHandler<HTMLTableCellElement> | undefined;
+  onContextMenu: React.MouseEventHandler<HTMLTableCellElement> | undefined;
 } & Pick<
   DataTableColumn<T>,
   'accessor' | 'visibleMediaQuery' | 'textAlign' | 'width' | 'noWrap' | 'ellipsis' | 'render' | 'customCellAttributes'

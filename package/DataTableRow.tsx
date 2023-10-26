@@ -4,7 +4,12 @@ import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
 import { useRowExpansion } from './hooks';
-import type { DataTableCellClickHandler, DataTableColumn, DataTableDefaultColumnProps } from './types';
+import type {
+  DataTableCellClickHandler,
+  DataTableColumn,
+  DataTableDefaultColumnProps,
+  DataTableRowClickHandler,
+} from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
 type DataTableRowProps<T> = {
@@ -18,14 +23,14 @@ type DataTableRowProps<T> = {
   onSelectionChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
   isRecordSelectable: ((record: T, index: number) => boolean) | undefined;
   getSelectionCheckboxProps: (record: T, index: number) => Record<string, unknown>;
-  onClick: React.MouseEventHandler<HTMLTableRowElement> | undefined;
+  onClick: DataTableRowClickHandler<T> | undefined;
+  onContextMenu: DataTableRowClickHandler<T> | undefined;
   onCellClick: DataTableCellClickHandler<T> | undefined;
-  // onContextMenu: React.MouseEventHandler<HTMLTableRowElement> | undefined;
+  onCellContextMenu: DataTableCellClickHandler<T> | undefined;
   expansion: ReturnType<typeof useRowExpansion<T>>;
   customAttributes?: (record: T, index: number) => Record<string, unknown>;
   className?: string | ((record: T, index: number) => string | undefined);
   style?: (record: T, index: number) => MantineStyleProp | undefined;
-  contextMenuVisible: boolean;
   leftShadowVisible: boolean;
 };
 
@@ -41,13 +46,13 @@ export function DataTableRow<T>({
   isRecordSelectable,
   getSelectionCheckboxProps,
   onClick,
+  onContextMenu,
   onCellClick,
-  // onContextMenu,
+  onCellContextMenu,
   expansion,
   customAttributes,
   className,
   style,
-  contextMenuVisible,
   leftShadowVisible,
 }: DataTableRowProps<T>) {
   return (
@@ -59,7 +64,6 @@ export function DataTableRow<T>({
           typeof className === 'function' ? className(record, index) : className
         )}
         data-selected={selectionChecked || undefined}
-        data-context-menu-visible={contextMenuVisible || undefined}
         onClick={(e) => {
           if (expansion) {
             const { isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
@@ -71,11 +75,11 @@ export function DataTableRow<T>({
               }
             }
           }
-          onClick?.(e);
+          onClick?.({ event: e, record, index });
         }}
+        onContextMenu={onContextMenu ? (e) => onContextMenu({ event: e, record, index }) : undefined}
         style={style?.(record, index)}
         {...customAttributes?.(record, index)}
-        // onContextMenu={onContextMenu}
       >
         {selectionVisible && (
           <DataTableRowSelectorCell<T>
@@ -104,11 +108,6 @@ export function DataTableRow<T>({
             customCellAttributes,
           } = { ...defaultColumnProps, ...columnProps };
 
-          let handleCellClick: React.MouseEventHandler<HTMLTableCellElement> | undefined;
-          if (onCellClick) {
-            handleCellClick = (event) => onCellClick({ event, record, index, column: columnProps, columnIndex });
-          }
-
           return (
             <DataTableRowCell<T>
               key={accessor}
@@ -117,7 +116,16 @@ export function DataTableRow<T>({
               visibleMediaQuery={visibleMediaQuery}
               record={record}
               index={index}
-              onClick={handleCellClick}
+              onClick={
+                onCellClick
+                  ? (event) => onCellClick({ event, record, index, column: columnProps, columnIndex })
+                  : undefined
+              }
+              onContextMenu={
+                onCellContextMenu
+                  ? (event) => onCellContextMenu({ event, record, index, column: columnProps, columnIndex })
+                  : undefined
+              }
               accessor={accessor}
               textAlign={textAlign}
               noWrap={noWrap}

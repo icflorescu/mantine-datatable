@@ -6,8 +6,8 @@ import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelecto
 import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
 
 type DataTableFooterProps<T> = {
-  className?: string;
-  style?: MantineStyleProp;
+  className: string | undefined;
+  style: MantineStyleProp | undefined;
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
   selectionVisible: boolean;

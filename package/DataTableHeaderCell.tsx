@@ -8,7 +8,7 @@ import { ELLIPSIS, NOWRAP, TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT 
 import { humanize } from './utils';
 
 type DataTableHeaderCellProps<T> = {
-  className?: string;
+  className: string | undefined;
   style: MantineStyleProp | undefined;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: React.ReactNode | undefined;

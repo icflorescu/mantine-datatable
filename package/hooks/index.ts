@@ -4,6 +4,5 @@ export * from './useLastSelectionChangeIndex';
 export * from './useMediaQueries';
 export * from './useMediaQueriesStringOrFunction';
 export * from './useMediaQueryStringOrFunction';
-export * from './useRowContextMenu';
 export * from './useRowExpansion';
 export * from './useRowExpansionStatus';

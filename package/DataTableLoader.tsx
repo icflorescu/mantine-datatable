@@ -1,4 +1,4 @@
-import { Center, Loader, type DefaultMantineColor, type MantineLoader, type MantineSize } from '@mantine/core';
+import { Center, Loader, type MantineColor, type MantineLoader, type MantineSize } from '@mantine/core';
 import clsx from 'clsx';
 
 type DataTableLoaderProps = {
@@ -9,7 +9,7 @@ type DataTableLoaderProps = {
   backgroundBlur: number | undefined;
   size: MantineSize | (string & NonNullable<unknown>) | number | undefined;
   type: MantineLoader | undefined;
-  color: DefaultMantineColor | undefined;
+  color: MantineColor | undefined;
 };
 
 export function DataTableLoader({

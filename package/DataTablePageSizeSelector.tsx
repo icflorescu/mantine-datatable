@@ -1,4 +1,14 @@
-import { Button, Group, Menu, Text, type MantineColor, type MantineSize } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Menu,
+  MenuDropdown,
+  MenuItem,
+  MenuTarget,
+  Text,
+  type MantineColor,
+  type MantineSize,
+} from '@mantine/core';
 
 type DataTablePageSizeSelectorComponentProps = {
   size: MantineSize;
@@ -6,7 +16,7 @@ type DataTablePageSizeSelectorComponentProps = {
   values: number[];
   value: number;
   onChange: (value: number) => void;
-  color?: MantineColor;
+  color: MantineColor | undefined;
 };
 
 const HEIGHT: Record<MantineSize, number> = { xs: 22, sm: 26, md: 32, lg: 38, xl: 44 };
@@ -23,7 +33,7 @@ export function DataTablePageSizeSelector({
     <Group gap="xs">
       <Text size={size}>{label}</Text>
       <Menu withinPortal withArrow>
-        <Menu.Target>
+        <MenuTarget>
           <Button
             size={size}
             variant="default"
@@ -38,12 +48,12 @@ export function DataTablePageSizeSelector({
           >
             {value}
           </Button>
-        </Menu.Target>
-        <Menu.Dropdown>
+        </MenuTarget>
+        <MenuDropdown>
           {values.map((v) => {
             const isCurrent = v === value;
             return (
-              <Menu.Item
+              <MenuItem
                 key={v}
                 style={[
                   { height: HEIGHT[size] },
@@ -56,10 +66,10 @@ export function DataTablePageSizeSelector({
                 onClick={() => onChange(v)}
               >
                 <Text size={size}>{v}</Text>
-              </Menu.Item>
+              </MenuItem>
             );
           })}
-        </Menu.Dropdown>
+        </MenuDropdown>
       </Menu>
     </Group>
   );

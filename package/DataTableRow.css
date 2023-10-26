@@ -7,8 +7,7 @@
     background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
   }
 
-  &[data-selected] td,
-  &[data-context-menu-visible] td {
+  &[data-selected] td {
     background: var(--mantine-primary-color-light);
   }
 }
