@@ -7,7 +7,7 @@
   z-index: -1;
   transform: scaleY(0);
   transform-origin: top;
-  transition: transform 0.2s;
+  transition: transform;
 }
 
 .lineVisible {

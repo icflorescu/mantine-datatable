@@ -13,6 +13,8 @@ export type NavbarExamplesProps = {
   items: NavbarButtonProps[];
 };
 
+const COLOR = 'green';
+
 export function NavbarExamples({ items }: NavbarExamplesProps) {
   const [expanded, { toggle, open }] = useDisclosure(false, {
     onOpen: () => localStorage.setItem(EXPANSION_STATE_STORAGE_KEY, 'true'),
@@ -36,7 +38,7 @@ export function NavbarExamples({ items }: NavbarExamplesProps) {
       <NavbarButton
         title="Examples"
         description={`${PRODUCT_NAME} usage examples`}
-        color="green"
+        color={COLOR}
         onClick={(e) => {
           e.stopPropagation();
           toggle();
@@ -44,7 +46,11 @@ export function NavbarExamples({ items }: NavbarExamplesProps) {
         expanded={expanded}
       />
       <Collapse in={expanded} onTransitionEnd={() => setDidExpand(expanded)} pos="relative">
-        <Box bg="green" className={clsx(classes.line, { [classes.lineVisible]: didExpand })} />
+        <Box
+          bg={COLOR}
+          className={clsx(classes.line, { [classes.lineVisible]: didExpand })}
+          style={{ transitionDuration: `${30 * items.length}ms` }}
+        />
         {items.map((item) => (
           <NavbarButton key={item.href} {...item} />
         ))}
