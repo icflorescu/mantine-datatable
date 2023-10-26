@@ -1,0 +1,24 @@
+.controlGroups {
+  display: flex;
+  flex-direction: column;
+  max-width: rem(340px);
+  gap: var(--mantine-spacing-md);
+  @media (min-width: rem(880px)) {
+    max-width: rem(700px);
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--mantine-spacing-xs);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  min-height: rem(34px);
+}

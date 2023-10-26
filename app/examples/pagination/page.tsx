@@ -7,6 +7,7 @@ import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
+import { MANTINE_SIZES } from '~/lib/constants';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import PaginationExample from './PaginationExample';
 import PaginationExampleWithControlProps from './PaginationExampleWithControlProps';
@@ -67,7 +68,7 @@ export default async function PaginationExamplePage() {
         <li>
           <Code>paginationSize</Code> → the pagination size,{' '}
           <Code>
-            {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
+            {MANTINE_SIZES.map((size, index) => (
               <Fragment key={size}>
                 {index !== 0 && ' | '}
                 &apos;{size}&apos;

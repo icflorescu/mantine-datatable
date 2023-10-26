@@ -188,6 +188,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: disabling text selection on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/asynchronous-data-loading',
+    title: 'Asynchronous data loading',
+    description: `Example: loading data asynchronously with ${PRODUCT_NAME} and customizing the loader`,
+  },
+  {
     href: '/examples/custom-row-or-cell-attributes',
     title: 'Custom row or cell attributes',
     description: `Example: How to add custom attributes to ${PRODUCT_NAME} rows or cells`,

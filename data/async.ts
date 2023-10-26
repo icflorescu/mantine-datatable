@@ -1,5 +1,16 @@
 import { delay, type DelayOptions } from '~/lib/examples';
-import { departments, employees } from '.';
+import { companies, departments, employees } from '.';
+
+export async function getCompaniesAsync({
+  count,
+  delay: delayOptions = { min: 1000, max: 2000 },
+}: {
+  count: number;
+  delay?: DelayOptions;
+}) {
+  await delay(delayOptions);
+  return companies.slice(0, count);
+}
 
 export async function countCompanyDepartmentsAsync({
   companyId,
