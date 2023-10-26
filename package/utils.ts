@@ -27,15 +27,20 @@ export function uniqBy<T>(arr: T[], iteratee: (value: T) => unknown) {
 /**
  * Utility function that returns the value at a given path in an object
  */
-export function getValueAtPath(obj: unknown, path: string) {
+export function getValueAtPath<T>(obj: T, path: keyof T | (string & NonNullable<unknown>)) {
   if (!path) return undefined;
-  const pathArray = path.match(/([^[.\]])+/g) as string[];
+  const pathArray = (path as string).match(/([^[.\]])+/g) as string[];
   return pathArray.reduce((prevObj: unknown, key) => prevObj && (prevObj as Record<string, unknown>)[key], obj);
 }
 
 /**
  * Utility function that returns the record id using idAccessor
  */
-export function getRecordId<T>(record: T, idAccessor: string | ((record: T) => React.Key)) {
-  return typeof idAccessor === 'string' ? getValueAtPath(record, idAccessor) : idAccessor(record);
+export function getRecordId<T>(
+  record: T,
+  idAccessor: keyof T | (string & NonNullable<unknown>) | ((record: T) => React.Key)
+) {
+  return typeof idAccessor === 'string'
+    ? getValueAtPath(record, idAccessor)
+    : (idAccessor as (record: T) => React.Key)(record);
 }

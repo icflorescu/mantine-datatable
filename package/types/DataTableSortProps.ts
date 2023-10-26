@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { DataTableSortStatus } from './DataTableSortStatus';
 
-export type DataTableSortProps =
+export type DataTableSortProps<T> =
   | {
       sortStatus?: never;
       onSortStatusChange?: never;
@@ -11,13 +11,13 @@ export type DataTableSortProps =
       /**
        * Current sort status (sort column accessor & direction).
        */
-      sortStatus: DataTableSortStatus;
+      sortStatus: DataTableSortStatus<T>;
 
       /**
        * Callback fired after change of sort status.
        * Receives the new sort status as argument.
        */
-      onSortStatusChange?: (sortStatus: DataTableSortStatus) => void;
+      onSortStatusChange?: (sortStatus: DataTableSortStatus<T>) => void;
 
       /**
        * Custom sort icons.

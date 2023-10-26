@@ -1,12 +1,11 @@
 import { Collapse, TableTd, TableTr } from '@mantine/core';
-import type { ReactNode } from 'react';
 import { useRowExpansionStatus } from './hooks';
 import type { DataTableRowExpansionCollapseProps } from './types';
 
 type DataTableRowExpansionProps = {
   open: boolean;
   colSpan: number;
-  content: () => ReactNode;
+  content: () => React.ReactNode;
   collapseProps: DataTableRowExpansionCollapseProps | undefined;
 };
 

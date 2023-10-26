@@ -125,7 +125,7 @@ export function DataTable<T>({
 
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
-  const handleScrollPositionChange = useCallback(() => {
+  const processScrolling = useCallback(() => {
     const scrollTop = scrollViewportRef.current?.scrollTop || 0;
     const scrollLeft = scrollViewportRef.current?.scrollLeft || 0;
 
@@ -152,11 +152,8 @@ export function DataTable<T>({
       if (newScrolledToLeft && newScrolledToLeft !== scrolledToLeft) onScrollToLeft?.();
       if (newScrolledToRight && newScrolledToRight !== scrolledToRight) onScrollToRight?.();
     }
-
-    onScroll?.({ x: scrollLeft, y: scrollTop });
   }, [
     fetching,
-    onScroll,
     onScrollToBottom,
     onScrollToLeft,
     onScrollToRight,
@@ -172,7 +169,15 @@ export function DataTable<T>({
     tableWidth,
   ]);
 
-  useIsomorphicLayoutEffect(handleScrollPositionChange, [handleScrollPositionChange]);
+  useIsomorphicLayoutEffect(processScrolling, [processScrolling]);
+
+  const handleScrollPositionChange = useCallback(
+    (e: { x: number; y: number }) => {
+      onScroll?.(e);
+      processScrolling();
+    },
+    [processScrolling, onScroll]
+  );
 
   const handlePageChange = useCallback(
     (page: number) => {

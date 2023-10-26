@@ -9,7 +9,7 @@ export function useRowExpansion<T>({
 }: {
   rowExpansion?: DataTableRowExpansionProps<T>;
   records: T[] | undefined;
-  idAccessor: string | ((record: T) => React.Key);
+  idAccessor: (keyof T | (string & NonNullable<unknown>)) | ((record: T) => React.Key);
 }) {
   let initiallyExpandedRecordIds: unknown[] = [];
   if (rowExpansion && records) {

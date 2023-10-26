@@ -153,6 +153,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: handling cell click events on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/using-with-mantine-contextmenu',
+    title: `Using with ${MANTINE_CONTEXTMENU_PRODUCT_NAME}`,
+    description: `Example: how to use ${PRODUCT_NAME} with ${MANTINE_CONTEXTMENU_PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/expanding-rows',
     title: 'Expanding rows',
     description: `Example: the row expansion feature of ${PRODUCT_NAME}`,

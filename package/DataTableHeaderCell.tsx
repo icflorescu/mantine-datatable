@@ -12,9 +12,9 @@ type DataTableHeaderCellProps<T> = {
   style: MantineStyleProp | undefined;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: React.ReactNode | undefined;
-  sortStatus: DataTableSortProps['sortStatus'];
-  sortIcons: DataTableSortProps['sortIcons'];
-  onSortStatusChange: DataTableSortProps['onSortStatusChange'];
+  sortStatus: DataTableSortProps<T>['sortStatus'];
+  sortIcons: DataTableSortProps<T>['sortIcons'];
+  onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
 } & Pick<DataTableColumn<T>, 'accessor' | 'sortable' | 'textAlign' | 'width' | 'filter' | 'filtering'>;
 
 export function DataTableHeaderCell<T>({
@@ -33,7 +33,7 @@ export function DataTableHeaderCell<T>({
   filtering,
 }: DataTableHeaderCellProps<T>) {
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
-  const text = title ?? humanize(accessor);
+  const text = title ?? humanize(accessor as string);
   const tooltip = typeof text === 'string' ? text : undefined;
   const sortAction =
     sortable && onSortStatusChange

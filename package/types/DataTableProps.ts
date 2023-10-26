@@ -88,7 +88,11 @@ export type DataTableProps<T> = {
    * Accepts the current record, its index in `records` and the column `accessor` as
    * arguments and returns a React node (remember that a string is a valid React node too).
    */
-  defaultColumnRender?: (record: T, index: number, accessor: string) => React.ReactNode;
+  defaultColumnRender?: (
+    record: T,
+    index: number,
+    accessor: keyof T | (string & NonNullable<unknown>)
+  ) => React.ReactNode;
 
   /**
    * Accessor to use as unique record key.
@@ -98,7 +102,7 @@ export type DataTableProps<T> = {
    * (i.e. `department.name` or `department.company.name`).
    * @default `id`
    */
-  idAccessor?: string | ((record: T) => React.Key);
+  idAccessor?: (keyof T | (string & NonNullable<unknown>)) | ((record: T) => React.Key);
 
   /**
    * Visible records.
@@ -207,6 +211,6 @@ export type DataTableProps<T> = {
   DataTableLoaderProps &
   DataTableEmptyStateProps &
   DataTablePaginationProps &
-  DataTableSortProps &
+  DataTableSortProps<T> &
   DataTableScrollProps &
   DataTableSelectionProps<T>;

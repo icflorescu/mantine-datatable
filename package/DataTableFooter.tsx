@@ -59,7 +59,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
 
           return (
             <DataTableFooterCell<T>
-              key={accessor}
+              key={accessor as React.Key}
               className={footerClassName}
               style={footerStyle}
               visibleMediaQuery={visibleMediaQuery}

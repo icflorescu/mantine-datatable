@@ -9,9 +9,9 @@ import type { DataTableColumn, DataTableColumnGroup, DataTableSortProps } from '
 type DataTableHeaderProps<T> = {
   className: string | undefined;
   style?: MantineStyleProp;
-  sortStatus: DataTableSortProps['sortStatus'];
-  sortIcons: DataTableSortProps['sortIcons'];
-  onSortStatusChange: DataTableSortProps['onSortStatusChange'];
+  sortStatus: DataTableSortProps<T>['sortStatus'];
+  sortIcons: DataTableSortProps<T>['sortIcons'];
+  onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
   columns: DataTableColumn<T>[];
   defaultColumnProps: Omit<DataTableColumn<T>, 'accessor'> | undefined;
   groups: readonly DataTableColumnGroup<T>[] | undefined;
@@ -83,7 +83,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
 
           return (
             <DataTableHeaderCell<T>
-              key={accessor}
+              key={accessor as React.Key}
               accessor={accessor}
               className={titleClassName}
               style={titleStyle}

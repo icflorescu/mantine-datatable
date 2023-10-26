@@ -17,7 +17,9 @@ type DataTableRowCellProps<T> = {
   style: MantineStyleProp | undefined;
   record: T;
   index: number;
-  defaultRender: ((record: T, index: number, accessor: string) => React.ReactNode) | undefined;
+  defaultRender:
+    | ((record: T, index: number, accessor: keyof T | (string & NonNullable<unknown>)) => React.ReactNode)
+    | undefined;
   onClick: React.MouseEventHandler<HTMLTableCellElement> | undefined;
   onContextMenu: React.MouseEventHandler<HTMLTableCellElement> | undefined;
 } & Pick<
@@ -32,6 +34,7 @@ export function DataTableRowCell<T>({
   record,
   index,
   onClick,
+  onContextMenu,
   noWrap,
   ellipsis,
   textAlign,
@@ -64,6 +67,7 @@ export function DataTableRowCell<T>({
         style,
       ]}
       onClick={onClick}
+      onContextMenu={onContextMenu}
       {...customCellAttributes?.(record, index)}
     >
       {render

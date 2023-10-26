@@ -17,7 +17,9 @@ type DataTableRowProps<T> = {
   index: number;
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
-  defaultColumnRender: ((record: T, index: number, accessor: string) => React.ReactNode) | undefined;
+  defaultColumnRender:
+    | ((record: T, index: number, accessor: keyof T | (string & NonNullable<unknown>)) => React.ReactNode)
+    | undefined;
   selectionVisible: boolean;
   selectionChecked: boolean;
   onSelectionChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
@@ -110,7 +112,7 @@ export function DataTableRow<T>({
 
           return (
             <DataTableRowCell<T>
-              key={accessor}
+              key={accessor as React.Key}
               className={typeof cellsClassName === 'function' ? cellsClassName(record, index) : cellsClassName}
               style={cellsStyle?.(record, index)}
               visibleMediaQuery={visibleMediaQuery}

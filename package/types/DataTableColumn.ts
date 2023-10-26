@@ -7,7 +7,7 @@ export type DataTableColumn<T> = {
    * You can use dot-notation for nested objects property drilling.
    * (i.e. `department.name` or `department.company.name`)
    */
-  accessor: string;
+  accessor: keyof T | (string & NonNullable<unknown>);
 
   /**
    * Optional column header title.
