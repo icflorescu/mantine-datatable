@@ -13,5 +13,5 @@ export * from './DataTableRowExpansionProps';
 export * from './DataTableSelectionProps';
 export * from './DataTableSortProps';
 export * from './DataTableSortStatus';
-export * from './DataTableVerticalAlignment';
+export * from './DataTableVerticalAlign';
 export * from './utils';

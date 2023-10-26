@@ -46,11 +46,11 @@
   }
 }
 
-.mantine-datatable-vertical-alignment-top td {
+.mantine-datatable-vertical-align-top td {
   vertical-align: top;
 }
 
-.mantine-datatable-vertical-alignment-bottom td {
+.mantine-datatable-vertical-align-bottom td {
   vertical-align: bottom;
 }
 

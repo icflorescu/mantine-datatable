@@ -1,5 +1,5 @@
 import { MantineSize } from '@mantine/core';
-import { DataTable, DataTableVerticalAlignment } from '__PACKAGE__';
+import { DataTable, DataTableVerticalAlign } from '__PACKAGE__';
 import companies from '~/data/companies.json';
 
 const records = companies.slice(0, 5);
@@ -21,8 +21,8 @@ export function BasicTablePropertiesExample({
   verticalSpacing,
   customizeFz,
   fz,
-  customizeVerticalAlignment,
-  verticalAlignment,
+  customizeVerticalAlign,
+  verticalAlign,
 }: {
   withTableBorder: boolean;
   withRowBorders: boolean;
@@ -40,8 +40,8 @@ export function BasicTablePropertiesExample({
   verticalSpacing: MantineSize;
   customizeFz: boolean;
   fz: MantineSize;
-  customizeVerticalAlignment: boolean;
-  verticalAlignment: DataTableVerticalAlignment;
+  customizeVerticalAlign: boolean;
+  verticalAlign: DataTableVerticalAlign;
 }) {
   // example-start
   return (
@@ -58,7 +58,7 @@ export function BasicTablePropertiesExample({
       horizontalSpacing={customizeHorizontalSpacing ? horizontalSpacing : undefined}
       verticalSpacing={customizeVerticalSpacing ? verticalSpacing : undefined}
       fz={customizeFz ? fz : undefined}
-      verticalAlignment={customizeVerticalAlignment ? verticalAlignment : undefined}
+      verticalAlign={customizeVerticalAlign ? verticalAlign : undefined}
       columns={[
         { accessor: 'name' },
         { accessor: 'missionStatement', width: 150 },

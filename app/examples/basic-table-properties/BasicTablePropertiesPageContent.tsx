@@ -1,7 +1,7 @@
 'use client';
 
 import { Code, Paper, Switch, type MantineSize } from '@mantine/core';
-import type { DataTableVerticalAlignment } from '__PACKAGE__';
+import type { DataTableVerticalAlign } from '__PACKAGE__';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import { CheckableSegmentedControl } from '~/components/CheckableSegmentedControl';
@@ -14,10 +14,10 @@ const INITIAL_SHADOW: MantineSize = 'sm';
 const INITIAL_HORIZONTAL_SPACING: MantineSize = 'xs';
 const INITIAL_VERTICAL_SPACING: MantineSize = 'xs';
 const INITIAL_FONT_SIZE: MantineSize = 'sm';
-const INITIAL_VERTICAL_ALIGNMENT: DataTableVerticalAlignment = 'center';
+const INITIAL_VERTICAL_ALIGN: DataTableVerticalAlign = 'center';
 
 const MANTINE_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'];
-const VERTICAL_ALIGNMENTS: DataTableVerticalAlignment[] = ['top', 'center', 'bottom'];
+const VERTICAL_ALIGNS: DataTableVerticalAlign[] = ['top', 'center', 'bottom'];
 
 export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: string }) {
   const [withTableBorder, setWithTableBorder] = useState(false);
@@ -36,8 +36,8 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
   const [verticalSpacing, setVerticalSpacing] = useState<MantineSize>(INITIAL_VERTICAL_SPACING);
   const [customizeFz, setCustomizeFz] = useState(false);
   const [fz, setFz] = useState<MantineSize>(INITIAL_FONT_SIZE);
-  const [customizeVerticalAlignment, setCustomizeVerticalAlignment] = useState(false);
-  const [verticalAlignment, setVerticalAlignment] = useState<DataTableVerticalAlignment>(INITIAL_VERTICAL_ALIGNMENT);
+  const [customizeVerticalAlign, setCustomizeVerticalAlign] = useState(false);
+  const [verticalAlign, setVerticalAlign] = useState<DataTableVerticalAlign>(INITIAL_VERTICAL_ALIGN);
 
   useEffect(() => {
     if (!withTableBorder) setCustomizeBorderRadius(false);
@@ -83,8 +83,8 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
           customizeVerticalSpacing ? `${spaces}verticalSpacing="${verticalSpacing}"\n` : ''
         )
         .replace(/( +)fz=.*\n/, (_, spaces) => (customizeFz ? `${spaces}fz="${fz}"\n` : ''))
-        .replace(/( +)verticalAlignment=.*\n/, (_, spaces) =>
-          customizeVerticalAlignment ? `${spaces}verticalAlignment="${verticalAlignment}"\n` : ''
+        .replace(/( +)verticalAlign=.*\n/, (_, spaces) =>
+          customizeVerticalAlign ? `${spaces}verticalAlign="${verticalAlign}"\n` : ''
         ),
     [
       initialCode,
@@ -104,8 +104,8 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
       verticalSpacing,
       customizeFz,
       fz,
-      customizeVerticalAlignment,
-      verticalAlignment,
+      customizeVerticalAlign,
+      verticalAlign,
     ]
   );
 
@@ -216,12 +216,12 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
           <CheckableSegmentedControl
             className={classes.control}
             label="Vertical alignment"
-            documentAs="verticalAlignment"
-            data={VERTICAL_ALIGNMENTS}
-            checked={customizeVerticalAlignment}
-            onCheckedChange={setCustomizeVerticalAlignment}
-            value={verticalAlignment}
-            onChange={(value) => setVerticalAlignment(value as DataTableVerticalAlignment)}
+            documentAs="verticalAlign"
+            data={VERTICAL_ALIGNS}
+            checked={customizeVerticalAlign}
+            onCheckedChange={setCustomizeVerticalAlign}
+            value={verticalAlign}
+            onChange={(value) => setVerticalAlign(value as DataTableVerticalAlign)}
           />
         </div>
       </Paper>
@@ -242,8 +242,8 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
         verticalSpacing={verticalSpacing}
         customizeFz={customizeFz}
         fz={fz}
-        customizeVerticalAlignment={customizeVerticalAlignment}
-        verticalAlignment={verticalAlignment}
+        customizeVerticalAlign={customizeVerticalAlign}
+        verticalAlign={verticalAlign}
       />
       <CodeBlock language="tsx" code={code} />
     </>

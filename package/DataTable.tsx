@@ -25,7 +25,7 @@ export function DataTable<T>({
   height = '100%',
   minHeight,
   shadow,
-  verticalAlignment = 'center',
+  verticalAlign = 'center',
   fetching,
   columns,
   groups,
@@ -268,8 +268,8 @@ export function DataTable<T>({
             'mantine-datatable-table',
             {
               [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
-              'mantine-datatable-vertical-alignment-top': verticalAlignment === 'top',
-              'mantine-datatable-vertical-alignment-bottom': verticalAlignment === 'bottom',
+              'mantine-datatable-vertical-align-top': verticalAlign === 'top',
+              'mantine-datatable-vertical-align-bottom': verticalAlign === 'bottom',
               'mantine-datatable-table-last-row-border-bottom-visible': tableHeight < scrollViewportHeight,
             },
             classNames?.table

@@ -18,7 +18,7 @@ import type { DataTableRowExpansionProps } from './DataTableRowExpansionProps';
 import type { DataTableScrollProps } from './DataTableScrollProps';
 import type { DataTableSelectionProps } from './DataTableSelectionProps';
 import type { DataTableSortProps } from './DataTableSortProps';
-import type { DataTableVerticalAlignment } from './DataTableVerticalAlignment';
+import type { DataTableVerticalAlign } from './DataTableVerticalAlign';
 
 export type DataTableProps<T> = {
   /**
@@ -71,7 +71,7 @@ export type DataTableProps<T> = {
    * Vertical alignment for row cells.
    * @default `center`
    */
-  verticalAlignment?: DataTableVerticalAlignment;
+  verticalAlign?: DataTableVerticalAlign;
 
   /**
    * If true, will show a loader with semi-transparent background, centered over the table.
