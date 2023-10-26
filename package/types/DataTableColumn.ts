@@ -90,6 +90,7 @@ export type DataTableColumn<T> = {
 
   /**
    * Optional style passed to the column title.
+   * Either a style object, or a function receiving the current theme and returning a style object.
    */
   titleStyle?: MantineStyleProp;
 
@@ -102,7 +103,8 @@ export type DataTableColumn<T> = {
 
   /**
    * Optional style passed to each data cell in the column.
-   * A function that receives the current record and its index as arguments and returns the style.
+   * A function that receives the current record and its index as arguments and returns either
+   * a style object, or a function that accepts theme and returns a style object.
    */
   cellsStyle?: (record: T, index: number) => MantineStyleProp | undefined;
 

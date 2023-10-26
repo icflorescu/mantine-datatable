@@ -3,6 +3,22 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.1.0-alpha.1 (2023-10-26)
+
+The V7 alpha release is here! 🎉  
+This is a **major rewrite** of the library internals, with the following goals in mind:
+  - **Mantine V7 compatibility** - switch the styling approach from CSS-in-JS to PostCSS (or PostCSS modules)
+  - Make the repo easier to maintain by switching from a monorepo approach to a single-package that includes the source code, documentation and examples; this should also make it easier for new contributors to get started
+  - Streamline the build process - switch from `esbuild` to plain `tsc` and `postcss` commands
+  - Rewrite the entire documentation website to make use of Next.js app router and React Server Components; this should also ensure the package will work properly in such an environment
+
+### Since the V7 is a major rewrite, it contains a number of **BREAKING CHANGES**, including but not limited to:
+
+- The `sx` styling properties are no longer supported; use `style`, `className`, `styles` and `classNames` instead
+- The column `textAlignment` property was renamed to `textAlign`
+- The internal context-menu functionality was removed in favor of using the [Mantine ContextMenu](https://icflorescu.github.io/mantine-contextmenu/) package (built by the same author), which is more flexible and feature-rich
+- Some method signatures were changed from `(record, index) => ...` to `({ record, index }) => ...` for clarity
+
 ## 6.0.0 (2023-10-01)
 
 - Bump version to 6.0.0 to match the compatible versions of `@mantine/hooks` and `@mantine/core`. From now on, let's keep the major version of `mantine-datatable` in sync with the major version of Mantine core

@@ -28,6 +28,7 @@ export type DataTableProps<T> = {
 
   /**
    * Data table container style.
+   * Either a style object or a function that accepts current theme and returns a style object.
    */
   style?: MantineStyleProp;
 
@@ -40,9 +41,8 @@ export type DataTableProps<T> = {
 
   /**
    * Data table elements styles.
-   * Can be an object with `root`, `table`, `header`, `footer` and `pagination` keys and
-   * style objects as values, or a function that accepts the current theme and returns a
-   * similarly structured object.
+   * An object with `root`, `table`, `header`, `footer` and `pagination` keys and
+   * either style objects, or functions that accept current theme and return style objects, as values.
    */
   styles?: StylesRecord<'root' | 'table' | 'header' | 'footer' | 'pagination', MantineStyleProp>;
 
@@ -122,29 +122,29 @@ export type DataTableProps<T> = {
 
   /**
    * Function to call when a row cell is clicked.
-   * Receives the current record, its index in `records`, the current column, its index in `columns`
-   * and the click event as parameters.
+   * Receives an object with the current record, its index in `records`, the current column,
+   * its index in `columns` and the click event as properties.
    */
   onCellClick?: DataTableCellClickHandler<T>;
 
   /**
    * Function to call when the user right-clicks on a row cell.
-   * Receives the current record, its index in `records`, the current column, its index in `columns`
-   * and the click event as parameters.
+   * Receives an object with the current record, its index in `records`, the current column,
+   * its index in `columns` and the click event as properties.
    */
   onCellContextMenu?: DataTableCellClickHandler<T>;
 
   /**
    * Function to call when a row is clicked.
-   * Receives the current record, its index in `records` and the click event
-   * as parameters.
+   * Receives an object with the current record, its index in `records` and the click event
+   * as properties.
    */
   onRowClick?: DataTableRowClickHandler<T>;
 
   /**
    * Function to call when the user right-clicks on a row.
-   * Receives the current record, its index in `records` and the click event
-   * as parameters.
+   * Receives an object with the current record, its index in `records` and the click event
+   * as properties.
    */
   onRowContextMenu?: DataTableRowClickHandler<T>;
 
@@ -166,7 +166,8 @@ export type DataTableProps<T> = {
 
   /**
    * Optional style passed to each row.
-   * A function receiving the current record and its index as arguments and returning a style object.
+   * A function receiving the current record and its index as arguments and returning either
+   * a style object, or a function that accepts theme and returns a style object.
    */
   rowStyle?: (record: T, index: number) => MantineStyleProp | undefined;
 
