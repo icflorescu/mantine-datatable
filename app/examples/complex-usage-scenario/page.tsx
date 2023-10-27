@@ -29,7 +29,7 @@ export default async function ComplexUsageExamplePage() {
       <Txt>
         Here is a complex usage scenario featuring custom column definitions, asynchronous data loading with{' '}
         <ExternalLink to="https://tanstack.com/query/latest">TanStack React Query</ExternalLink>, sorting, pagination,
-        custom cell data rendering, multiple row selection, and row context-menu.
+        custom cell data rendering, multiple row selection, row expansion, action cells, and row context-menu.
       </Txt>
       <ComplexUsageExampleWrapper>
         <ComplexUsageExample />
