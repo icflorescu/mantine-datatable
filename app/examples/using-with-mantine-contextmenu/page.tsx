@@ -13,6 +13,7 @@ import { CellContextMenuExample } from './CellContextMenuExample';
 import { ContextMenuOnClickExample } from './ContextMenuOnClickExample';
 import { RowAndCellContextMenuExample } from './RowAndCellContextMenuExample';
 import { RowContextMenuExample } from './RowContextMenuExample';
+import { RowContextMenuInsideModalExample } from './RowContextMenuInsideModalExample';
 import { RowContextMenuOnScrollableTableExample } from './RowContextMenuOnScrollableTableExample';
 
 const PATH = '/examples/using-with-mantine-contextmenu';
@@ -28,6 +29,7 @@ export default async function UsingWithMantineContextMenuExamplePage() {
     ),
     'RowAndCellContextMenuExample.tsx': readCodeFile<string>(`${PATH}/RowAndCellContextMenuExample.tsx`),
     'ContextMenuOnClickExample.tsx': readCodeFile<string>(`${PATH}/ContextMenuOnClickExample.tsx`),
+    'RowContextMenuInsideModalExample.tsx': readCodeFile<string>(`${PATH}/RowContextMenuInsideModalExample.tsx`),
   });
 
   return (
@@ -103,6 +105,14 @@ export default async function UsingWithMantineContextMenuExamplePage() {
       <ContextMenuOnClickExample />
       <Txt>Here’s the code for the example above:</Txt>
       <CodeBlock code={code['ContextMenuOnClickExample.tsx']} />
+      <PageSubtitle value="Using context-menus inside modals" />
+      <Txt>
+        You can use context-menus inside modals. In the example below, we’re showing a context-menu when the user
+        right-clicks on a table row rendered inside a modal:
+      </Txt>
+      <RowContextMenuInsideModalExample />
+      <Txt>Here’s the code for the example above:</Txt>
+      <CodeBlock code={code['RowContextMenuInsideModalExample.tsx']} />
       <Txt>Head over to the next example to discover more features of {PRODUCT_NAME}.</Txt>
       <PageNavigation of={PATH} />
     </>
