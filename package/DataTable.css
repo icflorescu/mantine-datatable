@@ -41,6 +41,10 @@
     background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
   }
 
+  &[data-highlight-on-hover] tbody tr:hover {
+    background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+  }
+
   tbody tr:last-of-type {
     border-bottom: 0;
   }

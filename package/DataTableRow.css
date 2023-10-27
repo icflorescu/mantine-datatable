@@ -3,10 +3,6 @@
     border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
   }
 
-  table[data-highlight-on-hover] &:hover {
-    background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
-  }
-
   &[data-selected] td {
     background: var(--mantine-primary-color-light);
   }
