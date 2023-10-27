@@ -2,10 +2,11 @@
 
 import { faker } from '@faker-js/faker';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { ActionIcon, Box, Button, Center, Group, Paper } from '@mantine/core';
+import { ActionIcon, Box, Button, Center, Paper } from '@mantine/core';
 import { IconArrowDown, IconArrowUp, IconArrowsUpDown, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
 import { useEffect, useState } from 'react';
+import classes from './UsingWithAutoAnimateExample.module.css';
 
 type User = {
   id: string;
@@ -23,7 +24,7 @@ export function UsingWithAutoAnimateExample() {
   const [records, setRecords] = useState<User[]>([]);
 
   useEffect(() => {
-    setRecords(Array.from({ length: 3 }, createUser));
+    setRecords(Array.from({ length: 6 }, createUser));
   }, []);
 
   const handleAdd = () => {
@@ -68,13 +69,12 @@ export function UsingWithAutoAnimateExample() {
 
   // example-start
   // ...
-
   const [bodyRef] = useAutoAnimate<HTMLTableSectionElement>();
 
   return (
     <>
       <DataTable
-        mb="xl"
+        borderRadius="sm"
         withTableBorder
         minHeight={160}
         columns={[
@@ -128,18 +128,20 @@ export function UsingWithAutoAnimateExample() {
       {/* example-skip */}
       <Paper p="md" mt="sm" withBorder>
         <Center>
-          <Group>
-            <Button onClick={handleAdd}>Add new user</Button>
-            <Button color="green" onClick={handleSortByName}>
+          <div className={classes.buttons}>
+            <Button className={classes.button} color="green" onClick={handleAdd}>
+              Add new user
+            </Button>
+            <Button className={classes.button} onClick={handleSortByName}>
               Sort by name
             </Button>
-            <Button color="green" onClick={handleSortByAge}>
+            <Button className={classes.button} onClick={handleSortByAge}>
               Sort by age
             </Button>
-            <Button color="red" onClick={handleDeleteAll}>
+            <Button className={classes.button} color="red" onClick={handleDeleteAll}>
               Delete all
             </Button>
-          </Group>
+          </div>
         </Center>
       </Paper>
       {/* example-resume */}

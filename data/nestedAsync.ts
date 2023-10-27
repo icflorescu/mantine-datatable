@@ -1,8 +1,15 @@
 import { sortBy } from 'lodash';
 import { useEffect, useState } from 'react';
 import { delay, useIsMounted } from '~/lib/examples';
-import { DataTableSortStatus } from '~/package';
-import { companies as companyData, departments as departmentData, employees } from '.';
+import type { DataTableSortStatus } from '~/package';
+import {
+  companies as companyData,
+  departments as departmentData,
+  employees,
+  type Company,
+  type Department,
+  type Employee,
+} from '.';
 
 // Departments with employees count
 export const departments = departmentData.map((department) => ({
@@ -19,7 +26,7 @@ export const companies = companyData.map((company) => ({
 }));
 
 // Hook simulating async companies fetching
-export function useCompaniesAsync({ sortStatus }: { sortStatus: DataTableSortStatus }) {
+export function useCompaniesAsync({ sortStatus }: { sortStatus: DataTableSortStatus<Company> }) {
   const isMounted = useIsMounted();
   const [records, setRecords] = useState<typeof companies>([]);
   const [loading, setLoading] = useState(true);
@@ -51,7 +58,7 @@ export function useDepartmentsAsync({
   sortStatus,
 }: {
   companyId: string;
-  sortStatus?: DataTableSortStatus;
+  sortStatus?: DataTableSortStatus<Department>;
 }) {
   const isMounted = useIsMounted();
   const [records, setRecords] = useState<typeof departments>([]);
@@ -87,7 +94,7 @@ export function useEmployeesAsync({
   sortStatus,
 }: {
   departmentId: string;
-  sortStatus?: DataTableSortStatus;
+  sortStatus?: DataTableSortStatus<Employee>;
 }) {
   const isMounted = useIsMounted();
   const [records, setRecords] = useState<typeof employees>([]);

@@ -1,0 +1,8 @@
+.root {
+  margin: var(--mantine-spacing-md) 0 var(--mantine-spacing-md) var(--mantine-spacing-sm);
+  &:not(.compact) {
+    li {
+      margin: var(--mantine-spacing-xs) 0;
+    }
+  }
+}

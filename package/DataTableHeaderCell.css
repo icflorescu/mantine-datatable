@@ -19,8 +19,8 @@
   transition: transform 0.2s;
 }
 
-.mantine-datatable-header-cell-sortable-column-header-icon-rotated {
-  transform: rotateZ(180deg);
+.mantine-datatable-header-cell-sortable-column-header-icon-reversed {
+  transform: scaleY(-1);
 }
 
 .mantine-datatable-header-cell-sortable-column-header-unsorted-icon {

@@ -46,11 +46,12 @@ export function LinksOrButtonsInsideClickableRowsOrCellsExample() {
         {
           accessor: 'actions',
           width: '0%',
-          title: <Box mx="xs">Row actions</Box>,
+          title: <Box mx={6}>Row actions</Box>,
           textAlign: 'right',
           render: (company) => (
             <Group gap={4} justify="right" wrap="nowrap">
               <ActionIcon
+                size="sm"
                 variant="subtle"
                 color="blue"
                 onClick={(e: React.MouseEvent) => {
@@ -61,6 +62,7 @@ export function LinksOrButtonsInsideClickableRowsOrCellsExample() {
                 <IconEdit size={16} />
               </ActionIcon>
               <ActionIcon
+                size="sm"
                 variant="subtle"
                 color="red"
                 onClick={(e: React.MouseEvent) => {

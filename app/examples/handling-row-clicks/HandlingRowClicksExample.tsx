@@ -9,16 +9,17 @@ export function HandlingRowClicksExample() {
   return (
     // example-start
     <DataTable
+      textSelectionDisabled
       withTableBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
-      onRowClick={(company, rowIndex, event) => {
+      onRowClick={({ record, index, event }) => {
         openModal({
           title: 'Company information',
           children: (
             <Stack>
               <Text size="sm">
-                You clicked on row[{rowIndex}], referring to company <em>{company.name}</em>.
+                You clicked on row[{index}], referring to company <em>{record.name}</em>.
                 <br />
                 {event.shiftKey && (
                   <>

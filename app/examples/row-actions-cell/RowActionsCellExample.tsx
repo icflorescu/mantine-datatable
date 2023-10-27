@@ -49,17 +49,32 @@ export function RowActionsCellExample() {
         { accessor: 'state' },
         {
           accessor: 'actions',
-          title: <Box mr="xs">Row actions</Box>,
+          title: <Box mr={6}>Row actions</Box>,
           textAlign: 'right',
           render: (company) => (
             <Group gap={4} justify="right" wrap="nowrap">
-              <ActionIcon variant="subtle" color="green" onClick={() => showModal({ company, action: 'view' })}>
+              <ActionIcon
+                size="sm"
+                variant="subtle"
+                color="green"
+                onClick={() => showModal({ company, action: 'view' })}
+              >
                 <IconEye size={16} />
               </ActionIcon>
-              <ActionIcon variant="subtle" color="blue" onClick={() => showModal({ company, action: 'edit' })}>
+              <ActionIcon
+                size="sm"
+                variant="subtle"
+                color="blue"
+                onClick={() => showModal({ company, action: 'edit' })}
+              >
                 <IconEdit size={16} />
               </ActionIcon>
-              <ActionIcon variant="subtle" color="red" onClick={() => showModal({ company, action: 'delete' })}>
+              <ActionIcon
+                size="sm"
+                variant="subtle"
+                color="red"
+                onClick={() => showModal({ company, action: 'delete' })}
+              >
                 <IconTrash size={16} />
               </ActionIcon>
             </Group>

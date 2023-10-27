@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import type { DataTableSortStatus } from './DataTableSortStatus';
 
 export type DataTableSortProps<T> =
@@ -27,10 +26,10 @@ export type DataTableSortProps<T> =
          * Icon to display when column is sorted ascending.
          * Will be rotated 180deg for descending sort
          */
-        sorted: ReactNode;
+        sorted: React.ReactNode;
         /**
          * Icon to display when column is not sorted.
          */
-        unsorted: ReactNode;
+        unsorted: React.ReactNode;
       };
     };

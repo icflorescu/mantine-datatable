@@ -9,6 +9,7 @@ export function HandlingCellClicksExample() {
   return (
     // example-start
     <DataTable
+      textSelectionDisabled
       withTableBorder
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}

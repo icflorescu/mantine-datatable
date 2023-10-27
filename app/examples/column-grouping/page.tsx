@@ -1,10 +1,11 @@
-import { Code } from '@mantine/core';
+import { Code, ListItem } from '@mantine/core';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
+import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { ColumnGroupingExample } from './ColumnGroupingExample';
@@ -27,36 +28,52 @@ export default async function ColumnGroupingExamplePage() {
         those columns. This can be easily achieved by specifying <Code>groups</Code> instead of <Code>columns</Code>.
       </Txt>
       <Txt>Each group requires the following properties:</Txt>
-      <ul>
-        <li>
-          <Code>id</Code> → used as a{' '}
+      <UnorderedList>
+        <ListItem>
+          <Code>id</Code>
+          <br />
+          Used as a{' '}
           <ExternalLink to="https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key">
             key
           </ExternalLink>
-          . Can be any string, as long as it is unique among the groups. A humanized version of this value is used as
-          header if no <Code>title</Code> is provided.
-        </li>
-        <li>
-          <Code>columns</Code> → an array of{' '}
-          <InternalLink to="/examples/column-properties">column definitions</InternalLink> that are part of this group.
-        </li>
-      </ul>
+          . Can be any string, as long as it is unique among the groups.
+          <br />A humanized version of this value is used as header if no <Code>title</Code> is provided.
+        </ListItem>
+        <ListItem>
+          <Code>columns</Code>
+          <br />
+          An array of <InternalLink to="/examples/column-properties">column definitions</InternalLink> that are part of
+          this group.
+        </ListItem>
+      </UnorderedList>
       <Txt>
         In addition to the aforementioned required properties, a group accepts some optional props for customization
         purposes:
       </Txt>
-      <ul>
-        <li>
-          <Code>title</Code> → A React component which will be rendered inside the column group. If not specified (or
-          set to <Code>undefined</Code>), the <Code>id</Code> is humanized to generate a string
-        </li>
-        <li>
-          <Code>className</Code> → Class to apply to the <Code>{'<th/>'}</Code>
-        </li>
-        <li>
-          <Code>style</Code> → style to be applied to the <Code>{'<th/>'}</Code>
-        </li>
-      </ul>
+      <UnorderedList>
+        <ListItem>
+          <Code>title</Code>
+          <br />A <Code>ReactNode</Code> that will be rendered inside the column group. If not specified (or set to{' '}
+          <Code>undefined</Code>), the <Code>id</Code> is humanized to generate a string.
+        </ListItem>
+        <ListItem>
+          <Code>{"textAlign: 'left' | 'center' | 'right'"}</Code>
+          <br />
+          The text alignment for all columns in this group.
+        </ListItem>
+        <ListItem>
+          <Code>className: string</Code>
+          <br />
+          Optional class to apply to the group header.
+        </ListItem>
+        <ListItem>
+          <Code>style</Code>
+          <br />
+          Optional style to be applied to the group header.
+          <br />
+          Can be a style object or a function that receives the current theme and returns a style object.
+        </ListItem>
+      </UnorderedList>
       <Txt>
         Groups are hidden if they don’t have any visible columns. This could be the result of all columns being hidden
         due to the <Code>hidden</Code> or <Code>visibleMediaQuery</Code> attribute, or by simply providing an empty

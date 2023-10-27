@@ -208,6 +208,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: How to use ${PRODUCT_NAME} bodyRef property with AutoAnimate`,
   },
   {
+    href: '/examples/complex-usage-scenario',
+    title: 'Complex usage scenario',
+    description: `Example: a complex usage scenario for ${PRODUCT_NAME} featuring custom column definitions, asynchronous data loading with React Query, sorting, pagination, custom cell rendering, multiple row selection, and more`,
+  },
+  {
     href: '/type-definitions',
     title: 'Type definitions',
     description: `${PRODUCT_NAME} is written in TypeScript and its options are well documented with additional JSDoc annotations`,

@@ -33,10 +33,12 @@ export function ColumnPropertiesExampleStyling() {
           // 👇 style cells with a function returning a style object
           //    this function receives the current record as its argument, but we're not using it here
           cellsStyle: () => ({ fontStyle: 'italic' }),
-          render: ({ firstName, lastName }) => `${firstName} ${lastName}`,
+          // 👇 style cells with a class name depending on current record
+          cellsClassName: ({ sex }) => clsx({ [classes.male]: sex === 'male', [classes.female]: sex === 'female' }),
           footer: `${records.length} employees`,
           // style footer with a style object
           footerStyle: { fontStyle: 'italic' },
+          render: ({ firstName, lastName }) => `${firstName} ${lastName}`,
         },
         { accessor: 'email' },
         {
@@ -44,7 +46,7 @@ export function ColumnPropertiesExampleStyling() {
           width: 150,
           // 👇 style title with a function returning a style object
           titleStyle: (theme) => ({ color: theme.colors.green[6] }),
-          // 👇 style cells with a function returning a style object
+          // 👇 style cells with a function returning a style function
           cellsStyle: () => (theme) => ({
             color: theme.colors.green[8],
             background: rgba(theme.colors.orange[6], 0.25),
@@ -65,9 +67,14 @@ export function ColumnPropertiesExampleStyling() {
           width: 100,
           // 👇 style title with a custom class name
           titleClassName: classes.birthdayColumnTitle,
-          // 👇 style cells with a class name depending on current record
-          cellsClassName: ({ birthDate }) =>
-            clsx({ [classes.birthdayInApril]: dayjs(birthDate).format('MM') === '04' }),
+          // 👇 style cells with a function accepting the current record and returning another
+          //    function that accepts the current theme and returns a style object
+          //    (i.e. people born in winter will have their birthday in blue)
+          cellsStyle:
+            ({ birthDate }) =>
+            (theme) => ({
+              color: ['Dec', 'Jan', 'Feb'].includes(dayjs(birthDate).format('MMM')) ? theme.colors.blue[6] : undefined,
+            }),
           render: ({ birthDate }) => dayjs(birthDate).format('MMM D'),
         },
         {

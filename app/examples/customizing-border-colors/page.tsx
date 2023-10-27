@@ -1,9 +1,10 @@
-import { Code } from '@mantine/core';
+import { Code, ListItem } from '@mantine/core';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
+import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import { CustomizingBorderColorsExample } from './CustomizingBorderColorsExample';
@@ -25,36 +26,36 @@ export default async function CustomizingBorderColorsExamplePage() {
       <Txt>
         The <Code>borderColor</Code> is applied to:
       </Txt>
-      <ul>
-        <li>
+      <UnorderedList compact>
+        <ListItem>
           the table outer border (if enabled by{' '}
           <InternalLink to="/examples/basic-table-properties">
             <Code>withTableBorder</Code> property
           </InternalLink>
           );
-        </li>
-        <li>header bottom border;</li>
-        <li>
+        </ListItem>
+        <ListItem>header bottom border;</ListItem>
+        <ListItem>
           footer top border (see{' '}
           <InternalLink to="/examples/column-properties/#column-footers">column footers</InternalLink>);
-        </li>
-        <li>
+        </ListItem>
+        <ListItem>
           pagination top border (see <InternalLink to="/examples/pagination">pagination</InternalLink>).
-        </li>
-      </ul>
+        </ListItem>
+      </UnorderedList>
       <Txt>
         The <Code>rowBorderColor</Code> is applied to:
       </Txt>
-      <ul>
-        <li>the bottom of each row;</li>
-        <li>
+      <UnorderedList compact>
+        <ListItem>the bottom of each row;</ListItem>
+        <ListItem>
           the column borders (if enabled by{' '}
           <InternalLink to="/examples/basic-table-properties">
             <Code>withTableBorder</Code> property
           </InternalLink>
           ).
-        </li>
-      </ul>
+        </ListItem>
+      </UnorderedList>
       <Txt>For example, this code:</Txt>
       <CodeBlock code={code} />
       <Txt>…will produce the following table:</Txt>

@@ -1306,6 +1306,18 @@
   resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.40.0.tgz#96cecc990a03412b88194ce3765280d2e63c1be6"
   integrity sha512-VqKsBSX159cLFTnCzkCmGhZtSPJHNN0lM2sC4xe0HPOfPUnjiex7rDHDdut4oe4iKRecDDpwXwM9BcU6xCPlCg==
 
+"@tanstack/query-core@5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.0.5.tgz#db02d648398f75a04cc536dacd640265f3614b14"
+  integrity sha512-MThCETMkHDHTnFZHp71L+SqTtD5d6XHftFCVR1xRJdWM3qGrlQ2VCXaj0SKVcyJej2e1Opa2c7iknu1llxCDNQ==
+
+"@tanstack/react-query@^5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.0.5.tgz#f26e05290f4b6bc9014704a65d05cf0cf47afe6e"
+  integrity sha512-ZG0Q4HZ0iuI8mWiZ2/MdVYPHbrmAVhMn7+gLOkxJh6zLIgCL4luSZlohzN5Xt4MjxfxxWioO1nemwpudaTsmQg==
+  dependencies:
+    "@tanstack/query-core" "5.0.5"
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.4"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.4.tgz#37fc1223f0786c39627068a12e94d6e6fc61de16"
@@ -3654,10 +3666,10 @@ magic-string@^0.25.0, magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
-mantine-contextmenu@^7.1.2:
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.1.2.tgz#8aecfb9ff4f81b9e158791f4c7f1d63af84a83cb"
-  integrity sha512-EByPn10URbd3fOVDODoyJ2DR4U3hfVKnKEZG1Ko32LdxEGJKuA1kwSIB6gvtp8RRfb9Mmyl3bm7BvfpnF9UPIA==
+mantine-contextmenu@^7.1.3:
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.1.3.tgz#8c2a5ebf072e67447af016b2f3070435e190be3d"
+  integrity sha512-a6TE9IMQ0rnpHuaKwWK2dSdugFGRecF9N70ZOcLeO2CDwBV/bhsJsx18nywdYFUwGGXNdiRmXFIBWlhEoD3smQ==
 
 merge-stream@^2.0.0:
   version "2.0.0"

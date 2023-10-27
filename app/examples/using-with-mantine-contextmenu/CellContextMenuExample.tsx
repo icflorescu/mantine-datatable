@@ -1,6 +1,6 @@
 'use client';
 
-import { notifications } from '@mantine/notifications';
+import { showNotification } from '@mantine/notifications';
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
 import { useContextMenu } from 'mantine-contextmenu';
@@ -24,7 +24,7 @@ export function CellContextMenuExample() {
               key: 'view-company-details',
               icon: <IconEye size={16} />,
               onClick: () =>
-                notifications.show({
+                showNotification({
                   message: `Clicked on view context-menu action for ${record.name} company`,
                   withBorder: true,
                 }),
@@ -33,7 +33,7 @@ export function CellContextMenuExample() {
               key: 'edit-company-information',
               icon: <IconEdit size={16} />,
               onClick: () =>
-                notifications.show({
+                showNotification({
                   message: `Clicked on edit context-menu action for ${record.name} company`,
                   withBorder: true,
                 }),
@@ -44,7 +44,7 @@ export function CellContextMenuExample() {
               icon: <IconTrash size={16} />,
               color: 'red',
               onClick: () =>
-                notifications.show({
+                showNotification({
                   color: 'red',
                   message: `Clicked on delete context-menu action for ${record.name} company`,
                   withBorder: true,

@@ -1,10 +1,11 @@
-import { Code } from '@mantine/core';
+import { Code, ListItem } from '@mantine/core';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
+import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import SortingExample from './SortingExample';
@@ -25,19 +26,19 @@ export default async function SortingExamplePage() {
       <PageTitle of={PATH} />
       <SortingExample />
       <Txt>In order to enable sorting, you’ll have to:</Txt>
-      <ul>
-        <li>
+      <UnorderedList compact>
+        <ListItem>
           add a <Code>sortable: true</Code> property to each sorting candidate column;
-        </li>
-        <li>
+        </ListItem>
+        <ListItem>
           add a <Code>sortStatus</Code> property to the DataTable component, pointing to an object describing the
           current sort status;
-        </li>
-        <li>
+        </ListItem>
+        <ListItem>
           add a handler called <Code>onSortStatusChange</Code> to the DataTable to perform the required action when a
           sortable column header is clicked.
-        </li>
-      </ul>
+        </ListItem>
+      </UnorderedList>
       <CodeBlock code={code['SortingExample.tsx']} />
       <Txt idea>
         If you enable sorting, you might want to consider{' '}

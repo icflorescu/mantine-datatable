@@ -1,7 +1,7 @@
 'use client';
 
 import { Box } from '@mantine/core';
-import { notifications } from '@mantine/notifications';
+import { showNotification } from '@mantine/notifications';
 import { DataTable } from '__PACKAGE__';
 
 export function GettingStartedExample() {
@@ -50,7 +50,7 @@ export function GettingStartedExample() {
       ]}
       // execute this callback when a row is clicked
       onRowClick={({ record: { name, party, bornIn } }) =>
-        notifications.show({
+        showNotification({
           title: `Clicked on ${name}`,
           message: `You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}`,
           withBorder: true,

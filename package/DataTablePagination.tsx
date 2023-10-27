@@ -1,4 +1,4 @@
-import { Box, Pagination, Text, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
+import { Box, Pagination, Text, rem, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef, type ForwardedRef } from 'react';
 import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
@@ -61,7 +61,7 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
     ({ breakpoints }) =>
       `(min-width: ${
         typeof paginationWrapBreakpoint === 'number'
-          ? `${paginationWrapBreakpoint}px`
+          ? `${rem(paginationWrapBreakpoint)}rem`
           : breakpoints[paginationWrapBreakpoint] || paginationWrapBreakpoint
       })`
   );

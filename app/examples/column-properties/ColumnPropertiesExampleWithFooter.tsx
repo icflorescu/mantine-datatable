@@ -25,8 +25,10 @@ export function ColumnPropertiesExampleWithFooter() {
           // 👇 this column has a footer
           footer: (
             <Group gap="xs">
-              <IconSum size="1.25em" />
-              <Box mb={-2}>{records.length} employees</Box>
+              <Box mb={-4}>
+                <IconSum size="1.25em" />
+              </Box>
+              <div>{records.length} employees</div>
             </Group>
           ),
         },
@@ -40,8 +42,10 @@ export function ColumnPropertiesExampleWithFooter() {
           // 👇 this column has a footer
           footer: (
             <Group gap="xs">
-              <IconSum size="1.25em" />
-              <Box mb={-2}>{uniqBy(records, (record) => record.department.company.name).length} companies</Box>
+              <Box mb={-4}>
+                <IconSum size={16} />
+              </Box>
+              <div>{uniqBy(records, (record) => record.department.company.name).length} companies</div>
             </Group>
           ),
         },

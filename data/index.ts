@@ -19,6 +19,7 @@ export type Department = {
 
 export type Employee = {
   id: string;
+  sex: 'male' | 'female';
   firstName: string;
   lastName: string;
   email: string;
@@ -33,7 +34,7 @@ export const departments: Department[] = departmentData.map(({ companyId, ...res
   company: companies.find(({ id }) => id === companyId)!,
 }));
 
-export const employees: Employee[] = employeeData.map(({ departmentId, ...rest }) => ({
+export const employees = employeeData.map(({ departmentId, ...rest }) => ({
   ...rest,
   department: departments.find(({ id }) => id === departmentId)!,
-}));
+})) as Employee[];

@@ -90,7 +90,7 @@ export function DataTableHeaderCell<T>({
             {sortStatus?.columnAccessor === accessor ? (
               <Center
                 className={clsx('mantine-datatable-header-cell-sortable-column-header-icon', {
-                  'mantine-datatable-header-cell-sortable-column-header-icon-rotated': sortStatus.direction === 'desc',
+                  'mantine-datatable-header-cell-sortable-column-header-icon-reversed': sortStatus.direction === 'desc',
                 })}
                 role="img"
                 aria-label={`Sorted ${sortStatus.direction === 'desc' ? 'descending' : 'ascending'}`}

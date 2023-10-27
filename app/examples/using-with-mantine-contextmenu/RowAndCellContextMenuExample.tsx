@@ -1,6 +1,6 @@
 'use client';
 
-import { notifications } from '@mantine/notifications';
+import { showNotification } from '@mantine/notifications';
 import { IconEdit, IconEye, IconMessage, IconTrash } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
 import { useContextMenu } from 'mantine-contextmenu';
@@ -23,7 +23,7 @@ export function RowAndCellContextMenuExample() {
             key: 'view-company-details',
             icon: <IconEye size={16} />,
             onClick: () =>
-              notifications.show({
+              showNotification({
                 message: `Clicked on view context-menu action for ${record.name} company`,
                 withBorder: true,
               }),
@@ -33,7 +33,7 @@ export function RowAndCellContextMenuExample() {
             icon: <IconTrash size={16} />,
             color: 'red',
             onClick: () =>
-              notifications.show({
+              showNotification({
                 color: 'red',
                 message: `Clicked on delete context-menu action for ${record.name} company`,
                 withBorder: true,
@@ -50,7 +50,7 @@ export function RowAndCellContextMenuExample() {
               key: 'edit-company-name',
               icon: <IconEdit size={16} />,
               onClick: () =>
-                notifications.show({
+                showNotification({
                   message: `Clicked on edit context-menu action for ${record.name} company`,
                   withBorder: true,
                 }),
@@ -60,7 +60,7 @@ export function RowAndCellContextMenuExample() {
               key: 'send-an-email-to-company',
               icon: <IconMessage size={16} />,
               onClick: () =>
-                notifications.show({
+                showNotification({
                   color: 'orange',
                   message: `Clicked on email context-menu action for ${record.name} company`,
                   withBorder: true,

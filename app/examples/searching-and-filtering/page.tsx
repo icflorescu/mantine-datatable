@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -33,10 +34,9 @@ export default async function SearchingAndFilteringExamplePage() {
       <Txt info title="Why no built-in “Excel-like” searching and filtering support?">
         You’ll often have to implement searching and filtering data in your projects.
         <br />
-        However there’s simply no way for <Code>Mantine DataTable</Code> to accommodate every possible usage scenario
-        out there. Most of the times you’d have to deal with pagination, sorting, asynchronous loading; sometimes you’d
-        have to place a search box or custom filtering criteria selectors in the header of your entire
-        website/application.
+        However there’s simply no way for {PRODUCT_NAME} to accommodate every possible usage scenario out there. Most of
+        the times you’d have to deal with pagination, sorting, asynchronous loading; sometimes you’d have to place a
+        search box or custom filtering criteria selectors in the header of your entire website/application.
         <br />
         Not to mention that in real-life you’d most often do the actual filtering and/or searching in a server API.
         <br />

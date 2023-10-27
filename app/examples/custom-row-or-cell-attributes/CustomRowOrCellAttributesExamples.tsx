@@ -1,6 +1,6 @@
 'use client';
 
-import { notifications } from '@mantine/notifications';
+import { showNotification } from '@mantine/notifications';
 import { DataTable } from '__PACKAGE__';
 import { companies } from '~/data';
 
@@ -37,7 +37,7 @@ export function CustomRowOrCellAttributesMiddleClickExample() {
       customRowAttributes={({ name }) => ({
         onMouseDown: (e: MouseEvent) => {
           if (e.button === 1) {
-            notifications.show({ message: `Middle-click on row ${name}`, withBorder: true });
+            showNotification({ message: `Middle-click on row ${name}`, withBorder: true });
           }
         },
       })}

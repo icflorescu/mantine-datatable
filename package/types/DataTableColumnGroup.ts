@@ -1,15 +1,24 @@
 import type { MantineStyleProp } from '@mantine/core';
 import type { DataTableColumn } from './DataTableColumn';
+import type { DataTableColumnTextAlign } from './DataTableColumnTextAlign';
 
 export type DataTableColumnGroup<T> = {
   /**
    * Used as the `key` prop for the created `<th />`.
    */
   id: string;
+
   /**
    * Component to render inside the column group header.
    */
   title?: React.ReactNode;
+
+  /**
+   * Text alignment of the column group header.
+   * @default `left`
+   */
+  textAlign?: DataTableColumnTextAlign;
+
   /**
    * Columns which are part of the group.
    */

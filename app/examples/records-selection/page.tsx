@@ -1,4 +1,4 @@
-import { Code } from '@mantine/core';
+import { Code, ListItem } from '@mantine/core';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
@@ -6,6 +6,7 @@ import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
+import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import {
@@ -36,34 +37,34 @@ export default async function RecordsSelectionExamplePage() {
         .
       </Txt>
       <Txt>In order to enable records selection, you’ll have to add the following properties to the DataTable:</Txt>
-      <ul>
-        <li>
+      <UnorderedList compact>
+        <ListItem>
           <Code>selectedRecords</Code> → an array of currently selected records (with the same TS type as the{' '}
           <Code>records</Code> property);
-        </li>
-        <li>
+        </ListItem>
+        <ListItem>
           <Code>onSelectedRecordsChange</Code> → a callback that will be invoked when the user alters the current
           selection.
-        </li>
-      </ul>
+        </ListItem>
+      </UnorderedList>
       <Txt>
         When adding these two properties, the component will render a selection checkbox column and handle user input as
         following:
       </Txt>
-      <ul>
-        <li>
+      <UnorderedList compact>
+        <ListItem>
           <em>Clicking a row selection checkbox</em> will result in selecting/deselecting the underlying record;
-        </li>
-        <li>
+        </ListItem>
+        <ListItem>
           <em>Clicking the column header checkbox</em> will result in selecting/deselecting all visible records;
-        </li>
-        <li>
+        </ListItem>
+        <ListItem>
           <strong>
             <em>Shift-clicking a row selection checkbox</em> will result in intuitively selecting all records between
             the last clicked record and the current one.
           </strong>
-        </li>
-      </ul>
+        </ListItem>
+      </UnorderedList>
       <RecordsSelectionExample />
       <Txt info title="Keep in mind">
         To determine selection inclusion, records are compared based on their ID property values, as specified on the{' '}

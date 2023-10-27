@@ -6,10 +6,16 @@
   color: var(--mantine-color-blue-6);
 }
 
-.birthdayInApril {
+.male {
   font-weight: 700;
   color: var(--mantine-color-blue-6);
-  background: color-mix(in srgb, var(--mantine-color-yellow-6), #0000 80%);
+  background: color-mix(in srgb, var(--mantine-color-blue-6), #0000 90%);
+}
+
+.female {
+  font-weight: 700;
+  color: var(--mantine-color-red-6);
+  background: color-mix(in srgb, var(--mantine-color-red-6), #0000 90%);
 }
 
 .ageFooter {

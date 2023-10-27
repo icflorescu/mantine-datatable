@@ -1,7 +1,9 @@
 import { TableTh } from '@mantine/core';
+import clsx from 'clsx';
 import { useMemo } from 'react';
 import { useMediaQueriesStringOrFunction } from './hooks';
 import type { DataTableColumnGroup } from './types';
+import { TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
 import { humanize } from './utils';
 
 type DataTableColumnGroupHeaderCellProps<T> = {
@@ -9,7 +11,7 @@ type DataTableColumnGroupHeaderCellProps<T> = {
 };
 
 export function DataTableColumnGroupHeaderCell<T>({
-  group: { id, columns, title, className, style },
+  group: { id, columns, title, textAlign, className, style },
 }: DataTableColumnGroupHeaderCellProps<T>) {
   const queries = useMemo(() => columns.map(({ visibleMediaQuery }) => visibleMediaQuery), [columns]);
   const visibles = useMediaQueriesStringOrFunction(queries);
@@ -19,7 +21,18 @@ export function DataTableColumnGroupHeaderCell<T>({
   );
 
   return colSpan > 0 ? (
-    <TableTh colSpan={colSpan} className={className} style={style}>
+    <TableTh
+      colSpan={colSpan}
+      className={clsx(
+        {
+          [TEXT_ALIGN_LEFT]: textAlign === 'left',
+          [TEXT_ALIGN_CENTER]: textAlign === 'center',
+          [TEXT_ALIGN_RIGHT]: textAlign === 'right',
+        },
+        className
+      )}
+      style={style}
+    >
       {title ?? humanize(id)}
     </TableTh>
   ) : null;
