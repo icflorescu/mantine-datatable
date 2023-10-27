@@ -58,6 +58,6 @@
   vertical-align: bottom;
 }
 
-.mantine-datatable-table-last-row-border-bottom-visible tr:last-of-type td {
+.mantine-datatable-table-last-row-border-bottom-visible tr:last-of-type:not(.mantine-datatable-empty-row) td {
   border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
 }

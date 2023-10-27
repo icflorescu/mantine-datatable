@@ -226,8 +226,8 @@ export function ComplexUsageExample() {
       withColumnBorders
       striped
       verticalAlign="top"
-      fetching={isFetching}
       columns={columns}
+      fetching={isFetching}
       records={data?.employees}
       page={page}
       onPageChange={setPage}
