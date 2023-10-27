@@ -23,6 +23,7 @@ export default async function AsynchronousDataLoadingExamplePage() {
   return (
     <>
       <PageTitle of={PATH} />
+      <Txt>Customize the loader properties in the interactive example below:</Txt>
       <AsynchronousDataLoadingExamplePageContent initialCode={code['default']} />
       <Txt>
         Simply set a <Code>fetching: true</Code> property to the DataTable to indicate data loading state by overlaying
@@ -44,8 +45,8 @@ export default async function AsynchronousDataLoadingExamplePage() {
           <Code>loaderBackgroundBlur</Code> → loader background blur in pixels
         </li>
       </ul>
-      <Txt idea>
-        If your <Code>DataTable</Code> is not vertically scrollable and contains no initial data, make sure to set its{' '}
+      <Txt idea title="Keep in mind">
+        If your DataTable is not vertically scrollable and contains no initial data, make sure to set its{' '}
         <Code>minHeight</Code> to minimize the “content jump” and accommodate the <Code>Loader</Code> height.
       </Txt>
       <CodeBlock code={code['default']} />
@@ -54,12 +55,12 @@ export default async function AsynchronousDataLoadingExamplePage() {
         If you’re not happy with standard Mantine{' '}
         <ExternalLink to="https://mantine.dev/core/loader/">Loader</ExternalLink> types, you can pass your own component
         to the <Code>customLoader</Code> property.
-      </Txt>
-      <Txt warning>
-        If you’re using a <Code>customLoader</Code>, do not set <Code>loaderSize</Code>, <Code>loaderType</Code> and{' '}
-        <Code>loaderColor</Code> properties.
+        <br />
+        In this case, do not set <Code>loaderSize</Code>, <Code>loaderType</Code> and <Code>loaderColor</Code>{' '}
+        properties.
       </Txt>
       <AsynchronousDataLoadingExampleWithCustomLoader />
+      <Txt>Here is the code:</Txt>
       <CodeBlock code={code['custom-loader']} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />

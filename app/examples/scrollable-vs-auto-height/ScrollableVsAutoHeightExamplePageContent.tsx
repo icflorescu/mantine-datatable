@@ -1,6 +1,6 @@
 'use client';
 
-import { Paper, Switch } from '@mantine/core';
+import { Center, Paper, Switch } from '@mantine/core';
 import { useState } from 'react';
 import { CodeBlock } from '~/components/CodeBlock';
 import { AutoHeightExample, ScrollableExample } from './ScrollableVsAutoHeightExamples';
@@ -14,12 +14,14 @@ export function ScrollableVsAutoHeightExamplePageContent({
 
   return (
     <>
-      <Paper my="xl" mx="auto" maw={360} p="md" withBorder>
-        <Switch
-          label="Set height to make it vertically-scrollable"
-          checked={scrollable}
-          onChange={() => setScrollable((value) => !value)}
-        />
+      <Paper my="xl" p="md" withBorder>
+        <Center>
+          <Switch
+            label="Set height to make it vertically-scrollable"
+            checked={scrollable}
+            onChange={() => setScrollable((value) => !value)}
+          />
+        </Center>
       </Paper>
       <CodeBlock code={code[scrollable ? 'scrollable' : 'auto-height']} />
       {scrollable ? <ScrollableExample /> : <AutoHeightExample />}

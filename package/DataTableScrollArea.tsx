@@ -1,4 +1,4 @@
-import { Box, ScrollArea, type ScrollAreaProps } from '@mantine/core';
+import { Box, ScrollArea, rem, type ScrollAreaProps } from '@mantine/core';
 import clsx from 'clsx';
 
 type DataTableScrollAreaProps = React.PropsWithChildren<{
@@ -25,7 +25,8 @@ export function DataTableScrollArea({
   viewportRef,
   scrollAreaProps,
 }: DataTableScrollAreaProps) {
-  const bottom = footerHeight ? footerHeight - 1 : 0;
+  const headerHeightRem = headerHeight ? rem(headerHeight) : 0;
+  const bottomRem = footerHeight ? rem(footerHeight - 1) : 0;
   return (
     <ScrollArea
       {...scrollAreaProps}
@@ -36,7 +37,7 @@ export function DataTableScrollArea({
         thumb: 'mantine-datatable-scroll-area-thumb',
         corner: 'mantine-datatable-scroll-area-corner',
       }}
-      styles={{ scrollbar: { marginTop: headerHeight, marginBottom: bottom } }}
+      styles={{ scrollbar: { marginTop: headerHeightRem, marginBottom: bottomRem } }}
       onScrollPositionChange={onScrollPositionChange}
     >
       {children}
@@ -44,7 +45,7 @@ export function DataTableScrollArea({
         className={clsx('mantine-datatable-scroll-area-shadow', 'mantine-datatable-scroll-area-top-shadow', {
           'mantine-datatable-scroll-area-shadow-visible': topShadowVisible,
         })}
-        style={{ top: headerHeight }}
+        style={{ top: headerHeightRem }}
       />
       <div
         className={clsx('mantine-datatable-scroll-area-shadow', 'mantine-datatable-scroll-area-left-shadow', {
@@ -60,7 +61,7 @@ export function DataTableScrollArea({
         className={clsx('mantine-datatable-scroll-area-shadow', 'mantine-datatable-scroll-area-bottom-shadow', {
           'mantine-datatable-scroll-area-shadow-visible': bottomShadowVisible,
         })}
-        style={{ bottom }}
+        style={{ bottom: bottomRem }}
       />
     </ScrollArea>
   );

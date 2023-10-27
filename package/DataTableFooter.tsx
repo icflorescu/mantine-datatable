@@ -35,7 +35,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
       style={[
         {
           position: relative ? 'relative' : 'sticky',
-          bottom: rem(`${relative ? scrollDiff : -1}px`),
+          bottom: rem(relative ? scrollDiff : -1),
         },
         style,
       ]}

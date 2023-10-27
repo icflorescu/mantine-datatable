@@ -36,12 +36,14 @@ export default async function CustomRowOrCellAttributesPage() {
       </Txt>
       <Txt>Inspect the table below to see the attributes generated for each row and cell:</Txt>
       <CustomRowOrCellAttributesExample />
+      <Txt>Here is the code:</Txt>
       <CodeBlock code={code['custom-row-or-cell-attributes']} />
       <PageSubtitle value="Handling middle-clicks" />
       <Txt>
         Here is how you could use the <Code>customRowAttributes</Code> property to handle middle-clicks on table rows:
       </Txt>
       <CustomRowOrCellAttributesMiddleClickExample />
+      <Txt>Code:</Txt>
       <CodeBlock code={code['middle-click']} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />

@@ -98,7 +98,7 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: using non-standard record IDs with ${PRODUCT_NAME}`,
   },
   {
-    href: '/examples/default-column-properies',
+    href: '/examples/default-column-properties',
     title: 'Default column properties',
     description: `Example: using default column properties with ${PRODUCT_NAME}`,
   },

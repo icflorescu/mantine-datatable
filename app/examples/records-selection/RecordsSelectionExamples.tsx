@@ -28,7 +28,7 @@ export function RecordsSelectionExample() {
         selectedRecords={selectedRecords}
         onSelectedRecordsChange={setSelectedRecords}
       />
-      <Paper my="xl" py="xl" withBorder radius={0}>
+      <Paper p="md" mt="sm" withBorder>
         <Center>
           <Button
             leftSection={<IconTrash size={16} />}

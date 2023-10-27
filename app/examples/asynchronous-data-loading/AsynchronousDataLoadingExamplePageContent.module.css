@@ -1,12 +1,11 @@
 .controlGroups {
   display: flex;
   flex-direction: column;
-  max-width: rem(340px);
-  gap: var(--mantine-spacing-md);
-  @media (min-width: rem(880px)) {
-    max-width: rem(700px);
+  justify-content: center;
+  gap: var(--mantine-spacing-sm);
+  @media (min-width: $mantine-breakpoint-md) {
     flex-direction: row;
-    justify-content: space-between;
+    gap: calc(2 * var(--mantine-spacing-xl));
   }
 }
 

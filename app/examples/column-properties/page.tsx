@@ -35,11 +35,11 @@ export default async function ColumnPropertiesExamplePage() {
         the record property you want to display in each column cell).
         <br />
         The <Code>accessor</Code> supports dot-notation for nested objects property drilling (i.e.{' '}
-        <Code>&apos;department.company.name&apos;</Code>).
+        <Code>{"'department.company.name'"}</Code>).
         <br />
         The component will try to derive a column header title by “humanizing” the provided accessor (i.e.{' '}
-        <Code>&apos;firstName&apos; → &apos;First name&apos;</Code> or{' '}
-        <Code>&apos;department.company.name&apos; → &apos;Department company name&apos;</Code>
+        <Code>{"'firstName' → 'First name'"}</Code> or{' '}
+        <Code>{"'department.company.name' → 'Department company name'"}</Code>
         ).
         <br />
         If you’re not happy with the automatically derived title, you can override it by setting your own column{' '}
@@ -62,8 +62,8 @@ export default async function ColumnPropertiesExamplePage() {
           <Code>ellipsis</Code> to <Code>true</Code>, but not both.
         </li>
         <li>
-          <Code>textAlign</Code> → <Code>&apos;left&apos; | &apos;center&apos; | &apos;right&apos;</Code>; defaults to{' '}
-          <Code>&apos;left&apos;</Code> if not specified.
+          <Code>textAlign</Code> → <Code>{"'left' | 'center' | 'right'"}</Code>; defaults to <Code>{"'left'"}</Code> if
+          not specified.
         </li>
         <li>
           <Code>hidden</Code> → if true, the column will not be visible.
@@ -97,18 +97,18 @@ export default async function ColumnPropertiesExamplePage() {
         (or nested property) name. In this case, you <strong>must</strong> provide a custom <Code>render</Code> method.
         Also, keep in mind that each accessor name must be unique amongst the collection of columns.
       </Txt>
-      <Txt>Consider the example below:</Txt>
-      <CodeBlock tabs={{ code, keys: ['ColumnPropertiesExample.tsx', 'data/index.ts'] }} />
-      <Txt>The code above will produce the following result:</Txt>
+      <Txt>Consider this example:</Txt>
       <ColumnPropertiesExample />
+      <Txt>Here’s the code for the example above:</Txt>
+      <CodeBlock tabs={{ code, keys: ['ColumnPropertiesExample.tsx', 'data/index.ts'] }} />
       <PageSubtitle value="Column footers" />
       <Txt>
-        The <Code>DataTable</Code> component will display a footer row at the bottom of the table if you specify a{' '}
+        The DataTable component will display a footer row at the bottom of the table if you specify a{' '}
         <Code>footer</Code> property for at least one column:
       </Txt>
-      <CodeBlock tabs={{ code, keys: ['ColumnPropertiesExampleWithFooter.tsx', 'data/index.ts'] }} />
-      <Txt>The code above will produce the following result:</Txt>
       <ColumnPropertiesExampleWithFooter />
+      <Txt>Here’s the code for the example above:</Txt>
+      <CodeBlock tabs={{ code, keys: ['ColumnPropertiesExampleWithFooter.tsx', 'data/index.ts'] }} />
       <PageSubtitle value="Styling column titles, cells and footers" />
       <Txt>In addition, each column can be further customized by specifying the following styling properties:</Txt>
       <ul>
@@ -125,27 +125,21 @@ export default async function ColumnPropertiesExamplePage() {
           <Code>cellsStyle</Code>
         </li>
         <li>
-          <Code>cellsSx</Code>
-        </li>
-        <li>
           <Code>footerClassName</Code>
         </li>
         <li>
           <Code>footerStyle</Code>
         </li>
       </ul>
-      <Txt info>
-        When styling column titles and footers with class names, you may need to increase selector specificity to
-        override the default styling.
-      </Txt>
+      <Txt>Consider this example:</Txt>
+      <ColumnPropertiesExampleStyling />
+      <Txt>Here’s the code for the example above:</Txt>
       <CodeBlock
         tabs={{
           code,
           keys: ['ColumnPropertiesExampleStyling.tsx', 'ColumnPropertiesExampleStyling.module.css', 'data/index.ts'],
         }}
       />
-      <Txt>The code above will produce the following result:</Txt>
-      <ColumnPropertiesExampleStyling />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>

@@ -69,16 +69,19 @@ export default async function ExpandingRowsExamplePage() {
         underlying Collapse component like so:
       </Txt>
       <RowExpansionExampleCollapseProps />
+      <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleCollapseProps.tsx']} />
       <PageSubtitle value="Specifying which rows are initially expanded" />
       <Txt>You can specify which rows are initially expanded like so:</Txt>
       <RowExpansionExampleInitiallyExpandedRows />
+      <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleInitiallyExpandedRows.tsx']} />
       <PageSubtitle value="Allowing multiple rows to be expanded at once" />
       <Txt>
         By default, a single row can be expanded at a certain time. You can override the default behavior like so:
       </Txt>
       <RowExpansionExampleMultipleExpandedRows />
+      <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleMultipleExpandedRows.tsx']} />
       <PageSubtitle value="Always expand all rows" />
       <Txt>
@@ -86,6 +89,7 @@ export default async function ExpandingRowsExamplePage() {
         property to <Code>{"'always'"}</Code>:
       </Txt>
       <RowExpansionExampleTriggerAlways />
+      <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleTriggerAlways.tsx']} />
       <PageSubtitle value="Using collapse() function in row expansion content" />
       <Txt>
@@ -93,6 +97,7 @@ export default async function ExpandingRowsExamplePage() {
         that could be used, for instance, in an inline editor like so:
       </Txt>
       <RowExpansionExampleWithInlineEditor />
+      <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleWithInlineEditor.tsx']} />
       <PageSubtitle value="Lazy-loading row expansion data" />
       <Txt>
@@ -103,6 +108,7 @@ export default async function ExpandingRowsExamplePage() {
         could exploit this behavior to lazy-load it only when a row is expanded:
       </Txt>
       <RowExpansionExampleWithLazyLoading />
+      <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleWithLazyLoading.tsx']} />
       <PageSubtitle value="Controlled mode" />
       <Txt>
@@ -124,6 +130,7 @@ export default async function ExpandingRowsExamplePage() {
         <Code>{"'never'"}</Code>.
       </Txt>
       <RowExpansionExampleControlledMode />
+      <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleControlledMode.tsx']} />
       <Txt info>
         If you need to combine the row expansion behavior with links, buttons,{' '}

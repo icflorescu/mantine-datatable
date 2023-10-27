@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Group, Text } from '@mantine/core';
+import { Button, Group, Paper, Text } from '@mantine/core';
 import { DataTable } from '__PACKAGE__';
 import { useEffect, useRef, useState } from 'react';
 import { employees } from '~/data';
@@ -48,15 +48,17 @@ export function InfiniteScrollingExample() {
         onScrollToBottom={loadMoreRecords}
         scrollViewportRef={scrollViewportRef}
       />
-      <Group mt="sm" mx="xs" justify="space-between">
-        <Text size="sm">
-          Showing {records.length} records of {employees.length}
-          {records.length < employees.length && ', scroll to bottom to load more'}
-        </Text>
-        <Button variant="light" onClick={reset}>
-          Reset records
-        </Button>
-      </Group>
+      <Paper p="md" mt="sm" withBorder>
+        <Group justify="space-between">
+          <Text size="sm">
+            Showing {records.length} records of {employees.length}
+            {records.length < employees.length && ', scroll to bottom to load more'}
+          </Text>
+          <Button variant="light" onClick={reset}>
+            Reset records
+          </Button>
+        </Group>
+      </Paper>
     </>
   );
 }

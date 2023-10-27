@@ -1,6 +1,6 @@
 'use client';
 
-import { Paper, Switch } from '@mantine/core';
+import { Center, Paper, Switch } from '@mantine/core';
 import { useCallback, useEffect, useState } from 'react';
 import { CodeBlock } from '~/components/CodeBlock';
 import { DisablingTextSelectionExample } from './DisablingTextSelectionExample';
@@ -24,12 +24,14 @@ export function DisablingTextSelectionExamplePageContent({ initialCode }: { init
 
   return (
     <>
-      <Paper my="xl" mx="auto" maw={260} p="md" withBorder>
-        <Switch
-          label="Disable text selection"
-          checked={textSelectionDisabled}
-          onChange={() => setTextSelectionDisabled((v) => !v)}
-        />
+      <Paper p="md" mb="sm" withBorder>
+        <Center>
+          <Switch
+            label="Disable text selection"
+            checked={textSelectionDisabled}
+            onChange={() => setTextSelectionDisabled((v) => !v)}
+          />
+        </Center>
       </Paper>
       <DisablingTextSelectionExample textSelectionDisabled={textSelectionDisabled} />
       <CodeBlock language="tsx" code={code} />

@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import { CheckableSegmentedControl } from '~/components/CheckableSegmentedControl';
 import { CodeBlock } from '~/components/CodeBlock';
+import { Txt } from '~/components/Txt';
 import { LOADER_TYPES, MANTINE_SIZES } from '~/lib/constants';
 import classes from './AsynchronousDataLoadingExamplePageContent.module.css';
 import { AsynchronousDataLoadingExample } from './AsynchronousDataLoadingExamples';
@@ -126,6 +127,7 @@ export function AsynchronousDataLoadingExamplePageContent({ initialCode }: { ini
         customizeLoaderBackgroundBlur={customizeLoaderBackgroundBlur}
         loaderBackgroundBlur={loaderBackgroundBlur}
       />
+      <Txt>Code:</Txt>
       <CodeBlock code={code} />
     </>
   );

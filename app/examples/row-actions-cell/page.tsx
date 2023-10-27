@@ -23,10 +23,10 @@ export default async function RowActionsCellExamplePage() {
         If a simple <InternalLink to="/examples/handling-row-clicks">row click</InternalLink> or{' '}
         <InternalLink to="/examples/handling-cell-clicks">cell click</InternalLink> handler is not enough and{' '}
         <InternalLink to="/examples/row-context-menu">context menus</InternalLink> are not your thing, implementing a
-        row actions cell should’t be difficult. Here’s how you could do it, unsing the column <Code>render</Code>{' '}
-        function:
+        row actions cell using the column <Code>render</Code> function should’t be difficult.
       </Txt>
       <RowActionsCellExample />
+      <Txt>Here is the code:</Txt>
       <CodeBlock code={code} />
       <Txt info title="Heads up">
         If you need to combine row actions with{' '}

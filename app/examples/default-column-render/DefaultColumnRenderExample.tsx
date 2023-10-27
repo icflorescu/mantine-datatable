@@ -1,3 +1,5 @@
+'use client';
+
 import { DataTable } from '__PACKAGE__';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';

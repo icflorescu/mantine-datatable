@@ -65,7 +65,7 @@ export default async function RecordsSelectionExamplePage() {
         </li>
       </ul>
       <RecordsSelectionExample />
-      <Txt info>
+      <Txt info title="Keep in mind">
         To determine selection inclusion, records are compared based on their ID property values, as specified on the{' '}
         DataTable’s <Code>idAccessor</Code> property (defaulting to <Code>id</Code> - see more info{' '}
         <InternalLink to="/examples/non-standard-record-ids">here</InternalLink>).

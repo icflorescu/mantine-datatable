@@ -25,6 +25,7 @@ export default async function UsingWithAutoAnimateExamplePage() {
         to animate table rows when they are added, removed or reordered.
       </Txt>
       <UsingWithAutoAnimateExample />
+      <Txt>Here is the code:</Txt>
       <CodeBlock code={code} />
       <Txt>Head over to the next example to learn more.</Txt>
       <PageNavigation of={PATH} />

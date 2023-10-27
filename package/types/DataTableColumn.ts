@@ -113,7 +113,7 @@ export type DataTableColumn<T> = {
    * Receives the current record and its index as arguments.
    * Useful for adding data attributes, handling middle-clicks, etc.
    */
-  customCellAttributes?: (precord: T, index: number) => Record<string, unknown>;
+  customCellAttributes?: (record: T, index: number) => Record<string, unknown>;
 
   /**
    * Optional column footer content.

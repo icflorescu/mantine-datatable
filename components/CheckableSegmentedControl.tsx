@@ -1,4 +1,4 @@
-import { Checkbox, Code, SegmentedControl, Text } from '@mantine/core';
+import { Checkbox, Code, SegmentedControl, Text, rem } from '@mantine/core';
 import { useId } from '@mantine/hooks';
 import clsx from 'clsx';
 import classes from './CheckableSegmentedControl.module.css';
@@ -38,14 +38,9 @@ export function CheckableSegmentedControl({
       </Text>
       {documentAs && <Code hidden>{documentAs}</Code>}
       <div className={classes.inputs}>
-        <Checkbox
-          id={id}
-          className={classes.checkbox}
-          checked={checked}
-          onChange={(e) => onCheckedChange(e.target.checked)}
-        />
+        <Checkbox id={id} checked={checked} onChange={(e) => onCheckedChange(e.target.checked)} />
         <SegmentedControl
-          className={classes.segmentedControl}
+          style={{ width: rem(160) }}
           size="xs"
           data={data}
           disabled={!checked}

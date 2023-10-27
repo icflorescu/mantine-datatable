@@ -1,4 +1,4 @@
-import { Code } from '@mantine/core';
+import { Box, Code } from '@mantine/core';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
@@ -26,20 +26,24 @@ export default async function HandlingCellClicksExamplePage() {
       </Txt>
       <CodeBlock code={code} />
       <Txt info title="Heads up">
-        When handling cell clicks, you might want to{' '}
-        <InternalLink to="/examples/disabling-text-selection">disable text selection</InternalLink>.
-      </Txt>
-      <Txt info title="Heads up">
-        If you need to combine this behavior with links, buttons,{' '}
-        <InternalLink to="/examples/row-actions-cell">row action cells</InternalLink> or any kind of clickable
-        components inside cells, make sure to intercept the <Code>click</Code> event on those components and{' '}
-        <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">
-          invoke its <Code>.stopPropagation()</Code> method
-        </ExternalLink>
-        .
-        <br />
-        See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows-or-cells">this example</InternalLink> for
-        more information.
+        <Box mb="sm">
+          When handling row clicks, you might want to{' '}
+          <InternalLink to="/examples/disabling-text-selection">disable text selection</InternalLink>.
+        </Box>
+        <div>
+          If you need to combine this behavior with links, buttons,{' '}
+          <InternalLink to="/examples/row-actions-cell">row action cells</InternalLink> or any kind of clickable
+          components inside cells, make sure to intercept the <Code>click</Code> event on those components and{' '}
+          <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">
+            invoke its <Code>.stopPropagation()</Code> method
+          </ExternalLink>
+          .
+          <br />
+          See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows-or-cells">
+            this example
+          </InternalLink>{' '}
+          for more information.
+        </div>
       </Txt>
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />

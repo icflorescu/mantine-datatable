@@ -117,7 +117,7 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
 
   return (
     <>
-      <Paper className={clsx(classes.controlGroups)} mt="lg" mb="xl" mx="auto" p="md" withBorder>
+      <Paper className={clsx(classes.controlGroups)} mt="lg" mb="xl" p="md" withBorder>
         <div className={classes.controls}>
           <Switch
             className={classes.control}

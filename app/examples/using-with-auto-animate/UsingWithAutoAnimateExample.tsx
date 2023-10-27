@@ -2,7 +2,7 @@
 
 import { faker } from '@faker-js/faker';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { ActionIcon, Box, Button, Center, Group } from '@mantine/core';
+import { ActionIcon, Box, Button, Center, Group, Paper } from '@mantine/core';
 import { IconArrowDown, IconArrowUp, IconArrowsUpDown, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
 import { useEffect, useState } from 'react';
@@ -126,18 +126,22 @@ export function UsingWithAutoAnimateExample() {
         bodyRef={bodyRef}
       />
       {/* example-skip */}
-      <Group>
-        <Button onClick={handleAdd}>Add new user</Button>
-        <Button color="green" onClick={handleSortByName}>
-          Sort by name
-        </Button>
-        <Button color="green" onClick={handleSortByAge}>
-          Sort by age
-        </Button>
-        <Button color="red" onClick={handleDeleteAll}>
-          Delete all
-        </Button>
-      </Group>
+      <Paper p="md" mt="sm" withBorder>
+        <Center>
+          <Group>
+            <Button onClick={handleAdd}>Add new user</Button>
+            <Button color="green" onClick={handleSortByName}>
+              Sort by name
+            </Button>
+            <Button color="green" onClick={handleSortByAge}>
+              Sort by age
+            </Button>
+            <Button color="red" onClick={handleDeleteAll}>
+              Delete all
+            </Button>
+          </Group>
+        </Center>
+      </Paper>
       {/* example-resume */}
     </>
   );

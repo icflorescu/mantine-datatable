@@ -45,6 +45,7 @@ export default async function ScrollableVsAutoHeightExamplePage() {
         could make the scrollbars invisible:
       </Txt>
       <CodeBlock code={code['scroll-area-props']} />
+      <Txt>Here is the result:</Txt>
       <ScrollAreaPropsExample />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
