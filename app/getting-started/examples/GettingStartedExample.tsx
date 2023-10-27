@@ -49,7 +49,7 @@ export function GettingStartedExample() {
         { accessor: 'bornIn' },
       ]}
       // execute this callback when a row is clicked
-      onRowClick={({ name, party, bornIn }) =>
+      onRowClick={({ record: { name, party, bornIn } }) =>
         notifications.show({
           title: `Clicked on ${name}`,
           message: `You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}`,

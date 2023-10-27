@@ -18,7 +18,7 @@ This is a **major rewrite** of the library internals, with the following goals i
 - The column `textAlignment` property was renamed to `textAlign`
 - The table `verticalAlignment` property was renamed to `verticalAlign`
 - The internal context-menu functionality was removed in favor of using the [Mantine ContextMenu](https://icflorescu.github.io/mantine-contextmenu/) package (built by the same author), which is more flexible and feature-rich
-- Some method signatures were changed from `(record, index) => ...` to `({ record, index }) => ...` for clarity
+- Some method signatures (such as click handlers) were changed from `(record, index) => ...` to `({ record, index }) => ...` for clarity
 
 ## 6.0.0 (2023-10-01)
 

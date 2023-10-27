@@ -56,6 +56,7 @@ export function SearchingAndFilteringExample() {
     <DataTable
       height={300}
       withTableBorder
+      withColumnBorders
       records={records}
       columns={[
         {
@@ -93,6 +94,7 @@ export function SearchingAndFilteringExample() {
         { accessor: 'department.company.name' },
         {
           accessor: 'birthDate',
+          textAlign: 'right',
           render: ({ birthDate }) => dayjs(birthDate).format('MMM DD YYYY'),
           filter: ({ close }) => (
             <Stack>
@@ -116,7 +118,7 @@ export function SearchingAndFilteringExample() {
           ),
           filtering: Boolean(birthdaySearchRange),
         },
-        { accessor: 'age', render: ({ birthDate }) => dayjs().diff(birthDate, 'y') },
+        { accessor: 'age', textAlign: 'right', render: ({ birthDate }) => dayjs().diff(birthDate, 'y') },
       ]}
     />
   );
