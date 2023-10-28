@@ -3,13 +3,12 @@
 import { ActionIcon, Button, Center, Flex, Group, Image, MantineTheme, Text, TextInput, rem } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
-import { IconChevronDown, IconClick, IconEdit, IconMessage, IconTrash, IconTrashX } from '@tabler/icons-react';
+import { IconClick, IconEdit, IconEye, IconMessage, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
 import { DataTable, DataTableColumn, DataTableProps, DataTableSortStatus } from '__PACKAGE__';
-import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { useContextMenu } from 'mantine-contextmenu';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Employee } from '~/data';
 import { getEmployeesAsync } from '~/data/async';
 import classes from './ComplexUsageExample.module.css';
@@ -31,21 +30,48 @@ export function ComplexUsageExample() {
   });
 
   const [selectedRecords, setSelectedRecords] = useState<Employee[]>([]);
-  const [expandedRecordIds, setExpandedRecordIds] = useState<string[]>([]);
 
   const handleSortStatusChange = (status: DataTableSortStatus<Employee>) => {
     setPage(1);
     setSortStatus(status);
   };
 
-  const toggleRecordExpansion = (id: string) => (e: React.MouseEvent) => {
-    e.stopPropagation(); // 👈 prevent triggering the row click function
-    setExpandedRecordIds((currentIds) =>
-      currentIds.includes(id) ? currentIds.filter((currentId) => currentId !== id) : [...currentIds, id]
-    );
-  };
+  const editRecord = useCallback(({ firstName, lastName }: Employee) => {
+    showNotification({
+      withBorder: true,
+      title: 'Editing record',
+      message: `In a real application we should edit ${firstName} ${lastName}, but this is just a demo`,
+    });
+  }, []);
 
-  const renderActions: DataTableColumn<Employee>['render'] = ({ id, firstName, lastName }) => (
+  const deleteRecord = useCallback(({ firstName, lastName }: Employee) => {
+    showNotification({
+      withBorder: true,
+      color: 'red',
+      title: 'Deleting record',
+      message: `Should delete ${firstName} ${lastName}, but we're not going to, because this is just a demo`,
+    });
+  }, []);
+
+  const deleteSelectedRecords = useCallback(() => {
+    showNotification({
+      withBorder: true,
+      color: 'red',
+      title: 'Deleting multiple records',
+      message: `Should delete ${selectedRecords.length} records, but we're not going to do that because deleting data is bad`,
+    });
+  }, [selectedRecords.length]);
+
+  const sendMessage = useCallback(({ firstName, lastName }: Employee) => {
+    showNotification({
+      withBorder: true,
+      title: 'Sending message',
+      message: `A real application could send a message to ${firstName} ${lastName}, but this is just a demo and we're not going to do that because we don't have a backend`,
+      color: 'green',
+    });
+  }, []);
+
+  const renderActions: DataTableColumn<Employee>['render'] = (record) => (
     <Group gap={4} justify="right" wrap="nowrap">
       <ActionIcon
         size="sm"
@@ -54,7 +80,7 @@ export function ComplexUsageExample() {
         onClick={(e) => {
           e.stopPropagation(); // 👈 prevent triggering the row click function
           openModal({
-            title: `Send message to ${firstName} ${lastName}`,
+            title: `Send message to ${record.firstName} ${record.lastName}`,
             classNames: {
               header: classes.modalHeader,
               title: classes.modalTitle,
@@ -64,17 +90,13 @@ export function ComplexUsageExample() {
               <>
                 <TextInput mt="md" placeholder="Your message..." />
                 <Group mt="md" justify="space-between">
-                  <Button variant="default" onClick={() => closeAllModals()}>
+                  <Button variant="transparent" c="dimmed" onClick={() => closeAllModals()}>
                     Cancel
                   </Button>
                   <Button
+                    color="green"
                     onClick={() => {
-                      showNotification({
-                        withBorder: true,
-                        title: 'Sending message',
-                        message: `A real application could send a message to ${firstName} ${lastName}, but this is just a demo and we're not going to do that because we don't have a backend`,
-                        color: 'green',
-                      });
+                      sendMessage(record);
                       closeAllModals();
                     }}
                   >
@@ -88,19 +110,21 @@ export function ComplexUsageExample() {
       >
         <IconMessage size={16} />
       </ActionIcon>
-      <ActionIcon size="sm" variant="transparent" onClick={toggleRecordExpansion(id)}>
-        <IconChevronDown
-          size={16}
-          className={clsx(classes.icon, { [classes.iconReverse]: expandedRecordIds.includes(id) })}
-        />
+      <ActionIcon
+        size="sm"
+        variant="transparent"
+        onClick={(e) => {
+          e.stopPropagation(); // 👈 prevent triggering the row click function
+          editRecord(record);
+        }}
+      >
+        <IconEye size={16} />
       </ActionIcon>
     </Group>
   );
 
   const rowExpansion: DataTableProps<Employee>['rowExpansion'] = {
-    trigger: 'never',
     allowMultiple: true,
-    expanded: { recordIds: expandedRecordIds },
     content: ({ record: { id, sex, firstName, lastName, birthDate, department } }) => (
       <Flex p="xs" pl={rem(50)} gap="md" align="center">
         <Image
@@ -121,49 +145,29 @@ export function ComplexUsageExample() {
     ),
   };
 
-  const handleContextMenu: DataTableProps<Employee>['onRowContextMenu'] = ({
-    record: { id, firstName, lastName },
-    event,
-  }) =>
+  const handleContextMenu: DataTableProps<Employee>['onRowContextMenu'] = ({ record, event }) =>
     showContextMenu([
       {
         key: 'edit',
         icon: <IconEdit size={14} />,
-        title: `Edit ${firstName} ${lastName}`,
-        onClick: () =>
-          showNotification({
-            withBorder: true,
-            title: 'Editing record',
-            message: `In a real application we should edit ${firstName} ${lastName}, but this is just a demo`,
-          }),
+        title: `Edit ${record.firstName} ${record.lastName}`,
+        onClick: () => editRecord(record),
       },
       {
         key: 'delete',
-        title: `Delete ${firstName} ${lastName}`,
+        title: `Delete ${record.firstName} ${record.lastName}`,
         icon: <IconTrashX size={14} />,
         color: 'red',
-        onClick: () =>
-          showNotification({
-            withBorder: true,
-            color: 'red',
-            title: 'Deleting record',
-            message: `Should delete ${firstName} ${lastName}, but we're not going to, because this is just a demo`,
-          }),
+        onClick: () => deleteRecord(record),
       },
       { key: 'divider' },
       {
         key: 'deleteMany',
-        hidden: selectedRecords.length <= 1 || !selectedRecords.map((r) => r.id).includes(id),
+        hidden: selectedRecords.length <= 1 || !selectedRecords.map((r) => r.id).includes(record.id),
         title: `Delete ${selectedRecords.length} selected records`,
         icon: <IconTrash size={14} />,
         color: 'red',
-        onClick: () =>
-          showNotification({
-            withBorder: true,
-            color: 'red',
-            title: 'Deleting multiple records',
-            message: `Should delete ${selectedRecords.length} records, but we're not going to do that because deleting data is bad`,
-          }),
+        onClick: deleteSelectedRecords,
       },
     ])(event);
 
