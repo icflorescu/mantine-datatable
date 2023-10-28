@@ -71,7 +71,9 @@ export function DataTable<T>({
   noRecordsText = 'No records',
   noRecordsIcon,
   highlightOnHover,
+  highlightOnHoverColor,
   striped,
+  stripedColor,
   noHeader,
   onRowClick,
   onRowContextMenu,
@@ -240,6 +242,12 @@ export function DataTable<T>({
             : undefined,
           '--mantine-datatable-custom-row-border-color': borderColor
             ? parseThemeColor({ color: rowBorderColor, theme }).value
+            : undefined,
+          '--mantine-datatable-custom-striped-color': stripedColor
+            ? parseThemeColor({ color: stripedColor, theme }).value
+            : undefined,
+          '--mantine-datatable-custom-highlight-on-hover-color': highlightOnHoverColor
+            ? parseThemeColor({ color: highlightOnHoverColor, theme }).value
             : undefined,
           borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
           boxShadow: theme.shadows[shadow as MantineSize] || shadow,
