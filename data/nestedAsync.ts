@@ -11,6 +11,9 @@ import {
   type Employee,
 } from '.';
 
+export type DepartmentWithEmployeeCount = Department & { employees: number };
+export type CompanyWithEmployeeCount = Company & { employees: number };
+
 // Departments with employees count
 export const departments = departmentData.map((department) => ({
   ...department,
@@ -26,7 +29,7 @@ export const companies = companyData.map((company) => ({
 }));
 
 // Hook simulating async companies fetching
-export function useCompaniesAsync({ sortStatus }: { sortStatus: DataTableSortStatus<Company> }) {
+export function useCompaniesAsync({ sortStatus }: { sortStatus: DataTableSortStatus<CompanyWithEmployeeCount> }) {
   const isMounted = useIsMounted();
   const [records, setRecords] = useState<typeof companies>([]);
   const [loading, setLoading] = useState(true);
@@ -58,7 +61,7 @@ export function useDepartmentsAsync({
   sortStatus,
 }: {
   companyId: string;
-  sortStatus?: DataTableSortStatus<Department>;
+  sortStatus?: DataTableSortStatus<DepartmentWithEmployeeCount>;
 }) {
   const isMounted = useIsMounted();
   const [records, setRecords] = useState<typeof departments>([]);
