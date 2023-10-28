@@ -1,6 +1,6 @@
 import type { DataTableRowExpansionCollapseProps } from './DataTableRowExpansionCollapseProps';
 
-export type DataTableRowExpansionProps<T> = {
+export type DataTableRowExpansionProps<T = Record<string, unknown>> = {
   /**
    * Defines when rows should expand.
    * @default `click`

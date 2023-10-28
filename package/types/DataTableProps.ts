@@ -20,7 +20,7 @@ import type { DataTableSelectionProps } from './DataTableSelectionProps';
 import type { DataTableSortProps } from './DataTableSortProps';
 import type { DataTableVerticalAlign } from './DataTableVerticalAlign';
 
-export type DataTableProps<T> = {
+export type DataTableProps<T = Record<string, unknown>> = {
   /**
    * Data table container class name.
    */

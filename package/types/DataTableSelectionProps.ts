@@ -1,4 +1,4 @@
-export type DataTableSelectionProps<T> =
+export type DataTableSelectionProps<T = Record<string, unknown>> =
   | {
       selectedRecords?: never;
       onSelectedRecordsChange?: never;

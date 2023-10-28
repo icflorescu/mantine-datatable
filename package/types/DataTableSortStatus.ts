@@ -1,4 +1,4 @@
-export type DataTableSortStatus<T> = {
+export type DataTableSortStatus<T = Record<string, unknown>> = {
   /**
    * Sort column accessor.
    * You can use dot-notation for nested objects property drilling

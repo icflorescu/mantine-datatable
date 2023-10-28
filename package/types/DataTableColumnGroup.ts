@@ -2,7 +2,7 @@ import type { MantineStyleProp } from '@mantine/core';
 import type { DataTableColumn } from './DataTableColumn';
 import type { DataTableColumnTextAlign } from './DataTableColumnTextAlign';
 
-export type DataTableColumnGroup<T> = {
+export type DataTableColumnGroup<T = Record<string, unknown>> = {
   /**
    * Used as the `key` prop for the created `<th />`.
    */

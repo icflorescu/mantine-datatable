@@ -1,6 +1,6 @@
 import type { DataTableSortStatus } from './DataTableSortStatus';
 
-export type DataTableSortProps<T> =
+export type DataTableSortProps<T = Record<string, unknown>> =
   | {
       sortStatus?: never;
       onSortStatusChange?: never;

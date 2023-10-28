@@ -1,4 +1,4 @@
-export type DataTableRowClickHandler<T> = (params: {
+export type DataTableRowClickHandler<T = Record<string, unknown>> = (params: {
   /**
    * Click event.
    */

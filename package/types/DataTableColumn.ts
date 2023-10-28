@@ -1,7 +1,7 @@
 import type { MantineStyleProp, MantineTheme } from '@mantine/core';
 import type { DataTableColumnTextAlign } from './DataTableColumnTextAlign';
 
-export type DataTableColumn<T> = {
+export type DataTableColumn<T = Record<string, unknown>> = {
   /**
    * Column accessor.
    * You can use dot-notation for nested objects property drilling.

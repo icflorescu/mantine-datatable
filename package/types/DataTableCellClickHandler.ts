@@ -1,6 +1,6 @@
 import type { DataTableColumn } from './DataTableColumn';
 
-export type DataTableCellClickHandler<T> = (params: {
+export type DataTableCellClickHandler<T = Record<string, unknown>> = (params: {
   /**
    * Click event.
    */

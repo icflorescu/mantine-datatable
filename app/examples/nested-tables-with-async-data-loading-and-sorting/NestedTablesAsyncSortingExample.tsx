@@ -6,9 +6,7 @@ import { DataTable, DataTableSortStatus } from '__PACKAGE__';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { Employee } from '~/data';
 import {
-  DepartmentWithEmployeeCount,
   useCompaniesAsync,
   useDepartmentsAsync,
   useEmployeesAsync,
@@ -16,13 +14,7 @@ import {
 } from '~/data/nestedAsync';
 import classes from './NestedTablesAsyncSortingExample.module.css';
 
-function EmployeesTable({
-  departmentId,
-  sortStatus,
-}: {
-  departmentId: string;
-  sortStatus: DataTableSortStatus<Employee>;
-}) {
+function EmployeesTable({ departmentId, sortStatus }: { departmentId: string; sortStatus: DataTableSortStatus }) {
   const { records, loading } = useEmployeesAsync({ departmentId, sortStatus });
 
   return (
@@ -55,13 +47,7 @@ function EmployeesTable({
   );
 }
 
-function DepartmentsTable({
-  companyId,
-  sortStatus,
-}: {
-  companyId: string;
-  sortStatus: DataTableSortStatus<DepartmentWithEmployeeCount>;
-}) {
+function DepartmentsTable({ companyId, sortStatus }: { companyId: string; sortStatus: DataTableSortStatus }) {
   const { records, loading } = useDepartmentsAsync({ companyId, sortStatus });
   const [expandedRecordIds, setExpandedRecordIds] = useState<string[]>([]);
 
@@ -92,12 +78,7 @@ function DepartmentsTable({
       rowExpansion={{
         allowMultiple: true,
         expanded: { recordIds: expandedRecordIds, onRecordIdsChange: setExpandedRecordIds },
-        content: ({ record }) => (
-          <EmployeesTable
-            departmentId={record.id}
-            sortStatus={sortStatus as unknown as DataTableSortStatus<Employee>}
-          />
-        ),
+        content: ({ record }) => <EmployeesTable departmentId={record.id} sortStatus={sortStatus} />,
       }}
     />
   );
@@ -150,10 +131,7 @@ export function NestedTablesAsyncSortingExample() {
         allowMultiple: true,
         expanded: { recordIds: expandedRecordIds, onRecordIdsChange: setExpandedRecordIds },
         content: ({ record }) => (
-          <DepartmentsTable
-            companyId={record.id}
-            sortStatus={sortStatus as unknown as DataTableSortStatus<DepartmentWithEmployeeCount>}
-          />
+          <DepartmentsTable companyId={record.id} sortStatus={sortStatus as DataTableSortStatus} />
         ),
       }}
     />
