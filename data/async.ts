@@ -23,7 +23,7 @@ export async function getEmployeesAsync({
 }: {
   page: number;
   recordsPerPage: number;
-  sortStatus: DataTableSortStatus;
+  sortStatus: DataTableSortStatus<Employee>;
   delay?: DelayOptions;
 }) {
   await delay(delayOptions);
