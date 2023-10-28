@@ -81,15 +81,11 @@ export function ComplexUsageExample() {
           e.stopPropagation(); // 👈 prevent triggering the row click function
           openModal({
             title: `Send message to ${record.firstName} ${record.lastName}`,
-            classNames: {
-              header: classes.modalHeader,
-              title: classes.modalTitle,
-              content: classes.modalContent,
-            },
+            classNames: { header: classes.modalHeader, title: classes.modalTitle },
             children: (
               <>
                 <TextInput mt="md" placeholder="Your message..." />
-                <Group mt="md" justify="space-between">
+                <Group mt="md" gap="sm" justify="flex-end">
                   <Button variant="transparent" c="dimmed" onClick={() => closeAllModals()}>
                     Cancel
                   </Button>

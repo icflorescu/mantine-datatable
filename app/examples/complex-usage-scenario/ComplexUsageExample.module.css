@@ -6,15 +6,3 @@
   color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-2));
   font-weight: 700;
 }
-
-.modalContent {
-  max-width: rem(300px);
-}
-
-.icon {
-  transition: transform 0.2s;
-}
-
-.iconReverse {
-  transform: scaleY(-1);
-}
