@@ -76,7 +76,7 @@ export function UsingWithAutoAnimateExample() {
       <DataTable
         borderRadius="sm"
         withTableBorder
-        minHeight={160}
+        minHeight={200}
         columns={[
           {
             accessor: 'move',
