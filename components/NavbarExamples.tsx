@@ -52,7 +52,7 @@ export function NavbarExamples({ items }: NavbarExamplesProps) {
           style={{ transitionDuration: `${30 * items.length}ms` }}
         />
         {items.map((item) => (
-          <NavbarButton key={item.href} {...item} />
+          <NavbarButton key={item.href as React.Key} {...item} />
         ))}
       </Collapse>
     </>

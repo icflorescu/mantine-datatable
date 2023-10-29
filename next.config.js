@@ -20,6 +20,7 @@ module.exports = async () => {
       PACKAGE_VERSION,
       INITIAL_NPM_DOWNLOADS: String(downloads),
     },
+    experimental: { typedRoutes: true },
   };
 
   if (process.env.GITHUB_PAGES) config.basePath = '/mantine-datatable';

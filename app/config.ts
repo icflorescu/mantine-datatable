@@ -10,6 +10,7 @@ import {
   IconRocket,
   TablerIconsProps,
 } from '@tabler/icons-react';
+import type { Route } from 'next';
 
 export const PRODUCT_NAME = 'Mantine DataTable';
 export const PRODUCT_DESCRIPTION =
@@ -38,7 +39,7 @@ export const MANTINE_CONTEXTMENU_PRODUCT_NAME = 'Mantine ContextMenu';
 export const DOWNLOADS_REFRESH_INTERVAL = 1000 * 60 * 60 * 24; // 1 day
 
 export type RouteInfo = {
-  href: string;
+  href: Route | URL;
   title: string;
   description: string;
 } & ({ icon?: never; color?: never } | { icon: React.FC<TablerIconsProps>; color: MantineColor });
@@ -241,7 +242,7 @@ export const ROUTES: RouteInfo[] = [
     color: 'teal',
   },
   {
-    href: `${REPO_LINK}/blob/main/CHANGELOG.md`,
+    href: `${REPO_LINK}/blob/main/CHANGELOG.md` as Route,
     title: `Changelog`,
     description: `See ${PRODUCT_NAME} changelog`,
     icon: IconList,

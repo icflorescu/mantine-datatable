@@ -2,6 +2,7 @@ import { Box, Center, Text, rgba } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
 import type { WithOptionalProperty, WithRequiredProperty } from '__PACKAGE__';
 import clsx from 'clsx';
+import type { Route } from 'next';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { RouteInfo } from '~/app/config';
@@ -13,7 +14,7 @@ export type NavbarButtonProps = WithRequiredProperty<WithOptionalProperty<RouteI
 };
 
 export function NavbarButton({ color, icon, title, description, href, onClick, expanded }: NavbarButtonProps) {
-  const isExternal = !!href?.startsWith('http');
+  const isExternal = !!(href as string).startsWith('http');
   const Icon = onClick ? IconChevronRight : icon;
   const pathname = usePathname();
   // this is to make sure for works for trailing slashes
@@ -30,7 +31,7 @@ export function NavbarButton({ color, icon, title, description, href, onClick, e
       className={classes.root}
       component="a"
       aria-label={description}
-      href={isExternal ? href : undefined}
+      href={isExternal ? (href as string) : undefined}
       target={isExternal ? '_blank' : undefined}
       onClick={onClick}
     >
@@ -52,7 +53,7 @@ export function NavbarButton({ color, icon, title, description, href, onClick, e
   return isExternal || onClick ? (
     content
   ) : (
-    <Link href={href!} passHref legacyBehavior>
+    <Link href={href as Route} passHref legacyBehavior>
       {content}
     </Link>
   );
