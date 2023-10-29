@@ -24,7 +24,7 @@ export default async function SearchingAndFilteringExamplePage() {
         logic in order to perform searching and filtering.
         <br />
         In order to support column-based filtering you can use the <Code>filter</Code> and <Code>filtering</Code>{' '}
-        <InternalLink to="/examples/column-properties">column properties</InternalLink>.
+        <InternalLink to="/examples/column-properties-and-styling">column properties</InternalLink>.
         <br />
         Here’s a possible (rather naive and rough around the edges) implementation:
       </Txt>

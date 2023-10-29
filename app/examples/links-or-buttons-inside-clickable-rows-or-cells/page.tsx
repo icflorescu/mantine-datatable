@@ -24,7 +24,7 @@ export default async function LinksOrButtonsInsideClickableRowsOrCellsExamplePag
         <InternalLink to="/examples/handling-row-clicks">clickable rows</InternalLink>,{' '}
         <InternalLink to="/examples/handling-cell-clicks">clickable cells</InternalLink>,{' '}
         <InternalLink to="/examples/expanding-rows">expandable rows</InternalLink> or{' '}
-        <InternalLink to="/examples/row-context-menu">
+        <InternalLink to="/examples/using-with-mantine-contextmenu">
           row context-menus triggered by <Code>click</Code> instead of <Code>right-click</Code>
         </InternalLink>
         , make sure to intercept the <Code>click</Code> event on the clickable components and{' '}

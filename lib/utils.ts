@@ -1,14 +1,14 @@
 import { useWindowScroll } from '@mantine/hooks';
 import { memoize } from 'lodash';
-import type { Metadata } from 'next';
+import type { Metadata, Route } from 'next';
 import { EXAMPLES_ROUTE_COLOR, PRODUCT_NAME, ROUTES, RouteInfo } from '~/app/config';
-import type { NavbarButtonProps } from '~/components/NavbarButton';
+import { NavbarButtonProps } from '~/components/NavbarButton';
 
 function addExamplesPrefix({ href, title }: Pick<RouteInfo, 'href' | 'title'>) {
   return href.startsWith('/examples/') ? `Examples › ${title}` : title;
 }
 
-export const getRouteMetadata = memoize((href: string): Metadata => {
+export const getRouteMetadata = memoize((href: Route): Metadata => {
   const route = ROUTES.find((route) => route.href === href);
   if (!route) throw new Error(`Route ${href} not found`);
   const { title, description } = route;
@@ -18,7 +18,7 @@ export const getRouteMetadata = memoize((href: string): Metadata => {
   };
 });
 
-export const getRouteTitle = memoize((href: string) => {
+export const getRouteTitle = memoize((href: Route) => {
   const route = ROUTES.find((route) => route.href === href);
   if (!route) throw new Error(`Route ${href} not found`);
   const { title } = route;
@@ -66,7 +66,9 @@ export const getPageNavigationInfo = memoize((href: string) => {
   };
 });
 
-export const getFirstExampleRoute = memoize(() => ROUTES.find((route) => route.href.startsWith('/examples'))!);
+export const getFirstExampleRoute = memoize(
+  () => ROUTES.find((route) => (route.href as string).startsWith('/examples'))!
+);
 
 export const getNextRoute = memoize((href: string) => {
   const index = ROUTES.findIndex((route) => route.href === href);

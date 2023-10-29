@@ -1,10 +1,11 @@
 import { Title } from '@mantine/core';
+import type { Route } from 'next';
 import { getRouteTitle } from '~/lib/utils';
 import classes from './PageTitle.module.css';
 
 export type PageTitleProps =
   | {
-      of: string;
+      of: Route;
       children?: never;
     }
   | {

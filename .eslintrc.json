@@ -1,6 +1,7 @@
 {
+  "root": true,
   "plugins": ["@typescript-eslint"],
-  "extends": ["next/core-web-vitals", "prettier", "plugin:@typescript-eslint/recommended"],
+  "extends": ["next/core-web-vitals", "prettier", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "@next/next/no-img-element": "off"
   }

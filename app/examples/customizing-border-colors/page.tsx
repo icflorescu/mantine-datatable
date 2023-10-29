@@ -37,7 +37,10 @@ export default async function CustomizingBorderColorsExamplePage() {
         <ListItem>header bottom border;</ListItem>
         <ListItem>
           footer top border (see{' '}
-          <InternalLink to="/examples/column-properties/#column-footers">column footers</InternalLink>);
+          <InternalLink to="/examples/column-properties-and-styling" scrollTo="Column footers">
+            column footers
+          </InternalLink>
+          );
         </ListItem>
         <ListItem>
           pagination top border (see <InternalLink to="/examples/pagination">pagination</InternalLink>).

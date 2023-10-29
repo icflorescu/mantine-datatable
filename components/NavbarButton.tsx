@@ -1,6 +1,6 @@
 import { Box, Center, Text, rgba } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
-import type { WithOptionalProperty, WithRequiredProperty } from '__PACKAGE__';
+import type { WithRequiredProperty } from '__PACKAGE__';
 import clsx from 'clsx';
 import type { Route } from 'next';
 import Link from 'next/link';
@@ -8,13 +8,14 @@ import { usePathname } from 'next/navigation';
 import type { RouteInfo } from '~/app/config';
 import classes from './NavbarButton.module.css';
 
-export type NavbarButtonProps = WithRequiredProperty<WithOptionalProperty<RouteInfo, 'href'>, 'color'> & {
+export type NavbarButtonProps = WithRequiredProperty<Omit<RouteInfo, 'href'>, 'color'> & {
+  href?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   expanded?: boolean;
 };
 
 export function NavbarButton({ color, icon, title, description, href, onClick, expanded }: NavbarButtonProps) {
-  const isExternal = !!(href as string).startsWith('http');
+  const isExternal = !!href?.startsWith('http');
   const Icon = onClick ? IconChevronRight : icon;
   const pathname = usePathname();
   // this is to make sure for works for trailing slashes
@@ -31,7 +32,7 @@ export function NavbarButton({ color, icon, title, description, href, onClick, e
       className={classes.root}
       component="a"
       aria-label={description}
-      href={isExternal ? (href as string) : undefined}
+      href={isExternal ? href : undefined}
       target={isExternal ? '_blank' : undefined}
       onClick={onClick}
     >

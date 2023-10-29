@@ -66,7 +66,7 @@
     "build:package": "rm -rf dist; tsc -p package/tsconfig.esm.json; tsc -p package/tsconfig.cjs.json; postcss package/styles*.css --dir dist/css",
     "build:docs": "next build",
     "build": "yarn build:package && yarn build:docs",
-    "lint": "eslint .",
+    "lint": "eslint . && tsc --noEmit --pretty",
     "format": "prettier --write ."
   },
   "devDependencies": {

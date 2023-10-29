@@ -21,8 +21,8 @@ export default async function DefaultColumnPropertiesExamplePage() {
       <Txt>
         If you find yourself repeating the same properties over and over again for multiple columns, you can use{' '}
         <Code>defaultColumnProps</Code> (which accepts a subset of{' '}
-        <InternalLink to="/examples/column-properties">column properties</InternalLink>) to set them once and use as a
-        fallback for all columns.
+        <InternalLink to="/examples/column-properties-and-styling">column properties</InternalLink>) to set them once
+        and use as a fallback for all columns.
       </Txt>
       <DefaultColumnPropertiesExample />
       <Txt>Here is the code for the above example:</Txt>
