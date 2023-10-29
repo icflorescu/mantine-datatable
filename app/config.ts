@@ -78,9 +78,9 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to set the basic ${PRODUCT_NAME} properties`,
   },
   {
-    href: '/examples/column-properties',
-    title: 'Column properties',
-    description: `Example: setting ${PRODUCT_NAME} column properties`,
+    href: '/examples/column-properties-and-styling',
+    title: 'Column properties and styling',
+    description: `Example: setting ${PRODUCT_NAME} column properties and customizing their styling`,
   },
   {
     href: '/examples/column-grouping',

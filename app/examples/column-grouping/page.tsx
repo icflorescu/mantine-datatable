@@ -42,8 +42,8 @@ export default async function ColumnGroupingExamplePage() {
         <ListItem>
           <Code>columns</Code>
           <br />
-          An array of <InternalLink to="/examples/column-properties">column definitions</InternalLink> that are part of
-          this group.
+          An array of <InternalLink to="/examples/column-properties-and-styling">column definitions</InternalLink> that
+          are part of this group.
         </ListItem>
       </UnorderedList>
       <Txt>

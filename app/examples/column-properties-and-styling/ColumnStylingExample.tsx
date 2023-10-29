@@ -5,11 +5,11 @@ import { DataTable, uniqBy } from '__PACKAGE__';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { employees } from '~/data';
-import classes from './ColumnPropertiesExampleStyling.module.css';
+import classes from './ColumnStylingExample.module.css';
 
 const records = employees.slice(0, 10);
 
-export function ColumnPropertiesExampleStyling() {
+export function ColumnStylingExample() {
   return (
     <DataTable
       withTableBorder

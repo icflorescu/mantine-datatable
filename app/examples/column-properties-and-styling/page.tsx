@@ -8,22 +8,20 @@ import { Txt } from '~/components/Txt';
 import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
+import { ColumnFooterExample } from './ColumnFooterExample';
 import { ColumnPropertiesExample } from './ColumnPropertiesExample';
-import { ColumnPropertiesExampleStyling } from './ColumnPropertiesExampleStyling';
-import { ColumnPropertiesExampleWithFooter } from './ColumnPropertiesExampleWithFooter';
+import { ColumnStylingExample } from './ColumnStylingExample';
 
-const PATH = '/examples/column-properties';
+const PATH = '/examples/column-properties-and-styling';
 
 export const metadata = getRouteMetadata(PATH);
 
-export default async function ColumnPropertiesExamplePage() {
+export default async function ColumnPropertiesAndStylingExamplePage() {
   const code = await allPromiseProps({
     'ColumnPropertiesExample.tsx': readCodeFile<string>(`${PATH}/ColumnPropertiesExample.tsx`),
-    'ColumnPropertiesExampleStyling.tsx': readCodeFile<string>(`${PATH}/ColumnPropertiesExampleStyling.tsx`),
-    'ColumnPropertiesExampleStyling.module.css': readCodeFile<string>(
-      `${PATH}/ColumnPropertiesExampleStyling.module.css`
-    ),
-    'ColumnPropertiesExampleWithFooter.tsx': readCodeFile<string>(`${PATH}/ColumnPropertiesExampleWithFooter.tsx`),
+    'ColumnStylingExample.tsx': readCodeFile<string>(`${PATH}/ColumnStylingExample.tsx`),
+    'ColumnStylingExample.module.css': readCodeFile<string>(`${PATH}/ColumnStylingExample.module.css`),
+    'ColumnFooterExample.tsx': readCodeFile<string>(`${PATH}/ColumnFooterExample.tsx`),
     'data/index.ts': readCodeFile<string>('/../data/index.ts'),
   });
 
@@ -132,9 +130,9 @@ export default async function ColumnPropertiesExamplePage() {
         The DataTable component will display a footer row at the bottom of the table if you specify a{' '}
         <Code>footer</Code> property for at least one column:
       </Txt>
-      <ColumnPropertiesExampleWithFooter />
+      <ColumnFooterExample />
       <Txt>Here’s the code for the example above:</Txt>
-      <CodeBlock tabs={{ code, keys: ['ColumnPropertiesExampleWithFooter.tsx', 'data/index.ts'] }} />
+      <CodeBlock tabs={{ code, keys: ['ColumnFooterExample.tsx', 'data/index.ts'] }} />
       <PageSubtitle value="Styling column titles, cells and footers" />
       <Txt>In addition, each column can be further customized by specifying the following styling properties:</Txt>
       <UnorderedList>
@@ -168,12 +166,12 @@ export default async function ColumnPropertiesExamplePage() {
         </ListItem>
       </UnorderedList>
       <Txt>Consider this example:</Txt>
-      <ColumnPropertiesExampleStyling />
+      <ColumnStylingExample />
       <Txt>Here’s the code for the example above:</Txt>
       <CodeBlock
         tabs={{
           code,
-          keys: ['ColumnPropertiesExampleStyling.tsx', 'ColumnPropertiesExampleStyling.module.css', 'data/index.ts'],
+          keys: ['ColumnStylingExample.tsx', 'ColumnStylingExample.module.css', 'data/index.ts'],
         }}
       />
       <Txt>Head over to the next example to discover more features.</Txt>
