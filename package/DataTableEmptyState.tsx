@@ -1,5 +1,5 @@
 import { Center, Text, type MantineSpacing, type StyleProp } from '@mantine/core';
-import { IconDatabaseOff } from '@tabler/icons-react';
+import { IconDatabaseOff } from './icons/IconDatabaseOff';
 
 type DataTableEmptyStateProps = React.PropsWithChildren<{
   icon: React.ReactNode | undefined;

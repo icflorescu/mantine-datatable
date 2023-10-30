@@ -20,4 +20,5 @@
   border-radius: 50%;
   padding: var(--mantine-spacing-xs);
   background: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  margin-bottom: calc(var(--mantine-spacing-xs) / 2);
 }

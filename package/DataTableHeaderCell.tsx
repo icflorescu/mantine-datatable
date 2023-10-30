@@ -1,8 +1,9 @@
 import { Box, Center, Group, MantineStyleProp, TableTh, type MantineTheme } from '@mantine/core';
-import { IconArrowUp, IconArrowsVertical } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
 import { useMediaQueryStringOrFunction } from './hooks';
+import { IconArrowUp } from './icons/IconArrowUp';
+import { IconArrowsVertical } from './icons/IconArrowsVertical';
 import type { DataTableColumn, DataTableSortProps } from './types';
 import { ELLIPSIS, NOWRAP, TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
 import { humanize } from './utils';
@@ -55,7 +56,7 @@ export function DataTableHeaderCell<T>({
     <TableTh
       className={clsx(
         {
-          'mantine-datatable-header-cell-sortable-column-header': sortable,
+          'mantine-datatable-header-cell-sortable': sortable,
         },
         className
       )}
@@ -65,14 +66,10 @@ export function DataTableHeaderCell<T>({
       onClick={sortAction}
       onKeyDown={(e) => e.key === 'Enter' && sortAction?.()}
     >
-      <Group
-        className="mantine-datatable-header-cell-sortable-column-header-group"
-        justify="space-between"
-        wrap="nowrap"
-      >
+      <Group className="mantine-datatable-header-cell-sortable-group" justify="space-between" wrap="nowrap">
         <Box
           className={clsx(
-            'mantine-datatable-header-cell-sortable-column-header-text',
+            'mantine-datatable-header-cell-sortable-text',
             {
               [TEXT_ALIGN_LEFT]: textAlign === 'left',
               [TEXT_ALIGN_CENTER]: textAlign === 'center',
@@ -89,21 +86,21 @@ export function DataTableHeaderCell<T>({
           <>
             {sortStatus?.columnAccessor === accessor ? (
               <Center
-                className={clsx('mantine-datatable-header-cell-sortable-column-header-icon', {
-                  'mantine-datatable-header-cell-sortable-column-header-icon-reversed': sortStatus.direction === 'desc',
+                className={clsx('mantine-datatable-header-cell-sortable-icon', {
+                  'mantine-datatable-header-cell-sortable-icon-reversed': sortStatus.direction === 'desc',
                 })}
                 role="img"
                 aria-label={`Sorted ${sortStatus.direction === 'desc' ? 'descending' : 'ascending'}`}
               >
-                {sortIcons?.sorted || <IconArrowUp size={14} />}
+                {sortIcons?.sorted || <IconArrowUp />}
               </Center>
             ) : (
               <Center
-                className="mantine-datatable-header-cell-sortable-column-header-unsorted-icon"
+                className="mantine-datatable-header-cell-sortable-unsorted-icon"
                 role="img"
                 aria-label="Not sorted"
               >
-                {sortIcons?.unsorted || <IconArrowsVertical size={14} />}
+                {sortIcons?.unsorted || <IconArrowsVertical />}
               </Center>
             )}
           </>

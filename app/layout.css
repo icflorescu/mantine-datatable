@@ -1,4 +1,5 @@
 @import '@mantine/core/esm/index.css' layer(mantine-core);
+@import '@mantine/dates/esm/index.css' layer(mantine-dates);
 @import '@mantine/notifications/esm/index.css' layer(mantine-notifications);
 @import '@mantine/code-highlight/esm/index.css' layer(mantine-code-highlight);
 @import 'mantine-contextmenu/dist/css/styles.css' layer(mantine-contextmenu);

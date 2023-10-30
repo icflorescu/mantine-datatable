@@ -1,22 +1,26 @@
 import {
   Button,
   Group,
+  MantineColor,
   Menu,
   MenuDropdown,
   MenuItem,
   MenuTarget,
   Text,
-  type MantineColor,
   type MantineSize,
 } from '@mantine/core';
+import clsx from 'clsx';
+import { getPaginationCssVariables } from './cssVariables';
+import { IconSelector } from './icons/IconSelector';
 
 type DataTablePageSizeSelectorComponentProps = {
   size: MantineSize;
   label: string;
   values: number[];
   value: number;
+  activeTextColor: MantineColor | { dark: MantineColor; light: MantineColor } | undefined;
+  activeBackgroundColor: MantineColor | { dark: MantineColor; light: MantineColor } | undefined;
   onChange: (value: number) => void;
-  color: MantineColor | undefined;
 };
 
 const HEIGHT: Record<MantineSize, number> = { xs: 22, sm: 26, md: 32, lg: 38, xl: 44 };
@@ -26,8 +30,9 @@ export function DataTablePageSizeSelector({
   label,
   values,
   value,
+  activeTextColor,
+  activeBackgroundColor,
   onChange,
-  color,
 }: DataTablePageSizeSelectorComponentProps) {
   return (
     <Group gap="xs">
@@ -37,6 +42,8 @@ export function DataTablePageSizeSelector({
           <Button
             size={size}
             variant="default"
+            classNames={{ section: 'mantine-datatable-page-size-selector-button-icon' }}
+            rightSection={<IconSelector />}
             style={[
               { fontWeight: 'normal' },
               (theme) => ({
@@ -55,12 +62,17 @@ export function DataTablePageSizeSelector({
             return (
               <MenuItem
                 key={v}
+                className={clsx({ 'mantine-datatable-page-size-selector-active': isCurrent })}
                 style={[
                   { height: HEIGHT[size] },
-                  (theme) => ({
-                    color: isCurrent ? theme.white : undefined,
-                    background: isCurrent ? theme.colors[color || theme.primaryColor][6] : undefined,
-                  }),
+                  isCurrent && (activeTextColor || activeBackgroundColor)
+                    ? (theme) =>
+                        getPaginationCssVariables({
+                          theme,
+                          paginationActiveTextColor: activeTextColor,
+                          paginationActiveBackgroundColor: activeBackgroundColor,
+                        })
+                    : undefined,
                 ]}
                 disabled={isCurrent}
                 onClick={() => onChange(v)}

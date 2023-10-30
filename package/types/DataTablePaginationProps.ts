@@ -3,14 +3,15 @@ import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelector
 
 export type DataTablePaginationProps = (
   | {
+      paginationWithEdges?: never;
       page?: never;
       onPageChange?: never;
       totalRecords?: never;
       recordsPerPage?: never;
-      paginationColor?: never;
+      paginationActiveTextColor?: never;
+      paginationActiveBackgroundColor?: never;
       paginationSize?: never;
       loadingText?: never;
-      paginationWithEdges?: never;
       paginationText?: never;
       paginationWrapBreakpoint?: never;
       getPaginationControlProps?: never;
@@ -50,10 +51,20 @@ export type DataTablePaginationProps = (
       paginationSize?: MantineSize;
 
       /**
-       * Pagination component color.
+       * Color applied to active page button text.
+       * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
+       * or an object with `light` and `dark` keys and `MantineColor` values.
+       * Defaults to white.
+       */
+      paginationActiveTextColor?: MantineColor | { light: MantineColor; dark: MantineColor };
+
+      /**
+       * Color applied to active page button background.
+       * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
+       * or an object with `light` and `dark` keys and `MantineColor` values.
        * Defaults to primary theme color.
        */
-      paginationColor?: MantineColor;
+      paginationActiveBackgroundColor?: MantineColor | { light: MantineColor; dark: MantineColor };
 
       /**
        * Text to show while records are loading.

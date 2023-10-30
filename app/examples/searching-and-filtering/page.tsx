@@ -20,8 +20,8 @@ export default async function SearchingAndFilteringExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        Adjust the array of <Code>records</Code> you’re feeding to <Code>Mantine DataTable</Code> based on your own
-        logic in order to perform searching and filtering.
+        Adjust the array of <Code>records</Code> you’re feeding to {PRODUCT_NAME} based on your own logic in order to
+        perform searching and filtering.
         <br />
         In order to support column-based filtering you can use the <Code>filter</Code> and <Code>filtering</Code>{' '}
         <InternalLink to="/examples/column-properties-and-styling">column properties</InternalLink>.

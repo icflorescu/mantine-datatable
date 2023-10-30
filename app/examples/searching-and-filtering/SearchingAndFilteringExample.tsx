@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, MultiSelect, Stack, TextInput } from '@mantine/core';
+import { ActionIcon, Button, MultiSelect, Stack, TextInput } from '@mantine/core';
 import { DatePicker, type DatesRangeValue } from '@mantine/dates';
 import { useDebouncedValue } from '@mantine/hooks';
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch, IconX } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
@@ -68,6 +68,11 @@ export function SearchingAndFilteringExample() {
               description="Show employees whose names include the specified text"
               placeholder="Search employees..."
               leftSection={<IconSearch size={16} />}
+              rightSection={
+                <ActionIcon size="sm" variant="transparent" c="dimmed" onClick={() => setQuery('')}>
+                  <IconX size={14} />
+                </ActionIcon>
+              }
               value={query}
               onChange={(e) => setQuery(e.currentTarget.value)}
             />
@@ -106,13 +111,13 @@ export function SearchingAndFilteringExample() {
               />
               <Button
                 disabled={!birthdaySearchRange}
-                color="red"
+                variant="light"
                 onClick={() => {
                   setBirthdaySearchRange(undefined);
                   close();
                 }}
               >
-                Reset
+                Clear
               </Button>
             </Stack>
           ),

@@ -2,6 +2,7 @@ import { Box, Pagination, Text, rem, type MantineSpacing, type MantineStyleProp 
 import clsx from 'clsx';
 import { forwardRef, type ForwardedRef } from 'react';
 import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
+import { getPaginationCssVariables } from './cssVariables';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTablePaginationProps } from './types';
 import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
@@ -29,7 +30,8 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
     page,
     onPageChange,
     paginationWithEdges,
-    paginationColor,
+    paginationActiveTextColor,
+    paginationActiveBackgroundColor,
     paginationSize,
     loadingText,
     noRecordsText,
@@ -79,19 +81,28 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
       </Text>
       {recordsPerPageOptions && (
         <DataTablePageSizeSelector
+          activeTextColor={paginationActiveTextColor}
+          activeBackgroundColor={paginationActiveBackgroundColor}
           size={paginationSize}
           label={recordsPerPageLabel}
           values={recordsPerPageOptions}
-          color={paginationColor}
           value={recordsPerPage!}
           onChange={onRecordsPerPageChange!}
         />
       )}
       <Pagination
-        color={paginationColor}
-        className={clsx('mantine-datatable-pagination-pages', {
-          'mantine-datatable-pagination-pages-fetching': fetching || !recordsLength,
-        })}
+        classNames={{
+          root: clsx('mantine-datatable-pagination-pages', {
+            'mantine-datatable-pagination-pages-fetching': fetching || !recordsLength,
+          }),
+          control: 'mantine-datatable-pagination-pages-control',
+        }}
+        style={
+          paginationActiveTextColor || paginationActiveBackgroundColor
+            ? (theme) =>
+                getPaginationCssVariables({ theme, paginationActiveTextColor, paginationActiveBackgroundColor })
+            : undefined
+        }
         withEdges={paginationWithEdges}
         value={page}
         onChange={onPageChange}

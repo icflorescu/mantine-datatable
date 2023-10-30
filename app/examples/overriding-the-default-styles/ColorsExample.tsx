@@ -9,7 +9,7 @@ const PAGE_SIZE = 4;
 
 const allCompanies = sortBy(companies, 'name');
 
-export function CustomizingBorderColorsExample() {
+export function ColorsExample() {
   const [page, setPage] = useState(1);
   const [records, setRecords] = useState(allCompanies.slice(0, PAGE_SIZE));
 
@@ -19,13 +19,16 @@ export function CustomizingBorderColorsExample() {
     setRecords(allCompanies.slice(from, to));
   }, [page]);
 
+  // example-start
   return (
-    // example-start
     <DataTable
       withTableBorder
       withColumnBorders
-      borderColor="#40C057"
-      rowBorderColor="#FAB005"
+      c={{ dark: '#dbc7a0', light: '#55350d' }}
+      backgroundColor={{ dark: '#232b25', light: '#f0f7f1' }}
+      borderColor="#40c057"
+      rowBorderColor="#fab005"
+      paginationActiveBackgroundColor="#40c057"
       // example-skip
       records={records}
       columns={[
@@ -40,6 +43,6 @@ export function CustomizingBorderColorsExample() {
       onPageChange={(p) => setPage(p)}
       // example-resume
     />
-    // example-end
   );
+  // example-end
 }

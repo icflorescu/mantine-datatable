@@ -7,8 +7,10 @@
 @import './DataTableFooterSelectorPlaceholderCell.css';
 @import './DataTableHeader.css';
 @import './DataTableHeaderCell.css';
+@import './DataTableHeaderCellFilter.css';
 @import './DataTableHeaderSelectorCell.css';
 @import './DataTableLoader.css';
+@import './DataTablePageSizeSelector.css';
 @import './DataTablePagination.css';
 @import './DataTableRow.css';
 @import './DataTableRowExpansion.css';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Table, parseThemeColor, type MantineSize } from '@mantine/core';
+import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
@@ -12,6 +12,7 @@ import { DataTableLoader } from './DataTableLoader';
 import { DataTablePagination } from './DataTablePagination';
 import { DataTableRow } from './DataTableRow';
 import { DataTableScrollArea } from './DataTableScrollArea';
+import { getTableCssVariables } from './cssVariables';
 import { useElementOuterSize, useIsomorphicLayoutEffect, useLastSelectionChangeIndex, useRowExpansion } from './hooks';
 import type { DataTableProps } from './types';
 import { TEXT_SELECTION_DISABLED } from './utilityClasses';
@@ -19,7 +20,6 @@ import { differenceBy, getRecordId, uniqBy } from './utils';
 
 export function DataTable<T>({
   withTableBorder,
-  borderColor,
   borderRadius,
   textSelectionDisabled,
   height = '100%',
@@ -49,7 +49,9 @@ export function DataTable<T>({
   onRecordsPerPageChange,
   recordsPerPageOptions,
   recordsPerPageLabel = 'Records per page',
-  paginationColor,
+  paginationWithEdges,
+  paginationActiveTextColor,
+  paginationActiveBackgroundColor,
   paginationSize = 'sm',
   paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
   paginationWrapBreakpoint = 'sm',
@@ -71,9 +73,7 @@ export function DataTable<T>({
   noRecordsText = 'No records',
   noRecordsIcon,
   highlightOnHover,
-  highlightOnHoverColor,
   striped,
-  stripedColor,
   noHeader,
   onRowClick,
   onRowContextMenu,
@@ -84,7 +84,12 @@ export function DataTable<T>({
   onScrollToBottom,
   onScrollToLeft,
   onScrollToRight,
+  c,
+  backgroundColor,
+  borderColor,
   rowBorderColor,
+  stripedColor,
+  highlightOnHoverColor,
   rowExpansion,
   rowClassName,
   rowStyle,
@@ -237,18 +242,15 @@ export function DataTable<T>({
       )}
       style={[
         (theme) => ({
-          '--mantine-datatable-custom-border-color': borderColor
-            ? parseThemeColor({ color: borderColor, theme }).value
-            : undefined,
-          '--mantine-datatable-custom-row-border-color': borderColor
-            ? parseThemeColor({ color: rowBorderColor, theme }).value
-            : undefined,
-          '--mantine-datatable-custom-striped-color': stripedColor
-            ? parseThemeColor({ color: stripedColor, theme }).value
-            : undefined,
-          '--mantine-datatable-custom-highlight-on-hover-color': highlightOnHoverColor
-            ? parseThemeColor({ color: highlightOnHoverColor, theme }).value
-            : undefined,
+          ...getTableCssVariables({
+            theme,
+            c,
+            backgroundColor,
+            borderColor,
+            rowBorderColor,
+            stripedColor,
+            highlightOnHoverColor,
+          }),
           borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
           boxShadow: theme.shadows[shadow as MantineSize] || shadow,
           height,
@@ -400,7 +402,9 @@ export function DataTable<T>({
           onRecordsPerPageChange={onRecordsPerPageChange}
           recordsPerPageOptions={recordsPerPageOptions}
           recordsPerPageLabel={recordsPerPageLabel}
-          paginationColor={paginationColor}
+          paginationWithEdges={paginationWithEdges}
+          paginationActiveTextColor={paginationActiveTextColor}
+          paginationActiveBackgroundColor={paginationActiveBackgroundColor}
           paginationSize={paginationSize}
           paginationText={paginationText}
           paginationWrapBreakpoint={paginationWrapBreakpoint}

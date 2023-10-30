@@ -1,25 +1,49 @@
 .mantine-datatable {
+  --mantine-datatable-color: var(
+    light-dark(--mantine-datatable-color-light, --mantine-datatable-color-dark),
+    var(--mantine-color-text)
+  );
+  --mantine-datatable-background-color: var(
+    light-dark(--mantine-datatable-background-color-light, --mantine-datatable-background-color-dark),
+    var(--mantine-color-body)
+  );
+  --mantine-datatable-border-color: var(
+    light-dark(--mantine-datatable-border-color-light, --mantine-datatable-border-color-dark),
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))
+  );
+  --mantine-datatable-row-border-color: var(
+    light-dark(--mantine-datatable-row-border-color-light, --mantine-datatable-row-border-color-dark),
+    var(--mantine-datatable-border-color)
+  );
+  --mantine-datatable-striped-color: var(
+    light-dark(--mantine-datatable-striped-color-light, --mantine-datatable-striped-color-dark),
+    light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))
+  );
+  --mantine-datatable-highlight-on-hover-color: var(
+    light-dark(--mantine-datatable-highlight-on-hover-color-light, --mantine-datatable-highlight-on-hover-color-dark),
+    light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5))
+  );
+
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  color: var(--mantine-datatable-color);
+  background: var(--mantine-datatable-background-color);
 
-  --mantine-datatable-border-color: var(
-    --mantine-datatable-custom-border-color,
-    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))
-  );
-  --mantine-datatable-row-border-color: var(
-    --mantine-datatable-custom-row-border-color,
-    var(--mantine-datatable-border-color)
-  );
-  --mantine-datatable-striped-color: var(
-    --mantine-datatable-custom-striped-color,
-    light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))
-  );
-  --mantine-datatable-highlight-on-hover-color: var(
-    --mantine-datatable-custom-highlight-on-hover-color,
-    light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5))
-  );
+  /* 😑 make background inheritable down to the table element */
+  /* 👇 scroll area */
+  > div {
+    background: inherit;
+    /* 👇 scroll area viewport */
+    > div {
+      background: inherit;
+      /* 👇 table wrapper */
+      > div {
+        background: inherit;
+      }
+    }
+  }
 }
 
 .mantine-datatable-with-border {
@@ -29,7 +53,8 @@
 .mantine-datatable-table {
   border-collapse: separate;
   border-spacing: 0;
-  background: var(--mantine-color-body);
+  color: inherit;
+  background: inherit;
 
   th,
   td {
@@ -37,10 +62,10 @@
   }
 
   thead,
-  tfoot,
   tbody,
-  th,
+  tfoot,
   tr,
+  th,
   td {
     background: inherit;
   }

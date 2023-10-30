@@ -1,4 +1,4 @@
-.mantine-datatable-header-cell-sortable-column-header {
+.mantine-datatable-header-cell-sortable {
   cursor: pointer;
   transition: background 0.2s;
   &:hover:not(:has(button:hover)) {
@@ -6,24 +6,24 @@
   }
 }
 
-.mantine-datatable-header-cell-sortable-column-header-group {
+.mantine-datatable-header-cell-sortable-group {
   gap: 0.25em;
 }
 
-.mantine-datatable-header-cell-sortable-column-header-text {
+.mantine-datatable-header-cell-sortable-text {
   min-width: 0;
   flex-grow: 1;
 }
 
-.mantine-datatable-header-cell-sortable-column-header-icon {
+.mantine-datatable-header-cell-sortable-icon {
   transition: transform 0.2s;
 }
 
-.mantine-datatable-header-cell-sortable-column-header-icon-reversed {
+.mantine-datatable-header-cell-sortable-icon-reversed {
   transform: scaleY(-1);
 }
 
-.mantine-datatable-header-cell-sortable-column-header-unsorted-icon {
+.mantine-datatable-header-cell-sortable-unsorted-icon {
   color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
   transition: color 0.2s;
   th:hover & {

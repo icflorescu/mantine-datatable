@@ -1,7 +1,7 @@
 import { Code, ListItem } from '@mantine/core';
 import { Fragment } from 'react';
+import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
-import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
@@ -30,8 +30,7 @@ export default async function PaginationExamplePage() {
   return (
     <>
       <PageTitle of={PATH} />
-      <PaginationExample />
-      <Txt>You can enable pagination by adding the following component properties:</Txt>
+      <Txt>You can enable pagination by setting the following {PRODUCT_NAME} properties:</Txt>
       <UnorderedList>
         <ListItem>
           <Code>page: number</Code>
@@ -53,6 +52,7 @@ export default async function PaginationExamplePage() {
           The number of records per page.
         </ListItem>
       </UnorderedList>
+      <PaginationExample />
       <Txt>
         If you’re not happy with the default pagination behavior, you can override it by setting these{' '}
         <strong>optional</strong> properties:
@@ -71,12 +71,6 @@ export default async function PaginationExamplePage() {
           <br />A callback receiving an object in the shape of{' '}
           <Code>{'{ from: number; to: number; totalRecords: number }'}</Code> and returning a <Code>ReactNode</Code>{' '}
           representing the pagination text.
-        </ListItem>
-        <ListItem>
-          <Code>paginationColor: MantineColor</Code>
-          <br />
-          The pagination color (see <ExternalLink to="https://mantine.dev/theming/colors/">Mantine Colors</ExternalLink>
-          ).
         </ListItem>
         <ListItem>
           <Code>
@@ -109,7 +103,28 @@ export default async function PaginationExamplePage() {
           <Code>number</Code>, in which case it will be interpreted as a pixel value and converted to rem value before
           being applied.
         </ListItem>
+        <ListItem>
+          <Code>{'paginationActiveTextColor: MantineColor | { light: MantineColor; dark: MantineColor }'}</Code>
+          <br />
+          Color applied to active page button text.
+          <br />
+          Can be a <Code>MantineColor</Code> (key of <Code>theme.colors</Code> or any valid CSS color string), or an
+          object with <Code>light</Code> and <Code>dark</Code> keys and <Code>MantineColor</Code> values.
+          <br />
+          Defaults to white.
+        </ListItem>
+        <ListItem>
+          <Code>{'paginationActiveBackgroundColor: MantineColor | { light: MantineColor; dark: MantineColor }'}</Code>
+          <br />
+          Color applied to active page button background.
+          <br />
+          Can be a <Code>MantineColor</Code> (key of <Code>theme.colors</Code> or any valid CSS color string), or an
+          object with <Code>light</Code> and <Code>dark</Code> keys and <Code>MantineColor</Code> values.
+          <br />
+          Defaults to primary theme color.
+        </ListItem>
       </UnorderedList>
+      <Txt>Here is the code:</Txt>
       <CodeBlock code={code['PaginationExample.tsx']} />
       <PageSubtitle value="Displaying a page size selector" />
       <Txt>

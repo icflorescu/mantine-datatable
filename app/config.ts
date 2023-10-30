@@ -79,6 +79,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to set the basic ${PRODUCT_NAME} properties`,
   },
   {
+    href: '/examples/overriding-the-default-styles',
+    title: 'Overriding the default styles',
+    description: `Example: how to override the default ${PRODUCT_NAME} styles`,
+  },
+  {
     href: '/examples/column-properties-and-styling',
     title: 'Column properties and styling',
     description: `Example: setting ${PRODUCT_NAME} column properties and customizing their styling`,
@@ -87,11 +92,6 @@ export const ROUTES: RouteInfo[] = [
     href: '/examples/column-grouping',
     title: 'Column grouping',
     description: `Example: group multiple ${PRODUCT_NAME} columns under a shared header`,
-  },
-  {
-    href: '/examples/customizing-border-colors',
-    title: 'Customizing border colors',
-    description: `Example: how to customize the border colors of ${PRODUCT_NAME} and its displayed rows`,
   },
   {
     href: '/examples/non-standard-record-ids',

@@ -1,12 +1,6 @@
-import type {
-  MantineColor,
-  MantineShadow,
-  MantineStyleProp,
-  ScrollAreaProps,
-  StylesRecord,
-  TableProps,
-} from '@mantine/core';
+import type { MantineShadow, MantineStyleProp, ScrollAreaProps, StylesRecord, TableProps } from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
+import { DataTableColorProps } from './DataTableColorProps';
 import type { DataTableColumnProps } from './DataTableColumnProps';
 import type { DataTableDefaultColumnProps } from './DataTableDefaultColumnProps';
 import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';
@@ -149,11 +143,6 @@ export type DataTableProps<T = Record<string, unknown>> = {
   onRowContextMenu?: DataTableRowClickHandler<T>;
 
   /**
-   * Color of row borders, key of `theme.colors` or any valid CSS color.
-   */
-  rowBorderColor?: MantineColor;
-
-  /**
    * Defines the row expansion behavior.
    */
   rowExpansion?: DataTableRowExpansionProps<T>;
@@ -206,7 +195,13 @@ export type DataTableProps<T = Record<string, unknown>> = {
   | 'pb'
   | 'layout'
   | 'captionSide'
+  | 'c'
+  | 'color'
+  | 'borderColor'
+  | 'stripedColor'
+  | 'highlightOnHoverColor'
 > &
+  DataTableColorProps &
   DataTableColumnProps<T> &
   DataTableOuterBorderProps &
   DataTableLoaderProps &
