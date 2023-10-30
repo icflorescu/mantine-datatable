@@ -6,13 +6,15 @@ export type DataTableColumnProps<T = Record<string, unknown>> =
       /**
        * Grouped columns.
        */
-      groups: readonly DataTableColumnGroup<T>[];
+      groups: DataTableColumnGroup<T>[];
+
       columns?: never;
     }
   | {
+      groups?: never;
+
       /**
        * Visible columns.
        */
       columns: DataTableColumn<T>[];
-      groups?: never;
     };

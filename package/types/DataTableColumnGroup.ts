@@ -22,7 +22,7 @@ export type DataTableColumnGroup<T = Record<string, unknown>> = {
   /**
    * Columns which are part of the group.
    */
-  columns: readonly DataTableColumn<T>[];
+  columns: DataTableColumn<T>[];
 
   /**
    * Optional className to apply to the column group header.
@@ -31,8 +31,8 @@ export type DataTableColumnGroup<T = Record<string, unknown>> = {
 
   /**
    * Optional style to apply to the column group header.
-   * Can be a React.CSSProperties object or a function which receives the current theme and
-   * returns a React.CSSProperties object.
+   * Can be a style object or a function which receives the current theme and
+   * returns a style object.
    */
   style?: MantineStyleProp;
 };

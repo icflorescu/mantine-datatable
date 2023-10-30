@@ -10,9 +10,10 @@ import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import {
+  AdditionalCheckboxPropsExample,
+  DisabledRecordsExample,
   RecordsSelectionExample,
-  RecordsSelectionWithAdditionalCheckboxProps,
-  RecordsSelectionWithDisabledItemsExample,
+  RecordsSelectionHorizontalScrollingBehaviorExample,
 } from './RecordsSelectionExamples';
 
 const PATH = '/examples/records-selection';
@@ -20,9 +21,16 @@ const PATH = '/examples/records-selection';
 export const metadata = getRouteMetadata(PATH);
 
 export default async function RecordsSelectionExamplePage() {
-  const code = await readCodeFile<Record<'default' | 'disabled-records' | 'with-additional-checkbox-props', string>>(
-    `${PATH}/RecordsSelectionExamples.tsx`
-  );
+  const code = await readCodeFile<
+    Record<
+      | 'columns.ts'
+      | 'RecordsSelectionExample.tsx'
+      | 'DisabledRecordsExample.tsx'
+      | 'AdditionalCheckboxPropsExample.tsx'
+      | 'RecordsSelectionHorizontalScrollingBehaviorExample.tsx',
+      string
+    >
+  >(`${PATH}/RecordsSelectionExamples.tsx`);
 
   return (
     <>
@@ -71,11 +79,12 @@ export default async function RecordsSelectionExamplePage() {
         DataTable’s <Code>idAccessor</Code> property (defaulting to <Code>id</Code> - see more info{' '}
         <InternalLink to="/examples/non-standard-record-ids">here</InternalLink>).
       </Txt>
-      <CodeBlock language="tsx" code={code['default']} />
+      <CodeBlock tabs={{ code, keys: ['RecordsSelectionExample.tsx', 'columns.ts'] }} />
       <PageSubtitle value="Disable selection of certain records" />
       <Txt>You can disable the selection of certain records by providing an `isRecordSelectable` property like so:</Txt>
-      <CodeBlock language="tsx" code={code['disabled-records']} />
-      <RecordsSelectionWithDisabledItemsExample />
+      <CodeBlock tabs={{ code, keys: ['DisabledRecordsExample.tsx', 'columns.ts'] }} />
+      <Txt>The above code will result in the following behavior:</Txt>
+      <DisabledRecordsExample />
       <PageSubtitle value="Additional selection checkbox props" />
       <Txt>
         You can pass additional props to the selection checkboxes by providing the{' '}
@@ -84,8 +93,20 @@ export default async function RecordsSelectionExamplePage() {
         that receives the underlying record and record index and returns an object of props. will be applied to the row
         selection checkboxes.
       </Txt>
-      <CodeBlock language="tsx" code={code['with-additional-checkbox-props']} />
-      <RecordsSelectionWithAdditionalCheckboxProps />
+      <CodeBlock tabs={{ code, keys: ['AdditionalCheckboxPropsExample.tsx', 'columns.ts'] }} />
+      <Txt>
+        Inspect the DOM to see the <Code>aria-label</Code> attributes on the selection checkboxes in the following
+        example:
+      </Txt>
+      <AdditionalCheckboxPropsExample />
+      <PageSubtitle value="Horizontal scrolling behavior" />
+      <Txt>
+        Notice how, when the table needs to be horizontally scrollable, the selection column will be fixed to the left
+        side of the table, so that the selection checkboxes are always visible:
+      </Txt>
+      <RecordsSelectionHorizontalScrollingBehaviorExample />
+      <Txt>Code:</Txt>
+      <CodeBlock code={code['RecordsSelectionHorizontalScrollingBehaviorExample.tsx']} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>

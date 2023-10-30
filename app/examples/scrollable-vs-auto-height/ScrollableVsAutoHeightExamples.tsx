@@ -1,9 +1,20 @@
 'use client';
 
-import { DataTable } from '__PACKAGE__';
-import { employees } from '~/data';
+import { DataTable, type DataTableColumn } from '__PACKAGE__';
+import { employees, type Employee } from '~/data';
 
 const records = employees.slice(0, 15);
+
+const columns: DataTableColumn<Employee>[] = [
+  { accessor: 'firstName' },
+  { accessor: 'lastName' },
+  { accessor: 'email' },
+  { accessor: 'department.name', title: 'Department' },
+  { accessor: 'department.company.name', title: 'Company', noWrap: true },
+  { accessor: 'department.company.streetAddress', title: 'Address', noWrap: true },
+  { accessor: 'department.company.city', title: 'City' },
+  { accessor: 'department.company.state', title: 'State', textAlign: 'right' },
+];
 
 export function ScrollableExample() {
   // example-start scrollable
@@ -15,7 +26,7 @@ export function ScrollableExample() {
       withColumnBorders
       striped
       records={records}
-      columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
+      columns={columns}
       // example-resume
     />
   );
@@ -31,7 +42,7 @@ export function AutoHeightExample() {
       withColumnBorders
       striped
       records={records}
-      columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
+      columns={columns}
       // example-resume
     />
   );
@@ -48,7 +59,7 @@ export function ScrollAreaPropsExample() {
       withColumnBorders
       striped
       records={records}
-      columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
+      columns={columns}
       // example-resume
       scrollAreaProps={{ type: 'never' }}
     />

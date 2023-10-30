@@ -34,7 +34,7 @@ export function DisablingTextSelectionExamplePageContent({ initialCode }: { init
         </Center>
       </Paper>
       <DisablingTextSelectionExample textSelectionDisabled={textSelectionDisabled} />
-      <CodeBlock language="tsx" code={code} />
+      <CodeBlock code={code} />
     </>
   );
 }

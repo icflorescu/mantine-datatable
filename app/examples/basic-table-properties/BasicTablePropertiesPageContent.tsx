@@ -245,7 +245,7 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
         customizeVerticalAlign={customizeVerticalAlign}
         verticalAlign={verticalAlign}
       />
-      <CodeBlock language="tsx" code={code} />
+      <CodeBlock code={code} />
     </>
   );
 }

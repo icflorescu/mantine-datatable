@@ -11,12 +11,11 @@
     content: '';
     position: absolute;
     top: rem(-1px);
-    right: calc(-1 * var(--mantine-spacing-sm));
+    right: calc(-1 * var(--mantine-spacing-xs));
     bottom: 0;
     border-left: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
-    width: var(--mantine-spacing-sm);
-    background: linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.5)), rgba(0, 0, 0, 0)),
-      linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.5)), rgba(0, 0, 0, 0) 30%);
+    width: var(--mantine-spacing-xs);
+    background: var(--mantine-datatable-shadow-background-left);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s;

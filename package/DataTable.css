@@ -23,6 +23,22 @@
     light-dark(--mantine-datatable-highlight-on-hover-color-light, --mantine-datatable-highlight-on-hover-color-dark),
     light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5))
   );
+  --mantine-datatable-shadow-background-top: linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.5)), rgba(0, 0, 0, 0)),
+    linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.5)) 30%, rgba(0, 0, 0, 0));
+  --mantine-datatable-shadow-background-right: linear-gradient(
+      to left,
+      rgba(0, 0, 0, light-dark(0.05, 0.5)),
+      rgba(0, 0, 0, 0)
+    ),
+    linear-gradient(to left, rgba(0, 0, 0, light-dark(0.05, 0.5)), rgba(0, 0, 0, 0) 30%);
+  --mantine-datatable-shadow-background-bottom: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, light-dark(0.05, 0.5))),
+    linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, light-dark(0.05, 0.5)));
+  --mantine-datatable-shadow-background-left: linear-gradient(
+      to right,
+      rgba(0, 0, 0, light-dark(0.05, 0.5)),
+      rgba(0, 0, 0, 0)
+    ),
+    linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.5)), rgba(0, 0, 0, 0) 30%);
 
   position: relative;
   display: flex;
@@ -36,7 +52,7 @@
   > div {
     background: inherit;
     /* 👇 scroll area viewport */
-    > div {
+    > div:not(.mantine-datatable-scroll-area-scrollbar):not(.mantine-datatable-scroll-area-corner) {
       background: inherit;
       /* 👇 table wrapper */
       > div {
