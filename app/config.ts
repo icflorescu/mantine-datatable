@@ -38,6 +38,10 @@ export const MANTINE_CONTEXTMENU_PRODUCT_NAME = 'Mantine ContextMenu';
 
 export const DOWNLOADS_REFRESH_INTERVAL = 1000 * 60 * 60 * 24; // 1 day
 
+export const DOCSEARCH_APP_ID = 'QTPWIJ4FEH';
+export const DOCSEARCH_INDEX_NAME = 'mantine-datatable';
+export const DOCSEARCH_API_KEY = 'b6e1b8f8ada26b807cb65d32ad33ac21';
+
 export type RouteInfo = {
   href: Route;
   title: string;

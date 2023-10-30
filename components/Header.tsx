@@ -2,6 +2,7 @@ import { AppShellHeader, Burger, Group } from '@mantine/core';
 import clsx from 'clsx';
 import { useIsScrolled } from '~/lib/utils';
 import { ColorSchemeActionIcon } from './ColorSchemeActionIcon';
+import { DocSearchButton } from './DocSearchButton';
 import classes from './Header.module.css';
 import { HeaderLinkButtons } from './HeaderLinkButtons';
 import { HeaderTitle } from './HeaderTitle';
@@ -24,6 +25,7 @@ export function Header({ navbarExpanded, toggleNavbar }: HeaderProps) {
           <VersionBadge />
         </Group>
         <Group gap="xs">
+          <DocSearchButton />
           <HeaderLinkButtons />
           <ColorSchemeActionIcon />
         </Group>

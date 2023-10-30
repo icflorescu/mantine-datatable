@@ -70,6 +70,7 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@docsearch/react": "^3.5.2",
     "@ducanh2912/next-pwa": "^9.7.2",
     "@faker-js/faker": "^8.2.0",
     "@formkit/auto-animate": "^0.8.0",

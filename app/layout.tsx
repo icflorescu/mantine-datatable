@@ -4,6 +4,7 @@ import { Notifications } from '@mantine/notifications';
 import { ContextMenuProvider } from 'mantine-contextmenu';
 import type { Metadata } from 'next';
 import { AppWrapper } from '~/components/AppWrapper';
+import { ThemeAttributeSetter } from '~/components/ThemeAttributeSetter';
 import { AUTHOR_LINK, AUTHOR_NAME, PRODUCT_NAME, WEBSITE_LINK } from './config';
 import './layout.css';
 import classes from './layout.module.css';
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
           }}
         >
+          <ThemeAttributeSetter />
           <Notifications />
           <ModalsProvider>
             <ContextMenuProvider>
