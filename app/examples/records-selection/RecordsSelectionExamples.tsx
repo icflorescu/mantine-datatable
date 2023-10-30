@@ -3,8 +3,7 @@
 import { Button, Center, Paper, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
-import { DataTable, type DataTableColumn } from '__PACKAGE__';
-import { differenceBy, uniqBy } from 'lodash';
+import { DataTable, differenceBy, uniqBy, type DataTableColumn } from '__PACKAGE__';
 import { useEffect, useState } from 'react';
 import { companies, employees, type Company, type Employee } from '~/data';
 
@@ -109,8 +108,8 @@ export function SelectAllRecordsOnAllPagesExample() {
     if (allRecordsSelected) {
       const recordsToUnselect = records.filter((record) => !newSelectedRecords.includes(record));
       setUnselectedRecords(
-        // 👇 `uniqBy` from `lodash`
-        uniqBy([...unselectedRecords, ...recordsToUnselect], 'id').filter((r) => !newSelectedRecords.includes(r))
+        // 👇 `uniqBy` is a utility function provided by Mantine DataTable
+        uniqBy([...unselectedRecords, ...recordsToUnselect], (r) => r.id).filter((r) => !newSelectedRecords.includes(r))
       );
     } else {
       setSelectedRecords(newSelectedRecords);
@@ -134,8 +133,8 @@ export function SelectAllRecordsOnAllPagesExample() {
     setRecords(currentRecords);
     if (allRecordsSelected) {
       setSelectedRecords(
-        // 👇 `differenceBy` from `lodash`
-        differenceBy(currentRecords, unselectedRecords, 'id')
+        // 👇 `differenceBy` is a utility function provided by Mantine DataTable
+        differenceBy(currentRecords, unselectedRecords, (r) => r.id)
       );
     }
   }, [allRecordsSelected, page, unselectedRecords]);
