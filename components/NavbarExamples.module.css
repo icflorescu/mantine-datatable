@@ -1,0 +1,15 @@
+.line {
+  position: absolute;
+  top: rem(-10px);
+  bottom: rem(18px);
+  left: rem(29px);
+  width: rem(1px);
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform;
+}
+
+.lineVisible {
+  transform: scaleY(1);
+}

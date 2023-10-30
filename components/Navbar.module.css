@@ -1,0 +1,23 @@
+.scrollShadow {
+  position: absolute;
+  content: '';
+  left: 0;
+  right: 0;
+  height: rem(6px);
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+.scrollShadowTop {
+  top: 0;
+  background: linear-gradient(light-dark(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.45)), rgba(0, 0, 0, 0));
+}
+
+.scrollShadowBottom {
+  background: linear-gradient(rgba(0, 0, 0, 0), light-dark(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45)));
+  bottom: 0;
+}
+
+.scrollShadowVisible {
+  opacity: 1;
+}

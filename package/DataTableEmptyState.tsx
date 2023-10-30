@@ -1,52 +1,25 @@
-import { Center, createStyles, Text } from '@mantine/core';
-import { IconDatabaseOff } from '@tabler/icons-react';
-import type { ReactNode } from 'react';
+import { Center, Text, type MantineSpacing, type StyleProp } from '@mantine/core';
+import { IconDatabaseOff } from './icons/IconDatabaseOff';
 
-const useStyles = createStyles((theme) => ({
-  root: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    flexDirection: 'column',
-    pointerEvents: 'none',
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[6],
-    opacity: 0,
-    transition: 'opacity .15s ease',
-  },
-  active: {
-    opacity: 1,
-  },
-  standardIcon: {
-    fontSize: 0,
-    borderRadius: '50%',
-    padding: theme.spacing.xs,
-    background: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2],
-  },
-}));
-
-type DataTableEmptyStateProps = {
-  icon: ReactNode | undefined;
+type DataTableEmptyStateProps = React.PropsWithChildren<{
+  icon: React.ReactNode | undefined;
   text: string;
-  pt: number;
-  pb: number;
+  pt: StyleProp<MantineSpacing>;
+  pb: StyleProp<MantineSpacing>;
   active: boolean;
-  children: ReactNode | undefined;
-};
+}>;
 
-export default function DataTableEmptyState({ icon, text, pt, pb, active, children }: DataTableEmptyStateProps) {
-  const { classes, cx } = useStyles();
+export function DataTableEmptyState({ icon, text, pt, pb, active, children }: DataTableEmptyStateProps) {
   return (
-    <Center pt={pt} pb={pb} className={cx(classes.root, { [classes.active]: active })}>
+    <Center pt={pt} pb={pb} className="mantine-datatable-empty-state" data-active={active || undefined}>
       {children || (
         <>
           {icon || (
-            <div className={classes.standardIcon}>
+            <div className="mantine-datatable-empty-state-icon">
               <IconDatabaseOff />
             </div>
           )}
-          <Text size="sm" color="dimmed">
+          <Text size="sm" c="dimmed">
             {text}
           </Text>
         </>

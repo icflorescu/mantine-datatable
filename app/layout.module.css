@@ -1,0 +1,19 @@
+.codeRoot {
+  border-radius: var(--mantine-radius-xs);
+  border: rem(1px) solid light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+  background: light-dark(rgba(0, 0, 0, 0.03), rgba(255, 255, 255, 0.08));
+  padding: 0.25rem 0.16rem 0.1rem;
+}
+
+.codeBlockBox {
+  border-radius: var(--mantine-radius-sm);
+  border: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-5));
+  margin: 1em 0;
+}
+
+/* todo remove this firefox fix as soon as the problem is solved in Mantine */
+@-moz-document url-prefix() {
+  .buttonLabel {
+    margin-bottom: -0.25em;
+  }
+}

@@ -1,41 +1,13 @@
-import { Box, createStyles, type CSSObject, type MantineTheme } from '@mantine/core';
-import { CSSProperties, forwardRef, type ForwardedRef } from 'react';
-import DataTableFooterCell from './DataTableFooterCell';
-import DataTableFooterSelectorPlaceholderCell from './DataTableFooterSelectorPlaceholderCell';
+import { TableTfoot, TableTr, rem, type MantineStyleProp } from '@mantine/core';
+import clsx from 'clsx';
+import { forwardRef } from 'react';
+import { DataTableFooterCell } from './DataTableFooterCell';
+import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelectorPlaceholderCell';
 import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
 
-const useStyles = createStyles(
-  (
-    theme,
-    { scrollDiff, borderColor }: { scrollDiff: number; borderColor: string | ((theme: MantineTheme) => string) }
-  ) => {
-    const relative = scrollDiff < 0;
-    const borderColorValue = typeof borderColor === 'function' ? borderColor(theme) : borderColor;
-
-    return {
-      root: {
-        zIndex: 2,
-        position: relative ? 'relative' : 'sticky',
-        bottom: relative ? scrollDiff : -1,
-        background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-        '&& tr th': {
-          borderTopColor: borderColorValue,
-        },
-      },
-      relative: {
-        position: 'relative',
-      },
-      textSelectionDisabled: {
-        userSelect: 'none',
-      },
-    };
-  }
-);
-
 type DataTableFooterProps<T> = {
-  borderColor: string | ((theme: MantineTheme) => string);
-  className?: string;
-  style?: CSSObject;
+  className: string | undefined;
+  style: MantineStyleProp | undefined;
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
   selectionVisible: boolean;
@@ -43,24 +15,32 @@ type DataTableFooterProps<T> = {
   scrollDiff: number;
 };
 
-export default forwardRef(function DataTableFooter<T>(
+export const DataTableFooter = forwardRef(function DataTableFooter<T>(
   {
     className,
     style,
-    borderColor,
     columns,
     defaultColumnProps,
     selectionVisible,
     leftShadowVisible,
     scrollDiff,
   }: DataTableFooterProps<T>,
-  ref: ForwardedRef<HTMLTableSectionElement>
+  ref: React.ForwardedRef<HTMLTableSectionElement>
 ) {
-  const { cx, classes } = useStyles({ scrollDiff, borderColor });
-
+  const relative = scrollDiff < 0;
   return (
-    <Box component="tfoot" ref={ref} className={cx(classes.root, className)} style={style as CSSProperties}>
-      <tr>
+    <TableTfoot
+      ref={ref}
+      className={clsx('mantine-datatable-footer', className)}
+      style={[
+        {
+          position: relative ? 'relative' : 'sticky',
+          bottom: rem(relative ? scrollDiff : -1),
+        },
+        style,
+      ]}
+    >
+      <TableTr>
         {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={leftShadowVisible} />}
         {columns.map(({ hidden, ...columnProps }) => {
           if (hidden) return null;
@@ -68,24 +48,22 @@ export default forwardRef(function DataTableFooter<T>(
           const {
             accessor,
             visibleMediaQuery,
-            textAlignment,
+            textAlign,
             width,
             footer,
             footerClassName,
             footerStyle,
-            footerSx,
             noWrap,
             ellipsis,
           } = { ...defaultColumnProps, ...columnProps };
 
           return (
             <DataTableFooterCell<T>
-              key={accessor}
+              key={accessor as React.Key}
               className={footerClassName}
               style={footerStyle}
-              sx={footerSx}
               visibleMediaQuery={visibleMediaQuery}
-              textAlignment={textAlignment}
+              textAlign={textAlign}
               width={width}
               title={footer}
               noWrap={noWrap}
@@ -93,7 +71,7 @@ export default forwardRef(function DataTableFooter<T>(
             />
           );
         })}
-      </tr>
-    </Box>
+      </TableTr>
+    </TableTfoot>
   );
-}) as <T>(props: DataTableFooterProps<T> & { ref: ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;
+}) as <T>(props: DataTableFooterProps<T> & { ref: React.ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;

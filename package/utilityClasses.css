@@ -1,0 +1,28 @@
+.mantine-datatable-nowrap {
+  white-space: nowrap;
+}
+
+.mantine-datatable-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mantine-datatable-pointer-cursor {
+  cursor: pointer;
+}
+
+.mantine-datatable-text-selection-disabled {
+  user-select: none;
+}
+
+.mantine-datatable-text-align-left {
+  text-align: left;
+}
+
+.mantine-datatable-text-align-center {
+  text-align: center;
+}
+
+.mantine-datatable-text-align-right {
+  text-align: right;
+}

@@ -1,0 +1,22 @@
+@import '@mantine/core/esm/index.css' layer(mantine-core);
+@import '@mantine/dates/esm/index.css' layer(mantine-dates);
+@import '@mantine/notifications/esm/index.css' layer(mantine-notifications);
+@import '@mantine/code-highlight/esm/index.css' layer(mantine-code-highlight);
+@import 'mantine-contextmenu/dist/css/styles.css' layer(mantine-contextmenu);
+@import '../package/styles.css' layer(mantine-datatable);
+@import '@docsearch/css';
+@import './docsearch-overrides.css';
+
+@layer mantine-core, mantine-notifications, mantine-code-highlight, mantine-datatable;
+
+a code {
+  color: var(--mantine-color-anchor);
+}
+
+.noscroll {
+  overflow: hidden;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

@@ -1,0 +1,47 @@
+.mantine-datatable-pagination {
+  background: inherit;
+  border-top: rem(1px) solid var(--mantine-datatable-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-xs);
+}
+
+.mantine-datatable-pagination-text {
+  flex: 1 1 auto;
+}
+
+.mantine-datatable-pagination-pages {
+  --mantine-datatable-pagination-active-text-color: var(
+    light-dark(
+      --mantine-datatable-pagination-active-text-color-light,
+      --mantine-datatable-pagination-active-text-color-dark
+    ),
+    var(--mantine-color-white)
+  );
+  --mantine-datatable-pagination-active-background-color: var(
+    light-dark(
+      --mantine-datatable-pagination-active-background-color-light,
+      --mantine-datatable-pagination-active-background-color-dark
+    ),
+    var(--mantine-primary-color-filled)
+  );
+
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.mantine-datatable-pagination-pages-fetching {
+  opacity: 0;
+}
+
+.mantine-datatable-pagination-pages-control {
+  color: var(--mantine-datatable-color);
+  border-color: var(--mantine-datatable-border-color);
+
+  &[data-active] {
+    color: var(--mantine-datatable-pagination-active-text-color);
+    background: var(--mantine-datatable-pagination-active-background-color);
+    border-color: transparent;
+  }
+}

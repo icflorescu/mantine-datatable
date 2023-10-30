@@ -1,0 +1,31 @@
+.mantine-datatable-row-selector-cell {
+  position: sticky;
+  z-index: 1;
+  width: 0%;
+  left: 0;
+  tr[data-selected] &,
+  tr[data-context-menu-visible] & {
+    background: inherit;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: rem(-1px);
+    right: calc(-1 * var(--mantine-spacing-xs));
+    bottom: 0;
+    border-left: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    width: var(--mantine-spacing-xs);
+    background: var(--mantine-datatable-shadow-background-left);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &[data-shadow-visible]::after {
+    opacity: 1;
+  }
+}
+
+.mantine-datatable-row-selector-cell-checkbox {
+  cursor: pointer;
+}

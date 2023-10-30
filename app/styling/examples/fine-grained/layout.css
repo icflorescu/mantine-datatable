@@ -1,0 +1,8 @@
+/* 👇 Expressly import the mantine core styles into mantine-core layer */
+@import '@mantine/core/esm/index.css' layer(mantine-core);
+
+/* 👇 Expressly import the mantine-datatable styles into mantine-datatable layer */
+@import '__PACKAGE__/dist/css/styles.css' layer(mantine-datatable);
+
+/* 👇 Make sure the styles are applied in the correct order */
+@layer mantine-core, mantine-datatable;

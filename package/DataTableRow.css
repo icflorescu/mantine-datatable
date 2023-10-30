@@ -1,0 +1,21 @@
+.mantine-datatable-row {
+  --mantine-datatable-row-color: var(
+    light-dark(--mantine-datatable-row-color-light, --mantine-datatable-row-color-dark),
+    inherit
+  );
+  --mantine-datatable-row-background-color: var(
+    light-dark(--mantine-datatable-row-background-color-light, --mantine-datatable-row-background-color-dark),
+    inherit
+  );
+
+  color: var(--mantine-datatable-row-color);
+  background: var(--mantine-datatable-row-background-color);
+
+  &[data-with-row-border]:not(:last-of-type) td {
+    border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
+  }
+
+  &[data-selected] td {
+    background: var(--mantine-primary-color-light);
+  }
+}

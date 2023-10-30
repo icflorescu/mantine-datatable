@@ -1,0 +1,63 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-xs);
+  text-decoration: none;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+  cursor: pointer;
+  user-select: none;
+  color: var(--mantine-color-text);
+  background: light-dark(var(--navbar-button-bg-color-light), var(--navbar-button-bg-color-dark));
+  transition: background 0.2s;
+  &:hover {
+    background: light-dark(var(--navbar-button-hover-bg-color-light), var(--navbar-button-hover-bg-color-dark));
+  }
+  &:active {
+    .icon:not(.expanded),
+    .dot {
+      transform: scale(0.9);
+    }
+    .text {
+      transform: translateY(1px);
+    }
+  }
+}
+
+.iconWrapper {
+  flex: 0 0 auto;
+  width: rem(28px);
+  height: rem(28px);
+  border-radius: 50%;
+}
+
+.icon,
+.dot {
+  transition: all 0.15s;
+}
+
+.expanded {
+  transform: rotateZ(90deg);
+}
+
+.dotWrapper {
+  padding: rem(2px);
+  background: light-dark(white, var(--mantine-color-body));
+  border-radius: 50%;
+  border: 1px solid;
+  margin-left: rem(7px);
+  margin-right: rem(6px);
+}
+
+.dot {
+  width: rem(8px);
+  height: rem(8px);
+  border-radius: 50%;
+}
+
+/* todo remove this firefox fix if the problem is solved in Mantine */
+@-moz-document url-prefix() {
+  .text {
+    margin-top: 0.125em;
+    margin-bottom: -0.125em;
+  }
+}

@@ -1,0 +1,23 @@
+.controlGroups {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--mantine-spacing-sm);
+  @media (min-width: $mantine-breakpoint-md) {
+    flex-direction: row;
+    gap: calc(2 * var(--mantine-spacing-xl));
+  }
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--mantine-spacing-xs);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  min-height: rem(34px);
+}

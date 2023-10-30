@@ -1,15 +1,26 @@
-node_modules
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# misc
 .DS_Store
+
+# debug
 yarn-debug.log*
 yarn-error.log*
-.next
-out
-dist
-.turbo
-tsconfig.tsbuildinfo
-docs/public/sw.js
-docs/public/sw.js.map
-docs/public/workbox-*.js
-docs/public/workbox-*.js.map
-package/README.md
-package/LICENSE
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# service worker
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
+
+# build output
+/dist/

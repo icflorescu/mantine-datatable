@@ -1,33 +1,53 @@
-import { Button, Group, Menu, Text, type MantineColor, type MantineSize } from '@mantine/core';
+'use client';
+
+import {
+  Button,
+  Group,
+  MantineColor,
+  Menu,
+  MenuDropdown,
+  MenuItem,
+  MenuTarget,
+  Text,
+  rem,
+  type MantineSize,
+} from '@mantine/core';
+import clsx from 'clsx';
+import { getPaginationCssVariables } from './cssVariables';
+import { IconSelector } from './icons/IconSelector';
 
 type DataTablePageSizeSelectorComponentProps = {
   size: MantineSize;
   label: string;
   values: number[];
   value: number;
+  activeTextColor: MantineColor | { dark: MantineColor; light: MantineColor } | undefined;
+  activeBackgroundColor: MantineColor | { dark: MantineColor; light: MantineColor } | undefined;
   onChange: (value: number) => void;
-  color?: MantineColor;
 };
 
-const HEIGHT: Record<MantineSize, number> = { xs: 22, sm: 26, md: 32, lg: 38, xl: 44 };
+const HEIGHT: Record<MantineSize, string> = { xs: rem(22), sm: rem(26), md: rem(32), lg: rem(38), xl: rem(44) };
 
-export default function DataTablePageSizeSelector({
+export function DataTablePageSizeSelector({
   size,
   label,
   values,
   value,
+  activeTextColor,
+  activeBackgroundColor,
   onChange,
-  color,
 }: DataTablePageSizeSelectorComponentProps) {
   return (
-    <Group spacing="xs">
+    <Group gap="xs">
       <Text size={size}>{label}</Text>
       <Menu withinPortal withArrow>
-        <Menu.Target>
+        <MenuTarget>
           <Button
             size={size}
             variant="default"
-            sx={[
+            classNames={{ section: 'mantine-datatable-page-size-selector-button-icon' }}
+            rightSection={<IconSelector />}
+            style={[
               { fontWeight: 'normal' },
               (theme) => ({
                 height: HEIGHT[size],
@@ -38,30 +58,33 @@ export default function DataTablePageSizeSelector({
           >
             {value}
           </Button>
-        </Menu.Target>
-        <Menu.Dropdown>
+        </MenuTarget>
+        <MenuDropdown>
           {values.map((v) => {
             const isCurrent = v === value;
             return (
-              <Menu.Item
+              <MenuItem
                 key={v}
-                sx={[
+                className={clsx({ 'mantine-datatable-page-size-selector-active': isCurrent })}
+                style={[
                   { height: HEIGHT[size] },
-                  (theme) => ({
-                    '&&': {
-                      color: isCurrent ? theme.white : undefined,
-                    },
-                    background: isCurrent ? theme.colors[color || theme.primaryColor][6] : undefined,
-                  }),
+                  isCurrent && (activeTextColor || activeBackgroundColor)
+                    ? (theme) =>
+                        getPaginationCssVariables({
+                          theme,
+                          paginationActiveTextColor: activeTextColor,
+                          paginationActiveBackgroundColor: activeBackgroundColor,
+                        })
+                    : undefined,
                 ]}
                 disabled={isCurrent}
                 onClick={() => onChange(v)}
               >
                 <Text size={size}>{v}</Text>
-              </Menu.Item>
+              </MenuItem>
             );
           })}
-        </Menu.Dropdown>
+        </MenuDropdown>
       </Menu>
     </Group>
   );

@@ -1,0 +1,50 @@
+.root {
+  border: 1px solid var(--mantine-color-red-6);
+  border-radius: var(--mantine-radius-md);
+  background: light-dark(
+    color-mix(in srgb, var(--mantine-color-red-6) 5%, var(--mantine-color-body)),
+    color-mix(in srgb, var(--mantine-color-red-6) 10%, var(--mantine-color-body))
+  );
+}
+
+.table {
+  th,
+  td {
+    border-color: var(--mantine-color-orange-6);
+  }
+}
+
+.header {
+  font-style: italic;
+  color: var(--mantine-color-red-6);
+  th {
+    border-bottom: 1px solid var(--mantine-color-orange-6);
+  }
+}
+
+.footer {
+  font-style: italic;
+  color: var(--mantine-color-red-6);
+
+  th {
+    border-top: 1px solid var(--mantine-color-orange-6);
+  }
+}
+
+.pagination {
+  background: transparent;
+  color: var(--mantine-color-red-6);
+  border-top: 1px dashed var(--mantine-color-red-6);
+
+  button {
+    background: transparent;
+    color: var(--mantine-color-red-6);
+    border-color: var(--mantine-color-red-6);
+
+    &[data-active='true'] {
+      color: white;
+      border: transparent;
+      background: var(--mantine-color-red-6);
+    }
+  }
+}

@@ -25,17 +25,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16.1'
+          node-version: '18'
           cache: yarn
       - name: Restore cache
         uses: actions/cache@v3
         with:
           path: |
-            docs/.next/cache
+            .next/cache
           # Generate a new cache whenever packages or source files change.
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           # If source files changed but packages didn't, rebuild from a prior cache.
@@ -44,16 +44,24 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build
-        run: GITHUB_PAGES=true yarn build
+        run: yarn build
+        env:
+          GITHUB_PAGES: TRUE
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: ./docs/out
+          path: ./out
       - name: Upload package artifact
         uses: actions/upload-artifact@v3
         with:
           name: package
-          path: ./package
+          path: |
+            ./dist
+            ./package.json
+            ./README.md
+            ./LICENSE
+
+            # NPM publishing job
 
   # NPM publishing job
   publish:
@@ -65,7 +73,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: package
-      - uses: JS-DevTools/npm-publish@v1
+      - uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.NPM_TOKEN }}
 
@@ -75,8 +83,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build, publish]
+    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2

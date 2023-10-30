@@ -1,0 +1,65 @@
+.mantine-datatable-scroll-area {
+  flex: 1 1 100%;
+}
+
+.mantine-datatable-scroll-area-corner {
+  background: transparent;
+}
+
+.mantine-datatable-scroll-area-thumb {
+  z-index: 3;
+}
+
+.mantine-datatable-scroll-area-scrollbar {
+  &[data-state='visible'] {
+    background: transparent;
+  }
+  div::before {
+    pointer-events: none;
+  }
+}
+
+.mantine-datatable-scroll-area-shadow {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.mantine-datatable-scroll-area-top-shadow {
+  z-index: 2;
+  left: 0;
+  right: 0;
+  height: var(--mantine-spacing-xs);
+  background: var(--mantine-datatable-shadow-background-top);
+}
+
+.mantine-datatable-scroll-area-left-shadow {
+  z-index: 3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--mantine-spacing-xs);
+  background: var(--mantine-datatable-shadow-background-left);
+}
+
+.mantine-datatable-scroll-area-right-shadow {
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: var(--mantine-spacing-xs);
+  background: var(--mantine-datatable-shadow-background-right);
+}
+
+.mantine-datatable-scroll-area-bottom-shadow {
+  z-index: 2;
+  left: 0;
+  right: 0;
+  height: var(--mantine-spacing-xs);
+  background: var(--mantine-datatable-shadow-background-bottom);
+}
+
+.mantine-datatable-scroll-area-shadow-visible {
+  opacity: 1;
+}

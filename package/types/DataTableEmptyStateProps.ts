@@ -1,12 +1,11 @@
-import type { ReactNode } from 'react';
-
 export type DataTableEmptyStateProps =
   | {
       /**
-       * Content to show when no records are available; the provided content
-       * will be overlaid and centered automatically
+       * Content to show when no records are available.
+       * The provided content will be overlaid and centered automatically.
+       * You can either provide this property or `noRecordsIcon`, but not both.
        */
-      emptyState?: ReactNode;
+      emptyState?: React.ReactNode;
 
       noRecordsIcon?: never;
     }
@@ -14,7 +13,9 @@ export type DataTableEmptyStateProps =
       emptyState?: never;
 
       /**
-       * Icon to show when no records are available
+       * Icon to show when no records are available.
+       * The provided icon will be overlaid and centered automatically.
+       * You can either provide this property or `emptyState`, but not both.
        */
-      noRecordsIcon?: ReactNode;
+      noRecordsIcon?: React.ReactNode;
     };

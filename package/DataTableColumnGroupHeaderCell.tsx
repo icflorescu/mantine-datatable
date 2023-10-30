@@ -1,14 +1,19 @@
-import { Box } from '@mantine/core';
+'use client';
+
+import { TableTh } from '@mantine/core';
+import clsx from 'clsx';
 import { useMemo } from 'react';
+import { useMediaQueriesStringOrFunction } from './hooks';
 import type { DataTableColumnGroup } from './types';
-import { humanize, useMediaQueriesStringOrFunction } from './utils';
+import { TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
+import { humanize } from './utils';
 
 type DataTableColumnGroupHeaderCellProps<T> = {
   group: DataTableColumnGroup<T>;
 };
 
-export default function DataTableColumnGroupHeaderCell<T>({
-  group: { id, columns, title, className, style, sx },
+export function DataTableColumnGroupHeaderCell<T>({
+  group: { id, columns, title, textAlign, className, style },
 }: DataTableColumnGroupHeaderCellProps<T>) {
   const queries = useMemo(() => columns.map(({ visibleMediaQuery }) => visibleMediaQuery), [columns]);
   const visibles = useMediaQueriesStringOrFunction(queries);
@@ -18,8 +23,19 @@ export default function DataTableColumnGroupHeaderCell<T>({
   );
 
   return colSpan > 0 ? (
-    <Box component="th" colSpan={colSpan} className={className} sx={sx} style={style}>
+    <TableTh
+      colSpan={colSpan}
+      className={clsx(
+        {
+          [TEXT_ALIGN_LEFT]: textAlign === 'left',
+          [TEXT_ALIGN_CENTER]: textAlign === 'center',
+          [TEXT_ALIGN_RIGHT]: textAlign === 'right',
+        },
+        className
+      )}
+      style={style}
+    >
       {title ?? humanize(id)}
-    </Box>
+    </TableTh>
   ) : null;
 }

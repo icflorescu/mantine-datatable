@@ -1,26 +1,25 @@
-import type { MouseEvent } from 'react';
 import type { DataTableColumn } from './DataTableColumn';
 
-export type DataTableCellClickHandler<T> = (params: {
+export type DataTableCellClickHandler<T = Record<string, unknown>> = (params: {
   /**
-   * Click event
+   * Click event.
    */
-  event: MouseEvent;
+  event: React.MouseEvent;
 
   /**
-   * Clicked record
+   * Clicked record.
    */
   record: T;
   /**
-   * Clicked record index
+   * Clicked record index.
    */
-  recordIndex: number;
+  index: number;
   /**
-   * Clicked column information
+   * Clicked column information.
    */
   column: DataTableColumn<T>;
   /**
-   * Clicked column index
+   * Clicked column index.
    */
   columnIndex: number;
 }) => void;

@@ -1,20 +1,6 @@
-import { createStyles } from '@mantine/core';
-
-const useStyles = createStyles({
-  root: {
-    '&&': {
-      background: 'transparent',
-      ':last-of-type td': {
-        borderBottom: 'none',
-      },
-    },
-  },
-});
-
-export default function DataTableEmptyRow() {
-  const { classes } = useStyles();
+export function DataTableEmptyRow() {
   return (
-    <tr className={classes.root}>
+    <tr className="mantine-datatable-empty-row">
       <td />
     </tr>
   );

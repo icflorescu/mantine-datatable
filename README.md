@@ -10,23 +10,23 @@
 [![Language][language-image]][repo-url]
 [![Sponsor the author][sponsor-image]][sponsor-url]
 
-⚠️ Mantine DataTable V6 supports Mantine V6.  
-💡 Mantine V7 support is in the works, and I could really use your help to speed things up. Please consider [sponsoring my work](https://github.com/sponsors/icflorescu) 🙏
-
 The lightweight, dependency-free, "dark-theme aware" [**table component**](https://icflorescu.github.io/mantine-datatable/) for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row context menu, row expansion, nesting, and more.
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/189911698-369ba48e-65f0-4772-aad3-cb5e6d4cb59d.png)](https://icflorescu.github.io/mantine-datatable/)
+
+**⚠️ Mantine DataTable V7.1 is compatible with Mantine V7.1.**  
+**💡 If you're looking for the old version that works with [Mantine V6](https://v6.mantine.dev), head over to [Mantine DataTable V6](https://icflorescu.github.io/mantine-datatable-v6).**
 
 ## Features
 
 - **Lightweight** - no external dependencies, [no bloat](https://bundlephobia.com/package/mantine-datatable)
 - **Dark theme aware** - works out of the box with [Mantine's dark theme](https://mantine.dev/guides/dark-theme/)
-- **[Fully customizable](https://icflorescu.github.io/mantine-datatable/examples/additional-styling)** - you can customize the look and feel of the table and its components
+- **[Fully customizable](https://icflorescu.github.io/mantine-datatable/examples/overriding-the-default-styles)** - you can customize the look and feel of the table and its components
 - **[Asynchronous data loading](https://icflorescu.github.io/mantine-datatable/examples/asynchronous-data-loading)** - load data from a remote API endpoint and show a loading indicator while waiting for the response
 - **[Pagination](https://icflorescu.github.io/mantine-datatable/examples/pagination)** - split large data sets into pages
 - **[Column sorting](https://icflorescu.github.io/mantine-datatable/examples/sorting)** - sort data by one or more columns
-- **[Custom cell data rendering](https://icflorescu.github.io/mantine-datatable/examples/column-properties)** - render cell data using custom components
-- **[Row context menu](https://icflorescu.github.io/mantine-datatable/examples/row-context-menu)** - show a context menu when right-clicking on a row
+- **[Custom cell data rendering](https://icflorescu.github.io/mantine-datatable/examples/column-properties-and-styling)** - render cell data using custom components
+- **[Row context menu](https://icflorescu.github.io/mantine-datatable/examples/using-with-mantine-contextmenu)** - show a context menu when right-clicking on a row
 - **[Row expansion](https://icflorescu.github.io/mantine-datatable/examples/expanding-rows)** - expand a row to show additional details
 - **[Nesting](https://icflorescu.github.io/mantine-datatable/examples/nested-tables)** - nest tables to show hierarchical data
 - **[Additive batch rows selection](https://icflorescu.github.io/mantine-datatable/examples/records-selection)** - select or deselect ranges of rows using the Shift key
@@ -52,24 +52,37 @@ Visit [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mant
 
 ## Quickstart
 
-Install the package and its dependencies (Mantine v7 is not currently supported, so use v6.0.21):
+Create a new [application with Mantine](https://mantine.dev/getting-started/), then install Mantine DataTable and its `clsx` peer dependency: 
 
 ```sh
-npm i @mantine/core@6.0.21 @mantine/hooks@6.0.21 @emotion/react mantine-datatable
+npm i mantine-datatable clsx
 ```
-
-If you're using Next.js, Vite, CRA, Remix or Gatsby, you might need to install additional dependencies. Please refer to Mantine's [getting started page](https://mantine.dev/pages/getting-started/) for more details.
-
-Use it in your code:
+Import the necessary CSS files:
 
 ```ts
-import { Text } from '@mantine/core';
+import '@mantine/core/styles.layer.css';
+import 'mantine-datatable/styles.layer.css';
+import './layout.css';
+```
+Apply the styles in the correct order:
+
+```css
+@layer mantine, mantine-datatable;
+```
+
+Use the component in your code:
+
+```ts
+'use client';
+
+import { Box } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import { DataTable } from 'mantine-datatable';
 
-export default function GettingStartedExample() {
+export function GettingStartedExample() {
   return (
     <DataTable
-      withBorder
+      withTableBorder
       borderRadius="sm"
       withColumnBorders
       striped
@@ -86,23 +99,27 @@ export default function GettingStartedExample() {
           // this column has a custom title
           title: '#',
           // right-align column
-          textAlignment: 'right',
+          textAlign: 'right',
         },
         { accessor: 'name' },
         {
           accessor: 'party',
           // this column has custom cell data rendering
           render: ({ party }) => (
-            <Text weight={700} color={party === 'Democratic' ? 'blue' : 'red'}>
+            <Box fw={700} c={party === 'Democratic' ? 'blue' : 'red'}>
               {party.slice(0, 3).toUpperCase()}
-            </Text>
+            </Box>
           ),
         },
         { accessor: 'bornIn' },
       ]}
       // execute this callback when a row is clicked
-      onRowClick={({ name, party, bornIn }) =>
-        alert(`You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}.`)
+      onRowClick={({ record: { name, party, bornIn } }) =>
+        showNotification({
+          title: `Clicked on ${name}`,
+          message: `You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}`,
+          withBorder: true,
+        })
       }
     />
   );
@@ -113,9 +130,13 @@ Make sure to browse the comprehensive list of [usage examples](https://icfloresc
 
 ## Other useful resources
 
-Mantine DataTable had the context-menu functionality baked in since its early days. If you're looking to use a context menu in other parts of your application, you might want to check out [Mantine Context Menu](https://icflorescu.github.io/mantine-contextmenu/).
+Mantine DataTable works perfectly with [Mantine Context Menu](https://icflorescu.github.io/mantine-contextmenu/).
 
-## Code contributors
+## Contributing
+
+See the [contributing guide in the documentation website](https://icflorescu.github.io/mantine-datatable/contribute-and-support) or the repo [CONTRIBUTING.md](https://github.com/icflorescu/mantine-datatable/blob/master/CONTRIBUTING.md) file for details.
+
+Here's the list of people who have already contributed to Mantine DataTable:
 
 [![Contributors list](https://contrib.rocks/image?repo=icflorescu/mantine-datatable)](https://github.com/icflorescu/mantine-datatable/graphs/contributors)
 
@@ -123,11 +144,17 @@ Want to [become a code contributor](https://icflorescu.github.io/mantine-datatab
 
 ## Sponsor the project
 
-If you find this package useful, please consider ❤️ [sponsoring my work](https://github.com/sponsors/icflorescu). Your sponsorship will help me dedicate more time to maintaining the project and will encourage me to add new features and fix existing bugs. If you're a company using Mantine DataTable in a commercial project, you can also [hire my services](https://github.com/icflorescu).
+If you find this package useful, please consider ❤️ [sponsoring my work](https://github.com/sponsors/icflorescu).  
+Your sponsorship will help me dedicate more time to maintaining the project and will encourage me to add new features and fix existing bugs.  
+If you're a company using Mantine DataTable in a commercial project, you can also [hire my services](https://github.com/icflorescu).
 
 ## Other means of support
 
-If you find this package useful, please 🙏 star the repository, 💕 [tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu), 👍 [endorse me on LinkedIn](https://www.linkedin.com/in/icflorescu) or consider hiring my services.
+If you can't afford to sponsor the project or hire my services, there are other ways you can support my work:  
+
+- 🙏 star the repository;
+- 💕 [tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu);
+- 👍 [endorse me on LinkedIn](https://www.linkedin.com/in/icflorescu).
 
 The more stars this repository gets, the more visibility it gains among the Mantine users community. The more
 users it gets, the more chances that some of those users will become active code contributors willing to put

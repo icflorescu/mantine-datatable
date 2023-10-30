@@ -1,0 +1,75 @@
+:root {
+  --docsearch-primary-color: #228be6;
+  --docsearch-logo-color: #228be6;
+}
+
+.DocSearch-Container {
+  z-index: 1000;
+  position: fixed;
+}
+
+.DocSearch-Logo .cls-1,
+.DocSearch-Logo .cls-2 {
+  fill: var(--docsearch-logo-color);
+}
+
+.DocSearch-Button {
+  width: rem(30px);
+  height: rem(30px);
+  margin-left: 0;
+  border-radius: rem(4px);
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+  border: rem(1px) solid light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-4));
+  padding: 0 rem(6px);
+  &:hover {
+    background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: none;
+  }
+  @media (min-width: $mantine-breakpoint-md) {
+    padding: 0 rem(8px);
+    width: rem(150px);
+  }
+
+  .DocSearch-Search-Icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: var(--mantine-color-text);
+  }
+}
+
+.DocSearch-Button-Placeholder {
+  display: none;
+  @media (min-width: $mantine-breakpoint-md) {
+    color: var(--mantine-color-text);
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 600;
+    margin-bottom: rem(-2px);
+    display: block;
+  }
+}
+
+.DocSearch-Button-Keys {
+  justify-content: flex-end;
+}
+
+.DocSearch-Button-Key {
+  display: none;
+  @media (min-width: $mantine-breakpoint-md) {
+    display: flex;
+    font-size: rem(11px);
+    padding-top: rem(3px);
+    background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-4));
+  }
+}
+
+.DocSearch-Button-Key:last-child {
+  margin-right: rem(-2px);
+}
+
+.DocSearch-Control-Key-Icon {
+  margin: rem(-1px) 0 0 rem(1px);
+}

@@ -1,0 +1,21 @@
+.root {
+  @media (min-width: $mantine-breakpoint-xs) {
+    width: calc(50% - var(--mantine-spacing-xl) / 2);
+  }
+}
+
+.iconContainer {
+  color: white;
+  background: linear-gradient(45deg, var(--mantine-color-blue-6), var(--mantine-color-cyan-6));
+  flex-shrink: 0;
+  border-radius: var(--mantine-radius-md);
+}
+
+.title {
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-2));
+  margin: -0.25em 0 0.25em;
+}
+
+.description {
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-1));
+}

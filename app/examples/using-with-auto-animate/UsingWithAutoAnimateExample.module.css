@@ -1,0 +1,26 @@
+.buttons {
+  width: 100%;
+  display: flex;
+  gap: var(--mantine-spacing-md);
+  flex-direction: column;
+  @media (min-width: rem(400px)) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.button {
+  width: 100%;
+  @media (min-width: rem(400px)) {
+    width: calc(50% - (var(--mantine-spacing-md) / 2));
+  }
+  @media (min-width: rem(660px)) {
+    width: calc((100% - var(--mantine-spacing-md) * 3) / 4);
+  }
+  @media (min-width: $mantine-breakpoint-sm) {
+    width: calc(50% - (var(--mantine-spacing-md) / 2));
+  }
+  @media (min-width: $mantine-breakpoint-md) {
+    width: calc((100% - var(--mantine-spacing-md) * 3) / 4);
+  }
+}

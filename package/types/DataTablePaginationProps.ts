@@ -1,14 +1,15 @@
-import type { MantineColor, MantineNumberSize, MantineSize } from '@mantine/core';
-import type { ReactNode } from 'react';
+import type { MantineColor, MantineSize } from '@mantine/core';
 import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelectorProps';
 
 export type DataTablePaginationProps = (
   | {
+      paginationWithEdges?: never;
       page?: never;
       onPageChange?: never;
       totalRecords?: never;
       recordsPerPage?: never;
-      paginationColor?: never;
+      paginationActiveTextColor?: never;
+      paginationActiveBackgroundColor?: never;
       paginationSize?: never;
       loadingText?: never;
       paginationText?: never;
@@ -17,57 +18,78 @@ export type DataTablePaginationProps = (
     }
   | {
       /**
-       * Current page number (1-based); if provided, a pagination component is shown
+       * Whenther to show first and last page navigation buttons.
+       */
+      paginationWithEdges?: boolean;
+
+      /**
+       * Current page number (1-based).
+       * If provided, a pagination component is shown.
        */
       page: number;
 
       /**
-       * Callback fired after change of each page
+       * Callback fired after page change.
+       * Receives the new page number as argument.
        */
       onPageChange: (page: number) => void;
 
       /**
-       * Total number of records in the dataset
+       * Total number of records in the dataset.
        */
       totalRecords: number | undefined;
 
       /**
-       * Number of records per page
+       * Number of records per page.
        */
       recordsPerPage: number;
 
       /**
-       * Pagination component size; defaults to `sm`
+       * Pagination component size.
+       * @default `sm`
        */
       paginationSize?: MantineSize;
 
       /**
-       * Pagination component color; defaults to primary theme color
+       * Color applied to active page button text.
+       * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
+       * or an object with `light` and `dark` keys and `MantineColor` values.
+       * Defaults to white.
        */
-      paginationColor?: MantineColor;
+      paginationActiveTextColor?: MantineColor | { light: MantineColor; dark: MantineColor };
 
       /**
-       * Text to show while records are loading
+       * Color applied to active page button background.
+       * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
+       * or an object with `light` and `dark` keys and `MantineColor` values.
+       * Defaults to primary theme color.
+       */
+      paginationActiveBackgroundColor?: MantineColor | { light: MantineColor; dark: MantineColor };
+
+      /**
+       * Text to show while records are loading.
        */
       loadingText?: string;
 
       /**
-       * Pagination text; defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`
+       * Pagination text. Defaults to ```({ from, to, totalRecords }) => `${from}-${to}/${totalRecords}`
        * ```
        */
-      paginationText?: (options: { from: number; to: number; totalRecords: number }) => ReactNode;
+      paginationText?: (params: { from: number; to: number; totalRecords: number }) => React.ReactNode;
 
       /**
-       * Pagination wrap breakpoints; defaults to `sm`.
-       * Below this breakpoint the content will be displayed on multiple lines;
+       * Pagination wrap breakpoints.
+       * Below this breakpoint the content will be displayed on multiple lines,
        * above it the content will be displayed on a single line.
+       * @default `sm`
        */
-      paginationWrapBreakpoint?: MantineNumberSize;
+      paginationWrapBreakpoint?: MantineSize | (string & NonNullable<unknown>) | number;
 
       /**
-       * Function that returns props object for pagination control; useful for improving accessibility
+       * Function that returns props object for pagination control.
+       * Useful for improving accessibility.
        */
-      getPaginationControlProps?: (control: 'previous' | 'next') => Record<string, unknown>;
+      getPaginationControlProps?: (control: 'first' | 'last' | 'previous' | 'next') => Record<string, unknown>;
     }
 ) &
   DataTablePageSizeSelectorProps;

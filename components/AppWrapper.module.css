@@ -1,0 +1,29 @@
+.root {
+  background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
+}
+
+.main {
+  display: flow-root;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.content {
+  min-height: calc(100dvh - var(--app-wrapper-footer-height) - var(--app-shell-header-height));
+  margin-bottom: var(--app-wrapper-footer-height);
+  padding: var(--mantine-spacing-xs) 0 var(--mantine-spacing-xl);
+  background: var(--mantine-color-body);
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  position: relative;
+  pointer-events: all;
+  &::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    height: rem(6px);
+    bottom: rem(-7px);
+    background: linear-gradient(light-dark(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.3)), rgba(0, 0, 0, 0));
+  }
+}

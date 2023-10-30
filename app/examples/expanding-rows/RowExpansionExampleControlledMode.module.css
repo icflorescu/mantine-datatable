@@ -1,0 +1,23 @@
+.details {
+  font-size: var(--mantine-font-size-sm);
+  background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+}
+
+.label {
+  width: rem(130px);
+}
+
+.buttonGroup {
+  border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  border-radius: var(--mantine-radius-sm);
+  flex-direction: column;
+  @media (min-width: $mantine-breakpoint-md) {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: $mantine-breakpoint-md) {
+  .button {
+    flex: 1 1 33%;
+  }
+}

@@ -1,0 +1,8 @@
+.root {
+  background: light-dark(
+    color-mix(in srgb, var(--mantine-color-red-6) 5%, var(--mantine-color-body)),
+    color-mix(in srgb, var(--mantine-color-red-6) 10%, var(--mantine-color-body))
+  );
+  border: 1px dashed var(--mantine-color-red-6);
+  border-radius: var(--mantine-radius-md);
+}

@@ -1,55 +1,49 @@
-import { Box, createStyles, type MantineTheme, type Sx } from '@mantine/core';
-import type { CSSProperties, ReactNode } from 'react';
+import { TableTh, type MantineStyleProp, type MantineTheme } from '@mantine/core';
+import clsx from 'clsx';
+import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
-import { useMediaQueryStringOrFunction } from './utils';
-
-const useStyles = createStyles({
-  noWrap: {
-    whiteSpace: 'nowrap',
-  },
-  ellipsis: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-});
+import { ELLIPSIS, NOWRAP, TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
 
 type DataTableFooterCellProps<T> = {
-  className?: string;
-  sx?: Sx;
-  style?: CSSProperties;
+  className: string | undefined;
+  style: MantineStyleProp | undefined;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
-  title: ReactNode | undefined;
-} & Pick<DataTableColumn<T>, 'noWrap' | 'ellipsis' | 'textAlignment' | 'width'>;
+  title: React.ReactNode | undefined;
+} & Pick<DataTableColumn<T>, 'noWrap' | 'ellipsis' | 'textAlign' | 'width'>;
 
-export default function DataTableFooterCell<T>({
+export function DataTableFooterCell<T>({
   className,
-  sx,
   style,
   visibleMediaQuery,
   title,
   noWrap,
   ellipsis,
-  textAlignment,
+  textAlign,
   width,
 }: DataTableFooterCellProps<T>) {
-  const { cx, classes } = useStyles();
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
-    <Box
-      component="th"
-      className={cx({ [classes.noWrap]: noWrap || ellipsis, [classes.ellipsis]: ellipsis }, className)}
-      sx={[
+    <TableTh
+      className={clsx(
         {
-          '&&': { textAlign: textAlignment },
+          [NOWRAP]: noWrap || ellipsis,
+          [ELLIPSIS]: ellipsis,
+          [TEXT_ALIGN_LEFT]: textAlign === 'left',
+          [TEXT_ALIGN_CENTER]: textAlign === 'center',
+          [TEXT_ALIGN_RIGHT]: textAlign === 'right',
+        },
+        className
+      )}
+      style={[
+        {
           width,
           minWidth: width,
           maxWidth: width,
         },
-        sx,
+        style,
       ]}
-      style={style}
     >
       {title}
-    </Box>
+    </TableTh>
   );
 }
