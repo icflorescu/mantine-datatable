@@ -1,6 +1,6 @@
 .root {
   color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0));
-  margin: calc(1em - var(--app-shell-header-height)) 0 0.5em;
+  margin: calc(1em - var(--app-shell-header-height) - var(--mantine-spacing-md)) 0 0.5em;
   pointer-events: none;
   font-size: 1.2rem;
   @media (min-width: $mantine-breakpoint-sm) {
@@ -13,7 +13,7 @@
 
 .anchor {
   display: inline-block;
-  margin-top: var(--app-shell-header-height);
+  padding-top: calc(var(--app-shell-header-height) + var(--mantine-spacing-md));
   pointer-events: all;
   cursor: pointer;
   &:hover {
