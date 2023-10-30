@@ -80,9 +80,13 @@
   thead,
   tbody,
   tfoot,
-  tr,
   th,
   td {
+    background: inherit;
+  }
+
+  thead tr,
+  tfoot tr {
     background: inherit;
   }
 

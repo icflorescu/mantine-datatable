@@ -1,6 +1,6 @@
 import { MantineColor } from '@mantine/core';
 
-export type DataTableColorProps = {
+export type DataTableColorProps<T> = {
   /**
    * Data table text color.
    * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
@@ -42,4 +42,23 @@ export type DataTableColorProps = {
    * or an object with `light` and `dark` keys and `MantineColor` values.
    */
   highlightOnHoverColor?: MantineColor | { light: MantineColor; dark: MantineColor };
+
+  /**
+   * Data table row text color.
+   * A function that accepts row data and returns color.
+   * The returned color can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
+   * or an object with `light` and `dark` keys and `MantineColor` values.
+   */
+  rowColor?: (record: T, index: number) => MantineColor | undefined | { light: MantineColor; dark: MantineColor };
+
+  /**
+   * Data table row background color.
+   * A function that accepts row data and returns background color color.
+   * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
+   * or an object with `light` and `dark` keys and `MantineColor` values.
+   */
+  rowBackgroundColor?: (
+    record: T,
+    index: number
+  ) => MantineColor | undefined | { light: MantineColor; dark: MantineColor };
 };

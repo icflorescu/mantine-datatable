@@ -94,11 +94,6 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: group multiple ${PRODUCT_NAME} columns under a shared header`,
   },
   {
-    href: '/examples/non-standard-record-ids',
-    title: 'Non-standard record IDs',
-    description: `Example: using non-standard record IDs with ${PRODUCT_NAME}`,
-  },
-  {
     href: '/examples/default-column-properties',
     title: 'Default column properties',
     description: `Example: using default column properties with ${PRODUCT_NAME}`,
@@ -107,6 +102,16 @@ export const ROUTES: RouteInfo[] = [
     href: '/examples/default-column-render',
     title: 'Default column render',
     description: `Example: using a default column render function with ${PRODUCT_NAME}`,
+  },
+  {
+    href: '/examples/row-styling',
+    title: 'Row styling',
+    description: `Example: styling ${PRODUCT_NAME} rows based on their data`,
+  },
+  {
+    href: '/examples/non-standard-record-ids',
+    title: 'Non-standard record IDs',
+    description: `Example: using non-standard record IDs with ${PRODUCT_NAME}`,
   },
   {
     href: '/examples/scrollable-vs-auto-height',

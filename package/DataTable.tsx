@@ -90,6 +90,8 @@ export function DataTable<T>({
   rowBorderColor,
   stripedColor,
   highlightOnHoverColor,
+  rowColor,
+  rowBackgroundColor,
   rowExpansion,
   rowClassName,
   rowStyle,
@@ -363,6 +365,8 @@ export function DataTable<T>({
                     onContextMenu={onRowContextMenu}
                     onCellContextMenu={onCellContextMenu}
                     expansion={rowExpansionInfo}
+                    color={rowColor}
+                    backgroundColor={rowBackgroundColor}
                     className={rowClassName}
                     style={rowStyle}
                     customAttributes={customRowAttributes}

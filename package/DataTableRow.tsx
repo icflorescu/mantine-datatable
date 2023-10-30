@@ -1,8 +1,9 @@
-import { TableTr, type MantineStyleProp } from '@mantine/core';
+import { TableTr, type CheckboxProps, type MantineColor, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
+import { getRowCssVariables } from './cssVariables';
 import { useRowExpansion } from './hooks';
 import type {
   DataTableCellClickHandler,
@@ -24,13 +25,19 @@ type DataTableRowProps<T> = {
   selectionChecked: boolean;
   onSelectionChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
   isRecordSelectable: ((record: T, index: number) => boolean) | undefined;
-  getSelectionCheckboxProps: (record: T, index: number) => Record<string, unknown>;
+  getSelectionCheckboxProps: (record: T, index: number) => CheckboxProps;
   onClick: DataTableRowClickHandler<T> | undefined;
   onContextMenu: DataTableRowClickHandler<T> | undefined;
   onCellClick: DataTableCellClickHandler<T> | undefined;
   onCellContextMenu: DataTableCellClickHandler<T> | undefined;
   expansion: ReturnType<typeof useRowExpansion<T>>;
   customAttributes?: (record: T, index: number) => Record<string, unknown>;
+  color:
+    | ((record: T, index: number) => MantineColor | undefined | { light: MantineColor; dark: MantineColor })
+    | undefined;
+  backgroundColor:
+    | ((record: T, index: number) => MantineColor | undefined | { light: MantineColor; dark: MantineColor })
+    | undefined;
   className?: string | ((record: T, index: number) => string | undefined);
   style?: (record: T, index: number) => MantineStyleProp | undefined;
   leftShadowVisible: boolean;
@@ -53,6 +60,8 @@ export function DataTableRow<T>({
   onCellContextMenu,
   expansion,
   customAttributes,
+  color,
+  backgroundColor,
   className,
   style,
   leftShadowVisible,
@@ -80,7 +89,16 @@ export function DataTableRow<T>({
           onClick?.({ event: e, record, index });
         }}
         onContextMenu={onContextMenu ? (e) => onContextMenu({ event: e, record, index }) : undefined}
-        style={style?.(record, index)}
+        style={[
+          color || backgroundColor
+            ? (theme) => {
+                const colorValue = color?.(record, index);
+                const backgroundColorValue = backgroundColor?.(record, index);
+                return getRowCssVariables({ theme, color: colorValue, backgroundColor: backgroundColorValue });
+              }
+            : undefined,
+          style?.(record, index),
+        ]}
         {...customAttributes?.(record, index)}
       >
         {selectionVisible && (

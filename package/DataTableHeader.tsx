@@ -1,4 +1,4 @@
-import { TableThead, TableTr, type MantineStyleProp } from '@mantine/core';
+import { TableThead, TableTr, type CheckboxProps, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
@@ -19,7 +19,7 @@ type DataTableHeaderProps<T> = {
   selectionChecked: boolean;
   selectionIndeterminate: boolean;
   onSelectionChange: (() => void) | undefined;
-  selectionCheckboxProps: Record<string, unknown>;
+  selectionCheckboxProps: CheckboxProps;
   leftShadowVisible: boolean;
 };
 

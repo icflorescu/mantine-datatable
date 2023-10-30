@@ -1,4 +1,4 @@
-import { Checkbox, TableTd } from '@mantine/core';
+import { Checkbox, TableTd, type CheckboxProps } from '@mantine/core';
 import { POINTER_CURSOR } from './utilityClasses';
 
 type DataTableRowSelectorCellProps<T> = {
@@ -8,7 +8,7 @@ type DataTableRowSelectorCellProps<T> = {
   checked: boolean;
   disabled: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  getCheckboxProps: (record: T, index: number) => Record<string, unknown>;
+  getCheckboxProps: (record: T, index: number) => CheckboxProps;
 };
 
 export function DataTableRowSelectorCell<T>({
