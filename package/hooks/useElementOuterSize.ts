@@ -1,3 +1,5 @@
+'use client';
+
 import { useResizeObserver } from '@mantine/hooks';
 
 export function useElementOuterSize<T extends HTMLElement>() {

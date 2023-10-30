@@ -1,3 +1,5 @@
+'use client';
+
 import { TableTh } from '@mantine/core';
 import clsx from 'clsx';
 import { useMemo } from 'react';

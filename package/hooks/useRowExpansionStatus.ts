@@ -1,3 +1,5 @@
+'use client';
+
 import { useTimeout } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { Checkbox, TableTd, type CheckboxProps } from '@mantine/core';
 import { POINTER_CURSOR } from './utilityClasses';
 

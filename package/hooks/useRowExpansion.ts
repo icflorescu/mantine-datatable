@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from 'react';
-import { DataTableRowExpansionProps } from '..';
+import { DataTableRowExpansionProps } from '../types/DataTableRowExpansionProps';
 import { getRecordId } from '../utils';
 
 export function useRowExpansion<T>({

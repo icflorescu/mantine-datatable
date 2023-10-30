@@ -1,3 +1,5 @@
+'use client';
+
 import { useMantineTheme, type MantineTheme } from '@mantine/core';
 import { useMemo } from 'react';
 import { useMediaQueries } from './useMediaQueries';
