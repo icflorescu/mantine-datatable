@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Center, Paper } from '@mantine/core';
+import { Button, Center, Paper, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
 import { DataTable, type DataTableColumn } from '__PACKAGE__';
@@ -169,10 +169,10 @@ export function SelectAllRecordsOnAllPagesExample() {
         // example-resume
       />
       <Paper p="md" mt="sm" withBorder>
-        <Center>
+        <Text size="sm" ta="center">
           You have selected {allRecordsSelected ? employees.length - unselectedRecords.length : selectedRecords.length}{' '}
           records of a total of {employees.length}.
-        </Center>
+        </Text>
       </Paper>
     </>
   );
