@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuTarget,
   Text,
+  rem,
   type MantineSize,
 } from '@mantine/core';
 import clsx from 'clsx';
@@ -23,7 +24,7 @@ type DataTablePageSizeSelectorComponentProps = {
   onChange: (value: number) => void;
 };
 
-const HEIGHT: Record<MantineSize, number> = { xs: 22, sm: 26, md: 32, lg: 38, xl: 44 };
+const HEIGHT: Record<MantineSize, string> = { xs: rem(22), sm: rem(26), md: rem(32), lg: rem(38), xl: rem(44) };
 
 export function DataTablePageSizeSelector({
   size,
