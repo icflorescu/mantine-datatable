@@ -104,9 +104,6 @@ export function RecordsSelectionHorizontalScrollingBehaviorExample() {
     <DataTable
       selectedRecords={selectedRecords}
       onSelectedRecordsChange={setSelectedRecords}
-      withTableBorder
-      withColumnBorders
-      records={employees}
       // 👇 these columns take up more horizontal space
       columns={[
         { accessor: 'firstName' },
@@ -119,6 +116,11 @@ export function RecordsSelectionHorizontalScrollingBehaviorExample() {
         { accessor: 'department.company.city', title: 'City', noWrap: true },
         { accessor: 'department.company.state', title: 'State', textAlign: 'right' },
       ]}
+      // example-skip other table props
+      withTableBorder
+      withColumnBorders
+      records={employees}
+      // example-resume
     />
   );
   // example-end
