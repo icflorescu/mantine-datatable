@@ -1,3 +1,5 @@
+import type { CheckboxProps } from '@mantine/core';
+
 export type DataTableSelectionProps<T = Record<string, unknown>> =
   | {
       selectedRecords?: never;
@@ -29,10 +31,10 @@ export type DataTableSelectionProps<T = Record<string, unknown>> =
        * A function used to determine additional props of the row selection checkbox.
        * Accepts the current record and its index as arguments and returns an object.
        */
-      getRecordSelectionCheckboxProps?: (record: T, index: number) => Record<string, unknown>;
+      getRecordSelectionCheckboxProps?: (record: T, index: number) => CheckboxProps;
 
       /**
        * Additional props for the header checkbox that toggles selection of all records.
        */
-      allRecordsSelectionCheckboxProps?: Record<string, unknown>;
+      allRecordsSelectionCheckboxProps?: CheckboxProps;
     };

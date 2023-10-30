@@ -10,10 +10,11 @@ import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import {
-  AdditionalCheckboxPropsExample,
+  CheckboxPropsExample,
   DisabledRecordsExample,
   RecordsSelectionExample,
   RecordsSelectionHorizontalScrollingBehaviorExample,
+  SelectAllRecordsOnAllPagesExample,
 } from './RecordsSelectionExamples';
 
 const PATH = '/examples/records-selection';
@@ -26,7 +27,8 @@ export default async function RecordsSelectionExamplePage() {
       | 'columns.ts'
       | 'RecordsSelectionExample.tsx'
       | 'DisabledRecordsExample.tsx'
-      | 'AdditionalCheckboxPropsExample.tsx'
+      | 'CheckboxPropsExample.tsx'
+      | 'SelectAllRecordsOnAllPagesExample.tsx'
       | 'RecordsSelectionHorizontalScrollingBehaviorExample.tsx',
       string
     >
@@ -93,12 +95,28 @@ export default async function RecordsSelectionExamplePage() {
         that receives the underlying record and record index and returns an object of props. will be applied to the row
         selection checkboxes.
       </Txt>
-      <CodeBlock tabs={{ code, keys: ['AdditionalCheckboxPropsExample.tsx', 'columns.ts'] }} />
+      <CodeBlock tabs={{ code, keys: ['CheckboxPropsExample.tsx', 'columns.ts'] }} />
       <Txt>
         Inspect the DOM to see the <Code>aria-label</Code> attributes on the selection checkboxes in the following
         example:
       </Txt>
-      <AdditionalCheckboxPropsExample />
+      <CheckboxPropsExample />
+      <PageSubtitle value="Selecting all records on all pages" />
+      <Txt>
+        When using <InternalLink to="/examples/pagination">pagination</InternalLink>, the best practice is to{' '}
+        <strong>only load the current page’s records from the server</strong>.
+        <br />
+        This also means that {PRODUCT_NAME} can’t—and <strong>shouldn’t</strong>—know about your entire dataset, so the
+        “select all” checkbox will only select/deselect the records on the currently visible page.
+      </Txt>
+      <Txt>
+        However, in certain you might want to give users the ability to “select all records on all pages” (like you have
+        in Gmail’s user interface). In this case, you can use the <Code>allRecordsSelectionCheckboxProps</Code> to
+        create your own selection mechanism:
+      </Txt>
+      <SelectAllRecordsOnAllPagesExample />
+      <Txt>Here is the code for the above example:</Txt>
+      <CodeBlock code={code['SelectAllRecordsOnAllPagesExample.tsx']} />
       <PageSubtitle value="Horizontal scrolling behavior" />
       <Txt>
         Notice how, when the table needs to be horizontally scrollable, the selection column will be fixed to the left

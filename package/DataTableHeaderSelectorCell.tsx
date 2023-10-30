@@ -1,11 +1,11 @@
-import { Checkbox, TableTh } from '@mantine/core';
+import { Checkbox, TableTh, type CheckboxProps } from '@mantine/core';
 import { POINTER_CURSOR } from './utilityClasses';
 
 type DataTableHeaderSelectorCellProps = {
   shadowVisible: boolean;
   checked: boolean;
   indeterminate: boolean;
-  checkboxProps: Record<string, unknown>;
+  checkboxProps: CheckboxProps;
   onChange: (() => void) | undefined;
   rowSpan: number | undefined;
 };
@@ -28,9 +28,9 @@ export function DataTableHeaderSelectorCell({
         classNames={{ input: POINTER_CURSOR }}
         checked={checked}
         indeterminate={indeterminate}
-        disabled={!onChange}
         onChange={onChange}
         {...checkboxProps}
+        disabled={!(onChange || checkboxProps.onChange) || checkboxProps.disabled}
       />
     </TableTh>
   );

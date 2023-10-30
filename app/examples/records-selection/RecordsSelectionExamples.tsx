@@ -3,9 +3,10 @@
 import { Button, Center, Paper } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
-import { DataTable, DataTableColumn } from '__PACKAGE__';
-import { useState } from 'react';
-import { companies, employees as employeeData, type Company, type Employee } from '~/data';
+import { DataTable, type DataTableColumn } from '__PACKAGE__';
+import { differenceBy, uniqBy } from 'lodash';
+import { useEffect, useState } from 'react';
+import { companies, employees, type Company, type Employee } from '~/data';
 
 // example-start columns.ts
 const columns: DataTableColumn<Company>[] = [
@@ -73,8 +74,8 @@ export function DisabledRecordsExample() {
   // example-end
 }
 
-export function AdditionalCheckboxPropsExample() {
-  // example-start AdditionalCheckboxPropsExample.tsx
+export function CheckboxPropsExample() {
+  // example-start CheckboxPropsExample.tsx
   const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);
 
   return (
@@ -94,7 +95,91 @@ export function AdditionalCheckboxPropsExample() {
   // example-end
 }
 
-const employees = employeeData.slice(0, 15);
+export function SelectAllRecordsOnAllPagesExample() {
+  // example-start SelectAllRecordsOnAllPagesExample.tsx
+  const PAGE_SIZE = 10;
+
+  const [page, setPage] = useState(1);
+  const [records, setRecords] = useState(employees.slice(0, PAGE_SIZE));
+  const [allRecordsSelected, setAllRecordsSelected] = useState(false);
+  const [selectedRecords, setSelectedRecords] = useState<Employee[]>([]);
+  const [unselectedRecords, setUnselectedRecords] = useState<Employee[]>([]);
+
+  const handleSelectedRecordsChange = (newSelectedRecords: Employee[]) => {
+    if (allRecordsSelected) {
+      const recordsToUnselect = records.filter((record) => !newSelectedRecords.includes(record));
+      setUnselectedRecords(
+        // 👇 `uniqBy` from `lodash`
+        uniqBy([...unselectedRecords, ...recordsToUnselect], 'id').filter((r) => !newSelectedRecords.includes(r))
+      );
+    } else {
+      setSelectedRecords(newSelectedRecords);
+    }
+  };
+
+  const handleAllRecordsSelectionCheckboxChange = () => {
+    if (allRecordsSelected) {
+      setAllRecordsSelected(false);
+      setSelectedRecords([]);
+      setUnselectedRecords([]);
+    } else {
+      setAllRecordsSelected(true);
+    }
+  };
+
+  useEffect(() => {
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE;
+    const currentRecords = employees.slice(from, to);
+    setRecords(currentRecords);
+    if (allRecordsSelected) {
+      setSelectedRecords(
+        // 👇 `differenceBy` from `lodash`
+        differenceBy(currentRecords, unselectedRecords, 'id')
+      );
+    }
+  }, [allRecordsSelected, page, unselectedRecords]);
+
+  return (
+    <>
+      <DataTable
+        selectedRecords={selectedRecords}
+        onSelectedRecordsChange={handleSelectedRecordsChange}
+        allRecordsSelectionCheckboxProps={{
+          indeterminate: allRecordsSelected && !!unselectedRecords.length,
+          checked: allRecordsSelected,
+          onChange: handleAllRecordsSelectionCheckboxChange,
+          title: allRecordsSelected ? 'Unselect all records' : `Select ${employees.length} records`,
+        }}
+        records={records}
+        totalRecords={employees.length}
+        recordsPerPage={PAGE_SIZE}
+        page={page}
+        onPageChange={(p) => setPage(p)}
+        // example-skip other table props
+        columns={[
+          { accessor: 'firstName' },
+          { accessor: 'lastName' },
+          { accessor: 'email' },
+          { accessor: 'department.name', title: 'Department' },
+          { accessor: 'department.company.name', title: 'Company' },
+        ]}
+        withTableBorder
+        withColumnBorders
+        // example-resume
+      />
+      <Paper p="md" mt="sm" withBorder>
+        <Center>
+          You have selected {allRecordsSelected ? employees.length - unselectedRecords.length : selectedRecords.length}{' '}
+          records of a total of {employees.length}.
+        </Center>
+      </Paper>
+    </>
+  );
+  // example-end
+}
+
+const fiveEmployees = employees.slice(0, 5);
 
 export function RecordsSelectionHorizontalScrollingBehaviorExample() {
   // example-start RecordsSelectionHorizontalScrollingBehaviorExample.tsx
@@ -119,7 +204,7 @@ export function RecordsSelectionHorizontalScrollingBehaviorExample() {
       // example-skip other table props
       withTableBorder
       withColumnBorders
-      records={employees}
+      records={fiveEmployees}
       // example-resume
     />
   );
