@@ -1,6 +1,7 @@
 import { Button, Flex, Stack, Text } from '@mantine/core';
 import { IconBrandGithub, IconLifebuoy, IconRocket, IconScale, IconSettings } from '@tabler/icons-react';
 import clsx from 'clsx';
+import type { Route } from 'next';
 import Link from 'next/link';
 import {
   CRA_LINK,
@@ -22,7 +23,7 @@ import { HomePageSubtitle } from './HomePageSubtitle';
 import { HomePageTitle } from './HomePageTitle';
 import classes from './page.module.css';
 
-const PATH = '/';
+const PATH: Route = '/';
 export const metadata = getRouteMetadata(PATH);
 
 const { href: firstExampleHref, title: firstExampleTitle } = getFirstExampleRoute();

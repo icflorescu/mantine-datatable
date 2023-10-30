@@ -1,4 +1,5 @@
 import { Code, ListItem } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -11,7 +12,7 @@ import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import SortingExample from './SortingExample';
 import SortingExampleCustomIcons from './SortingExampleCustomIcons';
 
-const PATH = '/examples/sorting';
+const PATH: Route = '/examples/sorting';
 
 export const metadata = getRouteMetadata(PATH);
 

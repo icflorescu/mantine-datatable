@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -8,7 +9,7 @@ import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import { UsingWithAutoAnimateExample } from './UsingWithAutoAnimateExample';
 
-const PATH = '/examples/using-with-auto-animate';
+const PATH: Route = '/examples/using-with-auto-animate';
 
 export const metadata = getRouteMetadata(PATH);
 

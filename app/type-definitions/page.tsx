@@ -1,3 +1,4 @@
+import type { Route } from 'next';
 import { readdir } from 'node:fs/promises';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
@@ -7,7 +8,7 @@ import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 
-const PATH = '/type-definitions';
+const PATH: Route = '/type-definitions';
 export const metadata = getRouteMetadata(PATH);
 
 const TYPE_FILES_PATH = 'package/types';

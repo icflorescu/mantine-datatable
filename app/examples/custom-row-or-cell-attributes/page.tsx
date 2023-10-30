@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
@@ -11,7 +12,7 @@ import {
   CustomRowOrCellAttributesMiddleClickExample,
 } from './CustomRowOrCellAttributesExamples';
 
-const PATH = '/examples/custom-row-or-cell-attributes';
+const PATH: Route = '/examples/custom-row-or-cell-attributes';
 
 export const metadata = getRouteMetadata(PATH);
 

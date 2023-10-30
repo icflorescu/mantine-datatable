@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -8,7 +9,7 @@ import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import { DefaultColumnPropertiesExample } from './DefaultColumnPropertiesExample';
 
-const PATH = '/examples/default-column-properties';
+const PATH: Route = '/examples/default-column-properties';
 
 export const metadata = getRouteMetadata(PATH);
 

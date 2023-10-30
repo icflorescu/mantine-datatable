@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
@@ -9,7 +10,7 @@ import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import { RowActionsCellExample } from './RowActionsCellExample';
 
-const PATH = '/examples/row-actions-cell';
+const PATH: Route = '/examples/row-actions-cell';
 
 export const metadata = getRouteMetadata(PATH);
 

@@ -1,4 +1,5 @@
 import { Box, Code } from '@mantine/core';
+import type { Route } from 'next';
 import { MANTINE_LINK, PRODUCT_NAME, REPO_LINK } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
@@ -10,7 +11,7 @@ import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getFirstExampleRoute, getRouteMetadata } from '~/lib/utils';
 
-const PATH = '/styling';
+const PATH: Route = '/styling';
 export const metadata = getRouteMetadata(PATH);
 
 export default async function StylingPage() {

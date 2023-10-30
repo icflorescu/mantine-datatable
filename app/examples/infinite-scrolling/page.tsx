@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
@@ -7,7 +8,7 @@ import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import { InfiniteScrollingExample } from './InfiniteScrollingExample';
 
-const PATH = '/examples/infinite-scrolling';
+const PATH: Route = '/examples/infinite-scrolling';
 
 export const metadata = getRouteMetadata(PATH);
 

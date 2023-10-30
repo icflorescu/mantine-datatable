@@ -1,4 +1,5 @@
 import { Code, ListItem } from '@mantine/core';
+import type { Route } from 'next';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
@@ -17,7 +18,7 @@ import {
   SelectAllRecordsOnAllPagesExample,
 } from './RecordsSelectionExamples';
 
-const PATH = '/examples/records-selection';
+const PATH: Route = '/examples/records-selection';
 
 export const metadata = getRouteMetadata(PATH);
 

@@ -1,3 +1,4 @@
+import type { Route } from 'next';
 import { MANTINE_LINK, PRODUCT_NAME, REPO_LINK, V6_WEBSITE_LINK } from '~/app/config';
 import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -5,7 +6,7 @@ import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { getRouteMetadata } from '~/lib/utils';
 
-const PATH = '/mantine-v6-support';
+const PATH: Route = '/mantine-v6-support';
 export const metadata = getRouteMetadata(PATH);
 
 export default function MantineV6SupportPage() {

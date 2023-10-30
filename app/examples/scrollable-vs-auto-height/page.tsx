@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -10,7 +11,7 @@ import { getRouteMetadata } from '~/lib/utils';
 import { ScrollableVsAutoHeightExamplePageContent } from './ScrollableVsAutoHeightExamplePageContent';
 import { ScrollAreaPropsExample } from './ScrollableVsAutoHeightExamples';
 
-const PATH = '/examples/scrollable-vs-auto-height';
+const PATH: Route = '/examples/scrollable-vs-auto-height';
 
 export const metadata = getRouteMetadata(PATH);
 

@@ -1,3 +1,4 @@
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
@@ -6,7 +7,7 @@ import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { NestedTablesAsyncSortingExample } from './NestedTablesAsyncSortingExample';
 
-const PATH = '/examples/nested-tables-with-async-data-loading-and-sorting';
+const PATH: Route = '/examples/nested-tables-with-async-data-loading-and-sorting';
 
 export const metadata = getRouteMetadata(PATH);
 

@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -8,7 +9,7 @@ import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { NestedTablesAsyncExample } from './NestedTablesAsyncExample';
 
-const PATH = '/examples/nested-tables-with-async-data-loading';
+const PATH: Route = '/examples/nested-tables-with-async-data-loading';
 
 export const metadata = getRouteMetadata(PATH);
 

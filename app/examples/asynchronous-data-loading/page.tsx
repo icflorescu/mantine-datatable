@@ -1,4 +1,5 @@
 import { Code, ListItem } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -12,7 +13,7 @@ import { getRouteMetadata } from '~/lib/utils';
 import { AsynchronousDataLoadingExamplePageContent } from './AsynchronousDataLoadingExamplePageContent';
 import { AsynchronousDataLoadingExampleWithCustomLoader } from './AsynchronousDataLoadingExamples';
 
-const PATH = '/examples/asynchronous-data-loading';
+const PATH: Route = '/examples/asynchronous-data-loading';
 
 export const metadata = getRouteMetadata(PATH);
 

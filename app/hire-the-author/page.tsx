@@ -1,3 +1,4 @@
+import type { Route } from 'next';
 import {
   AUTHOR_LINK,
   AUTHOR_NAME,
@@ -12,7 +13,7 @@ import { Txt } from '~/components/Txt';
 import { getRouteMetadata } from '~/lib/utils';
 import classes from './page.module.css';
 
-const PATH = '/hire-the-author';
+const PATH: Route = '/hire-the-author';
 export const metadata = getRouteMetadata(PATH);
 
 export default function HireTheAuthorPage() {

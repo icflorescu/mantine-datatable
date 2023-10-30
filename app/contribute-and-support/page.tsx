@@ -1,4 +1,5 @@
 import { Box, Code } from '@mantine/core';
+import type { Route } from 'next';
 import {
   AUTHOR_LINK,
   AUTHOR_NAME,
@@ -17,7 +18,7 @@ import { Txt } from '~/components/Txt';
 import { getRouteMetadata } from '~/lib/utils';
 import { ContributorsImage } from './ContributorsImage';
 
-const PATH = '/contribute-and-support';
+const PATH: Route = '/contribute-and-support';
 export const metadata = getRouteMetadata(PATH);
 
 const TWITTER_TEXT = encodeURIComponent('Check out the missing context-menu for Mantine UI applications!');

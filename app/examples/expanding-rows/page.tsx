@@ -1,4 +1,5 @@
 import { Box, Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
@@ -17,7 +18,7 @@ import { RowExpansionExampleTriggerAlways } from './RowExpansionExampleTriggerAl
 import { RowExpansionExampleWithInlineEditor } from './RowExpansionExampleWithInlineEditor';
 import { RowExpansionExampleWithLazyLoading } from './RowExpansionExampleWithLazyLoading';
 
-const PATH = '/examples/expanding-rows';
+const PATH: Route = '/examples/expanding-rows';
 
 export const metadata = getRouteMetadata(PATH);
 

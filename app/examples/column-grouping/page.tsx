@@ -1,4 +1,5 @@
 import { Code, ListItem } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
@@ -10,7 +11,7 @@ import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { ColumnGroupingExample } from './ColumnGroupingExample';
 
-const PATH = '/examples/column-grouping';
+const PATH: Route = '/examples/column-grouping';
 
 export const metadata = getRouteMetadata(PATH);
 

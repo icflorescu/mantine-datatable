@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
@@ -12,7 +13,7 @@ import {
   EmptyStateExampleCustomText,
 } from './EmptyStateExamples';
 
-const PATH = '/examples/empty-state';
+const PATH: Route = '/examples/empty-state';
 
 export const metadata = getRouteMetadata(PATH);
 

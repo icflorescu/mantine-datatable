@@ -1,4 +1,5 @@
 import { Anchor, Box, Code } from '@mantine/core';
+import type { Route } from 'next';
 import { MANTINE_CONTEXTMENU_LINK, MANTINE_CONTEXTMENU_PRODUCT_NAME, PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
@@ -16,7 +17,7 @@ import { RowContextMenuExample } from './RowContextMenuExample';
 import { RowContextMenuInsideModalExample } from './RowContextMenuInsideModalExample';
 import { RowContextMenuOnScrollableTableExample } from './RowContextMenuOnScrollableTableExample';
 
-const PATH = '/examples/using-with-mantine-contextmenu';
+const PATH: Route = '/examples/using-with-mantine-contextmenu';
 
 export const metadata = getRouteMetadata(PATH);
 

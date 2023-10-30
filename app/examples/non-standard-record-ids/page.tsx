@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
@@ -9,7 +10,7 @@ import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { NonStandardRecordIdsFunctionExample } from './NonStandardRecordIdsFunctionExample';
 import { NonStandardRecordIdsStringExample } from './NonStandardRecordIdsStringExample';
 
-const PATH = '/examples/non-standard-record-ids';
+const PATH: Route = '/examples/non-standard-record-ids';
 
 export const metadata = getRouteMetadata(PATH);
 

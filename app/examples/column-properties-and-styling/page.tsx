@@ -1,4 +1,5 @@
 import { Code, ListItem } from '@mantine/core';
+import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -12,7 +13,7 @@ import { ColumnFooterExample } from './ColumnFooterExample';
 import { ColumnPropertiesExample } from './ColumnPropertiesExample';
 import { ColumnStylingExample } from './ColumnStylingExample';
 
-const PATH = '/examples/column-properties-and-styling';
+const PATH: Route = '/examples/column-properties-and-styling';
 
 export const metadata = getRouteMetadata(PATH);
 

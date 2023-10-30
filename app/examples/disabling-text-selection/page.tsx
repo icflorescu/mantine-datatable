@@ -1,4 +1,5 @@
 import { Code, ListItem } from '@mantine/core';
+import type { Route } from 'next';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
@@ -8,7 +9,7 @@ import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import { DisablingTextSelectionExamplePageContent } from './DisablingTextSelectionExamplePageContent';
 
-const PATH = '/examples/disabling-text-selection';
+const PATH: Route = '/examples/disabling-text-selection';
 
 export const metadata = getRouteMetadata(PATH);
 

@@ -1,3 +1,4 @@
+import type { Route } from 'next';
 import { MANTINE_LINK } from '~/app/config';
 import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -7,7 +8,7 @@ import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import { BasicTablePropertiesPageContent } from './BasicTablePropertiesPageContent';
 
-const PATH = '/examples/basic-table-properties';
+const PATH: Route = '/examples/basic-table-properties';
 
 export const metadata = getRouteMetadata(PATH);
 

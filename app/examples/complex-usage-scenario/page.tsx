@@ -1,4 +1,5 @@
 import { Code } from '@mantine/core';
+import type { Route } from 'next';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
@@ -10,7 +11,7 @@ import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { ComplexUsageExample } from './ComplexUsageExample';
 import { ComplexUsageExampleWrapper } from './ComplexUsageExampleWrapper';
 
-const PATH = '/examples/complex-usage-scenario';
+const PATH: Route = '/examples/complex-usage-scenario';
 
 export const metadata = getRouteMetadata(PATH);
 

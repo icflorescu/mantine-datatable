@@ -1,4 +1,5 @@
 import { Code, ListItem } from '@mantine/core';
+import type { Route } from 'next';
 import { Fragment } from 'react';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
@@ -14,7 +15,7 @@ import PaginationExample from './PaginationExample';
 import PaginationExampleWithControlProps from './PaginationExampleWithControlProps';
 import PaginationExampleWithPageSizeSelector from './PaginationExampleWithPageSizeSelector';
 
-const PATH = '/examples/pagination';
+const PATH: Route = '/examples/pagination';
 
 export const metadata = getRouteMetadata(PATH);
 
