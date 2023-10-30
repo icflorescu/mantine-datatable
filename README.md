@@ -21,12 +21,12 @@ The lightweight, dependency-free, "dark-theme aware" [**table component**](https
 
 - **Lightweight** - no external dependencies, [no bloat](https://bundlephobia.com/package/mantine-datatable)
 - **Dark theme aware** - works out of the box with [Mantine's dark theme](https://mantine.dev/guides/dark-theme/)
-- **[Fully customizable](https://icflorescu.github.io/mantine-datatable/examples/additional-styling)** - you can customize the look and feel of the table and its components
+- **[Fully customizable](https://icflorescu.github.io/mantine-datatable/examples/overriding-the-default-styles)** - you can customize the look and feel of the table and its components
 - **[Asynchronous data loading](https://icflorescu.github.io/mantine-datatable/examples/asynchronous-data-loading)** - load data from a remote API endpoint and show a loading indicator while waiting for the response
 - **[Pagination](https://icflorescu.github.io/mantine-datatable/examples/pagination)** - split large data sets into pages
 - **[Column sorting](https://icflorescu.github.io/mantine-datatable/examples/sorting)** - sort data by one or more columns
-- **[Custom cell data rendering](https://icflorescu.github.io/mantine-datatable/examples/column-properties)** - render cell data using custom components
-- **[Row context menu](https://icflorescu.github.io/mantine-datatable/examples/row-context-menu)** - show a context menu when right-clicking on a row
+- **[Custom cell data rendering](https://icflorescu.github.io/mantine-datatable/examples/column-properties-and-styling)** - render cell data using custom components
+- **[Row context menu](https://icflorescu.github.io/mantine-datatable/examples/using-with-mantine-contextmenu)** - show a context menu when right-clicking on a row
 - **[Row expansion](https://icflorescu.github.io/mantine-datatable/examples/expanding-rows)** - expand a row to show additional details
 - **[Nesting](https://icflorescu.github.io/mantine-datatable/examples/nested-tables)** - nest tables to show hierarchical data
 - **[Additive batch rows selection](https://icflorescu.github.io/mantine-datatable/examples/records-selection)** - select or deselect ranges of rows using the Shift key
@@ -52,22 +52,37 @@ Visit [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mant
 
 ## Quickstart
 
+Create a new [application with Mantine](https://mantine.dev/getting-started/), then install Mantine DataTable and its `clsx` peer dependency: 
+
 ```sh
-npm i @mantine/core @mantine/hooks clsx mantine-datatable
+npm i mantine-datatable clsx
 ```
-
-If you're using Next.js, Vite, CRA, Remix or Gatsby, you might need to install additional dependencies. Please refer to Mantine's [getting started page](https://mantine.dev/pages/getting-started/) for more details.
-
-Use it in your code:
+Import the necessary CSS files:
 
 ```ts
-import { Text } from '@mantine/core';
+import '@mantine/core/styles.layer.css';
+import 'mantine-datatable/styles.layer.css';
+import './layout.css';
+```
+Apply the styles in the correct order:
+
+```css
+@layer mantine, mantine-datatable;
+```
+
+Use the component in your code:
+
+```ts
+'use client';
+
+import { Box } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import { DataTable } from 'mantine-datatable';
 
-export default function GettingStartedExample() {
+export function GettingStartedExample() {
   return (
     <DataTable
-      withBorder
+      withTableBorder
       borderRadius="sm"
       withColumnBorders
       striped
@@ -83,7 +98,7 @@ export default function GettingStartedExample() {
           accessor: 'id',
           // this column has a custom title
           title: '#',
-          // right-aligned column
+          // right-align column
           textAlign: 'right',
         },
         { accessor: 'name' },
@@ -99,8 +114,12 @@ export default function GettingStartedExample() {
         { accessor: 'bornIn' },
       ]}
       // execute this callback when a row is clicked
-      onRowClick={({ name, party, bornIn }) =>
-        alert(`You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}.`)
+      onRowClick={({ record: { name, party, bornIn } }) =>
+        showNotification({
+          title: `Clicked on ${name}`,
+          message: `You clicked on ${name}, a ${party.toLowerCase()} president born in ${bornIn}`,
+          withBorder: true,
+        })
       }
     />
   );
@@ -111,7 +130,7 @@ Make sure to browse the comprehensive list of [usage examples](https://icfloresc
 
 ## Other useful resources
 
-Mantine DataTable had the context-menu functionality baked in since its early days. If you're looking to use a context menu in other parts of your application, you might want to check out [Mantine Context Menu](https://icflorescu.github.io/mantine-contextmenu/).
+Mantine DataTable works perfectly with [Mantine Context Menu](https://icflorescu.github.io/mantine-contextmenu/).
 
 ## Contributing
 

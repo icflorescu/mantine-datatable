@@ -46,7 +46,7 @@ export default async function GettingStartedPage() {
         ]}
       />
       <Txt>
-        Don’t forget to import the necessary CSS files <strong>in the correct order</strong>.
+        Don’t forget to import the necessary CSS files and apply the styles <strong>in the correct order</strong>.
       </Txt>
       <Txt idea>
         The <Code>@mantine/core</Code> package styles must be applied before {PRODUCT_NAME} styles.
