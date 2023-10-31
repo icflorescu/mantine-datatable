@@ -30,7 +30,7 @@ const { href: firstExampleHref, title: firstExampleTitle } = getFirstExampleRout
 
 export default function HomePage() {
   return (
-    <Stack gap="xl" maw={642} mx="auto">
+    <Stack gap="xl">
       <HomePageTitle />
       <HomePageSubtitle />
       <HeroImage />
