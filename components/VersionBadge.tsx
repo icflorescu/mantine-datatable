@@ -1,12 +1,13 @@
-import { Badge, Box, Menu, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
-import { IconChevronDown, IconExternalLink } from '@tabler/icons-react';
+import { Badge, Box, Popover, PopoverDropdown, PopoverTarget, Text } from '@mantine/core';
+import { IconAlertSquareRoundedFilled, IconChevronDown, IconExternalLink } from '@tabler/icons-react';
 import { V6_WEBSITE_LINK } from '~/app/config';
+import { ExternalLink } from './ExternalLink';
 import classes from './VersionBadge.module.css';
 
 export function VersionBadge() {
   return (
-    <Menu withArrow>
-      <MenuTarget>
+    <Popover withArrow shadow="sm">
+      <PopoverTarget>
         <Badge
           className={classes.root}
           variant="filled"
@@ -20,23 +21,24 @@ export function VersionBadge() {
         >
           {process.env.PACKAGE_VERSION}
         </Badge>
-      </MenuTarget>
-      <MenuDropdown>
-        <MenuItem
-          rightSection={
-            <Box mb={-5}>
-              <IconExternalLink size={16} />
-            </Box>
-          }
-          component="a"
-          href={V6_WEBSITE_LINK}
-          target="_blank"
-          td="underline"
-          c="blue"
-        >
-          View V6 docs
-        </MenuItem>
-      </MenuDropdown>
-    </Menu>
+      </PopoverTarget>
+      <PopoverDropdown w={160}>
+        <Text size="xs" ta="center">
+          <Box component="span" c="red">
+            <IconAlertSquareRoundedFilled />
+          </Box>
+          <br />
+          This version works with Mantine V7.
+          <br />
+          If you’re still using <ExternalLink to="https://v6.mantine.dev">Mantine V6</ExternalLink>, check the old
+          version{' '}
+          <ExternalLink to={V6_WEBSITE_LINK}>
+            here
+            <IconExternalLink className={classes.linkIcon} size={14} />
+          </ExternalLink>
+          .
+        </Text>
+      </PopoverDropdown>
+    </Popover>
   );
 }
