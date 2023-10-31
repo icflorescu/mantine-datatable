@@ -1,5 +1,6 @@
 'use client';
 
+import { useMediaQuery } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
@@ -9,11 +10,13 @@ import companies from '~/data/companies.json';
 export function ContextMenuOnClickExample() {
   // example-start
   const { showContextMenu } = useContextMenu();
+  const isTouch = useMediaQuery('(pointer: coarse)');
 
   return (
     <DataTable
       withTableBorder
       withColumnBorders
+      textSelectionDisabled={isTouch} // 👈 disable text selection on touch devices
       columns={[{ accessor: 'name' }, { accessor: 'streetAddress' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={companies}
       // 👇 use `onRowClick` instead of `onRowContextMenu` to

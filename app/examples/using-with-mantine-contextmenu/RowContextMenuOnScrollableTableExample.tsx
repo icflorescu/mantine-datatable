@@ -1,5 +1,6 @@
 'use client';
 
+import { useMediaQuery } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
@@ -9,12 +10,14 @@ import employees from '~/data/employees.json';
 export function RowContextMenuOnScrollableTableExample() {
   // example-start
   const { showContextMenu, hideContextMenu } = useContextMenu();
+  const isTouch = useMediaQuery('(pointer: coarse)');
 
   return (
     <DataTable
       height={300}
       withTableBorder
       withColumnBorders
+      textSelectionDisabled={isTouch} // 👈 disable text selection on touch devices
       columns={[{ accessor: 'firstName' }, { accessor: 'lastName' }, { accessor: 'email' }]}
       records={employees}
       onRowContextMenu={({ record, event }) =>

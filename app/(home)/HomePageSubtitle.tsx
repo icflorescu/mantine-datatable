@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { MANTINE_LINK, V6_WEBSITE_LINK } from '~/app/config';
 import { ExternalLink } from '~/components/ExternalLink';
 import classes from './HomePageSubtitle.module.css';
+import { PackageUsersAnchor } from './PackageUsersAnchor';
 
 export function HomePageSubtitle() {
   return (
@@ -11,7 +12,11 @@ export function HomePageSubtitle() {
       <Group gap={8} align="flex-start" wrap="nowrap">
         <IconDiscountCheck className={clsx(classes.leftIcon, classes.iconTrust)} />
         <Text size="sm">
-          trusted by awesome companies and developers <IconArrowDown className={classes.linkIcon} />
+          trusted by{' '}
+          <PackageUsersAnchor className="nowrap">
+            awesome companies and developers{' '}
+            <IconArrowDown className={clsx(classes.linkIcon, classes.scrollDownIcon)} />
+          </PackageUsersAnchor>
         </Text>
       </Group>
       <Group gap={8} align="flex-start" wrap="nowrap">
@@ -26,10 +31,13 @@ export function HomePageSubtitle() {
       <Group gap={8} align="flex-start" wrap="nowrap">
         <IconInfoCircle className={clsx(classes.leftIcon, classes.iconOldVersion)} />
         <Text size="sm">
-          old version compatible with <ExternalLink to="https://v6.mantine.dev">Mantine V6</ExternalLink> available{' '}
-          <ExternalLink className="nowrap" to={V6_WEBSITE_LINK}>
-            here <IconExternalLink className={classes.linkIcon} />
-          </ExternalLink>
+          old version compatible with <ExternalLink to="https://v6.mantine.dev">Mantine V6</ExternalLink>{' '}
+          <span className="nowrap">
+            available{' '}
+            <ExternalLink className="nowrap" to={V6_WEBSITE_LINK}>
+              here <IconExternalLink className={classes.linkIcon} />
+            </ExternalLink>
+          </span>
         </Text>
       </Group>
     </Stack>

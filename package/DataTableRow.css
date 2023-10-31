@@ -1,15 +1,13 @@
 .mantine-datatable-row {
   --mantine-datatable-row-color: var(
-    light-dark(--mantine-datatable-row-color-light, --mantine-datatable-row-color-dark),
-    inherit
+    light-dark(--mantine-datatable-row-color-light, --mantine-datatable-row-color-dark)
   );
   --mantine-datatable-row-background-color: var(
-    light-dark(--mantine-datatable-row-background-color-light, --mantine-datatable-row-background-color-dark),
-    inherit
+    light-dark(--mantine-datatable-row-background-color-light, --mantine-datatable-row-background-color-dark)
   );
 
-  color: var(--mantine-datatable-row-color);
-  background: var(--mantine-datatable-row-background-color);
+  color: var(--mantine-datatable-row-color, inherit);
+  background: var(--mantine-datatable-row-background-color, inherit);
 
   &[data-with-row-border]:not(:last-of-type) td {
     border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);

@@ -46,20 +46,6 @@
   overflow: hidden;
   color: var(--mantine-datatable-color);
   background: var(--mantine-datatable-background-color);
-
-  /* 😑 make background inheritable down to the table element */
-  /* 👇 scroll area */
-  > div {
-    background: inherit;
-    /* 👇 scroll area viewport */
-    > div:not(.mantine-datatable-scroll-area-scrollbar):not(.mantine-datatable-scroll-area-corner) {
-      background: inherit;
-      /* 👇 table wrapper */
-      > div {
-        background: inherit;
-      }
-    }
-  }
 }
 
 .mantine-datatable-with-border {
@@ -70,7 +56,7 @@
   border-collapse: separate;
   border-spacing: 0;
   color: inherit;
-  background: inherit;
+  background: var(--mantine-datatable-background-color);
 
   th,
   td {
@@ -80,13 +66,10 @@
   thead,
   tbody,
   tfoot,
+  thead tr,
+  tfoot tr,
   th,
   td {
-    background: inherit;
-  }
-
-  thead tr,
-  tfoot tr {
     background: inherit;
   }
 

@@ -1,4 +1,4 @@
-import { Code, ListItem } from '@mantine/core';
+import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -26,22 +26,18 @@ export default async function DisablingTextSelectionExamplePage() {
         For instance, for usability reasons, it would make sense to disable text selection if you:
       </Txt>
       <UnorderedList compact>
-        <ListItem>
+        <li>
           work with <InternalLink to="/examples/records-selection">records selection</InternalLink>;
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <InternalLink to="/examples/handling-row-clicks">handle row clicks</InternalLink>;
-        </ListItem>
-        <ListItem>
-          use a{' '}
-          <InternalLink to="/examples/using-with-mantine-contextmenu">
-            row context-menu triggered by click event
-          </InternalLink>
-          ;
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
+          use <InternalLink to="/examples/using-with-mantine-contextmenu">context-menus</InternalLink> on touch devices;
+        </li>
+        <li>
           use <InternalLink to="/examples/sorting">sorting</InternalLink>.
-        </ListItem>
+        </li>
       </UnorderedList>
       <DisablingTextSelectionExamplePageContent initialCode={code} />
       <Txt>Head over to the next example to discover more features.</Txt>

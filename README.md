@@ -10,7 +10,7 @@
 [![Language][language-image]][repo-url]
 [![Sponsor the author][sponsor-image]][sponsor-url]
 
-The lightweight, dependency-free, "dark-theme aware" [**table component**](https://icflorescu.github.io/mantine-datatable/) for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row context menu, row expansion, nesting, and more.
+The lightweight, dependency-free, **dark-theme aware** table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and [much more](https://icflorescu.github.io/mantine-datatable/).
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/189911698-369ba48e-65f0-4772-aad3-cb5e6d4cb59d.png)](https://icflorescu.github.io/mantine-datatable/)
 
@@ -20,7 +20,7 @@ The lightweight, dependency-free, "dark-theme aware" [**table component**](https
 ## Features
 
 - **Lightweight** - no external dependencies, [no bloat](https://bundlephobia.com/package/mantine-datatable)
-- **Dark theme aware** - works out of the box with [Mantine's dark theme](https://mantine.dev/guides/dark-theme/)
+- **Dark-theme aware** - automatically adapts to the current [Mantine color scheme](https://mantine.dev/theming/color-schemes/)
 - **[Fully customizable](https://icflorescu.github.io/mantine-datatable/examples/overriding-the-default-styles)** - you can customize the look and feel of the table and its components
 - **[Asynchronous data loading](https://icflorescu.github.io/mantine-datatable/examples/asynchronous-data-loading)** - load data from a remote API endpoint and show a loading indicator while waiting for the response
 - **[Pagination](https://icflorescu.github.io/mantine-datatable/examples/pagination)** - split large data sets into pages
@@ -52,11 +52,9 @@ Visit [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mant
 
 ## Quickstart
 
-Create a new [application with Mantine](https://mantine.dev/getting-started/), then install Mantine DataTable and its `clsx` peer dependency: 
+Create a new [application with Mantine](https://mantine.dev/getting-started/), make sure to have the `clsx` peer dependency installed,
+then install the package with `npm i mantine-datatable` or `yarn add mantine-datatable`.
 
-```sh
-npm i mantine-datatable clsx
-```
 Import the necessary CSS files:
 
 ```ts
@@ -64,9 +62,12 @@ import '@mantine/core/styles.layer.css';
 import 'mantine-datatable/styles.layer.css';
 import './layout.css';
 ```
-Apply the styles in the correct order:
+
+Make sure to [apply the styles in the correct order](https://mantine.dev/styles/mantine-styles/):
 
 ```css
+/* layout.css */
+/* 👇 Apply Mantine core styles first, DataTable styles second */
 @layer mantine, mantine-datatable;
 ```
 
@@ -87,24 +88,24 @@ export function GettingStartedExample() {
       withColumnBorders
       striped
       highlightOnHover
-      // provide data
+      // 👇 provide data
       records={[
         { id: 1, name: 'Joe Biden', bornIn: 1942, party: 'Democratic' },
         // more records...
       ]}
-      // define columns
+      // 👇 define columns
       columns={[
         {
           accessor: 'id',
-          // this column has a custom title
+          // 👇 this column has a custom title
           title: '#',
-          // right-align column
+          // 👇 right-align column
           textAlign: 'right',
         },
         { accessor: 'name' },
         {
           accessor: 'party',
-          // this column has custom cell data rendering
+          // 👇 this column has custom cell data rendering
           render: ({ party }) => (
             <Box fw={700} c={party === 'Democratic' ? 'blue' : 'red'}>
               {party.slice(0, 3).toUpperCase()}
@@ -113,7 +114,7 @@ export function GettingStartedExample() {
         },
         { accessor: 'bornIn' },
       ]}
-      // execute this callback when a row is clicked
+      // 👇 execute this callback when a row is clicked
       onRowClick={({ record: { name, party, bornIn } }) =>
         showNotification({
           title: `Clicked on ${name}`,
@@ -172,6 +173,7 @@ Mentioning “Mantine DataTable” in your text would help me prioritize your me
 ## Acknowledgements
 
 🙏 Special thanks to [Ani Ravi](https://github.com/aniravi24) for being the first person to sponsor my work on this project!
+💕 Additional thanks to [all sponsors](https://github.com/sponsors/icflorescu)!
 
 ## License
 

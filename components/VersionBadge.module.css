@@ -3,8 +3,14 @@
   @media (min-width: $mantine-breakpoint-sm) {
     display: flex;
     cursor: pointer;
+    text-transform: none;
     &:active {
       transform: translateY(1px);
     }
   }
+}
+
+.linkIcon {
+  margin-left: rem(2px);
+  vertical-align: rem(-2px);
 }

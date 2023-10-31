@@ -1,4 +1,4 @@
-import { Box, Code, ListItem } from '@mantine/core';
+import { Box, Code } from '@mantine/core';
 import { Route } from 'next';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
@@ -65,55 +65,55 @@ export default async function OverridingTheDefaultStylesExamplePage() {
         The <Code>c</Code> property refers to the text color and is applied to:
       </Txt>
       <UnorderedList compact>
-        <ListItem>the table body, header and footer;</ListItem>
-        <ListItem>
+        <li>the table body, header and footer;</li>
+        <li>
           the <InternalLink to="/examples/pagination">pagination</InternalLink> component (if present).
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt>
         The <Code>backgroundColor</Code> is applied to:
       </Txt>
       <UnorderedList compact>
-        <ListItem>the table body, header and footer;</ListItem>
-        <ListItem>
+        <li>the table body, header and footer;</li>
+        <li>
           the <InternalLink to="/examples/pagination">pagination</InternalLink> component (if present).
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt>
         The <Code>borderColor</Code> is applied to:
       </Txt>
       <UnorderedList compact>
-        <ListItem>
+        <li>
           the table outer border (if enabled by{' '}
           <InternalLink to="/examples/basic-table-properties">
             <Code>withTableBorder</Code> property
           </InternalLink>
           );
-        </ListItem>
-        <ListItem>header bottom border;</ListItem>
-        <ListItem>
+        </li>
+        <li>header bottom border;</li>
+        <li>
           footer top border (see{' '}
           <InternalLink to="/examples/column-properties-and-styling" scrollTo="Column footers">
             column footers
           </InternalLink>
           );
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <InternalLink to="/examples/pagination">pagination</InternalLink> top border (if present).
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt>
         The <Code>rowBorderColor</Code> is applied to:
       </Txt>
       <UnorderedList compact>
-        <ListItem>the bottom of each row;</ListItem>
-        <ListItem>
+        <li>the bottom of each row;</li>
+        <li>
           the column borders (if enabled by{' '}
           <InternalLink to="/examples/basic-table-properties">
             <Code>withTableBorder</Code> property
           </InternalLink>
           ).
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt>
         If you’re using <InternalLink to="/examples/pagination">pagination</InternalLink>, you can also customize its

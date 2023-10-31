@@ -22,3 +22,36 @@
   height: auto;
   vertical-align: rem(-2px);
 }
+
+.scrollDownIcon {
+  margin-bottom: rem(-1px);
+  animation: bounce 5s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  100% {
+    transform: translateY(0);
+  }
+
+  7% {
+    transform: translateY(rem(-5px));
+  }
+
+  10% {
+    transform: translateY(rem(4px));
+  }
+
+  13% {
+    transform: translateY(rem(-3px));
+  }
+
+  15% {
+    transform: translateY(rem(6px));
+  }
+
+  18% {
+    transform: translateY(rem(1px));
+  }
+}

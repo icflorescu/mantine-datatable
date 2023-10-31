@@ -1,5 +1,6 @@
 .root {
   margin: var(--mantine-spacing-md) 0 var(--mantine-spacing-md) var(--mantine-spacing-sm);
+  padding-left: var(--mantine-spacing-md);
   &:not(.compact) {
     li {
       margin: var(--mantine-spacing-xs) 0;

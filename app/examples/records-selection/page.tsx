@@ -1,4 +1,4 @@
-import { Code, ListItem } from '@mantine/core';
+import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
@@ -49,32 +49,32 @@ export default async function RecordsSelectionExamplePage() {
       </Txt>
       <Txt>In order to enable records selection, you’ll have to add the following properties to the DataTable:</Txt>
       <UnorderedList compact>
-        <ListItem>
+        <li>
           <Code>selectedRecords</Code> → an array of currently selected records (with the same TS type as the{' '}
           <Code>records</Code> property);
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>onSelectedRecordsChange</Code> → a callback that will be invoked when the user alters the current
           selection.
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt>
         When adding these two properties, the component will render a selection checkbox column and handle user input as
         following:
       </Txt>
       <UnorderedList compact>
-        <ListItem>
+        <li>
           <em>Clicking a row selection checkbox</em> will result in selecting/deselecting the underlying record;
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <em>Clicking the column header checkbox</em> will result in selecting/deselecting all visible records;
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <strong>
             <em>Shift-clicking a row selection checkbox</em> will result in intuitively selecting all records between
             the last clicked record and the current one.
           </strong>
-        </ListItem>
+        </li>
       </UnorderedList>
       <RecordsSelectionExample />
       <Txt info title="Keep in mind">

@@ -1,4 +1,4 @@
-import { Code, ListItem } from '@mantine/core';
+import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
@@ -48,12 +48,12 @@ export default async function ColumnPropertiesAndStylingExamplePage() {
       <PageSubtitle value="Basic column properties" />
       <Txt>In addition, each column can be customized by specifying the following properties:</Txt>
       <UnorderedList>
-        <ListItem>
+        <li>
           <Code>width: number | string</Code>
           <br />
           Desired column width.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>ellipsis: boolean</Code>
           <br />
           If true, cell content in this column will not wrap to multiple lines and will be truncated with ellipsis if/as
@@ -61,38 +61,38 @@ export default async function ColumnPropertiesAndStylingExamplePage() {
           <br />
           You can either set this property to <Code>true</Code> or set <Code>noWrap</Code> to <Code>true</Code>, but not
           both.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>noWrap: boolean</Code>
           <br />
           If true, cell content in this column will not wrap on multiple lines (i.e. <Code>white-space: nowrap</Code>).
           <br />
           You can either set this property to <Code>true</Code> or set <Code>ellipsis</Code> to <Code>true</Code>, but
           not both.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>{"textAlign: 'left' | 'center' | 'right'"}</Code>
           <br />
           Defaults to <Code>{"'left'"}</Code> if not specified.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>hidden: boolean</Code>
           <br />
           If true, the column will not be visible.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>visibleMediaQuery</Code>
           <br />A media query <Code>string</Code> or a function accepting the current <Code>MantineTheme</Code> as its
           argument and returning a media-query string.
           <br />
           If set, the column will only be visible according to the specified media query.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>render</Code>
           <br />A method that accepts the current record as its argument and returns a <Code>ReactNode</Code> (keep in
           mind that strings and numbers are valid react nodes).
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>filter</Code>
           <br />
           An optional property which provides the user with filtering options. It can be either a <Code>
@@ -105,13 +105,13 @@ export default async function ColumnPropertiesAndStylingExamplePage() {
           <br />
           Alternatively, you can provide a function returning a <Code>ReactNode</Code>. The function will be called with
           an object containing a <Code>close()</Code> method, which you can call to close the popover.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>filtering: boolean</Code>
           <br />
           If true, the column will be styled as an active filtering column. Defaults to <Code>false</Code> if not
           specified.
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt info>
         See the <InternalLink to="/examples/searching-and-filtering">searching and filtering</InternalLink> example to
@@ -137,34 +137,34 @@ export default async function ColumnPropertiesAndStylingExamplePage() {
       <PageSubtitle value="Styling column titles, cells and footers" />
       <Txt>In addition, each column can be further customized by specifying the following styling properties:</Txt>
       <UnorderedList>
-        <ListItem>
+        <li>
           <Code>titleClassName: string</Code>
           <br />A custom class name for the column title.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>titleStyle</Code>
           <br />A custom style object for the column title, or a function accepting the current theme and returning a
           style object.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>cellsClassName: string</Code>
           <br />A function that accepts the current record as its argument and returns a <Code>string</Code>{' '}
           representing a custom class name for the column cells.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>cellsStyle</Code>
           <br />A function that accepts the current record as its argument and returns either a style object for the
           column cells, or a function accepting the current theme and returning a style object.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>footerClassName: string</Code>
           <br />A custom class name for the column footer.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>footerStyle</Code>
           <br />A custom style object for the column footer, or a function accepting the current theme and returning a
           style object.
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt>Consider this example:</Txt>
       <ColumnStylingExample />
