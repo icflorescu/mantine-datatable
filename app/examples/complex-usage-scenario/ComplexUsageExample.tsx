@@ -3,7 +3,7 @@
 import { ActionIcon, Button, Center, Flex, Group, Image, MantineTheme, Text, TextInput, rem } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
-import { IconClick, IconEdit, IconEye, IconMessage, IconTrash, IconTrashX } from '@tabler/icons-react';
+import { IconClick, IconEdit, IconMessage, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
 import { DataTable, DataTableColumn, DataTableProps, DataTableSortStatus } from '__PACKAGE__';
 import dayjs from 'dayjs';
@@ -40,7 +40,7 @@ export function ComplexUsageExample() {
     showNotification({
       withBorder: true,
       title: 'Editing record',
-      message: `In a real application we should edit ${firstName} ${lastName}, but this is just a demo`,
+      message: `In a real application we could show a popup to edit ${firstName} ${lastName}, but this is just a demo, so we're not going to do that`,
     });
   }, []);
 
@@ -58,7 +58,7 @@ export function ComplexUsageExample() {
       withBorder: true,
       color: 'red',
       title: 'Deleting multiple records',
-      message: `Should delete ${selectedRecords.length} records, but we're not going to do that because deleting data is bad`,
+      message: `Should delete ${selectedRecords.length} records, but we're not going to do that because deleting data is bad... and this is just a demo anyway`,
     });
   }, [selectedRecords.length]);
 
@@ -114,7 +114,7 @@ export function ComplexUsageExample() {
           editRecord(record);
         }}
       >
-        <IconEye size={16} />
+        <IconEdit size={16} />
       </ActionIcon>
     </Group>
   );
