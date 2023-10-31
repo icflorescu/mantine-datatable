@@ -40,8 +40,15 @@ export default function HomePage() {
       </Text>
       <Flex direction={{ base: 'column', xs: 'row' }} gap="xl" wrap={{ base: 'nowrap', xs: 'wrap' }}>
         <Feature icon={IconSettings} title="Lightweight yet customizable">
-          Supports asynchronous data loading, pagination, multiple rows selection, column sorting, custom cell data
-          rendering, row context menus, row expansion, nesting and more
+          Supports <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink>,{' '}
+          <InternalLink to="/examples/pagination">pagination</InternalLink>,{' '}
+          <InternalLink to="/examples/records-selection">batch rows selection</InternalLink>,{' '}
+          <InternalLink to="/examples/sorting">column sorting</InternalLink>,{' '}
+          <InternalLink to="/examples/column-properties-and-styling">custom cell data rendering</InternalLink>,{' '}
+          <InternalLink to="/examples/using-with-mantine-contextmenu">context menus</InternalLink>,{' '}
+          <InternalLink to="/examples/expanding-rows">row expansion</InternalLink>,{' '}
+          <InternalLink to="/examples/nested-tables">nesting</InternalLink> and{' '}
+          <InternalLink to="/examples/complex-usage-scenario">more</InternalLink>
         </Feature>
         <Feature icon={IconLifebuoy} title="Typescript based">
           The entire codebase is <ExternalLink to={REPO_LINK}>written in TypeScript</ExternalLink>, options are{' '}
