@@ -35,16 +35,18 @@ export default function HomePage() {
       <HomePageSubtitle />
       <HeroImage />
       <Text component="div">
-        Mantine DataTable is a lightweight, dependency-free component that brings datagrid-like functionality to your
-        data-rich user interfaces, with intuitive Gmail-style additive batch rows selection out of the box.
+        Mantine DataTable is a{' '}
+        <ExternalLink to="https://bundlephobia.com/package/mantine-datatable">lightweight</ExternalLink>,
+        dependency-free component that brings datagrid-like functionality to your data-rich user interfaces, with
+        dark-mode support and intuitive Gmail-style additive batch rows selection out of the box.
       </Text>
       <Flex direction={{ base: 'column', xs: 'row' }} gap="xl" wrap={{ base: 'nowrap', xs: 'wrap' }}>
         <Feature icon={IconSettings} title="Lightweight yet customizable">
           Supports <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink>,{' '}
-          <InternalLink to="/examples/pagination">pagination</InternalLink>,{' '}
-          <InternalLink to="/examples/records-selection">batch rows selection</InternalLink>,{' '}
-          <InternalLink to="/examples/sorting">column sorting</InternalLink>,{' '}
-          <InternalLink to="/examples/column-properties-and-styling">custom cell data rendering</InternalLink>,{' '}
+          <InternalLink to="/examples/pagination">pagination</InternalLink>, intuitive{' '}
+          <InternalLink to="/examples/records-selection">rows selection</InternalLink>, column{' '}
+          <InternalLink to="/examples/sorting">sorting</InternalLink>, custom{' '}
+          <InternalLink to="/examples/column-properties-and-styling">cell data rendering</InternalLink>,{' '}
           <InternalLink to="/examples/using-with-mantine-contextmenu">context menus</InternalLink>,{' '}
           <InternalLink to="/examples/expanding-rows">row expansion</InternalLink>,{' '}
           <InternalLink to="/examples/nested-tables">nesting</InternalLink> and{' '}
