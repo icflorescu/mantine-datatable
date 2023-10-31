@@ -14,7 +14,8 @@ export function HomePageSubtitle() {
         <Text size="sm">
           trusted by{' '}
           <PackageUsersAnchor className="nowrap">
-            awesome companies and developers <IconArrowDown className={classes.linkIcon} />
+            awesome companies and developers{' '}
+            <IconArrowDown className={clsx(classes.linkIcon, classes.scrollDownIcon)} />
           </PackageUsersAnchor>
         </Text>
       </Group>
