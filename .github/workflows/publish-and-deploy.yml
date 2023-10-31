@@ -46,7 +46,7 @@ jobs:
       - name: Build
         run: yarn build
         env:
-          GITHUB_PAGES: TRUE
+          GITHUB_PAGES: 'TRUE'
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
