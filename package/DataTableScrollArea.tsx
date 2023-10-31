@@ -6,6 +6,7 @@ import clsx from 'clsx';
 type DataTableScrollAreaProps = React.PropsWithChildren<{
   topShadowVisible: boolean;
   leftShadowVisible: boolean;
+  leftShadowBehind: boolean;
   rightShadowVisible: boolean;
   bottomShadowVisible: boolean;
   headerHeight: number;
@@ -18,6 +19,7 @@ type DataTableScrollAreaProps = React.PropsWithChildren<{
 export function DataTableScrollArea({
   topShadowVisible,
   leftShadowVisible,
+  leftShadowBehind,
   rightShadowVisible,
   bottomShadowVisible,
   headerHeight,
@@ -52,6 +54,7 @@ export function DataTableScrollArea({
       <div
         className={clsx('mantine-datatable-scroll-area-shadow', 'mantine-datatable-scroll-area-left-shadow', {
           'mantine-datatable-scroll-area-shadow-visible': leftShadowVisible,
+          'mantine-datatable-scroll-area-left-shadow-behind': leftShadowBehind,
         })}
       />
       <div

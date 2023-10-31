@@ -265,7 +265,8 @@ export function DataTable<T>({
       <DataTableScrollArea
         viewportRef={useMergedRef(scrollViewportRef, scrollViewportRefProp)}
         topShadowVisible={!scrolledToTop}
-        leftShadowVisible={!(selectedRecords || scrolledToLeft)}
+        leftShadowVisible={!scrolledToLeft}
+        leftShadowBehind={selectionColumnVisible}
         rightShadowVisible={!scrolledToRight}
         bottomShadowVisible={!scrolledToBottom}
         headerHeight={headerHeight}
