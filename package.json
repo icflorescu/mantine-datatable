@@ -1,7 +1,7 @@
 {
   "name": "mantine-datatable",
   "version": "7.1.0-alpha.1",
-  "description": "The dependency-free datatable component for Mantine UI, featuring asynchronous data loading support, pagination, multple rows selection, column sorting, custom cell data rendering, row context menu, row expansion and more",
+  "description": "The lightweight, dependency-free, dark-theme aware table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and much more",
   "keywords": [
     "mantine",
     "data",

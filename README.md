@@ -10,7 +10,7 @@
 [![Language][language-image]][repo-url]
 [![Sponsor the author][sponsor-image]][sponsor-url]
 
-The lightweight, dependency-free, "dark-theme aware" [**table component**](https://icflorescu.github.io/mantine-datatable/) for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and [much more](https://icflorescu.github.io/mantine-datatable/).
+The lightweight, dependency-free, **dark-theme aware** table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and [much more](https://icflorescu.github.io/mantine-datatable/).
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/189911698-369ba48e-65f0-4772-aad3-cb5e6d4cb59d.png)](https://icflorescu.github.io/mantine-datatable/)
 
