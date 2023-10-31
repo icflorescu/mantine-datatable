@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { MANTINE_LINK, V6_WEBSITE_LINK } from '~/app/config';
 import { ExternalLink } from '~/components/ExternalLink';
 import classes from './HomePageSubtitle.module.css';
+import { PackageUsersAnchor } from './PackageUsersAnchor';
 
 export function HomePageSubtitle() {
   return (
@@ -12,9 +13,9 @@ export function HomePageSubtitle() {
         <IconDiscountCheck className={clsx(classes.leftIcon, classes.iconTrust)} />
         <Text size="sm">
           trusted by{' '}
-          <span className="nowrap">
+          <PackageUsersAnchor className="nowrap">
             awesome companies and developers <IconArrowDown className={classes.linkIcon} />
-          </span>
+          </PackageUsersAnchor>
         </Text>
       </Group>
       <Group gap={8} align="flex-start" wrap="nowrap">
