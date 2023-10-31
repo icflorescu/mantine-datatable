@@ -3,7 +3,12 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
-## 7.1.0-alpha.1 (2023-10-26)
+## 7.1.0-alpha.2 (2023-10-31)
+
+- Various CSS bug fixes
+- Various fixes to the documentation website
+
+## 7.1.0-alpha.1 (2023-10-30)
 
 The V7 alpha release is here! 🎉  
 This is a **major rewrite** of the library internals, with the following goals in mind:
