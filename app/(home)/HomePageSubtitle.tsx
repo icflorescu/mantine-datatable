@@ -11,7 +11,10 @@ export function HomePageSubtitle() {
       <Group gap={8} align="flex-start" wrap="nowrap">
         <IconDiscountCheck className={clsx(classes.leftIcon, classes.iconTrust)} />
         <Text size="sm">
-          trusted by awesome companies and developers <IconArrowDown className={classes.linkIcon} />
+          trusted by{' '}
+          <span className="nowrap">
+            awesome companies and developers <IconArrowDown className={classes.linkIcon} />
+          </span>
         </Text>
       </Group>
       <Group gap={8} align="flex-start" wrap="nowrap">
@@ -26,10 +29,13 @@ export function HomePageSubtitle() {
       <Group gap={8} align="flex-start" wrap="nowrap">
         <IconInfoCircle className={clsx(classes.leftIcon, classes.iconOldVersion)} />
         <Text size="sm">
-          old version compatible with <ExternalLink to="https://v6.mantine.dev">Mantine V6</ExternalLink> available{' '}
-          <ExternalLink className="nowrap" to={V6_WEBSITE_LINK}>
-            here <IconExternalLink className={classes.linkIcon} />
-          </ExternalLink>
+          old version compatible with <ExternalLink to="https://v6.mantine.dev">Mantine V6</ExternalLink>{' '}
+          <span className="nowrap">
+            available{' '}
+            <ExternalLink className="nowrap" to={V6_WEBSITE_LINK}>
+              here <IconExternalLink className={classes.linkIcon} />
+            </ExternalLink>
+          </span>
         </Text>
       </Group>
     </Stack>
