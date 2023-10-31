@@ -40,7 +40,12 @@ export default function HomePage() {
         dependency-free component that brings datagrid-like functionality to your data-rich user interfaces, with
         dark-mode support and intuitive Gmail-style additive batch rows selection out of the box.
       </Text>
-      <Flex direction={{ base: 'column', xs: 'row' }} gap="xl" wrap={{ base: 'nowrap', xs: 'wrap' }}>
+      <Flex
+        direction={{ base: 'column', xs: 'row' }}
+        gap="xl"
+        wrap={{ base: 'nowrap', xs: 'wrap' }}
+        mb={{ base: 0, md: 'sm' }}
+      >
         <Feature icon={IconSettings} title="Lightweight yet customizable">
           Supports <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink>,{' '}
           <InternalLink to="/examples/pagination">pagination</InternalLink>, intuitive{' '}
