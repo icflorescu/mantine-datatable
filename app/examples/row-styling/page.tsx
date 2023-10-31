@@ -49,6 +49,8 @@ export default async function RowStylingExamplePage() {
         the row in light and dark themes respectively.
       </Txt>
       <RowStylingWithColorPropertiesExample />
+      <Txt>Here is the code used to produce the result above:</Txt>
+      <CodeBlock code={code['RowStylingWithColorPropertiesExample.tsx']} />
       <PageSubtitle value="Using rowClassName" />
       <Txt>
         The <Code>rowClassName</Code> property accepts a function that receives the current record and its index as
