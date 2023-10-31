@@ -9,9 +9,9 @@ export function HomePageTitle() {
         table component
       </Text>
       <br />
-      for your Mantine
+      for your data-rich
       <br />
-      data-rich applications
+      Mantine applications
     </Title>
   );
 }
