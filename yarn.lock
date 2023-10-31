@@ -3832,10 +3832,10 @@ magic-string@^0.25.0, magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
-mantine-contextmenu@^7.1.3:
-  version "7.1.3"
-  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.1.3.tgz#8c2a5ebf072e67447af016b2f3070435e190be3d"
-  integrity sha512-a6TE9IMQ0rnpHuaKwWK2dSdugFGRecF9N70ZOcLeO2CDwBV/bhsJsx18nywdYFUwGGXNdiRmXFIBWlhEoD3smQ==
+mantine-contextmenu@^7.1.4:
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.1.4.tgz#61cf1a2f1e92ea9c78d7d197681100c49c458511"
+  integrity sha512-YXl+om1JAjHq0R57vgzMKI8pZZVg5JiWiXboKUmrtB/iZDPXVIansL9hXOM2vf97vqXqWTuWFBPY7v6+/M5c2w==
 
 merge-stream@^2.0.0:
   version "2.0.0"
