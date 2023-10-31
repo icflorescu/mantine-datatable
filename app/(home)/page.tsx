@@ -94,7 +94,7 @@ export default function HomePage() {
           variant="gradient"
           gradient={{ from: 'gray.6', to: 'gray.5' }}
           component="a"
-          href="/get-started"
+          href={REPO_LINK}
           target="_blank"
           aria-label={`View the source code of ${PRODUCT_NAME} on GitHub`}
           leftSection={<IconBrandGithub />}
