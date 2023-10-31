@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.1.0-alpha.3 (2023-10-31)
+
+- Improve UI when the table is scrolled horizontally and contains expanded rows (place a left shadow over the left side of the expanded row)
+
 ## 7.1.0-alpha.2 (2023-10-31)
 
 - Various CSS bug fixes

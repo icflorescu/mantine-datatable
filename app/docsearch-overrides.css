@@ -1,6 +1,6 @@
 :root {
-  --docsearch-primary-color: #228be6;
-  --docsearch-logo-color: #228be6;
+  --docsearch-primary-color: var(--mantine-color-blue-6);
+  --docsearch-logo-color: var(--mantine-color-blue-6);
 }
 
 .DocSearch-Container {

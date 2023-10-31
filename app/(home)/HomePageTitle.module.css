@@ -9,8 +9,11 @@
     font-size: rem(42px);
   }
   @media (min-width: $mantine-breakpoint-md) {
-    font-size: rem(60px);
+    font-size: rem(64px);
     margin-top: 0.5em;
+  }
+  @media (min-width: $mantine-breakpoint-lg) {
+    font-size: rem(80px);
   }
 }
 

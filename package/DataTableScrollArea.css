@@ -43,6 +43,11 @@
   background: var(--mantine-datatable-shadow-background-left);
 }
 
+/* For horizontal scrolling and expanded rows */
+.mantine-datatable-scroll-area-left-shadow-behind {
+  z-index: 0;
+}
+
 .mantine-datatable-scroll-area-right-shadow {
   z-index: 2;
   top: 0;
