@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { IconAppWindow, IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
@@ -11,6 +12,7 @@ import companies from '~/data/companies.json';
 export function RowContextMenuInsideModalExample() {
   // example-start
   const { showContextMenu, hideContextMenu } = useContextMenu();
+  const isTouch = useMediaQuery('(pointer: coarse)');
 
   return (
     <Button
@@ -25,6 +27,7 @@ export function RowContextMenuInsideModalExample() {
               height={260}
               withTableBorder
               withColumnBorders
+              textSelectionDisabled={isTouch} // 👈 disable text selection on touch devices
               columns={[{ accessor: 'name' }, { accessor: 'city' }, { accessor: 'state', textAlign: 'right' }]}
               records={companies}
               onRowContextMenu={({ record, event }) =>

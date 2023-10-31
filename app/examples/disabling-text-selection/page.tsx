@@ -33,11 +33,7 @@ export default async function DisablingTextSelectionExamplePage() {
           <InternalLink to="/examples/handling-row-clicks">handle row clicks</InternalLink>;
         </ListItem>
         <ListItem>
-          use a{' '}
-          <InternalLink to="/examples/using-with-mantine-contextmenu">
-            row context-menu triggered by click event
-          </InternalLink>
-          ;
+          use <InternalLink to="/examples/using-with-mantine-contextmenu">context-menus</InternalLink> on touch devices;
         </ListItem>
         <ListItem>
           use <InternalLink to="/examples/sorting">sorting</InternalLink>.

@@ -39,7 +39,7 @@ export default async function UsingWithMantineContextMenuExamplePage() {
       <Txt>
         Mantine doesn’t have a context-menu component, but the DataTable works perfectly with{' '}
         <ExternalLink to={MANTINE_CONTEXTMENU_LINK}>{MANTINE_CONTEXTMENU_PRODUCT_NAME}</ExternalLink>, built by the same
-        author.
+        author. Have a look at the examples below to learn how.
       </Txt>
       <Txt idea title="Important">
         <Box mb="sm">
@@ -49,13 +49,17 @@ export default async function UsingWithMantineContextMenuExamplePage() {
           <ExternalLink to={`${MANTINE_CONTEXTMENU_LINK}/getting-started`}>getting started</ExternalLink> page of{' '}
           {MANTINE_CONTEXTMENU_PRODUCT_NAME} for more information.
         </Box>
-        <div>
+        <Box mb="sm">
           When using {MANTINE_CONTEXTMENU_PRODUCT_NAME} with a scrollable {PRODUCT_NAME}, you’ll need to close the
           context-menu when the user scrolls the table –{' '}
           <Anchor inherit href="#using-with-scrollable-tables">
             see the example below
           </Anchor>
           .
+        </Box>
+        <div>
+          When using {MANTINE_CONTEXTMENU_PRODUCT_NAME} with {PRODUCT_NAME} on touch devices, consider{' '}
+          <InternalLink to="/examples/disabling-text-selection">disabling text selection</InternalLink> on the table.
         </div>
       </Txt>
       <PageSubtitle value="Row context-menu" />
