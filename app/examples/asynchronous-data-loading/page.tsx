@@ -1,4 +1,4 @@
-import { Code, ListItem } from '@mantine/core';
+import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
@@ -34,22 +34,22 @@ export default async function AsynchronousDataLoadingExamplePage() {
         You can customize the loader appearance with:
       </Txt>
       <UnorderedList>
-        <ListItem>
+        <li>
           <Code>loaderSize: {MANTINE_SIZES.map((v) => `'${v}'`).join(' | ')}</Code>
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>loaderType: {LOADER_TYPES.map((v) => `'${v}'`).join(' | ')}</Code>
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>loaderColor</Code>
           <br />
           The loader <ExternalLink to="https://mantine.dev/theming/colors/">color</ExternalLink>.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>loaderBackgroundBlur: number</Code>
           <br />
           The loader background blur, in pixels. No blur by default.
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt idea title="Keep in mind">
         If your DataTable is not vertically scrollable and contains no initial data, make sure to set its{' '}

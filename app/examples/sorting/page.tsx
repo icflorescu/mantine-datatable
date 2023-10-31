@@ -1,4 +1,4 @@
-import { Code, ListItem } from '@mantine/core';
+import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
@@ -28,17 +28,17 @@ export default async function SortingExamplePage() {
       <SortingExample />
       <Txt>In order to enable sorting, you’ll have to:</Txt>
       <UnorderedList compact>
-        <ListItem>
+        <li>
           add a <Code>sortable: true</Code> property to each sorting candidate column;
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           add a <Code>sortStatus</Code> property to the DataTable component, pointing to an object describing the
           current sort status;
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           add a handler called <Code>onSortStatusChange</Code> to the DataTable to perform the required action when a
           sortable column header is clicked.
-        </ListItem>
+        </li>
       </UnorderedList>
       <CodeBlock code={code['SortingExample.tsx']} />
       <Txt idea>

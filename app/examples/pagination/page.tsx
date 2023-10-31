@@ -1,4 +1,4 @@
-import { Code, ListItem } from '@mantine/core';
+import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { Fragment } from 'react';
 import { PRODUCT_NAME } from '~/app/config';
@@ -33,25 +33,25 @@ export default async function PaginationExamplePage() {
       <PageTitle of={PATH} />
       <Txt>You can enable pagination by setting the following {PRODUCT_NAME} properties:</Txt>
       <UnorderedList>
-        <ListItem>
+        <li>
           <Code>page: number</Code>
           <br />
           The current page number.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>onPageChange</Code>
           <br />A callback that is executed when the user changes the current page.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>totalRecords: number</Code>
           <br />
           The total number of records in the dataset.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>recordsPerPage: number</Code>
           <br />
           The number of records per page.
-        </ListItem>
+        </li>
       </UnorderedList>
       <PaginationExample />
       <Txt>
@@ -59,21 +59,21 @@ export default async function PaginationExamplePage() {
         <strong>optional</strong> properties:
       </Txt>
       <UnorderedList>
-        <ListItem>
+        <li>
           <Code>loadingText: string</Code>
           <br />A text to display while loading records.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>noRecordsText: string</Code>
           <br />A text to display when no records are present.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>paginationText</Code>
           <br />A callback receiving an object in the shape of{' '}
           <Code>{'{ from: number; to: number; totalRecords: number }'}</Code> and returning a <Code>ReactNode</Code>{' '}
           representing the pagination text.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>
             paginationSize:{' '}
             {MANTINE_SIZES.map((size, index) => (
@@ -85,8 +85,8 @@ export default async function PaginationExamplePage() {
           </Code>
           <br />
           The pagination size.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>
             paginationWrapBreakpoint:{' '}
             {MANTINE_SIZES.map((size, index) => (
@@ -103,8 +103,8 @@ export default async function PaginationExamplePage() {
           You can also provide a <Code>string</Code> like <Code>{"'300px'"}</Code> or <Code>{"'20rem'"}</Code>, or a{' '}
           <Code>number</Code>, in which case it will be interpreted as a pixel value and converted to rem value before
           being applied.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>{'paginationActiveTextColor: MantineColor | { light: MantineColor; dark: MantineColor }'}</Code>
           <br />
           Color applied to active page button text.
@@ -113,8 +113,8 @@ export default async function PaginationExamplePage() {
           object with <Code>light</Code> and <Code>dark</Code> keys and <Code>MantineColor</Code> values.
           <br />
           Defaults to white.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>{'paginationActiveBackgroundColor: MantineColor | { light: MantineColor; dark: MantineColor }'}</Code>
           <br />
           Color applied to active page button background.
@@ -123,7 +123,7 @@ export default async function PaginationExamplePage() {
           object with <Code>light</Code> and <Code>dark</Code> keys and <Code>MantineColor</Code> values.
           <br />
           Defaults to primary theme color.
-        </ListItem>
+        </li>
       </UnorderedList>
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code['PaginationExample.tsx']} />
@@ -132,21 +132,21 @@ export default async function PaginationExamplePage() {
         You can display a selector to let the user choose the page size by setting the following component properties:
       </Txt>
       <UnorderedList>
-        <ListItem>
+        <li>
           <Code>recordsPerPageOptions: number[]</Code>
           <br />
           An array of page size numbers to display in the page size selector.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>onRecordsPerPageChange</Code>
           <br />A callback that is executed when the user changes the page size. Receives the new page size as its
           argument.
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <Code>recordsPerPageLabel</Code>
           <br />
           The page size selector label, defaulting to {"'Records per page'"}.
-        </ListItem>
+        </li>
       </UnorderedList>
       <CodeBlock code={code['PaginationExampleWithPageSizeSelector.tsx']} />
       <PaginationExampleWithPageSizeSelector />
