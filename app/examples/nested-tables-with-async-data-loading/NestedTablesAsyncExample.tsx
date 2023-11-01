@@ -1,6 +1,6 @@
 'use client';
 
-import { Group } from '@mantine/core';
+import { Box } from '@mantine/core';
 import { IconBuilding, IconChevronRight, IconUser, IconUsers } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
 import clsx from 'clsx';
@@ -21,13 +21,14 @@ function EmployeesTable({ departmentId }: { departmentId: string }) {
       columns={[
         {
           accessor: 'name',
+          noWrap: true,
           render: ({ firstName, lastName }) => (
-            <Group gap="xs" wrap="nowrap" className={classes.employeeName}>
+            <Box component="span" ml={40}>
               <IconUser className={classes.icon} />
-              <div>
+              <span>
                 {firstName} {lastName}
-              </div>
-            </Group>
+              </span>
+            </Box>
           ),
         },
         {
@@ -55,16 +56,17 @@ function DepartmentsTable({ companyId }: { companyId: string }) {
       columns={[
         {
           accessor: 'name',
+          noWrap: true,
           render: ({ id, name }) => (
-            <Group ml="lg" gap="xs" wrap="nowrap">
+            <Box component="span" ml={20}>
               <IconChevronRight
                 className={clsx(classes.icon, classes.expandIcon, {
                   [classes.expandIconRotated]: expandedRecordIds.includes(id),
                 })}
               />
               <IconUsers className={classes.icon} />
-              <div>{name}</div>
-            </Group>
+              <span>{name}</span>
+            </Box>
           ),
         },
         { accessor: 'employees', textAlign: 'right', width: 200 },
@@ -92,16 +94,17 @@ export function NestedTablesAsyncExample() {
         {
           accessor: 'name',
           title: 'Company / Department / Employee',
+          noWrap: true,
           render: ({ id, name }) => (
-            <Group gap="xs">
+            <>
               <IconChevronRight
                 className={clsx(classes.icon, classes.expandIcon, {
                   [classes.expandIconRotated]: expandedRecordIds.includes(id),
                 })}
               />
               <IconBuilding className={classes.icon} />
-              <div>{name}</div>
-            </Group>
+              <span>{name}</span>
+            </>
           ),
         },
         { accessor: 'employees', title: 'Employees / Birth date', textAlign: 'right', width: 200 },

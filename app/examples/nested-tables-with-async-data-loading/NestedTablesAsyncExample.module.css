@@ -1,7 +1,8 @@
 .icon {
-  margin-top: rem(-2px);
-  width: rem(14px);
+  width: rem(13px);
   height: auto;
+  vertical-align: rem(-1px);
+  margin-right: rem(8px);
 }
 
 .expandIcon {
@@ -10,8 +11,4 @@
 
 .expandIconRotated {
   transform: rotate(90deg);
-}
-
-.employeeName {
-  margin-left: calc(var(--mantine-spacing-xl) * 2);
 }
