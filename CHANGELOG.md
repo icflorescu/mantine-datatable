@@ -3,23 +3,15 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
-## 7.1.0-alpha.3 (2023-10-31)
+## 7.1.0 (2023-11-01)
 
-- Improve UI when the table is scrolled horizontally and contains expanded rows (place a left shadow over the left side of the expanded row)
+### First V7 release! 🎉
 
-## 7.1.0-alpha.2 (2023-10-31)
-
-- Various CSS bug fixes
-- Various fixes to the documentation website
-
-## 7.1.0-alpha.1 (2023-10-30)
-
-The V7 alpha release is here! 🎉  
 This is a **major rewrite** of the library internals, with the following goals in mind:
-  - **Mantine V7 compatibility** - switch the styling approach from CSS-in-JS to PostCSS (or PostCSS modules)
-  - Make the repo easier to maintain by switching from a monorepo approach to a single-package that includes the source code, documentation and examples; this should also make it easier for new contributors to get started
-  - Streamline the build process - switch from `esbuild` to plain `tsc` and `postcss` commands
-  - Rewrite the entire documentation website to make use of Next.js app router and React Server Components; this should also ensure the package will work properly in such an environment
+- **Mantine V7 compatibility** - switch the styling approach from CSS-in-JS to PostCSS (or PostCSS modules)
+- Make the repo easier to maintain by switching from a monorepo approach to a single-package that includes the source code, documentation and examples; this should also make it easier for new contributors to get started
+- Streamline the build process - switch from `esbuild` to plain `tsc` and `postcss` commands
+- Rewrite the entire documentation website to make use of Next.js app router and React Server Components; this should also ensure the package will work properly in such an environment
 
 ### Since the V7 is a major rewrite, it contains a number of **BREAKING CHANGES**, including but not limited to:
 
@@ -28,6 +20,10 @@ This is a **major rewrite** of the library internals, with the following goals i
 - The table `verticalAlignment` property was renamed to `verticalAlign`
 - The internal context-menu functionality was removed in favor of using the [Mantine ContextMenu](https://icflorescu.github.io/mantine-contextmenu/) package (built by the same author), which is more flexible and feature-rich
 - Some method signatures (such as click handlers) were changed from `(record, index) => ...` to `({ record, index }) => ...` for clarity
+
+## 7.1.0-alpha.1 to alpha-5 (2023-10-01 to 2023-10-31)
+
+- Initial V7 alpha releases
 
 ## 6.0.0 (2023-10-01)
 
