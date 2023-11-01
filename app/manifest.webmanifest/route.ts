@@ -7,8 +7,6 @@ import { PRODUCT_DESCRIPTION, PRODUCT_NAME } from '~/app/config';
  * (@see https://github.com/vercel/next.js/issues/56687)
  */
 
-const urlPrefix = process.env.GITHUB_PAGES === 'TRUE' ? `/${process.env.PACKAGE_NAME}` : '';
-
 const data: MetadataRoute.Manifest = {
   name: PRODUCT_NAME,
   short_name: PRODUCT_NAME,
@@ -20,34 +18,10 @@ const data: MetadataRoute.Manifest = {
   theme_color: '#1971c2',
   icons: [
     {
-      src: `${urlPrefix}/icon.svg`,
+      src: `${process.env.GITHUB_PAGES === 'TRUE' ? `/${process.env.PACKAGE_NAME}` : ''}/icon.svg`,
       type: 'image/svg+xml',
       sizes: 'any',
       purpose: 'any',
-    },
-    {
-      src: `${urlPrefix}/icon-192.png`,
-      type: 'image/png',
-      sizes: '192x192',
-      purpose: 'any',
-    },
-    {
-      src: `${urlPrefix}/icon-512.png`,
-      type: 'image/png',
-      sizes: '512x512',
-      purpose: 'any',
-    },
-    {
-      src: `${urlPrefix}/icon-maskable-192.png`,
-      type: 'image/png',
-      sizes: '192x192',
-      purpose: 'maskable',
-    },
-    {
-      src: `${urlPrefix}/icon-maskable-512.png`,
-      type: 'image/png',
-      sizes: '512x512',
-      purpose: 'maskable',
     },
   ],
 };
