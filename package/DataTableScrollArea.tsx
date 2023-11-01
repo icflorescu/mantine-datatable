@@ -63,7 +63,7 @@ export function DataTableScrollArea({
         className={clsx('mantine-datatable-scroll-area-shadow', 'mantine-datatable-scroll-area-bottom-shadow', {
           'mantine-datatable-scroll-area-shadow-visible': bottomShadowVisible,
         })}
-        style={{ bottom: footerHeight ? rem(footerHeight - 1) : 0 }}
+        style={{ bottom: footerHeight ? rem(footerHeight) : 0 }}
       />
     </ScrollArea>
   );
