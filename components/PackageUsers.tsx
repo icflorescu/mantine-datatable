@@ -68,20 +68,14 @@ export function PackageUsers() {
       <h2 className={classes.title}>{PRODUCT_NAME} is trusted by</h2>
       <Container className={classes.links}>
         {USERS.map(({ name, logo: { base, ext, themed, scale, shift }, link, showText }) => {
+          const title = `${name} is using ${PRODUCT_NAME}`;
           const commonImageAttrs: React.ImgHTMLAttributes<HTMLImageElement> = {
             style: { height: `${scale || '100'}%`, marginTop: shift ? `-${shift}%` : undefined },
-            alt: name,
+            alt: title,
           };
 
           return (
-            <a
-              key={name}
-              className={classes.link}
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={`${name} is using ${PRODUCT_NAME}`}
-            >
+            <a key={name} className={classes.link} href={link} target="_blank" rel="noopener noreferrer" title={title}>
               {themed ? (
                 <>
                   <img className={classes.light} {...commonImageAttrs} src={`${ROOT_URL}${base}-light.${ext}`} />

@@ -29,8 +29,6 @@ export function DataTableScrollArea({
   viewportRef,
   scrollAreaProps,
 }: DataTableScrollAreaProps) {
-  const headerHeightRem = headerHeight ? rem(headerHeight) : 0;
-  const bottomRem = footerHeight ? rem(footerHeight - 1) : 0;
   return (
     <ScrollArea
       {...scrollAreaProps}
@@ -41,7 +39,6 @@ export function DataTableScrollArea({
         thumb: 'mantine-datatable-scroll-area-thumb',
         corner: 'mantine-datatable-scroll-area-corner',
       }}
-      styles={{ scrollbar: { marginTop: headerHeightRem, marginBottom: bottomRem } }}
       onScrollPositionChange={onScrollPositionChange}
     >
       {children}
@@ -49,7 +46,7 @@ export function DataTableScrollArea({
         className={clsx('mantine-datatable-scroll-area-shadow', 'mantine-datatable-scroll-area-top-shadow', {
           'mantine-datatable-scroll-area-shadow-visible': topShadowVisible,
         })}
-        style={{ top: headerHeightRem }}
+        style={{ top: headerHeight ? rem(headerHeight) : 0 }}
       />
       <div
         className={clsx('mantine-datatable-scroll-area-shadow', 'mantine-datatable-scroll-area-left-shadow', {
@@ -66,7 +63,7 @@ export function DataTableScrollArea({
         className={clsx('mantine-datatable-scroll-area-shadow', 'mantine-datatable-scroll-area-bottom-shadow', {
           'mantine-datatable-scroll-area-shadow-visible': bottomShadowVisible,
         })}
-        style={{ bottom: bottomRem }}
+        style={{ bottom: footerHeight ? rem(footerHeight) : 0 }}
       />
     </ScrollArea>
   );

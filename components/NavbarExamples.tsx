@@ -3,7 +3,6 @@ import { useDisclosure } from '@mantine/hooks';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { PRODUCT_NAME } from '~/app/config';
 import { NavbarButton, type NavbarButtonProps } from './NavbarButton';
 import classes from './NavbarExamples.module.css';
 
@@ -37,7 +36,6 @@ export function NavbarExamples({ items }: NavbarExamplesProps) {
     <>
       <NavbarButton
         title="Examples"
-        description={`${PRODUCT_NAME} usage examples`}
         color={COLOR}
         onClick={(e) => {
           e.stopPropagation();

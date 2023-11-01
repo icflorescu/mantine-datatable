@@ -26,7 +26,7 @@ import classes from './page.module.css';
 const PATH: Route = '/';
 export const metadata = getRouteMetadata(PATH);
 
-const { href: firstExampleHref, title: firstExampleTitle } = getFirstExampleRoute();
+const { href: firstExampleHref } = getFirstExampleRoute();
 
 export default function HomePage() {
   return (
@@ -96,7 +96,7 @@ export default function HomePage() {
           component="a"
           href={REPO_LINK}
           target="_blank"
-          aria-label={`View the source code of ${PRODUCT_NAME} on GitHub`}
+          aria-label="View code on GitHub"
           leftSection={<IconBrandGithub />}
         >
           View code
@@ -108,7 +108,7 @@ export default function HomePage() {
           gradient={{ from: 'green.7', to: 'green.6' }}
           component={Link}
           href={firstExampleHref}
-          aria-label={firstExampleTitle}
+          aria-label="Learn by example"
           leftSection={<IconRocket />}
         >
           Learn by example
