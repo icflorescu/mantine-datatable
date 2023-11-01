@@ -31,6 +31,7 @@ export function NavbarButton({ color, icon, title, description, href, onClick, e
       })}
       className={classes.root}
       component="a"
+      role={href ? undefined : 'button'}
       aria-label={description}
       href={isExternal ? href : undefined}
       target={isExternal ? '_blank' : undefined}

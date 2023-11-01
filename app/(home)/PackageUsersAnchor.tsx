@@ -12,7 +12,7 @@ export function PackageUsersAnchor({ children, className }: PackageUsersAnchorPr
   };
 
   return (
-    <Anchor className={className} onClick={handlePackageUsersLinkClick}>
+    <Anchor className={className} role="button" onClick={handlePackageUsersLinkClick}>
       {children}
     </Anchor>
   );

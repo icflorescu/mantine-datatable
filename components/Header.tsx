@@ -20,7 +20,7 @@ export function Header({ navbarExpanded, toggleNavbar }: HeaderProps) {
     <AppShellHeader className={clsx(classes.root, { [classes.scrolled]: isScrolled })}>
       <Group h="100%" px="md" justify="space-between">
         <Group gap="xs">
-          <Burger hiddenFrom="sm" opened={navbarExpanded} onClick={toggleNavbar} size="sm" />
+          <Burger aria-label="Show menu" hiddenFrom="sm" opened={navbarExpanded} onClick={toggleNavbar} size="sm" />
           <HeaderTitle />
           <VersionBadge />
         </Group>
