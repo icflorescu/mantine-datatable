@@ -95,7 +95,7 @@
     "eslint-config-next": "^14.0.1",
     "eslint-config-prettier": "^9.0.0",
     "lodash": "^4.17.21",
-    "mantine-contextmenu": "^7.1.5",
+    "mantine-contextmenu": "^7.1.6",
     "next": "14.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",

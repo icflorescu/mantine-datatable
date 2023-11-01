@@ -8,7 +8,7 @@ import { PRODUCT_DESCRIPTION, PRODUCT_NAME, WEBSITE_LINK } from '~/app/config';
  */
 
 const data: MetadataRoute.Manifest = {
-  name: `Enhance your users’ experience with ${PRODUCT_NAME}`,
+  name: PRODUCT_NAME,
   short_name: PRODUCT_NAME,
   description: PRODUCT_DESCRIPTION,
   start_url: './',
