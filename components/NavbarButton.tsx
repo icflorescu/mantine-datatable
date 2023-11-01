@@ -8,13 +8,13 @@ import { usePathname } from 'next/navigation';
 import type { RouteInfo } from '~/app/config';
 import classes from './NavbarButton.module.css';
 
-export type NavbarButtonProps = WithRequiredProperty<Omit<RouteInfo, 'href'>, 'color'> & {
+export type NavbarButtonProps = WithRequiredProperty<Omit<RouteInfo, 'href' | 'description'>, 'color'> & {
   href?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   expanded?: boolean;
 };
 
-export function NavbarButton({ color, icon, title, description, href, onClick, expanded }: NavbarButtonProps) {
+export function NavbarButton({ color, icon, title, href, onClick, expanded }: NavbarButtonProps) {
   const isExternal = !!href?.startsWith('http');
   const Icon = onClick ? IconChevronRight : icon;
   const pathname = usePathname();
@@ -32,7 +32,6 @@ export function NavbarButton({ color, icon, title, description, href, onClick, e
       className={classes.root}
       component="a"
       role={href ? undefined : 'button'}
-      aria-label={description}
       href={isExternal ? href : undefined}
       target={isExternal ? '_blank' : undefined}
       onClick={onClick}
