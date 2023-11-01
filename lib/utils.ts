@@ -11,9 +11,18 @@ function addExamplesPrefix({ href, title }: Pick<RouteInfo, 'href' | 'title'>) {
 export const getRouteMetadata = memoize((href: Route): Metadata => {
   const route = ROUTES.find((route) => route.href === href);
   if (!route) throw new Error(`Route ${href} not found`);
-  const { title, description } = route;
+
+  const { title: rawTitle, description } = route;
+  const title = href === '/' ? PRODUCT_NAME : `${addExamplesPrefix({ title: rawTitle, href })} | ${PRODUCT_NAME}`;
+  const hrefWithTrailingSlash = href === '/' ? href : `${href}/`;
+  const url =
+    process.env.GITHUB_PAGES === 'TRUE'
+      ? `/${process.env.PACKAGE_NAME}${hrefWithTrailingSlash}`
+      : hrefWithTrailingSlash;
+
   return {
-    title: href === '/' ? PRODUCT_NAME : `${addExamplesPrefix({ title, href })} | ${PRODUCT_NAME}`,
+    title,
+    alternates: { canonical: url },
     description,
   };
 });
