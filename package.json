@@ -43,7 +43,10 @@
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js"
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      }
     },
     "./styles.css": "./dist/css/styles.css",
     "./styles.layer.css": "./dist/css/styles.layer.css"
