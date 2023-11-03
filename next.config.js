@@ -14,13 +14,23 @@ module.exports = async () => {
     output: 'export',
     trailingSlash: true,
     images: { unoptimized: true },
+    experimental: {
+      typedRoutes: true,
+      optimizePackageImports: [
+        '@mantine/code-highlight',
+        '@mantine/core',
+        '@mantine/dates',
+        '@mantine/hooks',
+        '@mantine/modals',
+        '@mantine/notifications',
+      ],
+    },
     env: {
       GITHUB_PAGES: String(process.env.GITHUB_PAGES === 'TRUE' || false).toUpperCase(),
       PACKAGE_NAME,
       PACKAGE_VERSION,
       INITIAL_NPM_DOWNLOADS: String(downloads),
     },
-    experimental: { typedRoutes: true },
   };
 
   if (process.env.GITHUB_PAGES) config.basePath = '/mantine-datatable';
