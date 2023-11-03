@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.1.1 (2023-11-03)
+
+- Switch to `esm` export only, to fix this issue: https://github.com/icflorescu/mantine-datatable/issues/451  
+  This is a potentially breaking change and I'm sorry to do it in a patch release, but the library needs to work with Next.js pages router
+
 ## 7.1.0 (2023-11-01)
 
 ### First V7 release! 🎉

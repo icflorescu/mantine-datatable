@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "The lightweight, dependency-free, dark-theme aware table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and much more",
   "keywords": [
     "mantine",
@@ -40,19 +40,10 @@
     "type": "github",
     "url": "https://github.com/sponsors/icflorescu"
   },
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.js"
-      },
-      "require": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/cjs/index.js"
-      }
+      "import": "./dist/esm/index.js"
     },
     "./styles.css": "./dist/css/styles.css",
     "./styles.layer.css": "./dist/css/styles.layer.css"
@@ -64,7 +55,7 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build:package": "rm -rf dist; tsc -p package/tsconfig.esm.json; tsc -p package/tsconfig.cjs.json; postcss package/styles*.css --dir dist/css",
+    "build:package": "rm -rf dist; tsc -p package/tsconfig.build.json; postcss package/styles*.css --dir dist/css",
     "build:docs": "next build",
     "build": "yarn build:package && yarn build:docs",
     "lint": "eslint . && tsc --noEmit --pretty",
