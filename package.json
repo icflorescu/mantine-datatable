@@ -43,7 +43,10 @@
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js"
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      }
     },
     "./styles.css": "./dist/css/styles.css",
     "./styles.layer.css": "./dist/css/styles.layer.css"
@@ -86,7 +89,7 @@
     "eslint-config-next": "^14.0.1",
     "eslint-config-prettier": "^9.0.0",
     "lodash": "^4.17.21",
-    "mantine-contextmenu": "^7.1.6",
+    "mantine-contextmenu": "^7.1.8",
     "next": "14.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
@@ -104,7 +107,6 @@
   "peerDependencies": {
     "@mantine/core": ">=7",
     "@mantine/hooks": ">=7",
-    "clsx": ">=2",
-    "mantine-contextmenu": ">=7"
+    "clsx": ">=2"
   }
 }
