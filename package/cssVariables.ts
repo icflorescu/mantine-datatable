@@ -1,5 +1,3 @@
-'use client';
-
 import { parseThemeColor, type MantineColor, type MantineTheme } from '@mantine/core';
 import type { DataTableProps } from './types';
 

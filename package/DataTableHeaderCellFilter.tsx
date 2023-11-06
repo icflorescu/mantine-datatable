@@ -1,5 +1,3 @@
-'use client';
-
 import { ActionIcon, Popover, PopoverTarget } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter } from './icons/IconFilter';

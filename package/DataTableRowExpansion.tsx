@@ -1,5 +1,3 @@
-'use client';
-
 import { Collapse, TableTd, TableTr } from '@mantine/core';
 import { useRowExpansionStatus } from './hooks';
 import type { DataTableRowExpansionCollapseProps } from './types';

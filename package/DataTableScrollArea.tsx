@@ -1,5 +1,3 @@
-'use client';
-
 import { Box, ScrollArea, rem, type ScrollAreaProps } from '@mantine/core';
 import clsx from 'clsx';
 

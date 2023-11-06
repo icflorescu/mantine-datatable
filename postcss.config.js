@@ -1,4 +1,5 @@
 module.exports = {
+  map: { inline: false },
   plugins: {
     'postcss-import': {},
     'postcss-preset-mantine': {},
@@ -12,4 +13,5 @@ module.exports = {
       },
     },
   },
+  cssnano: { preset: 'default' },
 };

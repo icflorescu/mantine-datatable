@@ -1,5 +1,3 @@
-'use client';
-
 import { TableTr, type CheckboxProps, type MantineColor, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { DataTableRowCell } from './DataTableRowCell';

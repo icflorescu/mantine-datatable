@@ -1,5 +1,3 @@
-'use client';
-
 import { Box, Center, Group, MantineStyleProp, TableTh, type MantineTheme } from '@mantine/core';
 import clsx from 'clsx';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
