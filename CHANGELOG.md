@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.1.2 (2023-11-06)
+
+- Switch to `tsup` building, to fix usage issues with Remix & Next.js
+
 ## 7.1.1 (2023-11-03)
 
 - Switch to `esm` export only, to fix this issue: https://github.com/icflorescu/mantine-datatable/issues/451  
