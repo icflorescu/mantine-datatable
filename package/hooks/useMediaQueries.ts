@@ -1,5 +1,3 @@
-'use client';
-
 // Modified from https://github.com/mantinedev/mantine/blob/8c12a76c56da51af34213f18dd67c8b72a0ddb44/src/mantine-hooks/src/use-media-query/use-media-query.ts
 
 import { useEffect, useRef, useState } from 'react';

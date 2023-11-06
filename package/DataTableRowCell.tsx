@@ -1,5 +1,3 @@
-'use client';
-
 import { TableTd, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { useMediaQueryStringOrFunction } from './hooks';

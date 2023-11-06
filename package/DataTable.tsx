@@ -1,5 +1,3 @@
-'use client';
-
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';

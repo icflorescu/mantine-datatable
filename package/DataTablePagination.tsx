@@ -1,5 +1,3 @@
-'use client';
-
 import { Box, Pagination, Text, rem, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef, type ForwardedRef } from 'react';

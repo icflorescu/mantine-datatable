@@ -1,5 +1,3 @@
-'use client';
-
 import { TableThead, TableTr, type CheckboxProps, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
