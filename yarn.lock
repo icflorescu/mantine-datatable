@@ -1666,10 +1666,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^18.2.35":
-  version "18.2.35"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.35.tgz#bacdc6d139a4d6d47e5186e1a96952c65e1f3792"
-  integrity sha512-LG3xpFZ++rTndV+/XFyX5vUP7NI9yxyk+MQvBDq+CVs8I9DLSc3Ymwb1Vmw5YDoeNeHN4PDZa3HylMKJYT9PNQ==
+"@types/react@^18.2.36":
+  version "18.2.36"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.36.tgz#bc68ffb4408e5d0c419b0760b2eaeec70aeeedb3"
+  integrity sha512-o9XFsHYLLZ4+sb9CWUYwHqFVoG61SesydF353vFMMsQziiyRu8np4n2OYMUSDZ8XuImxDr9c5tR7gidlH29Vnw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -4231,10 +4231,10 @@ magic-string@^0.25.0, magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
-mantine-contextmenu@^7.1.8:
-  version "7.1.8"
-  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.1.8.tgz#fe51640bdf0c7f104cbd6ed346f09b735339cad2"
-  integrity sha512-YNOdICye0XdduHiQ1NL7UIJwjHjiGKy9GY5eBv74uOIrCK1S9nFQ7Ml+0gI0aGfYdUAoFJBzbtnjKjMY2L8OtA==
+mantine-contextmenu@^7.1.9:
+  version "7.1.9"
+  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.1.9.tgz#23def3732318c75a3386645d283c0fce5501a767"
+  integrity sha512-RI/5TqPD7xEsF7bL30FcO/r5GLkfT8DJ/ek849ZhtvlN7bqyjAv3veVutnoI1P7Z/HDzIfPpLGj/sNBk0hrkfw==
 
 mdn-data@2.0.28:
   version "2.0.28"
