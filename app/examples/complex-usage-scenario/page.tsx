@@ -3,6 +3,7 @@ import type { Route } from 'next';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
+import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
@@ -28,9 +29,16 @@ export default async function ComplexUsageExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        Here is a complex usage scenario featuring custom column definitions, asynchronous data loading with{' '}
-        <ExternalLink to="https://tanstack.com/query/latest">TanStack React Query</ExternalLink>, sorting, pagination,
-        custom cell data rendering, multiple row selection, row expansion, action cells, and row context-menu.
+        Here is a complex usage scenario featuring{' '}
+        <InternalLink to="/examples/column-properties-and-styling">custom column definitions</InternalLink>,
+        <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink> with{' '}
+        <ExternalLink to="https://tanstack.com/query/latest">TanStack React Query</ExternalLink>,{' '}
+        <InternalLink to="/examples/sorting">sorting</InternalLink>,{' '}
+        <InternalLink to="/examples/pagination">pagination</InternalLink>, custom cell data rendering,{' '}
+        <InternalLink to="/examples/records-selection">multiple row selection</InternalLink>,{' '}
+        <InternalLink to="/examples/expanding-rows">row expansion</InternalLink>,{' '}
+        <InternalLink to="/examples/row-actions-cell">action cells</InternalLink>, and{' '}
+        <InternalLink to="/examples/using-with-mantine-contextmenu">row context-menu</InternalLink>.
       </Txt>
       <ComplexUsageExampleWrapper>
         <ComplexUsageExample />

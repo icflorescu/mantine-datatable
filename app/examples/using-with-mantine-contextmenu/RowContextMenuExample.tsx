@@ -1,4 +1,6 @@
 'use client';
+// 👆 Since 'useContextMenu' is a hook, don't forget to add the 'use client' directive
+//    at the top of your file if you're using it in a RSC context
 
 import { useMediaQuery } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
