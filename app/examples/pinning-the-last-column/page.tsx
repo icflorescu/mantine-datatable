@@ -36,6 +36,10 @@ export default async function PinLastColumnExamplePage() {
       <PinLastColumnExample />
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code} />
+      <Txt warning title="Warning">
+        Combining this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink> may lead
+        to minor visual artifacts.
+      </Txt>
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
