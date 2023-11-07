@@ -121,8 +121,9 @@
   }
 
   th:not(.mantine-datatable-column-group-header-cell):last-of-type,
-  tr:not(:last-of-type) td:not(.mantine-datatable-row-expansion-cell):last-of-type {
+  tr[data-with-row-border]:not(:last-of-type) td:not(.mantine-datatable-row-expansion-cell):last-of-type {
     &::after {
+      top: rem(-1px);
       bottom: rem(-1px);
     }
   }
