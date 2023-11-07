@@ -27,6 +27,7 @@ export function DataTable<T>({
   fetching,
   columns,
   groups,
+  pinLastColumn,
   defaultColumnProps,
   defaultColumnRender,
   idAccessor = 'id',
@@ -266,6 +267,7 @@ export function DataTable<T>({
         leftShadowVisible={!scrolledToLeft}
         leftShadowBehind={selectionColumnVisible}
         rightShadowVisible={!scrolledToRight}
+        rightShadowBehind={pinLastColumn}
         bottomShadowVisible={!scrolledToBottom}
         headerHeight={headerHeight}
         footerHeight={footerHeight}
@@ -281,7 +283,9 @@ export function DataTable<T>({
               [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
               'mantine-datatable-vertical-align-top': verticalAlign === 'top',
               'mantine-datatable-vertical-align-bottom': verticalAlign === 'bottom',
-              'mantine-datatable-table-last-row-border-bottom-visible': tableHeight < scrollViewportHeight,
+              'mantine-datatable-last-row-border-bottom-visible': tableHeight < scrollViewportHeight,
+              'mantine-datatable-pin-last-column': pinLastColumn,
+              'mantine-datatable-pin-last-column-scrolled': !scrolledToRight && pinLastColumn,
             },
             classNames?.table
           )}
@@ -306,7 +310,7 @@ export function DataTable<T>({
               selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
               onSelectionChange={handleHeaderSelectionChange}
               selectionCheckboxProps={allRecordsSelectionCheckboxProps}
-              leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
+              selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
             />
           )}
           <tbody ref={bodyRef}>
@@ -369,7 +373,7 @@ export function DataTable<T>({
                     className={rowClassName}
                     style={rowStyle}
                     customAttributes={customRowAttributes}
-                    leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                    selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
                   />
                 );
               })
@@ -385,7 +389,7 @@ export function DataTable<T>({
               columns={effectiveColumns}
               defaultColumnProps={defaultColumnProps}
               selectionVisible={selectionColumnVisible}
-              leftShadowVisible={selectionVisibleAndNotScrolledToLeft}
+              selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
               scrollDiff={tableHeight - scrollViewportHeight}
             />
           )}

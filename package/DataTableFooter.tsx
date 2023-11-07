@@ -11,7 +11,7 @@ type DataTableFooterProps<T> = {
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
   selectionVisible: boolean;
-  leftShadowVisible: boolean;
+  selectorCellShadowVisible: boolean;
   scrollDiff: number;
 };
 
@@ -22,7 +22,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
     columns,
     defaultColumnProps,
     selectionVisible,
-    leftShadowVisible,
+    selectorCellShadowVisible,
     scrollDiff,
   }: DataTableFooterProps<T>,
   ref: React.ForwardedRef<HTMLTableSectionElement>
@@ -41,7 +41,7 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
       ]}
     >
       <TableTr>
-        {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={leftShadowVisible} />}
+        {selectionVisible && <DataTableFooterSelectorPlaceholderCell shadowVisible={selectorCellShadowVisible} />}
         {columns.map(({ hidden, ...columnProps }) => {
           if (hidden) return null;
 
