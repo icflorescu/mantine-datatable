@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.1.4 (2023-11-07)
+
+- Improve shadows positioning CSS
+
 ## 7.1.3 (2023-11-07)
 
 - Implement `pinLastColumn` feature
