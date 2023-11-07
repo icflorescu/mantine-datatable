@@ -10,7 +10,7 @@
   &::after {
     content: '';
     position: absolute;
-    top: rem(-1px);
+    top: 0;
     right: calc(-1 * var(--mantine-spacing-xs));
     bottom: 0;
     border-left: 1px solid var(--mantine-datatable-row-border-color);
@@ -19,6 +19,15 @@
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s;
+  }
+
+  tr[data-with-row-border] &::after {
+    top: rem(-1px);
+    bottom: rem(-1px);
+  }
+
+  tr:last-of-type &::after {
+    bottom: 0;
   }
 
   &[data-shadow-visible]::after {

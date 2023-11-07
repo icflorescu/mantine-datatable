@@ -5,9 +5,9 @@
   &::after {
     content: '';
     position: absolute;
-    top: rem(-1px);
+    top: 0;
     right: calc(-1 * var(--mantine-spacing-xs));
-    bottom: 0;
+    bottom: rem(-1px);
     border-left: 1px solid var(--mantine-datatable-row-border-color);
     width: var(--mantine-spacing-xs);
     background: var(--mantine-datatable-shadow-background-left);
