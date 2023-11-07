@@ -48,7 +48,7 @@ export function PinLastColumnExample() {
       withTableBorder
       columns={[
         { accessor: 'firstName', noWrap: true },
-        { accessor: 'lastNameName', noWrap: true },
+        { accessor: 'lastName', noWrap: true },
         { accessor: 'department.name', title: 'Department' },
         { accessor: 'department.company.name', title: 'Company', noWrap: true },
         { accessor: 'department.company.city', title: 'City', noWrap: true },
