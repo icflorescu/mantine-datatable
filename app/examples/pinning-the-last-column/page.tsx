@@ -21,8 +21,10 @@ export default async function PinLastColumnExamplePage() {
       <PageTitle of={PATH} />
       <Code hidden>fix, fixed, affix, sticky</Code>
       <Txt>
-        You may have noticed that when you are using row selection and the table needs to scroll horizontally, the
-        checkbox column is always visible. This is because the checkbox column is pinned to the left side of the table.
+        You may have noticed that when you are using{' '}
+        <InternalLink to="/examples/records-selection">row selection</InternalLink> and the table needs to scroll
+        horizontally, the checkbox column is always visible. This is because the checkbox column is pinned to the left
+        side of the table.
       </Txt>
       <Txt>
         In the same way, pinning the last column to the right side of the table could be useful when you have a table
