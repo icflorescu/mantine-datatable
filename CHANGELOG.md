@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.1.3 (2023-11-07)
+
+- Implement `pinLastColumn` feature
+- Add missing `package.json` fields (`main` and `module`)
+
 ## 7.1.2 (2023-11-06)
 
 - Switch to `tsup` building, to fix usage issues with Remix & Next.js

@@ -24,6 +24,7 @@ export function DataTableColumnGroupHeaderCell<T>({
     <TableTh
       colSpan={colSpan}
       className={clsx(
+        'mantine-datatable-column-group-header-cell',
         {
           [TEXT_ALIGN_LEFT]: textAlign === 'left',
           [TEXT_ALIGN_CENTER]: textAlign === 'center',

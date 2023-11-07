@@ -40,7 +40,7 @@ type DataTableRowProps<T> = {
     | undefined;
   className?: string | ((record: T, index: number) => string | undefined);
   style?: (record: T, index: number) => MantineStyleProp | undefined;
-  leftShadowVisible: boolean;
+  selectorCellShadowVisible: boolean;
 };
 
 export function DataTableRow<T>({
@@ -64,7 +64,7 @@ export function DataTableRow<T>({
   backgroundColor,
   className,
   style,
-  leftShadowVisible,
+  selectorCellShadowVisible,
 }: DataTableRowProps<T>) {
   return (
     <>
@@ -105,7 +105,7 @@ export function DataTableRow<T>({
           <DataTableRowSelectorCell<T>
             record={record}
             index={index}
-            withRightShadow={leftShadowVisible}
+            withRightShadow={selectorCellShadowVisible}
             checked={selectionChecked}
             disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable(record, index) : false)}
             onChange={onSelectionChange}

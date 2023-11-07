@@ -20,7 +20,7 @@ type DataTableHeaderProps<T> = {
   selectionIndeterminate: boolean;
   onSelectionChange: (() => void) | undefined;
   selectionCheckboxProps: CheckboxProps;
-  leftShadowVisible: boolean;
+  selectorCellShadowVisible: boolean;
 };
 
 export const DataTableHeader = forwardRef(function DataTableHeader<T>(
@@ -38,13 +38,13 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
     selectionIndeterminate,
     onSelectionChange,
     selectionCheckboxProps,
-    leftShadowVisible,
+    selectorCellShadowVisible,
   }: DataTableHeaderProps<T>,
   ref: React.ForwardedRef<HTMLTableSectionElement>
 ) {
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
-      shadowVisible={leftShadowVisible}
+      shadowVisible={selectorCellShadowVisible}
       checked={selectionChecked}
       indeterminate={selectionIndeterminate}
       checkboxProps={selectionCheckboxProps}
