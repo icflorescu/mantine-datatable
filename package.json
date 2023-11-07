@@ -40,6 +40,13 @@
     "type": "github",
     "url": "https://github.com/sponsors/icflorescu"
   },
+  "files": [
+    "./dist",
+    "./README.md",
+    "./LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -55,11 +62,6 @@
     "./styles.css": "./dist/styles.css",
     "./styles.layer.css": "./dist/styles.layer.css"
   },
-  "files": [
-    "./dist",
-    "./README.md",
-    "./LICENSE"
-  ],
   "scripts": {
     "dev": "next dev",
     "build:package": "rm -rf dist; tsup --config scripts/tsup.esm.ts; tsup --config scripts/tsup.cjs.ts; tsup --config scripts/tsup.dts.ts; postcss package/styles*.css --dir dist",
@@ -114,6 +116,6 @@
     "@mantine/core": ">=7",
     "@mantine/hooks": ">=7",
     "clsx": ">=2",
-    "react": ">=18"
+    "react": ">=18.2"
   }
 }
