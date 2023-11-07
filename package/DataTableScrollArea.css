@@ -43,18 +43,18 @@
   background: var(--mantine-datatable-shadow-background-left);
 }
 
-/* For horizontal scrolling and expanded rows */
-.mantine-datatable-scroll-area-left-shadow-behind {
-  z-index: 0;
-}
-
 .mantine-datatable-scroll-area-right-shadow {
-  z-index: 2;
+  z-index: 3;
   top: 0;
   bottom: 0;
   right: 0;
   width: var(--mantine-spacing-xs);
   background: var(--mantine-datatable-shadow-background-right);
+}
+
+/* For horizontal scrolling and expanded rows */
+.mantine-datatable-scroll-area-shadow-behind {
+  z-index: 0;
 }
 
 .mantine-datatable-scroll-area-bottom-shadow {

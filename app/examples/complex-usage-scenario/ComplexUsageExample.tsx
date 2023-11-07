@@ -173,28 +173,36 @@ export function ComplexUsageExample() {
   const columns: DataTableProps<Employee>['columns'] = [
     {
       accessor: 'name',
-      width: 150,
-      ellipsis: true,
+      noWrap: true,
       sortable: true,
       render: ({ firstName, lastName }) => `${firstName} ${lastName}`,
     },
     {
       accessor: 'email',
       sortable: true,
-      visibleMediaQuery: aboveXs,
     },
     {
       accessor: 'department.company.name',
       title: 'Company',
-      width: 150,
+      noWrap: true,
       sortable: true,
       visibleMediaQuery: aboveXs,
     },
     {
       accessor: 'department.name',
       title: 'Department',
-      width: 130,
       sortable: true,
+      visibleMediaQuery: aboveXs,
+    },
+    {
+      accessor: 'department.company.city',
+      title: 'City',
+      noWrap: true,
+      visibleMediaQuery: aboveXs,
+    },
+    {
+      accessor: 'department.company.state',
+      title: 'State',
       visibleMediaQuery: aboveXs,
     },
     {
@@ -226,6 +234,7 @@ export function ComplexUsageExample() {
       withColumnBorders
       striped
       verticalAlign="top"
+      pinLastColumn
       columns={columns}
       fetching={isFetching}
       records={data?.employees}

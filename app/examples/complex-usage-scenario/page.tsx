@@ -30,7 +30,7 @@ export default async function ComplexUsageExamplePage() {
       <PageTitle of={PATH} />
       <Txt>
         Here is a complex usage scenario featuring{' '}
-        <InternalLink to="/examples/column-properties-and-styling">custom column definitions</InternalLink>,
+        <InternalLink to="/examples/column-properties-and-styling">custom column definitions</InternalLink>,{' '}
         <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink> with{' '}
         <ExternalLink to="https://tanstack.com/query/latest">TanStack React Query</ExternalLink>,{' '}
         <InternalLink to="/examples/sorting">sorting</InternalLink>,{' '}

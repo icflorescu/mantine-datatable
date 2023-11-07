@@ -73,6 +73,11 @@ export type DataTableProps<T = Record<string, unknown>> = {
   fetching?: boolean;
 
   /**
+   * If true, the last column will be pinned to the right side of the table.
+   */
+  pinLastColumn?: boolean;
+
+  /**
    * Default column props; will be merged with column props provided to each column
    */
   defaultColumnProps?: DataTableDefaultColumnProps<T>;
