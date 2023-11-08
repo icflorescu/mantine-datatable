@@ -131,6 +131,19 @@
   tfoot th:last-of-type::after {
     top: rem(-1px);
   }
+
+  tr[data-selected] td:not(.mantine-datatable-row-expansion-cell):last-of-type {
+    background: inherit;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--mantine-primary-color-light);
+    }
+  }
 }
 
 .mantine-datatable-pin-last-column-scrolled {
