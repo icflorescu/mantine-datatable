@@ -3,9 +3,17 @@
   z-index: 1;
   width: 0%;
   left: 0;
-  tr[data-selected] &,
-  tr[data-context-menu-visible] & {
+  tr[data-selected] & {
     background: inherit;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: var(--mantine-primary-color-light);
+    }
   }
   &::after {
     content: '';
