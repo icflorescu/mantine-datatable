@@ -131,7 +131,9 @@ Make sure to browse the comprehensive list of [usage examples](https://icfloresc
 
 ## Other useful resources
 
-Mantine DataTable works perfectly with [Mantine Context Menu](https://icflorescu.github.io/mantine-contextmenu/).
+Mantine DataTable works perfectly with [Mantine Context Menu](https://icflorescu.github.io/mantine-contextmenu/), a library built by the same author that enables you to enhance your UIs with desktop-grade, lightweight yet fully-featured context menus that respect the Mantine color scheme out of the box:
+
+[![Mantine ContextMenu](https://user-images.githubusercontent.com/581999/279488420-96467a1b-2fb7-4876-bbc0-6976d26ed79b.png)](https://icflorescu.github.io/mantine-contextmenu/)
 
 ## Contributing
 
@@ -143,11 +145,11 @@ Here's the list of people who have already contributed to Mantine DataTable:
 
 Want to [become a code contributor](https://icflorescu.github.io/mantine-datatable/contribute-and-support)?
 
-## Sponsor the project
+## Support the project
 
 If you find this package useful, please consider ❤️ [sponsoring my work](https://github.com/sponsors/icflorescu).  
 Your sponsorship will help me dedicate more time to maintaining the project and will encourage me to add new features and fix existing bugs.  
-If you're a company using Mantine DataTable in a commercial project, you can also [hire my services](https://github.com/icflorescu).
+If you're a company using Mantine, Mantine DataTable or [Mantine ContextMenu](https://icflorescu.github.io/mantine-contextmenu/) in a commercial project, you can also [hire my services](https://github.com/icflorescu).
 
 ## Other means of support
 
