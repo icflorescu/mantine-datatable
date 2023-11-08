@@ -3,8 +3,7 @@
   z-index: 1;
   width: 0%;
   left: 0;
-  tr[data-selected] &,
-  tr[data-context-menu-visible] & {
+  tr[data-selected] & {
     background: inherit;
   }
   &::after {
