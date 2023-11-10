@@ -1,7 +1,9 @@
 import type { CheckboxProps } from '@mantine/core';
+import type { DataTableSelectionTrigger } from './DataTableSelectionTrigger';
 
 export type DataTableSelectionProps<T = Record<string, unknown>> =
   | {
+      selectionTrigger?: never;
       selectedRecords?: never;
       onSelectedRecordsChange?: never;
       isRecordSelectable?: never;
@@ -9,6 +11,12 @@ export type DataTableSelectionProps<T = Record<string, unknown>> =
       allRecordsSelectionCheckboxProps?: never;
     }
   | {
+      /**
+       * Defines how selection is triggered.
+       * @default 'checkbox'
+       */
+      selectionTrigger?: DataTableSelectionTrigger;
+
       /**
        * Currently-selected records.
        */

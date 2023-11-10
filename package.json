@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable",
-  "version": "7.1.5",
+  "version": "7.1.6",
   "description": "The lightweight, dependency-free, dark-theme aware table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and much more",
   "keywords": [
     "mantine",
@@ -96,12 +96,12 @@
     "eslint-config-next": "^14.0.2",
     "eslint-config-prettier": "^9.0.0",
     "lodash": "^4.17.21",
-    "mantine-contextmenu": "^7.1.11",
+    "mantine-contextmenu": "^7.1.12",
     "next": "14.0.2",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "postcss-import": "^15.1.0",
-    "postcss-preset-mantine": "^1.9.1",
+    "postcss-preset-mantine": "^1.10.0",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.0.3",
     "react": "^18.2.0",

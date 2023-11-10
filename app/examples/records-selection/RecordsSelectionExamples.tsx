@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Center, Paper, Text } from '@mantine/core';
+import { Box, Button, Center, Paper, Stack, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
 import { DataTable, differenceBy, uniqBy, type DataTableColumn } from '__PACKAGE__';
@@ -208,4 +208,59 @@ export function RecordsSelectionHorizontalScrollingBehaviorExample() {
     />
   );
   // example-end
+}
+
+export function CellTriggerRecordsSelectionExample() {
+  const records = companies.slice(0, 3);
+  const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);
+
+  return (
+    <>
+      {/* example-start CellTriggerRecordsSelectionExample.tsx */}
+      <DataTable
+        // example-skip other props
+        verticalAlign="top"
+        striped
+        highlightOnHover
+        withTableBorder
+        withColumnBorders
+        records={records}
+        columns={[
+          { accessor: 'name' },
+          {
+            accessor: 'address',
+            render: ({ streetAddress, city, state }) => (
+              <Stack gap={0}>
+                <Box>{streetAddress}</Box>
+                <Box>{city}</Box>
+                <Box>{state}</Box>
+              </Stack>
+            ),
+          },
+          { accessor: 'missionStatement' },
+        ]}
+        selectedRecords={selectedRecords}
+        onSelectedRecordsChange={setSelectedRecords}
+        // example-resume
+        selectionTrigger="cell" // 👈 click anywhere in the cell to select the record
+      />
+      {/* example-end */}
+      <Paper p="md" mt="sm" withBorder>
+        <Center>
+          <Button
+            leftSection={<IconTrash size={16} />}
+            color="red"
+            disabled={!selectedRecords.length}
+            onClick={() => showNotification({ color: 'red', message: 'Deleting data is dangerous!' })}
+          >
+            {selectedRecords.length
+              ? `Delete ${
+                  selectedRecords.length === 1 ? 'one selected record' : `${selectedRecords.length} selected records`
+                }`
+              : 'Select records to delete'}
+          </Button>
+        </Center>
+      </Paper>
+    </>
+  );
 }

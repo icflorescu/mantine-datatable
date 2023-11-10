@@ -1,30 +1,50 @@
 import { Checkbox, TableTd, type CheckboxProps } from '@mantine/core';
+import clsx from 'clsx';
+import type { DataTableSelectionTrigger } from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
 type DataTableRowSelectorCellProps<T> = {
   record: T;
   index: number;
+  trigger: DataTableSelectionTrigger;
   withRightShadow: boolean;
   checked: boolean;
   disabled: boolean;
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  onChange: React.MouseEventHandler | undefined;
   getCheckboxProps: (record: T, index: number) => CheckboxProps;
 };
 
 export function DataTableRowSelectorCell<T>({
   record,
   index,
+  trigger,
+  onChange,
   withRightShadow,
   getCheckboxProps,
   ...otherProps
 }: DataTableRowSelectorCellProps<T>) {
+  const checkboxProps = getCheckboxProps(record, index);
+  const enabled = !otherProps.disabled && !checkboxProps.disabled;
+
+  const handleClick: React.MouseEventHandler = (e) => {
+    e.stopPropagation();
+    if (trigger === 'cell' && enabled) {
+      onChange?.(e);
+    }
+  };
+
   return (
     <TableTd
-      className="mantine-datatable-row-selector-cell"
+      className={clsx('mantine-datatable-row-selector-cell', { [POINTER_CURSOR]: trigger === 'cell' && enabled })}
       data-shadow-visible={withRightShadow || undefined}
-      onClick={(e) => e.stopPropagation()}
+      onClick={handleClick}
     >
-      <Checkbox classNames={{ input: POINTER_CURSOR }} {...otherProps} {...getCheckboxProps(record, index)} />
+      <Checkbox
+        classNames={enabled ? { input: POINTER_CURSOR } : undefined}
+        onChange={onChange as unknown as React.ChangeEventHandler}
+        {...otherProps}
+        {...checkboxProps}
+      />
     </TableTd>
   );
 }

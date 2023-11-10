@@ -4231,10 +4231,10 @@ magic-string@^0.25.0, magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
-mantine-contextmenu@^7.1.11:
-  version "7.1.11"
-  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.1.11.tgz#82a1868affa2f40bab53048c69b45bb870d9e922"
-  integrity sha512-cbhzxpfQ/EjQ1d+5/h5zgnsocXQEgLLx0/5W0AS0U7V8izxEjCpD5vF87LA/HHwOqo2DyuuT0kPzgLqAckJ7CA==
+mantine-contextmenu@^7.1.12:
+  version "7.1.12"
+  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.1.12.tgz#da7f17372bd8c92b949ce53a1a73c5ee047f5a4c"
+  integrity sha512-6Q0ozFGVqCTP0Jum5tBkTvLqrinznerscUrNHh8R8XHSvgJPDmjMKC/FaFZTD/U/XsFBdgJmLdL4cR2ga0aRag==
 
 mdn-data@2.0.28:
   version "2.0.28"
@@ -4822,10 +4822,10 @@ postcss-ordered-values@^6.0.0:
     cssnano-utils "^4.0.0"
     postcss-value-parser "^4.2.0"
 
-postcss-preset-mantine@^1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/postcss-preset-mantine/-/postcss-preset-mantine-1.9.1.tgz#24a4ad3e8132b7f31238c4a018bf8536854a9f41"
-  integrity sha512-7wyKKsxXvHaAxX9//9FS9tSEWaG96KIXl3/cRlaNf3C/V08JI0gvDV6UifloxPpseZQrPMsuC95/+gPBaTJuWw==
+postcss-preset-mantine@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/postcss-preset-mantine/-/postcss-preset-mantine-1.10.0.tgz#fddeb3c700db343ddfb9611996f0a4f5c884b8d4"
+  integrity sha512-pXe8iExVBzleZTp2VBPwdyJC+l00/cmhbuda6In5O22LL9/KPi57NF8sYgHCsd2u6Tv8AVHoz1rmd8W0GrmESg==
   dependencies:
     postcss-mixins "^9.0.4"
     postcss-nested "^6.0.1"
