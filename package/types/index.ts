@@ -11,6 +11,7 @@ export * from './DataTableRowClickHandler';
 export * from './DataTableRowExpansionCollapseProps';
 export * from './DataTableRowExpansionProps';
 export * from './DataTableSelectionProps';
+export * from './DataTableSelectionTrigger';
 export * from './DataTableSortProps';
 export * from './DataTableSortStatus';
 export * from './DataTableVerticalAlign';

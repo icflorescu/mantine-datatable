@@ -32,6 +32,7 @@ export function DataTable<T>({
   defaultColumnRender,
   idAccessor = 'id',
   records,
+  selectionTrigger = 'checkbox',
   selectedRecords,
   onSelectedRecordsChange,
   isRecordSelectable,
@@ -305,6 +306,7 @@ export function DataTable<T>({
               sortStatus={sortStatus}
               sortIcons={sortIcons}
               onSortStatusChange={onSortStatusChange}
+              selectionTrigger={selectionTrigger}
               selectionVisible={selectionColumnVisible}
               selectionChecked={allSelectableRecordsSelected}
               selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
@@ -319,10 +321,10 @@ export function DataTable<T>({
                 const recordId = getRecordId(record, idAccessor);
                 const isSelected = selectedRecordIds?.includes(recordId) || false;
 
-                let handleSelectionChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
+                let handleSelectionChange: React.MouseEventHandler | undefined;
                 if (onSelectedRecordsChange && selectedRecords) {
                   handleSelectionChange = (e) => {
-                    if ((e.nativeEvent as PointerEvent).shiftKey && lastSelectionChangeIndex !== null) {
+                    if (e.nativeEvent.shiftKey && lastSelectionChangeIndex !== null) {
                       const targetRecords = records.filter(
                         index > lastSelectionChangeIndex
                           ? (rec, idx) =>
@@ -358,6 +360,7 @@ export function DataTable<T>({
                     columns={effectiveColumns}
                     defaultColumnProps={defaultColumnProps}
                     defaultColumnRender={defaultColumnRender}
+                    selectionTrigger={selectionTrigger}
                     selectionVisible={selectionColumnVisible}
                     selectionChecked={isSelected}
                     onSelectionChange={handleSelectionChange}

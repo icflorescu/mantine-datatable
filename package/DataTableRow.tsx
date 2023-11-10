@@ -10,6 +10,7 @@ import type {
   DataTableColumn,
   DataTableDefaultColumnProps,
   DataTableRowClickHandler,
+  DataTableSelectionTrigger,
 } from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
@@ -21,9 +22,10 @@ type DataTableRowProps<T> = {
   defaultColumnRender:
     | ((record: T, index: number, accessor: keyof T | (string & NonNullable<unknown>)) => React.ReactNode)
     | undefined;
+  selectionTrigger: DataTableSelectionTrigger;
   selectionVisible: boolean;
   selectionChecked: boolean;
-  onSelectionChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  onSelectionChange: React.MouseEventHandler | undefined;
   isRecordSelectable: ((record: T, index: number) => boolean) | undefined;
   getSelectionCheckboxProps: (record: T, index: number) => CheckboxProps;
   onClick: DataTableRowClickHandler<T> | undefined;
@@ -49,6 +51,7 @@ export function DataTableRow<T>({
   columns,
   defaultColumnProps,
   defaultColumnRender,
+  selectionTrigger,
   selectionVisible,
   selectionChecked,
   onSelectionChange,
@@ -105,6 +108,7 @@ export function DataTableRow<T>({
           <DataTableRowSelectorCell<T>
             record={record}
             index={index}
+            trigger={selectionTrigger}
             withRightShadow={selectorCellShadowVisible}
             checked={selectionChecked}
             disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable(record, index) : false)}

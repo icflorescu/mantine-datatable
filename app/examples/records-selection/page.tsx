@@ -11,6 +11,7 @@ import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import {
+  CellTriggerRecordsSelectionExample,
   CheckboxPropsExample,
   DisabledRecordsExample,
   RecordsSelectionExample,
@@ -27,6 +28,7 @@ export default async function RecordsSelectionExamplePage() {
     Record<
       | 'columns.ts'
       | 'RecordsSelectionExample.tsx'
+      | 'CellTriggerRecordsSelectionExample.tsx'
       | 'DisabledRecordsExample.tsx'
       | 'CheckboxPropsExample.tsx'
       | 'SelectAllRecordsOnAllPagesExample.tsx'
@@ -126,6 +128,16 @@ export default async function RecordsSelectionExamplePage() {
       <RecordsSelectionHorizontalScrollingBehaviorExample />
       <Txt>Code:</Txt>
       <CodeBlock code={code['RecordsSelectionHorizontalScrollingBehaviorExample.tsx']} />
+      <PageSubtitle value="Maximizing the selection trigger area to the entire cell" />
+      <Txt>
+        By default, selection is triggered when the user clicks the row selection checkbox.
+        <br />
+        However, you can maximize the trigger area to the entire cell holding the checkbox by setting the{' '}
+        <Code>selectionTrigger</Code> property value to <Code>cell</Code>:
+      </Txt>
+      <CodeBlock code={code['CellTriggerRecordsSelectionExample.tsx']} />
+      <Txt>In this case, clicking anywhere in the cell will result in selecting/deselecting the underlying record:</Txt>
+      <CellTriggerRecordsSelectionExample />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>

@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.1.6 (2023-11-10)
+
+- Add `selectionTrigger` property to allow maximizing the selection area to the entire cell holding the checkbox
+
 ## 7.1.5 (2023-11-08)
 
 - Fix backgrounds for selection cell and last column when using `pinLastColumn` feature (see issues [#464](https://github.com/icflorescu/mantine-datatable/issues/464) and [#465](https://github.com/icflorescu/mantine-datatable/issues/465))

@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
 import { DataTableHeaderCell } from './DataTableHeaderCell';
 import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
-import type { DataTableColumn, DataTableColumnGroup, DataTableSortProps } from './types';
+import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
 
 type DataTableHeaderProps<T> = {
   className: string | undefined;
@@ -15,6 +15,7 @@ type DataTableHeaderProps<T> = {
   columns: DataTableColumn<T>[];
   defaultColumnProps: Omit<DataTableColumn<T>, 'accessor'> | undefined;
   groups: readonly DataTableColumnGroup<T>[] | undefined;
+  selectionTrigger: DataTableSelectionTrigger;
   selectionVisible: boolean;
   selectionChecked: boolean;
   selectionIndeterminate: boolean;
@@ -33,6 +34,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
     columns,
     defaultColumnProps,
     groups,
+    selectionTrigger,
     selectionVisible,
     selectionChecked,
     selectionIndeterminate,
@@ -44,6 +46,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
 ) {
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
+      trigger={selectionTrigger}
       shadowVisible={selectorCellShadowVisible}
       checked={selectionChecked}
       indeterminate={selectionIndeterminate}
