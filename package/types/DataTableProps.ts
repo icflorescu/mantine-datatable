@@ -205,6 +205,8 @@ export type DataTableProps<T = Record<string, unknown>> = {
   | 'borderColor'
   | 'stripedColor'
   | 'highlightOnHoverColor'
+  | 'stickyHeader'
+  | 'stickyHeaderOffset'
 > &
   DataTableColorProps<T> &
   DataTableColumnProps<T> &

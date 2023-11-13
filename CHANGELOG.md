@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.1.7 (2023-11-13)
+
+- Make sure to omit `stickyHeader` and `stickyHeaderOffset` properties from inherited Table component props to avoid confusion, since Mantine DataTable header is sticky "as needed"
+
 ## 7.1.6 (2023-11-10)
 
 - Add `selectionTrigger` property to allow maximizing the selection area to the entire cell holding the checkbox
