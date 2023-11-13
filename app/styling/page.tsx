@@ -67,7 +67,9 @@ export default async function StylingPage() {
         you to control the order of stylesheets in your application when importing CSS files.
       </Txt>
       <Txt>
-        You can mitigate this by making use of{' '}
+        As Mantine documentation{' '}
+        <ExternalLink to={`${MANTINE_LINK}/styles/mantine-styles/#css-layers`}>suggests</ExternalLink>, you can mitigate
+        this by making use of{' '}
         <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/CSS/@layer">CSS layers</ExternalLink>.
       </Txt>
       <Txt idea>

@@ -1,0 +1,7 @@
+.alertMessage {
+  line-height: 1.6;
+}
+
+.alertMessageWithoutTitle {
+  margin-top: 0;
+}

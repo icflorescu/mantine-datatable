@@ -1,5 +1,7 @@
 import { Alert, Text } from '@mantine/core';
 import { IconAlertSquareRoundedFilled, IconBulbFilled, IconInfoCircle } from '@tabler/icons-react';
+import clsx from 'clsx';
+import classes from './Txt.module.css';
 
 export type TxtProps = React.PropsWithChildren<
   | {
@@ -27,7 +29,7 @@ export function Txt({ info, warning, idea, title, children }: TxtProps) {
     <Alert
       my="xl"
       color={warning ? 'red' : idea ? 'orange' : undefined}
-      styles={{ message: { lineHeight: 1.6 } }}
+      classNames={{ message: clsx(classes.alertMessage, { [classes.alertMessageWithoutTitle]: !title }) }}
       icon={info ? <IconInfoCircle /> : idea ? <IconBulbFilled /> : <IconAlertSquareRoundedFilled />}
       title={title}
     >
