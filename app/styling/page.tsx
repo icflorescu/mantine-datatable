@@ -98,8 +98,8 @@ export default async function StylingPage() {
       <CodeBlock tabs={{ code: code['fineGrained'], keys: ['RootLayout.tsx', 'postcss.config.js', 'layout.css'] }} />
       <Txt>
         Now that you understand how styling works, feel free to browse the{' '}
-        <InternalLink to={firstExampleHref}>code examples</InternalLink> to see the context menu in action and learn how
-        to use it, and refer to the <InternalLink to="/type-definitions">type definitions</InternalLink> page for an
+        <InternalLink to={firstExampleHref}>code examples</InternalLink> to see the DataTable in action and learn how to
+        use it, and refer to the <InternalLink to="/type-definitions">type definitions</InternalLink> page for an
         exhaustive list of customizable options.
       </Txt>
       <PageNavigation of={PATH} />
