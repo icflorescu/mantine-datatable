@@ -138,6 +138,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: sorting data with ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/dragging-toggling',
+    title: 'Dragging & Toggling',
+    description: `Example: dragging & toggling columns with ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/infinite-scrolling',
     title: 'Infinite scrolling',
     description: `Example: how to implement infinite scrolling with ${PRODUCT_NAME}`,

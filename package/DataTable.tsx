@@ -2,6 +2,7 @@ import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
+import { DataTableDragToggleColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
 import { DataTableFooter } from './DataTableFooter';
@@ -12,6 +13,7 @@ import { DataTableRow } from './DataTableRow';
 import { DataTableScrollArea } from './DataTableScrollArea';
 import { getTableCssVariables } from './cssVariables';
 import { useElementOuterSize, useIsomorphicLayoutEffect, useLastSelectionChangeIndex, useRowExpansion } from './hooks';
+import { useDragToggleColumns } from './hooks/useDragToggleColumns';
 import type { DataTableProps } from './types';
 import { TEXT_SELECTION_DISABLED } from './utilityClasses';
 import { differenceBy, getRecordId, uniqBy } from './utils';
@@ -26,6 +28,7 @@ export function DataTable<T>({
   verticalAlign = 'center',
   fetching,
   columns,
+  storeColumnsKey,
   groups,
   pinLastColumn,
   defaultColumnProps,
@@ -121,6 +124,11 @@ export function DataTable<T>({
   const effectiveColumns = useMemo(() => {
     return groups?.flatMap((group) => group.columns) ?? columns!;
   }, [columns, groups]);
+
+  const dragToggle = useDragToggleColumns({
+    key: storeColumnsKey,
+    columns: effectiveColumns,
+  });
 
   const { ref: headerRef, height: headerHeight } = useElementOuterSize<HTMLTableSectionElement>();
   const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementOuterSize<HTMLTableElement>();
@@ -296,24 +304,26 @@ export function DataTable<T>({
           {...otherProps}
         >
           {noHeader ? null : (
-            <DataTableHeader<T>
-              ref={headerRef}
-              className={classNames?.header}
-              style={styles?.header}
-              columns={effectiveColumns}
-              defaultColumnProps={defaultColumnProps}
-              groups={groups}
-              sortStatus={sortStatus}
-              sortIcons={sortIcons}
-              onSortStatusChange={onSortStatusChange}
-              selectionTrigger={selectionTrigger}
-              selectionVisible={selectionColumnVisible}
-              selectionChecked={allSelectableRecordsSelected}
-              selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
-              onSelectionChange={handleHeaderSelectionChange}
-              selectionCheckboxProps={allRecordsSelectionCheckboxProps}
-              selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
-            />
+            <DataTableDragToggleColumnsProvider {...dragToggle}>
+              <DataTableHeader<T>
+                ref={headerRef}
+                className={classNames?.header}
+                style={styles?.header}
+                columns={effectiveColumns}
+                defaultColumnProps={defaultColumnProps}
+                groups={groups}
+                sortStatus={sortStatus}
+                sortIcons={sortIcons}
+                onSortStatusChange={onSortStatusChange}
+                selectionTrigger={selectionTrigger}
+                selectionVisible={selectionColumnVisible}
+                selectionChecked={allSelectableRecordsSelected}
+                selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
+                onSelectionChange={handleHeaderSelectionChange}
+                selectionCheckboxProps={allRecordsSelectionCheckboxProps}
+                selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+              />
+            </DataTableDragToggleColumnsProvider>
           )}
           <tbody ref={bodyRef}>
             {recordsLength ? (
