@@ -4,10 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { DataTableDragToggleColumnsContextProvider } from './DataTableDragToggleColumns.context';
 import { DataTableColumnToggle } from './hooks';
 
-type DataTableDragToggleColumnsProviderProps = {
-  // React children
-  children: React.ReactNode;
-
+type DataTableDragToggleColumnsProviderProps = React.PropsWithChildren<{
   columnsOrder: string[];
   setColumnsOrder: Dispatch<SetStateAction<string[]>>;
   resetColumnsOrder: () => void;
@@ -15,7 +12,7 @@ type DataTableDragToggleColumnsProviderProps = {
   columnsToggle: DataTableColumnToggle[];
   setColumnsToggle: Dispatch<SetStateAction<DataTableColumnToggle[]>>;
   resetColumnsToggle: () => void;
-};
+}>;
 
 export const DataTableDragToggleColumnsProvider = (props: DataTableDragToggleColumnsProviderProps) => {
   const {
