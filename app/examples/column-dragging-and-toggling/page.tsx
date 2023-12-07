@@ -31,18 +31,21 @@ export default async function DraggingExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        Starting from <Code>v7.3</Code>, Mantine DataTable supports column dragging and toggling, thanks to the{' '}
-        <ExternalLink to={`${REPO_LINK}/pull/483`}>outstanding work</ExternalLink> of{' '}
+        Starting with <Code>v7.3</Code>, Mantine DataTable supports column toggling and drag-and-drop reordering, thanks
+        to the <ExternalLink to={`${REPO_LINK}/pull/483`}>outstanding work</ExternalLink> of{' '}
         <ExternalLink to="https://github.com/gfazioli">Giovambattista Fazioli</ExternalLink>.
       </Txt>
       <DraggingExample />
-      <Txt>In order to enable Dragging you’ll have to:</Txt>
+      <Txt>
+        In order to enable <strong>column dragging</strong> you’ll have to:
+      </Txt>
       <UnorderedList compact>
         <li>
-          add a <Code>storeColumnsKey: your_key</Code> property to the DataTable;
+          add a <Code>storeColumnsKey: your_key</Code> property to the DataTable (since the order of the columns is
+          persisted in the local storage);
         </li>
         <li>
-          add a <Code>draggable: true</Code> property to each Dragging candidate column;
+          add a <Code>draggable: true</Code> property to each <strong>dragging candidate</strong> column;
         </li>
         <li>
           use <Code>useDragToggleColumns()</Code> hook to get the sorted columns.
@@ -55,13 +58,16 @@ export default async function DraggingExamplePage() {
 
       <PageSubtitle value="Toggling" />
       <TogglingExample />
-      <Txt>In order to enable Toggling you’ll have to:</Txt>
+      <Txt>
+        In order to enable <strong>column toggling</strong> you’ll have to:
+      </Txt>
       <UnorderedList compact>
         <li>
-          add a <Code>storeColumnsKey: your_key</Code> property to the DataTable;
+          add a <Code>storeColumnsKey: your_key</Code> property to the DataTable (since the order of the columns is
+          persisted in the local storage);
         </li>
         <li>
-          add a <Code>toggleable: true</Code> property to each Toggling candidate column;
+          add a <Code>toggleable: true</Code> property to each <strong>toggling candidate</strong> column;
         </li>
         <li>
           use <Code>useDragToggleColumns()</Code> hook to get the sorted columns.
@@ -71,16 +77,12 @@ export default async function DraggingExamplePage() {
       <Txt idea>
         The default toggled columns are the ones with <Code>defaultToggle: true</Code> property.
       </Txt>
-
-      <PageSubtitle value="Dragging & Toggling with context menu Reset" />
+      <PageSubtitle value="Dragging and toggling with context menu reset" />
       <DraggingTogglingResetExample />
-
       <CodeBlock code={code['DraggingTogglingResetExample.tsx']} />
-
       <PageSubtitle value="Complex usage" />
       <DraggingTogglingComplexExample />
       <CodeBlock code={code['DraggingTogglingComplexExample.tsx']} />
-
       <PageNavigation of={PATH} />
     </>
   );
