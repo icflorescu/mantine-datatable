@@ -8,7 +8,7 @@
 
 .mantine-datatable-header-cell-draggable {
   cursor: grab;
-  border-radius: 6px;
+  border-radius: rem(6px);
   transition: all 0.2s;
   &:active {
     cursor: grabbing;
