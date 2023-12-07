@@ -1,8 +1,8 @@
 export function IconGripVertical() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="14"
+      height="14"
       viewBox="0 0 24 24"
       strokeWidth="2"
       stroke="currentColor"
