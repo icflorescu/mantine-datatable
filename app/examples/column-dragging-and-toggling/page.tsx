@@ -35,6 +35,7 @@ export default async function DraggingExamplePage() {
         to the <ExternalLink to={`${REPO_LINK}/pull/483`}>outstanding work</ExternalLink> of{' '}
         <ExternalLink to="https://github.com/gfazioli">Giovambattista Fazioli</ExternalLink>.
       </Txt>
+      <PageSubtitle value="Column drag-and-drop reordering" />
       <DraggingExample />
       <Txt>
         In order to enable <strong>column dragging</strong> you’ll have to:
@@ -56,7 +57,7 @@ export default async function DraggingExamplePage() {
         The default order of the columns is the order in which they are defined in the <Code>columns</Code> prop.
       </Txt>
 
-      <PageSubtitle value="Toggling" />
+      <PageSubtitle value="Column toggling" />
       <TogglingExample />
       <Txt>
         In order to enable <strong>column toggling</strong> you’ll have to:
