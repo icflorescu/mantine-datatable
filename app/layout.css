@@ -1,7 +1,7 @@
-@import '@mantine/core/esm/index.css' layer(mantine-core);
-@import '@mantine/dates/esm/index.css' layer(mantine-dates);
-@import '@mantine/notifications/esm/index.css' layer(mantine-notifications);
-@import '@mantine/code-highlight/esm/index.css' layer(mantine-code-highlight);
+@import '@mantine/core/styles.css' layer(mantine-core);
+@import '@mantine/dates/styles.css' layer(mantine-dates);
+@import '@mantine/notifications/styles.css' layer(mantine-notifications);
+@import '@mantine/code-highlight/styles.css' layer(mantine-code-highlight);
 @import 'mantine-contextmenu/dist/styles.css' layer(mantine-contextmenu);
 @import '../package/styles.css' layer(mantine-datatable);
 @import '@docsearch/css';
