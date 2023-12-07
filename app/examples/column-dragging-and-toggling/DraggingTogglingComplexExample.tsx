@@ -1,12 +1,11 @@
 'use client';
 
 import { IconColumnRemove, IconColumns1 } from '@tabler/icons-react';
-import { DataTable, type DataTableSortStatus } from '__PACKAGE__';
+import { DataTable, useDragToggleColumns, type DataTableSortStatus } from '__PACKAGE__';
 import sortBy from 'lodash/sortBy';
 import { useContextMenu } from 'mantine-contextmenu';
 import { useEffect, useState } from 'react';
 import { companies, type Company } from '~/data';
-import { useDragToggleColumns } from '~/package/hooks/useDragToggleColumns';
 
 export default function DraggingTogglingComplexExample() {
   const { showContextMenu } = useContextMenu();

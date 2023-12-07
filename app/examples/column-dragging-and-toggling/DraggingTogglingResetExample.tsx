@@ -1,10 +1,9 @@
 'use client';
 
 import { IconColumnRemove, IconColumns1 } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
+import { DataTable, useDragToggleColumns } from '__PACKAGE__';
 import { useContextMenu } from 'mantine-contextmenu';
 import { companies } from '~/data';
-import { useDragToggleColumns } from '~/package/hooks/useDragToggleColumns';
 
 export default function DraggingTogglingResetExample() {
   const { showContextMenu } = useContextMenu();
