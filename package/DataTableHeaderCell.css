@@ -18,6 +18,11 @@
   }
 }
 
+.mantine-datatable-header-cell-draggable-action-icon {
+  cursor: inherit;
+  margin: rem(-2px) rem(2px) 0;
+}
+
 .mantine-datatable-header-cell-drag-over {
   background: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
 }

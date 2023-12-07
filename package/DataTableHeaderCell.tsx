@@ -172,7 +172,7 @@ export function DataTableHeaderCell<T>({
               {draggable ? (
                 <Center role="img" aria-label="Drag column">
                   <ActionIcon
-                    style={{ cursor: 'inherit' }}
+                    className="mantine-datatable-header-cell-draggable-action-icon"
                     variant="subtle"
                     size="xs"
                     onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
