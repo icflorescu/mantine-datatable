@@ -9,11 +9,21 @@ export type DataTableColumnToggle = {
   toggled: boolean;
 };
 
+/**
+ * Hook to handle the drag-and-drop column reordering and column toggling.
+ * @see https://icflorescu.github.io/mantine-datatable/examples/column-dragging-and-toggling/
+ */
 export const useDragToggleColumns = <T>({
   key,
   columns = [],
 }: {
+  /**
+   * The key to use in localStorage to store the columns order and toggle state.
+   */
   key: string | undefined;
+  /**
+   * Columns definitions.
+   */
   columns: DataTableColumn<T>[];
 }) => {
   // Default columns id ordered is the order of the columns in the array
