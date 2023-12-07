@@ -1,6 +1,8 @@
 import { Code } from '@mantine/core';
 import type { Route } from 'next';
+import { REPO_LINK } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
+import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
@@ -13,7 +15,7 @@ import DraggingTogglingComplexExample from './DraggingTogglingComplexExample';
 import DraggingTogglingResetExample from './DraggingTogglingResetExample';
 import TogglingExample from './TogglingExample';
 
-const PATH: Route = '/examples/dragging-toggling';
+const PATH: Route = '/examples/column-dragging-and-toggling';
 
 export const metadata = getRouteMetadata(PATH);
 
@@ -28,6 +30,11 @@ export default async function DraggingExamplePage() {
   return (
     <>
       <PageTitle of={PATH} />
+      <Txt>
+        Starting from <Code>v7.3</Code>, Mantine DataTable supports column dragging and toggling, thanks to the{' '}
+        <ExternalLink to={`${REPO_LINK}/pull/483`}>outstanding work</ExternalLink> of{' '}
+        <ExternalLink to="https://github.com/gfazioli">Giovambattista Fazioli</ExternalLink>.
+      </Txt>
       <DraggingExample />
       <Txt>In order to enable Dragging you’ll have to:</Txt>
       <UnorderedList compact>

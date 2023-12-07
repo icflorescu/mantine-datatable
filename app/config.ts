@@ -138,9 +138,9 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: sorting data with ${PRODUCT_NAME}`,
   },
   {
-    href: '/examples/dragging-toggling',
-    title: 'Dragging & Toggling',
-    description: `Example: dragging & toggling columns with ${PRODUCT_NAME}`,
+    href: '/examples/column-dragging-and-toggling',
+    title: 'Column dragging and toggling',
+    description: `Example: dragging & toggling ${PRODUCT_NAME} columns`,
   },
   {
     href: '/examples/infinite-scrolling',
