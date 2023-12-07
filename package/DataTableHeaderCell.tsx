@@ -7,6 +7,7 @@ import {
   Group,
   MantineStyleProp,
   Popover,
+  PopoverDropdown,
   PopoverTarget,
   Stack,
   TableTh,
@@ -199,7 +200,7 @@ export function DataTableHeaderCell<T>({
               </Box>
             </Flex>
           </PopoverTarget>
-          <Popover.Dropdown>
+          <PopoverDropdown>
             <Stack>
               {columnsToggle
                 .filter((column) => column.toggleable)
@@ -225,7 +226,7 @@ export function DataTableHeaderCell<T>({
                   );
                 })}
             </Stack>
-          </Popover.Dropdown>
+          </PopoverDropdown>
         </Popover>
         {toggleable ? (
           <Center className="mantine-datatable-header-cell-toggleable-icon" role="img" aria-label="Toggle column">
