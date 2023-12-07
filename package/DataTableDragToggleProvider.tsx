@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from 'react';
 import { DataTableDragToggleColumnsContextProvider } from './DataTableDragToggleColumns.context';
-import { DataTableColumnToggle } from './hooks/useDragToggleColumns';
+import { DataTableColumnToggle } from './hooks';
 
 type DataTableDragToggleColumnsProviderProps = {
   // React children

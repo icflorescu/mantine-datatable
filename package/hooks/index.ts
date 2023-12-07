@@ -1,3 +1,4 @@
+export * from './useDragToggleColumns';
 export * from './useElementOuterSize';
 export * from './useIsomorphicLayoutEffect';
 export * from './useLastSelectionChangeIndex';
