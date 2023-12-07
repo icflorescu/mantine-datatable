@@ -32,6 +32,7 @@ The lightweight, dependency-free, **dark-theme aware** table component for your 
 - **[Additive batch rows selection](https://icflorescu.github.io/mantine-datatable/examples/records-selection)** - select or deselect ranges of rows using the Shift key
 - **[Automatically-scrollable](https://icflorescu.github.io/mantine-datatable/examples/scrollable-vs-auto-height)** - automatically scrollable or auto-height
 - **[AutoAnimate support](https://icflorescu.github.io/mantine-datatable/examples/using-with-auto-animate)** - animate row sorting, addition and removal
+- **[Column dragging and toggling](https://icflorescu.github.io/mantine-datatable/examples/column-dragging-and-toggling)** - drag and drop columns to reorder them, toggle column visibility (thanks to [Giovambattista Fazioli](https://github.com/gfazioli))
 - **More** - check out the [full documentation](https://icflorescu.github.io/mantine-datatable/)
 
 ## Trusted by the community
