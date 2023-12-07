@@ -19,7 +19,7 @@
 }
 
 .mantine-datatable-header-cell-drag-over {
-  background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6)) !important
+  background: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
 }
 
 .mantine-datatable-header-cell-toggleable-icon {
