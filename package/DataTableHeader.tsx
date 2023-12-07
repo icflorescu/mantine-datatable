@@ -22,6 +22,8 @@ type DataTableHeaderProps<T> = {
   onSelectionChange: (() => void) | undefined;
   selectionCheckboxProps: CheckboxProps;
   selectorCellShadowVisible: boolean;
+  selectionColumnClassName: string | undefined;
+  selectionColumnStyle: MantineStyleProp;
 };
 
 export const DataTableHeader = forwardRef(function DataTableHeader<T>(
@@ -41,11 +43,15 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
     onSelectionChange,
     selectionCheckboxProps,
     selectorCellShadowVisible,
+    selectionColumnClassName,
+    selectionColumnStyle,
   }: DataTableHeaderProps<T>,
   ref: React.ForwardedRef<HTMLTableSectionElement>
 ) {
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
+      className={selectionColumnClassName}
+      style={selectionColumnStyle}
       trigger={selectionTrigger}
       shadowVisible={selectorCellShadowVisible}
       checked={selectionChecked}
@@ -78,6 +84,8 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
             width,
             title,
             sortable,
+            draggable,
+            toggleable,
             titleClassName,
             titleStyle,
             filter,
@@ -95,6 +103,8 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               width={width}
               title={title}
               sortable={sortable}
+              draggable={draggable}
+              toggleable={toggleable}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
               onSortStatusChange={onSortStatusChange}

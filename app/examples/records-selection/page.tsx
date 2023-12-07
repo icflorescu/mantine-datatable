@@ -13,6 +13,7 @@ import { getRouteMetadata } from '~/lib/utils';
 import {
   CellTriggerRecordsSelectionExample,
   CheckboxPropsExample,
+  CustomColumnStyleExample,
   DisabledRecordsExample,
   RecordsSelectionExample,
   RecordsSelectionHorizontalScrollingBehaviorExample,
@@ -30,6 +31,7 @@ export default async function RecordsSelectionExamplePage() {
       | 'RecordsSelectionExample.tsx'
       | 'CellTriggerRecordsSelectionExample.tsx'
       | 'DisabledRecordsExample.tsx'
+      | 'CustomColumnStyleExample.tsx'
       | 'CheckboxPropsExample.tsx'
       | 'SelectAllRecordsOnAllPagesExample.tsx'
       | 'RecordsSelectionHorizontalScrollingBehaviorExample.tsx',
@@ -90,6 +92,15 @@ export default async function RecordsSelectionExamplePage() {
       <CodeBlock tabs={{ code, keys: ['DisabledRecordsExample.tsx', 'columns.ts'] }} />
       <Txt>The above code will result in the following behavior:</Txt>
       <DisabledRecordsExample />
+      <PageSubtitle value="Customizing the selection column className and style" />
+      <Txt>
+        By default, the selection column has an absolute width of <Code>0</Code>, to that it only takes up the space
+        required by the selection checkboxes. If you’re not happy with this behavior, or you have other reasons to
+        customize the column’s properties, you can do so by providing the <Code>selectionColumnClassName</Code> and/or{' '}
+        <Code>selectionColumnStyle</Code> properties:
+      </Txt>
+      <CodeBlock code={code['CustomColumnStyleExample.tsx']} />
+      <CustomColumnStyleExample />
       <PageSubtitle value="Additional selection checkbox props" />
       <Txt>
         You can pass additional props to the selection checkboxes by providing the{' '}

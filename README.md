@@ -14,7 +14,7 @@ The lightweight, dependency-free, **dark-theme aware** table component for your 
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/279479387-525bb797-cb15-4739-85c6-94ceded94bc1.png)](https://icflorescu.github.io/mantine-datatable/)
 
-**⚠️ Mantine DataTable V7.1 is compatible with Mantine V7.1.**  
+**⚠️ Mantine DataTable V7 is compatible with Mantine V7.**  
 **💡 If you're looking for the old version that works with [Mantine V6](https://v6.mantine.dev), head over to [Mantine DataTable V6](https://icflorescu.github.io/mantine-datatable-v6).**
 
 ## Features
@@ -32,6 +32,7 @@ The lightweight, dependency-free, **dark-theme aware** table component for your 
 - **[Additive batch rows selection](https://icflorescu.github.io/mantine-datatable/examples/records-selection)** - select or deselect ranges of rows using the Shift key
 - **[Automatically-scrollable](https://icflorescu.github.io/mantine-datatable/examples/scrollable-vs-auto-height)** - automatically scrollable or auto-height
 - **[AutoAnimate support](https://icflorescu.github.io/mantine-datatable/examples/using-with-auto-animate)** - animate row sorting, addition and removal
+- **[Column dragging and toggling](https://icflorescu.github.io/mantine-datatable/examples/column-dragging-and-toggling)** - drag and drop columns to reorder them, toggle column visibility (thanks to [Giovambattista Fazioli](https://github.com/gfazioli))
 - **More** - check out the [full documentation](https://icflorescu.github.io/mantine-datatable/)
 
 ## Trusted by the community

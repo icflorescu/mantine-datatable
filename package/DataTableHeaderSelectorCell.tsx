@@ -1,9 +1,11 @@
-import { Checkbox, TableTh, type CheckboxProps } from '@mantine/core';
+import { Checkbox, MantineStyleProp, TableTh, type CheckboxProps } from '@mantine/core';
 import clsx from 'clsx';
 import type { DataTableSelectionTrigger } from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
 type DataTableHeaderSelectorCellProps = {
+  className: string | undefined;
+  style: MantineStyleProp | undefined;
   trigger: DataTableSelectionTrigger;
   shadowVisible: boolean;
   checked: boolean;
@@ -14,6 +16,8 @@ type DataTableHeaderSelectorCellProps = {
 };
 
 export function DataTableHeaderSelectorCell({
+  className,
+  style,
   trigger,
   shadowVisible,
   checked,
@@ -26,7 +30,12 @@ export function DataTableHeaderSelectorCell({
 
   return (
     <TableTh
-      className={clsx('mantine-datatable-header-selector-cell', { [POINTER_CURSOR]: trigger === 'cell' && enabled })}
+      className={clsx(
+        'mantine-datatable-header-selector-cell',
+        { [POINTER_CURSOR]: trigger === 'cell' && enabled },
+        className
+      )}
+      style={style}
       rowSpan={rowSpan}
       data-shadow-visible={shadowVisible || undefined}
       onClick={trigger === 'cell' && enabled ? onChange : undefined}

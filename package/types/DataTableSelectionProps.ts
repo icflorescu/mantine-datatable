@@ -1,4 +1,4 @@
-import type { CheckboxProps } from '@mantine/core';
+import type { CheckboxProps, MantineStyleProp } from '@mantine/core';
 import type { DataTableSelectionTrigger } from './DataTableSelectionTrigger';
 
 export type DataTableSelectionProps<T = Record<string, unknown>> =
@@ -9,6 +9,8 @@ export type DataTableSelectionProps<T = Record<string, unknown>> =
       isRecordSelectable?: never;
       getRecordSelectionCheckboxProps?: never;
       allRecordsSelectionCheckboxProps?: never;
+      selectionColumnClassName?: never;
+      selectionColumnStyle?: never;
     }
   | {
       /**
@@ -27,6 +29,16 @@ export type DataTableSelectionProps<T = Record<string, unknown>> =
        * Receives and array of selected records as argument.
        */
       onSelectedRecordsChange?: (selectedRecords: T[]) => void;
+
+      /**
+       * Optional class name applied to selection column.
+       */
+      selectionColumnClassName?: string;
+
+      /**
+       * Optional style applied to selection column.
+       */
+      selectionColumnStyle?: MantineStyleProp;
 
       /**
        * A function used to determine whether a certain record is selectable.

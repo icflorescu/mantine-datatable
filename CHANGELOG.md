@@ -3,6 +3,12 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.3.0 (2023-12-07)
+
+- Implement column dragging and toggling (see [#483](https://github.com/icflorescu/mantine-datatable/pull/483));
+- Implement `selectionColumnClassName` and `selectionColumnStyle` properties;
+- Update deps to ensure compatibility with Mantine 7.3.0
+
 ## 7.1.7 (2023-11-13)
 
 - Make sure to omit `stickyHeader` and `stickyHeaderOffset` properties from inherited Table component props to avoid confusion, since Mantine DataTable header is sticky "as needed"

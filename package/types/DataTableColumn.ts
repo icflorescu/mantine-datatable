@@ -35,12 +35,27 @@ export type DataTableColumn<T = Record<string, unknown>> = {
   sortable?: boolean;
 
   /**
+   * If set to true, the column can be dragged.
+   */
+  draggable?: boolean;
+
+  /**
+   * If set to true, the column can be toggled.
+   */
+  toggleable?: boolean;
+
+  /**
+   * If set to true, the column will be toggled by default.
+   */
+  defaultToggle?: boolean;
+
+  /**
    * Optional node providing the user with filtering options.
    * If present, a filter button will be added to the column's header. Upon clicking that button,
    * a pop-over showing the provided node will be opened.
    *
    * Alternatively, a function returning a node can be provided. The function receives props with a `close`
-   * method which allows programatically closing the pop-over.
+   * method which allows programmatically closing the pop-over.
    *
    * ```tsx
    * // …

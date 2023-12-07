@@ -1,4 +1,4 @@
-import { ActionIcon, Popover, PopoverTarget } from '@mantine/core';
+import { ActionIcon, Popover, PopoverDropdown, PopoverTarget } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter } from './icons/IconFilter';
 import { IconFilterFilled } from './icons/IconFilterFilled';
@@ -29,9 +29,9 @@ export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHe
           <Icon />
         </ActionIcon>
       </PopoverTarget>
-      <Popover.Dropdown onClick={(e) => e.preventDefault()}>
+      <PopoverDropdown onClick={(e) => e.preventDefault()}>
         {typeof children === 'function' ? children({ close }) : children}
-      </Popover.Dropdown>
+      </PopoverDropdown>
     </Popover>
   );
 }
