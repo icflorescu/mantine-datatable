@@ -73,6 +73,26 @@ export function DisabledRecordsExample() {
   // example-end
 }
 
+export function CustomColumnStyleExample() {
+  // example-start CustomColumnStyleExample.tsx
+  const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);
+
+  return (
+    <DataTable
+      // example-skip other props
+      withTableBorder
+      withColumnBorders
+      records={companies}
+      columns={columns}
+      selectedRecords={selectedRecords}
+      onSelectedRecordsChange={setSelectedRecords}
+      // example-resume
+      selectionColumnStyle={{ minWidth: 100 }}
+    />
+  );
+  // example-end
+}
+
 export function CheckboxPropsExample() {
   // example-start CheckboxPropsExample.tsx
   const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);

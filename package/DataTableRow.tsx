@@ -43,6 +43,8 @@ type DataTableRowProps<T> = {
   className?: string | ((record: T, index: number) => string | undefined);
   style?: (record: T, index: number) => MantineStyleProp | undefined;
   selectorCellShadowVisible: boolean;
+  selectionColumnClassName: string | undefined;
+  selectionColumnStyle: MantineStyleProp | undefined;
 };
 
 export function DataTableRow<T>({
@@ -68,6 +70,8 @@ export function DataTableRow<T>({
   className,
   style,
   selectorCellShadowVisible,
+  selectionColumnClassName,
+  selectionColumnStyle,
 }: DataTableRowProps<T>) {
   return (
     <>
@@ -106,6 +110,8 @@ export function DataTableRow<T>({
       >
         {selectionVisible && (
           <DataTableRowSelectorCell<T>
+            className={selectionColumnClassName}
+            style={selectionColumnStyle}
             record={record}
             index={index}
             trigger={selectionTrigger}

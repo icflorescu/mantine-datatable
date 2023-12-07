@@ -43,6 +43,8 @@ export function DataTable<T>({
   selectionTrigger = 'checkbox',
   selectedRecords,
   onSelectedRecordsChange,
+  selectionColumnClassName,
+  selectionColumnStyle,
   isRecordSelectable,
   allRecordsSelectionCheckboxProps = { 'aria-label': 'Select all records' },
   getRecordSelectionCheckboxProps = (_, index) => ({ 'aria-label': `Select record ${index + 1}` }),
@@ -327,6 +329,8 @@ export function DataTable<T>({
                 onSelectionChange={handleHeaderSelectionChange}
                 selectionCheckboxProps={allRecordsSelectionCheckboxProps}
                 selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                selectionColumnClassName={selectionColumnClassName}
+                selectionColumnStyle={selectionColumnStyle}
               />
             </DataTableDragToggleColumnsProvider>
           )}
@@ -392,6 +396,8 @@ export function DataTable<T>({
                     style={rowStyle}
                     customAttributes={customRowAttributes}
                     selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                    selectionColumnClassName={selectionColumnClassName}
+                    selectionColumnStyle={selectionColumnStyle}
                   />
                 );
               })
