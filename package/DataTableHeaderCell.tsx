@@ -7,6 +7,7 @@ import {
   Group,
   MantineStyleProp,
   Popover,
+  PopoverTarget,
   Stack,
   TableTh,
   type MantineTheme,
@@ -152,7 +153,7 @@ export function DataTableHeaderCell<T>({
           opened={columnsPopoverOpened}
           onChange={setColumnsPopoverOpened}
         >
-          <Popover.Target>
+          <PopoverTarget>
             <Flex
               align="center"
               w="100%"
@@ -197,7 +198,7 @@ export function DataTableHeaderCell<T>({
                 {text}
               </Box>
             </Flex>
-          </Popover.Target>
+          </PopoverTarget>
           <Popover.Dropdown>
             <Stack>
               {columnsToggle
