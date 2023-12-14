@@ -20,6 +20,9 @@ interface DataTableDragToggleColumnsContext {
   columnsToggle: DataTableColumnToggle[];
   setColumnsToggle: Dispatch<SetStateAction<DataTableColumnToggle[]>>;
   resetColumnsToggle: () => void;
+
+  setColumnWidth: (accessor: string, width: string | number) => void;
+  resetColumnsWidth: () => void;
 }
 
 export const [DataTableDragToggleColumnsContextProvider, useDataTableDragToggleColumnsContext] =

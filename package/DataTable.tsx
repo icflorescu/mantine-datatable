@@ -249,6 +249,7 @@ export function DataTable<T>({
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
   return (
+    <DataTableDragToggleColumnsProvider {...dragToggle}>
     <Box
       {...marginProperties}
       className={clsx(
@@ -465,5 +466,6 @@ export function DataTable<T>({
         {emptyState}
       </DataTableEmptyState>
     </Box>
+    </DataTableDragToggleColumnsProvider>
   );
 }
