@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.3.2 (2023-12-21)
+
+- Fix checkbox inside filter popover not working (issue [#481](https://github.com/icflorescu/mantine-datatable/issues/481))
+
 ## 7.3.1 (2023-12-21)
 
 - Implement column resizing (see [#490](https://github.com/icflorescu/mantine-datatable/pull/490));
