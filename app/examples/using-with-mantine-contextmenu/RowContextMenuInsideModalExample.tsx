@@ -11,7 +11,7 @@ import companies from '~/data/companies.json';
 
 export function RowContextMenuInsideModalExample() {
   // example-start
-  const { showContextMenu, hideContextMenu } = useContextMenu();
+  const { showContextMenu } = useContextMenu();
   const isTouch = useMediaQuery('(pointer: coarse)');
 
   return (
@@ -66,7 +66,6 @@ export function RowContextMenuInsideModalExample() {
                   // example-resume
                 ])(event)
               }
-              onScroll={hideContextMenu}
             />
           ),
         })

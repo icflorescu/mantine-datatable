@@ -43,9 +43,9 @@ export default async function UsingWithMantineContextMenuExamplePage() {
       </Txt>
       <Txt idea title="Important">
         <Box mb="sm">
-          When using {MANTINE_CONTEXTMENU_PRODUCT_NAME}, you’ll need to wrap your application in a{' '}
-          <Code>ContextMenuProvider</Code> and include the necessary CSS files <strong>in the correct order</strong>.
-          Please refer to the{' '}
+          When using <ExternalLink to={MANTINE_CONTEXTMENU_LINK}>{MANTINE_CONTEXTMENU_PRODUCT_NAME}</ExternalLink>,
+          you’ll need to wrap your application in a <Code>ContextMenuProvider</Code> and include the necessary CSS files{' '}
+          <strong>in the correct order</strong>. Please refer to the{' '}
           <ExternalLink to={`${MANTINE_CONTEXTMENU_LINK}/getting-started`}>getting started</ExternalLink> page of{' '}
           {MANTINE_CONTEXTMENU_PRODUCT_NAME} for more information.
         </Box>
@@ -72,10 +72,12 @@ export default async function UsingWithMantineContextMenuExamplePage() {
       <CodeBlock code={code['RowContextMenuExample.tsx']} />
       <PageSubtitle value="Using with scrollable tables" />
       <Txt>
-        By default, a {MANTINE_CONTEXTMENU_PRODUCT_NAME} will automatically close when the user clicks anywhere on the
-        page, hits the <Code>Escape</Code> key, scrolls the or resizes the browser window. However, when using a{' '}
-        <InternalLink to="/examples/scrollable-vs-auto-height">scrollable</InternalLink> DataTable, you’ll need to close
-        the context-menu when the user scrolls the table by passing the{' '}
+        By default, a <ExternalLink to={MANTINE_CONTEXTMENU_LINK}>{MANTINE_CONTEXTMENU_PRODUCT_NAME}</ExternalLink> will
+        automatically place an overlay over the entire page and close when the user clicks it, hits the{' '}
+        <Code>Escape</Code> key, scrolls the or resizes the browser window. However, when using a{' '}
+        <InternalLink to="/examples/scrollable-vs-auto-height">scrollable</InternalLink> DataTable, the user can still
+        scroll the table using the arrow keys, so you might need to close the context-menu when the user scrolls the
+        table by passing the{' '}
         <ExternalLink to={`${MANTINE_CONTEXTMENU_LINK}/examples/imperative-hiding/`}>
           <Code>hideContextMenu</Code> function
         </ExternalLink>{' '}
