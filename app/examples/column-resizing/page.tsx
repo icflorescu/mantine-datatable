@@ -1,6 +1,8 @@
 import { Code } from '@mantine/core';
 import type { Route } from 'next';
+import { PRODUCT_NAME, REPO_LINK } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
+import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
@@ -24,7 +26,11 @@ export default async function DraggingExamplePage() {
   return (
     <>
       <PageTitle of={PATH} />
-
+      <Txt>
+        Starting with <Code>v7.3.1</Code>, {PRODUCT_NAME} supports column toggling and drag-and-drop reordering, thanks
+        to the <ExternalLink to={`${REPO_LINK}/pull/490`}>outstanding work</ExternalLink> of{' '}
+        <ExternalLink to="https://github.com/gfazioli">Giovambattista Fazioli</ExternalLink>.
+      </Txt>
       <ResizingExample />
       <Txt>
         In order to enable <strong>column resizing</strong> you’ll have to:
@@ -46,19 +52,15 @@ export default async function DraggingExamplePage() {
         The default width of the columns is the <Code>width</Code> in which they are defined in the <Code>columns</Code>{' '}
         prop.
       </Txt>
-
       <Txt info>
         Of course, you can reset the column width to the default value by using the <Code>resetColumnsWidth()</Code>{' '}
         function.
         <br />
         You may also set up the column with to <Code>initial</Code> by double-clicking on the resize handle.
       </Txt>
-
       <PageSubtitle value="Complex usage" />
       <ResizingComplexExample />
-
       <CodeBlock code={code['ResizingComplexExample.tsx']} />
-
       <PageNavigation of={PATH} />
     </>
   );
