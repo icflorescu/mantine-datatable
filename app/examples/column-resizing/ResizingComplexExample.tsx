@@ -35,7 +35,7 @@ export default function ResizingComplexExample() {
     columns: [
       { accessor: 'name', ...props },
       { accessor: 'streetAddress', ...props },
-      { accessor: 'city', ...props },
+      { accessor: 'city', ellipsis: true, ...props },
       { accessor: 'state', textAlign: 'right', ...props },
     ],
   });
