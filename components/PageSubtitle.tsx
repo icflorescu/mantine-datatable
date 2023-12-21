@@ -13,8 +13,8 @@ export function PageSubtitle({ value }: PageSubtitleProps) {
   const id = kebabCase(value);
 
   return (
-    <Title className={classes.root} order={3}>
-      <a className={classes.anchor} id={id} onClick={() => (location.hash = id)}>
+    <Title id={id} className={classes.root} order={3}>
+      <a className={classes.anchor} onClick={() => (location.hash = id)}>
         {value}
         <IconLink className={classes.icon} />
       </a>

@@ -49,7 +49,7 @@ export default async function DraggingExamplePage() {
           add a <Code>draggable: true</Code> property to each <strong>dragging candidate</strong> column;
         </li>
         <li>
-          use <Code>useDragToggleColumns()</Code> hook to get the sorted columns.
+          use the <Code>useDataTableColumns()</Code> hook to get the sorted columns.
         </li>
       </UnorderedList>
       <CodeBlock code={code['DraggingExample.tsx']} />
@@ -71,7 +71,7 @@ export default async function DraggingExamplePage() {
           add a <Code>toggleable: true</Code> property to each <strong>toggling candidate</strong> column;
         </li>
         <li>
-          use <Code>useDragToggleColumns()</Code> hook to get the sorted columns.
+          use the <Code>useDataTableColumns()</Code> hook to get the sorted columns.
         </li>
       </UnorderedList>
       <CodeBlock code={code['TogglingExample.tsx']} />
