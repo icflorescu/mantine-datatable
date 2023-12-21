@@ -16,7 +16,7 @@ export default function ResizingExample() {
     columns: [
       { accessor: 'name', width: 100, resizable: true },
       { accessor: 'streetAddress', resizable: true },
-      { accessor: 'city', resizable: true },
+      { accessor: 'city', ellipsis: true, resizable: true },
       { accessor: 'state', textAlign: 'right' },
     ],
   });
