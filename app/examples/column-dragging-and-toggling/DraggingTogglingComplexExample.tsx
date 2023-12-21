@@ -1,7 +1,7 @@
 'use client';
 
 import { IconColumnRemove, IconColumns1 } from '@tabler/icons-react';
-import { DataTable, useDragToggleColumns, type DataTableSortStatus } from '__PACKAGE__';
+import { DataTable, useDataTableColumns, type DataTableSortStatus } from '__PACKAGE__';
 import sortBy from 'lodash/sortBy';
 import { useContextMenu } from 'mantine-contextmenu';
 import { useEffect, useState } from 'react';
@@ -24,7 +24,7 @@ export default function DraggingTogglingComplexExample() {
 
   const key = 'toggleable-reset-example';
 
-  const { effectiveColumns, resetColumnsOrder, resetColumnsToggle } = useDragToggleColumns({
+  const { effectiveColumns, resetColumnsOrder, resetColumnsToggle } = useDataTableColumns({
     key,
     columns: [
       { accessor: 'name', width: '40%', toggleable: true, draggable: true, sortable: true },

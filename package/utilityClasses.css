@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.mantine-datatable-context-menu-cursor {
+  cursor: context-menu;
+}
+
 .mantine-datatable-text-selection-disabled {
   user-select: none;
 }

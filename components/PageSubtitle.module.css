@@ -13,7 +13,7 @@
 
 .anchor {
   display: inline-block;
-  padding-top: calc(var(--app-shell-header-height) + var(--mantine-spacing-md));
+  margin-top: calc(var(--app-shell-header-height) + var(--mantine-spacing-md));
   pointer-events: all;
   cursor: pointer;
   &:hover {

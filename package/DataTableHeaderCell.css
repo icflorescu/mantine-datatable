@@ -40,6 +40,39 @@
   }
 }
 
+.mantine-datatable-header-cell-resizable {
+  position: relative;
+}
+
+.mantine-datatable-header-resizable-handle {
+  position: absolute;
+  cursor: 'col-resize';
+  top: 0;
+  bottom: 0;
+  width: rem(8px);
+  background: inherit;
+  cursor: col-resize;
+  z-index: 1;
+  transform: translateX(50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  &::after {
+    position: absolute;
+    content: '';
+    top: rem(1px);
+    bottom: rem(1px);
+    left: rem(2px);
+    border-right: rem(4px) dotted light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  }
+  &:hover::after {
+    border-color: var(--mantine-primary-color-6);
+  }
+}
+
+tr:hover .mantine-datatable-header-resizable-handle {
+  opacity: 1;
+}
+
 .mantine-datatable-header-cell-sortable-group {
   gap: 0.25em;
 }

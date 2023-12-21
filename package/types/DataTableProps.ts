@@ -133,6 +133,13 @@ export type DataTableProps<T = Record<string, unknown>> = {
   onCellClick?: DataTableCellClickHandler<T>;
 
   /**
+   * Function to call when a row cell is double-clicked.
+   * Receives an object with the current record, its index in `records`, the current column,
+   * its index in `columns` and the click event as properties.
+   */
+  onCellDoubleClick?: DataTableCellClickHandler<T>;
+
+  /**
    * Function to call when the user right-clicks on a row cell.
    * Receives an object with the current record, its index in `records`, the current column,
    * its index in `columns` and the click event as properties.
@@ -145,6 +152,13 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * as properties.
    */
   onRowClick?: DataTableRowClickHandler<T>;
+
+  /**
+   * Function to call when a row is double-clicked.
+   * Receives an object with the current record, its index in `records` and the click event
+   * as properties.
+   */
+  onRowDoubleClick?: DataTableRowClickHandler<T>;
 
   /**
    * Function to call when the user right-clicks on a row.

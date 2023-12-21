@@ -153,8 +153,8 @@ export default async function PaginationExamplePage() {
       <PageSubtitle value="Using pagination control props" />
       <Txt>
         You can provide additional props to pagination controls by using the <Code>getPaginationControlProps</Code>{' '}
-        callback. For example, if you’re not happy with the default accesibility aria-labels, you can override them like
-        so:
+        callback. For example, if you’re not happy with the default accessibility aria-labels, you can override them
+        like so:
       </Txt>
       <CodeBlock code={code['PaginationExampleWithControlProps.tsx']} />
       <PaginationExampleWithControlProps />

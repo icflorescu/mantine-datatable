@@ -74,7 +74,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
       )}
       <TableTr>
         {!groups && allRecordsSelectorCell}
-        {columns.map(({ hidden, ...columnProps }) => {
+        {columns.map(({ hidden, ...columnProps }, index) => {
           if (hidden) return null;
 
           const {
@@ -86,6 +86,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
             sortable,
             draggable,
             toggleable,
+            resizable,
             titleClassName,
             titleStyle,
             filter,
@@ -105,6 +106,9 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               sortable={sortable}
               draggable={draggable}
               toggleable={toggleable}
+              // we won't display the resize handle for the last column
+              // to avoid overflow render issues
+              resizable={resizable && index < columns.length - 1}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
               onSortStatusChange={onSortStatusChange}

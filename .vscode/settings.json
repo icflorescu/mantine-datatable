@@ -1,4 +1,5 @@
 {
+  "editor.unicodeHighlight.ambiguousCharacters": false,
   "postcss.validate": false,
   "cssVariables.lookupFiles": ["node_modules/@mantine/core/esm/index.css"]
 }

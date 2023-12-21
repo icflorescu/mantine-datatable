@@ -1,6 +1,6 @@
 import { Code } from '@mantine/core';
 import type { Route } from 'next';
-import { REPO_LINK } from '~/app/config';
+import { PRODUCT_NAME, REPO_LINK } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
@@ -31,8 +31,8 @@ export default async function DraggingExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        Starting with <Code>v7.3</Code>, Mantine DataTable supports column toggling and drag-and-drop reordering, thanks
-        to the <ExternalLink to={`${REPO_LINK}/pull/483`}>outstanding work</ExternalLink> of{' '}
+        Starting with <Code>v7.3</Code>, {PRODUCT_NAME} supports column toggling and drag-and-drop reordering, thanks to
+        the <ExternalLink to={`${REPO_LINK}/pull/483`}>outstanding work</ExternalLink> of{' '}
         <ExternalLink to="https://github.com/gfazioli">Giovambattista Fazioli</ExternalLink>.
       </Txt>
       <PageSubtitle value="Column drag-and-drop reordering" />
@@ -49,7 +49,7 @@ export default async function DraggingExamplePage() {
           add a <Code>draggable: true</Code> property to each <strong>dragging candidate</strong> column;
         </li>
         <li>
-          use <Code>useDragToggleColumns()</Code> hook to get the sorted columns.
+          use the <Code>useDataTableColumns()</Code> hook to get the sorted columns.
         </li>
       </UnorderedList>
       <CodeBlock code={code['DraggingExample.tsx']} />
@@ -71,7 +71,7 @@ export default async function DraggingExamplePage() {
           add a <Code>toggleable: true</Code> property to each <strong>toggling candidate</strong> column;
         </li>
         <li>
-          use <Code>useDragToggleColumns()</Code> hook to get the sorted columns.
+          use the <Code>useDataTableColumns()</Code> hook to get the sorted columns.
         </li>
       </UnorderedList>
       <CodeBlock code={code['TogglingExample.tsx']} />

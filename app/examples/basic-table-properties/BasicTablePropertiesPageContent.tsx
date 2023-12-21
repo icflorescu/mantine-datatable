@@ -142,11 +142,11 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
           <Code hidden>Striped</Code>
           <Switch
             className={classes.control}
-            label="Hightlight on hover"
+            label="Highlight on hover"
             checked={highlightOnHover}
             onChange={() => setHighlightOnHover((v) => !v)}
           />
-          <Code hidden>Hightlight on hover, highlightOnHover</Code>
+          <Code hidden>Highlight on hover, highlightOnHover</Code>
           <Switch
             className={classes.control}
             label="Table border"

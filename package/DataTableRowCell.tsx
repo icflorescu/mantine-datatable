@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
 import {
+  CONTEXT_MENU_CURSOR,
   ELLIPSIS,
   NOWRAP,
   POINTER_CURSOR,
@@ -21,6 +22,7 @@ type DataTableRowCellProps<T> = {
     | ((record: T, index: number, accessor: keyof T | (string & NonNullable<unknown>)) => React.ReactNode)
     | undefined;
   onClick: React.MouseEventHandler<HTMLTableCellElement> | undefined;
+  onDoubleClick: React.MouseEventHandler<HTMLTableCellElement> | undefined;
   onContextMenu: React.MouseEventHandler<HTMLTableCellElement> | undefined;
 } & Pick<
   DataTableColumn<T>,
@@ -34,6 +36,7 @@ export function DataTableRowCell<T>({
   record,
   index,
   onClick,
+  onDoubleClick,
   onContextMenu,
   noWrap,
   ellipsis,
@@ -51,7 +54,8 @@ export function DataTableRowCell<T>({
         {
           [NOWRAP]: noWrap || ellipsis,
           [ELLIPSIS]: ellipsis,
-          [POINTER_CURSOR]: onClick,
+          [POINTER_CURSOR]: onClick || onDoubleClick,
+          [CONTEXT_MENU_CURSOR]: onContextMenu,
           [TEXT_ALIGN_LEFT]: textAlign === 'left',
           [TEXT_ALIGN_CENTER]: textAlign === 'center',
           [TEXT_ALIGN_RIGHT]: textAlign === 'right',
@@ -67,14 +71,15 @@ export function DataTableRowCell<T>({
         style,
       ]}
       onClick={onClick}
+      onDoubleClick={onDoubleClick}
       onContextMenu={onContextMenu}
       {...customCellAttributes?.(record, index)}
     >
       {render
         ? render(record, index)
         : defaultRender
-        ? defaultRender(record, index, accessor)
-        : (getValueAtPath(record, accessor) as React.ReactNode)}
+          ? defaultRender(record, index, accessor)
+          : (getValueAtPath(record, accessor) as React.ReactNode)}
     </TableTd>
   );
 }

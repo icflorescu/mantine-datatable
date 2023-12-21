@@ -12,7 +12,7 @@ import type {
   DataTableRowClickHandler,
   DataTableSelectionTrigger,
 } from './types';
-import { POINTER_CURSOR } from './utilityClasses';
+import { CONTEXT_MENU_CURSOR, POINTER_CURSOR } from './utilityClasses';
 
 type DataTableRowProps<T> = {
   record: T;
@@ -29,8 +29,10 @@ type DataTableRowProps<T> = {
   isRecordSelectable: ((record: T, index: number) => boolean) | undefined;
   getSelectionCheckboxProps: (record: T, index: number) => CheckboxProps;
   onClick: DataTableRowClickHandler<T> | undefined;
+  onDoubleClick: DataTableRowClickHandler<T> | undefined;
   onContextMenu: DataTableRowClickHandler<T> | undefined;
   onCellClick: DataTableCellClickHandler<T> | undefined;
+  onCellDoubleClick: DataTableCellClickHandler<T> | undefined;
   onCellContextMenu: DataTableCellClickHandler<T> | undefined;
   expansion: ReturnType<typeof useRowExpansion<T>>;
   customAttributes?: (record: T, index: number) => Record<string, unknown>;
@@ -60,8 +62,10 @@ export function DataTableRow<T>({
   isRecordSelectable,
   getSelectionCheckboxProps,
   onClick,
+  onDoubleClick,
   onContextMenu,
   onCellClick,
+  onCellDoubleClick,
   onCellContextMenu,
   expansion,
   customAttributes,
@@ -78,7 +82,8 @@ export function DataTableRow<T>({
       <TableTr
         className={clsx(
           'mantine-datatable-row',
-          { [POINTER_CURSOR]: onClick || expansion?.expandOnClick },
+          { [POINTER_CURSOR]: onClick || onDoubleClick || expansion?.expandOnClick },
+          { [CONTEXT_MENU_CURSOR]: onContextMenu },
           typeof className === 'function' ? className(record, index) : className
         )}
         data-selected={selectionChecked || undefined}
@@ -95,6 +100,7 @@ export function DataTableRow<T>({
           }
           onClick?.({ event: e, record, index });
         }}
+        onDoubleClick={onDoubleClick ? (e) => onDoubleClick({ event: e, record, index }) : undefined}
         onContextMenu={onContextMenu ? (e) => onContextMenu({ event: e, record, index }) : undefined}
         style={[
           color || backgroundColor
@@ -149,6 +155,11 @@ export function DataTableRow<T>({
               onClick={
                 onCellClick
                   ? (event) => onCellClick({ event, record, index, column: columnProps, columnIndex })
+                  : undefined
+              }
+              onDoubleClick={
+                onCellDoubleClick
+                  ? (event) => onCellDoubleClick({ event, record, index, column: columnProps, columnIndex })
                   : undefined
               }
               onContextMenu={

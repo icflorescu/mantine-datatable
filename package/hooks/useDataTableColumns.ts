@@ -1,6 +1,6 @@
 import { useLocalStorage } from '@mantine/hooks';
 import { useMemo } from 'react';
-import { DataTableColumn } from '../types/DataTableColumn';
+import type { DataTableColumn } from '../types/DataTableColumn';
 
 export type DataTableColumnToggle = {
   accessor: string | undefined;
@@ -9,11 +9,13 @@ export type DataTableColumnToggle = {
   toggled: boolean;
 };
 
+type DataTableColumnWidth = Record<string, string | number>;
+
 /**
- * Hook to handle the drag-and-drop column reordering and column toggling.
+ * Hook to handle column features such as drag-and-drop reordering, visibility toggling and resizing.
  * @see https://icflorescu.github.io/mantine-datatable/examples/column-dragging-and-toggling/
  */
-export const useDragToggleColumns = <T>({
+export const useDataTableColumns = <T>({
   key,
   columns = [],
 }: {
@@ -28,6 +30,10 @@ export const useDragToggleColumns = <T>({
 }) => {
   // Default columns id ordered is the order of the columns in the array
   const defaultColumnsOrder = (columns && columns.map((column) => column.accessor)) || [];
+
+  // create an array of object with key = accessor and value = width
+  const defaultColumnsWidth =
+    (columns && columns.map((column) => ({ [column.accessor]: column.width ?? 'auto' }))) || [];
 
   // Default columns id toggled is the array of columns which have the toggleable property set to true
   const defaultColumnsToggle =
@@ -53,11 +59,20 @@ export const useDragToggleColumns = <T>({
     getInitialValueInEffect: true,
   });
 
+  // Store the columns with in localStorage
+  const [columnsWidth, setColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
+    key: `${key}-columns-width`,
+    defaultValue: defaultColumnsWidth as DataTableColumnWidth[],
+    getInitialValueInEffect: true,
+  });
+
   // we won't use the "remove" function from useLocalStorage() because
   // we got issue with rendering
   const resetColumnsOrder = () => setColumnsOrder(defaultColumnsOrder as string[]);
 
   const resetColumnsToggle = () => setColumnsToggle(defaultColumnsToggle as DataTableColumnToggle[]);
+
+  const resetColumnsWidth = () => setColumnsWidth(defaultColumnsWidth as DataTableColumnWidth[]);
 
   const effectiveColumns = useMemo(() => {
     if (!columnsOrder) {
@@ -72,8 +87,30 @@ export const useDragToggleColumns = <T>({
         })?.toggled;
       });
 
-    return result;
-  }, [columns, columnsOrder, columnsToggle]);
+    const newWith = result.map((column) => {
+      return {
+        ...column,
+        width: columnsWidth.find((width) => {
+          return width[column?.accessor as string];
+        })?.[column?.accessor as string],
+      };
+    });
+
+    return newWith;
+  }, [columns, columnsOrder, columnsToggle, columnsWidth]);
+
+  const setColumnWidth = (accessor: string, width: string | number) => {
+    const newColumnsWidth = columnsWidth.map((column) => {
+      if (!column[accessor]) {
+        return column;
+      }
+      return {
+        [accessor]: width,
+      };
+    });
+
+    setColumnsWidth(newColumnsWidth);
+  };
 
   return {
     effectiveColumns: effectiveColumns as DataTableColumn<T>[],
@@ -87,5 +124,17 @@ export const useDragToggleColumns = <T>({
     columnsToggle: columnsToggle as DataTableColumnToggle[],
     setColumnsToggle,
     resetColumnsToggle,
+
+    // Resize handling
+    columnsWidth,
+    setColumnsWidth,
+    setColumnWidth,
+    resetColumnsWidth,
   } as const;
 };
+
+/**
+ * @deprecated This hook is deprecated and will be removed in a future version. Please use the `useDataTableColumns` hook instead.
+ */
+export const useDragToggleColumns = useDataTableColumns;
+// todo remove the above in a future version (maybe 7.4?)
