@@ -47,18 +47,30 @@
 .mantine-datatable-header-resizable-knob {
   position: absolute;
   cursor: 'col-resize';
-  top: rem(1px);
-  bottom: rem(1px);
-  width: rem(7px);
+  top: 0;
+  bottom: 0;
+  width: rem(8px);
+  background: inherit;
   cursor: col-resize;
   z-index: 1;
-  background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
+  transform: translateX(50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  &::after {
+    position: absolute;
+    content: '';
+    top: rem(1px);
+    bottom: rem(1px);
+    left: rem(2px);
+    border-right: rem(4px) dotted light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  }
+  &:hover::after {
+    border-color: var(--mantine-primary-color-6);
+  }
 }
 
-[data-with-column-border='true'] {
-  .mantine-datatable-header-resizable-knob {
-    /* background-color: transparent; */
-  }
+tr:hover .mantine-datatable-header-resizable-knob {
+  opacity: 1;
 }
 
 .mantine-datatable-header-cell-sortable-group {

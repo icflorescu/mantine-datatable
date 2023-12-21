@@ -73,14 +73,13 @@ export const DataTableResizableHeaderKnob = (props: DataTableResizableHeaderCell
   return (
     <div
       ref={dragRef}
+      // we have to stop propagation so that the column doesn't
+      // accidentally get sorted when the user is resizing it
       onClick={(event) => event.stopPropagation()}
       onMouseDown={handleDragStart}
       onDoubleClick={handleDoubleClick}
       className="mantine-datatable-header-resizable-knob"
-      style={{
-        right: rem(deltaX - 4),
-        //backgroundColor: 'orange',
-      }}
+      style={{ right: rem(deltaX) }}
     ></div>
   );
 };
