@@ -1,3 +1,4 @@
+import { rem } from '@mantine/core';
 import { MutableRefObject, useRef, useState } from 'react';
 import { useDataTableDragToggleColumnsContext } from './DataTableDragToggleColumns.context';
 
@@ -76,7 +77,7 @@ export const DataTableResizableHeaderKnob = (props: DataTableResizableHeaderCell
       onDoubleClick={handleDoubleClick}
       className="mantine-datatable-header-resizable-knob"
       style={{
-        right: deltaX,
+        right: rem(deltaX),
         //backgroundColor: 'orange',
       }}
     ></div>
