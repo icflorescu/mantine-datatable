@@ -86,8 +86,10 @@ export function DataTable<T>({
   striped,
   noHeader,
   onRowClick,
+  onRowDoubleClick,
   onRowContextMenu,
   onCellClick,
+  onCellDoubleClick,
   onCellContextMenu,
   onScroll,
   onScrollToTop,
@@ -387,7 +389,9 @@ export function DataTable<T>({
                       isRecordSelectable={isRecordSelectable}
                       getSelectionCheckboxProps={getRecordSelectionCheckboxProps}
                       onClick={onRowClick}
+                      onDoubleClick={onRowDoubleClick}
                       onCellClick={onCellClick}
+                      onCellDoubleClick={onCellDoubleClick}
                       onContextMenu={onRowContextMenu}
                       onCellContextMenu={onCellContextMenu}
                       expansion={rowExpansionInfo}

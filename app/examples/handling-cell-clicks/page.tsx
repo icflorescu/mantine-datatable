@@ -4,18 +4,23 @@ import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
+import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
-import { getRouteMetadata } from '~/lib/utils';
+import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { HandlingCellClicksExample } from './HandlingCellClicksExample';
+import { HandlingCellDoubleClicksExample } from './HandlingCellDoubleClicksExample';
 
 const PATH: Route = '/examples/handling-cell-clicks';
 
 export const metadata = getRouteMetadata(PATH);
 
 export default async function HandlingCellClicksExamplePage() {
-  const code = await readCodeFile<string>(`${PATH}/HandlingCellClicksExample.tsx`);
+  const code = await allPromiseProps({
+    'HandlingCellClicksExample.tsx': readCodeFile<string>(`${PATH}/HandlingCellClicksExample.tsx`),
+    'HandlingCellDoubleClicksExample.tsx': readCodeFile<string>(`${PATH}/HandlingCellDoubleClicksExample.tsx`),
+  });
 
   return (
     <>
@@ -25,7 +30,14 @@ export default async function HandlingCellClicksExamplePage() {
       <Txt>
         Provide a handler called <Code>onCellClick</Code> to the DataTable component, like so:
       </Txt>
-      <CodeBlock code={code} />
+      <CodeBlock code={code['HandlingCellClicksExample.tsx']} />
+      <PageSubtitle value="Double-clicks" />
+      <Txt>
+        The <Code>onCellDoubleClick</Code> handler works in a similar way:
+      </Txt>
+      <CodeBlock code={code['HandlingCellDoubleClicksExample.tsx']} />
+      <Txt>Double-click on a cell to see it in action:</Txt>
+      <HandlingCellDoubleClicksExample />
       <Txt info title="Heads up">
         <Box mb="sm">
           When handling row clicks, you might want to{' '}
