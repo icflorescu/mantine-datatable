@@ -73,11 +73,12 @@ export const DataTableResizableHeaderKnob = (props: DataTableResizableHeaderCell
   return (
     <div
       ref={dragRef}
+      onClick={(event) => event.stopPropagation()}
       onMouseDown={handleDragStart}
       onDoubleClick={handleDoubleClick}
       className="mantine-datatable-header-resizable-knob"
       style={{
-        right: rem(deltaX),
+        right: rem(deltaX - 4),
         //backgroundColor: 'orange',
       }}
     ></div>
