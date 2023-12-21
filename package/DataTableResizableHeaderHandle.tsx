@@ -1,5 +1,5 @@
 import { rem } from '@mantine/core';
-import { MutableRefObject, useRef, useState } from 'react';
+import { useRef, useState, type MutableRefObject } from 'react';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 
 type DataTableResizableHeaderHandleProps = {

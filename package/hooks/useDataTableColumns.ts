@@ -1,6 +1,6 @@
 import { useLocalStorage } from '@mantine/hooks';
 import { useMemo } from 'react';
-import { DataTableColumn } from '../types/DataTableColumn';
+import type { DataTableColumn } from '../types/DataTableColumn';
 
 export type DataTableColumnToggle = {
   accessor: string | undefined;

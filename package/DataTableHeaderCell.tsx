@@ -5,12 +5,12 @@ import {
   Checkbox,
   Flex,
   Group,
-  MantineStyleProp,
   Popover,
   PopoverDropdown,
   PopoverTarget,
   Stack,
   TableTh,
+  type MantineStyleProp,
   type MantineTheme,
 } from '@mantine/core';
 import clsx from 'clsx';
