@@ -1,15 +1,26 @@
 'use client';
 
 import { Button, Group, Stack, Switch } from '@mantine/core';
-import { DataTable, useDragToggleColumns } from '__PACKAGE__';
-import { useState } from 'react';
+import { DataTable, useDragToggleColumns, type DataTableSortStatus } from '__PACKAGE__';
+import { sortBy } from 'lodash';
+import { useEffect, useState } from 'react';
 import { companies, type Company } from '~/data';
 
 export default function ResizingComplexExample() {
   const key = 'resize-complex-example';
 
-  const [withTableBorder, setWithTableBorder] = useState<boolean>(true);
+  const [sortStatus, setSortStatus] = useState<DataTableSortStatus<Company>>({
+    columnAccessor: 'name',
+    direction: 'asc',
+  });
+  const [records, setRecords] = useState(sortBy(companies, 'name'));
 
+  useEffect(() => {
+    const data = sortBy(companies, sortStatus.columnAccessor);
+    setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
+  }, [sortStatus]);
+
+  const [withTableBorder, setWithTableBorder] = useState<boolean>(true);
   const [withColumnBorders, setWithColumnBorders] = useState<boolean>(true);
 
   const props = {
@@ -35,8 +46,10 @@ export default function ResizingComplexExample() {
         withTableBorder={withTableBorder}
         withColumnBorders={withColumnBorders}
         storeColumnsKey={key}
-        records={companies}
+        records={records}
         columns={effectiveColumns}
+        sortStatus={sortStatus}
+        onSortStatusChange={setSortStatus}
       />
       <Group grow justify="space-between">
         <Group justify="flex-start">
