@@ -47,9 +47,9 @@
 .mantine-datatable-header-resizable-knob {
   position: absolute;
   cursor: 'col-resize';
-  top: 1px;
-  bottom: 1px;
-  width: 2px;
+  top: rem(1px);
+  bottom: rem(1px);
+  width: rem(2px);
   cursor: col-resize;
   z-index: 1;
   background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
