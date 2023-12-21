@@ -15,11 +15,11 @@ import {
 } from '@mantine/core';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
-import { useDataTableDragToggleColumnsContext } from './DataTableDragToggleColumns.context';
+import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
 import { DataTableResizableHeaderHandle } from './DataTableResizableHeaderHandle';
 import { useMediaQueryStringOrFunction } from './hooks';
-import { DataTableColumnToggle } from './hooks/useDragToggleColumns';
+import type { DataTableColumnToggle } from './hooks/useDataTableColumns';
 import { IconArrowUp } from './icons/IconArrowUp';
 import { IconArrowsVertical } from './icons/IconArrowsVertical';
 import { IconGripVertical } from './icons/IconGripVertical';
@@ -60,7 +60,7 @@ export function DataTableHeaderCell<T>({
   filtering,
 }: DataTableHeaderCellProps<T>) {
   const { setSourceColumn, setTargetColumn, swapColumns, columnsToggle, setColumnsToggle } =
-    useDataTableDragToggleColumnsContext();
+    useDataTableColumnsContext();
 
   const [dragOver, setDragOver] = useState<boolean>(false);
 

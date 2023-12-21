@@ -12,10 +12,10 @@ export type DataTableColumnToggle = {
 type DataTableColumnWidth = Record<string, string | number>;
 
 /**
- * Hook to handle the drag-and-drop column reordering and column toggling.
+ * Hook to handle column features such as drag-and-drop reordering, visibility toggling and resizing.
  * @see https://icflorescu.github.io/mantine-datatable/examples/column-dragging-and-toggling/
  */
-export const useDragToggleColumns = <T>({
+export const useDataTableColumns = <T>({
   key,
   columns = [],
 }: {
@@ -132,3 +132,9 @@ export const useDragToggleColumns = <T>({
     resetColumnsWidth,
   } as const;
 };
+
+/**
+ * @deprecated This hook is deprecated and will be removed in a future version. Please use the `useDataTableColumns` hook instead.
+ */
+export const useDragToggleColumns = useDataTableColumns;
+// todo remove the above in a future version (maybe 7.4?)

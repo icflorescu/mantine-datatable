@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Group, Stack, Switch } from '@mantine/core';
-import { DataTable, useDragToggleColumns } from '__PACKAGE__';
+import { DataTable, useDataTableColumns } from '__PACKAGE__';
 import { useState } from 'react';
 import { companies, type Company } from '~/data';
 
@@ -11,7 +11,7 @@ export default function ResizingExample() {
   const [withTableBorder, setWithTableBorder] = useState<boolean>(true);
   const [withColumnBorders, setWithColumnBorders] = useState<boolean>(true);
 
-  const { effectiveColumns, resetColumnsWidth } = useDragToggleColumns<Company>({
+  const { effectiveColumns, resetColumnsWidth } = useDataTableColumns<Company>({
     key,
     columns: [
       { accessor: 'name', width: 100, resizable: true },

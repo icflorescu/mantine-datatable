@@ -1,6 +1,6 @@
 import { rem } from '@mantine/core';
 import { MutableRefObject, useRef, useState } from 'react';
-import { useDataTableDragToggleColumnsContext } from './DataTableDragToggleColumns.context';
+import { useDataTableColumnsContext } from './DataTableColumns.context';
 
 type DataTableResizableHeaderHandleProps = {
   accessor: string;
@@ -14,7 +14,7 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
 
   const [deltaX, setDeltaX] = useState<number>(0);
 
-  const { setColumnWidth } = useDataTableDragToggleColumnsContext();
+  const { setColumnWidth } = useDataTableColumnsContext();
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();

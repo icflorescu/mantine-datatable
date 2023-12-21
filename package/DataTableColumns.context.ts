@@ -2,7 +2,7 @@ import { createSafeContext } from '@mantine/core';
 import { Dispatch, SetStateAction } from 'react';
 import { DataTableColumnToggle } from './hooks';
 
-interface DataTableDragToggleColumnsContext {
+interface DataTableColumnsContext {
   // accessor of the column which is currently dragged
   sourceColumn: string;
   setSourceColumn: Dispatch<SetStateAction<string>>;
@@ -25,7 +25,6 @@ interface DataTableDragToggleColumnsContext {
   resetColumnsWidth: () => void;
 }
 
-export const [DataTableDragToggleColumnsContextProvider, useDataTableDragToggleColumnsContext] =
-  createSafeContext<DataTableDragToggleColumnsContext>(
-    'useDataTableDragToggleColumnsContext must be used within DataTableDragToggleColumnOrdersProvider'
-  );
+export const [DataTableColumnsContextProvider, useDataTableColumnsContext] = createSafeContext<DataTableColumnsContext>(
+  'useDataTableColumnsContext must be used within DataTableColumnProvider'
+);

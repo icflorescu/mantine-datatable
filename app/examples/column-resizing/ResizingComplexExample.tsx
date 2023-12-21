@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Group, Stack, Switch } from '@mantine/core';
-import { DataTable, useDragToggleColumns, type DataTableSortStatus } from '__PACKAGE__';
+import { DataTable, useDataTableColumns, type DataTableSortStatus } from '__PACKAGE__';
 import { sortBy } from 'lodash';
 import { useEffect, useState } from 'react';
 import { companies, type Company } from '~/data';
@@ -30,7 +30,7 @@ export default function ResizingComplexExample() {
     draggable: true,
   };
 
-  const { effectiveColumns, resetColumnsWidth, resetColumnsOrder, resetColumnsToggle } = useDragToggleColumns<Company>({
+  const { effectiveColumns, resetColumnsWidth, resetColumnsOrder, resetColumnsToggle } = useDataTableColumns<Company>({
     key,
     columns: [
       { accessor: 'name', ...props },

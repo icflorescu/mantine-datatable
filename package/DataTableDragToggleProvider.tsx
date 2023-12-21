@@ -1,13 +1,10 @@
 'use client';
 
-import { Dispatch, SetStateAction, useState } from 'react';
-import { DataTableDragToggleColumnsContextProvider } from './DataTableDragToggleColumns.context';
+import { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
+import { DataTableColumnsContextProvider } from './DataTableColumns.context';
 import { DataTableColumnToggle } from './hooks';
 
-type DataTableDragToggleColumnsProviderProps = {
-  // React children
-  children: React.ReactNode;
-
+type DataTableColumnsProviderProps = PropsWithChildren<{
   columnsOrder: string[];
   setColumnsOrder: Dispatch<SetStateAction<string[]>>;
   resetColumnsOrder: () => void;
@@ -18,9 +15,9 @@ type DataTableDragToggleColumnsProviderProps = {
 
   setColumnWidth: (accessor: string, width: string | number) => void;
   resetColumnsWidth: () => void;
-};
+}>;
 
-export const DataTableDragToggleColumnsProvider = (props: DataTableDragToggleColumnsProviderProps) => {
+export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) => {
   const {
     children,
     columnsOrder,
@@ -35,9 +32,8 @@ export const DataTableDragToggleColumnsProvider = (props: DataTableDragToggleCol
     resetColumnsWidth,
   } = props;
 
-  const [sourceColumn, setSourceColumn] = useState<string>('');
-
-  const [targetColumn, setTargetColumn] = useState<string>('');
+  const [sourceColumn, setSourceColumn] = useState('');
+  const [targetColumn, setTargetColumn] = useState('');
 
   const swapColumns = () => {
     if (!columnsOrder || !setColumnsOrder || !sourceColumn || !targetColumn) {
@@ -57,7 +53,7 @@ export const DataTableDragToggleColumnsProvider = (props: DataTableDragToggleCol
   };
 
   return (
-    <DataTableDragToggleColumnsContextProvider
+    <DataTableColumnsContextProvider
       value={{
         sourceColumn,
         setSourceColumn,
@@ -74,6 +70,6 @@ export const DataTableDragToggleColumnsProvider = (props: DataTableDragToggleCol
       }}
     >
       {children}
-    </DataTableDragToggleColumnsContextProvider>
+    </DataTableColumnsContextProvider>
   );
 };
