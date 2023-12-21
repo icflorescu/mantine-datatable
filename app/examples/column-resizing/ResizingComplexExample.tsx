@@ -20,8 +20,8 @@ export default function ResizingComplexExample() {
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 
-  const [withTableBorder, setWithTableBorder] = useState<boolean>(true);
-  const [withColumnBorders, setWithColumnBorders] = useState<boolean>(true);
+  const [withTableBorder, setWithTableBorder] = useState(true);
+  const [withColumnBorders, setWithColumnBorders] = useState(true);
 
   const props = {
     resizable: true,
