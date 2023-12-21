@@ -7,6 +7,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 - Implement column resizing (see [#490](https://github.com/icflorescu/mantine-datatable/pull/490));
 - Deprecate `useDragToggleColumns` hook in favor of `useDataTableColumns`;
+- Implement `onRowDoubleClick` and `onCellDoubleClick` callbacks;
 - Fix typos in the documentation;
 - Update deps to ensure compatibility with Mantine 7.3.2
 
