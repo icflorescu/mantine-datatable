@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.3.1 (2023-12-21)
+
+- Implement column resizing (see [#490](https://github.com/icflorescu/mantine-datatable/pull/490));
+- Deprecate `useDragToggleColumns` hook in favor of `useDataTableColumns`
+
 ## 7.3.0 (2023-12-07)
 
 - Implement column dragging and toggling (see [#483](https://github.com/icflorescu/mantine-datatable/pull/483));
