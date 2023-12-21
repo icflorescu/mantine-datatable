@@ -49,7 +49,7 @@
   cursor: 'col-resize';
   top: rem(1px);
   bottom: rem(1px);
-  width: rem(2px);
+  width: rem(7px);
   cursor: col-resize;
   z-index: 1;
   background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
@@ -57,7 +57,7 @@
 
 [data-with-column-border='true'] {
   .mantine-datatable-header-resizable-knob {
-    background-color: transparent;
+    /* background-color: transparent; */
   }
 }
 
