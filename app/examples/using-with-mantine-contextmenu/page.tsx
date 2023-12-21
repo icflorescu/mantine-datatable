@@ -79,7 +79,7 @@ export default async function UsingWithMantineContextMenuExamplePage() {
         <ExternalLink to={`${MANTINE_CONTEXTMENU_LINK}/examples/imperative-hiding/`}>
           <Code>hideContextMenu</Code> function
         </ExternalLink>{' '}
-        retuned by the <Code>useContextMenu</Code> hook to the <Code>onScroll</Code> property of the DataTable:
+        returned by the <Code>useContextMenu</Code> hook to the <Code>onScroll</Code> property of the DataTable:
       </Txt>
       <RowContextMenuOnScrollableTableExample />
       <Txt>Here’s the code for the example above:</Txt>
@@ -94,7 +94,7 @@ export default async function UsingWithMantineContextMenuExamplePage() {
       <CodeBlock code={code['CellContextMenuExample.tsx']} />
       <PageSubtitle value="Mixing row and cell context-menus" />
       <Txt>
-        You can also mix row and cell context-menus. In the example below, we’re shwing a context-menu for the{' '}
+        You can also mix row and cell context-menus. In the example below, we’re showing a context-menu for the{' '}
         <Code>name</Code> column and a different one for the row:
       </Txt>
       <RowAndCellContextMenuExample />

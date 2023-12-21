@@ -49,7 +49,7 @@ export default function ContributeAndSupportPage() {
       </ul>
       <PageSubtitle value="Please sponsor my work" />
       <Txt>
-        I built these projects out of passion, but the constand effort of spending so many hours on open-source
+        I built these projects out of passion, but the constant effort of spending so many hours on open-source
         development and maintenance takes its toll, and passion alone doesn’t pay the bills. So, if you find{' '}
         {PRODUCT_NAME} useful and you want to support its future development, please consider{' '}
         <ExternalLink to="https://github.com/sponsors/icflorescu">sponsoring my work</ExternalLink> ❤️.
@@ -68,7 +68,7 @@ export default function ContributeAndSupportPage() {
       <Txt warning>
         Be considerate when asking for a new feature!
         <br />
-        Is it really something that would be useful for other poeple, or just an edge case?
+        Is it really something that would be useful for other people, or just an edge case?
         <br />
         Keep in mind that I am not paid to work on this project, so I have to prioritize my time and effort.
       </Txt>

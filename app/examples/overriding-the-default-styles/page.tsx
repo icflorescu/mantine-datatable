@@ -124,7 +124,7 @@ export default async function OverridingTheDefaultStylesExamplePage() {
       <Txt>…will produce the following table:</Txt>
       <ColorsExample />
       <Txt>
-        There are even more ellaborate ways to destroy the default styling of {PRODUCT_NAME} besides setting its{' '}
+        There are even more elaborate ways to destroy the default styling of {PRODUCT_NAME} besides setting its{' '}
         <InternalLink to="/examples/basic-table-properties">basic properties</InternalLink> and the aforementioned
         colors.
       </Txt>
