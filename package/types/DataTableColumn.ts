@@ -45,6 +45,11 @@ export type DataTableColumn<T = Record<string, unknown>> = {
   toggleable?: boolean;
 
   /**
+   * If set to true, the column can be resized.
+   */
+  resizable?: boolean;
+
+  /**
    * If set to true, the column will be toggled by default.
    */
   defaultToggle?: boolean;

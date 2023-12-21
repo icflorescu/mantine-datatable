@@ -143,6 +143,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: dragging & toggling ${PRODUCT_NAME} columns`,
   },
   {
+    href: '/examples/column-resizing',
+    title: 'Column resizing',
+    description: `Example: resizing ${PRODUCT_NAME} columns`,
+  },
+  {
     href: '/examples/infinite-scrolling',
     title: 'Infinite scrolling',
     description: `Example: how to implement infinite scrolling with ${PRODUCT_NAME}`,

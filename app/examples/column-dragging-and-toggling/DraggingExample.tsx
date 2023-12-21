@@ -1,13 +1,13 @@
 'use client';
 
 import { Button, Group, Stack } from '@mantine/core';
-import { DataTable, useDragToggleColumns } from '__PACKAGE__';
+import { DataTable, useDataTableColumns } from '__PACKAGE__';
 import { companies, type Company } from '~/data';
 
 export default function DraggingExample() {
   const key = 'draggable-example';
 
-  const { effectiveColumns, resetColumnsOrder } = useDragToggleColumns<Company>({
+  const { effectiveColumns, resetColumnsOrder } = useDataTableColumns<Company>({
     key,
     columns: [
       { accessor: 'name', width: '40%', draggable: true },

@@ -1,7 +1,7 @@
 'use client';
 
 import { IconColumnRemove, IconColumns1 } from '@tabler/icons-react';
-import { DataTable, useDragToggleColumns } from '__PACKAGE__';
+import { DataTable, useDataTableColumns } from '__PACKAGE__';
 import { useContextMenu } from 'mantine-contextmenu';
 import { companies } from '~/data';
 
@@ -10,7 +10,7 @@ export default function DraggingTogglingResetExample() {
 
   const key = 'toggleable-reset-example';
 
-  const { effectiveColumns, resetColumnsOrder, resetColumnsToggle } = useDragToggleColumns({
+  const { effectiveColumns, resetColumnsOrder, resetColumnsToggle } = useDataTableColumns({
     key,
     columns: [
       { accessor: 'name', width: '40%', toggleable: true, draggable: true },

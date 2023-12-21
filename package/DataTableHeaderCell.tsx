@@ -5,20 +5,21 @@ import {
   Checkbox,
   Flex,
   Group,
-  MantineStyleProp,
   Popover,
   PopoverDropdown,
   PopoverTarget,
   Stack,
   TableTh,
+  type MantineStyleProp,
   type MantineTheme,
 } from '@mantine/core';
 import clsx from 'clsx';
-import { useState } from 'react';
-import { useDataTableDragToggleColumnsContext } from './DataTableDragToggleColumns.context';
+import { useRef, useState } from 'react';
+import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
+import { DataTableResizableHeaderHandle } from './DataTableResizableHeaderHandle';
 import { useMediaQueryStringOrFunction } from './hooks';
-import { DataTableColumnToggle } from './hooks/useDragToggleColumns';
+import type { DataTableColumnToggle } from './hooks/useDataTableColumns';
 import { IconArrowUp } from './icons/IconArrowUp';
 import { IconArrowsVertical } from './icons/IconArrowsVertical';
 import { IconGripVertical } from './icons/IconGripVertical';
@@ -37,7 +38,7 @@ type DataTableHeaderCellProps<T> = {
   onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
 } & Pick<
   DataTableColumn<T>,
-  'accessor' | 'sortable' | 'draggable' | 'toggleable' | 'textAlign' | 'width' | 'filter' | 'filtering'
+  'accessor' | 'sortable' | 'draggable' | 'toggleable' | 'resizable' | 'textAlign' | 'width' | 'filter' | 'filtering'
 >;
 
 export function DataTableHeaderCell<T>({
@@ -49,6 +50,7 @@ export function DataTableHeaderCell<T>({
   sortable,
   draggable,
   toggleable,
+  resizable,
   sortIcons,
   textAlign,
   width,
@@ -58,9 +60,11 @@ export function DataTableHeaderCell<T>({
   filtering,
 }: DataTableHeaderCellProps<T>) {
   const { setSourceColumn, setTargetColumn, swapColumns, columnsToggle, setColumnsToggle } =
-    useDataTableDragToggleColumnsContext();
+    useDataTableColumnsContext();
 
   const [dragOver, setDragOver] = useState<boolean>(false);
+
+  const columnRef = useRef<HTMLTableCellElement | null>(null);
 
   const [columnsPopoverOpened, setColumnsPopoverOpened] = useState<boolean>(false);
 
@@ -130,10 +134,17 @@ export function DataTableHeaderCell<T>({
         {
           'mantine-datatable-header-cell-sortable': sortable,
           'mantine-datatable-header-cell-toggleable': toggleable,
+          'mantine-datatable-header-cell-resizable': resizable,
         },
         className
       )}
-      style={[{ width, minWidth: width, maxWidth: width }, style]}
+      style={[
+        {
+          width,
+          ...(!resizable ? { minWidth: width, maxWidth: width } : { minWidth: '1px' }),
+        },
+        style,
+      ]}
       role={sortable ? 'button' : undefined}
       tabIndex={sortable ? 0 : undefined}
       onClick={sortAction}
@@ -144,6 +155,7 @@ export function DataTableHeaderCell<T>({
         }
       }}
       onKeyDown={(e) => e.key === 'Enter' && sortAction?.()}
+      ref={columnRef}
     >
       <Group className="mantine-datatable-header-cell-sortable-group" justify="space-between" wrap="nowrap">
         <Popover
@@ -260,6 +272,7 @@ export function DataTableHeaderCell<T>({
         ) : null}
         {filter ? <DataTableHeaderCellFilter isActive={!!filtering}>{filter}</DataTableHeaderCellFilter> : null}
       </Group>
+      {resizable ? <DataTableResizableHeaderHandle accessor={accessor as string} columnRef={columnRef} /> : null}
     </TableTh>
   );
 }
