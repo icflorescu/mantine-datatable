@@ -17,7 +17,7 @@ import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { useDataTableDragToggleColumnsContext } from './DataTableDragToggleColumns.context';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
-import { DataTableResizableHeaderKnob } from './DataTableResizableHeaderKnob';
+import { DataTableResizableHeaderHandle } from './DataTableResizableHeaderHandle';
 import { useMediaQueryStringOrFunction } from './hooks';
 import { DataTableColumnToggle } from './hooks/useDragToggleColumns';
 import { IconArrowUp } from './icons/IconArrowUp';
@@ -272,7 +272,7 @@ export function DataTableHeaderCell<T>({
         ) : null}
         {filter ? <DataTableHeaderCellFilter isActive={!!filtering}>{filter}</DataTableHeaderCellFilter> : null}
       </Group>
-      {resizable ? <DataTableResizableHeaderKnob accessor={accessor as string} columnRef={columnRef} /> : null}
+      {resizable ? <DataTableResizableHeaderHandle accessor={accessor as string} columnRef={columnRef} /> : null}
     </TableTh>
   );
 }

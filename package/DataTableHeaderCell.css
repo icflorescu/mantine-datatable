@@ -44,7 +44,7 @@
   position: relative;
 }
 
-.mantine-datatable-header-resizable-knob {
+.mantine-datatable-header-resizable-handle {
   position: absolute;
   cursor: 'col-resize';
   top: 0;
@@ -69,7 +69,7 @@
   }
 }
 
-tr:hover .mantine-datatable-header-resizable-knob {
+tr:hover .mantine-datatable-header-resizable-handle {
   opacity: 1;
 }
 
