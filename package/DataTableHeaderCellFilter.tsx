@@ -29,7 +29,7 @@ export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHe
           <Icon />
         </ActionIcon>
       </PopoverTarget>
-      <PopoverDropdown onClick={(e) => e.preventDefault()}>
+      <PopoverDropdown onClick={(e) => e.stopPropagation()}>
         {typeof children === 'function' ? children({ close }) : children}
       </PopoverDropdown>
     </Popover>

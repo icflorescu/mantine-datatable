@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionIcon, Button, MultiSelect, Stack, TextInput } from '@mantine/core';
+import { ActionIcon, Button, Checkbox, MultiSelect, Stack, TextInput } from '@mantine/core';
 import { DatePicker, type DatesRangeValue } from '@mantine/dates';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconSearch, IconX } from '@tabler/icons-react';
@@ -22,6 +22,7 @@ export function SearchingAndFilteringExample() {
   const [query, setQuery] = useState('');
   const [selectedDepartments, setSelectedDepartments] = useState<string[]>([]);
   const [birthdaySearchRange, setBirthdaySearchRange] = useState<DatesRangeValue>();
+  const [seniors, setSeniors] = useState(false);
   const [debouncedQuery] = useDebouncedValue(query, 200);
 
   useEffect(() => {
@@ -30,9 +31,8 @@ export function SearchingAndFilteringExample() {
         if (
           debouncedQuery !== '' &&
           !`${firstName} ${lastName}`.toLowerCase().includes(debouncedQuery.trim().toLowerCase())
-        ) {
+        )
           return false;
-        }
 
         if (
           birthdaySearchRange &&
@@ -40,17 +40,17 @@ export function SearchingAndFilteringExample() {
           birthdaySearchRange[1] &&
           (dayjs(birthdaySearchRange[0]).isAfter(birthDate, 'day') ||
             dayjs(birthdaySearchRange[1]).isBefore(birthDate, 'day'))
-        ) {
+        )
           return false;
-        }
 
-        if (selectedDepartments.length && !selectedDepartments.some((d) => d === department.name)) {
-          return false;
-        }
+        if (selectedDepartments.length && !selectedDepartments.some((d) => d === department.name)) return false;
+
+        if (seniors && dayjs().diff(birthDate, 'y') < 70) return false;
+
         return true;
       })
     );
-  }, [debouncedQuery, birthdaySearchRange, selectedDepartments]);
+  }, [debouncedQuery, birthdaySearchRange, selectedDepartments, seniors]);
 
   return (
     <DataTable
@@ -83,7 +83,7 @@ export function SearchingAndFilteringExample() {
           accessor: 'department.name',
           filter: (
             <MultiSelect
-              label="Departments "
+              label="Departments"
               description="Show all employees working at the selected departments"
               data={departments}
               value={selectedDepartments}
@@ -96,7 +96,7 @@ export function SearchingAndFilteringExample() {
           ),
           filtering: selectedDepartments.length > 0,
         },
-        { accessor: 'department.company.name' },
+        { accessor: 'department.company.name', title: 'Company' },
         {
           accessor: 'birthDate',
           textAlign: 'right',
@@ -123,7 +123,21 @@ export function SearchingAndFilteringExample() {
           ),
           filtering: Boolean(birthdaySearchRange),
         },
-        { accessor: 'age', textAlign: 'right', render: ({ birthDate }) => dayjs().diff(birthDate, 'y') },
+        {
+          accessor: 'age',
+          textAlign: 'right',
+          render: ({ birthDate }) => dayjs().diff(birthDate, 'y'),
+          filter: () => (
+            <Checkbox
+              label="Seniors"
+              description="Show employees who are older than 70 years"
+              checked={seniors}
+              onChange={() => {
+                setSeniors((current) => !current);
+              }}
+            />
+          ),
+        },
       ]}
     />
   );
