@@ -5,6 +5,16 @@ import classes from './PackageUsers.module.css';
 
 const USERS = [
   {
+    name: 'Namecheap',
+    logo: { base: 'namecheap', ext: 'svg', themed: true },
+    link: 'https://www.namecheap.com',
+  },
+  {
+    name: 'EasyWP',
+    logo: { base: 'easywp', ext: 'svg', themed: true },
+    link: 'https://www.easywp.com',
+  },
+  {
     name: 'kappa.ai',
     logo: { base: 'kapa', ext: 'png', themed: true, scale: 98, shift: 1 },
     link: 'https://kapa.ai',
