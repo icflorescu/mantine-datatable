@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.3.5 (2023-12-29)
+
+- Minor README updates
+
 ## 7.3.4 (2023-12-28)
 
 - Minor README improvements
