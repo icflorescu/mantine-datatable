@@ -208,6 +208,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to pin the last column on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/pinning-the-first-column',
+    title: 'Pinning the first column',
+    description: `Example: how to pin the first column on ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/links-or-buttons-inside-clickable-rows-or-cells',
     title: 'Links or buttons inside clickable rows or cells',
     description: `Example: how to add links or buttons inside ${PRODUCT_NAME} clickable rows or cells`,

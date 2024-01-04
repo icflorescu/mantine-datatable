@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -35,6 +35,7 @@ export function DataTable<T>({
   columns,
   storeColumnsKey,
   groups,
+  pinFirstColumn,
   pinLastColumn,
   defaultColumnProps,
   defaultColumnRender,
@@ -146,6 +147,13 @@ export function DataTable<T>({
   const { ref: paginationRef, height: paginationHeight } = useElementOuterSize<HTMLDivElement>();
 
   const mergedTableRef = useMergedRef(localTableRef, tableRef);
+
+  const selectionColumnHeaderRef = useRef<HTMLTableCellElement>(null);
+  const [selectionColumnWidth, setSelectionColumnWidth] = useState<number>(0);
+
+  useEffect(() => {
+    if (selectionColumnHeaderRef.current) setSelectionColumnWidth(selectionColumnHeaderRef.current.offsetWidth);
+  }, []);
 
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
@@ -287,7 +295,7 @@ export function DataTable<T>({
           viewportRef={useMergedRef(scrollViewportRef, scrollViewportRefProp)}
           topShadowVisible={!scrolledToTop}
           leftShadowVisible={!scrolledToLeft}
-          leftShadowBehind={selectionColumnVisible}
+          leftShadowBehind={selectionColumnVisible || !!pinFirstColumn}
           rightShadowVisible={!scrolledToRight}
           rightShadowBehind={pinLastColumn}
           bottomShadowVisible={!scrolledToBottom}
@@ -308,10 +316,16 @@ export function DataTable<T>({
                 'mantine-datatable-last-row-border-bottom-visible': tableHeight < scrollViewportHeight,
                 'mantine-datatable-pin-last-column': pinLastColumn,
                 'mantine-datatable-pin-last-column-scrolled': !scrolledToRight && pinLastColumn,
+                'mantine-datatable-selection-column-visible': selectionColumnVisible,
+                'mantine-datatable-pin-first-column': pinFirstColumn,
+                'mantine-datatable-pin-first-column-scrolled': !scrolledToLeft && pinFirstColumn,
               },
               classNames?.table
             )}
-            style={styles?.table}
+            style={{
+              ...styles?.table,
+              '--mantine-datatable-selection-column-width': `${selectionColumnWidth}px`,
+            }}
             data-striped={(recordsLength && striped) || undefined}
             data-highlight-on-hover={highlightOnHover || undefined}
             {...otherProps}
@@ -320,6 +334,7 @@ export function DataTable<T>({
               <DataTableColumnsProvider {...dragToggle}>
                 <DataTableHeader<T>
                   ref={headerRef}
+                  selectionColumnHeaderRef={selectionColumnHeaderRef}
                   className={classNames?.header}
                   style={styles?.header}
                   columns={effectiveColumns}
