@@ -1,7 +1,3 @@
-.root {
-  background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
-}
-
 .main {
   display: flow-root;
   position: relative;
