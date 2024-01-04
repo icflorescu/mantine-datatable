@@ -202,6 +202,12 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * Additional props passed to the underlying `ScrollArea` element.
    */
   scrollAreaProps?: Omit<ScrollAreaProps, 'classNames' | 'styles' | 'onScrollPositionChange'>;
+
+  /**
+   * Ref pointing to the table element.
+   */
+  tableRef?: ((instance: HTMLTableElement | null) => void) | React.RefObject<HTMLTableElement>;
+
   /**
    * Ref pointing to the table body element.
    */
