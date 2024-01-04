@@ -148,9 +148,9 @@ export function DataTable<T>({
 
   const mergedTableRef = useMergedRef(localTableRef, tableRef);
 
+  // todo extract this to a hook before merging
   const selectionColumnHeaderRef = useRef<HTMLTableCellElement>(null);
   const [selectionColumnWidth, setSelectionColumnWidth] = useState<number>(0);
-
   useEffect(() => {
     if (selectionColumnHeaderRef.current) setSelectionColumnWidth(selectionColumnHeaderRef.current.offsetWidth);
   }, []);
