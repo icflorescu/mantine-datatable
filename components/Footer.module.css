@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--mantine-spacing-xs);
+  background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
   @media (min-width: $mantine-breakpoint-sm) {
     left: var(--app-shell-navbar-width);
   }
