@@ -110,6 +110,7 @@ export function DataTable<T>({
   customRowAttributes,
   scrollViewportRef: scrollViewportRefProp,
   scrollAreaProps,
+  tableRef,
   bodyRef,
   m,
   my,
@@ -140,9 +141,11 @@ export function DataTable<T>({
   });
 
   const { ref: headerRef, height: headerHeight } = useElementOuterSize<HTMLTableSectionElement>();
-  const { ref: tableRef, width: tableWidth, height: tableHeight } = useElementOuterSize<HTMLTableElement>();
+  const { ref: localTableRef, width: tableWidth, height: tableHeight } = useElementOuterSize<HTMLTableElement>();
   const { ref: footerRef, height: footerHeight } = useElementOuterSize<HTMLTableSectionElement>();
   const { ref: paginationRef, height: paginationHeight } = useElementOuterSize<HTMLDivElement>();
+
+  const mergedTableRef = useMergedRef(localTableRef, tableRef);
 
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
@@ -294,7 +297,7 @@ export function DataTable<T>({
           scrollAreaProps={scrollAreaProps}
         >
           <Table
-            ref={tableRef}
+            ref={mergedTableRef}
             horizontalSpacing={horizontalSpacing}
             className={clsx(
               'mantine-datatable-table',
