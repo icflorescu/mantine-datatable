@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.4.1 (2024-01-04)
+
+- Expose `tableRef` property to access the table element
+
 ## 7.4.0 (2024-01-04)
 
 - Ensure compatibility with Mantine 7.4
