@@ -250,7 +250,7 @@ export function DataTable<T>({
   ]);
 
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
-  const selectionVisibleAndNotScrolledToLeft = selectionColumnVisible && !scrolledToLeft;
+  const selectorCellShadowVisible = selectionColumnVisible && !scrolledToLeft && !pinFirstColumn;
 
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
@@ -342,7 +342,7 @@ export function DataTable<T>({
                   selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
                   onSelectionChange={handleHeaderSelectionChange}
                   selectionCheckboxProps={allRecordsSelectionCheckboxProps}
-                  selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                  selectorCellShadowVisible={selectorCellShadowVisible}
                   selectionColumnClassName={selectionColumnClassName}
                   selectionColumnStyle={selectionColumnStyle}
                 />
@@ -411,7 +411,7 @@ export function DataTable<T>({
                       className={rowClassName}
                       style={rowStyle}
                       customAttributes={customRowAttributes}
-                      selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                      selectorCellShadowVisible={selectorCellShadowVisible}
                       selectionColumnClassName={selectionColumnClassName}
                       selectionColumnStyle={selectionColumnStyle}
                     />
@@ -429,7 +429,7 @@ export function DataTable<T>({
                 columns={effectiveColumns}
                 defaultColumnProps={defaultColumnProps}
                 selectionVisible={selectionColumnVisible}
-                selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                selectorCellShadowVisible={selectorCellShadowVisible}
                 scrollDiff={tableHeight - scrollViewportHeight}
               />
             )}
