@@ -4,6 +4,7 @@ import { ActionIcon, Box, Button, Grid, GridCol, Group, Stack, Text } from '@man
 import { closeModal, openModal } from '@mantine/modals';
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
+import { useState } from 'react';
 import { employees, type Employee } from '~/data';
 
 const records = employees.slice(0, 5);
@@ -15,16 +16,16 @@ const showModal = ({ employee, action }: { employee: Employee; action: 'view' | 
       action === 'view'
         ? 'Showing company information'
         : action === 'edit'
-        ? 'Editing company information'
-        : 'Deleting company',
+          ? 'Editing company information'
+          : 'Deleting company',
     children: (
       <Stack>
         <Text>
           {action === 'view'
             ? 'Here’s where you could show more information...'
             : action === 'edit'
-            ? 'Here’s where you could put an edit form...'
-            : 'Here’s where you could ask for confirmation before deleting...'}
+              ? 'Here’s where you could put an edit form...'
+              : 'Here’s where you could ask for confirmation before deleting...'}
         </Text>
         <Grid gutter="xs">
           <GridCol span={2}>ID</GridCol>
@@ -41,10 +42,13 @@ const showModal = ({ employee, action }: { employee: Employee; action: 'view' | 
 };
 
 export function PinLastColumnExample() {
+  const [selectedRecord, setSelectedRecord] = useState<Employee[]>([]);
+
   // example-start
   return (
     <DataTable
       pinLastColumn // 👈 make sure the last column is always visible
+      // example-skip other table props
       withTableBorder
       columns={[
         { accessor: 'firstName', noWrap: true },
@@ -60,7 +64,6 @@ export function PinLastColumnExample() {
           title: <Box mr={6}>Row actions</Box>,
           textAlign: 'right',
           render: (employee) => (
-            // example-skip action cells custom rendering
             <Group gap={4} justify="right" wrap="nowrap">
               <ActionIcon
                 size="sm"
@@ -87,11 +90,13 @@ export function PinLastColumnExample() {
                 <IconTrash size={16} />
               </ActionIcon>
             </Group>
-            // example-resume
           ),
         },
       ]}
       records={records}
+      selectedRecords={selectedRecord}
+      onSelectedRecordsChange={setSelectedRecord}
+      // example-resume
     />
   );
   // example-end

@@ -73,6 +73,11 @@ export type DataTableProps<T = Record<string, unknown>> = {
   fetching?: boolean;
 
   /**
+   * If true, the first column will be pinned to the left side of the table.
+   */
+  pinFirstColumn?: boolean;
+
+  /**
    * If true, the last column will be pinned to the right side of the table.
    */
   pinLastColumn?: boolean;

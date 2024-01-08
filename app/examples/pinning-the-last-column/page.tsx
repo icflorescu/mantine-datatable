@@ -42,7 +42,10 @@ export default async function PinLastColumnExamplePage() {
         Combining this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink> may lead
         to minor visual artifacts.
       </Txt>
-      <Txt>Head over to the next example to discover more features.</Txt>
+      <Txt>
+        Head over to the next example to discover how you can pin the <strong>first</strong> column to the{' '}
+        <strong>left</strong> side of the table.
+      </Txt>
       <PageNavigation of={PATH} />
     </>
   );

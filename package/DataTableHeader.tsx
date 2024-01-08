@@ -7,6 +7,7 @@ import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
 
 type DataTableHeaderProps<T> = {
+  selectionColumnHeaderRef: React.ForwardedRef<HTMLTableCellElement>;
   className: string | undefined;
   style?: MantineStyleProp;
   sortStatus: DataTableSortProps<T>['sortStatus'];
@@ -28,6 +29,7 @@ type DataTableHeaderProps<T> = {
 
 export const DataTableHeader = forwardRef(function DataTableHeader<T>(
   {
+    selectionColumnHeaderRef,
     className,
     style,
     sortStatus,
@@ -50,6 +52,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
 ) {
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
+      ref={selectionColumnHeaderRef}
       className={selectionColumnClassName}
       style={selectionColumnStyle}
       trigger={selectionTrigger}
