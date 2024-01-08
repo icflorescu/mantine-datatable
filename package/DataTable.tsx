@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -145,15 +145,8 @@ export function DataTable<T>({
   const { ref: localTableRef, width: tableWidth, height: tableHeight } = useElementOuterSize<HTMLTableElement>();
   const { ref: footerRef, height: footerHeight } = useElementOuterSize<HTMLTableSectionElement>();
   const { ref: paginationRef, height: paginationHeight } = useElementOuterSize<HTMLDivElement>();
-
+  const { ref: selectionColumnHeaderRef, width: selectionColumnWidth } = useElementOuterSize<HTMLTableCellElement>();
   const mergedTableRef = useMergedRef(localTableRef, tableRef);
-
-  // todo extract this to a hook before merging
-  const selectionColumnHeaderRef = useRef<HTMLTableCellElement>(null);
-  const [selectionColumnWidth, setSelectionColumnWidth] = useState<number>(0);
-  useEffect(() => {
-    if (selectionColumnHeaderRef.current) setSelectionColumnWidth(selectionColumnHeaderRef.current.offsetWidth);
-  }, []);
 
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
