@@ -35,6 +35,7 @@ export function DataTable<T>({
   columns,
   storeColumnsKey,
   groups,
+  pinFirstColumn,
   pinLastColumn,
   defaultColumnProps,
   defaultColumnRender,
@@ -144,7 +145,7 @@ export function DataTable<T>({
   const { ref: localTableRef, width: tableWidth, height: tableHeight } = useElementOuterSize<HTMLTableElement>();
   const { ref: footerRef, height: footerHeight } = useElementOuterSize<HTMLTableSectionElement>();
   const { ref: paginationRef, height: paginationHeight } = useElementOuterSize<HTMLDivElement>();
-
+  const { ref: selectionColumnHeaderRef, width: selectionColumnWidth } = useElementOuterSize<HTMLTableCellElement>();
   const mergedTableRef = useMergedRef(localTableRef, tableRef);
 
   const [scrolledToTop, setScrolledToTop] = useState(true);
@@ -249,7 +250,7 @@ export function DataTable<T>({
   ]);
 
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
-  const selectionVisibleAndNotScrolledToLeft = selectionColumnVisible && !scrolledToLeft;
+  const selectorCellShadowVisible = selectionColumnVisible && !scrolledToLeft && !pinFirstColumn;
 
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
@@ -287,7 +288,7 @@ export function DataTable<T>({
           viewportRef={useMergedRef(scrollViewportRef, scrollViewportRefProp)}
           topShadowVisible={!scrolledToTop}
           leftShadowVisible={!scrolledToLeft}
-          leftShadowBehind={selectionColumnVisible}
+          leftShadowBehind={selectionColumnVisible || !!pinFirstColumn}
           rightShadowVisible={!scrolledToRight}
           rightShadowBehind={pinLastColumn}
           bottomShadowVisible={!scrolledToBottom}
@@ -308,10 +309,16 @@ export function DataTable<T>({
                 'mantine-datatable-last-row-border-bottom-visible': tableHeight < scrollViewportHeight,
                 'mantine-datatable-pin-last-column': pinLastColumn,
                 'mantine-datatable-pin-last-column-scrolled': !scrolledToRight && pinLastColumn,
+                'mantine-datatable-selection-column-visible': selectionColumnVisible,
+                'mantine-datatable-pin-first-column': pinFirstColumn,
+                'mantine-datatable-pin-first-column-scrolled': !scrolledToLeft && pinFirstColumn,
               },
               classNames?.table
             )}
-            style={styles?.table}
+            style={{
+              ...styles?.table,
+              '--mantine-datatable-selection-column-width': `${selectionColumnWidth}px`,
+            }}
             data-striped={(recordsLength && striped) || undefined}
             data-highlight-on-hover={highlightOnHover || undefined}
             {...otherProps}
@@ -320,6 +327,7 @@ export function DataTable<T>({
               <DataTableColumnsProvider {...dragToggle}>
                 <DataTableHeader<T>
                   ref={headerRef}
+                  selectionColumnHeaderRef={selectionColumnHeaderRef}
                   className={classNames?.header}
                   style={styles?.header}
                   columns={effectiveColumns}
@@ -334,7 +342,7 @@ export function DataTable<T>({
                   selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
                   onSelectionChange={handleHeaderSelectionChange}
                   selectionCheckboxProps={allRecordsSelectionCheckboxProps}
-                  selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                  selectorCellShadowVisible={selectorCellShadowVisible}
                   selectionColumnClassName={selectionColumnClassName}
                   selectionColumnStyle={selectionColumnStyle}
                 />
@@ -403,7 +411,7 @@ export function DataTable<T>({
                       className={rowClassName}
                       style={rowStyle}
                       customAttributes={customRowAttributes}
-                      selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                      selectorCellShadowVisible={selectorCellShadowVisible}
                       selectionColumnClassName={selectionColumnClassName}
                       selectionColumnStyle={selectionColumnStyle}
                     />
@@ -421,7 +429,7 @@ export function DataTable<T>({
                 columns={effectiveColumns}
                 defaultColumnProps={defaultColumnProps}
                 selectionVisible={selectionColumnVisible}
-                selectorCellShadowVisible={selectionVisibleAndNotScrolledToLeft}
+                selectorCellShadowVisible={selectorCellShadowVisible}
                 scrollDiff={tableHeight - scrollViewportHeight}
               />
             )}
