@@ -49,20 +49,17 @@ export function PinFirstColumnExampleWithoutRecordSelection() {
       // example-skip other table props
       withTableBorder
       columns={[
-        { accessor: 'firstName', noWrap: true },
-        { accessor: 'lastName', noWrap: true },
-        { accessor: 'department.name', title: 'Department' },
-        { accessor: 'department.company.name', title: 'Company', noWrap: true },
-        { accessor: 'department.company.city', title: 'City', noWrap: true },
-        { accessor: 'department.company.state', title: 'State' },
-        { accessor: 'department.company.streetAddress', title: 'Address', noWrap: true },
-        { accessor: 'department.company.missionStatement', title: 'Mission statement', noWrap: true },
         {
           accessor: 'actions',
-          title: <Box mr={6}>Row actions</Box>,
-          textAlign: 'right',
+          title: (
+            <Group gap={10} pl={3} wrap="nowrap" c="dimmed">
+              <IconEye size={16} />
+              <IconEdit size={16} />
+              <IconTrash size={16} />
+            </Group>
+          ),
           render: (employee) => (
-            <Group gap={4} justify="right" wrap="nowrap">
+            <Group gap={4} wrap="nowrap">
               <ActionIcon
                 size="sm"
                 variant="subtle"
@@ -90,6 +87,14 @@ export function PinFirstColumnExampleWithoutRecordSelection() {
             </Group>
           ),
         },
+        { accessor: 'firstName', noWrap: true },
+        { accessor: 'lastName', noWrap: true },
+        { accessor: 'department.name', title: 'Department' },
+        { accessor: 'department.company.name', title: 'Company', noWrap: true },
+        { accessor: 'department.company.city', title: 'City', noWrap: true },
+        { accessor: 'department.company.state', title: 'State' },
+        { accessor: 'department.company.streetAddress', title: 'Address', noWrap: true },
+        { accessor: 'department.company.missionStatement', title: 'Mission statement', noWrap: true },
       ]}
       records={records}
       // example-resume
@@ -110,20 +115,17 @@ export function PinFirstColumnExampleWithRecordSelection() {
       // example-skip other table props
       withTableBorder
       columns={[
-        { accessor: 'firstName', noWrap: true },
-        { accessor: 'lastName', noWrap: true },
-        { accessor: 'department.name', title: 'Department' },
-        { accessor: 'department.company.name', title: 'Company', noWrap: true },
-        { accessor: 'department.company.city', title: 'City', noWrap: true },
-        { accessor: 'department.company.state', title: 'State' },
-        { accessor: 'department.company.streetAddress', title: 'Address', noWrap: true },
-        { accessor: 'department.company.missionStatement', title: 'Mission statement', noWrap: true },
         {
           accessor: 'actions',
-          title: <Box mr={6}>Row actions</Box>,
-          textAlign: 'right',
+          title: (
+            <Group gap={10} pl={3} wrap="nowrap" c="dimmed">
+              <IconEye size={16} />
+              <IconEdit size={16} />
+              <IconTrash size={16} />
+            </Group>
+          ),
           render: (employee) => (
-            <Group gap={4} justify="right" wrap="nowrap">
+            <Group gap={4} wrap="nowrap">
               <ActionIcon
                 size="sm"
                 variant="subtle"
@@ -149,6 +151,90 @@ export function PinFirstColumnExampleWithRecordSelection() {
                 <IconTrash size={16} />
               </ActionIcon>
             </Group>
+          ),
+        },
+        { accessor: 'firstName', noWrap: true },
+        { accessor: 'lastName', noWrap: true },
+        { accessor: 'department.name', title: 'Department' },
+        { accessor: 'department.company.name', title: 'Company', noWrap: true },
+        { accessor: 'department.company.city', title: 'City', noWrap: true },
+        { accessor: 'department.company.state', title: 'State' },
+        { accessor: 'department.company.streetAddress', title: 'Address', noWrap: true },
+        { accessor: 'department.company.missionStatement', title: 'Mission statement', noWrap: true },
+      ]}
+      records={records}
+      // example-resume
+    />
+  );
+  // example-end
+}
+
+export function PinFirstAndLastColumnsExampleWithRecordSelection() {
+  const [selectedRecord, setSelectedRecord] = useState<Employee[]>([]);
+
+  // example-start first-last-and-record-selection
+  return (
+    <DataTable
+      pinFirstColumn // 👈 make sure the first column is always visible
+      pinLastColumn // 👈 make sure the last column is always visible
+      selectedRecords={selectedRecord}
+      onSelectedRecordsChange={setSelectedRecord}
+      // example-skip other table props
+      withTableBorder
+      columns={[
+        {
+          accessor: 'view-and-edit',
+          title: (
+            <Group gap={10} pl={3} wrap="nowrap" c="dimmed">
+              <IconEye size={16} />
+              <IconEdit size={16} />
+            </Group>
+          ),
+          render: (employee) => (
+            <Group gap={4} wrap="nowrap">
+              <ActionIcon
+                size="sm"
+                variant="subtle"
+                color="green"
+                onClick={() => showModal({ employee, action: 'view' })}
+              >
+                <IconEye size={16} />
+              </ActionIcon>
+              <ActionIcon
+                size="sm"
+                variant="subtle"
+                color="blue"
+                onClick={() => showModal({ employee, action: 'edit' })}
+              >
+                <IconEdit size={16} />
+              </ActionIcon>
+            </Group>
+          ),
+        },
+        { accessor: 'firstName', noWrap: true },
+        { accessor: 'lastName', noWrap: true },
+        { accessor: 'department.name', title: 'Department' },
+        { accessor: 'department.company.name', title: 'Company', noWrap: true },
+        { accessor: 'department.company.city', title: 'City', noWrap: true },
+        { accessor: 'department.company.state', title: 'State' },
+        { accessor: 'department.company.streetAddress', title: 'Address', noWrap: true },
+        { accessor: 'department.company.missionStatement', title: 'Mission statement', noWrap: true },
+        {
+          accessor: 'delete',
+          title: (
+            <Box pl={3} c="dimmed">
+              <IconTrash size={16} />
+            </Box>
+          ),
+          render: (employee) => (
+            <ActionIcon
+              size="sm"
+              variant="subtle"
+              color="red"
+              onClick={() => showModal({ employee, action: 'delete' })}
+            >
+              <IconTrash size={16} />
+            </ActionIcon>
           ),
         },
       ]}
