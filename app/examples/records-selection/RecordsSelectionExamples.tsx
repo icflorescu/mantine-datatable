@@ -27,7 +27,9 @@ export function RecordsSelectionExample() {
         highlightOnHover
         withTableBorder
         withColumnBorders
-        records={companies}
+        // records={companies}
+        mih={200}
+        records={[]}
         columns={columns}
         selectedRecords={selectedRecords}
         onSelectedRecordsChange={setSelectedRecords}
