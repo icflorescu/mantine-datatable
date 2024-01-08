@@ -6,6 +6,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 ## 7.4.1 (2024-01-08)
 
 - Implement `pinFirstColumn` feature
+- Fix minor UI glitch when using highlight on hover and the table contains no records (issue [#508](https://github.com/icflorescu/mantine-datatable/issues/508))
 - Expose `tableRef` property to access the table element
 
 ## 7.4.0 (2024-01-04)
