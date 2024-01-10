@@ -59,7 +59,7 @@ export const useDataTableColumns = <T>({
     getInitialValueInEffect: true,
   });
 
-  // Store the columns with in localStorage
+  // Store the columns widths in localStorage
   const [columnsWidth, setColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
     key: `${key}-columns-width`,
     defaultValue: defaultColumnsWidth as DataTableColumnWidth[],
@@ -87,7 +87,7 @@ export const useDataTableColumns = <T>({
         })?.toggled;
       });
 
-    const newWith = result.map((column) => {
+    const newWidths = result.map((column) => {
       return {
         ...column,
         width: columnsWidth.find((width) => {
@@ -96,7 +96,7 @@ export const useDataTableColumns = <T>({
       };
     });
 
-    return newWith;
+    return newWidths;
   }, [columns, columnsOrder, columnsToggle, columnsWidth]);
 
   const setColumnWidth = (accessor: string, width: string | number) => {
