@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.4.3 (2024-01-10)
+
+- Implement the `selectionCheckboxProps` property to allow customizing all selection checkboxes at once
+
 ## 7.4.2 (2024-01-10)
 
 - Improve default column toggling behavior

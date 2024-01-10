@@ -102,17 +102,25 @@ export default async function RecordsSelectionExamplePage() {
       <CodeBlock code={code['CustomColumnStyleExample.tsx']} />
       <CustomColumnStyleExample />
       <PageSubtitle value="Additional selection checkbox props" />
-      <Txt>
-        You can pass additional props to the selection checkboxes by providing the{' '}
-        <Code>allRecordsSelectionCheckboxProps</Code> and <Code>getRecordSelectionCheckboxProps</Code> properties. The
-        former is an object of props that will be applied to the column header checkbox, while the latter is a function
-        that receives the underlying record and record index and returns an object of props. will be applied to the row
-        selection checkboxes.
-      </Txt>
+      <Txt>You can pass additional props to the selection checkboxes by providing the following properties:</Txt>
+      <UnorderedList compact>
+        <li>
+          <Code>checkboxProps</Code> → an object of props that will be applied to all selection checkboxes (both the
+          column header checkbox and the row selection checkboxes);
+        </li>
+        <li>
+          <Code>allRecordsSelectionCheckboxProps</Code> → an object of props that will be applied to the column header
+          checkbox;
+        </li>
+        <li>
+          <Code>getRecordSelectionCheckboxProps</Code> → a function that receives the underlying record and record index
+          and returns an object of props that will be applied to the row selection checkboxes.
+        </li>
+      </UnorderedList>
       <CodeBlock tabs={{ code, keys: ['CheckboxPropsExample.tsx', 'columns.ts'] }} />
       <Txt>
-        Inspect the DOM to see the <Code>aria-label</Code> attributes on the selection checkboxes in the following
-        example:
+        In this example, the checkboxes will be rendered with a smaller size and will have custom{' '}
+        <Code>aria-label</Code> attributes that will be read by screen readers (inspect the DOM to check these):
       </Txt>
       <CheckboxPropsExample />
       <PageSubtitle value="Selecting all records on all pages" />

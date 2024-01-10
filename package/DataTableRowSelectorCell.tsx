@@ -13,6 +13,7 @@ type DataTableRowSelectorCellProps<T> = {
   checked: boolean;
   disabled: boolean;
   onChange: React.MouseEventHandler | undefined;
+  checkboxProps: CheckboxProps | undefined;
   getCheckboxProps: (record: T, index: number) => CheckboxProps;
 };
 
@@ -24,11 +25,12 @@ export function DataTableRowSelectorCell<T>({
   trigger,
   onChange,
   withRightShadow,
+  checkboxProps,
   getCheckboxProps,
   ...otherProps
 }: DataTableRowSelectorCellProps<T>) {
-  const checkboxProps = getCheckboxProps(record, index);
-  const enabled = !otherProps.disabled && !checkboxProps.disabled;
+  const allCheckboxProps = { ...checkboxProps, ...getCheckboxProps(record, index) };
+  const enabled = !otherProps.disabled && !allCheckboxProps.disabled;
 
   const handleClick: React.MouseEventHandler = (e) => {
     e.stopPropagation();
@@ -52,7 +54,7 @@ export function DataTableRowSelectorCell<T>({
         classNames={enabled ? { input: POINTER_CURSOR } : undefined}
         onChange={onChange as unknown as React.ChangeEventHandler}
         {...otherProps}
-        {...checkboxProps}
+        {...allCheckboxProps}
       />
     </TableTd>
   );
