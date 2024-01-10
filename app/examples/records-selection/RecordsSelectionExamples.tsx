@@ -27,9 +27,7 @@ export function RecordsSelectionExample() {
         highlightOnHover
         withTableBorder
         withColumnBorders
-        // records={companies}
-        mih={200}
-        records={[]}
+        records={companies}
         columns={columns}
         selectedRecords={selectedRecords}
         onSelectedRecordsChange={setSelectedRecords}
@@ -109,6 +107,7 @@ export function CheckboxPropsExample() {
       selectedRecords={selectedRecords}
       onSelectedRecordsChange={setSelectedRecords}
       // example-resume
+      selectionCheckboxProps={{ size: 'xs' }}
       allRecordsSelectionCheckboxProps={{ 'aria-label': 'Select all records' }}
       getRecordSelectionCheckboxProps={(record) => ({ 'aria-label': `Select ${record.name}` })}
     />

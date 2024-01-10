@@ -7,6 +7,7 @@ export type DataTableSelectionProps<T = Record<string, unknown>> =
       selectedRecords?: never;
       onSelectedRecordsChange?: never;
       isRecordSelectable?: never;
+      selectionCheckboxProps?: never;
       getRecordSelectionCheckboxProps?: never;
       allRecordsSelectionCheckboxProps?: never;
       selectionColumnClassName?: never;
@@ -48,7 +49,12 @@ export type DataTableSelectionProps<T = Record<string, unknown>> =
       isRecordSelectable?: (record: T, index: number) => boolean;
 
       /**
-       * A function used to determine additional props of the row selection checkbox.
+       * Props for the selection checkboxes, applied to header and all rows.
+       */
+      selectionCheckboxProps?: CheckboxProps;
+
+      /**
+       * A function used to determine additional props of the row selection checkboxes.
        * Accepts the current record and its index as arguments and returns an object.
        */
       getRecordSelectionCheckboxProps?: (record: T, index: number) => CheckboxProps;

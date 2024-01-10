@@ -27,6 +27,7 @@ type DataTableRowProps<T> = {
   selectionChecked: boolean;
   onSelectionChange: React.MouseEventHandler | undefined;
   isRecordSelectable: ((record: T, index: number) => boolean) | undefined;
+  selectionCheckboxProps: CheckboxProps | undefined;
   getSelectionCheckboxProps: (record: T, index: number) => CheckboxProps;
   onClick: DataTableRowClickHandler<T> | undefined;
   onDoubleClick: DataTableRowClickHandler<T> | undefined;
@@ -60,6 +61,7 @@ export function DataTableRow<T>({
   selectionChecked,
   onSelectionChange,
   isRecordSelectable,
+  selectionCheckboxProps,
   getSelectionCheckboxProps,
   onClick,
   onDoubleClick,
@@ -125,6 +127,7 @@ export function DataTableRow<T>({
             checked={selectionChecked}
             disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable(record, index) : false)}
             onChange={onSelectionChange}
+            checkboxProps={selectionCheckboxProps}
             getCheckboxProps={getSelectionCheckboxProps}
           />
         )}

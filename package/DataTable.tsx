@@ -47,6 +47,7 @@ export function DataTable<T>({
   selectionColumnClassName,
   selectionColumnStyle,
   isRecordSelectable,
+  selectionCheckboxProps,
   allRecordsSelectionCheckboxProps = { 'aria-label': 'Select all records' },
   getRecordSelectionCheckboxProps = (_, index) => ({ 'aria-label': `Select record ${index + 1}` }),
   sortStatus,
@@ -341,7 +342,7 @@ export function DataTable<T>({
                   selectionChecked={allSelectableRecordsSelected}
                   selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
                   onSelectionChange={handleHeaderSelectionChange}
-                  selectionCheckboxProps={allRecordsSelectionCheckboxProps}
+                  selectionCheckboxProps={{ ...selectionCheckboxProps, ...allRecordsSelectionCheckboxProps }}
                   selectorCellShadowVisible={selectorCellShadowVisible}
                   selectionColumnClassName={selectionColumnClassName}
                   selectionColumnStyle={selectionColumnStyle}
@@ -398,6 +399,7 @@ export function DataTable<T>({
                       selectionChecked={isSelected}
                       onSelectionChange={handleSelectionChange}
                       isRecordSelectable={isRecordSelectable}
+                      selectionCheckboxProps={selectionCheckboxProps}
                       getSelectionCheckboxProps={getRecordSelectionCheckboxProps}
                       onClick={onRowClick}
                       onDoubleClick={onRowDoubleClick}
