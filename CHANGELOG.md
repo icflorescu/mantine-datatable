@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.4.2 (2024-01-10)
+
+- Improve default column toggling behavior
+
 ## 7.4.1 (2024-01-08)
 
 - Implement `pinFirstColumn` feature

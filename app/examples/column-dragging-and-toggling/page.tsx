@@ -56,8 +56,12 @@ export default async function DraggingExamplePage() {
       <Txt idea>
         The default order of the columns is the order in which they are defined in the <Code>columns</Code> prop.
       </Txt>
-
       <PageSubtitle value="Column toggling" />
+      <Txt>
+        In the below example you can toggle the first 3 columns. The last column is not toggleable and will always be
+        visible. The first column is toggled off by default. Click with right mouse button on the header to select the
+        columns you want to toggle.
+      </Txt>
       <TogglingExample />
       <Txt>
         In order to enable <strong>column toggling</strong> you’ll have to:
@@ -75,8 +79,9 @@ export default async function DraggingExamplePage() {
         </li>
       </UnorderedList>
       <CodeBlock code={code['TogglingExample.tsx']} />
-      <Txt idea>
-        The default toggled columns are the ones with <Code>defaultToggle: true</Code> property.
+      <Txt info>
+        You may define which columns will be toggled by default by setting the <Code>defaultToggle</Code> property to{' '}
+        <Code>false</Code>.
       </Txt>
       <PageSubtitle value="Dragging and toggling with context menu reset" />
       <DraggingTogglingResetExample />
