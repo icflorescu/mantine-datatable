@@ -3,7 +3,8 @@ import { useMemo } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
 
 export type DataTableColumnToggle = {
-  accessor: string | undefined;
+  accessor: string;
+  title: string | undefined;
   defaultToggle: boolean;
   toggleable: boolean;
   toggled: boolean;
@@ -33,16 +34,17 @@ export const useDataTableColumns = <T>({
 
   // create an array of object with key = accessor and value = width
   const defaultColumnsWidth =
-    (columns && columns.map((column) => ({ [column.accessor]: column.width ?? 'auto' }))) || [];
+    (columns && columns.map((column) => ({ [column.accessor]: column.width ?? 'initial' }))) || [];
 
   // Default columns id toggled is the array of columns which have the toggleable property set to true
   const defaultColumnsToggle =
     columns &&
     columns.map((column) => ({
       accessor: column.accessor,
+      title: column.title,
       defaultToggle: column.defaultToggle || true,
       toggleable: column.toggleable,
-      toggled: column.defaultToggle || true,
+      toggled: column.defaultToggle === undefined ? true : column.defaultToggle,
     }));
 
   // Store the columns order in localStorage
@@ -70,7 +72,9 @@ export const useDataTableColumns = <T>({
   // we got issue with rendering
   const resetColumnsOrder = () => setColumnsOrder(defaultColumnsOrder as string[]);
 
-  const resetColumnsToggle = () => setColumnsToggle(defaultColumnsToggle as DataTableColumnToggle[]);
+  const resetColumnsToggle = () => {
+    setColumnsToggle(defaultColumnsToggle as DataTableColumnToggle[]);
+  };
 
   const resetColumnsWidth = () => setColumnsWidth(defaultColumnsWidth as DataTableColumnWidth[]);
 
@@ -81,11 +85,14 @@ export const useDataTableColumns = <T>({
 
     const result = columnsOrder
       .map((order) => columns.find((column) => column.accessor === order))
-      .filter((column) => {
-        return columnsToggle.find((toggle) => {
-          return toggle.accessor === column?.accessor;
-        })?.toggled;
-      });
+      .map((column) => {
+        return {
+          ...column,
+          hidden: !columnsToggle.find((toggle) => {
+            return toggle.accessor === column?.accessor;
+          })?.toggled,
+        };
+      }) as DataTableColumn<T>[];
 
     const newWidths = result.map((column) => {
       return {

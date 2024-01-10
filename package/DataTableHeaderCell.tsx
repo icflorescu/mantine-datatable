@@ -221,7 +221,7 @@ export function DataTableHeaderCell<T>({
                     <Group key={column.accessor}>
                       <Checkbox
                         size="xs"
-                        label={column.accessor}
+                        label={column.title ?? humanize(column.accessor)}
                         checked={column.toggled}
                         onChange={(e) => {
                           setColumnsToggle(

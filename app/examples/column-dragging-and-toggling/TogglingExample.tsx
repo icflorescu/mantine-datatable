@@ -10,7 +10,7 @@ export default function TogglingExample() {
   const { effectiveColumns, resetColumnsToggle } = useDataTableColumns({
     key,
     columns: [
-      { accessor: 'name', width: '40%', toggleable: true },
+      { accessor: 'name', width: '40%', toggleable: true, defaultToggle: false },
       { accessor: 'streetAddress', width: '60%', toggleable: true },
       { accessor: 'city', width: 160, toggleable: true },
       { accessor: 'state', textAlign: 'right' },
