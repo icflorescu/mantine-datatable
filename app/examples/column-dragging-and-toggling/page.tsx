@@ -42,8 +42,8 @@ export default async function DraggingExamplePage() {
       </Txt>
       <UnorderedList compact>
         <li>
-          add a <Code>storeColumnsKey: your_key</Code> property to the DataTable (since the order of the columns is
-          persisted in the local storage);
+          add a <Code>storeColumnsKey: &apos;your_key&apos;</Code> property to the DataTable (since the order of the
+          columns is persisted in the local storage);
         </li>
         <li>
           add a <Code>draggable: true</Code> property to each <strong>dragging candidate</strong> column;
@@ -58,9 +58,9 @@ export default async function DraggingExamplePage() {
       </Txt>
       <PageSubtitle value="Column toggling" />
       <Txt>
-        In the below example you can toggle the first 3 columns. The last column is not toggleable and will always be
-        visible. The first column is toggled off by default. Click with right mouse button on the header to select the
-        columns you want to toggle.
+        In the example below you can toggle the first 3 columns. The last column is not toggleable and will always be
+        visible. The first column is toggled off by default. Right-click on the header to select the columns you want to
+        toggle.
       </Txt>
       <TogglingExample />
       <Txt>
@@ -68,8 +68,8 @@ export default async function DraggingExamplePage() {
       </Txt>
       <UnorderedList compact>
         <li>
-          add a <Code>storeColumnsKey: your_key</Code> property to the DataTable (since the order of the columns is
-          persisted in the local storage);
+          add a <Code>storeColumnsKey: &apos;your_key&apos;</Code> property to the DataTable (since the order of the
+          columns is persisted in the local storage);
         </li>
         <li>
           add a <Code>toggleable: true</Code> property to each <strong>toggling candidate</strong> column;

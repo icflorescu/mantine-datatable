@@ -117,6 +117,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               onSortStatusChange={onSortStatusChange}
               filter={filter}
               filtering={filtering}
+              allColumns={columns}
             />
           );
         })}

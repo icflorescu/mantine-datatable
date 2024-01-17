@@ -1,6 +1,6 @@
 'use client';
 
-import { IconColumnRemove, IconColumns1 } from '@tabler/icons-react';
+import { IconColumnRemove, IconColumns3 } from '@tabler/icons-react';
 import { DataTable, useDataTableColumns } from '__PACKAGE__';
 import { useContextMenu } from 'mantine-contextmenu';
 import { companies } from '~/data';
@@ -30,13 +30,13 @@ export default function DraggingTogglingResetExample() {
       onRowContextMenu={({ event }) =>
         showContextMenu([
           {
-            key: 'reset-columns.toggled',
+            key: 'reset-toggled-columns',
             icon: <IconColumnRemove size={16} />,
             onClick: resetColumnsToggle,
           },
           {
             key: 'reset-columns-order',
-            icon: <IconColumns1 size={16} />,
+            icon: <IconColumns3 size={16} />,
             onClick: resetColumnsOrder,
           },
         ])(event)
