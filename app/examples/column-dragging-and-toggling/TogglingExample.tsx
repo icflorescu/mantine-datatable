@@ -73,7 +73,7 @@ export default function TogglingExample() {
         columns={effectiveColumns}
       />
       <Group justify="right">
-        <Button onClick={resetColumnsToggle}>Reset Column Toggled</Button>
+        <Button onClick={resetColumnsToggle}>Reset toggled columns</Button>
       </Group>
     </Stack>
   );

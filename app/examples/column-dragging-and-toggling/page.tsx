@@ -57,11 +57,13 @@ export default async function DraggingExamplePage() {
         The default order of the columns is the order in which they are defined in the <Code>columns</Code> prop.
       </Txt>
       <PageSubtitle value="Column toggling" />
-      <Txt>
-        In the example below you can toggle the first 3 columns. The last column is not toggleable and will always be
-        visible. The first column is toggled off by default. Right-click on the header to select the columns you want to
-        toggle.
-      </Txt>
+      <Txt>In the example below:</Txt>
+      <UnorderedList compact>
+        <li>you can toggle the first 3 columns;</li>
+        <li>the last column is not toggleable and will always be visible;</li>
+        <li>the first column is toggled off by default.</li>
+      </UnorderedList>
+      <Txt>Right-click on the header to select the columns you want to toggle.</Txt>
       <TogglingExample />
       <Txt>
         In order to enable <strong>column toggling</strong> you’ll have to:
