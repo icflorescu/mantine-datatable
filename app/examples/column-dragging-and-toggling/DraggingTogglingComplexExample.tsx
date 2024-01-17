@@ -1,6 +1,6 @@
 'use client';
 
-import { IconColumnRemove, IconColumns1 } from '@tabler/icons-react';
+import { IconColumnRemove, IconColumns3 } from '@tabler/icons-react';
 import { DataTable, useDataTableColumns, type DataTableSortStatus } from '__PACKAGE__';
 import sortBy from 'lodash/sortBy';
 import { useContextMenu } from 'mantine-contextmenu';
@@ -46,13 +46,13 @@ export default function DraggingTogglingComplexExample() {
       onRowContextMenu={({ event }) =>
         showContextMenu([
           {
-            key: 'reset-columns.toggled',
+            key: 'reset-toggled-columns',
             icon: <IconColumnRemove size={16} />,
             onClick: resetColumnsToggle,
           },
           {
             key: 'reset-columns-order',
-            icon: <IconColumns1 size={16} />,
+            icon: <IconColumns3 size={16} />,
             onClick: resetColumnsOrder,
           },
         ])(event)

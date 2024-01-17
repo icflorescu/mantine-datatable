@@ -36,6 +36,7 @@ type DataTableHeaderCellProps<T> = {
   sortStatus: DataTableSortProps<T>['sortStatus'];
   sortIcons: DataTableSortProps<T>['sortIcons'];
   onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
+  allColumns: DataTableColumn<T>[];
 } & Pick<
   DataTableColumn<T>,
   'accessor' | 'sortable' | 'draggable' | 'toggleable' | 'resizable' | 'textAlign' | 'width' | 'filter' | 'filtering'
@@ -58,6 +59,7 @@ export function DataTableHeaderCell<T>({
   onSortStatusChange,
   filter,
   filtering,
+  allColumns,
 }: DataTableHeaderCellProps<T>) {
   const { setSourceColumn, setTargetColumn, swapColumns, columnsToggle, setColumnsToggle } =
     useDataTableColumnsContext();
@@ -221,7 +223,9 @@ export function DataTableHeaderCell<T>({
                     <Group key={column.accessor}>
                       <Checkbox
                         size="xs"
-                        label={column.title ?? humanize(column.accessor)}
+                        label={
+                          allColumns.find((c) => c.accessor === column.accessor)?.title ?? humanize(column.accessor)
+                        }
                         checked={column.toggled}
                         onChange={(e) => {
                           setColumnsToggle(

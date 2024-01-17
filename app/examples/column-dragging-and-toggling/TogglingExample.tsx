@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Group, Stack } from '@mantine/core';
-import { IconMap } from '@tabler/icons-react';
+import { Button, Group, Stack, Text } from '@mantine/core';
+import { IconBuildingCommunity, IconBuildingSkyscraper, IconMap, IconRoadSign } from '@tabler/icons-react';
 import { DataTable, useDataTableColumns } from '__PACKAGE__';
 import { companies } from '~/data';
 
@@ -11,10 +11,55 @@ export default function TogglingExample() {
   const { effectiveColumns, resetColumnsToggle } = useDataTableColumns({
     key,
     columns: [
-      { accessor: 'name', width: '40%', toggleable: true, defaultToggle: false },
-      { accessor: 'streetAddress', width: '60%', toggleable: true },
-      { accessor: 'city', width: 160, toggleable: true },
-      { accessor: 'state', textAlign: 'right', title: <IconMap /> },
+      {
+        accessor: 'name',
+        title: (
+          <Group gap={4} mt={-1} justify="start">
+            <IconBuildingSkyscraper size={16} />
+            <Text inherit mt={1}>
+              Company
+            </Text>
+          </Group>
+        ),
+        width: '40%',
+        toggleable: true,
+        defaultToggle: false,
+      },
+      {
+        accessor: 'streetAddress',
+        title: (
+          <Group gap={4} mt={-1} justify="start">
+            <IconRoadSign size={16} />
+            <Text inherit mt={1}>
+              Street Address
+            </Text>
+          </Group>
+        ),
+        width: '60%',
+        toggleable: true,
+      },
+      {
+        accessor: 'city',
+        title: (
+          <Group gap={4} mt={-1}>
+            <IconBuildingCommunity size={16} />
+            <Text inherit mt={1}>
+              City
+            </Text>
+          </Group>
+        ),
+        width: 160,
+        toggleable: true,
+      },
+      {
+        accessor: 'state',
+        textAlign: 'right',
+        title: (
+          <Group justify="right">
+            <IconMap size={16} />
+          </Group>
+        ),
+      },
     ],
   });
 
