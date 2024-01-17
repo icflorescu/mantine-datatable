@@ -4,7 +4,6 @@ import type { DataTableColumn } from '../types/DataTableColumn';
 
 export type DataTableColumnToggle = {
   accessor: string;
-  title: string | undefined;
   defaultToggle: boolean;
   toggleable: boolean;
   toggled: boolean;
@@ -41,7 +40,6 @@ export const useDataTableColumns = <T>({
     columns &&
     columns.map((column) => ({
       accessor: column.accessor,
-      title: column.title,
       defaultToggle: column.defaultToggle || true,
       toggleable: column.toggleable,
       toggled: column.defaultToggle === undefined ? true : column.defaultToggle,

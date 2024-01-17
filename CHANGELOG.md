@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.4.4 (2024-01-17)
+
+- Fix unhandled Runtime Error with column dragging/toggling (PR [#514](https://github.com/icflorescu/mantine-datatable/pull/514))
+- Update dev dependencies
+
 ## 7.4.3 (2024-01-10)
 
 - Implement the `selectionCheckboxProps` property to allow customizing all selection checkboxes at once
