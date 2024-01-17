@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, Group, Stack } from '@mantine/core';
+import { IconMap } from '@tabler/icons-react';
 import { DataTable, useDataTableColumns } from '__PACKAGE__';
 import { companies } from '~/data';
 
@@ -13,7 +14,7 @@ export default function TogglingExample() {
       { accessor: 'name', width: '40%', toggleable: true, defaultToggle: false },
       { accessor: 'streetAddress', width: '60%', toggleable: true },
       { accessor: 'city', width: 160, toggleable: true },
-      { accessor: 'state', textAlign: 'right' },
+      { accessor: 'state', textAlign: 'right', title: <IconMap /> },
     ],
   });
 
