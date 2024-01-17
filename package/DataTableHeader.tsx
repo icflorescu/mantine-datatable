@@ -1,10 +1,24 @@
-import { TableThead, TableTr, type CheckboxProps, type MantineStyleProp } from '@mantine/core';
+import {
+  Checkbox,
+  Group,
+  Popover,
+  PopoverDropdown,
+  PopoverTarget,
+  Stack,
+  TableThead,
+  TableTr,
+  type CheckboxProps,
+  type MantineStyleProp,
+} from '@mantine/core';
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
+import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCell } from './DataTableHeaderCell';
 import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
+import { DataTableColumnToggle } from './hooks';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
+import { humanize } from './utils';
 
 type DataTableHeaderProps<T> = {
   selectionColumnHeaderRef: React.ForwardedRef<HTMLTableCellElement>;
@@ -65,8 +79,20 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
     />
   ) : null;
 
-  return (
-    <TableThead className={clsx('mantine-datatable-header', className)} style={style} ref={ref}>
+  const { columnsToggle, setColumnsToggle } = useDataTableColumnsContext();
+  const [columnsPopoverOpened, setColumnsPopoverOpened] = useState<boolean>(false);
+  const someColumnsToggleable = columns.some((column) => column.toggleable);
+
+  const content = (
+    <TableThead
+      className={clsx('mantine-datatable-header', className)}
+      style={style}
+      ref={ref}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        setColumnsPopoverOpened((columnsPopoverOpened) => !columnsPopoverOpened);
+      }}
+    >
       {groups && (
         <TableTr>
           {allRecordsSelectorCell}
@@ -117,11 +143,46 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               onSortStatusChange={onSortStatusChange}
               filter={filter}
               filtering={filtering}
-              allColumns={columns}
             />
           );
         })}
       </TableTr>
     </TableThead>
+  );
+
+  return someColumnsToggleable ? (
+    <Popover position="bottom" withArrow shadow="md" opened={columnsPopoverOpened} onChange={setColumnsPopoverOpened}>
+      <PopoverTarget>{content}</PopoverTarget>
+      <PopoverDropdown>
+        <Stack>
+          {columnsToggle
+            .filter((column) => column.toggleable)
+            .map((column: DataTableColumnToggle) => {
+              return (
+                <Group key={column.accessor}>
+                  <Checkbox
+                    classNames={{ label: 'mantine-datatable-header-columns-popover-label' }}
+                    size="xs"
+                    label={columns.find((c) => c.accessor === column.accessor)?.title ?? humanize(column.accessor)}
+                    checked={column.toggled}
+                    onChange={(e) => {
+                      setColumnsToggle(
+                        columnsToggle.map((c: DataTableColumnToggle) => {
+                          if (c.accessor === column.accessor) {
+                            return { ...c, toggled: e.currentTarget.checked };
+                          }
+                          return c;
+                        })
+                      );
+                    }}
+                  />
+                </Group>
+              );
+            })}
+        </Stack>
+      </PopoverDropdown>
+    </Popover>
+  ) : (
+    content
   );
 }) as <T>(props: DataTableHeaderProps<T> & { ref: React.ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;
