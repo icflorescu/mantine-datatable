@@ -83,6 +83,10 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
   const [columnsPopoverOpened, setColumnsPopoverOpened] = useState<boolean>(false);
   const someColumnsToggleable = columns.some((column) => column.toggleable);
 
+  const columnToggleCheckboxLabels = someColumnsToggleable
+    ? Object.fromEntries(columns.map(({ accessor, title }) => [accessor, title ?? humanize(String(accessor))]))
+    : undefined;
+
   const content = (
     <TableThead
       className={clsx('mantine-datatable-header', className)}
@@ -161,9 +165,9 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               return (
                 <Group key={column.accessor}>
                   <Checkbox
-                    classNames={{ label: 'mantine-datatable-header-columns-popover-label' }}
+                    classNames={{ label: 'mantine-datatable-header-column-toggle-checkbox-label' }}
                     size="xs"
-                    label={columns.find((c) => c.accessor === column.accessor)?.title ?? humanize(column.accessor)}
+                    label={columnToggleCheckboxLabels![column.accessor]}
                     checked={column.toggled}
                     onChange={(e) => {
                       setColumnsToggle(
