@@ -14,7 +14,7 @@ export default function TogglingExample() {
       {
         accessor: 'name',
         title: (
-          <Group gap={4} mt={-1} justify="start">
+          <Group gap={4} mt={-1}>
             <IconBuildingSkyscraper size={16} />
             <Text inherit mt={1}>
               Company
@@ -28,7 +28,7 @@ export default function TogglingExample() {
       {
         accessor: 'streetAddress',
         title: (
-          <Group gap={4} mt={-1} justify="start">
+          <Group gap={4} mt={-1}>
             <IconRoadSign size={16} />
             <Text inherit mt={1}>
               Street Address
