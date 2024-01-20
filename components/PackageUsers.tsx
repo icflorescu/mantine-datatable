@@ -28,6 +28,11 @@ const USERS: {
     link: 'https://www.easywp.com',
   },
   {
+    name: 'Aquarino',
+    logo: { base: 'aquarino', ext: 'svg', shift: 2 },
+    link: 'http://aquarino.com.br',
+  },
+  {
     name: 'kappa.ai',
     logo: { base: 'kapa', ext: 'png', themed: true, scale: 98, shift: 1 },
     link: 'https://kapa.ai',
