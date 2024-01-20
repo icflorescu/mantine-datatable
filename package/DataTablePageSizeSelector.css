@@ -2,6 +2,10 @@
   margin: 0 rem(-4px) 0 rem(2px);
 }
 
+.mantine-datatable-page-size-selector-menu-arrow {
+  z-index: -1;
+}
+
 .mantine-datatable-page-size-selector-active {
   --mantine-datatable-pagination-active-text-color: var(
     light-dark(
