@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.4.5 (2024-01-20)
+
+- Improve column toggling UX & code efficiency
+- Update dev dependencies to ensure compatibility with Mantine 7.4.2 and Next.js 14.1
+
 ## 7.4.4 (2024-01-17)
 
 - Fix unhandled Runtime Error with column dragging/toggling (PR [#514](https://github.com/icflorescu/mantine-datatable/pull/514))
