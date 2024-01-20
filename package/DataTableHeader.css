@@ -7,3 +7,7 @@
     border-bottom: rem(1px) solid var(--mantine-datatable-border-color);
   }
 }
+
+.mantine-datatable-header-column-toggle-checkbox-label {
+  user-select: none;
+}
