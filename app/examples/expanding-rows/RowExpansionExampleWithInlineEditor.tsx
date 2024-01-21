@@ -96,9 +96,9 @@ export function RowExpansionExampleWithInlineEditor() {
             onDone={(data) => {
               const index = companies.findIndex((c) => c.id === data.id);
               setCompanies([...companies.slice(0, index), data, ...companies.slice(index + 1)]);
-              collapse();
+              collapse(); // 👈 collapse the row after editing
             }}
-            onCancel={collapse}
+            onCancel={collapse} // 👈 collapse the row if editing is cancelled
           />
         ),
       }}

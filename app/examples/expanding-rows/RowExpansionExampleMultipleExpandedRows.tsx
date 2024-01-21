@@ -16,7 +16,7 @@ export function RowExpansionExampleMultipleExpandedRows() {
       columns={[{ accessor: 'name' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={records}
       rowExpansion={{
-        allowMultiple: true,
+        allowMultiple: true, // 👈 allow multiple rows to be expanded at the same time
         // example-skip
         content: ({ record }) => (
           <Stack className={classes.details} p="xs" gap={6}>

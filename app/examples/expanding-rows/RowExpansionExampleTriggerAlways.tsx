@@ -16,7 +16,7 @@ export function RowExpansionExampleTriggerAlways() {
       columns={[{ accessor: 'name' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={records}
       rowExpansion={{
-        trigger: 'always',
+        trigger: 'always', // 👈 always expand all rows
         // example-skip
         content: ({ record }) => (
           <Stack className={classes.details} p="xs" gap={6}>

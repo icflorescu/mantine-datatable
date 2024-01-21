@@ -24,11 +24,13 @@ export function ColorsExample() {
     <DataTable
       withTableBorder
       withColumnBorders
+      // 👇 override default text color for light and dark themes
       c={{ dark: '#dbc7a0', light: '#55350d' }}
+      // 👇 override default background color for light and dark themes
       backgroundColor={{ dark: '#232b25', light: '#f0f7f1' }}
-      borderColor="#40c057"
-      rowBorderColor="#fab005"
-      paginationActiveBackgroundColor="#40c057"
+      borderColor="#40c057" // 👈 override default border color
+      rowBorderColor="#fab005" // 👈 override default row border color
+      paginationActiveBackgroundColor="#40c057" // 👈 override default pagination active background color
       // example-skip
       records={records}
       columns={[
