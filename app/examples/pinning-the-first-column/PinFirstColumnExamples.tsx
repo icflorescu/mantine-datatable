@@ -244,3 +244,90 @@ export function PinFirstAndLastColumnsExampleWithRecordSelection() {
   );
   // example-end
 }
+
+export function PinFirstColumnExampleWithColumnGroups() {
+  const [selectedRecord, setSelectedRecord] = useState<Employee[]>([]);
+
+  // example-start with-column-groups
+  return (
+    <DataTable
+      withTableBorder
+      withColumnBorders
+      pinFirstColumn
+      pinLastColumn
+      groups={[
+        {
+          id: 'name',
+          title: '', // 👈 empty title
+          columns: [
+            { accessor: 'name', noWrap: true, render: ({ firstName, lastName }) => `${firstName} ${lastName}` },
+          ],
+        },
+        // example-skip other column groups
+        {
+          id: 'workplaceInformation',
+          columns: [
+            { accessor: 'department.company.name', title: 'Company', noWrap: true },
+            { accessor: 'department.name', title: 'Department' },
+            { accessor: 'department.company.missionStatement', title: 'Mission statement', noWrap: true },
+          ],
+        },
+        {
+          id: 'workplaceLocation',
+          columns: [
+            { accessor: 'department.company.city', title: 'City', noWrap: true },
+            { accessor: 'department.company.state', title: 'State' },
+            { accessor: 'department.company.streetAddress', title: 'Address', noWrap: true },
+          ],
+        },
+        {
+          id: 'actions',
+          style: { borderBottomColor: 'transparent' },
+          textAlign: 'center',
+          columns: [
+            {
+              accessor: 'actions',
+              title: '', // 👈 empty title
+              textAlign: 'right',
+              render: (employee) => (
+                <Group gap={4} wrap="nowrap">
+                  <ActionIcon
+                    size="sm"
+                    variant="subtle"
+                    color="green"
+                    onClick={() => showModal({ employee, action: 'view' })}
+                  >
+                    <IconEye size={16} />
+                  </ActionIcon>
+                  <ActionIcon
+                    size="sm"
+                    variant="subtle"
+                    color="blue"
+                    onClick={() => showModal({ employee, action: 'edit' })}
+                  >
+                    <IconEdit size={16} />
+                  </ActionIcon>
+                  <ActionIcon
+                    size="sm"
+                    variant="subtle"
+                    color="red"
+                    onClick={() => showModal({ employee, action: 'delete' })}
+                  >
+                    <IconTrash size={16} />
+                  </ActionIcon>
+                </Group>
+              ),
+            },
+          ],
+          // example-resume
+        },
+      ]}
+      // example-skip other table props
+      records={records}
+      selectedRecords={selectedRecord}
+      onSelectedRecordsChange={setSelectedRecord}
+      // example-resume
+    />
+  );
+  // example-end
+}

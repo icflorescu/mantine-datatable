@@ -9,6 +9,7 @@ import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import {
   PinFirstAndLastColumnsExampleWithRecordSelection,
+  PinFirstColumnExampleWithColumnGroups,
   PinFirstColumnExampleWithoutRecordSelection,
   PinFirstColumnExampleWithRecordSelection,
 } from './PinFirstColumnExamples';
@@ -19,7 +20,10 @@ export const metadata = getRouteMetadata(PATH);
 
 export default async function PinFirstColumnExamplePage() {
   const code = await readCodeFile<
-    Record<'without-record-selection' | 'with-record-selection' | 'first-last-and-record-selection', string>
+    Record<
+      'without-record-selection' | 'with-record-selection' | 'first-last-and-record-selection' | 'with-column-groups',
+      string
+    >
   >(`${PATH}/PinFirstColumnExamples.tsx`);
 
   return (
@@ -54,10 +58,13 @@ export default async function PinFirstColumnExamplePage() {
       <PinFirstAndLastColumnsExampleWithRecordSelection />
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code['first-last-and-record-selection']} />
-      <Txt warning title="Warning">
-        Combining this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink> may lead
-        to minor visual artifacts.
+      <Txt warning title="Warning!">
+        When using this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink>, you
+        need to <strong>make sure that the first group contains only one column</strong>:
       </Txt>
+      <PinFirstColumnExampleWithColumnGroups />
+      <Txt>Here is the code:</Txt>
+      <CodeBlock code={code['with-column-groups']} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>

@@ -7,14 +7,16 @@ import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
-import { PinLastColumnExample } from './PinLastColumnExample';
+import { PinLastColumnExample, PinLastColumnExampleWithColumnGroups } from './PinLastColumnExamples';
 
 const PATH: Route = '/examples/pinning-the-last-column';
 
 export const metadata = getRouteMetadata(PATH);
 
 export default async function PinLastColumnExamplePage() {
-  const code = await readCodeFile<string>(`${PATH}/PinLastColumnExample.tsx`);
+  const code = await readCodeFile<Record<'default' | 'with-column-groups', string>>(
+    `${PATH}/PinLastColumnExamples.tsx`
+  );
 
   return (
     <>
@@ -37,11 +39,14 @@ export default async function PinLastColumnExamplePage() {
       </Txt>
       <PinLastColumnExample />
       <Txt>Here is the code:</Txt>
-      <CodeBlock code={code} />
-      <Txt warning title="Warning">
-        Combining this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink> may lead
-        to minor visual artifacts.
+      <CodeBlock code={code['default']} />
+      <Txt warning title="Warning!">
+        When using this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink>, you
+        need to <strong>make sure that the last group contains only one column</strong>:
       </Txt>
+      <PinLastColumnExampleWithColumnGroups />
+      <Txt>Here is the code:</Txt>
+      <CodeBlock code={code['with-column-groups']} />
       <Txt>
         Head over to the next example to discover how you can pin the <strong>first</strong> column to the{' '}
         <strong>left</strong> side of the table.

@@ -44,7 +44,7 @@ const showModal = ({ employee, action }: { employee: Employee; action: 'view' | 
 export function PinLastColumnExample() {
   const [selectedRecord, setSelectedRecord] = useState<Employee[]>([]);
 
-  // example-start
+  // example-start default
   return (
     <DataTable
       pinLastColumn // 👈 make sure the last column is always visible
@@ -93,6 +93,94 @@ export function PinLastColumnExample() {
           ),
         },
       ]}
+      records={records}
+      selectedRecords={selectedRecord}
+      onSelectedRecordsChange={setSelectedRecord}
+      // example-resume
+    />
+  );
+  // example-end
+}
+
+export function PinLastColumnExampleWithColumnGroups() {
+  const [selectedRecord, setSelectedRecord] = useState<Employee[]>([]);
+
+  // example-start with-column-groups
+  return (
+    <DataTable
+      withTableBorder
+      withColumnBorders
+      pinLastColumn
+      groups={[
+        // example-skip other column groups
+        {
+          id: 'name',
+          columns: [
+            { accessor: 'firstName', noWrap: true },
+            { accessor: 'lastName', noWrap: true },
+          ],
+        },
+        {
+          id: 'workplaceInformation',
+          columns: [
+            { accessor: 'department.company.name', title: 'Company', noWrap: true },
+            { accessor: 'department.name', title: 'Department' },
+            { accessor: 'department.company.missionStatement', title: 'Mission statement', noWrap: true },
+          ],
+        },
+        {
+          id: 'workplaceLocation',
+          columns: [
+            { accessor: 'department.company.city', title: 'City', noWrap: true },
+            { accessor: 'department.company.state', title: 'State' },
+            { accessor: 'department.company.streetAddress', title: 'Address', noWrap: true },
+          ],
+        },
+        // example-resume
+        // 👇 this group has only one column, so it will be pinned to the right side of the table
+        {
+          id: 'actions',
+          style: { borderBottomColor: 'transparent' },
+          textAlign: 'center',
+          columns: [
+            {
+              accessor: 'actions',
+              title: '', // 👈 empty title
+              textAlign: 'right',
+              render: (employee) => (
+                <Group gap={4} wrap="nowrap">
+                  <ActionIcon
+                    size="sm"
+                    variant="subtle"
+                    color="green"
+                    onClick={() => showModal({ employee, action: 'view' })}
+                  >
+                    <IconEye size={16} />
+                  </ActionIcon>
+                  <ActionIcon
+                    size="sm"
+                    variant="subtle"
+                    color="blue"
+                    onClick={() => showModal({ employee, action: 'edit' })}
+                  >
+                    <IconEdit size={16} />
+                  </ActionIcon>
+                  <ActionIcon
+                    size="sm"
+                    variant="subtle"
+                    color="red"
+                    onClick={() => showModal({ employee, action: 'delete' })}
+                  >
+                    <IconTrash size={16} />
+                  </ActionIcon>
+                </Group>
+              ),
+            },
+          ],
+          // example-resume
+        },
+      ]}
+      // example-skip other table props
       records={records}
       selectedRecords={selectedRecord}
       onSelectedRecordsChange={setSelectedRecord}
