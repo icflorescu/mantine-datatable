@@ -92,10 +92,14 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
       className={clsx('mantine-datatable-header', className)}
       style={style}
       ref={ref}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        setColumnsPopoverOpened((columnsPopoverOpened) => !columnsPopoverOpened);
-      }}
+      onContextMenu={
+        someColumnsToggleable
+          ? (e) => {
+              e.preventDefault();
+              setColumnsPopoverOpened((columnsPopoverOpened) => !columnsPopoverOpened);
+            }
+          : undefined
+      }
     >
       {groups && (
         <TableTr>
