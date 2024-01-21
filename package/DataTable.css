@@ -99,11 +99,16 @@
 }
 
 .mantine-datatable-pin-last-column {
-  th:not(.mantine-datatable-column-group-header-cell):last-of-type,
+  th:last-of-type,
   td:not(.mantine-datatable-row-expansion-cell):last-of-type {
     position: sticky;
-    right: 0;
     z-index: 1;
+
+    /* This is to fix a minor visual glitch in webkit browsers */
+    right: rem(-0.4px);
+    @-moz-document url-prefix() {
+      right: 0;
+    }
 
     &::after {
       content: '';
@@ -120,7 +125,7 @@
     }
   }
 
-  th:not(.mantine-datatable-column-group-header-cell):last-of-type,
+  th:last-of-type,
   tr[data-with-row-border]:not(:last-of-type) td:not(.mantine-datatable-row-expansion-cell):last-of-type {
     &::after {
       top: rem(-1px);
@@ -144,92 +149,93 @@
       background: var(--mantine-primary-color-light);
     }
   }
-}
 
-.mantine-datatable-pin-last-column-scrolled {
-  th:not(.mantine-datatable-column-group-header-cell):last-of-type,
-  td:not(.mantine-datatable-row-expansion-cell):last-of-type {
-    &::after {
-      opacity: 1;
+  &-scrolled {
+    th:last-of-type,
+    td:not(.mantine-datatable-row-expansion-cell):last-of-type {
+      &::after {
+        opacity: 1;
+      }
     }
   }
 }
 
-.mantine-datatable-pin-first-column:not(.mantine-datatable-selection-column-visible)
-  th:not(.mantine-datatable-column-group-header-cell):first-of-type,
-.mantine-datatable-pin-first-column:not(.mantine-datatable-selection-column-visible)
-  td:not(.mantine-datatable-row-expansion-cell):first-of-type,
-.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible
-  th:not(.mantine-datatable-column-group-header-cell):nth-of-type(2),
-.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible
-  td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
-  position: sticky;
-  left: var(--mantine-datatable-selection-column-width);
-  z-index: 1;
+.mantine-datatable-pin-first-column {
+  &:not(.mantine-datatable-selection-column-visible) th:first-of-type,
+  &:not(.mantine-datatable-selection-column-visible) td:not(.mantine-datatable-row-expansion-cell):first-of-type,
+  &.mantine-datatable-selection-column-visible th:first-of-type,
+  &.mantine-datatable-selection-column-visible th.mantine-datatable-column-group-header-cell:nth-of-type(2),
+  &.mantine-datatable-selection-column-visible td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
+    position: sticky;
+    left: var(--mantine-datatable-selection-column-width);
+    z-index: 1;
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: calc(-1 * var(--mantine-spacing-xs));
-    border-left: 1px solid var(--mantine-datatable-row-border-color);
-    width: var(--mantine-spacing-xs);
-    background: var(--mantine-datatable-shadow-background-left);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: calc(-1 * var(--mantine-spacing-xs));
+      border-left: 1px solid var(--mantine-datatable-row-border-color);
+      width: var(--mantine-spacing-xs);
+      background: var(--mantine-datatable-shadow-background-left);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
   }
-}
 
-.mantine-datatable-pin-first-column:not(.mantine-datatable-selection-column-visible)
-  th:not(.mantine-datatable-column-group-header-cell):first-of-type,
-.mantine-datatable-pin-first-column:not(.mantine-datatable-selection-column-visible)
-  tr[data-with-row-border]:not(:last-of-type)
-  td:not(.mantine-datatable-row-expansion-cell):first-of-type,
-.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible
-  th:not(.mantine-datatable-column-group-header-cell):nth-of-type(2),
-.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible
-  tr[data-with-row-border]:not(:last-of-type)
-  td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
-  &::after {
-    top: rem(-1px);
-    bottom: rem(-1px);
-  }
-}
-
-.mantine-datatable-pin-first-column:not(.mantine-datatable-selection-column-visible) tfoot th:first-of-type::after,
-.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible tfoot th:nth-of-type(2)::after {
-  top: rem(-1px);
-}
-
-.mantine-datatable-pin-first-column:not(.mantine-datatable-selection-column-visible)
-  tr[data-selected]
-  td:not(.mantine-datatable-row-expansion-cell):first-of-type,
-.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible
-  tr[data-selected]
-  td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
-  background: inherit;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
+  &.mantine-datatable-selection-column-visible th.mantine-datatable-header-selector-cell {
     left: 0;
-    right: 0;
-    background: var(--mantine-primary-color-light);
   }
-}
 
-.mantine-datatable-pin-first-column-scrolled:not(.mantine-datatable-selection-column-visible)
-  th:not(.mantine-datatable-column-group-header-cell):first-of-type,
-.mantine-datatable-pin-first-column-scrolled:not(.mantine-datatable-selection-column-visible)
-  td:not(.mantine-datatable-row-expansion-cell):first-of-type,
-.mantine-datatable-pin-first-column-scrolled.mantine-datatable-selection-column-visible
-  th:not(.mantine-datatable-column-group-header-cell):nth-of-type(2),
-.mantine-datatable-pin-first-column-scrolled.mantine-datatable-selection-column-visible
-  td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
-  &::after {
-    opacity: 1;
+  &:not(.mantine-datatable-selection-column-visible) th:first-of-type,
+  &:not(.mantine-datatable-selection-column-visible)
+    tr[data-with-row-border]:not(:last-of-type)
+    td:not(.mantine-datatable-row-expansion-cell):first-of-type,
+  &.mantine-datatable-selection-column-visible th.mantine-datatable-column-group-header-cell:nth-of-type(2),
+  &.mantine-datatable-selection-column-visible
+    tr[data-with-row-border]:not(:last-of-type)
+    td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
+    &::after {
+      top: rem(-1px);
+      bottom: rem(-1px);
+    }
+  }
+
+  &:not(.mantine-datatable-selection-column-visible) tfoot th:first-of-type,
+  &.mantine-datatable-selection-column-visible tfoot th:nth-of-type(2) {
+    &::after {
+      top: rem(-1px);
+    }
+  }
+
+  &:not(.mantine-datatable-selection-column-visible)
+    tr[data-selected]
+    td:not(.mantine-datatable-row-expansion-cell):first-of-type,
+  &.mantine-datatable-selection-column-visible
+    tr[data-selected]
+    td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
+    background: inherit;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--mantine-primary-color-light);
+    }
+  }
+
+  &-scrolled:not(.mantine-datatable-selection-column-visible) th:first-of-type,
+  &-scrolled:not(.mantine-datatable-selection-column-visible)
+    td:not(.mantine-datatable-row-expansion-cell):first-of-type,
+  &-scrolled.mantine-datatable-selection-column-visible th:first-of-type,
+  &-scrolled.mantine-datatable-selection-column-visible th.mantine-datatable-column-group-header-cell:nth-of-type(2),
+  &-scrolled.mantine-datatable-selection-column-visible td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
+    &::after {
+      opacity: 1;
+    }
   }
 }

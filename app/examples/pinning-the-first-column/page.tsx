@@ -3,12 +3,14 @@ import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
+import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import {
   PinFirstAndLastColumnsExampleWithRecordSelection,
+  PinFirstColumnExampleWithColumnGroups,
   PinFirstColumnExampleWithoutRecordSelection,
   PinFirstColumnExampleWithRecordSelection,
 } from './PinFirstColumnExamples';
@@ -19,7 +21,10 @@ export const metadata = getRouteMetadata(PATH);
 
 export default async function PinFirstColumnExamplePage() {
   const code = await readCodeFile<
-    Record<'without-record-selection' | 'with-record-selection' | 'first-last-and-record-selection', string>
+    Record<
+      'without-record-selection' | 'with-record-selection' | 'first-last-and-record-selection' | 'with-column-groups',
+      string
+    >
   >(`${PATH}/PinFirstColumnExamples.tsx`);
 
   return (
@@ -54,10 +59,19 @@ export default async function PinFirstColumnExamplePage() {
       <PinFirstAndLastColumnsExampleWithRecordSelection />
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code['first-last-and-record-selection']} />
-      <Txt warning title="Warning">
-        Combining this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink> may lead
-        to minor visual artifacts.
+      <PageSubtitle value="Using with column grouping" />
+      <Txt warning title="Warning!">
+        When using this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink>, you
+        need to <strong>make sure that the first group contains only one column</strong>.
       </Txt>
+      <Txt>
+        Here is an example of how you can pin the first column when using column grouping. Notice how the first group
+        contains only one column, and how we are using an absolutely positioned custom title component to create the
+        illusion that the <em>Name</em> text is centered vertically:
+      </Txt>
+      <PinFirstColumnExampleWithColumnGroups />
+      <Txt>Here is the code:</Txt>
+      <CodeBlock code={code['with-column-groups']} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
