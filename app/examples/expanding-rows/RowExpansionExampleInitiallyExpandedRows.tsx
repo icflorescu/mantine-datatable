@@ -16,7 +16,8 @@ export function RowExpansionExampleInitiallyExpandedRows() {
       columns={[{ accessor: 'name' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={records}
       rowExpansion={{
-        initiallyExpanded: ({ record: { name } }) => name === 'Johnston LLC',
+        allowMultiple: true,
+        initiallyExpanded: ({ record: { state } }) => state === 'WY', // 👈 expand rows where state is WY
         // example-skip
         content: ({ record }) => (
           <Stack className={classes.details} p="xs" gap={6}>

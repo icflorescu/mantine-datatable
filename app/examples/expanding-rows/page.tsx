@@ -72,11 +72,6 @@ export default async function ExpandingRowsExamplePage() {
       <RowExpansionExampleCollapseProps />
       <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleCollapseProps.tsx']} />
-      <PageSubtitle value="Specifying which rows are initially expanded" />
-      <Txt>You can specify which rows are initially expanded like so:</Txt>
-      <RowExpansionExampleInitiallyExpandedRows />
-      <Txt>Here is the code for the above example:</Txt>
-      <CodeBlock code={code['RowExpansionExampleInitiallyExpandedRows.tsx']} />
       <PageSubtitle value="Allowing multiple rows to be expanded at once" />
       <Txt>
         By default, a single row can be expanded at a certain time. You can override the default behavior like so:
@@ -84,6 +79,11 @@ export default async function ExpandingRowsExamplePage() {
       <RowExpansionExampleMultipleExpandedRows />
       <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleMultipleExpandedRows.tsx']} />
+      <PageSubtitle value="Specifying which rows are initially expanded" />
+      <Txt>You can specify which rows are initially expanded like so:</Txt>
+      <RowExpansionExampleInitiallyExpandedRows />
+      <Txt>Here is the code for the above example:</Txt>
+      <CodeBlock code={code['RowExpansionExampleInitiallyExpandedRows.tsx']} />
       <PageSubtitle value="Always expand all rows" />
       <Txt>
         If you want all rows to be locked in their expanded state, just set the row expansion <Code>trigger</Code>{' '}
