@@ -3,6 +3,7 @@ import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
+import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
@@ -40,9 +41,15 @@ export default async function PinLastColumnExamplePage() {
       <PinLastColumnExample />
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code['default']} />
+      <PageSubtitle value="Using with column grouping" />
       <Txt warning title="Warning!">
         When using this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink>, you
-        need to <strong>make sure that the last group contains only one column</strong>:
+        need to <strong>make sure that the last group contains only one column</strong>.
+      </Txt>
+      <Txt>
+        Here is an example of how you can pin the last column when using column grouping. Notice how the last group
+        contains only one column, and how we are using an absolutely positioned custom title component to create the
+        illusion that the <em>Actions</em> text is centered vertically:
       </Txt>
       <PinLastColumnExampleWithColumnGroups />
       <Txt>Here is the code:</Txt>

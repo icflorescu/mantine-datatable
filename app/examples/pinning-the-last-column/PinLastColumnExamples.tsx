@@ -140,13 +140,18 @@ export function PinLastColumnExampleWithColumnGroups() {
         // 👇 this group has only one column, so it will be pinned to the right side of the table
         {
           id: 'actions',
-          style: { borderBottomColor: 'transparent' },
-          textAlign: 'center',
+          title: '', // 👈 empty title
+          style: { borderBottomColor: 'transparent' }, // 👈 hide the group bottom border
           columns: [
             {
               accessor: 'actions',
-              title: '', // 👈 empty title
-              textAlign: 'right',
+              title: (
+                // 👇 use an absolutely positioned custom title component
+                //    to center the title vertically
+                <Text inherit pos="absolute" mt={-28} ml={12}>
+                  Actions
+                </Text>
+              ),
               render: (employee) => (
                 <Group gap={4} wrap="nowrap">
                   <ActionIcon

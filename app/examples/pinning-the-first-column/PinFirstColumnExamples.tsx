@@ -259,8 +259,20 @@ export function PinFirstColumnExampleWithColumnGroups() {
         {
           id: 'name',
           title: '', // 👈 empty title
+          style: { borderBottomColor: 'transparent' }, // 👈 hide the bottom border
           columns: [
-            { accessor: 'name', noWrap: true, render: ({ firstName, lastName }) => `${firstName} ${lastName}` },
+            {
+              accessor: 'name',
+              title: (
+                // 👇 use an absolutely positioned custom title component
+                //    to center the title vertically
+                <Text inherit pos="absolute" mt={-28}>
+                  Name
+                </Text>
+              ),
+              noWrap: true,
+              render: ({ firstName, lastName }) => `${firstName} ${lastName}`,
+            },
           ],
         },
         // example-skip other column groups
@@ -282,13 +294,18 @@ export function PinFirstColumnExampleWithColumnGroups() {
         },
         {
           id: 'actions',
-          style: { borderBottomColor: 'transparent' },
-          textAlign: 'center',
+          title: '', // 👈 empty title
+          style: { borderBottomColor: 'transparent' }, // 👈 hide the bottom border
           columns: [
             {
               accessor: 'actions',
-              title: '', // 👈 empty title
-              textAlign: 'right',
+              title: (
+                // 👇 use an absolutely positioned custom title component
+                //    to center the title vertically
+                <Text inherit pos="absolute" mt={-28} ml={12}>
+                  Actions
+                </Text>
+              ),
               render: (employee) => (
                 <Group gap={4} wrap="nowrap">
                   <ActionIcon

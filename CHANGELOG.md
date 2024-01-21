@@ -3,6 +3,12 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.4.6 (2024-01-21)
+
+- Improve first and last column pinning CSS to allow combining the feature with column groups
+- Improve last column pinning CSS to fix a minor glitch in webkit browsers
+- A few documentation improvements
+
 ## 7.4.5 (2024-01-20)
 
 - Improve column toggling UX & code efficiency

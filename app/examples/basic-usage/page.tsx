@@ -24,8 +24,7 @@ export default async function BasicUsageExamplePage() {
       <PageTitle of={PATH} />
       <Txt>
         In its most basic usage scenario, the DataTable component only requires <Code>records</Code> and{' '}
-        <Code>columns</Code>
-        properties to be set:
+        <Code>columns</Code> properties to be set:
       </Txt>
       <CodeBlock tabs={{ code, keys: ['BasicUsageExample.tsx', 'companies.json'] }} />
       <Txt>The code above will produce the following result:</Txt>
