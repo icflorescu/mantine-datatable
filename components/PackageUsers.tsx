@@ -6,7 +6,7 @@ import classes from './PackageUsers.module.css';
 const USERS: {
   name: string;
   showText?: boolean;
-  logo: { base: string; ext: 'png' | 'svg'; themed?: true; scale?: number; shift?: number };
+  logo: { base: string; ext: 'png' | 'webp' | 'svg'; themed?: true; scale?: number; shift?: number };
   link: string;
   shift?: number;
 }[] = [
@@ -31,6 +31,13 @@ const USERS: {
     name: 'Aquarino',
     logo: { base: 'aquarino', ext: 'svg', shift: 2 },
     link: 'http://aquarino.com.br',
+  },
+  {
+    name: 'Dera',
+    showText: true,
+    logo: { base: 'dera', ext: 'webp', shift: 10 },
+    link: 'https://getdera.com/',
+    shift: 1,
   },
   {
     name: 'kappa.ai',
