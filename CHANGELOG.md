@@ -6,6 +6,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 ## 7.6.0 (2024-02-28)
 
 - Update dev dependencies to ensure compatibility with Mantine 7.6.0
+- Fix [#553](https://github.com/icflorescu/mantine-datatable/issues/553) - loading spinner makes the table too dark in dark mode
 
 ## 7.5.0 (2024-01-27)
 
