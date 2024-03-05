@@ -8,7 +8,9 @@ import { employees } from '~/data';
 export function ScrollIntoViewExample() {
   // example-start scroll-into-view
   const scrollRowIntoView = (selector: string) => {
-    document.querySelector(selector)?.scrollIntoView(false);
+    document.querySelector(selector)?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    // 👇 if you don't want smooth scrolling, you could simply use this instead:
+    // document.querySelector(selector)?.scrollIntoView(false);
   };
 
   return (
