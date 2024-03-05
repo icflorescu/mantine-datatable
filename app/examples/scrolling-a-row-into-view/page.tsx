@@ -1,45 +1,54 @@
 import { Code, Text } from '@mantine/core';
 import type { Route } from 'next';
+import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
+import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
-import { ScrollRowIntoViewExample } from './ScrollRowIntoViewExample';
+import { ScrollIntoViewExample, ScrollToExample } from './ScrollRowIntoViewExamples';
 
 const PATH: Route = '/examples/scrolling-a-row-into-view';
 
 export const metadata = getRouteMetadata(PATH);
 
-export default async function ScrollableVsAutoHeightExamplePage() {
-  const code = await readCodeFile<string>(`${PATH}/ScrollRowIntoViewExample.tsx`);
+export default async function ScrollIntoViewExamplesPage() {
+  const code = await readCodeFile<Record<'scroll-into-view' | 'scroll-to', string>>(
+    `${PATH}/ScrollRowIntoViewExamples.tsx`
+  );
 
   return (
     <>
       <PageTitle of={PATH} />
       <Txt>
-        One possible way to scroll a specific row into view is to use the{' '}
+        There are two possible approaches you could use to scroll a specific row into view in a {PRODUCT_NAME}. Both of
+        them rely on adding <Code>data-*</Code>{' '}
         <InternalLink to="/examples/custom-row-or-cell-attributes">
-          <Code>customRowAttributes</Code> property
+          <Code>customRowAttributes</Code>
         </InternalLink>{' '}
-        to add a custom <Code>data-*</Code> attribute to the row, and then use{' '}
-        <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">
-          <Code>document.querySelector</Code>
-        </ExternalLink>{' '}
-        to find the row and call{' '}
+        to the row, and then using DOM methods to find and scroll the row into view.
+      </Txt>
+      <PageSubtitle value="Using scrollIntoView" />
+      <Txt>
+        The simplest possible way is to use the{' '}
         <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView">
           <Code>scrollIntoView</Code>
         </ExternalLink>{' '}
-        on it.
+        method on the row element itself. Here is an example of how you could use it:
       </Txt>
-      <ScrollRowIntoViewExample />
+      <ScrollIntoViewExample />
       <Txt idea title="Keep in mind">
         <Text inherit mb="xs">
-          Due to the fact that the <Code>DataTable</Code> header is fixed, using <Code>scrollIntoView()</Code> with no
-          arguments, or the equivalent{' '}
+          This method is simple and works well in most cases, but it has a limitation when the table is part of a more
+          complex layout - it will scroll the entire page to the top when bringing the row into view.
+        </Text>
+        <Text inherit mb="xs">
+          Also, due to the fact that the <Code>DataTable</Code> header is fixed, using <Code>scrollIntoView()</Code>{' '}
+          with no arguments, or the equivalent{' '}
           <Code style={{ whiteSpace: 'nowrap' }}>{"scrollIntoView({ block: 'start' })"}</Code>, will not work as
           expected.
         </Text>
@@ -49,7 +58,15 @@ export default async function ScrollableVsAutoHeightExamplePage() {
         </Text>
       </Txt>
       <Txt>Here is the code:</Txt>
-      <CodeBlock code={code} />
+      <CodeBlock code={code['scroll-into-view']} />
+      <PageSubtitle value="Using table viewport scrollTo" />
+      <Txt>
+        If the DataTable resides in a page with a more complex layout and you want to avoid scrolling the entire page
+        when bringing a row into view, you can use the <Code>scrollTo</Code> method of the table viewport element:
+      </Txt>
+      <ScrollToExample />
+      <Txt>Here is the code:</Txt>
+      <CodeBlock code={code['scroll-to']} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
