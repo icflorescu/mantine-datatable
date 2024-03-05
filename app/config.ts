@@ -123,6 +123,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to make ${PRODUCT_NAME} vertically scrollable`,
   },
   {
+    href: '/examples/scrolling-a-row-into-view',
+    title: 'Scrolling a row into view',
+    description: `Example: how to scroll a ${PRODUCT_NAME} row into view`,
+  },
+  {
     href: '/examples/empty-state',
     title: 'Empty state',
     description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,
