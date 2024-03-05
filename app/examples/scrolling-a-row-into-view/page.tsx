@@ -62,7 +62,11 @@ export default async function ScrollIntoViewExamplesPage() {
       <PageSubtitle value="Using table viewport scrollTo" />
       <Txt>
         If the DataTable resides in a page with a more complex layout and you want to avoid scrolling the entire page
-        when bringing a row into view, you can use the <Code>scrollTo</Code> method of the table viewport element:
+        when bringing a row into view, you can use the{' '}
+        <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo">
+          <Code>scrollTo</Code>
+        </ExternalLink>{' '}
+        method of the table viewport element:
       </Txt>
       <ScrollToExample />
       <Txt>Here is the code:</Txt>
