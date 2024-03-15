@@ -18,6 +18,7 @@ type DataTableColumnWidth = Record<string, string | number>;
 export const useDataTableColumns = <T>({
   key,
   columns = [],
+  getInitialValueInEffect = true,
 }: {
   /**
    * The key to use in localStorage to store the columns order and toggle state.
@@ -27,6 +28,14 @@ export const useDataTableColumns = <T>({
    * Columns definitions.
    */
   columns: DataTableColumn<T>[];
+  /**
+   * Columns definitions.
+   */
+  /**
+   * If set to true, value will be update is useEffect after mount.
+   * @default true
+   */
+  getInitialValueInEffect?: boolean;
 }) => {
   // Default columns id ordered is the order of the columns in the array
   const defaultColumnsOrder = (columns && columns.map((column) => column.accessor)) || [];
@@ -49,21 +58,21 @@ export const useDataTableColumns = <T>({
   const [columnsOrder, setColumnsOrder] = useLocalStorage<string[]>({
     key: `${key}-columns-order`,
     defaultValue: defaultColumnsOrder as string[],
-    getInitialValueInEffect: true,
+    getInitialValueInEffect,
   });
 
   // Store the columns toggle in localStorage
   const [columnsToggle, setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
     key: `${key}-columns-toggle`,
     defaultValue: defaultColumnsToggle as DataTableColumnToggle[],
-    getInitialValueInEffect: true,
+    getInitialValueInEffect,
   });
 
   // Store the columns widths in localStorage
   const [columnsWidth, setColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
     key: `${key}-columns-width`,
     defaultValue: defaultColumnsWidth as DataTableColumnWidth[],
-    getInitialValueInEffect: true,
+    getInitialValueInEffect,
   });
 
   // we won't use the "remove" function from useLocalStorage() because
