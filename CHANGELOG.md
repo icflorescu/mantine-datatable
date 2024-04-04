@@ -7,6 +7,8 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 - Allow passing getInitialValueInEffect to useLocalStorage hook in useDataTableColumns (see [#560](https://github.com/icflorescu/mantine-datatable/pull/560) by [@Sajarin-M](https://github.com/Sajarin-M))
 - Update dev dependencies to ensure compatibility with Mantine 7.7.0
+- Update peer deps to exclude Mantine `7.7.1` due to [this bug](https://github.com/mantinedev/mantine/issues/6017) that causes "maximum update depth exceeded"
+- Add a default value of `'mantine-datatable'` to `storeColumnsKey` (used as a prefix in the `useDataTableColumns` hook)
 
 ## 7.6.1 (2024-03-05)
 
