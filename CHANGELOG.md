@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.7.0 (2024-04-04)
+
+- Allow passing getInitialValueInEffect to useLocalStorage hook in useDataTableColumns (see [#560](https://github.com/icflorescu/mantine-datatable/pull/560) by [@Sajarin-M](https://github.com/Sajarin-M))
+- Update dev dependencies to ensure compatibility with Mantine 7.7.0
+
 ## 7.6.1 (2024-03-05)
 
 - Update dev dependencies to ensure compatibility with Mantine 7.6.1 & Next.js 14.1.2
