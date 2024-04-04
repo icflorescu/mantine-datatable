@@ -33,7 +33,7 @@ export function DataTable<T>({
   verticalAlign = 'center',
   fetching,
   columns,
-  storeColumnsKey,
+  storeColumnsKey = 'mantine-datatable',
   groups,
   pinFirstColumn,
   pinLastColumn,
@@ -110,7 +110,7 @@ export function DataTable<T>({
   rowClassName,
   rowStyle,
   customRowAttributes,
-  scrollViewportRef: scrollViewportRefProp,
+  scrollViewportRef,
   scrollAreaProps,
   tableRef,
   bodyRef,
@@ -128,7 +128,7 @@ export function DataTable<T>({
   ...otherProps
 }: DataTableProps<T>) {
   const {
-    ref: scrollViewportRef,
+    ref: localScrollViewportRef,
     width: scrollViewportWidth,
     height: scrollViewportHeight,
   } = useElementOuterSize<HTMLDivElement>();
@@ -147,7 +147,9 @@ export function DataTable<T>({
   const { ref: footerRef, height: footerHeight } = useElementOuterSize<HTMLTableSectionElement>();
   const { ref: paginationRef, height: paginationHeight } = useElementOuterSize<HTMLDivElement>();
   const { ref: selectionColumnHeaderRef, width: selectionColumnWidth } = useElementOuterSize<HTMLTableCellElement>();
+
   const mergedTableRef = useMergedRef(localTableRef, tableRef);
+  const mergedViewportRef = useMergedRef(localScrollViewportRef, scrollViewportRef);
 
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
@@ -157,8 +159,8 @@ export function DataTable<T>({
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
   const processScrolling = useCallback(() => {
-    const scrollTop = scrollViewportRef.current?.scrollTop || 0;
-    const scrollLeft = scrollViewportRef.current?.scrollLeft || 0;
+    const scrollTop = localScrollViewportRef.current?.scrollTop || 0;
+    const scrollLeft = localScrollViewportRef.current?.scrollLeft || 0;
 
     if (fetching || tableHeight <= scrollViewportHeight) {
       setScrolledToTop(true);
@@ -190,7 +192,7 @@ export function DataTable<T>({
     onScrollToRight,
     onScrollToTop,
     scrollViewportHeight,
-    scrollViewportRef,
+    localScrollViewportRef,
     scrollViewportWidth,
     scrolledToBottom,
     scrolledToLeft,
@@ -212,10 +214,10 @@ export function DataTable<T>({
 
   const handlePageChange = useCallback(
     (page: number) => {
-      scrollViewportRef.current?.scrollTo({ top: 0, left: 0 });
+      localScrollViewportRef.current?.scrollTo({ top: 0, left: 0 });
       onPageChange!(page);
     },
-    [onPageChange, scrollViewportRef]
+    [onPageChange, localScrollViewportRef]
   );
 
   const recordsLength = records?.length;
@@ -286,7 +288,7 @@ export function DataTable<T>({
         ]}
       >
         <DataTableScrollArea
-          viewportRef={useMergedRef(scrollViewportRef, scrollViewportRefProp)}
+          viewportRef={mergedViewportRef}
           topShadowVisible={!scrolledToTop}
           leftShadowVisible={!scrolledToLeft}
           leftShadowBehind={selectionColumnVisible || !!pinFirstColumn}

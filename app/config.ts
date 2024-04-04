@@ -1,16 +1,18 @@
 import type { MantineColor } from '@mantine/core';
 import {
+  Icon,
   IconAdjustments,
   IconBrandCss3,
   IconHeartHandshake,
   IconHome,
   IconList,
+  IconProps,
   IconQuestionMark,
   IconRocket,
   IconThumbUp,
-  TablerIconsProps,
 } from '@tabler/icons-react';
 import type { Route } from 'next';
+import { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 export const PRODUCT_NAME = 'Mantine DataTable';
 export const PRODUCT_DESCRIPTION =
@@ -46,7 +48,10 @@ export type RouteInfo = {
   href: Route;
   title: string;
   description: string;
-} & ({ icon?: never; color?: never } | { icon: React.FC<TablerIconsProps>; color: MantineColor });
+} & (
+  | { icon?: never; color?: never }
+  | { icon: ForwardRefExoticComponent<Omit<IconProps, 'ref'> & RefAttributes<Icon>>; color: MantineColor }
+);
 
 export const EXAMPLES_ROUTE_COLOR: MantineColor = 'green';
 
