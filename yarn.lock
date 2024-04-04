@@ -1526,7 +1526,7 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@mantine/code-highlight@^7.7.1":
+"@mantine/code-highlight@7.7.1":
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/@mantine/code-highlight/-/code-highlight-7.7.1.tgz#2a94bd410abcad25cc5da9179e8dfe614c8c7b99"
   integrity sha512-1pKocbs1T4yNyLg5VVq4RBEEqxjxaucW7pEHGu7Tyi5m/BDmaRaORYLxVLJ/DZcSO3350qLt7CLtOphvxGPjhQ==
@@ -1534,7 +1534,7 @@
     clsx "2.1.0"
     highlight.js "^11.9.0"
 
-"@mantine/core@^7.7.1":
+"@mantine/core@7.7.1":
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.7.1.tgz#1c294d53d409934a87fac7c578671353327a0b1a"
   integrity sha512-SdPzjvqvEK7uHFuVD3a8w3OZyQVoCwIXLSUfOtRNouDMQgsq6Ac7QjKXBBOk3wNweOWFVOU1vATLHobSmow0lQ==
@@ -1546,24 +1546,24 @@
     react-textarea-autosize "8.5.3"
     type-fest "^4.12.0"
 
-"@mantine/dates@^7.7.1":
+"@mantine/dates@7.7.1":
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/@mantine/dates/-/dates-7.7.1.tgz#3bdd223ab27a4eb1b3e50f885773010d515a4a43"
   integrity sha512-SIeC11HUTiMAExlReFYHXSkTaVjkk1i7+QvLtxJkd3lxn6X1vHuPVV4j4c9AED8oZI5QEmoVcYc/03Eud2FoAg==
   dependencies:
     clsx "2.1.0"
 
-"@mantine/hooks@^7.7.1":
+"@mantine/hooks@7.7.1":
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.7.1.tgz#04fd8999fe109615d064bf42a8ff04435c93b927"
   integrity sha512-3YH2FzKMlg840tb04PBDcDXyBCi9puFOxEBVgc6Y/pN6KFqfOoAnQE/YvgOtwSNXZlbTWyDlQoYj+3je7pA7og==
 
-"@mantine/modals@^7.7.1":
+"@mantine/modals@7.7.1":
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/@mantine/modals/-/modals-7.7.1.tgz#de713e7d02ccb765858c9914674d3b42df9f6396"
   integrity sha512-r7Zk6gZnUNiEEwbnzhIue+d8qjVDmV3umX5/FZgW0ugyB6U8C+ZIPDTlHUaPOF45F+Pu1ahdlK6N+YoRT/lxSg==
 
-"@mantine/notifications@^7.7.1":
+"@mantine/notifications@7.7.1":
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-7.7.1.tgz#f004fe608413b418712d8119793b557e845099c9"
   integrity sha512-UGs3r4CU2hy1Vt0TVtdorDufpI7LWCd4P7qZP0US+mXVeeZqHkNTCiwRTwlledhfaIdqERmmQn9OD2lJu8Wblg==
