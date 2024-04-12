@@ -36,6 +36,7 @@ export default async function EmptyStateExamplePage() {
   return (
     <>
       <PageTitle of={PATH} />
+      <Code hidden>minHeight</Code>
       <Txt>
         If <Code>records</Code> property points to an empty array, the <Code>DataTable</Code> component will indicate
         its empty state by displaying a customizable icon and text, like so:

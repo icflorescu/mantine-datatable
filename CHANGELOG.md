@@ -5,9 +5,11 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 ## 7.8.0 (2024-04-12)
 
-- Update dev dependencies to ensure compatibility with Mantine 7.8 and Next.js 14.2.0
+- Update peer dependencies to Mantine 7.8
 - Remove `useDragToggleColumns` hook, previously deprecated in favor of `useDataTableColumns`
 - Make the scroll shadows gentler, especially in dark mode
+- Optimize scroll-triggered re-renders by using a `debouncedProcessScrolling` method
+- Implement `maxHeight` property
 
 ## 7.7.0 (2024-04-04)
 

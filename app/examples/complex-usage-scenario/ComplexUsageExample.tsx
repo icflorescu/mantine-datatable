@@ -13,7 +13,7 @@ import { Employee } from '~/data';
 import { getEmployeesAsync } from '~/data/async';
 import classes from './ComplexUsageExample.module.css';
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 100;
 
 export function ComplexUsageExample() {
   const { showContextMenu, hideContextMenu } = useContextMenu();
@@ -227,7 +227,9 @@ export function ComplexUsageExample() {
 
   return (
     <DataTable
-      height={400}
+      height="70dvh"
+      minHeight={400}
+      maxHeight={1000}
       withTableBorder
       highlightOnHover
       borderRadius="sm"
