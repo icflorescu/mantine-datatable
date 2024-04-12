@@ -30,7 +30,7 @@
   z-index: 2;
   left: 0;
   right: 0;
-  height: var(--mantine-spacing-xs);
+  height: calc(var(--mantine-spacing-xs) / 2);
   background: var(--mantine-datatable-shadow-background-top);
 }
 
@@ -48,7 +48,7 @@
   top: 0;
   bottom: 0;
   right: 0;
-  width: var(--mantine-spacing-xs);
+  width: calc(var(--mantine-spacing-xs) / 2);
   background: var(--mantine-datatable-shadow-background-right);
 }
 
@@ -61,7 +61,7 @@
   z-index: 2;
   left: 0;
   right: 0;
-  height: var(--mantine-spacing-xs);
+  height: calc(var(--mantine-spacing-xs) / 2);
   background: var(--mantine-datatable-shadow-background-bottom);
 }
 

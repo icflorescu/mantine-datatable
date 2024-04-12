@@ -3,6 +3,14 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.8.0 (2024-04-12)
+
+- Update peer dependencies to Mantine 7.8
+- Remove `useDragToggleColumns` hook, previously deprecated in favor of `useDataTableColumns`
+- Make the scroll shadows gentler, especially in dark mode
+- Optimize scroll-triggered re-renders by using a `debouncedProcessScrolling` method
+- Implement `maxHeight` property
+
 ## 7.7.0 (2024-04-04)
 
 - Allow passing getInitialValueInEffect to useLocalStorage hook in useDataTableColumns (see [#560](https://github.com/icflorescu/mantine-datatable/pull/560) by [@Sajarin-M](https://github.com/Sajarin-M))

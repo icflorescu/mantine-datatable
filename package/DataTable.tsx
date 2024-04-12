@@ -1,5 +1,5 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
-import { useMergedRef } from '@mantine/hooks';
+import { useDebounceCallback, useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
@@ -29,6 +29,7 @@ export function DataTable<T>({
   textSelectionDisabled,
   height = '100%',
   minHeight,
+  maxHeight,
   shadow,
   verticalAlign = 'center',
   fetching,
@@ -204,12 +205,14 @@ export function DataTable<T>({
 
   useIsomorphicLayoutEffect(processScrolling, [processScrolling]);
 
+  const debouncedProcessScrolling = useDebounceCallback(processScrolling, 50);
+
   const handleScrollPositionChange = useCallback(
     (e: { x: number; y: number }) => {
       onScroll?.(e);
-      processScrolling();
+      debouncedProcessScrolling();
     },
-    [processScrolling, onScroll]
+    [debouncedProcessScrolling, onScroll]
   );
 
   const handlePageChange = useCallback(
@@ -282,6 +285,7 @@ export function DataTable<T>({
             boxShadow: theme.shadows[shadow as MantineSize] || shadow,
             height,
             minHeight,
+            maxHeight,
           }),
           style,
           styles?.root,
