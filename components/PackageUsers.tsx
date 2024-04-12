@@ -11,13 +11,6 @@ const USERS: {
   shift?: number;
 }[] = [
   {
-    name: 'SegmentX',
-    showText: true,
-    logo: { base: 'segmentx', ext: 'png', shift: 6, scale: 110 },
-    link: 'https://segmentx.ai',
-    shift: 1.75,
-  },
-  {
     name: 'Namecheap',
     logo: { base: 'namecheap', ext: 'svg', themed: true },
     link: 'https://www.namecheap.com',
@@ -26,6 +19,13 @@ const USERS: {
     name: 'EasyWP',
     logo: { base: 'easywp', ext: 'svg', themed: true },
     link: 'https://www.easywp.com',
+  },
+  {
+    name: 'SegmentX',
+    showText: true,
+    logo: { base: 'segmentx', ext: 'png', shift: 6, scale: 110 },
+    link: 'https://segmentx.ai',
+    shift: 1.75,
   },
   {
     name: 'Aquarino',
