@@ -37,7 +37,9 @@ export function DataTablePageSizeSelector({
 }: DataTablePageSizeSelectorComponentProps) {
   return (
     <Group gap="xs">
-      <Text size={size}>{label}</Text>
+      <Text component="div" size={size}>
+        {label}
+      </Text>
       <Menu withinPortal withArrow classNames={{ arrow: 'mantine-datatable-page-size-selector-menu-arrow' }}>
         <MenuTarget>
           <Button
@@ -78,7 +80,9 @@ export function DataTablePageSizeSelector({
                 disabled={isCurrent}
                 onClick={() => onChange(v)}
               >
-                <Text size={size}>{v}</Text>
+                <Text component="div" size={size}>
+                  {v}
+                </Text>
               </MenuItem>
             );
           })}
