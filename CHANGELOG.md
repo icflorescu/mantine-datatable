@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.8.1 (2024-04-12)
+
+- Update all internal `<Text/>` components to output divs instead of paragraphs to avoid issues such as [#570](https://github.com/icflorescu/mantine-datatable/issues/570)
+
 ## 7.8.0 (2024-04-12)
 
 - Update peer dependencies to Mantine 7.8

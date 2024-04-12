@@ -19,7 +19,7 @@ export function DataTableEmptyState({ icon, text, pt, pb, active, children }: Da
               <IconDatabaseOff />
             </div>
           )}
-          <Text size="sm" c="dimmed">
+          <Text component="div" size="sm" c="dimmed">
             {text}
           </Text>
         </>

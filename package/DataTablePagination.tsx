@@ -76,7 +76,7 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
       className={clsx('mantine-datatable-pagination', className)}
       style={[{ flexDirection: isAbovePaginationWrapBreakpoint ? 'row' : 'column' }, style]}
     >
-      <Text className="mantine-datatable-pagination-text" size={paginationSize}>
+      <Text component="div" className="mantine-datatable-pagination-text" size={paginationSize}>
         {paginationTextValue}
       </Text>
       {recordsPerPageOptions && (
