@@ -146,9 +146,3 @@ export const useDataTableColumns = <T>({
     resetColumnsWidth,
   } as const;
 };
-
-/**
- * @deprecated This hook is deprecated and will be removed in a future version. Please use the `useDataTableColumns` hook instead.
- */
-export const useDragToggleColumns = useDataTableColumns;
-// todo remove the above in a future version (maybe 7.4?)
