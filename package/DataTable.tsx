@@ -1,5 +1,5 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
-import { useDebounceCallback, useMergedRef } from '@mantine/hooks';
+import { useDebouncedCallback, useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
@@ -205,7 +205,7 @@ export function DataTable<T>({
 
   useIsomorphicLayoutEffect(processScrolling, [processScrolling]);
 
-  const debouncedProcessScrolling = useDebounceCallback(processScrolling, 50);
+  const debouncedProcessScrolling = useDebouncedCallback(processScrolling, 50);
 
   const handleScrollPositionChange = useCallback(
     (e: { x: number; y: number }) => {
