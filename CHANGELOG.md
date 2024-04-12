@@ -7,6 +7,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 - Update dev dependencies to ensure compatibility with Mantine 7.8 and Next.js 14.2.0
 - Remove `useDragToggleColumns` hook, previously deprecated in favor of `useDataTableColumns`
+- Make the scroll shadows gentler, especially in dark mode
 
 ## 7.7.0 (2024-04-04)
 
