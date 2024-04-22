@@ -92,7 +92,7 @@
     "clsx": "^2.1.0",
     "cssnano": "^6.1.2",
     "dayjs": "^1.11.10",
-    "eslint": "^9.1.0",
+    "eslint": "^8",
     "eslint-config-next": "^14.2.2",
     "eslint-config-prettier": "^9.1.0",
     "lodash": "^4.17.21",
