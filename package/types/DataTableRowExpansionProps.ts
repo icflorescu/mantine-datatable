@@ -2,6 +2,13 @@ import type { DataTableRowExpansionCollapseProps } from './DataTableRowExpansion
 
 export type DataTableRowExpansionProps<T = Record<string, unknown>> = {
   /**
+   * Function defining which records can be expanded.
+   * Accepts an object with `record` and `index` properties and returns a boolean specifying
+   * whether the row should be expandable.
+   */
+  expandable?: (params: { record: T; index: number }) => boolean;
+
+  /**
    * Defines when rows should expand.
    * @default `click`
    */
