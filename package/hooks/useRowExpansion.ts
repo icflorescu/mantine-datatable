@@ -47,7 +47,7 @@ export function useRowExpansion<T>({
         trigger === 'always' ? true : expandedRecordIds.includes(getRecordId(record, idAccessor)),
       isExpandable: ({ record, index }: { record: T; index: number }) => {
         if (!expandable) {
-          return false;
+          return true;
         }
         return expandable({ record, index });
       },
