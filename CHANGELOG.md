@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.8.2 (2024-04-26)
+
+- Add `rowExpansion.expandable` property defining if row can be expanded (see [#579](https://github.com/icflorescu/mantine-datatable/issues/579), by [@camdarley](https://github.com/camdarley))
+- Update dev dependencies to ensure compatibility with Mantine 7.8.1, Next.js 14.2.3 and React 18.3 
+
 ## 7.8.1 (2024-04-12)
 
 - Update all internal `<Text/>` components to output divs instead of paragraphs to avoid issues such as [#570](https://github.com/icflorescu/mantine-datatable/issues/570)

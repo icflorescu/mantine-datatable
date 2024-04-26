@@ -31,7 +31,7 @@ export function useRowExpansion<T>({
   const expandedRecordIdsState = useState<unknown[]>(initiallyExpandedRecordIds);
 
   if (rowExpansion) {
-    const { trigger, allowMultiple, collapseProps, content } = rowExpansion;
+    const { expandable, trigger, allowMultiple, collapseProps, content } = rowExpansion;
     if (rowExpansion.expanded) {
       ({ recordIds: expandedRecordIds, onRecordIdsChange: setExpandedRecordIds } = rowExpansion.expanded);
     } else {
@@ -45,6 +45,12 @@ export function useRowExpansion<T>({
       expandOnClick: trigger !== 'always' && trigger !== 'never',
       isRowExpanded: (record: T) =>
         trigger === 'always' ? true : expandedRecordIds.includes(getRecordId(record, idAccessor)),
+      isExpandable: ({ record, index }: { record: T; index: number }) => {
+        if (!expandable) {
+          return true;
+        }
+        return expandable({ record, index });
+      },
       expandRow: (record: T) => {
         const recordId = getRecordId(record, idAccessor);
         setExpandedRecordIds?.(allowMultiple ? [...expandedRecordIds, recordId] : [recordId]);
