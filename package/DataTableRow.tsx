@@ -84,15 +84,15 @@ export function DataTableRow<T>({
       <TableTr
         className={clsx(
           'mantine-datatable-row',
-          { [POINTER_CURSOR]: onClick || onDoubleClick || expansion?.expandOnClick },
+          { [POINTER_CURSOR]: expansion?.isExpandable({ record, index }) && (onClick || onDoubleClick || expansion?.expandOnClick) },
           { [CONTEXT_MENU_CURSOR]: onContextMenu },
           typeof className === 'function' ? className(record, index) : className
         )}
         data-selected={selectionChecked || undefined}
         onClick={(e) => {
           if (expansion) {
-            const { isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
-            if (expandOnClick) {
+            const { isExpandable, isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
+            if (isExpandable({ record, index }) && expandOnClick) {
               if (isRowExpanded(record)) {
                 collapseRow(record);
               } else {

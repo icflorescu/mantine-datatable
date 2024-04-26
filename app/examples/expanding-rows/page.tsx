@@ -11,6 +11,7 @@ import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { RowExpansionExampleCollapseProps } from './RowExpansionExampleCollapseProps';
 import { RowExpansionExampleControlledMode } from './RowExpansionExampleControlledMode';
+import { RowExpansionExampleExpandableRows } from './RowExpansionExampleExpandableRows';
 import { RowExpansionExampleInitiallyExpandedRows } from './RowExpansionExampleInitiallyExpandedRows';
 import { RowExpansionExampleMultipleExpandedRows } from './RowExpansionExampleMultipleExpandedRows';
 import { RowExpansionExampleSimple } from './RowExpansionExampleSimple';
@@ -26,6 +27,7 @@ export default async function ExpandingRowsExamplePage() {
   const code = await allPromiseProps({
     'RowExpansionExampleCollapseProps.tsx': readCodeFile<string>(`${PATH}/RowExpansionExampleCollapseProps.tsx`),
     'RowExpansionExampleControlledMode.tsx': readCodeFile<string>(`${PATH}/RowExpansionExampleControlledMode.tsx`),
+    'RowExpansionExampleExpandableRows.tsx': readCodeFile<string>(`${PATH}/RowExpansionExampleExpandableRows.tsx`),
     'RowExpansionExampleInitiallyExpandedRows.tsx': readCodeFile<string>(
       `${PATH}/RowExpansionExampleInitiallyExpandedRows.tsx`
     ),
@@ -79,6 +81,11 @@ export default async function ExpandingRowsExamplePage() {
       <RowExpansionExampleMultipleExpandedRows />
       <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code['RowExpansionExampleMultipleExpandedRows.tsx']} />
+      <PageSubtitle value="Specifying which rows are expandable" />
+      <Txt>You can specify which rows are expandable like so:</Txt>
+      <RowExpansionExampleExpandableRows />
+      <Txt>Here is the code for the above example:</Txt>
+      <CodeBlock code={code['RowExpansionExampleExpandableRows.tsx']} />
       <PageSubtitle value="Specifying which rows are initially expanded" />
       <Txt>You can specify which rows are initially expanded like so:</Txt>
       <RowExpansionExampleInitiallyExpandedRows />
