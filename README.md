@@ -10,7 +10,7 @@
 [![Language][language-image]][repo-url]
 [![Sponsor the author][sponsor-image]][sponsor-url]
 
-The lightweight, dependency-free, **dark-theme aware** table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and [much more](https://icflorescu.github.io/mantine-datatable/).
+The [lightweight](https://bundlephobia.com/package/mantine-datatable), dependency-free, **dark-theme aware** table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and [much more](https://icflorescu.github.io/mantine-datatable/).
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/294180790-93289cec-4d73-47b5-988f-8c93dd3443fe.png)](https://icflorescu.github.io/mantine-datatable/)
 
@@ -136,7 +136,7 @@ Make sure to browse the comprehensive list of [usage examples](https://icfloresc
 
 Mantine DataTable works perfectly with [Mantine Context Menu](https://icflorescu.github.io/mantine-contextmenu/), a library built by the same author that enables you to enhance your UIs with desktop-grade, lightweight yet fully-featured context menus that respect the Mantine color scheme out of the box:
 
-[![Mantine ContextMenu](https://user-images.githubusercontent.com/581999/279488420-96467a1b-2fb7-4876-bbc0-6976d26ed79b.png)](https://icflorescu.github.io/mantine-contextmenu/)
+[![Mantine ContextMenu](https://user-images.githubusercontent.com/581999/294179957-e5b07f1f-701b-49a9-a518-4e42afb8b70a.png)](https://icflorescu.github.io/mantine-contextmenu/)
 
 ## Contributing
 
