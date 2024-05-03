@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.8.2 (2024-05-03)
+
+- Update dev dependencies to ensure compatibility with Mantine 7.9
+- Update GitHub workflow action versions
+
 ## 7.8.2 (2024-04-26)
 
 - Add `rowExpansion.expandable` property defining if row can be expanded (see [#579](https://github.com/icflorescu/mantine-datatable/issues/579), by [@camdarley](https://github.com/camdarley))
