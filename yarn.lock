@@ -1135,7 +1135,7 @@
     "@docsearch/css" "3.6.0"
     algoliasearch "^4.19.1"
 
-"@ducanh2912/next-pwa@^10.2.6":
+"@ducanh2912/next-pwa@^10.2.7":
   version "10.2.7"
   resolved "https://registry.yarnpkg.com/@ducanh2912/next-pwa/-/next-pwa-10.2.7.tgz#9c737a7da2050762d11bdd1b19a1ff8e0c446a21"
   integrity sha512-FDIA5MEykCTxHlNJ8Gh+dCMjiKGVUfBX39r7OQO/9VU6qezFvkB56cvsBNNl2K41l2dFRkmK3BccHRnrxhWjrQ==
@@ -1531,7 +1531,7 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@mantine/code-highlight@^7.9.0":
+"@mantine/code-highlight@^7.9.1":
   version "7.9.1"
   resolved "https://registry.yarnpkg.com/@mantine/code-highlight/-/code-highlight-7.9.1.tgz#ddce5ea4a79c15161ed554fd2a877c9e2b96f3ed"
   integrity sha512-4FEEcfz4mMx/DzIMfnJGp+CXCyITVFwrGL0Hh35OeL/E/OIRejvHDM8TUgmoWMqGspK+jtYf2XiOAVQKBGBgDg==
@@ -1539,7 +1539,7 @@
     clsx "2.1.0"
     highlight.js "^11.9.0"
 
-"@mantine/core@^7.9.0":
+"@mantine/core@^7.9.1":
   version "7.9.1"
   resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.9.1.tgz#778a9117267ef7db37e6f18dfff47be5d322fbc9"
   integrity sha512-UXK11t1fAQ2ROQ9HTIZfyU52XdwS8sFJ2SRUh5uHMWSahJo3wTdKzaCvYN7wg+ONM9p6ENT0hC0dfv5qXoKU4w==
@@ -1551,24 +1551,24 @@
     react-textarea-autosize "8.5.3"
     type-fest "^4.12.0"
 
-"@mantine/dates@^7.9.0":
+"@mantine/dates@^7.9.1":
   version "7.9.1"
   resolved "https://registry.yarnpkg.com/@mantine/dates/-/dates-7.9.1.tgz#a854faac16fed1dde409d4f48a4673c5fd6d698a"
   integrity sha512-HB6gIMV6OEz/ih48KedcII1MNpH6oLit2ajSG50POJ3jgDSBQI9710kSu3rTrC5TiTLrZTIr/u51gsk0Daaepg==
   dependencies:
     clsx "2.1.0"
 
-"@mantine/hooks@^7.9.0":
+"@mantine/hooks@^7.9.1":
   version "7.9.1"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.9.1.tgz#9946432d017d56afe28f3980d1c64af0153a2128"
   integrity sha512-nb2Ar+2HfGxLjGZgObapeUeqcQsUWJ+rvj4X2KNTUy3+YpvLIMD3CqREowWHF7/5OTGh4BCyBqQNZ9JFpnMeHQ==
 
-"@mantine/modals@^7.9.0":
+"@mantine/modals@^7.9.1":
   version "7.9.1"
   resolved "https://registry.yarnpkg.com/@mantine/modals/-/modals-7.9.1.tgz#1a36193e8c76b6e53c9bebdddb14bfc36e028f7e"
   integrity sha512-HvDJ3XLnNuYpFFuJ3SNPbRnM2kATKaIFmgsN9zt8ZkYD7GgvfYXyZ+jctwNBaR6atAbWyFboDklJ4AIc+0w8aw==
 
-"@mantine/notifications@^7.9.0":
+"@mantine/notifications@^7.9.1":
   version "7.9.1"
   resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-7.9.1.tgz#fe2f1325b7d67aea226d023aefb0a0d439d03a81"
   integrity sha512-+fzc/+conYQMqE72eaKcxaOrLijsWExRO6Rp+QVgsmp3Hf57yksRdEbVE259PrWq3jaVI8G4XIMeKdYK0tB5Pw==
@@ -1844,7 +1844,7 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.35.1.tgz#a7e6cbf0f252475da19ba9cba6567e8fe683b2ee"
   integrity sha512-0Dnpybqb8+ps6WgqBnqFEC+1F/xLvUosRAq+wiGisTgolOZzqZfkE2995dEXmhuzINiTM7/a6xSGznU0NIvBkw==
 
-"@tanstack/react-query@^5.32.1":
+"@tanstack/react-query@^5.35.1":
   version "5.35.1"
   resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.35.1.tgz#3b7c710bb32c6c71e0cbe64029dded9b0cbd9a0f"
   integrity sha512-i2T7m2ffQdNqlX3pO+uMsnQ0H4a59Ens2GxtlMsRiOvdSB4SfYmHb27MnvFV8rGmtWRaa4gPli0/rpDoSS5LbQ==
@@ -1892,12 +1892,12 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/lodash@^4.17.0":
+"@types/lodash@^4.17.1":
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.1.tgz#0fabfcf2f2127ef73b119d98452bd317c4a17eb8"
   integrity sha512-X+2qazGS3jxLAIz5JDXDzglAF3KpijdhFxlf/V1+hEsOUc+HnWi81L/uv/EvGuV90WY+7mPGFCUDGfQC3Gj95Q==
 
-"@types/node@*", "@types/node@^20.12.8":
+"@types/node@*", "@types/node@^20.12.11":
   version "20.12.11"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.12.11.tgz#c4ef00d3507000d17690643278a60dc55a9dc9be"
   integrity sha512-vDg9PZ/zi+Nqp6boSOT7plNuthRugEKixDv5sFTIpkE89MmNtEArAShI4mxuX2+UrLEe9pxC1vm2cjm9YlWbJw==
@@ -4390,7 +4390,7 @@ magic-string@^0.25.0, magic-string@^0.25.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
-mantine-contextmenu@^7.9.0:
+mantine-contextmenu@^7.9.1:
   version "7.9.1"
   resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.9.1.tgz#a25898327d34efb8dfc966afef9133a5006a54e6"
   integrity sha512-F176CXsOqnK0hUM9tmXHPVMhWGp2sGS1TNBjotUew/ZWYlo5sNdCsBVrLz2ID4+knZlz3Tm0yNO8kk69oKwzmw==
