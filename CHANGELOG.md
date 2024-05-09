@@ -3,7 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
-## 7.8.2 (2024-05-03)
+## 7.9.1 (2024-05-09)
+
+- Update dev dependencies to ensure compatibility with Mantine 7.9.1
+
+## 7.9.0 (2024-05-03)
 
 - Update dev dependencies to ensure compatibility with Mantine 7.9
 - Update GitHub workflow action versions
