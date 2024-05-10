@@ -3,9 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
-## 7.9.1 (2024-05-09)
+## 7.9.1 (2024-05-10)
 
 - Update dev dependencies to ensure compatibility with Mantine 7.9.1
+- Improve row expansion styling to hide bottom border when being rendered in the last row of the table
 
 ## 7.9.0 (2024-05-03)
 
