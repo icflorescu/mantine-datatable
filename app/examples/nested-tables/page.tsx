@@ -30,9 +30,19 @@ export default async function NestedTablesExamplePage() {
           the <Code>noHeader</Code> property
         </InternalLink>{' '}
         to create nested tables.
-        <br />
-        Click on the expandable rows in the table below to see it in action:
       </Txt>
+      <Txt warning title="Warning">
+        Nested tables do not work with column pinning -{' '}
+        <InternalLink to="/examples/pinning-the-first-column">
+          <Code>pinFirstColumn</Code>
+        </InternalLink>{' '}
+        and{' '}
+        <InternalLink to="/examples/pinning-the-last-column">
+          <Code>pinLastColumn</Code>
+        </InternalLink>
+        .
+      </Txt>
+      <Txt>Click on the expandable rows in the table below to see it in action:</Txt>
       <NestedTablesExample />
       <Txt>The above example is implemented with the following code:</Txt>
       <CodeBlock tabs={{ code, keys: ['NestedTablesExample.tsx', 'NestedTablesExample.module.css', 'data.ts'] }} />

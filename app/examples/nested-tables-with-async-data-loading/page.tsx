@@ -27,9 +27,19 @@ export default async function NestedTablesWithAsyncDataLoadingExamplePage() {
         Since the row expansion <Code>content</Code> function is <em>lazily executed</em> when a row is expanded to
         prevent creating unnecessary DOM elements, you can use this behavior to asynchronously load data for nested
         tables.
-        <br />
-        Click on the expandable rows in the table below to see it in action:
       </Txt>
+      <Txt warning title="Warning">
+        Nested tables do not work with column pinning -{' '}
+        <InternalLink to="/examples/pinning-the-first-column">
+          <Code>pinFirstColumn</Code>
+        </InternalLink>{' '}
+        and{' '}
+        <InternalLink to="/examples/pinning-the-last-column">
+          <Code>pinLastColumn</Code>
+        </InternalLink>
+        .
+      </Txt>
+      <Txt>Click on the expandable rows in the table below to see it in action:</Txt>
       <NestedTablesAsyncExample />
       <Txt>The above example is implemented with the following code:</Txt>
       <CodeBlock

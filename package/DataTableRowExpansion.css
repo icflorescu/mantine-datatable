@@ -3,7 +3,9 @@
 }
 
 .mantine-datatable-row-expansion-cell-content {
-  border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
+  tr:not(:last-of-type) & {
+    border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
+  }
   border-top: rem(1px) solid var(--mantine-datatable-row-border-color);
   [data-with-row-border] & {
     border-top: 0;
