@@ -8,6 +8,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 - Update dev dependencies to ensure compatibility with Mantine 7.9.1
 - Improve row expansion styling to hide bottom border when being rendered in the last row of the table
 - Fix [#588](https://github.com/icflorescu/mantine-datatable/issues/588) - `withRowBorders=false` being ignored in the last row
+- Add documentation notice about `pinFirstColumn` and `pinLastColumn` not being supported in combination with nested tables
 
 ## 7.9.0 (2024-05-03)
 
