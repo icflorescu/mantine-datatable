@@ -3,10 +3,11 @@
  */
 export function humanize(value: string) {
   const str = value
-    .replace(/([a-z\d])([A-Z]+)/g, '$1 $2')
-    .replace(/\W|_/g, ' ')
+    .replace(/([a-zà-öø-ÿ\d])([A-ZÀ-ÖØ-Ý]+)/g, '$1 $2')
+    .replace(/([^a-zà-öø-ÿA-ZÀ-ÖØ-Ý0-9-])/g, ' ')
     .trim()
     .toLowerCase();
+
   return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 }
 
