@@ -33,6 +33,7 @@ export type DataTableColumn<T = Record<string, unknown>> = {
    * If true, column will be sortable.
    */
   sortable?: boolean;
+  sortKey?: string;
 
   /**
    * If set to true, the column can be dragged.

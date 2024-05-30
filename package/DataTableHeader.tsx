@@ -128,6 +128,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
             titleStyle,
             filter,
             filtering,
+            sortKey,
           } = { ...defaultColumnProps, ...columnProps };
 
           return (
@@ -148,6 +149,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               resizable={resizable && index < columns.length - 1}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
+              sortKey={sortKey}
               onSortStatusChange={onSortStatusChange}
               filter={filter}
               filtering={filtering}

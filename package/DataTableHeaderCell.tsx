@@ -23,7 +23,16 @@ type DataTableHeaderCellProps<T> = {
   onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
 } & Pick<
   DataTableColumn<T>,
-  'accessor' | 'sortable' | 'draggable' | 'toggleable' | 'resizable' | 'textAlign' | 'width' | 'filter' | 'filtering'
+  | 'accessor'
+  | 'sortable'
+  | 'draggable'
+  | 'toggleable'
+  | 'resizable'
+  | 'textAlign'
+  | 'width'
+  | 'filter'
+  | 'filtering'
+  | 'sortKey'
 >;
 
 export function DataTableHeaderCell<T>({
@@ -43,6 +52,7 @@ export function DataTableHeaderCell<T>({
   onSortStatusChange,
   filter,
   filtering,
+  sortKey,
 }: DataTableHeaderCellProps<T>) {
   const { setSourceColumn, setTargetColumn, swapColumns, setColumnsToggle } = useDataTableColumnsContext();
   const [dragOver, setDragOver] = useState<boolean>(false);
@@ -58,6 +68,7 @@ export function DataTableHeaderCell<T>({
           if (e?.defaultPrevented) return;
 
           onSortStatusChange({
+            sortKey,
             columnAccessor: accessor,
             direction:
               sortStatus?.columnAccessor === accessor
