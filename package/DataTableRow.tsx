@@ -84,7 +84,10 @@ export function DataTableRow<T>({
       <TableTr
         className={clsx(
           'mantine-datatable-row',
-          { [POINTER_CURSOR]: expansion?.isExpandable({ record, index }) && (onClick || onDoubleClick || expansion?.expandOnClick) },
+          {
+            [POINTER_CURSOR]:
+              onClick || onDoubleClick || (expansion?.isExpandable({ record, index }) && expansion?.expandOnClick),
+          },
           { [CONTEXT_MENU_CURSOR]: onContextMenu },
           typeof className === 'function' ? className(record, index) : className
         )}
