@@ -3,6 +3,12 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.10.1 (2024-06-03)
+
+- Update dev dependencies to ensure compatibility with Mantine 7.10.1
+- Add support for sorting by nested property in columns (see PR [#600](https://github.com/icflorescu/mantine-datatable/pull/600))
+- Fix issue [#593](https://github.com/icflorescu/mantine-datatable/issues/593) (`cursor: pointer` not showing when using `onRowClick`)
+
 ## 7.9.1 (2024-05-10)
 
 - Update dev dependencies to ensure compatibility with Mantine 7.9.1
