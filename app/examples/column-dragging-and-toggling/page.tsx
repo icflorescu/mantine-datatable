@@ -13,6 +13,7 @@ import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import DraggingExample from './DraggingExample';
 import DraggingTogglingComplexExample from './DraggingTogglingComplexExample';
 import DraggingTogglingResetExample from './DraggingTogglingResetExample';
+import DynamicColumnExample from './DynamicColumnExample';
 import TogglingExample from './TogglingExample';
 
 const PATH: Route = '/examples/column-dragging-and-toggling';
@@ -24,6 +25,7 @@ export default async function DraggingExamplePage() {
     'DraggingExample.tsx': readCodeFile<string>(`${PATH}/DraggingExample.tsx`),
     'DraggingTogglingResetExample.tsx': readCodeFile<string>(`${PATH}/DraggingTogglingResetExample.tsx`),
     'TogglingExample.tsx': readCodeFile<string>(`${PATH}/TogglingExample.tsx`),
+    'DynamicColumnExample.tsx': readCodeFile<string>(`${PATH}/DynamicColumnExample.tsx`),
     'DraggingTogglingComplexExample.tsx': readCodeFile<string>(`${PATH}/DraggingTogglingComplexExample.tsx`),
   });
 
@@ -85,9 +87,19 @@ export default async function DraggingExamplePage() {
         You may define which columns will be toggled by default by setting the <Code>defaultToggle</Code> property to{' '}
         <Code>false</Code>.
       </Txt>
+
+      <PageSubtitle value="Add & Remove column at run-time" />
+      <Txt>
+        Of course, you may need to add or remove columns at run-time. In this case, you can directly modify the array of
+        columns without needing to perform any operations.
+      </Txt>
+      <DynamicColumnExample />
+      <CodeBlock code={code['DynamicColumnExample.tsx']} />
+
       <PageSubtitle value="Dragging and toggling with context menu reset" />
       <DraggingTogglingResetExample />
       <CodeBlock code={code['DraggingTogglingResetExample.tsx']} />
+
       <PageSubtitle value="Complex usage" />
       <DraggingTogglingComplexExample />
       <CodeBlock code={code['DraggingTogglingComplexExample.tsx']} />
