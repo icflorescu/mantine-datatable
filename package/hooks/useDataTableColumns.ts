@@ -99,11 +99,21 @@ export const useDataTableColumns = <T>({
 
   // align order
   function useAlignColumnsOrder() {
-    const [columnsOrder, setColumnsOrder] = useLocalStorage<string[]>({
-      key: `${key}-columns-order`,
-      defaultValue: defaultColumnsOrder as string[],
+    const [columnsOrder, _setColumnsOrder] = useLocalStorage<string[]>({
+      key: key ? `${key}-columns-order` : '',
+      defaultValue: key ? (defaultColumnsOrder as string[]) : undefined,
       getInitialValueInEffect,
     });
+
+    function setColumnsOrder(order: string[] | ((prev: string[]) => string[])) {
+      if (key) {
+        _setColumnsOrder(order);
+      }
+    }
+
+    if (!key) {
+      return [columnsOrder, setColumnsOrder] as const;
+    }
 
     const alignedColumnsOrder = alignColumnsOrder(columnsOrder, columns);
 
@@ -117,11 +127,23 @@ export const useDataTableColumns = <T>({
   }
 
   function useAlignColumnsToggle() {
-    const [columnsToggle, setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
-      key: `${key}-columns-toggle`,
-      defaultValue: defaultColumnsToggle as DataTableColumnToggle[],
+    const [columnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
+      key: key ? `${key}-columns-toggle` : '',
+      defaultValue: key ? (defaultColumnsToggle as DataTableColumnToggle[]) : undefined,
       getInitialValueInEffect,
     });
+
+    function setColumnsToggle(
+      toggle: DataTableColumnToggle[] | ((prev: DataTableColumnToggle[]) => DataTableColumnToggle[])
+    ) {
+      if (key) {
+        _setColumnsToggle(toggle);
+      }
+    }
+
+    if (!key) {
+      return [columnsToggle, setColumnsToggle] as const;
+    }
 
     const alignedColumnsToggle = alignColumnsToggle(columnsToggle, columns);
 
@@ -135,11 +157,23 @@ export const useDataTableColumns = <T>({
   }
 
   function useAlignColumnsWidth() {
-    const [columnsWidth, setColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
-      key: `${key}-columns-width`,
-      defaultValue: defaultColumnsWidth as DataTableColumnWidth[],
+    const [columnsWidth, _setColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
+      key: key ? `${key}-columns-width` : '',
+      defaultValue: key ? (defaultColumnsWidth as DataTableColumnWidth[]) : undefined,
       getInitialValueInEffect,
     });
+
+    function setColumnsWidth(
+      width: DataTableColumnWidth[] | ((prev: DataTableColumnWidth[]) => DataTableColumnWidth[])
+    ) {
+      if (key) {
+        _setColumnsWidth(width);
+      }
+    }
+
+    if (!key) {
+      return [columnsWidth, setColumnsWidth] as const;
+    }
 
     const alignedColumnsWidth = alignColumnsWidth(columnsWidth, columns);
 
