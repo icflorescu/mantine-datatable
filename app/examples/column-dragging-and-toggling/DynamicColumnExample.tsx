@@ -74,10 +74,10 @@ export default function DynamicColumnExample() {
       newColumns.push({
         accessor: 'missionStatement',
         title: (
-          <Group gap={4} mt={-1}>
+          <Group gap={4} mt={-1} wrap="nowrap">
             <IconBuildingSkyscraper size={16} />
             <Text inherit mt={1}>
-              missionStatement
+              Mission Statement
             </Text>
           </Group>
         ),
@@ -92,7 +92,7 @@ export default function DynamicColumnExample() {
   return (
     <Stack>
       <Group>
-        <Button onClick={toggleColumnMissionStatement}>Toggle missionStatement column</Button>
+        <Button onClick={toggleColumnMissionStatement}>Toggle Mission Statement column</Button>
       </Group>
       <DataTable
         withTableBorder

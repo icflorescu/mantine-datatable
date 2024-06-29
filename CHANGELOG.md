@@ -3,6 +3,15 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.10.4 (2024-06-24)
+
+- Revert [#603](https://github.com/icflorescu/mantine-datatable/pull/603) due to issue [#605](https://github.com/icflorescu/mantine-datatable/issues/605)
+
+## 7.10.3 (2024-06-18)
+
+- Fix issue [#596](https://github.com/icflorescu/mantine-datatable/issues/596) (new columns don't appear when added to `useDataTableColumns`), thanks to [@gfazioli](https://github.com/gfazioli) for PR [#603](https://github.com/icflorescu/mantine-datatable/pull/603)
+- Update dev dependencies
+
 ## 7.10.2 (2024-06-15)
 
 - Update dev dependencies to ensure compatibility with Mantine 7.10.2 and Next.js 14.2.4
