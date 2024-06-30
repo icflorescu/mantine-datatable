@@ -37,8 +37,8 @@ export default function ContributeAndSupportPage() {
         <li>
           I think <ExternalLink to={MANTINE_LINK}>Mantine</ExternalLink> is currently the best React UI Framework;
           however people were{' '}
-          <ExternalLink to="https://github.com/mantinedev/mantine/discussions/1049">asking</ExternalLink> in the
-          community for a ContextMenu component;
+          <ExternalLink to="https://github.com/mantinedev/mantine/discussions/1057">asking</ExternalLink> in the
+          community for a data-table / data-grid component;
         </li>
         <li>
           I’m a keen advocate of open-source and{' '}
@@ -49,7 +49,7 @@ export default function ContributeAndSupportPage() {
       </ul>
       <PageSubtitle value="Please sponsor my work" />
       <Txt>
-        I built these projects out of passion, but the constant effort of spending so many hours on open-source
+        I’m building these projects out of passion, but the constant effort of spending so many hours on open-source
         development and maintenance takes its toll, and passion alone doesn’t pay the bills. So, if you find{' '}
         {PRODUCT_NAME} useful and you want to support its future development, please consider{' '}
         <ExternalLink to="https://github.com/sponsors/icflorescu">sponsoring my work</ExternalLink> ❤️.
