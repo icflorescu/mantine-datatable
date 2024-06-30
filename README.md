@@ -140,7 +140,7 @@ Mantine DataTable works perfectly with [Mantine Context Menu](https://icflorescu
 
 ## Contributing
 
-See the [contributing guide in the documentation website](https://icflorescu.github.io/mantine-datatable/contribute-and-support) or the repo [CONTRIBUTING.md](https://github.com/icflorescu/mantine-datatable/blob/master/CONTRIBUTING.md) file for details.
+See the [contributing guide in the documentation website](https://icflorescu.github.io/mantine-datatable/contribute-and-support) or the repo [CONTRIBUTING.md](https://github.com/icflorescu/mantine-datatable/blob/master/CONTRIBUTING.md) file for details. **Most importantly, remember to make your PRs against the `next` branch.**
 
 Here's the list of people who have already contributed to Mantine DataTable:
 
