@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.11.1 (2024-06-30)
+
+- Add new `paginationWithControls` prop (thanks to [@ValentinJS](https://github.com/ValentinJS) for PR [#611](https://github.com/icflorescu/mantine-datatable/pull/611))
+- Minor docs website improvements
+
 ## 7.11.0 (2024-06-30)
 
 - Attempt to fix issue [#596](https://github.com/icflorescu/mantine-datatable/issues/596) again, thanks to [@gfazioli](https://github.com/gfazioli) for PR [#608](https://github.com/icflorescu/mantine-datatable/pull/608)

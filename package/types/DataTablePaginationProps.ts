@@ -4,6 +4,7 @@ import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelector
 export type DataTablePaginationProps = (
   | {
       paginationWithEdges?: never;
+      paginationWithControls?: never;
       page?: never;
       onPageChange?: never;
       totalRecords?: never;
@@ -18,9 +19,14 @@ export type DataTablePaginationProps = (
     }
   | {
       /**
-       * Whenther to show first and last page navigation buttons.
+       * Whether to show first and last page navigation buttons.
        */
       paginationWithEdges?: boolean;
+
+      /**
+       * Whether to show next and previous page navigation buttons.
+       */
+      paginationWithControls?: boolean;
 
       /**
        * Current page number (1-based).

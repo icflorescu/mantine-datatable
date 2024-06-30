@@ -30,6 +30,7 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
     page,
     onPageChange,
     paginationWithEdges,
+    paginationWithControls,
     paginationActiveTextColor,
     paginationActiveBackgroundColor,
     paginationSize,
@@ -104,6 +105,7 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
             : undefined
         }
         withEdges={paginationWithEdges}
+        withControls={paginationWithControls}
         value={page}
         onChange={onPageChange}
         size={paginationSize}
