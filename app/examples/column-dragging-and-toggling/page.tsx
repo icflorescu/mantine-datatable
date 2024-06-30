@@ -13,6 +13,7 @@ import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import DraggingExample from './DraggingExample';
 import DraggingTogglingComplexExample from './DraggingTogglingComplexExample';
 import DraggingTogglingResetExample from './DraggingTogglingResetExample';
+import DynamicColumnExample from './DynamicColumnExample';
 import TogglingExample from './TogglingExample';
 
 const PATH: Route = '/examples/column-dragging-and-toggling';
@@ -87,14 +88,13 @@ export default async function DraggingExamplePage() {
         <Code>false</Code>.
       </Txt>
 
-      {/* TODO add this back after fixing issue https://github.com/icflorescu/mantine-datatable/issues/605 */}
-      {/* <PageSubtitle value="Add & Remove column at run-time" />
+      <PageSubtitle value="Add & Remove column at run-time" />
       <Txt>
         Of course, you may need to add or remove columns at run-time. In this case, you can directly modify the array of
         columns without needing to perform any operations.
       </Txt>
       <DynamicColumnExample />
-      <CodeBlock code={code['DynamicColumnExample.tsx']} /> */}
+      <CodeBlock code={code['DynamicColumnExample.tsx']} />
 
       <PageSubtitle value="Dragging and toggling with context menu reset" />
       <DraggingTogglingResetExample />
