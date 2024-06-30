@@ -63,6 +63,7 @@ export function DataTable<T>({
   recordsPerPageOptions,
   recordsPerPageLabel = 'Records per page',
   paginationWithEdges,
+  paginationWithControls,
   paginationActiveTextColor,
   paginationActiveBackgroundColor,
   paginationSize = 'sm',
@@ -459,6 +460,7 @@ export function DataTable<T>({
             recordsPerPageOptions={recordsPerPageOptions}
             recordsPerPageLabel={recordsPerPageLabel}
             paginationWithEdges={paginationWithEdges}
+            paginationWithControls={paginationWithControls}
             paginationActiveTextColor={paginationActiveTextColor}
             paginationActiveBackgroundColor={paginationActiveBackgroundColor}
             paginationSize={paginationSize}
