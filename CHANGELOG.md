@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.11.0 (2024-06-30)
+
+- Attempt to fix issue [#596](https://github.com/icflorescu/mantine-datatable/issues/596) again, thanks to [@gfazioli](https://github.com/gfazioli) for PR [#608](https://github.com/icflorescu/mantine-datatable/pull/608)
+- Update deps to ensure compatibility with Mantine 7.11.0
+
 ## 7.10.4 (2024-06-24)
 
 - Revert [#603](https://github.com/icflorescu/mantine-datatable/pull/603) due to issue [#605](https://github.com/icflorescu/mantine-datatable/issues/605)

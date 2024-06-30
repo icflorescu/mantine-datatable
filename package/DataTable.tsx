@@ -34,7 +34,7 @@ export function DataTable<T>({
   verticalAlign = 'center',
   fetching,
   columns,
-  storeColumnsKey = 'mantine-datatable',
+  storeColumnsKey,
   groups,
   pinFirstColumn,
   pinLastColumn,

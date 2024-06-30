@@ -37,6 +37,155 @@ export const useDataTableColumns = <T>({
    */
   getInitialValueInEffect?: boolean;
 }) => {
+  // align order
+  function alignColumnsOrder<T>(columnsOrder: string[], columns: DataTableColumn<T>[]) {
+    const updatedColumnsOrder: string[] = [];
+    columnsOrder.forEach((col) => {
+      if (columns.find((c) => c.accessor === col)) {
+        updatedColumnsOrder.push(col);
+      }
+    });
+    columns.forEach((col) => {
+      if (!updatedColumnsOrder.includes(col.accessor as string)) {
+        updatedColumnsOrder.push(col.accessor as string);
+      }
+    });
+    return updatedColumnsOrder;
+  }
+
+  // align toggle
+  function alignColumnsToggle<T>(columnsToggle: DataTableColumnToggle[], columns: DataTableColumn<T>[]) {
+    const updatedColumnsToggle: DataTableColumnToggle[] = [];
+    columnsToggle.forEach((col) => {
+      if (columns.find((c) => c.accessor === col.accessor)) {
+        updatedColumnsToggle.push(col);
+      }
+    });
+    columns.forEach((col) => {
+      if (!updatedColumnsToggle.find((c) => c.accessor === col.accessor)) {
+        updatedColumnsToggle.push({
+          accessor: col.accessor as string,
+          defaultToggle: col.defaultToggle || true,
+          toggleable: col.toggleable as boolean,
+          toggled: col.defaultToggle === undefined ? true : col.defaultToggle,
+        });
+      }
+    });
+    return updatedColumnsToggle as DataTableColumnToggle[];
+  }
+
+  // align width
+  function alignColumnsWidth<T>(columnsWidth: DataTableColumnWidth[], columns: DataTableColumn<T>[]) {
+    const updatedColumnsWidth: DataTableColumnWidth[] = [];
+
+    columnsWidth.forEach((col) => {
+      const accessor = Object.keys(col)[0];
+      if (columns.find((c) => c.accessor === accessor)) {
+        updatedColumnsWidth.push(col);
+      }
+    });
+
+    columns.forEach((col) => {
+      const accessor = col.accessor;
+      if (!updatedColumnsWidth.find((c) => Object.keys(c)[0] === accessor)) {
+        const widthObj: DataTableColumnWidth = {};
+        widthObj[accessor as string] = '';
+        updatedColumnsWidth.push(widthObj);
+      }
+    });
+
+    return updatedColumnsWidth;
+  }
+
+  // align order
+  function useAlignColumnsOrder() {
+    const [columnsOrder, _setColumnsOrder] = useLocalStorage<string[]>({
+      key: key ? `${key}-columns-order` : '',
+      defaultValue: key ? (defaultColumnsOrder as string[]) : undefined,
+      getInitialValueInEffect,
+    });
+
+    function setColumnsOrder(order: string[] | ((prev: string[]) => string[])) {
+      if (key) {
+        _setColumnsOrder(order);
+      }
+    }
+
+    if (!key) {
+      return [columnsOrder, setColumnsOrder] as const;
+    }
+
+    const alignedColumnsOrder = alignColumnsOrder(columnsOrder, columns);
+
+    const prevColumnsOrder = JSON.stringify(columnsOrder);
+
+    if (JSON.stringify(alignedColumnsOrder) !== prevColumnsOrder) {
+      setColumnsOrder(alignedColumnsOrder);
+    }
+
+    return [alignedColumnsOrder, setColumnsOrder] as const;
+  }
+
+  function useAlignColumnsToggle() {
+    const [columnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
+      key: key ? `${key}-columns-toggle` : '',
+      defaultValue: key ? (defaultColumnsToggle as DataTableColumnToggle[]) : undefined,
+      getInitialValueInEffect,
+    });
+
+    function setColumnsToggle(
+      toggle: DataTableColumnToggle[] | ((prev: DataTableColumnToggle[]) => DataTableColumnToggle[])
+    ) {
+      if (key) {
+        _setColumnsToggle(toggle);
+      }
+    }
+
+    if (!key) {
+      return [columnsToggle, setColumnsToggle] as const;
+    }
+
+    const alignedColumnsToggle = alignColumnsToggle(columnsToggle, columns);
+
+    const prevColumnsToggle = JSON.stringify(columnsToggle);
+
+    if (JSON.stringify(alignedColumnsToggle) !== prevColumnsToggle) {
+      setColumnsToggle(alignedColumnsToggle);
+    }
+
+    return [alignColumnsToggle(columnsToggle, columns), setColumnsToggle] as const;
+  }
+
+  function useAlignColumnsWidth() {
+    const [columnsWidth, _setColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
+      key: key ? `${key}-columns-width` : '',
+      defaultValue: key ? (defaultColumnsWidth as DataTableColumnWidth[]) : undefined,
+      getInitialValueInEffect,
+    });
+
+    function setColumnsWidth(
+      width: DataTableColumnWidth[] | ((prev: DataTableColumnWidth[]) => DataTableColumnWidth[])
+    ) {
+      if (key) {
+        _setColumnsWidth(width);
+      }
+    }
+
+    if (!key) {
+      return [columnsWidth, setColumnsWidth] as const;
+    }
+
+    const alignedColumnsWidth = alignColumnsWidth(columnsWidth, columns);
+
+    const prevColumnsWidth = JSON.stringify(columnsWidth);
+
+    if (JSON.stringify(alignedColumnsWidth) !== prevColumnsWidth) {
+      setColumnsWidth(alignedColumnsWidth);
+    }
+
+    return [alignColumnsWidth(columnsWidth, columns), setColumnsWidth] as const;
+  }
+
   // Default columns id ordered is the order of the columns in the array
   const defaultColumnsOrder = (columns && columns.map((column) => column.accessor)) || [];
 
@@ -55,25 +204,13 @@ export const useDataTableColumns = <T>({
     }));
 
   // Store the columns order in localStorage
-  const [columnsOrder, setColumnsOrder] = useLocalStorage<string[]>({
-    key: `${key}-columns-order`,
-    defaultValue: defaultColumnsOrder as string[],
-    getInitialValueInEffect,
-  });
+  const [columnsOrder, setColumnsOrder] = useAlignColumnsOrder();
 
   // Store the columns toggle in localStorage
-  const [columnsToggle, setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
-    key: `${key}-columns-toggle`,
-    defaultValue: defaultColumnsToggle as DataTableColumnToggle[],
-    getInitialValueInEffect,
-  });
+  const [columnsToggle, setColumnsToggle] = useAlignColumnsToggle();
 
   // Store the columns widths in localStorage
-  const [columnsWidth, setColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
-    key: `${key}-columns-width`,
-    defaultValue: defaultColumnsWidth as DataTableColumnWidth[],
-    getInitialValueInEffect,
-  });
+  const [columnsWidth, setColumnsWidth] = useAlignColumnsWidth();
 
   // we won't use the "remove" function from useLocalStorage() because
   // we got issue with rendering
