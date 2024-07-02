@@ -127,6 +127,7 @@ export function DataTable<T>({
   classNames,
   style,
   styles,
+  draggableRows,
   ...otherProps
 }: DataTableProps<T>) {
   const {
@@ -262,7 +263,7 @@ export function DataTable<T>({
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
   return (
-    <DataTableColumnsProvider {...dragToggle}>
+    <DataTableColumnsProvider draggableRows={draggableRows} {...dragToggle}>
       <Box
         {...marginProperties}
         className={clsx(
@@ -333,7 +334,7 @@ export function DataTable<T>({
             {...otherProps}
           >
             {noHeader ? null : (
-              <DataTableColumnsProvider {...dragToggle}>
+              <DataTableColumnsProvider draggableRows={false} {...dragToggle}>
                 <DataTableHeader<T>
                   ref={headerRef}
                   selectionColumnHeaderRef={selectionColumnHeaderRef}
@@ -354,6 +355,7 @@ export function DataTable<T>({
                   selectorCellShadowVisible={selectorCellShadowVisible}
                   selectionColumnClassName={selectionColumnClassName}
                   selectionColumnStyle={selectionColumnStyle}
+                  draggableRows={draggableRows}
                 />
               </DataTableColumnsProvider>
             )}
@@ -424,6 +426,7 @@ export function DataTable<T>({
                       selectorCellShadowVisible={selectorCellShadowVisible}
                       selectionColumnClassName={selectionColumnClassName}
                       selectionColumnStyle={selectionColumnStyle}
+                      draggableRows={draggableRows}
                     />
                   );
                 })

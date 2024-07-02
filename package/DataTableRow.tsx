@@ -1,10 +1,22 @@
-import { TableTr, type CheckboxProps, type MantineColor, type MantineStyleProp } from '@mantine/core';
+import { Draggable } from '@hello-pangea/dnd';
+import {
+  ActionIcon,
+  TableTd,
+  TableTr,
+  TableTrProps,
+  useComputedColorScheme,
+  useMantineTheme,
+  type CheckboxProps,
+  type MantineColor,
+  type MantineStyleProp,
+} from '@mantine/core';
 import clsx from 'clsx';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
 import { getRowCssVariables } from './cssVariables';
 import { useRowExpansion } from './hooks';
+import { IconGripVertical } from './icons/IconGripVertical';
 import type {
   DataTableCellClickHandler,
   DataTableColumn,
@@ -13,6 +25,7 @@ import type {
   DataTableSelectionTrigger,
 } from './types';
 import { CONTEXT_MENU_CURSOR, POINTER_CURSOR } from './utilityClasses';
+import { useColorScheme } from '@mantine/hooks';
 
 type DataTableRowProps<T> = {
   record: T;
@@ -48,6 +61,7 @@ type DataTableRowProps<T> = {
   selectorCellShadowVisible: boolean;
   selectionColumnClassName: string | undefined;
   selectionColumnStyle: MantineStyleProp | undefined;
+  draggableRows?: boolean;
 };
 
 export function DataTableRow<T>({
@@ -78,46 +92,52 @@ export function DataTableRow<T>({
   selectorCellShadowVisible,
   selectionColumnClassName,
   selectionColumnStyle,
-}: DataTableRowProps<T>) {
+  draggableRows,
+}: Readonly<DataTableRowProps<T>>) {
   return (
     <>
-      <TableTr
-        className={clsx(
-          'mantine-datatable-row',
-          {
-            [POINTER_CURSOR]:
-              onClick || onDoubleClick || (expansion?.isExpandable({ record, index }) && expansion?.expandOnClick),
-          },
-          { [CONTEXT_MENU_CURSOR]: onContextMenu },
-          typeof className === 'function' ? className(record, index) : className
-        )}
-        data-selected={selectionChecked || undefined}
-        onClick={(e) => {
-          if (expansion) {
-            const { isExpandable, isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
-            if (isExpandable({ record, index }) && expandOnClick) {
-              if (isRowExpanded(record)) {
-                collapseRow(record);
-              } else {
-                expandRow(record);
+      <DraggableRow
+        rowProps={{
+          className: clsx(
+            'mantine-datatable-row',
+            {
+              [POINTER_CURSOR]:
+                onClick || onDoubleClick || (expansion?.isExpandable({ record, index }) && expansion?.expandOnClick),
+            },
+            { [CONTEXT_MENU_CURSOR]: onContextMenu },
+            typeof className === 'function' ? className(record, index) : className
+          ),
+          ['data-selected' as never]: selectionChecked || undefined,
+          onClick: (e) => {
+            if (expansion) {
+              const { isExpandable, isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
+              if (isExpandable({ record, index }) && expandOnClick) {
+                if (isRowExpanded(record)) {
+                  collapseRow(record);
+                } else {
+                  expandRow(record);
+                }
               }
             }
-          }
-          onClick?.({ event: e, record, index });
+            onClick?.({ event: e, record, index });
+          },
+          onDoubleClick: onDoubleClick ? (e) => onDoubleClick({ event: e, record, index }) : undefined,
+          onContextMenu: onContextMenu ? (e) => onContextMenu({ event: e, record, index }) : undefined,
+          style: [
+            color || backgroundColor
+              ? (theme) => {
+                  const colorValue = color?.(record, index);
+                  const backgroundColorValue = backgroundColor?.(record, index);
+                  return getRowCssVariables({ theme, color: colorValue, backgroundColor: backgroundColorValue });
+                }
+              : undefined,
+            style?.(record, index),
+          ],
+          ...customAttributes?.(record, index),
         }}
-        onDoubleClick={onDoubleClick ? (e) => onDoubleClick({ event: e, record, index }) : undefined}
-        onContextMenu={onContextMenu ? (e) => onContextMenu({ event: e, record, index }) : undefined}
-        style={[
-          color || backgroundColor
-            ? (theme) => {
-                const colorValue = color?.(record, index);
-                const backgroundColorValue = backgroundColor?.(record, index);
-                return getRowCssVariables({ theme, color: colorValue, backgroundColor: backgroundColorValue });
-              }
-            : undefined,
-          style?.(record, index),
-        ]}
-        {...customAttributes?.(record, index)}
+        record={record}
+        index={index}
+        draggable={draggableRows}
       >
         {selectionVisible && (
           <DataTableRowSelectorCell<T>
@@ -134,6 +154,7 @@ export function DataTableRow<T>({
             getCheckboxProps={getSelectionCheckboxProps}
           />
         )}
+
         {columns.map(({ hidden, ...columnProps }, columnIndex) => {
           if (hidden) return null;
 
@@ -184,7 +205,8 @@ export function DataTableRow<T>({
             />
           );
         })}
-      </TableTr>
+      </DraggableRow>
+
       {expansion && (
         <DataTableRowExpansion
           colSpan={columns.filter(({ hidden }) => !hidden).length + (selectionVisible ? 1 : 0)}
@@ -194,5 +216,38 @@ export function DataTableRow<T>({
         />
       )}
     </>
+  );
+}
+
+function DraggableRow<T>({
+  record,
+  index,
+  draggable,
+  children,
+  rowProps,
+}: React.PropsWithChildren<{ draggable?: boolean; record: T; index: number; rowProps: TableTrProps }>) {
+  const colorScheme = useComputedColorScheme();
+
+  if (!draggable) return <TableTr {...rowProps}>{children}</TableTr>;
+
+  return (
+    <Draggable draggableId={(record as any).id.toString()} index={index} disableInteractiveElementBlocking>
+      {(provided) => (
+        <TableTr {...rowProps} {...provided.draggableProps}>
+          <TableTd>
+            <ActionIcon
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+              variant="transparent"
+              color={colorScheme === 'dark' ? '#fff' : 'dark'}
+            >
+              <IconGripVertical />
+            </ActionIcon>
+          </TableTd>
+
+          {children}
+        </TableTr>
+      )}
+    </Draggable>
   );
 }

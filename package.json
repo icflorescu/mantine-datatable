@@ -117,5 +117,8 @@
     "@mantine/hooks": ">=7.8",
     "clsx": ">=2",
     "react": ">=18.2"
+  },
+  "dependencies": {
+    "@hello-pangea/dnd": "^16.6.0"
   }
 }

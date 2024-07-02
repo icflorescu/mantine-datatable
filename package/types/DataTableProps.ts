@@ -222,6 +222,11 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * Ref pointing to the table body element.
    */
   bodyRef?: ((instance: HTMLTableSectionElement | null) => void) | React.RefObject<HTMLTableSectionElement>;
+
+  /**
+   * If true, the rows will be draggable.
+   */
+  draggableRows?: boolean;
 } & Omit<
   TableProps,
   | 'onScroll'
