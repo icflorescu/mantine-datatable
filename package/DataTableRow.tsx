@@ -281,8 +281,10 @@ function DraggableRow<T>({
                 minWidth: '50px',
                 maxWidth: '50px',
               }}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
             >
-              <div {...provided.dragHandleProps} ref={provided.innerRef}>
+              <div>
                 <IconGripVertical />
               </div>
             </TableTd>
