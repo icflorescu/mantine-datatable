@@ -1,16 +1,14 @@
 import { Draggable } from '@hello-pangea/dnd';
 import {
-  ActionIcon,
   TableTd,
   TableTr,
   TableTrProps,
-  useComputedColorScheme,
-  useMantineTheme,
   type CheckboxProps,
   type MantineColor,
   type MantineStyleProp,
 } from '@mantine/core';
 import clsx from 'clsx';
+import { ElementRef, useEffect, useRef } from 'react';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
@@ -25,7 +23,6 @@ import type {
   DataTableSelectionTrigger,
 } from './types';
 import { CONTEXT_MENU_CURSOR, POINTER_CURSOR } from './utilityClasses';
-import { useColorScheme } from '@mantine/hooks';
 
 type DataTableRowProps<T> = {
   record: T;
@@ -62,6 +59,7 @@ type DataTableRowProps<T> = {
   selectionColumnClassName: string | undefined;
   selectionColumnStyle: MantineStyleProp | undefined;
   draggableRows?: boolean;
+  idAccessor: string;
 };
 
 export function DataTableRow<T>({
@@ -93,6 +91,7 @@ export function DataTableRow<T>({
   selectionColumnClassName,
   selectionColumnStyle,
   draggableRows,
+  idAccessor,
 }: Readonly<DataTableRowProps<T>>) {
   return (
     <>
@@ -138,6 +137,7 @@ export function DataTableRow<T>({
         record={record}
         index={index}
         draggable={draggableRows}
+        idAccessor={idAccessor}
       >
         {selectionVisible && (
           <DataTableRowSelectorCell<T>
@@ -219,35 +219,78 @@ export function DataTableRow<T>({
   );
 }
 
+interface IDraggableRowProps<T> extends React.PropsWithChildren {
+  draggable?: boolean;
+  record: T;
+  index: number;
+  rowProps: TableTrProps;
+  idAccessor: string;
+}
+
 function DraggableRow<T>({
   record,
   index,
   draggable,
   children,
   rowProps,
-}: React.PropsWithChildren<{ draggable?: boolean; record: T; index: number; rowProps: TableTrProps }>) {
-  const colorScheme = useComputedColorScheme();
+  idAccessor,
+}: Readonly<IDraggableRowProps<T>>) {
+  const ref = useRef<ElementRef<'tr'>>(null);
 
   if (!draggable) return <TableTr {...rowProps}>{children}</TableTr>;
 
   return (
-    <Draggable draggableId={(record as any).id.toString()} index={index} disableInteractiveElementBlocking>
-      {(provided) => (
-        <TableTr {...rowProps} {...provided.draggableProps}>
-          <TableTd>
-            <ActionIcon
-              {...provided.dragHandleProps}
-              ref={provided.innerRef}
-              variant="transparent"
-              color={colorScheme === 'dark' ? '#fff' : 'dark'}
-            >
-              <IconGripVertical />
-            </ActionIcon>
-          </TableTd>
+    <Draggable
+      draggableId={String((record as Record<string, never>)[idAccessor])}
+      index={index}
+      disableInteractiveElementBlocking
+    >
+      {function Row(provided, snapshot) {
+        useEffect(() => {
+          const node = ref.current;
 
-          {children}
-        </TableTr>
-      )}
+          if (!node) return;
+
+          const th = node.parentElement?.parentElement?.children?.[0]?.children?.[0]?.children;
+
+          Array.from(th ?? []).forEach((th, index) => {
+            const child = node.children[index] as HTMLTableCellElement;
+
+            if (!child) return;
+
+            const cellWidth = th.getBoundingClientRect().width + 'px';
+
+            child.style.width = cellWidth;
+            child.style.minWidth = cellWidth;
+            child.style.maxWidth = cellWidth;
+          });
+        }, [snapshot.isDragging]);
+
+        return (
+          <TableTr
+            {...rowProps}
+            {...provided.draggableProps}
+            ref={ref}
+            style={[provided.draggableProps.style, rowProps.style]}
+          >
+            <TableTd
+              style={{
+                cursor: 'grab',
+
+                width: '50px',
+                minWidth: '50px',
+                maxWidth: '50px',
+              }}
+            >
+              <div {...provided.dragHandleProps} ref={provided.innerRef}>
+                <IconGripVertical />
+              </div>
+            </TableTd>
+
+            {children}
+          </TableTr>
+        );
+      }}
     </Draggable>
   );
 }

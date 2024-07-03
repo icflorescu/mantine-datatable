@@ -3,7 +3,7 @@
 import React, { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
 import { DataTableColumnToggle } from './hooks';
-import { DragDropContext, Droppable } from '@hello-pangea/dnd';
+import { DragDropContext, Droppable, OnDragEndResponder } from '@hello-pangea/dnd';
 
 type DataTableColumnsProviderProps = PropsWithChildren<{
   columnsOrder: string[];
@@ -18,15 +18,22 @@ type DataTableColumnsProviderProps = PropsWithChildren<{
   resetColumnsWidth: () => void;
 
   draggableRows?: boolean;
+  onReorder?: OnDragEndResponder;
 }>;
 
-function DraggableWrapper(props: React.PropsWithChildren<{ draggableRows?: boolean }>) {
+function DraggableWrapper(
+  props: React.PropsWithChildren<Pick<DataTableColumnsProviderProps, 'draggableRows' | 'onReorder'>>
+) {
   if (!props.draggableRows) {
     return props.children;
   }
 
   return (
-    <DragDropContext onDragEnd={console.log}>
+    <DragDropContext
+      onDragEnd={(result, provided) => {
+        props.onReorder?.(result, provided);
+      }}
+    >
       <Droppable droppableId="dnd-table" direction="vertical">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -75,7 +82,7 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
   };
 
   return (
-    <DraggableWrapper draggableRows={props.draggableRows}>
+    <DraggableWrapper onReorder={props.onReorder} draggableRows={props.draggableRows}>
       <DataTableColumnsContextProvider
         value={{
           sourceColumn,

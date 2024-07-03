@@ -128,6 +128,7 @@ export function DataTable<T>({
   style,
   styles,
   draggableRows,
+  onReorder,
   ...otherProps
 }: DataTableProps<T>) {
   const {
@@ -162,8 +163,8 @@ export function DataTable<T>({
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
   const processScrolling = useCallback(() => {
-    const scrollTop = localScrollViewportRef.current?.scrollTop || 0;
-    const scrollLeft = localScrollViewportRef.current?.scrollLeft || 0;
+    const scrollTop = localScrollViewportRef.current?.scrollTop ?? 0;
+    const scrollLeft = localScrollViewportRef.current?.scrollLeft ?? 0;
 
     if (fetching || tableHeight <= scrollViewportHeight) {
       setScrolledToTop(true);
@@ -263,7 +264,7 @@ export function DataTable<T>({
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
   return (
-    <DataTableColumnsProvider draggableRows={draggableRows} {...dragToggle}>
+    <DataTableColumnsProvider draggableRows={draggableRows} onReorder={onReorder} {...dragToggle}>
       <Box
         {...marginProperties}
         className={clsx(
@@ -291,6 +292,9 @@ export function DataTable<T>({
           }),
           style,
           styles?.root,
+          {
+            position: 'relative',
+          },
         ]}
       >
         <DataTableScrollArea
@@ -328,6 +332,7 @@ export function DataTable<T>({
             style={{
               ...styles?.table,
               '--mantine-datatable-selection-column-width': `${selectionColumnWidth}px`,
+              tableLayout: 'fixed',
             }}
             data-striped={(recordsLength && striped) || undefined}
             data-highlight-on-hover={highlightOnHover || undefined}
@@ -427,6 +432,7 @@ export function DataTable<T>({
                       selectionColumnClassName={selectionColumnClassName}
                       selectionColumnStyle={selectionColumnStyle}
                       draggableRows={draggableRows}
+                      idAccessor={idAccessor as string}
                     />
                   );
                 })

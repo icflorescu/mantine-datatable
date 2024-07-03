@@ -13,6 +13,7 @@ import type { DataTableScrollProps } from './DataTableScrollProps';
 import type { DataTableSelectionProps } from './DataTableSelectionProps';
 import type { DataTableSortProps } from './DataTableSortProps';
 import type { DataTableVerticalAlign } from './DataTableVerticalAlign';
+import { OnDragEndResponder } from '@hello-pangea/dnd';
 
 export type DataTableProps<T = Record<string, unknown>> = {
   /**
@@ -227,6 +228,11 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * If true, the rows will be draggable.
    */
   draggableRows?: boolean;
+
+  /**
+   * Callback fired on drag end.
+   */
+  onReorder?: OnDragEndResponder;
 } & Omit<
   TableProps,
   | 'onScroll'
