@@ -238,6 +238,11 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * set a custom drag handle for dragging
    */
   dragHandle?: React.ReactNode;
+
+  /**
+   * A unique key to mark a table as a draggable
+   */
+  dragKey?: string;
 } & Omit<
   TableProps,
   | 'onScroll'

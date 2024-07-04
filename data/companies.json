@@ -78,5 +78,29 @@
     "city": "West Gerry",
     "state": "KS",
     "missionStatement": "Synthesize customized portals."
+  },
+  {
+    "id": "a9c0b7f0-3a1b-4b0c-8f3d-6a6a7b7b7b7q2",
+    "name": "Kling - McLaughlin",
+    "streetAddress": "8346 Kertzmann Square",
+    "city": "South Joesph",
+    "state": "ID",
+    "missionStatement": "Reinvent cross-platform channels."
+  },
+  {
+    "id": "a9c0b7f0-3a1b-4b0c-8f3d-6a6a7b7b7b72b",
+    "name": "Jogi - McLaughlin",
+    "streetAddress": "83462 Shazam Street",
+    "city": "North Joesph",
+    "state": "ID",
+    "missionStatement": "Eliminate best-of-breed e-markets."
+  },
+  {
+    "id": "a9c0b7f0-3a1b-4b0c-8f3d-6a6af7b7b7b7b",
+    "name": "Jogi - McLaughlin",
+    "streetAddress": "83462 Shazam Street",
+    "city": "North Joesph",
+    "state": "ID",
+    "missionStatement": "Eliminate best-of-breed e-markets."
   }
 ]

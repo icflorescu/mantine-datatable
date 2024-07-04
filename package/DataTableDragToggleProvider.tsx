@@ -3,7 +3,6 @@
 import React, { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
 import { DataTableColumnToggle } from './hooks';
-import { DragDropContext, Droppable, OnDragEndResponder } from '@hello-pangea/dnd';
 
 type DataTableColumnsProviderProps = PropsWithChildren<{
   columnsOrder: string[];
@@ -16,35 +15,7 @@ type DataTableColumnsProviderProps = PropsWithChildren<{
 
   setColumnWidth: (accessor: string, width: string | number) => void;
   resetColumnsWidth: () => void;
-
-  draggableRows?: boolean;
-  onDragEnd?: OnDragEndResponder;
 }>;
-
-function DraggableWrapper(
-  props: React.PropsWithChildren<Pick<DataTableColumnsProviderProps, 'draggableRows' | 'onDragEnd'>>
-) {
-  if (!props.draggableRows) {
-    return props.children;
-  }
-
-  return (
-    <DragDropContext
-      onDragEnd={(result, provided) => {
-        props.onDragEnd?.(result, provided);
-      }}
-    >
-      <Droppable droppableId="dnd-table" direction="vertical">
-        {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
-            {props.children}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
-  );
-}
 
 export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) => {
   const {
@@ -82,25 +53,23 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
   };
 
   return (
-    <DraggableWrapper onDragEnd={props.onDragEnd} draggableRows={props.draggableRows}>
-      <DataTableColumnsContextProvider
-        value={{
-          sourceColumn,
-          setSourceColumn,
-          targetColumn,
-          setTargetColumn,
-          columnsToggle,
-          setColumnsToggle,
-          swapColumns,
-          resetColumnsOrder,
-          resetColumnsToggle,
+    <DataTableColumnsContextProvider
+      value={{
+        sourceColumn,
+        setSourceColumn,
+        targetColumn,
+        setTargetColumn,
+        columnsToggle,
+        setColumnsToggle,
+        swapColumns,
+        resetColumnsOrder,
+        resetColumnsToggle,
 
-          setColumnWidth,
-          resetColumnsWidth,
-        }}
-      >
-        {children}
-      </DataTableColumnsContextProvider>
-    </DraggableWrapper>
+        setColumnWidth,
+        resetColumnsWidth,
+      }}
+    >
+      {children}
+    </DataTableColumnsContextProvider>
   );
 };

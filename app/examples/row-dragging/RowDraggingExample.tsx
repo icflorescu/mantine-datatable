@@ -19,6 +19,7 @@ export function RowDraggingExample() {
         { accessor: 'state', width: '150px' },
       ]}
       records={records}
+      height={400}
       draggableRows
       onDragEnd={(dragResult) => {
         const array = swapRecords(dragResult, records);
