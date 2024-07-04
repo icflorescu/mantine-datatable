@@ -232,7 +232,12 @@ export type DataTableProps<T = Record<string, unknown>> = {
   /**
    * Callback fired on drag end.
    */
-  onReorder?: OnDragEndResponder;
+  onDragEnd?: OnDragEndResponder;
+
+  /**
+   * set a custom drag handle for dragging
+   */
+  dragHandle?: React.ReactNode;
 } & Omit<
   TableProps,
   | 'onScroll'
@@ -254,6 +259,7 @@ export type DataTableProps<T = Record<string, unknown>> = {
   | 'highlightOnHoverColor'
   | 'stickyHeader'
   | 'stickyHeaderOffset'
+  | 'onDragEnd'
 > &
   DataTableColorProps<T> &
   DataTableColumnProps<T> &

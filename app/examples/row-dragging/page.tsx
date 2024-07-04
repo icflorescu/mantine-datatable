@@ -7,15 +7,15 @@ import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
-import { BasicUsageExample } from './BasicUsageExample';
+import { RowDraggingExample } from './RowDraggingExample';
 
-const PATH: Route = '/examples/basic-usage';
+const PATH: Route = '/examples/row-dragging';
 
 export const metadata = getRouteMetadata(PATH);
 
 export default async function BasicUsageExamplePage() {
   const code = await allPromiseProps({
-    'BasicUsageExample.tsx': readCodeFile<string>(`${PATH}/BasicUsageExample.tsx`),
+    'RowDraggingExample.tsx': readCodeFile<string>(`${PATH}/RowDraggingExample.tsx`),
     'companies.json': readCodeFile<string>('/../data/companies.json'),
   });
 
@@ -26,9 +26,9 @@ export default async function BasicUsageExamplePage() {
         In its most basic usage scenario, the DataTable component only requires <Code>records</Code> and{' '}
         <Code>columns</Code> properties to be set:
       </Txt>
-      <CodeBlock tabs={{ code, keys: ['BasicUsageExample.tsx', 'companies.json'] }} />
+      <CodeBlock tabs={{ code, keys: ['RowDraggingExample.tsx', 'companies.json'] }} />
       <Txt>The code above will produce the following result:</Txt>
-      <BasicUsageExample />
+      <RowDraggingExample />
       <Txt>
         However, there’s much more you can do with {PRODUCT_NAME}.
         <br />

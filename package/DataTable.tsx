@@ -128,7 +128,8 @@ export function DataTable<T>({
   style,
   styles,
   draggableRows,
-  onReorder,
+  onDragEnd,
+  dragHandle,
   ...otherProps
 }: DataTableProps<T>) {
   const {
@@ -264,7 +265,7 @@ export function DataTable<T>({
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
   return (
-    <DataTableColumnsProvider draggableRows={draggableRows} onReorder={onReorder} {...dragToggle}>
+    <DataTableColumnsProvider draggableRows={draggableRows} onDragEnd={onDragEnd} {...dragToggle}>
       <Box
         {...marginProperties}
         className={clsx(
@@ -433,6 +434,7 @@ export function DataTable<T>({
                       selectionColumnStyle={selectionColumnStyle}
                       draggableRows={draggableRows}
                       idAccessor={idAccessor as string}
+                      dragHandle={dragHandle}
                     />
                   );
                 })

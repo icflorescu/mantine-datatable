@@ -28,7 +28,7 @@ export function DataTableRowSelectorCell<T>({
   checkboxProps,
   getCheckboxProps,
   ...otherProps
-}: DataTableRowSelectorCellProps<T>) {
+}: Readonly<DataTableRowSelectorCellProps<T>>) {
   const allCheckboxProps = { ...checkboxProps, ...getCheckboxProps(record, index) };
   const enabled = !otherProps.disabled && !allCheckboxProps.disabled;
 

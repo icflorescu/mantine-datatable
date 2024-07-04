@@ -153,6 +153,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: dragging & toggling ${PRODUCT_NAME} columns`,
   },
   {
+    href: '/examples/row-dragging',
+    title: 'Row Dragging',
+    description: `Example: dragging & toggling ${PRODUCT_NAME} columns`,
+  },
+  {
     href: '/examples/column-resizing',
     title: 'Column resizing',
     description: `Example: resizing ${PRODUCT_NAME} columns`,

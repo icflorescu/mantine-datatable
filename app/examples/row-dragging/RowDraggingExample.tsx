@@ -1,10 +1,10 @@
 'use client';
 
-import { DataTable, reorderRecords, swapRecords } from '__PACKAGE__';
+import { DataTable, swapRecords } from '__PACKAGE__';
 import { useState } from 'react';
 import companies from '~/data/companies.json';
 
-export function BasicUsageExample() {
+export function RowDraggingExample() {
   const [records, setRecords] = useState(companies);
 
   return (
@@ -20,8 +20,8 @@ export function BasicUsageExample() {
       ]}
       records={records}
       draggableRows
-      onReorder={(reorderResult) => {
-        const array = swapRecords(reorderResult, records);
+      onDragEnd={(dragResult) => {
+        const array = swapRecords(dragResult, records);
         // const array = reorderRecords(reorderResult, records);
         setRecords(array);
       }}

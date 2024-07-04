@@ -8,7 +8,7 @@ import {
   type MantineStyleProp,
 } from '@mantine/core';
 import clsx from 'clsx';
-import { ElementRef, useEffect, useRef } from 'react';
+import React, { ElementRef, useEffect, useRef } from 'react';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
@@ -60,6 +60,7 @@ type DataTableRowProps<T> = {
   selectionColumnStyle: MantineStyleProp | undefined;
   draggableRows?: boolean;
   idAccessor: string;
+  dragHandle?: React.ReactNode;
 };
 
 export function DataTableRow<T>({
@@ -92,6 +93,7 @@ export function DataTableRow<T>({
   selectionColumnStyle,
   draggableRows,
   idAccessor,
+  dragHandle,
 }: Readonly<DataTableRowProps<T>>) {
   return (
     <>
@@ -138,6 +140,7 @@ export function DataTableRow<T>({
         index={index}
         draggable={draggableRows}
         idAccessor={idAccessor}
+        dragHandle={dragHandle}
       >
         {selectionVisible && (
           <DataTableRowSelectorCell<T>
@@ -225,6 +228,7 @@ interface IDraggableRowProps<T> extends React.PropsWithChildren {
   index: number;
   rowProps: TableTrProps;
   idAccessor: string;
+  dragHandle?: React.ReactNode;
 }
 
 function DraggableRow<T>({
@@ -234,6 +238,7 @@ function DraggableRow<T>({
   children,
   rowProps,
   idAccessor,
+  dragHandle,
 }: Readonly<IDraggableRowProps<T>>) {
   const ref = useRef<ElementRef<'tr'>>(null);
 
@@ -272,6 +277,7 @@ function DraggableRow<T>({
             {...provided.draggableProps}
             ref={ref}
             style={[provided.draggableProps.style, rowProps.style]}
+            data-is-dragging={snapshot.isDragging}
           >
             <TableTd
               style={{
@@ -284,9 +290,11 @@ function DraggableRow<T>({
               {...provided.dragHandleProps}
               ref={provided.innerRef}
             >
-              <div>
-                <IconGripVertical />
-              </div>
+              {dragHandle ?? (
+                <div>
+                  <IconGripVertical />
+                </div>
+              )}
             </TableTd>
 
             {children}
