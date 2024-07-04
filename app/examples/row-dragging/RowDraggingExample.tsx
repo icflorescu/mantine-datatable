@@ -26,6 +26,7 @@ export function RowDraggingExample() {
         // const array = reorderRecords(reorderResult, records);
         setRecords(array);
       }}
+      dragKey="row-drag-example"
     />
   );
 }

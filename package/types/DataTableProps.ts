@@ -15,6 +15,28 @@ import type { DataTableSortProps } from './DataTableSortProps';
 import type { DataTableVerticalAlign } from './DataTableVerticalAlign';
 import { OnDragEndResponder } from '@hello-pangea/dnd';
 
+export type DraggableProps = {
+  /**
+   * If true, the rows will be draggable.
+   */
+  draggableRows: boolean;
+
+  /**
+   * Callback fired on drag end.
+   */
+  onDragEnd: OnDragEndResponder;
+
+  /**
+   * set a custom drag handle for dragging
+   */
+  dragHandle?: React.ReactNode;
+
+  /**
+   * A unique key to mark a table as a draggable
+   */
+  dragKey: string;
+};
+
 export type DataTableProps<T = Record<string, unknown>> = {
   /**
    * Data table container class name.
@@ -223,26 +245,6 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * Ref pointing to the table body element.
    */
   bodyRef?: ((instance: HTMLTableSectionElement | null) => void) | React.RefObject<HTMLTableSectionElement>;
-
-  /**
-   * If true, the rows will be draggable.
-   */
-  draggableRows?: boolean;
-
-  /**
-   * Callback fired on drag end.
-   */
-  onDragEnd?: OnDragEndResponder;
-
-  /**
-   * set a custom drag handle for dragging
-   */
-  dragHandle?: React.ReactNode;
-
-  /**
-   * A unique key to mark a table as a draggable
-   */
-  dragKey?: string;
 } & Omit<
   TableProps,
   | 'onScroll'
@@ -274,4 +276,5 @@ export type DataTableProps<T = Record<string, unknown>> = {
   DataTablePaginationProps &
   DataTableSortProps<T> &
   DataTableScrollProps &
-  DataTableSelectionProps<T>;
+  DataTableSelectionProps<T> &
+  DraggableProps;
