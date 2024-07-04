@@ -28,12 +28,9 @@ export default async function BasicUsageExamplePage() {
       </Txt>
       <CodeBlock tabs={{ code, keys: ['RowDraggingExample.tsx', 'companies.json'] }} />
       <Txt>The code above will produce the following result:</Txt>
+      <Txt>For customizing drag button, you can use dragHandle prop it will accept a React.Node </Txt>
       <RowDraggingExample />
-      <Txt>
-        However, there’s much more you can do with {PRODUCT_NAME}.
-        <br />
-        Head over to the next example to learn about its basic properties.
-      </Txt>
+
       <PageNavigation of={PATH} />
     </>
   );
