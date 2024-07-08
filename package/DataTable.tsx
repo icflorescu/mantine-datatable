@@ -336,7 +336,6 @@ export function DataTable<T>({
               style={{
                 ...styles?.table,
                 '--mantine-datatable-selection-column-width': `${selectionColumnWidth}px`,
-                tableLayout: 'fixed',
               }}
               data-striped={(recordsLength && striped) || undefined}
               data-highlight-on-hover={highlightOnHover || undefined}
