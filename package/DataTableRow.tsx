@@ -8,7 +8,7 @@ import {
   type MantineStyleProp,
 } from '@mantine/core';
 import clsx from 'clsx';
-import React, { ElementRef, useEffect, useRef } from 'react';
+import { ElementRef, useEffect, useRef } from 'react';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
@@ -222,14 +222,14 @@ export function DataTableRow<T>({
   );
 }
 
-interface IDraggableRowProps<T> extends React.PropsWithChildren {
+type DraggableRowProps<T> = React.PropsWithChildren<{
   draggable?: boolean;
   record: T;
   index: number;
   rowProps: TableTrProps;
   idAccessor: string;
   dragHandle?: React.ReactNode;
-}
+}>;
 
 function DraggableRow<T>({
   record,
@@ -239,7 +239,7 @@ function DraggableRow<T>({
   rowProps,
   idAccessor,
   dragHandle,
-}: Readonly<IDraggableRowProps<T>>) {
+}: Readonly<DraggableRowProps<T>>) {
   const ref = useRef<ElementRef<'tr'>>(null);
 
   if (!draggable) return <TableTr {...rowProps}>{children}</TableTr>;

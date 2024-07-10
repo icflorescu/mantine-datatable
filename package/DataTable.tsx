@@ -11,7 +11,7 @@ import { DataTableLoader } from './DataTableLoader';
 import { DataTablePagination } from './DataTablePagination';
 import { DataTableRow } from './DataTableRow';
 import { DataTableScrollArea } from './DataTableScrollArea';
-import DraggableWrapper from './DraggableWrapper';
+import { DraggableWrapper } from './DraggableWrapper';
 import { getTableCssVariables } from './cssVariables';
 import {
   useDataTableColumns,

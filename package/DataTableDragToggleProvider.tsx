@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
+import { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
 import { DataTableColumnToggle } from './hooks';
 

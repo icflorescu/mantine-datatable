@@ -1,27 +1,25 @@
-import { DragDropContext, Droppable, OnDragEndResponder } from '@hello-pangea/dnd';
-import React from 'react';
+import { DragDropContext, Droppable, type OnDragEndResponder } from '@hello-pangea/dnd';
+import type { PropsWithChildren } from 'react';
 
-interface Props extends React.PropsWithChildren {
+type DraggableWrapperProps = PropsWithChildren<{
   draggableRows?: boolean;
   onDragEnd?: OnDragEndResponder;
   dragKey?: string;
-}
+}>;
 
-export default function DraggableWrapper(props: Readonly<Props>) {
-  if (!props.draggableRows) {
-    return props.children;
-  }
+export function DraggableWrapper({ children, draggableRows, onDragEnd, dragKey }: Readonly<DraggableWrapperProps>) {
+  if (!draggableRows) return children;
 
   return (
     <DragDropContext
       onDragEnd={(result, provided) => {
-        props.onDragEnd?.(result, provided);
+        onDragEnd?.(result, provided);
       }}
     >
-      <Droppable droppableId={props.dragKey ?? 'dnd-table'} direction="vertical" ignoreContainerClipping>
+      <Droppable droppableId={dragKey ?? 'dnd-table'} direction="vertical" ignoreContainerClipping>
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            {props.children}
+            {children}
             {provided.placeholder}
           </div>
         )}

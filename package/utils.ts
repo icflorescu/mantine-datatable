@@ -1,4 +1,4 @@
-import { DropResult } from '@hello-pangea/dnd';
+import type { DropResult } from '@hello-pangea/dnd';
 
 /**
  * Utility function that returns a humanized version of a string, e.g. "camelCase" -> "Camel Case"

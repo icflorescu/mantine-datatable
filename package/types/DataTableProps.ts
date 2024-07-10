@@ -1,3 +1,4 @@
+import { OnDragEndResponder } from '@hello-pangea/dnd';
 import type { MantineShadow, MantineStyleProp, ScrollAreaProps, StylesRecord, TableProps } from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import { DataTableColorProps } from './DataTableColorProps';
@@ -13,7 +14,6 @@ import type { DataTableScrollProps } from './DataTableScrollProps';
 import type { DataTableSelectionProps } from './DataTableSelectionProps';
 import type { DataTableSortProps } from './DataTableSortProps';
 import type { DataTableVerticalAlign } from './DataTableVerticalAlign';
-import { OnDragEndResponder } from '@hello-pangea/dnd';
 
 export type DraggableProps = {
   /**
@@ -27,7 +27,7 @@ export type DraggableProps = {
   onDragEnd: OnDragEndResponder;
 
   /**
-   * set a custom drag handle for dragging
+   * Custom drag handle.
    */
   dragHandle?: React.ReactNode;
 
