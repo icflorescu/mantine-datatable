@@ -20,6 +20,8 @@ export function RowDraggingExample() {
       ]}
       records={records}
       height={400}
+      withTableBorder
+      withColumnBorders
       draggableRows
       dragKey="row-drag-example"
       onDragEnd={(dragResult) => {

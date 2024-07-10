@@ -2,6 +2,7 @@ import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
+import { ExternalLink } from '~/components/ExternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
@@ -23,14 +24,16 @@ export default async function BasicUsageExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        In its most basic usage scenario, the DataTable component only requires <Code>records</Code> and{' '}
-        <Code>columns</Code> properties to be set:
+        {PRODUCT_NAME} also supports row dragging (implemented with{' '}
+        <ExternalLink to="https://react-dnd.github.io/react-dnd/">Pangea DnD library</ExternalLink>).
       </Txt>
       <CodeBlock tabs={{ code, keys: ['RowDraggingExample.tsx', 'companies.json'] }} />
       <Txt>The code above will produce the following result:</Txt>
-      <Txt>For customizing drag button, you can use dragHandle prop it will accept a React.Node </Txt>
       <RowDraggingExample />
-
+      <Txt idea>
+        To customize the drag button, you can use <Code>dragHandle</Code> property that accepts any{' '}
+        <Code>React.Node</Code> content.
+      </Txt>
       <PageNavigation of={PATH} />
     </>
   );

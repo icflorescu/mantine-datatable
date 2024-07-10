@@ -154,8 +154,8 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     href: '/examples/row-dragging',
-    title: 'Row Dragging',
-    description: `Example: dragging & toggling ${PRODUCT_NAME} columns`,
+    title: 'Row dragging',
+    description: `Example: dragging ${PRODUCT_NAME} rows`,
   },
   {
     href: '/examples/column-resizing',
