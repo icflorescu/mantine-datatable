@@ -51,7 +51,8 @@ export default function ContributeAndSupportPage() {
       <Txt>
         I’m building these projects out of passion, but the constant effort of spending so many hours on open-source
         development and maintenance takes its toll, and passion alone doesn’t pay the bills. So, if you find{' '}
-        {PRODUCT_NAME} useful and you want to support its future development, please consider{' '}
+        {PRODUCT_NAME} or <ExternalLink to={MANTINE_CONTEXTMENU_LINK}>{MANTINE_CONTEXTMENU_PRODUCT_NAME}</ExternalLink>{' '}
+        useful and want to support thier future development, please consider{' '}
         <ExternalLink to="https://github.com/sponsors/icflorescu">sponsoring my work</ExternalLink> ❤️.
       </Txt>
       <PageSubtitle value="Raise issues and discuss new features" />
