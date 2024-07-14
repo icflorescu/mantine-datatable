@@ -1,20 +1,10 @@
-import { Draggable } from '@hello-pangea/dnd';
-import {
-  TableTd,
-  TableTr,
-  TableTrProps,
-  type CheckboxProps,
-  type MantineColor,
-  type MantineStyleProp,
-} from '@mantine/core';
+import { TableTr, type CheckboxProps, type MantineColor, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
-import { ElementRef, useEffect, useRef } from 'react';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
 import { getRowCssVariables } from './cssVariables';
 import { useRowExpansion } from './hooks';
-import { IconGripVertical } from './icons/IconGripVertical';
 import type {
   DataTableCellClickHandler,
   DataTableColumn,
@@ -58,9 +48,7 @@ type DataTableRowProps<T> = {
   selectorCellShadowVisible: boolean;
   selectionColumnClassName: string | undefined;
   selectionColumnStyle: MantineStyleProp | undefined;
-  draggableRows?: boolean;
   idAccessor: string;
-  dragHandle?: React.ReactNode;
 };
 
 export function DataTableRow<T>({
@@ -91,56 +79,46 @@ export function DataTableRow<T>({
   selectorCellShadowVisible,
   selectionColumnClassName,
   selectionColumnStyle,
-  draggableRows,
-  idAccessor,
-  dragHandle,
 }: Readonly<DataTableRowProps<T>>) {
   return (
     <>
-      <DraggableRow
-        rowProps={{
-          className: clsx(
-            'mantine-datatable-row',
-            {
-              [POINTER_CURSOR]:
-                onClick || onDoubleClick || (expansion?.isExpandable({ record, index }) && expansion?.expandOnClick),
-            },
-            { [CONTEXT_MENU_CURSOR]: onContextMenu },
-            typeof className === 'function' ? className(record, index) : className
-          ),
-          ['data-selected' as never]: selectionChecked || undefined,
-          onClick: (e) => {
-            if (expansion) {
-              const { isExpandable, isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
-              if (isExpandable({ record, index }) && expandOnClick) {
-                if (isRowExpanded(record)) {
-                  collapseRow(record);
-                } else {
-                  expandRow(record);
-                }
+      <TableTr
+        className={clsx(
+          'mantine-datatable-row',
+          {
+            [POINTER_CURSOR]:
+              onClick || onDoubleClick || (expansion?.isExpandable({ record, index }) && expansion?.expandOnClick),
+          },
+          { [CONTEXT_MENU_CURSOR]: onContextMenu },
+          typeof className === 'function' ? className(record, index) : className
+        )}
+        data-selected={selectionChecked || undefined}
+        onClick={(e) => {
+          if (expansion) {
+            const { isExpandable, isRowExpanded, expandOnClick, expandRow, collapseRow } = expansion;
+            if (isExpandable({ record, index }) && expandOnClick) {
+              if (isRowExpanded(record)) {
+                collapseRow(record);
+              } else {
+                expandRow(record);
               }
             }
-            onClick?.({ event: e, record, index });
-          },
-          onDoubleClick: onDoubleClick ? (e) => onDoubleClick({ event: e, record, index }) : undefined,
-          onContextMenu: onContextMenu ? (e) => onContextMenu({ event: e, record, index }) : undefined,
-          style: [
-            color || backgroundColor
-              ? (theme) => {
-                  const colorValue = color?.(record, index);
-                  const backgroundColorValue = backgroundColor?.(record, index);
-                  return getRowCssVariables({ theme, color: colorValue, backgroundColor: backgroundColorValue });
-                }
-              : undefined,
-            style?.(record, index),
-          ],
-          ...customAttributes?.(record, index),
+          }
+          onClick?.({ event: e, record, index });
         }}
-        record={record}
-        index={index}
-        draggable={draggableRows}
-        idAccessor={idAccessor}
-        dragHandle={dragHandle}
+        onDoubleClick={onDoubleClick ? (e) => onDoubleClick({ event: e, record, index }) : undefined}
+        onContextMenu={onContextMenu ? (e) => onContextMenu({ event: e, record, index }) : undefined}
+        style={[
+          color || backgroundColor
+            ? (theme) => {
+                const colorValue = color?.(record, index);
+                const backgroundColorValue = backgroundColor?.(record, index);
+                return getRowCssVariables({ theme, color: colorValue, backgroundColor: backgroundColorValue });
+              }
+            : undefined,
+          style?.(record, index),
+        ]}
+        {...customAttributes?.(record, index)}
       >
         {selectionVisible && (
           <DataTableRowSelectorCell<T>
@@ -157,7 +135,6 @@ export function DataTableRow<T>({
             getCheckboxProps={getSelectionCheckboxProps}
           />
         )}
-
         {columns.map(({ hidden, ...columnProps }, columnIndex) => {
           if (hidden) return null;
 
@@ -208,7 +185,7 @@ export function DataTableRow<T>({
             />
           );
         })}
-      </DraggableRow>
+      </TableTr>
 
       {expansion && (
         <DataTableRowExpansion
@@ -219,88 +196,5 @@ export function DataTableRow<T>({
         />
       )}
     </>
-  );
-}
-
-type DraggableRowProps<T> = React.PropsWithChildren<{
-  draggable?: boolean;
-  record: T;
-  index: number;
-  rowProps: TableTrProps;
-  idAccessor: string;
-  dragHandle?: React.ReactNode;
-}>;
-
-function DraggableRow<T>({
-  record,
-  index,
-  draggable,
-  children,
-  rowProps,
-  idAccessor,
-  dragHandle,
-}: Readonly<DraggableRowProps<T>>) {
-  const ref = useRef<ElementRef<'tr'>>(null);
-
-  if (!draggable) return <TableTr {...rowProps}>{children}</TableTr>;
-
-  return (
-    <Draggable
-      draggableId={String((record as Record<string, never>)[idAccessor])}
-      index={index}
-      disableInteractiveElementBlocking
-    >
-      {function Row(provided, snapshot) {
-        useEffect(() => {
-          const node = ref.current;
-
-          if (!node) return;
-
-          const th = node.parentElement?.parentElement?.children?.[0]?.children?.[0]?.children;
-
-          Array.from(th ?? []).forEach((th, index) => {
-            const child = node.children[index] as HTMLTableCellElement;
-
-            if (!child) return;
-
-            const cellWidth = th.getBoundingClientRect().width + 'px';
-
-            child.style.width = cellWidth;
-            child.style.minWidth = cellWidth;
-            child.style.maxWidth = cellWidth;
-          });
-        }, [snapshot.isDragging]);
-
-        return (
-          <TableTr
-            {...rowProps}
-            {...provided.draggableProps}
-            ref={ref}
-            style={[provided.draggableProps.style, rowProps.style]}
-            data-is-dragging={snapshot.isDragging}
-          >
-            <TableTd
-              style={{
-                cursor: 'grab',
-
-                width: '50px',
-                minWidth: '50px',
-                maxWidth: '50px',
-              }}
-              {...provided.dragHandleProps}
-              ref={provided.innerRef}
-            >
-              {dragHandle ?? (
-                <div>
-                  <IconGripVertical />
-                </div>
-              )}
-            </TableTd>
-
-            {children}
-          </TableTr>
-        );
-      }}
-    </Draggable>
   );
 }

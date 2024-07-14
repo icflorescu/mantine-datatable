@@ -5,7 +5,6 @@ import {
   PopoverDropdown,
   PopoverTarget,
   Stack,
-  TableTh,
   TableThead,
   TableTr,
   type CheckboxProps,
@@ -40,7 +39,6 @@ type DataTableHeaderProps<T> = {
   selectorCellShadowVisible: boolean;
   selectionColumnClassName: string | undefined;
   selectionColumnStyle: MantineStyleProp;
-  draggableRows?: boolean;
 };
 
 export const DataTableHeader = forwardRef(function DataTableHeader<T>(
@@ -63,7 +61,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
     selectorCellShadowVisible,
     selectionColumnClassName,
     selectionColumnStyle,
-    draggableRows,
+    // draggableRows,
   }: DataTableHeaderProps<T>,
   ref: React.ForwardedRef<HTMLTableSectionElement>
 ) {
@@ -115,8 +113,6 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
 
       <TableTr>
         {!groups && allRecordsSelectorCell}
-
-        {draggableRows && <TableTh w={50}></TableTh>}
 
         {columns.map(({ hidden, ...columnProps }, index) => {
           if (hidden) return null;

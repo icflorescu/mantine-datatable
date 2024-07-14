@@ -1,5 +1,5 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
-import { useDebouncedCallback, useMergedRef } from '@mantine/hooks';
+import { useMergedRef, useDebouncedCallback } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
@@ -11,7 +11,6 @@ import { DataTableLoader } from './DataTableLoader';
 import { DataTablePagination } from './DataTablePagination';
 import { DataTableRow } from './DataTableRow';
 import { DataTableScrollArea } from './DataTableScrollArea';
-import { DraggableWrapper } from './DraggableWrapper';
 import { getTableCssVariables } from './cssVariables';
 import {
   useDataTableColumns,
@@ -128,10 +127,7 @@ export function DataTable<T>({
   classNames,
   style,
   styles,
-  draggableRows,
-  onDragEnd,
-  dragHandle,
-  dragKey,
+  rowFactory,
   ...otherProps
 }: DataTableProps<T>) {
   const {
@@ -313,151 +309,156 @@ export function DataTable<T>({
           onScrollPositionChange={handleScrollPositionChange}
           scrollAreaProps={scrollAreaProps}
         >
-          <DraggableWrapper draggableRows={draggableRows} onDragEnd={onDragEnd} dragKey={dragKey}>
-            <Table
-              ref={mergedTableRef}
-              horizontalSpacing={horizontalSpacing}
-              className={clsx(
-                'mantine-datatable-table',
-                {
-                  [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
-                  'mantine-datatable-vertical-align-top': verticalAlign === 'top',
-                  'mantine-datatable-vertical-align-bottom': verticalAlign === 'bottom',
-                  'mantine-datatable-last-row-border-bottom-visible':
-                    otherProps.withRowBorders && tableHeight < scrollViewportHeight,
-                  'mantine-datatable-pin-last-column': pinLastColumn,
-                  'mantine-datatable-pin-last-column-scrolled': !scrolledToRight && pinLastColumn,
-                  'mantine-datatable-selection-column-visible': selectionColumnVisible,
-                  'mantine-datatable-pin-first-column': pinFirstColumn,
-                  'mantine-datatable-pin-first-column-scrolled': !scrolledToLeft && pinFirstColumn,
-                },
-                classNames?.table
-              )}
-              style={{
-                ...styles?.table,
-                '--mantine-datatable-selection-column-width': `${selectionColumnWidth}px`,
-              }}
-              data-striped={(recordsLength && striped) || undefined}
-              data-highlight-on-hover={highlightOnHover || undefined}
-              {...otherProps}
-            >
-              {noHeader ? null : (
-                <DataTableColumnsProvider {...dragToggle}>
-                  <DataTableHeader<T>
-                    ref={headerRef}
-                    selectionColumnHeaderRef={selectionColumnHeaderRef}
-                    className={classNames?.header}
-                    style={styles?.header}
-                    columns={effectiveColumns}
-                    defaultColumnProps={defaultColumnProps}
-                    groups={groups}
-                    sortStatus={sortStatus}
-                    sortIcons={sortIcons}
-                    onSortStatusChange={onSortStatusChange}
-                    selectionTrigger={selectionTrigger}
-                    selectionVisible={selectionColumnVisible}
-                    selectionChecked={allSelectableRecordsSelected}
-                    selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
-                    onSelectionChange={handleHeaderSelectionChange}
-                    selectionCheckboxProps={{ ...selectionCheckboxProps, ...allRecordsSelectionCheckboxProps }}
-                    selectorCellShadowVisible={selectorCellShadowVisible}
-                    selectionColumnClassName={selectionColumnClassName}
-                    selectionColumnStyle={selectionColumnStyle}
-                    draggableRows={draggableRows}
-                  />
-                </DataTableColumnsProvider>
-              )}
-              <tbody ref={bodyRef}>
-                {recordsLength ? (
-                  records.map((record, index) => {
-                    const recordId = getRecordId(record, idAccessor);
-                    const isSelected = selectedRecordIds?.includes(recordId) || false;
-
-                    let handleSelectionChange: React.MouseEventHandler | undefined;
-                    if (onSelectedRecordsChange && selectedRecords) {
-                      handleSelectionChange = (e) => {
-                        if (e.nativeEvent.shiftKey && lastSelectionChangeIndex !== null) {
-                          const targetRecords = records.filter(
-                            index > lastSelectionChangeIndex
-                              ? (rec, idx) =>
-                                  idx >= lastSelectionChangeIndex &&
-                                  idx <= index &&
-                                  (isRecordSelectable ? isRecordSelectable(rec, idx) : true)
-                              : (rec, idx) =>
-                                  idx >= index &&
-                                  idx <= lastSelectionChangeIndex &&
-                                  (isRecordSelectable ? isRecordSelectable(rec, idx) : true)
-                          );
-                          onSelectedRecordsChange(
-                            isSelected
-                              ? differenceBy(selectedRecords, targetRecords, (r) => getRecordId(r, idAccessor))
-                              : uniqBy([...selectedRecords, ...targetRecords], (r) => getRecordId(r, idAccessor))
-                          );
-                        } else {
-                          onSelectedRecordsChange(
-                            isSelected
-                              ? selectedRecords.filter((rec) => getRecordId(rec, idAccessor) !== recordId)
-                              : uniqBy([...selectedRecords, record], (rec) => getRecordId(rec, idAccessor))
-                          );
-                        }
-                        setLastSelectionChangeIndex(index);
-                      };
-                    }
-
-                    return (
-                      <DataTableRow<T>
-                        key={recordId as React.Key}
-                        record={record}
-                        index={index}
-                        columns={effectiveColumns}
-                        defaultColumnProps={defaultColumnProps}
-                        defaultColumnRender={defaultColumnRender}
-                        selectionTrigger={selectionTrigger}
-                        selectionVisible={selectionColumnVisible}
-                        selectionChecked={isSelected}
-                        onSelectionChange={handleSelectionChange}
-                        isRecordSelectable={isRecordSelectable}
-                        selectionCheckboxProps={selectionCheckboxProps}
-                        getSelectionCheckboxProps={getRecordSelectionCheckboxProps}
-                        onClick={onRowClick}
-                        onDoubleClick={onRowDoubleClick}
-                        onCellClick={onCellClick}
-                        onCellDoubleClick={onCellDoubleClick}
-                        onContextMenu={onRowContextMenu}
-                        onCellContextMenu={onCellContextMenu}
-                        expansion={rowExpansionInfo}
-                        color={rowColor}
-                        backgroundColor={rowBackgroundColor}
-                        className={rowClassName}
-                        style={rowStyle}
-                        customAttributes={customRowAttributes}
-                        selectorCellShadowVisible={selectorCellShadowVisible}
-                        selectionColumnClassName={selectionColumnClassName}
-                        selectionColumnStyle={selectionColumnStyle}
-                        draggableRows={draggableRows}
-                        idAccessor={idAccessor as string}
-                        dragHandle={dragHandle}
-                      />
-                    );
-                  })
-                ) : (
-                  <DataTableEmptyRow />
-                )}
-              </tbody>
-              {effectiveColumns.some(({ footer }) => footer) && (
-                <DataTableFooter<T>
-                  ref={footerRef}
-                  className={classNames?.footer}
-                  style={styles?.footer}
+          <Table
+            ref={mergedTableRef}
+            horizontalSpacing={horizontalSpacing}
+            className={clsx(
+              'mantine-datatable-table',
+              {
+                [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
+                'mantine-datatable-vertical-align-top': verticalAlign === 'top',
+                'mantine-datatable-vertical-align-bottom': verticalAlign === 'bottom',
+                'mantine-datatable-last-row-border-bottom-visible':
+                  otherProps.withRowBorders && tableHeight < scrollViewportHeight,
+                'mantine-datatable-pin-last-column': pinLastColumn,
+                'mantine-datatable-pin-last-column-scrolled': !scrolledToRight && pinLastColumn,
+                'mantine-datatable-selection-column-visible': selectionColumnVisible,
+                'mantine-datatable-pin-first-column': pinFirstColumn,
+                'mantine-datatable-pin-first-column-scrolled': !scrolledToLeft && pinFirstColumn,
+              },
+              classNames?.table
+            )}
+            style={{
+              ...styles?.table,
+              '--mantine-datatable-selection-column-width': `${selectionColumnWidth}px`,
+            }}
+            data-striped={(recordsLength && striped) || undefined}
+            data-highlight-on-hover={highlightOnHover || undefined}
+            {...otherProps}
+          >
+            {noHeader ? null : (
+              <DataTableColumnsProvider {...dragToggle}>
+                <DataTableHeader<T>
+                  ref={headerRef}
+                  selectionColumnHeaderRef={selectionColumnHeaderRef}
+                  className={classNames?.header}
+                  style={styles?.header}
                   columns={effectiveColumns}
                   defaultColumnProps={defaultColumnProps}
+                  groups={groups}
+                  sortStatus={sortStatus}
+                  sortIcons={sortIcons}
+                  onSortStatusChange={onSortStatusChange}
+                  selectionTrigger={selectionTrigger}
                   selectionVisible={selectionColumnVisible}
+                  selectionChecked={allSelectableRecordsSelected}
+                  selectionIndeterminate={someRecordsSelected && !allSelectableRecordsSelected}
+                  onSelectionChange={handleHeaderSelectionChange}
+                  selectionCheckboxProps={{ ...selectionCheckboxProps, ...allRecordsSelectionCheckboxProps }}
                   selectorCellShadowVisible={selectorCellShadowVisible}
-                  scrollDiff={tableHeight - scrollViewportHeight}
+                  selectionColumnClassName={selectionColumnClassName}
+                  selectionColumnStyle={selectionColumnStyle}
                 />
+              </DataTableColumnsProvider>
+            )}
+            <tbody ref={bodyRef}>
+              {recordsLength ? (
+                records.map((record, index) => {
+                  const recordId = getRecordId(record, idAccessor);
+                  const isSelected = selectedRecordIds?.includes(recordId) || false;
+
+                  let handleSelectionChange: React.MouseEventHandler | undefined;
+                  if (onSelectedRecordsChange && selectedRecords) {
+                    handleSelectionChange = (e) => {
+                      if (e.nativeEvent.shiftKey && lastSelectionChangeIndex !== null) {
+                        const targetRecords = records.filter(
+                          index > lastSelectionChangeIndex
+                            ? (rec, idx) =>
+                                idx >= lastSelectionChangeIndex &&
+                                idx <= index &&
+                                (isRecordSelectable ? isRecordSelectable(rec, idx) : true)
+                            : (rec, idx) =>
+                                idx >= index &&
+                                idx <= lastSelectionChangeIndex &&
+                                (isRecordSelectable ? isRecordSelectable(rec, idx) : true)
+                        );
+                        onSelectedRecordsChange(
+                          isSelected
+                            ? differenceBy(selectedRecords, targetRecords, (r) => getRecordId(r, idAccessor))
+                            : uniqBy([...selectedRecords, ...targetRecords], (r) => getRecordId(r, idAccessor))
+                        );
+                      } else {
+                        onSelectedRecordsChange(
+                          isSelected
+                            ? selectedRecords.filter((rec) => getRecordId(rec, idAccessor) !== recordId)
+                            : uniqBy([...selectedRecords, record], (rec) => getRecordId(rec, idAccessor))
+                        );
+                      }
+                      setLastSelectionChangeIndex(index);
+                    };
+                  }
+                  const RowWrapperComponent = ({ children }: { children: React.ReactNode }) =>
+                    rowWrapper ? rowWrapper(children, record, index) : children;
+
+                  const rowContent = (
+                    <DataTableRow<T>
+                      key={recordId as React.Key}
+                      record={record}
+                      index={index}
+                      columns={effectiveColumns}
+                      defaultColumnProps={defaultColumnProps}
+                      defaultColumnRender={defaultColumnRender}
+                      selectionTrigger={selectionTrigger}
+                      selectionVisible={selectionColumnVisible}
+                      selectionChecked={isSelected}
+                      onSelectionChange={handleSelectionChange}
+                      isRecordSelectable={isRecordSelectable}
+                      selectionCheckboxProps={selectionCheckboxProps}
+                      getSelectionCheckboxProps={getRecordSelectionCheckboxProps}
+                      onClick={onRowClick}
+                      onDoubleClick={onRowDoubleClick}
+                      onCellClick={onCellClick}
+                      onCellDoubleClick={onCellDoubleClick}
+                      onContextMenu={onRowContextMenu}
+                      onCellContextMenu={onCellContextMenu}
+                      expansion={rowExpansionInfo}
+                      color={rowColor}
+                      backgroundColor={rowBackgroundColor}
+                      className={rowClassName}
+                      style={rowStyle}
+                      customAttributes={customRowAttributes}
+                      selectorCellShadowVisible={selectorCellShadowVisible}
+                      selectionColumnClassName={selectionColumnClassName}
+                      selectionColumnStyle={selectionColumnStyle}
+                      idAccessor={idAccessor as string}
+                    />
+                  );
+
+                  return rowFactory ? (
+                    <RowWrapperComponent key={recordId as React.Key}>
+                      {rowFactory({ record, index, children: rowContent })}
+                    </RowWrapperComponent>
+                  ) : (
+                    <RowWrapperComponent key={recordId as React.Key}>{rowContent}</RowWrapperComponent>
+                  );
+                })
+              ) : (
+                <DataTableEmptyRow />
               )}
-            </Table>
-          </DraggableWrapper>
+            </tbody>
+            {effectiveColumns.some(({ footer }) => footer) && (
+              <DataTableFooter<T>
+                ref={footerRef}
+                className={classNames?.footer}
+                style={styles?.footer}
+                columns={effectiveColumns}
+                defaultColumnProps={defaultColumnProps}
+                selectionVisible={selectionColumnVisible}
+                selectorCellShadowVisible={selectorCellShadowVisible}
+                scrollDiff={tableHeight - scrollViewportHeight}
+              />
+            )}
+          </Table>
         </DataTableScrollArea>
 
         {page && (

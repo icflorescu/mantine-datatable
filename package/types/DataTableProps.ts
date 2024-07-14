@@ -1,4 +1,3 @@
-import { OnDragEndResponder } from '@hello-pangea/dnd';
 import type { MantineShadow, MantineStyleProp, ScrollAreaProps, StylesRecord, TableProps } from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import { DataTableColorProps } from './DataTableColorProps';
@@ -14,28 +13,6 @@ import type { DataTableScrollProps } from './DataTableScrollProps';
 import type { DataTableSelectionProps } from './DataTableSelectionProps';
 import type { DataTableSortProps } from './DataTableSortProps';
 import type { DataTableVerticalAlign } from './DataTableVerticalAlign';
-
-export type DraggableProps = {
-  /**
-   * If true, the rows will be draggable.
-   */
-  draggableRows: boolean;
-
-  /**
-   * Callback fired on drag end.
-   */
-  onDragEnd: OnDragEndResponder;
-
-  /**
-   * Custom drag handle.
-   */
-  dragHandle?: React.ReactNode;
-
-  /**
-   * A unique key to mark a table as a draggable
-   */
-  dragKey: string;
-};
 
 export type DataTableProps<T = Record<string, unknown>> = {
   /**
@@ -219,6 +196,13 @@ export type DataTableProps<T = Record<string, unknown>> = {
   rowStyle?: (record: T, index: number) => MantineStyleProp | undefined;
 
   /**
+   * Optional style passed to each row.
+   * a function that receives the current record and its index as arguments
+   * and returns a React node representing the row.
+   */
+  rowFactory?: (props: { record: T; index: number; children: React.ReactNode }) => React.ReactNode;
+
+  /**
    * Optional function returning an object of custom attributes to be applied to each row in the table.
    * Receives the current record and its index as arguments.
    * Useful for adding data attributes, handling middle-clicks, etc.
@@ -276,5 +260,4 @@ export type DataTableProps<T = Record<string, unknown>> = {
   DataTablePaginationProps &
   DataTableSortProps<T> &
   DataTableScrollProps &
-  DataTableSelectionProps<T> &
-  DraggableProps;
+  DataTableSelectionProps<T>;

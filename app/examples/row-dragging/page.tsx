@@ -25,7 +25,7 @@ export default async function BasicUsageExamplePage() {
       <PageTitle of={PATH} />
       <Txt>
         {PRODUCT_NAME} also supports row dragging (implemented with{' '}
-        <ExternalLink to="https://react-dnd.github.io/react-dnd/">Pangea DnD library</ExternalLink>).
+        <ExternalLink to="https://github.com/hello-pangea/dnd">@hello-pangea/dnd library</ExternalLink>).
       </Txt>
       <CodeBlock tabs={{ code, keys: ['RowDraggingExample.tsx', 'companies.json'] }} />
       <Txt>The code above will produce the following result:</Txt>
