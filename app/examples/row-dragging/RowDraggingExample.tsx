@@ -5,6 +5,7 @@ import { Table, rem } from '@mantine/core';
 import { IconGripVertical } from '@tabler/icons-react';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { DataTable, DataTableColumn } from '__PACKAGE__';
+import DraggableRow from '~/package/DraggableRow';
 import companies from '~/data/companies.json';
 
 interface RecordData {
@@ -30,12 +31,8 @@ export function RowDraggingExample() {
   };
 
   const columns: DataTableColumn<RecordData>[] = [
-    {
-      accessor: 'drag',
-      title: '',
-      render: () => <IconGripVertical style={{ width: rem(18), height: rem(18) }} stroke={1.5} />,
-      width: 30,
-    },
+    // add empty header column for the drag handle
+    { accessor: '', hiddenContent: true, width: 30 },
     { accessor: 'name', width: 150 },
     { accessor: 'streetAddress', width: 150 },
     { accessor: 'city', width: 150 },
@@ -60,17 +57,22 @@ export function RowDraggingExample() {
             )}
           </Droppable>
         )}
+        styles={{
+          table: {
+            tableLayout: 'fixed',
+          },
+        }}
         rowFactory={({ record, index, rowProps, children }) => (
           <Draggable key={record.id} draggableId={record.id} index={index}>
-            {(provided) => (
-              <Table.Tr
-                ref={provided.innerRef}
-                {...rowProps}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-              >
+            {(provided, snapshot) => (
+              <DraggableRow isDragging={snapshot.isDragging} {...rowProps} {...provided.draggableProps}>
+                {/** custom drag handle */}
+                <Table.Td {...provided.dragHandleProps} ref={provided.innerRef}>
+                  <IconGripVertical size={16} />
+                </Table.Td>
+
                 {children}
-              </Table.Tr>
+              </DraggableRow>
             )}
           </Draggable>
         )}

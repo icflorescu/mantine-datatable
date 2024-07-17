@@ -99,6 +99,11 @@ export type DataTableColumn<T = Record<string, unknown>> = {
   hidden?: boolean;
 
   /**
+   * If true, tbody cells will not be visible.
+   */
+  hiddenContent?: boolean;
+
+  /**
    * If set, the column will only be visible according to the specified media query.
    * Can be a string, or a function receiving the current theme and returning a string.
    */

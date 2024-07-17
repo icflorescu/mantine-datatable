@@ -30,10 +30,7 @@ export default async function BasicUsageExamplePage() {
       <CodeBlock tabs={{ code, keys: ['RowDraggingExample.tsx', 'companies.json'] }} />
       <Txt>The code above will produce the following result:</Txt>
       <RowDraggingExample />
-      <Txt idea>
-        To customize the drag button, you can use <Code>dragHandle</Code> property that accepts any{' '}
-        <Code>React.Node</Code> content.
-      </Txt>
+
       <PageNavigation of={PATH} />
     </>
   );
