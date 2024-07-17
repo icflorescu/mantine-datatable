@@ -44,34 +44,37 @@ export function RowDraggingExample() {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId="datatable">
-        {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
-            <DataTable<RecordData>
-              columns={columns}
-              records={records}
-              height={400}
-              withTableBorder
-              withColumnBorders
-              rowFactory={({ record, index, rowProps, children }) => (
-                <Draggable key={record.id} draggableId={record.id} index={index}>
-                  {(provided) => (
-                    <Table.Tr
-                      ref={provided.innerRef}
-                      {...rowProps}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
-                      {children}
-                    </Table.Tr>
-                  )}
-                </Draggable>
-              )}
-            />
-            {provided.placeholder}
-          </div>
+      <DataTable<RecordData>
+        columns={columns}
+        records={records}
+        height={400}
+        withTableBorder
+        withColumnBorders
+        tableWrapper={({ children }) => (
+          <Droppable droppableId="datatable">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {children}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         )}
-      </Droppable>
+        rowFactory={({ record, index, rowProps, children }) => (
+          <Draggable key={record.id} draggableId={record.id} index={index}>
+            {(provided) => (
+              <Table.Tr
+                ref={provided.innerRef}
+                {...rowProps}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+              >
+                {children}
+              </Table.Tr>
+            )}
+          </Draggable>
+        )}
+      />
     </DragDropContext>
   );
 }
