@@ -1,4 +1,11 @@
-import type { MantineShadow, MantineStyleProp, ScrollAreaProps, StylesRecord, TableProps } from '@mantine/core';
+import type {
+  MantineShadow,
+  MantineStyleProp,
+  ScrollAreaProps,
+  StylesRecord,
+  TableProps,
+  TableTrProps,
+} from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import { DataTableColorProps } from './DataTableColorProps';
 import type { DataTableColumnProps } from './DataTableColumnProps';
@@ -200,7 +207,13 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * a function that receives the current record and its index as arguments
    * and returns a React node representing the row.
    */
-  rowFactory?: (props: { record: T; index: number; children: React.ReactNode }) => React.ReactNode;
+  rowFactory?: (props: {
+    record: T;
+    index: number;
+    children: React.ReactNode;
+    rowProps: TableTrProps;
+    expandedElement?: React.ReactNode;
+  }) => React.ReactNode;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each row in the table.

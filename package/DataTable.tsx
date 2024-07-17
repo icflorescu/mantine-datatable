@@ -368,6 +368,7 @@ export function DataTable<T>({
                   const isSelected = selectedRecordIds?.includes(recordId) || false;
 
                   let handleSelectionChange: React.MouseEventHandler | undefined;
+
                   if (onSelectedRecordsChange && selectedRecords) {
                     handleSelectionChange = (e) => {
                       if (e.nativeEvent.shiftKey && lastSelectionChangeIndex !== null) {
@@ -397,10 +398,8 @@ export function DataTable<T>({
                       setLastSelectionChangeIndex(index);
                     };
                   }
-                  const RowWrapperComponent = ({ children }: { children: React.ReactNode }) =>
-                    rowWrapper ? rowWrapper(children, record, index) : children;
 
-                  const rowContent = (
+                  return (
                     <DataTableRow<T>
                       key={recordId as React.Key}
                       record={record}
@@ -431,21 +430,15 @@ export function DataTable<T>({
                       selectionColumnClassName={selectionColumnClassName}
                       selectionColumnStyle={selectionColumnStyle}
                       idAccessor={idAccessor as string}
+                      rowFactory={rowFactory}
                     />
-                  );
-
-                  return rowFactory ? (
-                    <RowWrapperComponent key={recordId as React.Key}>
-                      {rowFactory({ record, index, children: rowContent })}
-                    </RowWrapperComponent>
-                  ) : (
-                    <RowWrapperComponent key={recordId as React.Key}>{rowContent}</RowWrapperComponent>
                   );
                 })
               ) : (
                 <DataTableEmptyRow />
               )}
             </tbody>
+
             {effectiveColumns.some(({ footer }) => footer) && (
               <DataTableFooter<T>
                 ref={footerRef}

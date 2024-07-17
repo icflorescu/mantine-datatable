@@ -53,15 +53,16 @@ export function RowDraggingExample() {
               height={400}
               withTableBorder
               withColumnBorders
-              rowFactory={({ record, index }) => (
+              rowFactory={({ record, index, rowProps, children }) => (
                 <Draggable key={record.id} draggableId={record.id} index={index}>
                   {(provided) => (
-                    <Table.Tr ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                      {columns.map((column) => (
-                        <Table.Td key={column.accessor}>
-                          {column.render ? column.render(record) : record[column.accessor as keyof RecordData]}
-                        </Table.Td>
-                      ))}
+                    <Table.Tr
+                      ref={provided.innerRef}
+                      {...rowProps}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      {children}
                     </Table.Tr>
                   )}
                 </Draggable>
