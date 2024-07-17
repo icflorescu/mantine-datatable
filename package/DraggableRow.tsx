@@ -40,4 +40,4 @@ const DraggableRow = forwardRef<HTMLTableRowElement, Props>(function ({ children
   );
 });
 
-export default DraggableRow;
+export { DraggableRow };

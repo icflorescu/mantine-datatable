@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Table, rem } from '@mantine/core';
+import { DragDropContext, Draggable, DropResult, Droppable } from '@hello-pangea/dnd';
+import { Table } from '@mantine/core';
 import { IconGripVertical } from '@tabler/icons-react';
-import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
-import { DataTable, DataTableColumn } from '__PACKAGE__';
-import DraggableRow from '~/package/DraggableRow';
+import { DataTable, DataTableColumn, DraggableRow } from '__PACKAGE__';
+import { useState } from 'react';
 import companies from '~/data/companies.json';
 
 interface RecordData {
