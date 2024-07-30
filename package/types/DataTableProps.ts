@@ -1,4 +1,11 @@
-import type { MantineShadow, MantineStyleProp, ScrollAreaProps, StylesRecord, TableProps } from '@mantine/core';
+import type {
+  MantineShadow,
+  MantineStyleProp,
+  ScrollAreaProps,
+  StylesRecord,
+  TableProps,
+  TableTrProps,
+} from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
 import { DataTableColorProps } from './DataTableColorProps';
 import type { DataTableColumnProps } from './DataTableColumnProps';
@@ -196,6 +203,27 @@ export type DataTableProps<T = Record<string, unknown>> = {
   rowStyle?: (record: T, index: number) => MantineStyleProp | undefined;
 
   /**
+   * Optional style passed to each row.
+   * a function that receives the current record, its index, default row props and expanded element as arguments
+   * and returns a React node representing the row.
+   */
+  rowFactory?: (props: {
+    record: T;
+    index: number;
+    children: React.ReactNode;
+    rowProps: TableTrProps;
+    expandedElement?: React.ReactNode;
+  }) => React.ReactNode;
+
+  /**
+   * Optional function returning a React node representing the table wrapper.
+   * If not provided, no wrapper will be used.
+   *
+   * examplle: This function can be used with rowFactory if using drag and drop to pass context
+   */
+  tableWrapper: ({ children }: { children: React.ReactNode }) => React.ReactNode;
+
+  /**
    * Optional function returning an object of custom attributes to be applied to each row in the table.
    * Receives the current record and its index as arguments.
    * Useful for adding data attributes, handling middle-clicks, etc.
@@ -243,6 +271,7 @@ export type DataTableProps<T = Record<string, unknown>> = {
   | 'highlightOnHoverColor'
   | 'stickyHeader'
   | 'stickyHeaderOffset'
+  | 'onDragEnd'
 > &
   DataTableColorProps<T> &
   DataTableColumnProps<T> &
