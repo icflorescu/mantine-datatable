@@ -54,7 +54,8 @@ export default function HomePage() {
           <InternalLink to="/examples/column-properties-and-styling">cell data rendering</InternalLink>,{' '}
           <InternalLink to="/examples/using-with-mantine-contextmenu">context menus</InternalLink>,{' '}
           <InternalLink to="/examples/expanding-rows">row expansion</InternalLink>,{' '}
-          <InternalLink to="/examples/nested-tables">nesting</InternalLink> and{' '}
+          <InternalLink to="/examples/nested-tables">nesting</InternalLink>,{' '}
+          <InternalLink to="/examples/row-dragging">drag-and-drop reordering support</InternalLink> and{' '}
           <InternalLink to="/examples/complex-usage-scenario">more</InternalLink>
         </Feature>
         <Feature icon={IconLifebuoy} title="Typescript based">

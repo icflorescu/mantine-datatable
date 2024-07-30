@@ -1,3 +1,5 @@
+import type { DropResult } from '@hello-pangea/dnd';
+
 /**
  * Utility function that returns a humanized version of a string, e.g. "camelCase" -> "Camel Case"
  */
@@ -43,4 +45,40 @@ export function getRecordId<T>(
   return typeof idAccessor === 'string'
     ? getValueAtPath(record, idAccessor)
     : (idAccessor as (record: T) => React.Key)(record);
+}
+
+/**
+ * Utility function that reorders an array of records by a given field used for drag'n'drop functionality.
+ * @see https://github.com/hello-pangea/dnd
+ */
+export function reorderRecords<T>(dropResult: DropResult, records: T[]): T[] {
+  const draft = structuredClone(records);
+  const prev = draft[dropResult.source.index];
+
+  if (dropResult.destination) {
+    draft.splice(dropResult.source.index, 1);
+    draft.splice(dropResult.destination.index, 0, prev);
+  }
+
+  return draft;
+}
+
+/**
+ * Utility function that swaps elements of an array, by a given result from drag'n'drop functionality.
+ * @see https://github.com/hello-pangea/dnd
+ */
+export function swapRecords<T>(dropResult: DropResult, records: T[]): T[] {
+  const draft = structuredClone(records);
+
+  const destination = dropResult.destination;
+
+  if (!destination) return draft;
+
+  const sourceEl = draft[dropResult.source.index];
+  const destEl = draft[destination.index];
+
+  draft.splice(destination.index, 1, sourceEl);
+  draft.splice(dropResult.source.index, 1, destEl);
+
+  return draft;
 }

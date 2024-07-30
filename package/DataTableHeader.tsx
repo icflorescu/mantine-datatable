@@ -61,6 +61,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
     selectorCellShadowVisible,
     selectionColumnClassName,
     selectionColumnStyle,
+    // draggableRows,
   }: DataTableHeaderProps<T>,
   ref: React.ForwardedRef<HTMLTableSectionElement>
 ) {
@@ -109,8 +110,10 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
           ))}
         </TableTr>
       )}
+
       <TableTr>
         {!groups && allRecordsSelectorCell}
+
         {columns.map(({ hidden, ...columnProps }, index) => {
           if (hidden) return null;
 
