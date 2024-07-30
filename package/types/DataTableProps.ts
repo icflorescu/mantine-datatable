@@ -221,7 +221,7 @@ export type DataTableProps<T = Record<string, unknown>> = {
    *
    * examplle: This function can be used with rowFactory if using drag and drop to pass context
    */
-  tableWrapper: ({ children }: { children: React.ReactNode }) => React.ReactNode;
+  tableWrapper?: ({ children }: { children: React.ReactNode }) => React.ReactNode;
 
   /**
    * Optional function returning an object of custom attributes to be applied to each row in the table.
