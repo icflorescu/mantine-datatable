@@ -1,9 +1,10 @@
 'use client';
 
-import { DragDropContext, Draggable, DropResult, Droppable } from '@hello-pangea/dnd';
-import { Table } from '@mantine/core';
+import { DragDropContext, Draggable, type DropResult, Droppable } from '@hello-pangea/dnd';
+import { TableTd } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
 import { IconGripVertical } from '@tabler/icons-react';
-import { DataTable, DataTableColumn, DraggableRow } from '__PACKAGE__';
+import { DataTable, DataTableColumn, DataTableDraggableRow } from '__PACKAGE__';
 import { useState } from 'react';
 import companies from '~/data/companies.json';
 
@@ -23,10 +24,17 @@ export function RowDraggingExample() {
     if (!result.destination) return;
 
     const items = Array.from(records);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
+    const [reorderedItem] = items.splice(sourceIndex, 1);
+    items.splice(destinationIndex, 0, reorderedItem);
 
     setRecords(items);
+    notifications.show({
+      title: 'Table reordered',
+      message: `The company named "${items[sourceIndex].name}" has been moved from position ${sourceIndex + 1} to ${destinationIndex + 1}.`,
+      color: 'blue',
+    });
   };
 
   const columns: DataTableColumn<RecordData>[] = [
@@ -56,22 +64,17 @@ export function RowDraggingExample() {
             )}
           </Droppable>
         )}
-        styles={{
-          table: {
-            tableLayout: 'fixed',
-          },
-        }}
+        styles={{ table: { tableLayout: 'fixed' } }}
         rowFactory={({ record, index, rowProps, children }) => (
           <Draggable key={record.id} draggableId={record.id} index={index}>
             {(provided, snapshot) => (
-              <DraggableRow isDragging={snapshot.isDragging} {...rowProps} {...provided.draggableProps}>
+              <DataTableDraggableRow isDragging={snapshot.isDragging} {...rowProps} {...provided.draggableProps}>
                 {/** custom drag handle */}
-                <Table.Td {...provided.dragHandleProps} ref={provided.innerRef}>
+                <TableTd {...provided.dragHandleProps} ref={provided.innerRef}>
                   <IconGripVertical size={16} />
-                </Table.Td>
-
+                </TableTd>
                 {children}
-              </DraggableRow>
+              </DataTableDraggableRow>
             )}
           </Draggable>
         )}

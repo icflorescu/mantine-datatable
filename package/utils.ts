@@ -48,7 +48,8 @@ export function getRecordId<T>(
 }
 
 /**
- * Utility function that reorders an array of records by a given field used for drag'n'drop functionality
+ * Utility function that reorders an array of records by a given field used for drag'n'drop functionality.
+ * @see https://github.com/hello-pangea/dnd
  */
 export function reorderRecords<T>(dropResult: DropResult, records: T[]): T[] {
   const draft = structuredClone(records);
@@ -63,7 +64,8 @@ export function reorderRecords<T>(dropResult: DropResult, records: T[]): T[] {
 }
 
 /**
- * Utility function that swaps elements of an array, by given result from drag'n'drop functionality
+ * Utility function that swaps elements of an array, by a given result from drag'n'drop functionality.
+ * @see https://github.com/hello-pangea/dnd
  */
 export function swapRecords<T>(dropResult: DropResult, records: T[]): T[] {
   const draft = structuredClone(records);

@@ -1,12 +1,12 @@
-import { Table, TableTrProps } from '@mantine/core';
+import { TableTr } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
-import React, { ElementRef, forwardRef, useEffect, useRef } from 'react';
+import { type ElementRef, forwardRef, useEffect, useRef } from 'react';
+import type { DataTableDraggableRowProps } from './types';
 
-type Props = {
-  isDragging?: boolean;
-} & TableTrProps;
-
-const DraggableRow = forwardRef<HTMLTableRowElement, Props>(function ({ children, isDragging, ...props }, passedRef) {
+const DataTableDraggableRow = forwardRef<HTMLTableRowElement, DataTableDraggableRowProps>(function (
+  { children, isDragging, ...props },
+  passedRef
+) {
   const ref = useRef<ElementRef<'tr'>>(null);
   const mergedRef = useMergedRef(ref, passedRef);
 
@@ -34,10 +34,12 @@ const DraggableRow = forwardRef<HTMLTableRowElement, Props>(function ({ children
   }, [isDragging, children]);
 
   return (
-    <Table.Tr data-is-dragging={isDragging} ref={mergedRef} {...props}>
+    <TableTr data-is-dragging={isDragging} ref={mergedRef} {...props}>
       {children}
-    </Table.Tr>
+    </TableTr>
   );
 });
 
-export { DraggableRow };
+DataTableDraggableRow.displayName = 'DataTableDraggableRow';
+
+export { DataTableDraggableRow };

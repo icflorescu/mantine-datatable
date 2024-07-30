@@ -1,5 +1,5 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
-import { useMergedRef, useDebouncedCallback } from '@mantine/hooks';
+import { useDebouncedCallback, useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';

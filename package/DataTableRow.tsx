@@ -14,7 +14,6 @@ import type {
   DataTableSelectionTrigger,
 } from './types';
 import { CONTEXT_MENU_CURSOR, POINTER_CURSOR } from './utilityClasses';
-import { Fragment } from 'react';
 
 type DataTableRowProps<T> = {
   record: T;
@@ -85,7 +84,7 @@ export function DataTableRow<T>({
 }: Readonly<DataTableRowProps<T>>) {
   function TableCols() {
     return (
-      <Fragment>
+      <>
         {selectionVisible && (
           <DataTableRowSelectorCell<T>
             className={selectionColumnClassName}
@@ -152,7 +151,7 @@ export function DataTableRow<T>({
             />
           );
         })}
-      </Fragment>
+      </>
     );
   }
 
