@@ -33,6 +33,7 @@ The [lightweight](https://bundlephobia.com/package/mantine-datatable), dependenc
 - **[Automatically-scrollable](https://icflorescu.github.io/mantine-datatable/examples/scrollable-vs-auto-height)** - automatically scrollable or auto-height
 - **[AutoAnimate support](https://icflorescu.github.io/mantine-datatable/examples/using-with-auto-animate)** - animate row sorting, addition and removal
 - **[Column reordering, toggling](https://icflorescu.github.io/mantine-datatable/examples/column-dragging-and-toggling)** and **[resizing](https://icflorescu.github.io/mantine-datatable/examples/column-resizing)** - thanks to the outstanding work of [Giovambattista Fazioli](https://github.com/gfazioli)
+- **[Drag-and-drop support](https://icflorescu.github.io/mantine-datatable/examples/row-dragging)** - implemented using [@hello-pangea/dnd](https://github.com/hello-pangea/dnd) thanks to the outstanding work of [Mohd Ahmad](https://github.com/MohdAhmad1)
 - **More** - check out the [full documentation](https://icflorescu.github.io/mantine-datatable/)
 
 ## Trusted by the community
