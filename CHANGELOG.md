@@ -6,6 +6,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 ## 7.12.4 (2024-09-04)
 
 - Fix [#627](https://github.com/icflorescu/mantine-datatable/issues/627)
+- Fix [#614](https://github.com/icflorescu/mantine-datatable/issues/614)
 
 ## 7.12.3 (2024-09-04)
 
