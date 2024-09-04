@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.12.4 (2024-09-04)
+
+- Fix [#627](https://github.com/icflorescu/mantine-datatable/issues/627)
+
 ## 7.12.3 (2024-09-04)
 
 - Fix [#625](https://github.com/icflorescu/mantine-datatable/issues/625) - after implementing row dragging support, inputs inside columns were losing focus
