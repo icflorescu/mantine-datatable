@@ -50,14 +50,12 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
   ref: ForwardedRef<HTMLDivElement>
 ) {
   let paginationTextValue: React.ReactNode;
-  if (fetching) {
-    paginationTextValue = loadingText;
-  } else if (!totalRecords) {
-    paginationTextValue = noRecordsText;
-  } else {
-    const from = (page! - 1) * recordsPerPage! + 1;
-    const to = from + recordsLength! - 1;
+  if (totalRecords) {
+    const from = (page - 1) * recordsPerPage + 1;
+    const to = from + (recordsLength || 0) - 1;
     paginationTextValue = paginationText!({ from, to, totalRecords });
+  } else {
+    paginationTextValue = fetching ? loadingText : noRecordsText;
   }
 
   const isAbovePaginationWrapBreakpoint = useMediaQueryStringOrFunction(
