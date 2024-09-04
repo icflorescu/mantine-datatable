@@ -232,9 +232,11 @@ export const useDataTableColumns = <T>({
       .map((column) => {
         return {
           ...column,
-          hidden: !columnsToggle.find((toggle) => {
-            return toggle.accessor === column?.accessor;
-          })?.toggled,
+          hidden:
+            column?.hidden ||
+            !columnsToggle.find((toggle) => {
+              return toggle.accessor === column?.accessor;
+            })?.toggled,
         };
       }) as DataTableColumn<T>[];
 

@@ -2,10 +2,9 @@
 
 import { Button, Group, Stack, Text } from '@mantine/core';
 import { IconBuildingCommunity, IconBuildingSkyscraper, IconMap, IconRoadSign } from '@tabler/icons-react';
-import { DataTable, useDataTableColumns } from '__PACKAGE__';
+import { DataTable, DataTableColumn, useDataTableColumns } from '__PACKAGE__';
 import { useState } from 'react';
 import { companies } from '~/data';
-import { DataTableColumn } from '~/dist';
 
 export default function DynamicColumnExample() {
   const key = 'dynamic-column-example';
