@@ -82,78 +82,76 @@ export function DataTableRow<T>({
   selectionColumnStyle,
   rowFactory,
 }: Readonly<DataTableRowProps<T>>) {
-  function TableCols() {
-    return (
-      <>
-        {selectionVisible && (
-          <DataTableRowSelectorCell<T>
-            className={selectionColumnClassName}
-            style={selectionColumnStyle}
+  const cols = (
+    <>
+      {selectionVisible && (
+        <DataTableRowSelectorCell<T>
+          className={selectionColumnClassName}
+          style={selectionColumnStyle}
+          record={record}
+          index={index}
+          trigger={selectionTrigger}
+          withRightShadow={selectorCellShadowVisible}
+          checked={selectionChecked}
+          disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable(record, index) : false)}
+          onChange={onSelectionChange}
+          checkboxProps={selectionCheckboxProps}
+          getCheckboxProps={getSelectionCheckboxProps}
+        />
+      )}
+
+      {columns.map(({ hidden, hiddenContent, ...columnProps }, columnIndex) => {
+        if (hidden || hiddenContent) return null;
+
+        const {
+          accessor,
+          visibleMediaQuery,
+          textAlign,
+          noWrap,
+          ellipsis,
+          width,
+          render,
+          cellsClassName,
+          cellsStyle,
+          customCellAttributes,
+        } = { ...defaultColumnProps, ...columnProps };
+
+        return (
+          <DataTableRowCell<T>
+            key={accessor as React.Key}
+            className={typeof cellsClassName === 'function' ? cellsClassName(record, index) : cellsClassName}
+            style={cellsStyle?.(record, index)}
+            visibleMediaQuery={visibleMediaQuery}
             record={record}
             index={index}
-            trigger={selectionTrigger}
-            withRightShadow={selectorCellShadowVisible}
-            checked={selectionChecked}
-            disabled={!onSelectionChange || (isRecordSelectable ? !isRecordSelectable(record, index) : false)}
-            onChange={onSelectionChange}
-            checkboxProps={selectionCheckboxProps}
-            getCheckboxProps={getSelectionCheckboxProps}
+            onClick={
+              onCellClick
+                ? (event) => onCellClick({ event, record, index, column: columnProps, columnIndex })
+                : undefined
+            }
+            onDoubleClick={
+              onCellDoubleClick
+                ? (event) => onCellDoubleClick({ event, record, index, column: columnProps, columnIndex })
+                : undefined
+            }
+            onContextMenu={
+              onCellContextMenu
+                ? (event) => onCellContextMenu({ event, record, index, column: columnProps, columnIndex })
+                : undefined
+            }
+            accessor={accessor}
+            textAlign={textAlign}
+            noWrap={noWrap}
+            ellipsis={ellipsis}
+            width={width}
+            render={render}
+            defaultRender={defaultColumnRender}
+            customCellAttributes={customCellAttributes}
           />
-        )}
-
-        {columns.map(({ hidden, hiddenContent, ...columnProps }, columnIndex) => {
-          if (hidden || hiddenContent) return null;
-
-          const {
-            accessor,
-            visibleMediaQuery,
-            textAlign,
-            noWrap,
-            ellipsis,
-            width,
-            render,
-            cellsClassName,
-            cellsStyle,
-            customCellAttributes,
-          } = { ...defaultColumnProps, ...columnProps };
-
-          return (
-            <DataTableRowCell<T>
-              key={accessor as React.Key}
-              className={typeof cellsClassName === 'function' ? cellsClassName(record, index) : cellsClassName}
-              style={cellsStyle?.(record, index)}
-              visibleMediaQuery={visibleMediaQuery}
-              record={record}
-              index={index}
-              onClick={
-                onCellClick
-                  ? (event) => onCellClick({ event, record, index, column: columnProps, columnIndex })
-                  : undefined
-              }
-              onDoubleClick={
-                onCellDoubleClick
-                  ? (event) => onCellDoubleClick({ event, record, index, column: columnProps, columnIndex })
-                  : undefined
-              }
-              onContextMenu={
-                onCellContextMenu
-                  ? (event) => onCellContextMenu({ event, record, index, column: columnProps, columnIndex })
-                  : undefined
-              }
-              accessor={accessor}
-              textAlign={textAlign}
-              noWrap={noWrap}
-              ellipsis={ellipsis}
-              width={width}
-              render={render}
-              defaultRender={defaultColumnRender}
-              customCellAttributes={customCellAttributes}
-            />
-          );
-        })}
-      </>
-    );
-  }
+        );
+      })}
+    </>
+  );
 
   const expandedElement = expansion && (
     <DataTableRowExpansion
@@ -184,17 +182,14 @@ export function DataTableRow<T>({
       record,
       index,
       rowProps,
-      children: <TableCols />,
+      children: cols,
       expandedElement,
     });
   }
 
   return (
     <>
-      <TableTr {...rowProps}>
-        <TableCols />
-      </TableTr>
-
+      <TableTr {...rowProps}>{cols}</TableTr>
       {expandedElement}
     </>
   );
