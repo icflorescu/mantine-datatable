@@ -1,4 +1,4 @@
-import type { MantineStyleProp, MantineTheme } from '@mantine/core';
+import type { MantineStyleProp, MantineTheme, PopoverProps } from '@mantine/core';
 import type { DataTableColumnTextAlign } from './DataTableColumnTextAlign';
 
 export type DataTableColumn<T = Record<string, unknown>> = {
@@ -82,6 +82,11 @@ export type DataTableColumn<T = Record<string, unknown>> = {
    * It is assumed that the actual filtering is performed somewhere in user code.
    */
   filter?: React.ReactNode | ((params: { close: () => void }) => React.ReactNode);
+
+  /**
+   * Filter popover props; override if necessary.
+   */
+  filterPopoverProps?: PopoverProps;
 
   /**
    * If true, filter icon will be styled differently to indicate the filter is in effect.

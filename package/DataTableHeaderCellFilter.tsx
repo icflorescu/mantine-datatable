@@ -6,16 +6,23 @@ import type { DataTableColumn } from './types';
 
 type DataTableHeaderCellFilterProps<T> = {
   children: DataTableColumn<T>['filter'];
+  filterPopoverProps: DataTableColumn<T>['filterPopoverProps'];
   isActive: boolean;
 };
 
-export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHeaderCellFilterProps<T>) {
+export function DataTableHeaderCellFilter<T>({
+  children,
+  isActive,
+  filterPopoverProps,
+}: DataTableHeaderCellFilterProps<T>) {
   const [isOpen, { close, toggle }] = useDisclosure(false);
   const Icon = isActive ? IconFilterFilled : IconFilter;
   const ref = useClickOutside(close);
 
+  console.log({ filterPopoverProps });
+
   return (
-    <Popover withArrow shadow="md" opened={isOpen} onClose={close} trapFocus>
+    <Popover withArrow shadow="md" opened={isOpen} onClose={close} trapFocus {...filterPopoverProps}>
       <PopoverTarget>
         <ActionIcon
           className="mantine-datatable-header-cell-filter-action-icon"
