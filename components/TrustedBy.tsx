@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Container, Text } from '@mantine/core';
 import { PRODUCT_NAME, WEBSITE_LINK } from '~/app/config';
-import classes from './PackageUsers.module.css';
+import classes from './TrustedBy.module.css';
 
-const USERS: {
+const ITEMS: {
   name: string;
   showText?: boolean;
   logo: { base: string; ext: 'png' | 'webp' | 'svg'; themed?: true; scale?: number; shift?: number };
@@ -26,6 +26,11 @@ const USERS: {
     logo: { base: 'codeparrot', ext: 'svg', shift: 3, scale: 110 },
     link: 'https://codeparrot.ai',
     shift: 1,
+  },
+  {
+    name: 'OmicsStudio',
+    logo: { base: 'omicsstudio', ext: 'svg', themed: true },
+    link: 'https://omicsstudio.com',
   },
   {
     name: 'SegmentX',
@@ -113,12 +118,12 @@ const USERS: {
 
 const ROOT_URL = `${process.env.GITHUB_PAGES === 'TRUE' ? WEBSITE_LINK : ''}/users/`;
 
-export function PackageUsers() {
+export function TrustedBy() {
   return (
     <div className={classes.root}>
       <h2 className={classes.title}>{PRODUCT_NAME} is trusted by</h2>
       <Container className={classes.links}>
-        {USERS.map(({ name, logo: { base, ext, themed, scale, shift: imageShift }, link, showText, shift }) => {
+        {ITEMS.map(({ name, logo: { base, ext, themed, scale, shift: imageShift }, link, showText, shift }) => {
           const title = `${name} is using ${PRODUCT_NAME}`;
           const commonImageAttrs: React.ImgHTMLAttributes<HTMLImageElement> = {
             style: {
