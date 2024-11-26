@@ -19,8 +19,6 @@ export function DataTableHeaderCellFilter<T>({
   const Icon = isActive ? IconFilterFilled : IconFilter;
   const ref = useClickOutside(close);
 
-  console.log({ filterPopoverProps });
-
   return (
     <Popover withArrow shadow="md" opened={isOpen} onClose={close} trapFocus {...filterPopoverProps}>
       <PopoverTarget>
