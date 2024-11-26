@@ -6,6 +6,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 ## 7.14.2 (2024-10-26)
 
 - Fix [#659](https://github.com/icflorescu/mantine-datatable/issues/659) - filter popup not closing after clicking outside
+- Fix [#645](https://github.com/icflorescu/mantine-datatable/issues/645) - implement `filterPopoverProps` to allow overriding the default filter popover behavior
 - Update dev dependencies to ensure compatibility with Mantine 7.14.2 and Next.js 15
 - Update build workflow Node.js version
 - Minor docs app fixes
