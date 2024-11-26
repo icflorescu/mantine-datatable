@@ -1,4 +1,7 @@
-import { Box, Image, Stack, Text } from '@mantine/core';
+'use client';
+
+import { Box, Button, Image, Stack, Text } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
 import { IconMoodSad } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
 import classes from './EmptyStateExamples.module.css';
@@ -76,6 +79,35 @@ export function EmptyStateExampleCustomContent() {
             alt="No data found"
             style={{ filter: 'grayscale(1)' }}
           />
+        </Stack>
+      }
+      // example-skip
+      withTableBorder
+      withColumnBorders
+      columns={[{ accessor: 'name' }, { accessor: 'email' }]}
+      // example-resume
+    />
+  );
+  // example-end
+}
+
+export function EmptyStateExampleCustomInteractiveContent() {
+  // example-start custom-interactive-content
+  return (
+    <DataTable
+      minHeight={280}
+      records={[]}
+      emptyState={
+        <Stack align="center" gap="xs">
+          <Text c="dimmed" size="sm">
+            No data found...
+          </Text>
+          <Button
+            style={{ pointerEvents: 'all' }} // 👈 enable button pointer events
+            onClick={() => notifications.show({ message: 'Should add a new record' })}
+          >
+            Add a record
+          </Button>
         </Stack>
       }
       // example-skip
