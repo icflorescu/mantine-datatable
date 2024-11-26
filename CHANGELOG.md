@@ -5,7 +5,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 ## 7.14.4 (2024-10-26)
 
-- Revert previous commit - to fix being unable to click on rows
+- Revert previous commit to fix regression (https://github.com/icflorescu/mantine-datatable/issues/663#issuecomment-2501215033)
 
 ## 7.14.3 (2024-10-26)
 
