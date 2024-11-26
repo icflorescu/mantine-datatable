@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.14.3 (2024-10-26)
+
+- Fix [#663](https://github.com/icflorescu/mantine-datatable/issues/663) - buttons not clickable inside emptyState
+
 ## 7.14.2 (2024-10-26)
 
 - Fix [#659](https://github.com/icflorescu/mantine-datatable/issues/659) - filter popup not closing after clicking outside
