@@ -2,6 +2,7 @@ import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
 import { PageNavigation } from '~/components/PageNavigation';
+import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
@@ -10,6 +11,7 @@ import {
   EmptyStateExample,
   EmptyStateExampleCustomContent,
   EmptyStateExampleCustomIconAndText,
+  EmptyStateExampleCustomInteractiveContent,
   EmptyStateExampleCustomText,
 } from './EmptyStateExamples';
 
@@ -19,9 +21,12 @@ export const metadata = getRouteMetadata(PATH);
 
 export default async function EmptyStateExamplePage() {
   const rawCode = await allPromiseProps({
-    tsx: readCodeFile<Record<'default' | 'custom-text' | 'custom-icon-and-text' | 'custom-content', string>>(
-      `${PATH}/EmptyStateExamples.tsx`
-    ),
+    tsx: readCodeFile<
+      Record<
+        'default' | 'custom-text' | 'custom-icon-and-text' | 'custom-content' | 'custom-interactive-content',
+        string
+      >
+    >(`${PATH}/EmptyStateExamples.tsx`),
     css: readCodeFile<string>(`${PATH}/EmptyStateExamples.module.css`),
   });
 
@@ -65,6 +70,15 @@ export default async function EmptyStateExamplePage() {
       </Txt>
       <EmptyStateExampleCustomContent />
       <CodeBlock code={code['custom-content']} />
+      <PageSubtitle value="Interactive custom empty state content" />
+      <Txt>
+        The empty state component has the <Code>pointer-events</Code> CSS property set to <Code>none</Code>.
+        <br />
+        Which means that if you need to add interactive content to the custom empty state, you’ll have to enable pointer
+        interactions using the <Code>pointer-events</Code> CSS prop:
+      </Txt>
+      <EmptyStateExampleCustomInteractiveContent />
+      <CodeBlock code={code['custom-interactive-content']} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
