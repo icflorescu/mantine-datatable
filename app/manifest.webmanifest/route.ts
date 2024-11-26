@@ -7,6 +7,8 @@ import { PRODUCT_DESCRIPTION, PRODUCT_NAME } from '~/app/config';
  * (@see https://github.com/vercel/next.js/issues/56687)
  */
 
+export const dynamic = 'force-static';
+
 const data: MetadataRoute.Manifest = {
   name: PRODUCT_NAME,
   short_name: PRODUCT_NAME,
