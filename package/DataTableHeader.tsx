@@ -61,7 +61,6 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
     selectorCellShadowVisible,
     selectionColumnClassName,
     selectionColumnStyle,
-    // draggableRows,
   }: DataTableHeaderProps<T>,
   ref: React.ForwardedRef<HTMLTableSectionElement>
 ) {
@@ -130,6 +129,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
             titleClassName,
             titleStyle,
             filter,
+            filterPopoverProps,
             filtering,
             sortKey,
           } = { ...defaultColumnProps, ...columnProps };
@@ -147,14 +147,14 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               sortable={sortable}
               draggable={draggable}
               toggleable={toggleable}
-              // we won't display the resize handle for the last column
-              // to avoid overflow render issues
+              // we won't display the resize handle for the last column to avoid overflow render issues
               resizable={resizable && index < columns.length - 1}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
               sortKey={sortKey}
               onSortStatusChange={onSortStatusChange}
               filter={filter}
+              filterPopoverProps={filterPopoverProps}
               filtering={filtering}
             />
           );

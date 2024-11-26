@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const withPWA = require('@ducanh2912/next-pwa').default({ dest: 'public' });
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { name: PACKAGE_NAME, version: PACKAGE_VERSION } = require('./package.json');
 
 module.exports = async () => {
@@ -35,5 +34,5 @@ module.exports = async () => {
 
   if (process.env.GITHUB_PAGES) config.basePath = '/mantine-datatable';
 
-  return withPWA(config);
+  return config;
 };

@@ -21,11 +21,18 @@ const USERS: {
     link: 'https://www.easywp.com',
   },
   {
+    name: 'CodeParrot.AI',
+    showText: true,
+    logo: { base: 'codeparrot', ext: 'svg', shift: 3, scale: 110 },
+    link: 'https://codeparrot.ai',
+    shift: 1,
+  },
+  {
     name: 'SegmentX',
     showText: true,
-    logo: { base: 'segmentx', ext: 'png', shift: 6, scale: 110 },
+    logo: { base: 'segmentx', ext: 'png', shift: 5, scale: 110 },
     link: 'https://segmentx.ai',
-    shift: 1.75,
+    shift: 1.5,
   },
   {
     name: 'Aquarino',

@@ -90,6 +90,7 @@ export function SearchingAndFilteringExample() {
               placeholder="Search departments…"
               onChange={setSelectedDepartments}
               leftSection={<IconSearch size={16} />}
+              comboboxProps={{ withinPortal: false }}
               clearable
               searchable
             />

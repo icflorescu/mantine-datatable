@@ -2,6 +2,7 @@ import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
+import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
@@ -32,6 +33,12 @@ export default async function SearchingAndFilteringExamplePage() {
       <SearchingAndFilteringExample />
       <Txt>The code for this example is as follows:</Txt>
       <CodeBlock code={code} />
+      <Txt idea>
+        To use the Mantine Component with a popover inside the filter column property, you need to render the child
+        properties without using a Portal. Please refer to the Mantine documentation on{' '}
+        <ExternalLink to="https://mantine.dev/core/popover/#nested-popovers">Nested Popovers</ExternalLink> for more
+        details.
+      </Txt>
       <Txt info title="Why no built-in “Excel-like” searching and filtering support?">
         You’ll often have to implement searching and filtering data in your projects.
         <br />

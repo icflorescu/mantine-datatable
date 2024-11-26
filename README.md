@@ -54,6 +54,10 @@ If you're using Mantine DataTable in your project, please drop me a line at the 
 
 Visit [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mantine-datatable/) to view the full documentation and learn how to use it by browsing a comprehensive list of examples.
 
+## Mantine DataTable AI Bot
+
+[Mantine DataTable AI Bot](https://codeparrot.ai/oracle?owner=icflorescu&repo=mantine-datatable), kindly provided by [CodeParrot](https://codeparrot.ai), will help you understand this repository better. You can ask for code examples, installation guide, debugging help and much more.
+
 ## Quickstart
 
 Create a new [application with Mantine](https://mantine.dev/getting-started/), make sure to have the `clsx` peer dependency installed,

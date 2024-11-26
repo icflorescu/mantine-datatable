@@ -31,6 +31,7 @@ type DataTableHeaderCellProps<T> = {
   | 'textAlign'
   | 'width'
   | 'filter'
+  | 'filterPopoverProps'
   | 'filtering'
   | 'sortKey'
 >;
@@ -51,6 +52,7 @@ export function DataTableHeaderCell<T>({
   sortStatus,
   onSortStatusChange,
   filter,
+  filterPopoverProps,
   filtering,
   sortKey,
 }: DataTableHeaderCellProps<T>) {
@@ -75,7 +77,7 @@ export function DataTableHeaderCell<T>({
                 ? sortStatus.direction === 'asc'
                   ? 'desc'
                   : 'asc'
-                : sortStatus?.direction ?? 'asc',
+                : (sortStatus?.direction ?? 'asc'),
           });
         }
       : undefined;
@@ -217,7 +219,11 @@ export function DataTableHeaderCell<T>({
             )}
           </>
         ) : null}
-        {filter ? <DataTableHeaderCellFilter isActive={!!filtering}>{filter}</DataTableHeaderCellFilter> : null}
+        {filter ? (
+          <DataTableHeaderCellFilter filterPopoverProps={filterPopoverProps} isActive={!!filtering}>
+            {filter}
+          </DataTableHeaderCellFilter>
+        ) : null}
       </Group>
       {resizable ? <DataTableResizableHeaderHandle accessor={accessor as string} columnRef={columnRef} /> : null}
     </TableTh>
