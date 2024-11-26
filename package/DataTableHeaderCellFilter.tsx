@@ -1,5 +1,5 @@
 import { ActionIcon, Popover, PopoverDropdown, PopoverTarget } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { useClickOutside, useDisclosure } from '@mantine/hooks';
 import { IconFilter } from './icons/IconFilter';
 import { IconFilterFilled } from './icons/IconFilterFilled';
 import type { DataTableColumn } from './types';
@@ -12,6 +12,7 @@ type DataTableHeaderCellFilterProps<T> = {
 export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHeaderCellFilterProps<T>) {
   const [isOpen, { close, toggle }] = useDisclosure(false);
   const Icon = isActive ? IconFilterFilled : IconFilter;
+  const ref = useClickOutside(close);
 
   return (
     <Popover withArrow withinPortal shadow="md" opened={isOpen} onClose={close} trapFocus>
@@ -33,6 +34,7 @@ export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHe
         </ActionIcon>
       </PopoverTarget>
       <PopoverDropdown
+        ref={ref}
         onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => {
           e.stopPropagation();
