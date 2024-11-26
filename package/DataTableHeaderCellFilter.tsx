@@ -25,11 +25,19 @@ export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHe
             e.preventDefault();
             toggle();
           }}
+          onKeyDown={(e) => {
+            e.stopPropagation();
+          }}
         >
           <Icon />
         </ActionIcon>
       </PopoverTarget>
-      <PopoverDropdown onClick={(e) => e.stopPropagation()}>
+      <PopoverDropdown
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+        }}
+      >
         {typeof children === 'function' ? children({ close }) : children}
       </PopoverDropdown>
     </Popover>
