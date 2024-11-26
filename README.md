@@ -17,6 +17,12 @@ The [lightweight](https://bundlephobia.com/package/mantine-datatable), dependenc
 **⚠️ Mantine DataTable V7 is compatible with Mantine V7.**  
 **💡 If you're looking for the old version that works with [Mantine V6](https://v6.mantine.dev), head over to [Mantine DataTable V6](https://icflorescu.github.io/mantine-datatable-v6).**
 
+
+## Mantine DataTable AI Bot
+
+[Mantine DataTable](https://codeparrot.ai/oracle?owner=icflorescu&repo=mantine-datatable) Bot will help you understand this repository better. You can ask for code examples, installation guide, debugging help and much more.
+
+
 ## Features
 
 - **Lightweight** - no external dependencies, [no bloat](https://bundlephobia.com/package/mantine-datatable)
