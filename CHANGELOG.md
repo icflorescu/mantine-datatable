@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.14.5 (2024-10-26)
+
+- Remove leftover `console.log` statement
+
 ## 7.14.4 (2024-10-26)
 
 - Revert previous commit to fix regression (https://github.com/icflorescu/mantine-datatable/issues/663#issuecomment-2501215033)
