@@ -5,7 +5,6 @@
   bottom: 0;
   left: 0;
   flex-direction: column;
-  pointer-events: none;
   color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-3));
   opacity: 0;
   transition: opacity 0.2s;
