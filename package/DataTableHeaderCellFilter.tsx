@@ -15,7 +15,7 @@ export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHe
   const ref = useClickOutside(close);
 
   return (
-    <Popover withArrow withinPortal shadow="md" opened={isOpen} onClose={close} trapFocus>
+    <Popover withArrow shadow="md" opened={isOpen} onClose={close} trapFocus>
       <PopoverTarget>
         <ActionIcon
           className="mantine-datatable-header-cell-filter-action-icon"
@@ -26,20 +26,12 @@ export function DataTableHeaderCellFilter<T>({ children, isActive }: DataTableHe
             e.preventDefault();
             toggle();
           }}
-          onKeyDown={(e) => {
-            e.stopPropagation();
-          }}
+          onKeyDown={(e) => e.stopPropagation()}
         >
           <Icon />
         </ActionIcon>
       </PopoverTarget>
-      <PopoverDropdown
-        ref={ref}
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => {
-          e.stopPropagation();
-        }}
-      >
+      <PopoverDropdown ref={ref} onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
         {typeof children === 'function' ? children({ close }) : children}
       </PopoverDropdown>
     </Popover>
