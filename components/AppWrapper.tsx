@@ -7,7 +7,7 @@ import classes from './AppWrapper.module.css';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { Navbar } from './Navbar';
-import { PackageUsers } from './PackageUsers';
+import { TrustedBy } from './TrustedBy';
 
 export function AppWrapper({ children }: React.PropsWithChildren) {
   const [navbarExpanded, { toggle: toggleNavbar, close: collapseNavbar }] = useDisclosure(false);
@@ -28,7 +28,7 @@ export function AppWrapper({ children }: React.PropsWithChildren) {
       <AppShellMain className={classes.main}>
         <div className={classes.content}>
           <Container>{children}</Container>
-          <PackageUsers />
+          <TrustedBy />
         </div>
       </AppShellMain>
       <Footer ref={ref} />
