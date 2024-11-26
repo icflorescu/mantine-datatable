@@ -85,7 +85,7 @@ const USERS: {
     name: 'Pachtop',
     showText: true,
     logo: { base: 'pachtop', ext: 'png', scale: 84, shift: 5 },
-    link: 'https://github.com/pacholoamit/pachtop',
+    link: 'https://pachtop.com',
     shift: 0.25,
   },
   {
