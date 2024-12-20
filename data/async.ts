@@ -35,8 +35,8 @@ export async function getEmployeesAsync({
     sortAccessor === 'name'
       ? `${employee.firstName} ${employee.lastName}`
       : sortAccessor === 'age'
-      ? now.diff(employee.birthDate)
-      : get(employee, sortAccessor)
+        ? now.diff(employee.birthDate)
+        : get(employee, sortAccessor)
   );
 
   if (sortDirection === 'desc') result.reverse();

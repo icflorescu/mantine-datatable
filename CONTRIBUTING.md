@@ -19,7 +19,7 @@ This is a [Next.js](https://nextjs.org/) project with an [app router](https://ne
 The Mantine DataTable package code is located in the `package` folder, while the documentation website code is located in the `app` folder.  
 The `components` folder holds generic React components used by the documentation website.  
 If you want to implement a new feature or improve an existing one, make sure to add an example page and/or alter the one(s) already referring to it.  
-It’s not a feature if other people don’t know about it or don’t understand how to use it.  
+It’s not a feature if other people don’t know about it or don’t understand how to use it.
 
 **Please target your PRs to the `next` branch.**
 Pushing to the `main` branch triggers the GitHub deployment workflow, so PRs targeting `main` will be rejected.
