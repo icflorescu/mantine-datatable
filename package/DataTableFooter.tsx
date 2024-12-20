@@ -1,6 +1,6 @@
 import { TableTfoot, TableTr, rem, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { forwardRef, type JSX } from 'react';
 import { DataTableFooterCell } from './DataTableFooterCell';
 import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelectorPlaceholderCell';
 import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
