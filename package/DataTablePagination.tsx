@@ -1,6 +1,6 @@
 import { Box, Pagination, Text, rem, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
-import { forwardRef, type ForwardedRef } from 'react';
+import { forwardRef, type ForwardedRef, type JSX } from 'react';
 import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import { getPaginationCssVariables } from './cssVariables';
 import { useMediaQueryStringOrFunction } from './hooks';
