@@ -11,7 +11,7 @@ import {
   type MantineStyleProp,
 } from '@mantine/core';
 import clsx from 'clsx';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState, type JSX } from 'react';
 import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCell } from './DataTableHeaderCell';

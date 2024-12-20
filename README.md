@@ -163,7 +163,7 @@ If you're a company using Mantine, Mantine DataTable or [Mantine ContextMenu](ht
 
 ## Other means of support
 
-If you can't afford to sponsor the project or hire my services, there are other ways you can support my work:  
+If you can't afford to sponsor the project or hire my services, there are other ways you can support my work:
 
 - 🙏 star the repository;
 - 💕 [tweet about it](http://twitter.com/share?text=Build%20data-rich%20React%20applications%20with%20Mantine%20DataTable&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fmantine-datatable&hashtags=mantine%2Cdatatable%2Cdatagrid%2Creact&via=icflorescu);

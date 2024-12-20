@@ -3,6 +3,12 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.15.1 (2024-12-20)
+
+- Fix [#682](https://github.com/icflorescu/mantine-datatable/issues/682) - request to remove CSS source maps from the dist
+- Update dev dependencies to ensure compatibility with Mantine 7.15.1 and Next.js 15 GA
+- Fix a few type imports
+
 ## 7.14.5 (2024-10-26)
 
 - Remove leftover `console.log` statement
@@ -45,7 +51,6 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 - Update dev dependencies
 - Emphasize that PRs should be made against the `next` branch in the README and on the [documentation website](https://icflorescu.github.io/mantine-datatable/)
-
 
 ## 7.11.1 (2024-06-30)
 
@@ -91,7 +96,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 ## 7.8.2 (2024-04-26)
 
 - Add `rowExpansion.expandable` property defining if row can be expanded (see [#579](https://github.com/icflorescu/mantine-datatable/issues/579), by [@camdarley](https://github.com/camdarley))
-- Update dev dependencies to ensure compatibility with Mantine 7.8.1, Next.js 14.2.3 and React 18.3 
+- Update dev dependencies to ensure compatibility with Mantine 7.8.1, Next.js 14.2.3 and React 18.3
 
 ## 7.8.1 (2024-04-12)
 
@@ -159,7 +164,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 - Ensure compatibility with Mantine 7.4
 - Minor docs improvements
-  
+
 ## 7.3.5 (2023-12-29)
 
 - Minor README updates
@@ -221,6 +226,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 ### First V7 release! 🎉
 
 This is a **major rewrite** of the library internals, with the following goals in mind:
+
 - **Mantine V7 compatibility** - switch the styling approach from CSS-in-JS to PostCSS (or PostCSS modules)
 - Make the repo easier to maintain by switching from a monorepo approach to a single-package that includes the source code, documentation and examples; this should also make it easier for new contributors to get started
 - Streamline the build process - switch from `esbuild` to plain `tsc` and `postcss` commands

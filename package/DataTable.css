@@ -31,7 +31,10 @@
       rgba(0, 0, 0, 0)
     ),
     linear-gradient(to left, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0) 30%);
-  --mantine-datatable-shadow-background-bottom: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, light-dark(0.05, 0.25))),
+  --mantine-datatable-shadow-background-bottom: linear-gradient(
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, light-dark(0.05, 0.25))
+    ),
     linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, light-dark(0.05, 0.25)));
   --mantine-datatable-shadow-background-left: linear-gradient(
       to right,

@@ -234,7 +234,7 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * Ref pointing to the scrollable viewport element.
    * Useful for imperative scrolling.
    */
-  scrollViewportRef?: React.RefObject<HTMLDivElement>;
+  scrollViewportRef?: React.RefObject<HTMLDivElement | null>;
 
   /**
    * Additional props passed to the underlying `ScrollArea` element.

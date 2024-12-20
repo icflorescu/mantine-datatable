@@ -1,5 +1,4 @@
 module.exports = {
-  map: { inline: false },
   plugins: {
     'postcss-import': {},
     'postcss-preset-mantine': {},
@@ -12,6 +11,6 @@ module.exports = {
         'mantine-breakpoint-xl': '88em',
       },
     },
+    cssnano: { preset: 'default' },
   },
-  cssnano: { preset: 'default' },
 };
