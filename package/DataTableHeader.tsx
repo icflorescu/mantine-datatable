@@ -130,6 +130,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
             titleStyle,
             filter,
             filterPopoverProps,
+            filterPopoverDisableClickOutside,
             filtering,
             sortKey,
           } = { ...defaultColumnProps, ...columnProps };
@@ -155,6 +156,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               onSortStatusChange={onSortStatusChange}
               filter={filter}
               filterPopoverProps={filterPopoverProps}
+              filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
               filtering={filtering}
             />
           );

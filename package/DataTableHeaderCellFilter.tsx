@@ -7,6 +7,7 @@ import type { DataTableColumn } from './types';
 type DataTableHeaderCellFilterProps<T> = {
   children: DataTableColumn<T>['filter'];
   filterPopoverProps: DataTableColumn<T>['filterPopoverProps'];
+  filterPopoverDisableClickOutside?: DataTableColumn<T>['filterPopoverDisableClickOutside'];
   isActive: boolean;
 };
 
@@ -14,10 +15,11 @@ export function DataTableHeaderCellFilter<T>({
   children,
   isActive,
   filterPopoverProps,
+  filterPopoverDisableClickOutside,
 }: DataTableHeaderCellFilterProps<T>) {
   const [isOpen, { close, toggle }] = useDisclosure(false);
   const Icon = isActive ? IconFilterFilled : IconFilter;
-  const ref = useClickOutside(close);
+  const ref = filterPopoverDisableClickOutside ? undefined : useClickOutside(close);
 
   return (
     <Popover withArrow shadow="md" opened={isOpen} onClose={close} trapFocus {...filterPopoverProps}>
