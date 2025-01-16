@@ -50,6 +50,7 @@ type DataTableRowProps<T> = {
   selectionColumnClassName: string | undefined;
   selectionColumnStyle: MantineStyleProp | undefined;
   idAccessor: string;
+  rowRef: React.Ref<HTMLTableRowElement>;
 } & Pick<DataTableProps<T>, 'rowFactory'>;
 
 export function DataTableRow<T>({
@@ -81,6 +82,7 @@ export function DataTableRow<T>({
   selectionColumnClassName,
   selectionColumnStyle,
   rowFactory,
+  rowRef,
 }: Readonly<DataTableRowProps<T>>) {
   const cols = (
     <>
@@ -189,7 +191,9 @@ export function DataTableRow<T>({
 
   return (
     <>
-      <TableTr {...rowProps}>{cols}</TableTr>
+      <TableTr ref={rowRef} data-index={index} {...rowProps}>
+        {cols}
+      </TableTr>
       {expandedElement}
     </>
   );

@@ -250,6 +250,12 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * Ref pointing to the table body element.
    */
   bodyRef?: ((instance: HTMLTableSectionElement | null) => void) | React.RefObject<HTMLTableSectionElement>;
+
+  /**
+   * Determines whether the table should be virtualized. Note that virtualization is not compatible with
+   * using a tableWrapper function.
+   */
+  virtualize?: boolean;
 } & Omit<
   TableProps,
   | 'onScroll'
