@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 7.17.1 (2025-03-06)
+
+- Update dev dependencies to ensure compatibility with Mantine 7.17.1 and Next.js 15.2
+
 ## 7.15.1 (2024-12-20)
 
 - Fix [#682](https://github.com/icflorescu/mantine-datatable/issues/682) - request to remove CSS source maps from the dist
