@@ -32,6 +32,7 @@ type DataTableHeaderCellProps<T> = {
   | 'width'
   | 'filter'
   | 'filterPopoverProps'
+  | 'filterPopoverDisableClickOutside'
   | 'filtering'
   | 'sortKey'
 >;
@@ -53,6 +54,7 @@ export function DataTableHeaderCell<T>({
   onSortStatusChange,
   filter,
   filterPopoverProps,
+  filterPopoverDisableClickOutside,
   filtering,
   sortKey,
 }: DataTableHeaderCellProps<T>) {
@@ -220,7 +222,7 @@ export function DataTableHeaderCell<T>({
           </>
         ) : null}
         {filter ? (
-          <DataTableHeaderCellFilter filterPopoverProps={filterPopoverProps} isActive={!!filtering}>
+          <DataTableHeaderCellFilter filterPopoverProps={filterPopoverProps} isActive={!!filtering} filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}>
             {filter}
           </DataTableHeaderCellFilter>
         ) : null}
