@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useDebouncedCallback, useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -22,6 +22,7 @@ import {
 import type { DataTableProps } from './types';
 import { TEXT_SELECTION_DISABLED } from './utilityClasses';
 import { differenceBy, getRecordId, uniqBy } from './utils';
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 export function DataTable<T>({
   withTableBorder,
@@ -129,6 +130,7 @@ export function DataTable<T>({
   styles,
   rowFactory,
   tableWrapper,
+  virtualize,
   ...otherProps
 }: DataTableProps<T>) {
   const {
@@ -263,13 +265,26 @@ export function DataTable<T>({
 
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
+  const virtualizer = useVirtualizer({
+    count: recordsLength ?? 0,
+    enabled: virtualize,
+    getScrollElement: () => localScrollViewportRef.current,
+    estimateSize: () => 40,
+    overscan: 20,
+  });
+
   const TableWrapper = useCallback(
     ({ children }: { children: React.ReactNode }) => {
+      if (virtualize) return <div style={{ height: virtualizer.getTotalSize() }}>{children}</div>;
       if (tableWrapper) return tableWrapper({ children });
       return children;
     },
-    [tableWrapper]
+    [tableWrapper, virtualize, virtualizer]
   );
+
+  useEffect(() => {
+    virtualizer.measure();
+  }, [records, virtualizer]);
 
   return (
     <DataTableColumnsProvider {...dragToggle}>
@@ -373,7 +388,8 @@ export function DataTable<T>({
               )}
               <tbody ref={bodyRef}>
                 {recordsLength ? (
-                  records.map((record, index) => {
+                  virtualizer.getVirtualItems().map((virtualRow, index) => {
+                    const record = records[virtualRow.index];
                     const recordId = getRecordId(record, idAccessor);
                     const isSelected = selectedRecordIds?.includes(recordId) || false;
 
@@ -383,13 +399,13 @@ export function DataTable<T>({
                       handleSelectionChange = (e) => {
                         if (e.nativeEvent.shiftKey && lastSelectionChangeIndex !== null) {
                           const targetRecords = records.filter(
-                            index > lastSelectionChangeIndex
+                            virtualRow.index > lastSelectionChangeIndex
                               ? (rec, idx) =>
                                   idx >= lastSelectionChangeIndex &&
-                                  idx <= index &&
+                                  idx <= virtualRow.index &&
                                   (isRecordSelectable ? isRecordSelectable(rec, idx) : true)
                               : (rec, idx) =>
-                                  idx >= index &&
+                                  idx >= virtualRow.index &&
                                   idx <= lastSelectionChangeIndex &&
                                   (isRecordSelectable ? isRecordSelectable(rec, idx) : true)
                           );
@@ -405,15 +421,39 @@ export function DataTable<T>({
                               : uniqBy([...selectedRecords, record], (rec) => getRecordId(rec, idAccessor))
                           );
                         }
-                        setLastSelectionChangeIndex(index);
+                        setLastSelectionChangeIndex(virtualRow.index);
                       };
                     }
+
+                    const virtualRowStyle = virtualize
+                      ? () => {
+                          return {
+                            ...(rowStyle ? rowStyle(record, virtualRow.index) : {}),
+                            height: `${virtualRow.size}px`,
+
+                            // transform: `translateY(${virtualRow.start}px)`,
+
+                            transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`,
+
+                            // display: 'table',
+
+                            // position: 'absolute',
+                            // display: 'table',
+                            // // top: 0,
+                            // // left: 0,
+                            // transform: `translateY(${virtualRow.start}px)`,
+                            // width: '100%',
+                          };
+                        }
+                      : rowStyle;
 
                     return (
                       <DataTableRow<T>
                         key={recordId as React.Key}
+                        // key={virtualRow.key}
+                        rowRef={virtualizer.measureElement}
                         record={record}
-                        index={index}
+                        index={virtualRow.index}
                         columns={effectiveColumns}
                         defaultColumnProps={defaultColumnProps}
                         defaultColumnRender={defaultColumnRender}
@@ -434,7 +474,7 @@ export function DataTable<T>({
                         color={rowColor}
                         backgroundColor={rowBackgroundColor}
                         className={rowClassName}
-                        style={rowStyle}
+                        style={virtualRowStyle}
                         customAttributes={customRowAttributes}
                         selectorCellShadowVisible={selectorCellShadowVisible}
                         selectionColumnClassName={selectionColumnClassName}
