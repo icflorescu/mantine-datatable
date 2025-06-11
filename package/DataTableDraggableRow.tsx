@@ -1,13 +1,13 @@
 import { TableTr } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
-import { type ElementRef, forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import type { DataTableDraggableRowProps } from './types';
 
 const DataTableDraggableRow = forwardRef<HTMLTableRowElement, DataTableDraggableRowProps>(function (
   { children, isDragging, ...props },
   passedRef
 ) {
-  const ref = useRef<ElementRef<'tr'>>(null);
+  const ref = useRef<HTMLTableRowElement>(null);
   const mergedRef = useMergedRef(ref, passedRef);
 
   useEffect(() => {
