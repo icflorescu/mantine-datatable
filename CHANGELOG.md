@@ -10,6 +10,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 - Upgrade development workflow to eslint v9 & fix linting rules
 - Minor improvements to docs website
 - Switch to pnpm for package management
+- Update peer dependency versions to Mantine `>=8.1` and React `>=19`
 
 ## 7.17.1 (2025-03-06)
 
