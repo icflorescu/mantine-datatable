@@ -222,7 +222,11 @@ export function DataTableHeaderCell<T>({
           </>
         ) : null}
         {filter ? (
-          <DataTableHeaderCellFilter filterPopoverProps={filterPopoverProps} isActive={!!filtering} filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}>
+          <DataTableHeaderCellFilter
+            filterPopoverProps={filterPopoverProps}
+            isActive={!!filtering}
+            filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
+          >
             {filter}
           </DataTableHeaderCellFilter>
         ) : null}
