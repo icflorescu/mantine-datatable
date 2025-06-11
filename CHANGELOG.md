@@ -7,6 +7,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 - Update dependencies to ensure compatibility with Mantine 8.1 and Next.js 15.3
 - Fix [#698](https://github.com/icflorescu/mantine-datatable/issues/698) - first column header not pinned when using row selection
+- Fix [#700](https://github.com/icflorescu/mantine-datatable/issues/700) - hydration error in row dragging example
 - Upgrade development workflow to eslint v9 & fix linting rules
 - Minor improvements to docs website
 - Switch to pnpm for package management
