@@ -16,7 +16,7 @@ import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCell } from './DataTableHeaderCell';
 import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
-import { DataTableColumnToggle } from './hooks';
+import type { DataTableColumnToggle } from './hooks';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
 import { humanize } from './utils';
 

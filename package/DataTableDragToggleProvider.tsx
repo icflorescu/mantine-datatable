@@ -2,7 +2,7 @@
 
 import { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
-import { DataTableColumnToggle } from './hooks';
+import type { DataTableColumnToggle } from './hooks';
 
 type DataTableColumnsProviderProps = PropsWithChildren<{
   columnsOrder: string[];

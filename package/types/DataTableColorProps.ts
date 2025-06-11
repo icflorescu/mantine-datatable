@@ -1,4 +1,4 @@
-import { MantineColor } from '@mantine/core';
+import type { MantineColor } from '@mantine/core';
 
 export type DataTableColorProps<T> = {
   /**

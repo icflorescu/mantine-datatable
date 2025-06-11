@@ -1,5 +1,6 @@
-import { MantineSize } from '@mantine/core';
-import { DataTable, DataTableVerticalAlign } from '__PACKAGE__';
+import type { MantineSize } from '@mantine/core';
+import type { DataTableVerticalAlign } from '__PACKAGE__';
+import { DataTable } from '__PACKAGE__';
 import companies from '~/data/companies.json';
 
 const records = companies.slice(0, 5);

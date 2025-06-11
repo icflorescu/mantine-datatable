@@ -4,7 +4,8 @@ import { DragDropContext, Draggable, type DropResult, Droppable } from '@hello-p
 import { TableTd } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconGripVertical } from '@tabler/icons-react';
-import { DataTable, DataTableColumn, DataTableDraggableRow } from '__PACKAGE__';
+import type { DataTableColumn } from '__PACKAGE__';
+import { DataTable, DataTableDraggableRow } from '__PACKAGE__';
 import { useState } from 'react';
 import companies from '~/data/companies.json';
 

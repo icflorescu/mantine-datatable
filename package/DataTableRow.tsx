@@ -1,10 +1,11 @@
-import { MantineTheme, TableTr, type CheckboxProps, type MantineColor, type MantineStyleProp } from '@mantine/core';
+import type { MantineTheme } from '@mantine/core';
+import { TableTr, type CheckboxProps, type MantineColor, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
 import { getRowCssVariables } from './cssVariables';
-import { useRowExpansion } from './hooks';
+import type { useRowExpansion } from './hooks';
 import type {
   DataTableCellClickHandler,
   DataTableColumn,

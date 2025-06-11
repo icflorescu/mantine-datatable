@@ -1,8 +1,9 @@
 import { useWindowScroll } from '@mantine/hooks';
 import { memoize } from 'lodash';
 import type { Metadata, Route } from 'next';
-import { EXAMPLES_ROUTE_COLOR, PRODUCT_NAME, ROUTES, RouteInfo } from '~/app/config';
-import { NavbarButtonProps } from '~/components/NavbarButton';
+import type { RouteInfo } from '~/app/config';
+import { EXAMPLES_ROUTE_COLOR, PRODUCT_NAME, ROUTES } from '~/app/config';
+import type { NavbarButtonProps } from '~/components/NavbarButton';
 
 function addExamplesPrefix({ href, title }: Pick<RouteInfo, 'href' | 'title'>) {
   return href.startsWith('/examples/') ? `Examples › ${title}` : title;

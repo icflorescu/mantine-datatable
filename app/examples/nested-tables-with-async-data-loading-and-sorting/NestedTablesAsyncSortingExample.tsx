@@ -2,7 +2,8 @@
 
 import { Box } from '@mantine/core';
 import { IconBuilding, IconChevronRight, IconUser, IconUsers } from '@tabler/icons-react';
-import { DataTable, DataTableSortStatus } from '__PACKAGE__';
+import type { DataTableSortStatus } from '__PACKAGE__';
+import { DataTable } from '__PACKAGE__';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { useState } from 'react';
