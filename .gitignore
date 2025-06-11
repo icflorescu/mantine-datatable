@@ -8,10 +8,6 @@
 # misc
 .DS_Store
 
-# debug
-yarn-debug.log*
-yarn-error.log*
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
