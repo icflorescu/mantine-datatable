@@ -66,7 +66,7 @@
     "dev": "next dev",
     "build:package": "rm -rf dist; tsup --config scripts/tsup.esm.ts; tsup --config scripts/tsup.cjs.ts; tsup --config scripts/tsup.dts.ts; postcss package/styles*.css --dir dist",
     "build:docs": "next build",
-    "build": "yarn build:package && yarn build:docs",
+    "build": "pnpm build:package && pnpm build:docs",
     "lint": "eslint . && tsc --noEmit --pretty",
     "format": "prettier --write ."
   },
