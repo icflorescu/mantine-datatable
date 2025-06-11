@@ -1,4 +1,11 @@
 {
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "files.associations": {
+    "*.css": "postcss"
+  },
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "postcss.validate": false,
   "cssVariables.lookupFiles": ["node_modules/@mantine/core/esm/index.css"]

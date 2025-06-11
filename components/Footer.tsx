@@ -1,11 +1,14 @@
 import { Group, Text, useMantineTheme } from '@mantine/core';
-import { forwardRef } from 'react';
+import type { Ref } from 'react';
 import { AUTHOR_LINK, AUTHOR_NAME, LICENSE_LINK, NPM_LINK, REPO_LINK, SPONSORS_LINK } from '~/app/config';
 import { ExternalLink } from './ExternalLink';
 import classes from './Footer.module.css';
 
-// eslint-disable-next-line no-empty-pattern
-export const Footer = forwardRef(function Footer({}, ref: React.ForwardedRef<HTMLDivElement>) {
+export type FooterProps = {
+  ref: Ref<HTMLDivElement>;
+};
+
+export function Footer({ ref }: FooterProps) {
   const { colors } = useMantineTheme();
   const color = colors.blue[7].substring(1);
   const badgeParams = `?style=flat&color=${color}`;
@@ -44,4 +47,4 @@ export const Footer = forwardRef(function Footer({}, ref: React.ForwardedRef<HTM
       </Group>
     </footer>
   );
-});
+}

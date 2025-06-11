@@ -1,4 +1,5 @@
-import { Checkbox, MantineStyleProp, TableTh, type CheckboxProps } from '@mantine/core';
+import type { MantineStyleProp } from '@mantine/core';
+import { Checkbox, TableTh, type CheckboxProps } from '@mantine/core';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import type { DataTableSelectionTrigger } from './types';

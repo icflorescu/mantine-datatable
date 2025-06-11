@@ -18,16 +18,16 @@ export default function MantineV6SupportPage() {
         <ExternalLink to={V6_WEBSITE_LINK}>{PRODUCT_NAME} V6</ExternalLink>.
       </Txt>
       <Txt>
-        {PRODUCT_NAME} V7 is a major release with{' '}
-        <ExternalLink to={`${REPO_LINK}/blob/main/CHANGELOG.md`}>breaking changes</ExternalLink> and is compatible with{' '}
-        <ExternalLink to={MANTINE_LINK}>Mantine V7</ExternalLink>.
+        {PRODUCT_NAME} V7 was a major release with{' '}
+        <ExternalLink to={`${REPO_LINK}/blob/main/CHANGELOG.md`}>breaking changes</ExternalLink> and was compatible with{' '}
+        <ExternalLink to={MANTINE_LINK}>Mantine V7+</ExternalLink>.
       </Txt>
       <Txt>One of the breaking changes in Mantine V7 was the migration to native CSS.</Txt>
       <Txt>
         In Mantine V6, the styling was done with CSS-in-JS (<ExternalLink to="https://emotion.sh">Emotion</ExternalLink>
         ), while in Mantine V7 it is done with native CSS.
         <br />
-        Hence, you won’t be able to use {PRODUCT_NAME} V7 with Mantine V6.
+        Hence, you won’t be able to use {PRODUCT_NAME} V7+ with Mantine V6.
       </Txt>
       <PageNavigation of={PATH} />
     </>

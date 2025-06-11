@@ -14,7 +14,7 @@ The [lightweight](https://bundlephobia.com/package/mantine-datatable), dependenc
 
 [![Mantine DataTable](https://user-images.githubusercontent.com/581999/294180790-93289cec-4d73-47b5-988f-8c93dd3443fe.png)](https://icflorescu.github.io/mantine-datatable/)
 
-**⚠️ Mantine DataTable V7 is compatible with Mantine V7.**  
+**⚠️ Mantine DataTable V7+ is compatible with Mantine V7+.**  
 **💡 If you're looking for the old version that works with [Mantine V6](https://v6.mantine.dev), head over to [Mantine DataTable V6](https://icflorescu.github.io/mantine-datatable-v6).**
 
 ## Features

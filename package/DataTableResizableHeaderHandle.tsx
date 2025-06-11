@@ -1,10 +1,11 @@
 import { rem } from '@mantine/core';
-import { useRef, useState, type MutableRefObject } from 'react';
+import type { RefObject } from 'react';
+import { useRef, useState } from 'react';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 
 type DataTableResizableHeaderHandleProps = {
   accessor: string;
-  columnRef: MutableRefObject<HTMLTableCellElement | null>;
+  columnRef: RefObject<HTMLTableCellElement | null>;
 };
 
 export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHandleProps) => {

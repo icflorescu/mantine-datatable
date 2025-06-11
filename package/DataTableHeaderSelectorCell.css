@@ -1,5 +1,6 @@
 .mantine-datatable-header-selector-cell {
   position: sticky;
+  z-index: 1;
   width: 0;
   left: 0;
   &::after {

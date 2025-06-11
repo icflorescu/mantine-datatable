@@ -1,18 +1,17 @@
 import type { MantineColor } from '@mantine/core';
+import type { Icon, IconProps } from '@tabler/icons-react';
 import {
-  Icon,
   IconAdjustments,
   IconBrandCss3,
   IconHeartHandshake,
   IconHome,
   IconList,
-  IconProps,
   IconQuestionMark,
   IconRocket,
   IconThumbUp,
 } from '@tabler/icons-react';
 import type { Route } from 'next';
-import { ForwardRefExoticComponent, RefAttributes } from 'react';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 export const PRODUCT_NAME = 'Mantine DataTable';
 export const PRODUCT_DESCRIPTION =

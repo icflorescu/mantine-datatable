@@ -1,5 +1,6 @@
 import { CodeHighlight, CodeHighlightTabs } from '@mantine/code-highlight';
-import { IconBrandCss3, IconBrandTypescript, IconFileTypeTsx, IconJson, IconTerminal } from '@tabler/icons-react';
+import { IconBrandCss3, IconBrandTypescript, IconFileTypeTsx, IconTerminal } from '@tabler/icons-react';
+import classes from './CodeBlock.module.css';
 
 const ICON_PROPS = { size: 16 };
 
@@ -8,7 +9,6 @@ const ICONS = {
   ts: <IconBrandTypescript {...ICON_PROPS} />,
   css: <IconBrandCss3 {...ICON_PROPS} />,
   shell: <IconTerminal {...ICON_PROPS} />,
-  json: <IconJson {...ICON_PROPS} />,
 };
 
 function getLanguage(fileName: string) {
@@ -46,6 +46,7 @@ export function CodeBlock<T extends Record<string, string>>({ fileName, language
     if (Array.isArray(tabs)) {
       return (
         <CodeHighlightTabs
+          className={classes.root}
           code={tabs.map(({ language, fileName, code }) => {
             language = language || getLanguage(fileName);
             return {
@@ -61,6 +62,7 @@ export function CodeBlock<T extends Record<string, string>>({ fileName, language
       const { code, keys } = tabs;
       return (
         <CodeHighlightTabs
+          className={classes.root}
           code={keys.map((key) => {
             const language = getLanguage(key as string);
             return {
@@ -74,6 +76,12 @@ export function CodeBlock<T extends Record<string, string>>({ fileName, language
       );
     }
   } else {
-    return <CodeHighlight language={fileName ? getLanguage(fileName) : language || 'tsx'} code={code} />;
+    return (
+      <CodeHighlight
+        className={classes.root}
+        language={fileName ? getLanguage(fileName) : language || 'tsx'}
+        code={code}
+      />
+    );
   }
 }

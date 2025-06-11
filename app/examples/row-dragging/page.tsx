@@ -17,6 +17,7 @@ export const metadata = getRouteMetadata(PATH);
 export default async function BasicUsageExamplePage() {
   const code = await allPromiseProps({
     'RowDraggingExample.tsx': readCodeFile<string>(`${PATH}/RowDraggingExample.tsx`),
+    'RowDraggingExample.module.css': readCodeFile<string>(`${PATH}/RowDraggingExample.module.css`),
     'companies.json': readCodeFile<string>('/../data/companies.json'),
   });
 
@@ -30,7 +31,7 @@ export default async function BasicUsageExamplePage() {
         <br />
         Here is how you would implement it in your project:
       </Txt>
-      <CodeBlock tabs={{ code, keys: ['RowDraggingExample.tsx', 'companies.json'] }} />
+      <CodeBlock tabs={{ code, keys: ['RowDraggingExample.tsx', 'RowDraggingExample.module.css', 'companies.json'] }} />
       <Txt>The code above will produce the following result:</Txt>
       <RowDraggingExample />
 

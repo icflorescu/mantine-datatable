@@ -7,7 +7,7 @@ import type {
   TableTrProps,
 } from '@mantine/core';
 import type { DataTableCellClickHandler } from './DataTableCellClickHandler';
-import { DataTableColorProps } from './DataTableColorProps';
+import type { DataTableColorProps } from './DataTableColorProps';
 import type { DataTableColumnProps } from './DataTableColumnProps';
 import type { DataTableDefaultColumnProps } from './DataTableDefaultColumnProps';
 import type { DataTableEmptyStateProps } from './DataTableEmptyStateProps';

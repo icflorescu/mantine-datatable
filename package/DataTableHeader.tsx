@@ -16,7 +16,7 @@ import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCell } from './DataTableHeaderCell';
 import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
-import { DataTableColumnToggle } from './hooks';
+import type { DataTableColumnToggle } from './hooks';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
 import { humanize } from './utils';
 
@@ -130,6 +130,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
             titleStyle,
             filter,
             filterPopoverProps,
+            filterPopoverDisableClickOutside,
             filtering,
             sortKey,
           } = { ...defaultColumnProps, ...columnProps };
@@ -155,6 +156,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               onSortStatusChange={onSortStatusChange}
               filter={filter}
               filterPopoverProps={filterPopoverProps}
+              filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
               filtering={filtering}
             />
           );

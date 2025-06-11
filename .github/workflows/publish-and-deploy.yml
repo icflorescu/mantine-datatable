@@ -1,7 +1,6 @@
 name: Publish npm & deploy docs
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ['main']
 
@@ -14,43 +13,50 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.11'
-          cache: yarn
-      - name: Restore cache
+          node-version: 24.2
+          cache: pnpm
+
+      - name: Restore pnpm store
         uses: actions/cache@v4
         with:
-          path: |
-            .next/cache
-          # Generate a new cache whenever packages or source files change.
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          # If source files changed but packages didn't, rebuild from a prior cache.
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+            ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
+
       - name: Build
-        run: yarn build
         env:
           GITHUB_PAGES: 'TRUE'
+        run: pnpm build
+
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
@@ -61,7 +67,6 @@ jobs:
             ./README.md
             ./LICENSE
 
-  # NPM publishing job
   publish:
     environment:
       name: npm-registry
@@ -75,7 +80,6 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
 
-  # Pages deployment job
   deploy:
     environment:
       name: github-pages

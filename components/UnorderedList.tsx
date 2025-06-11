@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import classes from './UnorderedList.module.css';
 
 export type UnorderedListProps = PropsWithChildren<{

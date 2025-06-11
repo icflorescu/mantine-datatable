@@ -1,15 +1,5 @@
-import {
-  Button,
-  Group,
-  MantineColor,
-  Menu,
-  MenuDropdown,
-  MenuItem,
-  MenuTarget,
-  Text,
-  rem,
-  type MantineSize,
-} from '@mantine/core';
+import type { MantineColor } from '@mantine/core';
+import { Button, Group, Menu, MenuDropdown, MenuItem, MenuTarget, Text, rem, type MantineSize } from '@mantine/core';
 import clsx from 'clsx';
 import { getPaginationCssVariables } from './cssVariables';
 import { IconSelector } from './icons/IconSelector';
@@ -40,7 +30,7 @@ export function DataTablePageSizeSelector({
       <Text component="div" size={size}>
         {label}
       </Text>
-      <Menu withinPortal withArrow classNames={{ arrow: 'mantine-datatable-page-size-selector-menu-arrow' }}>
+      <Menu withinPortal withArrow offset={2} classNames={{ arrow: 'mantine-datatable-page-size-selector-menu-arrow' }}>
         <MenuTarget>
           <Button
             size={size}
