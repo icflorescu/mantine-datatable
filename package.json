@@ -71,6 +71,7 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@docsearch/css": "^3.9.0",
     "@docsearch/react": "^3.9.0",
     "@eslint/eslintrc": "^3.3.1",
     "@faker-js/faker": "^9.8.0",

@@ -8,6 +8,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 - Update dependencies to ensure compatibility with Mantine 8.1 and Next.js 15.3
 - Upgrade development workflow to eslint v9 & fix linting rules
 - Minor improvements to docs website
+- Switch to pnpm for package management
 
 ## 7.17.1 (2025-03-06)
 
