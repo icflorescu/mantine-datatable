@@ -1,8 +1,12 @@
+.link,
+.root {
+  text-decoration: none;
+}
+
 .root {
   display: flex;
   align-items: center;
   gap: var(--mantine-spacing-xs);
-  text-decoration: none;
   padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
   cursor: pointer;
   user-select: none;

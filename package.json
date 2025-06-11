@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable",
-  "version": "7.17.1",
+  "version": "8.1.0",
   "description": "The lightweight, dependency-free, dark-theme aware table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and much more",
   "keywords": [
     "mantine",
@@ -71,17 +71,17 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
     "@docsearch/react": "^3.9.0",
+    "@eslint/eslintrc": "^3.3.1",
     "@faker-js/faker": "^9.8.0",
     "@formkit/auto-animate": "^0.8.2",
     "@hello-pangea/dnd": "^18.0.1",
-    "@mantine/code-highlight": "^7.17.1",
-    "@mantine/core": "^7.17.1",
-    "@mantine/dates": "^7.17.1",
-    "@mantine/hooks": "^7.17.1",
-    "@mantine/modals": "^7.17.1",
-    "@mantine/notifications": "^7.17.1",
+    "@mantine/code-highlight": "^8.1.0",
+    "@mantine/core": "^8.1.0",
+    "@mantine/dates": "^8.1.0",
+    "@mantine/hooks": "^8.1.0",
+    "@mantine/modals": "^8.1.0",
+    "@mantine/notifications": "^8.1.0",
     "@tabler/icons-react": "^3.34.0",
     "@tanstack/react-query": "^5.80.6",
     "@types/lodash": "^4.17.17",
@@ -108,6 +108,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "sharp": "^0.34.2",
+    "shiki": "^3.6.0",
     "swr": "^2.3.3",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"

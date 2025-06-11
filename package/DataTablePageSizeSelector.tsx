@@ -30,7 +30,7 @@ export function DataTablePageSizeSelector({
       <Text component="div" size={size}>
         {label}
       </Text>
-      <Menu withinPortal withArrow classNames={{ arrow: 'mantine-datatable-page-size-selector-menu-arrow' }}>
+      <Menu withinPortal withArrow offset={2} classNames={{ arrow: 'mantine-datatable-page-size-selector-menu-arrow' }}>
         <MenuTarget>
           <Button
             size={size}

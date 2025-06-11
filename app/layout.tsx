@@ -7,6 +7,7 @@ import { Notifications } from '@mantine/notifications';
 import { ContextMenuProvider } from 'mantine-contextmenu';
 import type { Metadata, Viewport } from 'next';
 import { AppWrapper } from '~/components/AppWrapper';
+import { ShikiCodeHighlightProvider } from '~/components/ShikiCodeHighlightProvider';
 import { ThemeAttributeSetter } from '~/components/ThemeAttributeSetter';
 import { AUTHOR_LINK, AUTHOR_NAME, WEB_ROOT, WEBSITE_LINK } from './config';
 import classes from './layout.module.css';
@@ -42,13 +43,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
           }}
         >
-          <ThemeAttributeSetter />
-          <Notifications />
-          <ModalsProvider>
-            <ContextMenuProvider>
-              <AppWrapper>{children}</AppWrapper>
-            </ContextMenuProvider>
-          </ModalsProvider>
+          <ShikiCodeHighlightProvider>
+            <ThemeAttributeSetter />
+            <Notifications />
+            <ModalsProvider>
+              <ContextMenuProvider repositionOnRepeat>
+                <AppWrapper>{children}</AppWrapper>
+              </ContextMenuProvider>
+            </ModalsProvider>
+          </ShikiCodeHighlightProvider>
         </MantineProvider>
       </body>
     </html>

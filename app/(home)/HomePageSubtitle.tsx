@@ -24,7 +24,7 @@ export function HomePageSubtitle() {
         <Text size="sm">
           compatible with{' '}
           <ExternalLink className="nowrap" to={MANTINE_LINK}>
-            Mantine V7 <IconExternalLink className={classes.linkIcon} />
+            Mantine V8.1 <IconExternalLink className={classes.linkIcon} />
           </ExternalLink>
         </Text>
       </Group>

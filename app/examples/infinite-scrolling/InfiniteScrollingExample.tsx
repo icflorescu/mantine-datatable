@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, Group, Paper, Text } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
 import { DataTable } from '__PACKAGE__';
 import { useEffect, useRef, useState } from 'react';
 import { employees } from '~/data';
@@ -20,6 +21,11 @@ export function InfiniteScrollingExample() {
         setRecords(employees.slice(0, records.length + batchSize));
         setLoading(false);
       }, 1000);
+    } else {
+      notifications.show({
+        title: 'No more records',
+        message: 'All records have been loaded.',
+      });
     }
   };
 

@@ -14,7 +14,10 @@ export const getRouteMetadata = memoize((href: Route): Metadata => {
   if (!route) throw new Error(`Route ${href} not found`);
 
   const { title: rawTitle, description } = route;
-  const title = href === '/' ? PRODUCT_NAME : `${addExamplesPrefix({ title: rawTitle, href })} | ${PRODUCT_NAME}`;
+  const title =
+    href === '/'
+      ? `${PRODUCT_NAME} - build awesome data-rich web applications`
+      : `${addExamplesPrefix({ title: rawTitle, href })} | ${PRODUCT_NAME}`;
   const hrefWithTrailingSlash = href === '/' ? href : `${href}/`;
   const url =
     process.env.GITHUB_PAGES === 'TRUE'
