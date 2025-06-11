@@ -1,14 +1,20 @@
 import { TableTr } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
-import { forwardRef, useEffect, useRef } from 'react';
+import type { Ref } from 'react';
+import { useEffect, useRef } from 'react';
 import type { DataTableDraggableRowProps } from './types';
 
-const DataTableDraggableRow = forwardRef<HTMLTableRowElement, DataTableDraggableRowProps>(function (
-  { children, isDragging, ...props },
-  passedRef
-) {
+export function DataTableDraggableRow({
+  className,
+  children,
+  isDragging,
+  ref: refProp,
+  ...otherProps
+}: DataTableDraggableRowProps & {
+  ref?: Ref<HTMLTableRowElement>;
+}) {
   const ref = useRef<HTMLTableRowElement>(null);
-  const mergedRef = useMergedRef(ref, passedRef);
+  const mergedRef = useMergedRef(ref, refProp);
 
   useEffect(() => {
     // a simple fix to keep column width as in table
@@ -34,12 +40,8 @@ const DataTableDraggableRow = forwardRef<HTMLTableRowElement, DataTableDraggable
   }, [isDragging, children]);
 
   return (
-    <TableTr data-is-dragging={isDragging} ref={mergedRef} {...props}>
+    <TableTr data-is-dragging={isDragging} ref={mergedRef} {...otherProps} className={className}>
       {children}
     </TableTr>
   );
-});
-
-DataTableDraggableRow.displayName = 'DataTableDraggableRow';
-
-export { DataTableDraggableRow };
+}
