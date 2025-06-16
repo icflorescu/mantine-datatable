@@ -38,6 +38,15 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
 
     columnRef.current.style.width = widthString;
 
+    // Get the next th (if it exists)
+    const nextColumnElement = columnRef.current.nextElementSibling as HTMLTableCellElement | null;
+
+    if (nextColumnElement) {
+      const nextColumnWidth = nextColumnElement.getBoundingClientRect().width - delta;
+      const nextColumnWidthString = `${nextColumnWidth}px`;
+      nextColumnElement.style.width = nextColumnWidthString;
+    }
+
     // we have to set (store) the width in the context  and in the
     // local storage, otherwise the resizing won't work for small sizes
     setColumnWidth(accessor, columnRef.current.style.width as string);
