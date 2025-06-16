@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.1.0 (2025-03-16)
+
+- Update dependencies to ensure compatibility with Mantine 8.1.1
+
 ## 8.1.0 (2025-03-11)
 
 - Update dependencies to ensure compatibility with Mantine 8.1 and Next.js 15.3
