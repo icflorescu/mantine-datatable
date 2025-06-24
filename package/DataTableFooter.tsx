@@ -1,6 +1,5 @@
 import { TableTfoot, TableTr, rem, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
-import { forwardRef, type JSX } from 'react';
 import { DataTableFooterCell } from './DataTableFooterCell';
 import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelectorPlaceholderCell';
 import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
@@ -13,20 +12,19 @@ type DataTableFooterProps<T> = {
   selectionVisible: boolean;
   selectorCellShadowVisible: boolean;
   scrollDiff: number;
+  ref: React.Ref<HTMLTableSectionElement>;
 };
 
-export const DataTableFooter = forwardRef(function DataTableFooter<T>(
-  {
-    className,
-    style,
-    columns,
-    defaultColumnProps,
-    selectionVisible,
-    selectorCellShadowVisible,
-    scrollDiff,
-  }: DataTableFooterProps<T>,
-  ref: React.ForwardedRef<HTMLTableSectionElement>
-) {
+export function DataTableFooter<T>({
+  className,
+  style,
+  columns,
+  defaultColumnProps,
+  selectionVisible,
+  selectorCellShadowVisible,
+  scrollDiff,
+  ref,
+}: DataTableFooterProps<T>) {
   const relative = scrollDiff < 0;
   return (
     <TableTfoot
@@ -74,4 +72,4 @@ export const DataTableFooter = forwardRef(function DataTableFooter<T>(
       </TableTr>
     </TableTfoot>
   );
-}) as <T>(props: DataTableFooterProps<T> & { ref: React.ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;
+}
