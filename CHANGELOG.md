@@ -3,11 +3,16 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
-## 8.1.0 (2025-03-16)
+## 8.1.2 (2025-03-24)
+
+- Use `ref` prop instead of `forwardRef`, which was deprecated in React 19
+- Update dev deps
+
+## 8.1.1 (2025-06-16)
 
 - Update dependencies to ensure compatibility with Mantine 8.1.1
 
-## 8.1.0 (2025-03-11)
+## 8.1.0 (2025-06-11)
 
 - Update dependencies to ensure compatibility with Mantine 8.1 and Next.js 15.3
 - Fix [#698](https://github.com/icflorescu/mantine-datatable/issues/698) - first column header not pinned when using row selection
