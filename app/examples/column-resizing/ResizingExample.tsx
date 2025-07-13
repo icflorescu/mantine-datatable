@@ -14,7 +14,7 @@ export default function ResizingExample() {
   const { effectiveColumns, resetColumnsWidth } = useDataTableColumns<Company>({
     key,
     columns: [
-      { accessor: 'name', width: 100, resizable: true },
+      { accessor: 'name', width: 200, resizable: true },
       { accessor: 'streetAddress', resizable: true },
       { accessor: 'city', ellipsis: true, resizable: true },
       { accessor: 'state', textAlign: 'right' },

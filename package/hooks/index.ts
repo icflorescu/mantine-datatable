@@ -1,3 +1,4 @@
+export * from './useColumnResize';
 export * from './useDataTableColumns';
 export * from './useElementOuterSize';
 export * from './useIsomorphicLayoutEffect';

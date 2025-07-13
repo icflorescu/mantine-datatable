@@ -141,6 +141,10 @@ export function DataTable<T>({
     return groups?.flatMap((group) => group.columns) ?? columns!;
   }, [columns, groups]);
 
+  const hasResizableColumns = useMemo(() => {
+    return effectiveColumns.some((col) => col.resizable);
+  }, [effectiveColumns]);
+
   const dragToggle = useDataTableColumns({
     key: storeColumnsKey,
     columns: effectiveColumns,
@@ -335,6 +339,7 @@ export function DataTable<T>({
                   'mantine-datatable-selection-column-visible': selectionColumnVisible,
                   'mantine-datatable-pin-first-column': pinFirstColumn,
                   'mantine-datatable-pin-first-column-scrolled': !scrolledToLeft && pinFirstColumn,
+                  'mantine-datatable-resizable-columns': hasResizableColumns,
                 },
                 classNames?.table
               )}

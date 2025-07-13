@@ -48,6 +48,16 @@
   border: rem(1px) solid var(--mantine-datatable-border-color);
 }
 
+.mantine-datatable-resizable-columns {
+  table-layout: fixed;
+}
+
+.mantine-datatable-resizable-columns th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .mantine-datatable-table {
   border-collapse: separate;
   border-spacing: 0;
