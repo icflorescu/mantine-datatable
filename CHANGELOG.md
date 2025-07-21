@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.1.3 (2025-07-21)
+
+- Enhance column resizing behavior for closed columns - many thanks to [Giovambattista Fazioli](https://github.com/gfazioli) for PR [#711](https://github.com/icflorescu/mantine-datatable/pull/711)
+
 ## 8.1.2 (2025-03-24)
 
 - Use `ref` prop instead of `forwardRef`, which was deprecated in React 19
