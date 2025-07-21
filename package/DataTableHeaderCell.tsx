@@ -125,6 +125,7 @@ export function DataTableHeaderCell<T>({
 
   return (
     <TableTh
+      data-accessor={accessor}
       className={clsx(
         {
           'mantine-datatable-header-cell-sortable': sortable,
@@ -231,7 +232,9 @@ export function DataTableHeaderCell<T>({
           </DataTableHeaderCellFilter>
         ) : null}
       </Group>
-      {resizable ? <DataTableResizableHeaderHandle accessor={accessor as string} columnRef={columnRef} /> : null}
+      {resizable && accessor !== '__selection__' ? (
+        <DataTableResizableHeaderHandle accessor={accessor as string} columnRef={columnRef} />
+      ) : null}
     </TableTh>
   );
 }
