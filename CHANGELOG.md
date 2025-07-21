@@ -6,6 +6,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 ## 8.1.3 (2025-07-21)
 
 - Enhance column resizing behavior for closed columns - many thanks to [Giovambattista Fazioli](https://github.com/gfazioli) for PR [#711](https://github.com/icflorescu/mantine-datatable/pull/711)
+- Update deps to ensure compatibility with Mantine 8.1.3 and Next.js 15.4.x
 
 ## 8.1.2 (2025-03-24)
 
