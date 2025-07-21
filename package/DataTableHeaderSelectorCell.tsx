@@ -42,6 +42,7 @@ export function DataTableHeaderSelectorCell({
       style={style}
       rowSpan={rowSpan}
       data-shadow-visible={shadowVisible || undefined}
+      data-accessor="__selection__"
       onClick={trigger === 'cell' && enabled ? onChange : undefined}
     >
       <Checkbox

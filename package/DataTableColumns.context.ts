@@ -22,6 +22,7 @@ interface DataTableColumnsContext {
   resetColumnsToggle: () => void;
 
   setColumnWidth: (accessor: string, width: string | number) => void;
+  setMultipleColumnWidths: (updates: Array<{ accessor: string; width: string | number }>) => void;
   resetColumnsWidth: () => void;
 }
 
