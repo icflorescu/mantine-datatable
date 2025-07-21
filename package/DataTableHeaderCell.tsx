@@ -32,6 +32,7 @@ type DataTableHeaderCellProps<T> = {
   | 'width'
   | 'filter'
   | 'filterPopoverProps'
+  | 'filterPopoverDisableClickOutside'
   | 'filtering'
   | 'sortKey'
 >;
@@ -53,6 +54,7 @@ export function DataTableHeaderCell<T>({
   onSortStatusChange,
   filter,
   filterPopoverProps,
+  filterPopoverDisableClickOutside,
   filtering,
   sortKey,
 }: DataTableHeaderCellProps<T>) {
@@ -123,6 +125,7 @@ export function DataTableHeaderCell<T>({
 
   return (
     <TableTh
+      data-accessor={accessor}
       className={clsx(
         {
           'mantine-datatable-header-cell-sortable': sortable,
@@ -220,12 +223,18 @@ export function DataTableHeaderCell<T>({
           </>
         ) : null}
         {filter ? (
-          <DataTableHeaderCellFilter filterPopoverProps={filterPopoverProps} isActive={!!filtering}>
+          <DataTableHeaderCellFilter
+            filterPopoverProps={filterPopoverProps}
+            isActive={!!filtering}
+            filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
+          >
             {filter}
           </DataTableHeaderCellFilter>
         ) : null}
       </Group>
-      {resizable ? <DataTableResizableHeaderHandle accessor={accessor as string} columnRef={columnRef} /> : null}
+      {resizable && accessor !== '__selection__' ? (
+        <DataTableResizableHeaderHandle accessor={accessor as string} columnRef={columnRef} />
+      ) : null}
     </TableTh>
   );
 }

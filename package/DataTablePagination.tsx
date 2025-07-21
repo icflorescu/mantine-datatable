@@ -1,6 +1,6 @@
 import { Box, Pagination, Text, rem, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
-import { forwardRef, type ForwardedRef, type JSX } from 'react';
+import { type ForwardedRef } from 'react';
 import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import { getPaginationCssVariables } from './cssVariables';
 import { useMediaQueryStringOrFunction } from './hooks';
@@ -20,35 +20,34 @@ type DataTablePaginationComponentProps = WithOptionalProperty<
   recordsLength: number | undefined;
   horizontalSpacing: MantineSpacing | undefined;
   noRecordsText: string;
+  ref: ForwardedRef<HTMLDivElement>;
 };
 
-export const DataTablePagination = forwardRef(function DataTablePagination(
-  {
-    className,
-    style,
-    fetching,
-    page,
-    onPageChange,
-    paginationWithEdges,
-    paginationWithControls,
-    paginationActiveTextColor,
-    paginationActiveBackgroundColor,
-    paginationSize,
-    loadingText,
-    noRecordsText,
-    paginationText,
-    totalRecords,
-    recordsPerPage,
-    onRecordsPerPageChange,
-    recordsPerPageLabel,
-    recordsPerPageOptions,
-    recordsLength,
-    horizontalSpacing,
-    paginationWrapBreakpoint,
-    getPaginationControlProps,
-  }: DataTablePaginationComponentProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
+export function DataTablePagination({
+  className,
+  style,
+  fetching,
+  page,
+  onPageChange,
+  paginationWithEdges,
+  paginationWithControls,
+  paginationActiveTextColor,
+  paginationActiveBackgroundColor,
+  paginationSize,
+  loadingText,
+  noRecordsText,
+  paginationText,
+  totalRecords,
+  recordsPerPage,
+  onRecordsPerPageChange,
+  recordsPerPageLabel,
+  recordsPerPageOptions,
+  recordsLength,
+  horizontalSpacing,
+  paginationWrapBreakpoint,
+  getPaginationControlProps,
+  ref,
+}: DataTablePaginationComponentProps) {
   let paginationTextValue: React.ReactNode;
   if (totalRecords) {
     const from = (page - 1) * recordsPerPage + 1;
@@ -112,4 +111,4 @@ export const DataTablePagination = forwardRef(function DataTablePagination(
       />
     </Box>
   );
-}) as (props: DataTablePaginationComponentProps & { ref: ForwardedRef<HTMLDivElement> }) => JSX.Element;
+}

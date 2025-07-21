@@ -14,6 +14,7 @@ export default function ResizingComplexExample() {
     direction: 'asc',
   });
   const [records, setRecords] = useState(sortBy(companies, 'name'));
+  const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);
 
   useEffect(() => {
     const data = sortBy(companies, sortStatus.columnAccessor);
@@ -45,6 +46,8 @@ export default function ResizingComplexExample() {
       <DataTable
         withTableBorder={withTableBorder}
         withColumnBorders={withColumnBorders}
+        selectedRecords={selectedRecords}
+        onSelectedRecordsChange={setSelectedRecords}
         storeColumnsKey={key}
         records={records}
         columns={effectiveColumns}

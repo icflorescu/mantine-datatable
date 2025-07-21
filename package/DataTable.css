@@ -24,24 +24,17 @@
     light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5))
   );
   --mantine-datatable-selection-color: var(--mantine-primary-color-light);
-  --mantine-datatable-shadow-background-top: linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0)),
+  --mantine-datatable-shadow-background-top:
+    linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0)),
     linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.25)) 30%, rgba(0, 0, 0, 0));
-  --mantine-datatable-shadow-background-right: linear-gradient(
-      to left,
-      rgba(0, 0, 0, light-dark(0.05, 0.25)),
-      rgba(0, 0, 0, 0)
-    ),
+  --mantine-datatable-shadow-background-right:
+    linear-gradient(to left, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0)),
     linear-gradient(to left, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0) 30%);
-  --mantine-datatable-shadow-background-bottom: linear-gradient(
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, light-dark(0.05, 0.25))
-    ),
+  --mantine-datatable-shadow-background-bottom:
+    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, light-dark(0.05, 0.25))),
     linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, light-dark(0.05, 0.25)));
-  --mantine-datatable-shadow-background-left: linear-gradient(
-      to right,
-      rgba(0, 0, 0, light-dark(0.05, 0.25)),
-      rgba(0, 0, 0, 0)
-    ),
+  --mantine-datatable-shadow-background-left:
+    linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0)),
     linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0) 30%);
 
   position: relative;
@@ -54,6 +47,16 @@
 
 .mantine-datatable-with-border {
   border: rem(1px) solid var(--mantine-datatable-border-color);
+}
+
+.mantine-datatable-resizable-columns {
+  table-layout: fixed;
+}
+
+.mantine-datatable-resizable-columns th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .mantine-datatable-table {
@@ -168,6 +171,7 @@
   &:not(.mantine-datatable-selection-column-visible) th:first-of-type,
   &:not(.mantine-datatable-selection-column-visible) td:not(.mantine-datatable-row-expansion-cell):first-of-type,
   &.mantine-datatable-selection-column-visible th:first-of-type,
+  &.mantine-datatable-selection-column-visible tr:not(:nth-of-type(2)) th:nth-of-type(2),
   &.mantine-datatable-selection-column-visible th.mantine-datatable-column-group-header-cell:nth-of-type(2),
   &.mantine-datatable-selection-column-visible td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
     position: sticky;
@@ -236,6 +240,7 @@
   &-scrolled:not(.mantine-datatable-selection-column-visible)
     td:not(.mantine-datatable-row-expansion-cell):first-of-type,
   &-scrolled.mantine-datatable-selection-column-visible th:first-of-type,
+  &-scrolled.mantine-datatable-selection-column-visible tr:not(:nth-of-type(2)) th:nth-of-type(2),
   &-scrolled.mantine-datatable-selection-column-visible th.mantine-datatable-column-group-header-cell:nth-of-type(2),
   &-scrolled.mantine-datatable-selection-column-visible td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
     &::after {

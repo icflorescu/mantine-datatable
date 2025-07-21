@@ -265,6 +265,23 @@ export const useDataTableColumns = <T>({
     setColumnsWidth(newColumnsWidth);
   };
 
+  const setMultipleColumnWidths = (updates: Array<{ accessor: string; width: string | number }>) => {
+    const newColumnsWidth = columnsWidth.map((column) => {
+      const accessor = Object.keys(column)[0];
+      const update = updates.find((u) => u.accessor === accessor);
+
+      if (update) {
+        return {
+          [accessor]: update.width,
+        };
+      }
+
+      return column;
+    });
+
+    setColumnsWidth(newColumnsWidth);
+  };
+
   return {
     effectiveColumns: effectiveColumns as DataTableColumn<T>[],
 
@@ -282,6 +299,7 @@ export const useDataTableColumns = <T>({
     columnsWidth,
     setColumnsWidth,
     setColumnWidth,
+    setMultipleColumnWidths,
     resetColumnsWidth,
   } as const;
 };

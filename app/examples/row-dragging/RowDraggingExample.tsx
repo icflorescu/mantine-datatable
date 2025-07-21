@@ -1,12 +1,15 @@
 'use client';
 
 import { DragDropContext, Draggable, type DropResult, Droppable } from '@hello-pangea/dnd';
-import { TableTd } from '@mantine/core';
+import { Center, TableTd } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconGripVertical } from '@tabler/icons-react';
-import { DataTable, DataTableColumn, DataTableDraggableRow } from '__PACKAGE__';
+import type { DataTableColumn } from '__PACKAGE__';
+import { DataTable, DataTableDraggableRow } from '__PACKAGE__';
+import clsx from 'clsx';
 import { useState } from 'react';
 import companies from '~/data/companies.json';
+import classes from './RowDraggingExample.module.css';
 
 interface RecordData {
   id: string;
@@ -68,10 +71,18 @@ export function RowDraggingExample() {
         rowFactory={({ record, index, rowProps, children }) => (
           <Draggable key={record.id} draggableId={record.id} index={index}>
             {(provided, snapshot) => (
-              <DataTableDraggableRow isDragging={snapshot.isDragging} {...rowProps} {...provided.draggableProps}>
-                {/** custom drag handle */}
-                <TableTd {...provided.dragHandleProps} ref={provided.innerRef}>
-                  <IconGripVertical size={16} />
+              <DataTableDraggableRow
+                isDragging={snapshot.isDragging}
+                {...rowProps}
+                // 👇 custom class name for styling
+                className={clsx(rowProps.className, classes.draggableRow)}
+                {...provided.draggableProps}
+              >
+                <TableTd>
+                  {/** 👇 custom drag handle */}
+                  <Center {...provided.dragHandleProps} ref={provided.innerRef}>
+                    <IconGripVertical size={16} />
+                  </Center>
                 </TableTd>
                 {children}
               </DataTableDraggableRow>

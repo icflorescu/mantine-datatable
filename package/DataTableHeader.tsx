@@ -11,12 +11,12 @@ import {
   type MantineStyleProp,
 } from '@mantine/core';
 import clsx from 'clsx';
-import { forwardRef, useState, type JSX } from 'react';
+import { useState } from 'react';
 import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCell } from './DataTableHeaderCell';
 import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
-import { DataTableColumnToggle } from './hooks';
+import type { DataTableColumnToggle } from './hooks';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
 import { humanize } from './utils';
 
@@ -39,31 +39,30 @@ type DataTableHeaderProps<T> = {
   selectorCellShadowVisible: boolean;
   selectionColumnClassName: string | undefined;
   selectionColumnStyle: MantineStyleProp;
+  ref: React.Ref<HTMLTableSectionElement>;
 };
 
-export const DataTableHeader = forwardRef(function DataTableHeader<T>(
-  {
-    selectionColumnHeaderRef,
-    className,
-    style,
-    sortStatus,
-    sortIcons,
-    onSortStatusChange,
-    columns,
-    defaultColumnProps,
-    groups,
-    selectionTrigger,
-    selectionVisible,
-    selectionChecked,
-    selectionIndeterminate,
-    onSelectionChange,
-    selectionCheckboxProps,
-    selectorCellShadowVisible,
-    selectionColumnClassName,
-    selectionColumnStyle,
-  }: DataTableHeaderProps<T>,
-  ref: React.ForwardedRef<HTMLTableSectionElement>
-) {
+export function DataTableHeader<T>({
+  selectionColumnHeaderRef,
+  className,
+  style,
+  sortStatus,
+  sortIcons,
+  onSortStatusChange,
+  columns,
+  defaultColumnProps,
+  groups,
+  selectionTrigger,
+  selectionVisible,
+  selectionChecked,
+  selectionIndeterminate,
+  onSelectionChange,
+  selectionCheckboxProps,
+  selectorCellShadowVisible,
+  selectionColumnClassName,
+  selectionColumnStyle,
+  ref,
+}: DataTableHeaderProps<T>) {
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
       ref={selectionColumnHeaderRef}
@@ -130,6 +129,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
             titleStyle,
             filter,
             filterPopoverProps,
+            filterPopoverDisableClickOutside,
             filtering,
             sortKey,
           } = { ...defaultColumnProps, ...columnProps };
@@ -155,6 +155,7 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
               onSortStatusChange={onSortStatusChange}
               filter={filter}
               filterPopoverProps={filterPopoverProps}
+              filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
               filtering={filtering}
             />
           );
@@ -198,4 +199,4 @@ export const DataTableHeader = forwardRef(function DataTableHeader<T>(
   ) : (
     content
   );
-}) as <T>(props: DataTableHeaderProps<T> & { ref: React.ForwardedRef<HTMLTableSectionElement> }) => JSX.Element;
+}

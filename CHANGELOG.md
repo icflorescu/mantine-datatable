@@ -3,6 +3,29 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.1.3 (2025-07-21)
+
+- Enhance column resizing behavior for closed columns - many thanks to [Giovambattista Fazioli](https://github.com/gfazioli) for PR [#711](https://github.com/icflorescu/mantine-datatable/pull/711)
+
+## 8.1.2 (2025-03-24)
+
+- Use `ref` prop instead of `forwardRef`, which was deprecated in React 19
+- Update dev deps
+
+## 8.1.1 (2025-06-16)
+
+- Update dependencies to ensure compatibility with Mantine 8.1.1
+
+## 8.1.0 (2025-06-11)
+
+- Update dependencies to ensure compatibility with Mantine 8.1 and Next.js 15.3
+- Fix [#698](https://github.com/icflorescu/mantine-datatable/issues/698) - first column header not pinned when using row selection
+- Fix [#700](https://github.com/icflorescu/mantine-datatable/issues/700) - hydration error in row dragging example
+- Upgrade development workflow to eslint v9 & fix linting rules
+- Minor improvements to docs website
+- Switch to pnpm for package management
+- Update peer dependency versions to Mantine `>=8.1` and React `>=19`
+
 ## 7.17.1 (2025-03-06)
 
 - Update dev dependencies to ensure compatibility with Mantine 7.17.1 and Next.js 15.2

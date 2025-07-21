@@ -89,6 +89,11 @@ export type DataTableColumn<T = Record<string, unknown>> = {
   filterPopoverProps?: PopoverProps;
 
   /**
+   * Disables the use of the Mantine useClickOutside hook inside the filter popover
+   */
+  filterPopoverDisableClickOutside?: boolean;
+
+  /**
    * If true, filter icon will be styled differently to indicate the filter is in effect.
    */
   filtering?: boolean;

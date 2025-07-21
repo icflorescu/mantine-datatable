@@ -1,7 +1,8 @@
 'use client';
 
 import { IconChevronUp, IconSelector } from '@tabler/icons-react';
-import { DataTable, DataTableSortStatus } from '__PACKAGE__';
+import type { DataTableSortStatus } from '__PACKAGE__';
+import { DataTable } from '__PACKAGE__';
 import sortBy from 'lodash/sortBy';
 import { useEffect, useState } from 'react';
 import { companies, type Company } from '~/data';

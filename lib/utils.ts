@@ -1,8 +1,9 @@
 import { useWindowScroll } from '@mantine/hooks';
 import { memoize } from 'lodash';
 import type { Metadata, Route } from 'next';
-import { EXAMPLES_ROUTE_COLOR, PRODUCT_NAME, ROUTES, RouteInfo } from '~/app/config';
-import { NavbarButtonProps } from '~/components/NavbarButton';
+import type { RouteInfo } from '~/app/config';
+import { EXAMPLES_ROUTE_COLOR, PRODUCT_NAME, ROUTES } from '~/app/config';
+import type { NavbarButtonProps } from '~/components/NavbarButton';
 
 function addExamplesPrefix({ href, title }: Pick<RouteInfo, 'href' | 'title'>) {
   return href.startsWith('/examples/') ? `Examples › ${title}` : title;
@@ -13,7 +14,10 @@ export const getRouteMetadata = memoize((href: Route): Metadata => {
   if (!route) throw new Error(`Route ${href} not found`);
 
   const { title: rawTitle, description } = route;
-  const title = href === '/' ? PRODUCT_NAME : `${addExamplesPrefix({ title: rawTitle, href })} | ${PRODUCT_NAME}`;
+  const title =
+    href === '/'
+      ? `${PRODUCT_NAME} - build awesome data-rich web applications`
+      : `${addExamplesPrefix({ title: rawTitle, href })} | ${PRODUCT_NAME}`;
   const hrefWithTrailingSlash = href === '/' ? href : `${href}/`;
   const url =
     process.env.GITHUB_PAGES === 'TRUE'

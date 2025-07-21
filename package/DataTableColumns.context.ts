@@ -1,6 +1,6 @@
 import { createSafeContext } from '@mantine/core';
-import { Dispatch, SetStateAction } from 'react';
-import { DataTableColumnToggle } from './hooks';
+import type { Dispatch, SetStateAction } from 'react';
+import type { DataTableColumnToggle } from './hooks';
 
 interface DataTableColumnsContext {
   // accessor of the column which is currently dragged
@@ -22,6 +22,7 @@ interface DataTableColumnsContext {
   resetColumnsToggle: () => void;
 
   setColumnWidth: (accessor: string, width: string | number) => void;
+  setMultipleColumnWidths: (updates: Array<{ accessor: string; width: string | number }>) => void;
   resetColumnsWidth: () => void;
 }
 

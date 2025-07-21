@@ -1,6 +1,6 @@
-import { Checkbox, MantineStyleProp, TableTh, type CheckboxProps } from '@mantine/core';
+import type { MantineStyleProp } from '@mantine/core';
+import { Checkbox, TableTh, type CheckboxProps } from '@mantine/core';
 import clsx from 'clsx';
-import { forwardRef } from 'react';
 import type { DataTableSelectionTrigger } from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
@@ -14,22 +14,21 @@ type DataTableHeaderSelectorCellProps = {
   checkboxProps: CheckboxProps;
   onChange: (() => void) | undefined;
   rowSpan: number | undefined;
+  ref: React.Ref<HTMLTableCellElement>;
 };
 
-export const DataTableHeaderSelectorCell = forwardRef(function DataTableHeaderSelectorCell(
-  {
-    className,
-    style,
-    trigger,
-    shadowVisible,
-    checked,
-    indeterminate,
-    checkboxProps,
-    onChange,
-    rowSpan,
-  }: DataTableHeaderSelectorCellProps,
-  ref: React.ForwardedRef<HTMLTableCellElement>
-) {
+export function DataTableHeaderSelectorCell({
+  className,
+  style,
+  trigger,
+  shadowVisible,
+  checked,
+  indeterminate,
+  checkboxProps,
+  onChange,
+  rowSpan,
+  ref,
+}: DataTableHeaderSelectorCellProps) {
   const enabled = !checkboxProps.disabled;
 
   return (
@@ -43,6 +42,7 @@ export const DataTableHeaderSelectorCell = forwardRef(function DataTableHeaderSe
       style={style}
       rowSpan={rowSpan}
       data-shadow-visible={shadowVisible || undefined}
+      data-accessor="__selection__"
       onClick={trigger === 'cell' && enabled ? onChange : undefined}
     >
       <Checkbox
@@ -55,4 +55,4 @@ export const DataTableHeaderSelectorCell = forwardRef(function DataTableHeaderSe
       />
     </TableTh>
   );
-});
+}

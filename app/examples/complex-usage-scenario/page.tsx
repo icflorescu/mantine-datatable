@@ -32,7 +32,7 @@ export default async function ComplexUsageExamplePage() {
         Here is a complex usage scenario featuring{' '}
         <InternalLink to="/examples/column-properties-and-styling">custom column definitions</InternalLink>,{' '}
         <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink> with{' '}
-        <ExternalLink to="https://tanstack.com/query/latest">TanStack React Query</ExternalLink>,{' '}
+        <ExternalLink to="https://tanstack.com/query/latest">TanStack Query</ExternalLink>,{' '}
         <InternalLink to="/examples/sorting">sorting</InternalLink>,{' '}
         <InternalLink to="/examples/pagination">pagination</InternalLink>, custom cell data rendering,{' '}
         <InternalLink to="/examples/records-selection">multiple row selection</InternalLink>,{' '}
@@ -44,8 +44,8 @@ export default async function ComplexUsageExamplePage() {
         <ComplexUsageExample />
       </ComplexUsageExampleWrapper>
       <Txt>
-        Since this example is using React Query, we have to wrap everything in a <Code>QueryClientProvider</Code> like
-        so:
+        Since this example is using TanStack Query, we have to wrap everything in a <Code>QueryClientProvider</Code>{' '}
+        like so:
       </Txt>
       <CodeBlock code={code['ComplexUsageExampleWrapper.tsx']} />
       <Txt>Here is the actual code:</Txt>

@@ -1,15 +1,17 @@
 'use client';
 
-import { ActionIcon, Button, Center, Flex, Group, Image, MantineTheme, Text, TextInput, rem } from '@mantine/core';
+import type { MantineTheme } from '@mantine/core';
+import { ActionIcon, Button, Center, Flex, Group, Image, Text, TextInput, rem } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { IconClick, IconEdit, IconMessage, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
-import { DataTable, DataTableColumn, DataTableProps, DataTableSortStatus } from '__PACKAGE__';
+import type { DataTableColumn, DataTableProps, DataTableSortStatus } from '__PACKAGE__';
+import { DataTable } from '__PACKAGE__';
 import dayjs from 'dayjs';
 import { useContextMenu } from 'mantine-contextmenu';
 import { useCallback, useState } from 'react';
-import { Employee } from '~/data';
+import type { Employee } from '~/data';
 import { getEmployeesAsync } from '~/data/async';
 import classes from './ComplexUsageExample.module.css';
 

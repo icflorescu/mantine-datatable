@@ -1,7 +1,12 @@
 .mantine-datatable-header-selector-cell {
   position: sticky;
-  width: 0;
+  z-index: 1;
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
   left: 0;
+  text-align: center;
+  padding: var(--mantine-spacing-xs);
   &::after {
     content: '';
     position: absolute;

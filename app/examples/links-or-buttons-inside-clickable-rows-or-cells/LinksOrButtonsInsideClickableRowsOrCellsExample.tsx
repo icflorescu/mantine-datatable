@@ -4,7 +4,8 @@ import { ActionIcon, Box, Button, Grid, GridCol, Group, Stack, Text } from '@man
 import { closeModal, openModal } from '@mantine/modals';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
-import { Company, companies } from '~/data';
+import type { Company } from '~/data';
+import { companies } from '~/data';
 
 const records = companies.slice(0, 5);
 

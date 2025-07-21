@@ -2,7 +2,7 @@
 
 import { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
-import { DataTableColumnToggle } from './hooks';
+import type { DataTableColumnToggle } from './hooks';
 
 type DataTableColumnsProviderProps = PropsWithChildren<{
   columnsOrder: string[];
@@ -14,6 +14,7 @@ type DataTableColumnsProviderProps = PropsWithChildren<{
   resetColumnsToggle: () => void;
 
   setColumnWidth: (accessor: string, width: string | number) => void;
+  setMultipleColumnWidths: (updates: Array<{ accessor: string; width: string | number }>) => void;
   resetColumnsWidth: () => void;
 }>;
 
@@ -29,6 +30,7 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
     resetColumnsToggle,
 
     setColumnWidth,
+    setMultipleColumnWidths,
     resetColumnsWidth,
   } = props;
 
@@ -66,6 +68,7 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
         resetColumnsToggle,
 
         setColumnWidth,
+        setMultipleColumnWidths,
         resetColumnsWidth,
       }}
     >

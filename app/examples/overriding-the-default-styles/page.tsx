@@ -1,5 +1,5 @@
 import { Box, Code } from '@mantine/core';
-import { Route } from 'next';
+import type { Route } from 'next';
 import { PRODUCT_NAME } from '~/app/config';
 import { CodeBlock } from '~/components/CodeBlock';
 import { InternalLink } from '~/components/InternalLink';
