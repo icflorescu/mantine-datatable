@@ -23,6 +23,7 @@
     light-dark(--mantine-datatable-highlight-on-hover-color-light, --mantine-datatable-highlight-on-hover-color-dark),
     light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5))
   );
+  --mantine-datatable-selection-color: var(--mantine-primary-color-light);
   --mantine-datatable-shadow-background-top:
     linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0)),
     linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.25)) 30%, rgba(0, 0, 0, 0));
@@ -152,7 +153,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--mantine-primary-color-light);
+      background: var(--mantine-datatable-selection-color);
     }
   }
 
@@ -231,7 +232,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--mantine-primary-color-light);
+      background: var(--mantine-datatable-selection-color);
     }
   }
 
