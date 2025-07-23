@@ -134,6 +134,10 @@ export default async function ColumnPropertiesAndStylingExamplePage() {
       <ColumnFooterExample />
       <Txt>Here’s the code for the example above:</Txt>
       <CodeBlock tabs={{ code, keys: ['ColumnFooterExample.tsx', 'data/index.ts'] }} />
+      <Txt>The footer is always visible and sticks at the bottom. For example, if the table is scrollable:</Txt>
+      <ColumnFooterExample height={200} />
+      <Txt>Or if the table is higher than the amount of data:</Txt>
+      <ColumnFooterExample height={550} />
       <PageSubtitle value="Styling column titles, cells and footers" />
       <Txt>In addition, each column can be further customized by specifying the following styling properties:</Txt>
       <UnorderedList>

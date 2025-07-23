@@ -2,8 +2,6 @@ import { Center, Loader, type MantineColor, type MantineLoader, type MantineSize
 import clsx from 'clsx';
 
 type DataTableLoaderProps = {
-  pt: number;
-  pb: number;
   fetching: boolean | undefined;
   customContent: React.ReactNode | undefined;
   backgroundBlur: number | undefined;
@@ -12,20 +10,9 @@ type DataTableLoaderProps = {
   color: MantineColor | undefined;
 };
 
-export function DataTableLoader({
-  pt,
-  pb,
-  fetching,
-  customContent,
-  backgroundBlur,
-  size,
-  type,
-  color,
-}: DataTableLoaderProps) {
+export function DataTableLoader({ fetching, customContent, backgroundBlur, size, type, color }: DataTableLoaderProps) {
   return (
     <Center
-      pt={pt}
-      pb={pb}
       className={clsx('mantine-datatable-loader', { 'mantine-datatable-loader-fetching': fetching })}
       style={[{ backdropFilter: backgroundBlur ? `blur(${backgroundBlur}px)` : undefined }]}
     >
