@@ -9,8 +9,8 @@
   background: alpha(var(--mantine-datatable-background-color), 0.75);
   opacity: 0;
   transition: opacity 0.2s;
-  padding-top: var(--mantine-datatable-header-height, 0px);
-  padding-bottom: var(--mantine-datatable-footer-height, 0px);
+  padding-top: var(--mantine-datatable-header-height, 0);
+  padding-bottom: var(--mantine-datatable-footer-height, 0);
 }
 
 .mantine-datatable-loader-fetching {

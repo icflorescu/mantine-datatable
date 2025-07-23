@@ -37,15 +37,15 @@
     linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0)),
     linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0) 30%);
 
-  --mantine-datatable-header-height: 0px;
-  --mantine-datatable-footer-height: 0px;
-  --mantine-datatable-selection-column-width: 0px;
+  --mantine-datatable-header-height: 0;
+  --mantine-datatable-footer-height: 0;
+  --mantine-datatable-selection-column-width: 0;
   --mantine-datatable-top-shadow-opacity: 0;
   --mantine-datatable-left-shadow-opacity: 0;
   --mantine-datatable-bottom-shadow-opacity: 0;
   --mantine-datatable-right-shadow-opacity: 0;
   --mantine-datatable-footer-position: sticky;
-  --mantine-datatable-footer-bottom: 0px;
+  --mantine-datatable-footer-bottom: 0;
   --mantine-datatable-last-row-border-bottom: unset;
 
   position: relative;

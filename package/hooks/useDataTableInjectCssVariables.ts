@@ -84,7 +84,7 @@ export function useDataTableInjectCssVariables({
       (rect) => {
         setCssVar(root.current, VAR_HEADER_HEIGHT, `${rect.height}px`);
       },
-      () => setCssVar(root.current, VAR_HEADER_HEIGHT, '0px')
+      () => setCssVar(root.current, VAR_HEADER_HEIGHT, '0')
     );
   }, [header.current]);
 
@@ -94,7 +94,7 @@ export function useDataTableInjectCssVariables({
       (rect) => {
         setCssVar(root.current, VAR_FOOTER_HEIGHT, `${rect.height}px`);
       },
-      () => setCssVar(root.current, VAR_FOOTER_HEIGHT, '0px')
+      () => setCssVar(root.current, VAR_FOOTER_HEIGHT, '0')
     );
   }, [footer.current]);
 
@@ -104,7 +104,7 @@ export function useDataTableInjectCssVariables({
       (rect) => {
         setCssVar(root.current, VAR_SELECTION_COLUMN_WIDTH, `${rect.width}px`);
       },
-      () => setCssVar(root.current, VAR_SELECTION_COLUMN_WIDTH, '0px')
+      () => setCssVar(root.current, VAR_SELECTION_COLUMN_WIDTH, '0')
     );
   }, [selectionColumnHeader.current]);
 
@@ -132,7 +132,7 @@ export function useDataTableInjectCssVariables({
       const diff = tableRect.height - scrollRect.height;
       const relative = diff < 0;
       setCssVar(root.current, '--mantine-datatable-footer-position', relative ? 'relative' : 'sticky');
-      setCssVar(root.current, '--mantine-datatable-footer-bottom', relative ? `${diff}px` : '0px');
+      setCssVar(root.current, '--mantine-datatable-footer-bottom', relative ? `${diff}px` : '0');
     }
 
     function processLastRowBottomBorder() {

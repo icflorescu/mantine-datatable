@@ -9,8 +9,8 @@
   color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-3));
   opacity: 0;
   transition: opacity 0.2s;
-  padding-top: var(--mantine-datatable-header-height, 0px);
-  padding-bottom: var(--mantine-datatable-footer-height, 0px);
+  padding-top: var(--mantine-datatable-header-height, 0);
+  padding-bottom: var(--mantine-datatable-footer-height, 0);
 
   &[data-active] {
     opacity: 1;
