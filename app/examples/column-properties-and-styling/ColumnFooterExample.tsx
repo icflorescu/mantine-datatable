@@ -8,7 +8,7 @@ import { employees } from '~/data';
 
 const records = employees.slice(0, 10);
 
-export function ColumnFooterExample() {
+export function ColumnFooterExample({ height }: { height?: number }) {
   return (
     // example-start
     <DataTable
@@ -16,6 +16,8 @@ export function ColumnFooterExample() {
       withColumnBorders
       striped
       records={records}
+      height={height}
+      withRowBorders
       columns={[
         {
           accessor: 'name',

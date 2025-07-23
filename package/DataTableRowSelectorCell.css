@@ -43,7 +43,7 @@
   }
 
   &[data-shadow-visible]::after {
-    opacity: 1;
+    opacity: var(--mantine-datatable-left-shadow-opacity);
   }
 }
 

@@ -37,6 +37,17 @@
     linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0)),
     linear-gradient(to right, rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0) 30%);
 
+  --mantine-datatable-header-height: 0px;
+  --mantine-datatable-footer-height: 0px;
+  --mantine-datatable-selection-column-width: 0px;
+  --mantine-datatable-top-shadow-opacity: 0;
+  --mantine-datatable-left-shadow-opacity: 0;
+  --mantine-datatable-bottom-shadow-opacity: 0;
+  --mantine-datatable-right-shadow-opacity: 0;
+  --mantine-datatable-footer-position: sticky;
+  --mantine-datatable-footer-bottom: 0px;
+  --mantine-datatable-last-row-border-bottom: unset;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -91,6 +102,10 @@
   tbody tr:last-of-type {
     border-bottom: 0;
   }
+
+  tr:last-of-type:not(.mantine-datatable-empty-row) td {
+    border-bottom: var(--mantine-datatable-last-row-border-bottom);
+  }
 }
 
 .mantine-datatable-vertical-align-top td {
@@ -127,7 +142,7 @@
       width: var(--mantine-spacing-xs);
       background: var(--mantine-datatable-shadow-background-right);
       pointer-events: none;
-      opacity: 0;
+      opacity: var(--mantine-datatable-right-shadow-opacity);
       transition: opacity 0.2s;
     }
   }
@@ -156,15 +171,6 @@
       background: var(--mantine-datatable-selection-color);
     }
   }
-
-  &-scrolled {
-    th:last-of-type,
-    td:not(.mantine-datatable-row-expansion-cell):last-of-type {
-      &::after {
-        opacity: 1;
-      }
-    }
-  }
 }
 
 .mantine-datatable-pin-first-column {
@@ -188,7 +194,7 @@
       width: var(--mantine-spacing-xs);
       background: var(--mantine-datatable-shadow-background-left);
       pointer-events: none;
-      opacity: 0;
+      opacity: var(--mantine-datatable-left-shadow-opacity);
       transition: opacity 0.2s;
     }
   }
@@ -233,18 +239,6 @@
       left: 0;
       right: 0;
       background: var(--mantine-datatable-selection-color);
-    }
-  }
-
-  &-scrolled:not(.mantine-datatable-selection-column-visible) th:first-of-type,
-  &-scrolled:not(.mantine-datatable-selection-column-visible)
-    td:not(.mantine-datatable-row-expansion-cell):first-of-type,
-  &-scrolled.mantine-datatable-selection-column-visible th:first-of-type,
-  &-scrolled.mantine-datatable-selection-column-visible tr:not(:nth-of-type(2)) th:nth-of-type(2),
-  &-scrolled.mantine-datatable-selection-column-visible th.mantine-datatable-column-group-header-cell:nth-of-type(2),
-  &-scrolled.mantine-datatable-selection-column-visible td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
-    &::after {
-      opacity: 1;
     }
   }
 }

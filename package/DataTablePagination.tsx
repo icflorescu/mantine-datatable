@@ -1,6 +1,5 @@
 import { Box, Pagination, Text, rem, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
 import clsx from 'clsx';
-import { type ForwardedRef } from 'react';
 import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import { getPaginationCssVariables } from './cssVariables';
 import { useMediaQueryStringOrFunction } from './hooks';
@@ -20,7 +19,6 @@ type DataTablePaginationComponentProps = WithOptionalProperty<
   recordsLength: number | undefined;
   horizontalSpacing: MantineSpacing | undefined;
   noRecordsText: string;
-  ref: ForwardedRef<HTMLDivElement>;
 };
 
 export function DataTablePagination({
@@ -46,7 +44,6 @@ export function DataTablePagination({
   horizontalSpacing,
   paginationWrapBreakpoint,
   getPaginationControlProps,
-  ref,
 }: DataTablePaginationComponentProps) {
   let paginationTextValue: React.ReactNode;
   if (totalRecords) {
@@ -68,7 +65,6 @@ export function DataTablePagination({
 
   return (
     <Box
-      ref={ref}
       px={horizontalSpacing ?? 'xs'}
       py="xs"
       className={clsx('mantine-datatable-pagination', className)}
