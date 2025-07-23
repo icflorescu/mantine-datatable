@@ -2,3 +2,5 @@ onlyBuiltDependencies:
   - esbuild
   - sharp
   - unrs-resolver
+packages:
+  - package

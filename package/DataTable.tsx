@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
-import { useDebouncedCallback, useMergedRef } from '@mantine/hooks';
+import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -14,8 +14,7 @@ import { DataTableScrollArea } from './DataTableScrollArea';
 import { getTableCssVariables } from './cssVariables';
 import {
   useDataTableColumns,
-  useElementOuterSize,
-  useIsomorphicLayoutEffect,
+  useDataTableInjectCssVariables,
   useLastSelectionChangeIndex,
   useRowExpansion,
 } from './hooks';
@@ -131,12 +130,6 @@ export function DataTable<T>({
   tableWrapper,
   ...otherProps
 }: DataTableProps<T>) {
-  const {
-    ref: localScrollViewportRef,
-    width: scrollViewportWidth,
-    height: scrollViewportHeight,
-  } = useElementOuterSize<HTMLDivElement>();
-
   const effectiveColumns = useMemo(() => {
     return groups?.flatMap((group) => group.columns) ?? columns!;
   }, [columns, groups]);
@@ -150,84 +143,28 @@ export function DataTable<T>({
     columns: effectiveColumns,
   });
 
-  const { ref: headerRef, height: headerHeight } = useElementOuterSize<HTMLTableSectionElement>();
-  const { ref: localTableRef, width: tableWidth, height: tableHeight } = useElementOuterSize<HTMLTableElement>();
-  const { ref: footerRef, height: footerHeight } = useElementOuterSize<HTMLTableSectionElement>();
-  const { ref: paginationRef, height: paginationHeight } = useElementOuterSize<HTMLDivElement>();
-  const { ref: selectionColumnHeaderRef, width: selectionColumnWidth } = useElementOuterSize<HTMLTableCellElement>();
+  const { refs, onScroll: handleScrollPositionChange } = useDataTableInjectCssVariables({
+    scrollCallbacks: {
+      onScroll,
+      onScrollToTop,
+      onScrollToBottom,
+      onScrollToLeft,
+      onScrollToRight,
+    },
+    withRowBorders: otherProps.withRowBorders,
+  });
 
-  const mergedTableRef = useMergedRef(localTableRef, tableRef);
-  const mergedViewportRef = useMergedRef(localScrollViewportRef, scrollViewportRef);
-
-  const [scrolledToTop, setScrolledToTop] = useState(true);
-  const [scrolledToBottom, setScrolledToBottom] = useState(true);
-  const [scrolledToLeft, setScrolledToLeft] = useState(true);
-  const [scrolledToRight, setScrolledToRight] = useState(true);
+  const mergedTableRef = useMergedRef(refs.table, tableRef);
+  const mergedViewportRef = useMergedRef(refs.scrollViewport, scrollViewportRef);
 
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
-  const processScrolling = useCallback(() => {
-    const scrollTop = localScrollViewportRef.current?.scrollTop ?? 0;
-    const scrollLeft = localScrollViewportRef.current?.scrollLeft ?? 0;
-
-    if (fetching || tableHeight <= scrollViewportHeight) {
-      setScrolledToTop(true);
-      setScrolledToBottom(true);
-    } else {
-      const newScrolledToTop = scrollTop === 0;
-      const newScrolledToBottom = tableHeight - scrollTop - scrollViewportHeight < 1;
-      setScrolledToTop(newScrolledToTop);
-      setScrolledToBottom(newScrolledToBottom);
-      if (newScrolledToTop && newScrolledToTop !== scrolledToTop) onScrollToTop?.();
-      if (newScrolledToBottom && newScrolledToBottom !== scrolledToBottom) onScrollToBottom?.();
-    }
-
-    if (fetching || tableWidth === scrollViewportWidth) {
-      setScrolledToLeft(true);
-      setScrolledToRight(true);
-    } else {
-      const newScrolledToLeft = scrollLeft === 0;
-      const newScrolledToRight = tableWidth - scrollLeft - scrollViewportWidth < 1;
-      setScrolledToLeft(newScrolledToLeft);
-      setScrolledToRight(newScrolledToRight);
-      if (newScrolledToLeft && newScrolledToLeft !== scrolledToLeft) onScrollToLeft?.();
-      if (newScrolledToRight && newScrolledToRight !== scrolledToRight) onScrollToRight?.();
-    }
-  }, [
-    fetching,
-    onScrollToBottom,
-    onScrollToLeft,
-    onScrollToRight,
-    onScrollToTop,
-    scrollViewportHeight,
-    localScrollViewportRef,
-    scrollViewportWidth,
-    scrolledToBottom,
-    scrolledToLeft,
-    scrolledToRight,
-    scrolledToTop,
-    tableHeight,
-    tableWidth,
-  ]);
-
-  useIsomorphicLayoutEffect(processScrolling, [processScrolling]);
-
-  const debouncedProcessScrolling = useDebouncedCallback(processScrolling, 50);
-
-  const handleScrollPositionChange = useCallback(
-    (e: { x: number; y: number }) => {
-      onScroll?.(e);
-      debouncedProcessScrolling();
-    },
-    [debouncedProcessScrolling, onScroll]
-  );
-
   const handlePageChange = useCallback(
     (page: number) => {
-      localScrollViewportRef.current?.scrollTo({ top: 0, left: 0 });
+      refs.scrollViewport.current?.scrollTo({ top: 0, left: 0 });
       onPageChange!(page);
     },
-    [onPageChange, localScrollViewportRef]
+    [onPageChange, refs.scrollViewport]
   );
 
   const recordsLength = records?.length;
@@ -263,7 +200,7 @@ export function DataTable<T>({
   ]);
 
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
-  const selectorCellShadowVisible = selectionColumnVisible && !scrolledToLeft && !pinFirstColumn;
+  const selectorCellShadowVisible = selectionColumnVisible && !pinFirstColumn;
 
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
@@ -278,6 +215,7 @@ export function DataTable<T>({
   return (
     <DataTableColumnsProvider {...dragToggle}>
       <Box
+        ref={refs.root}
         {...marginProperties}
         className={clsx(
           'mantine-datatable',
@@ -311,14 +249,8 @@ export function DataTable<T>({
       >
         <DataTableScrollArea
           viewportRef={mergedViewportRef}
-          topShadowVisible={!scrolledToTop}
-          leftShadowVisible={!scrolledToLeft}
           leftShadowBehind={selectionColumnVisible || !!pinFirstColumn}
-          rightShadowVisible={!scrolledToRight}
           rightShadowBehind={pinLastColumn}
-          bottomShadowVisible={!scrolledToBottom}
-          headerHeight={headerHeight}
-          footerHeight={footerHeight}
           onScrollPositionChange={handleScrollPositionChange}
           scrollAreaProps={scrollAreaProps}
         >
@@ -332,20 +264,15 @@ export function DataTable<T>({
                   [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
                   'mantine-datatable-vertical-align-top': verticalAlign === 'top',
                   'mantine-datatable-vertical-align-bottom': verticalAlign === 'bottom',
-                  'mantine-datatable-last-row-border-bottom-visible':
-                    otherProps.withRowBorders && tableHeight < scrollViewportHeight,
                   'mantine-datatable-pin-last-column': pinLastColumn,
-                  'mantine-datatable-pin-last-column-scrolled': !scrolledToRight && pinLastColumn,
                   'mantine-datatable-selection-column-visible': selectionColumnVisible,
                   'mantine-datatable-pin-first-column': pinFirstColumn,
-                  'mantine-datatable-pin-first-column-scrolled': !scrolledToLeft && pinFirstColumn,
                   'mantine-datatable-resizable-columns': hasResizableColumns,
                 },
                 classNames?.table
               )}
               style={{
                 ...styles?.table,
-                '--mantine-datatable-selection-column-width': `${selectionColumnWidth}px`,
               }}
               data-striped={(recordsLength && striped) || undefined}
               data-highlight-on-hover={highlightOnHover || undefined}
@@ -354,8 +281,8 @@ export function DataTable<T>({
               {noHeader ? null : (
                 <DataTableColumnsProvider {...dragToggle}>
                   <DataTableHeader<T>
-                    ref={headerRef}
-                    selectionColumnHeaderRef={selectionColumnHeaderRef}
+                    ref={refs.header}
+                    selectionColumnHeaderRef={refs.selectionColumnHeader}
                     className={classNames?.header}
                     style={styles?.header}
                     columns={effectiveColumns}
@@ -456,14 +383,13 @@ export function DataTable<T>({
 
               {effectiveColumns.some(({ footer }) => footer) && (
                 <DataTableFooter<T>
-                  ref={footerRef}
+                  ref={refs.footer}
                   className={classNames?.footer}
                   style={styles?.footer}
                   columns={effectiveColumns}
                   defaultColumnProps={defaultColumnProps}
                   selectionVisible={selectionColumnVisible}
                   selectorCellShadowVisible={selectorCellShadowVisible}
-                  scrollDiff={tableHeight - scrollViewportHeight}
                 />
               )}
             </Table>
@@ -472,7 +398,6 @@ export function DataTable<T>({
 
         {page && (
           <DataTablePagination
-            ref={paginationRef}
             className={classNames?.pagination}
             style={styles?.pagination}
             horizontalSpacing={horizontalSpacing}
@@ -498,8 +423,6 @@ export function DataTable<T>({
           />
         )}
         <DataTableLoader
-          pt={headerHeight}
-          pb={paginationHeight}
           fetching={fetching}
           backgroundBlur={loaderBackgroundBlur}
           customContent={customLoader}
@@ -507,13 +430,7 @@ export function DataTable<T>({
           type={loaderType}
           color={loaderColor}
         />
-        <DataTableEmptyState
-          pt={headerHeight}
-          pb={paginationHeight}
-          icon={noRecordsIcon}
-          text={noRecordsText}
-          active={!fetching && !recordsLength}
-        >
+        <DataTableEmptyState icon={noRecordsIcon} text={noRecordsText} active={!fetching && !recordsLength}>
           {emptyState}
         </DataTableEmptyState>
       </Box>
