@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.2.0 (2025-07-23)
+
+- **Significant performance improvement by reducing re-renders**, many thanks to [yergom](https://github.com/yergom) for PR [#732](https://github.com/icflorescu/mantine-datatable/pull/732)
+- Update deps to ensure compatibility with Mantine 8.2.0
+
 ## 8.1.3 (2025-07-21)
 
 - Enhance column resizing behavior for closed columns - many thanks to [Giovambattista Fazioli](https://github.com/gfazioli) for PR [#711](https://github.com/icflorescu/mantine-datatable/pull/711)
