@@ -65,7 +65,7 @@ export const useDataTableColumns = <T>({
       if (!updatedColumnsToggle.find((c) => c.accessor === col.accessor)) {
         updatedColumnsToggle.push({
           accessor: col.accessor as string,
-          defaultToggle: col.defaultToggle || true,
+          defaultToggle: col.defaultToggle === undefined ? true : col.defaultToggle,
           toggleable: col.toggleable as boolean,
           toggled: col.defaultToggle === undefined ? true : col.defaultToggle,
         });
