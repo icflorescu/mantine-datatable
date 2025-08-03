@@ -190,7 +190,6 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
       className="mantine-datatable-header-resizable-handle"
       style={{
         cursor: isResizing ? 'col-resize' : undefined,
-        ...(isRTL ? { right: 'auto', left: '-6px' } : {}),
       }}
       onMouseDown={handleMouseDown}
       onDoubleClick={handleDoubleClick}
