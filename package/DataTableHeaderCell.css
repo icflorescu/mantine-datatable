@@ -83,6 +83,12 @@
   }
 }
 
+/* RTL support: position handle on the left side in RTL */
+[dir="rtl"] .mantine-datatable-header-resizable-handle {
+  right: auto !important;
+  left: -6px !important;
+}
+
 tr:hover .mantine-datatable-header-resizable-handle {
   opacity: 1;
 }
