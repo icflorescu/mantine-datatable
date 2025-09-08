@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -156,47 +156,49 @@ export function DataTable<T>({
 
   const mergedTableRef = useMergedRef(refs.table, tableRef);
   const mergedViewportRef = useMergedRef(refs.scrollViewport, scrollViewportRef);
-
-  // Track when we should reset scroll due to pagination, but defer until data is rendered
-  const shouldResetScrollOnDataUpdate = useRef(false);
-  const prevPageRef = useRef(page);
-
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
+  // Track when we should reset scroll due to pagination, but defer until data is rendered
+  const resetScrollPending = useRef(false);
+  const prevPageRef = useRef(page);
+  const recordsAtPageChangeRef = useRef<typeof records | undefined>(records);
+
   const handlePageChange = useCallback(
-    (page: number) => {
-      // Defer scrolling to the top until after loading completes and rows are rendered
-      shouldResetScrollOnDataUpdate.current = true;
-      onPageChange!(page);
+    (newPage: number) => {
+      resetScrollPending.current = true;
+      recordsAtPageChangeRef.current = records;
+      onPageChange!(newPage);
     },
-    [onPageChange]
+    [onPageChange, records]
   );
 
   // Handle externally-driven page changes
   useEffect(() => {
     if (prevPageRef.current !== page) {
-      shouldResetScrollOnDataUpdate.current = true;
+      resetScrollPending.current = true;
+      recordsAtPageChangeRef.current = records;
       prevPageRef.current = page;
     }
-  }, [page]);
+  }, [page, records]);
 
   const recordsLength = records?.length;
 
-  // Perform the scroll reset only after fetching finishes and new rows have rendered
-  useEffect(() => {
-    if (!shouldResetScrollOnDataUpdate.current) return;
-
-    // If still fetching, wait
+  // Reset scroll position when changing pages (sync) or when records change (async)
+  useLayoutEffect(() => {
+    if (!resetScrollPending.current) return;
     if (fetching) return;
+    if (records === recordsAtPageChangeRef.current) return;
 
-    // Fetching is false; schedule scroll after paint to ensure DOM is updated
+    const viewport = refs.scrollViewport.current;
+    if (!viewport) return;
+
     const raf = requestAnimationFrame(() => {
-      refs.scrollViewport.current?.scrollTo({ top: 0, left: 0 });
-      shouldResetScrollOnDataUpdate.current = false;
+      viewport.scrollTo({ top: 0, left: 0 });
+      resetScrollPending.current = false;
     });
 
     return () => cancelAnimationFrame(raf);
-  }, [fetching, recordsLength, refs.scrollViewport]);
+  }, [fetching, records, refs.scrollViewport]);
 
   const recordIds = records?.map((record) => getRecordId(record, idAccessor));
   const selectionColumnVisible = !!selectedRecords;
