@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -157,17 +157,47 @@ export function DataTable<T>({
   const mergedTableRef = useMergedRef(refs.table, tableRef);
   const mergedViewportRef = useMergedRef(refs.scrollViewport, scrollViewportRef);
 
+  // Track when we should reset scroll due to pagination, but defer until data is rendered
+  const shouldResetScrollOnDataUpdate = useRef(false);
+  const prevPageRef = useRef(page);
+
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
 
   const handlePageChange = useCallback(
     (page: number) => {
-      refs.scrollViewport.current?.scrollTo({ top: 0, left: 0 });
+      // Defer scrolling to the top until after loading completes and rows are rendered
+      shouldResetScrollOnDataUpdate.current = true;
       onPageChange!(page);
     },
-    [onPageChange, refs.scrollViewport]
+    [onPageChange]
   );
 
+  // Handle externally-driven page changes
+  useEffect(() => {
+    if (prevPageRef.current !== page) {
+      shouldResetScrollOnDataUpdate.current = true;
+      prevPageRef.current = page;
+    }
+  }, [page]);
+
   const recordsLength = records?.length;
+
+  // Perform the scroll reset only after fetching finishes and new rows have rendered
+  useEffect(() => {
+    if (!shouldResetScrollOnDataUpdate.current) return;
+
+    // If still fetching, wait
+    if (fetching) return;
+
+    // Fetching is false; schedule scroll after paint to ensure DOM is updated
+    const raf = requestAnimationFrame(() => {
+      refs.scrollViewport.current?.scrollTo({ top: 0, left: 0 });
+      shouldResetScrollOnDataUpdate.current = false;
+    });
+
+    return () => cancelAnimationFrame(raf);
+  }, [fetching, recordsLength, refs.scrollViewport]);
+
   const recordIds = records?.map((record) => getRecordId(record, idAccessor));
   const selectionColumnVisible = !!selectedRecords;
   const selectedRecordIds = selectedRecords?.map((record) => getRecordId(record, idAccessor));
