@@ -10,7 +10,12 @@ import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
 type DataTablePaginationComponentProps = WithOptionalProperty<
   WithRequiredProperty<
     DataTablePaginationProps,
-    'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint' | 'getPaginationControlProps'
+    | 'loadingText'
+    | 'paginationSize'
+    | 'paginationGap'
+    | 'recordsPerPageLabel'
+    | 'paginationWrapBreakpoint'
+    | 'getPaginationControlProps'
   >,
   'onRecordsPerPageChange' | 'recordsPerPageOptions' | 'renderPagination'
 > & {
@@ -33,6 +38,7 @@ export function DataTablePagination({
   paginationActiveTextColor,
   paginationActiveBackgroundColor,
   paginationSize,
+  paginationGap,
   loadingText,
   noRecordsText,
   paginationText,
@@ -72,6 +78,9 @@ export function DataTablePagination({
   );
 
   const isWrapped = !isAbovePaginationWrapBreakpoint;
+
+  const gapValue =
+    typeof paginationGap === 'number' ? rem(paginationGap) : `var(--mantine-spacing-${paginationGap ?? 'xs'})`;
 
   const Controls: PaginationRenderContext['Controls'] = {
     Text: (props) => (
@@ -150,7 +159,13 @@ export function DataTablePagination({
       px={horizontalSpacing ?? 'xs'}
       py="xs"
       className={clsx('mantine-datatable-pagination', className)}
-      style={[{ flexDirection: isWrapped ? 'column' : 'row' }, style]}
+      style={[
+        {
+          flexDirection: isWrapped ? 'column' : 'row',
+          '--datatable-pagination-gap': gapValue,
+        },
+        style,
+      ]}
     >
       {typeof renderPagination === 'function' ? (
         renderPagination(ctx)
