@@ -39,9 +39,8 @@ export default function PaginationExampleWithPageSizeSelector() {
           render: ({ birthDate }) => dayjs(birthDate).format('MMM D YYYY'),
         },
       ]}
-      paginationGap={100}
       totalRecords={employees.length}
-      paginationActiveBackgroundColor="red"
+      paginationActiveBackgroundColor="grape"
       recordsPerPage={pageSize}
       page={page}
       onPageChange={(p) => setPage(p)}
