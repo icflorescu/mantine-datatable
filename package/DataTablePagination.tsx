@@ -10,7 +10,12 @@ import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
 type DataTablePaginationComponentProps = WithOptionalProperty<
   WithRequiredProperty<
     DataTablePaginationProps,
-    'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint' | 'getPaginationControlProps'
+    | 'loadingText'
+    | 'paginationSize'
+    | 'recordsPerPageLabel'
+    | 'paginationWrapBreakpoint'
+    | 'getPaginationControlProps'
+    | 'renderPagination'
   >,
   'onRecordsPerPageChange' | 'recordsPerPageOptions'
 > & {
