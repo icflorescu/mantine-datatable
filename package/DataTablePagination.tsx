@@ -125,6 +125,7 @@ export function DataTablePagination({
 
   const ctx: PaginationRenderContext = {
     state: {
+      paginationSize,
       page,
       totalPages,
       totalRecords,
