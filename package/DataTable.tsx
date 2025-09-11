@@ -76,6 +76,7 @@ export function DataTable<T>({
     }
     return {};
   },
+  renderPagination,
   loaderBackgroundBlur,
   customLoader,
   loaderSize,
@@ -420,6 +421,7 @@ export function DataTable<T>({
             noRecordsText={noRecordsText}
             loadingText={loadingText}
             recordsLength={recordsLength}
+            renderPagination={renderPagination}
           />
         )}
         <DataTableLoader
