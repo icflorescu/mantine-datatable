@@ -2,6 +2,7 @@ import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { Fragment } from 'react';
 import { PRODUCT_NAME } from '~/app/config';
+import PaginationCustomRenderExample from '~/app/examples/pagination/PaginationCustomRenderExample';
 import { CodeBlock } from '~/components/CodeBlock';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
@@ -23,6 +24,7 @@ export default async function PaginationExamplePage() {
   const code = await allPromiseProps({
     'PaginationExample.tsx': readCodeFile<string>(`${PATH}/PaginationExample.tsx`),
     'PaginationExampleWithControlProps.tsx': readCodeFile<string>(`${PATH}/PaginationExampleWithControlProps.tsx`),
+    'PaginationCustomRenderExample.tsx': readCodeFile<string>(`${PATH}/PaginationCustomRenderExample.tsx`),
     'PaginationExampleWithPageSizeSelector.tsx': readCodeFile<string>(
       `${PATH}/PaginationExampleWithPageSizeSelector.tsx`
     ),
@@ -150,6 +152,17 @@ export default async function PaginationExamplePage() {
       </UnorderedList>
       <CodeBlock code={code['PaginationExampleWithPageSizeSelector.tsx']} />
       <PaginationExampleWithPageSizeSelector />
+
+      <PageSubtitle value="Customizing pagination controls" />
+      <Txt>
+        You can fully customize the pagination controls by using the <Code>renderPagination</Code> callback. This
+        callback receives the current pagination context and should return the desired pagination controls. For example,
+        if you’re not happy with the default order of pagination controls or wish to inject custom elements between, you
+        can do it like this:
+      </Txt>
+      <CodeBlock code={code['PaginationCustomRenderExample.tsx']} />
+      <PaginationCustomRenderExample />
+
       <PageSubtitle value="Using pagination control props" />
       <Txt>
         You can provide additional props to pagination controls by using the <Code>getPaginationControlProps</Code>{' '}
