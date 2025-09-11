@@ -155,10 +155,21 @@ export default async function PaginationExamplePage() {
 
       <PageSubtitle value="Customizing pagination controls" />
       <Txt>
-        You can fully customize the pagination controls by using the <Code>renderPagination</Code> callback. This
-        callback receives the current pagination context and should return the desired pagination controls. For example,
-        if you’re not happy with the default order of pagination controls or wish to inject custom elements between, you
-        can do it like this:
+        You can fully customize pagination by providing the <Code>renderPagination</Code> prop. The callback receives a
+        context with default controls as factories:
+        <UnorderedList>
+          <li>
+            <Code>Controls.Text</Code>: the pagination text.
+          </li>
+          <li>
+            <Code>Controls.PageSizeSelector</Code>: the page size selector (if enabled).
+          </li>
+          <li>
+            <Code>Controls.Pagination</Code>: the pagination component.
+          </li>
+        </UnorderedList>
+        This allows you to render them in any order, inject your own elements, or override their props. The example
+        below shows how to add a &quot;jump to page&quot; control between page size selector and pagination controls.
       </Txt>
       <CodeBlock code={code['PaginationCustomRenderExample.tsx']} />
       <PaginationCustomRenderExample />
