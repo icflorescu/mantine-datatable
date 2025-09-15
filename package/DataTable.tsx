@@ -20,7 +20,7 @@ import {
 } from './hooks';
 import type { DataTableProps } from './types';
 import { TEXT_SELECTION_DISABLED } from './utilityClasses';
-import { differenceBy, getRecordId, uniqBy } from './utils';
+import { differenceBy, flattenColumns, getRecordId, uniqBy } from './utils';
 
 export function DataTable<T>({
   withTableBorder,
@@ -131,7 +131,7 @@ export function DataTable<T>({
   ...otherProps
 }: DataTableProps<T>) {
   const effectiveColumns = useMemo(() => {
-    return groups?.flatMap((group) => group.columns) ?? columns!;
+    return groups ? flattenColumns(groups) : columns!;
   }, [columns, groups]);
 
   const hasResizableColumns = useMemo(() => {
@@ -300,6 +300,7 @@ export function DataTable<T>({
                     selectorCellShadowVisible={selectorCellShadowVisible}
                     selectionColumnClassName={selectionColumnClassName}
                     selectionColumnStyle={selectionColumnStyle}
+                    withColumnBorders={otherProps.withColumnBorders}
                   />
                 </DataTableColumnsProvider>
               )}
