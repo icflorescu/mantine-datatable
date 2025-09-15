@@ -8,16 +8,18 @@ import { companies, type Company } from '~/data';
 export default function ResizingExample() {
   const key = 'resize-example';
 
+  const [resizable, setResizable] = useState<boolean>(true);
   const [withTableBorder, setWithTableBorder] = useState<boolean>(true);
   const [withColumnBorders, setWithColumnBorders] = useState<boolean>(true);
 
   const { effectiveColumns, resetColumnsWidth } = useDataTableColumns<Company>({
     key,
     columns: [
-      { accessor: 'name', width: 200, resizable: true },
-      { accessor: 'streetAddress', resizable: true },
-      { accessor: 'city', ellipsis: true, resizable: true },
-      { accessor: 'state', textAlign: 'right' },
+      { accessor: 'name', resizable },
+      { accessor: 'streetAddress', resizable },
+      { accessor: 'city', resizable },
+      { accessor: 'state', resizable },
+      { accessor: 'missionStatement', resizable },
     ],
   });
 
@@ -32,6 +34,12 @@ export default function ResizingExample() {
       />
       <Group grow justify="space-between">
         <Group justify="flex-start">
+          <Switch
+            checked={resizable}
+            onChange={(event) => setResizable(event.currentTarget.checked)}
+            labelPosition="left"
+            label="Resizable"
+          />
           <Switch
             checked={withTableBorder}
             onChange={(event) => setWithTableBorder(event.currentTarget.checked)}
