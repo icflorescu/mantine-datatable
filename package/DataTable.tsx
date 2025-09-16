@@ -209,6 +209,48 @@ export function DataTable<T>({
     return () => cancelAnimationFrame(raf);
   }, [hasResizableColumns]);
 
+  // If user resets widths to 'initial', recompute widths and re-enable fixed layout.
+  const allResizableWidthsInitial = useMemo(() => {
+    if (!hasResizableColumns) return false;
+    return effectiveColumns
+      .filter((c) => c.resizable && !c.hidden && c.accessor !== '__selection__')
+      .every((c) => c.width === undefined || c.width === '' || c.width === 'initial');
+  }, [effectiveColumns, hasResizableColumns]);
+
+  useEffect(() => {
+    if (!hasResizableColumns) return;
+    if (!allResizableWidthsInitial) return;
+
+    // Temporarily disable fixed layout so natural widths can be measured
+    setFixedLayoutEnabled(false);
+
+    let raf = requestAnimationFrame(() => {
+      const thead = refs.header.current;
+      if (!thead) {
+        setFixedLayoutEnabled(true);
+        return;
+      }
+
+      const headerCells = Array.from(thead.querySelectorAll<HTMLTableCellElement>('th[data-accessor]'));
+
+      const updates = headerCells
+        .map((cell) => {
+          const accessor = cell.getAttribute('data-accessor');
+          if (!accessor || accessor === '__selection__') return null;
+          const width = Math.ceil(cell.getBoundingClientRect().width);
+          return { accessor, width: `${width}px` } as const;
+        })
+        .filter(Boolean) as Array<{ accessor: string; width: string }>;
+
+      setTimeout(() => {
+        if (updates.length) dragToggle.setMultipleColumnWidths(updates);
+        setFixedLayoutEnabled(true);
+      }, 0);
+    });
+
+    return () => cancelAnimationFrame(raf);
+  }, [hasResizableColumns, allResizableWidthsInitial, refs.header, dragToggle]);
+
   const handlePageChange = useCallback(
     (page: number) => {
       refs.scrollViewport.current?.scrollTo({ top: 0, left: 0 });
