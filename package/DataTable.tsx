@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -138,6 +138,11 @@ export function DataTable<T>({
     return effectiveColumns.some((col) => col.resizable);
   }, [effectiveColumns]);
 
+  // When columns are resizable, start with auto layout to let the browser
+  // compute natural widths, then capture them and switch to fixed layout.
+  const [fixedLayoutEnabled, setFixedLayoutEnabled] = useState(false);
+  const prevHasResizableRef = useRef<boolean | null>(null);
+
   const dragToggle = useDataTableColumns({
     key: storeColumnsKey,
     columns: effectiveColumns,
@@ -158,6 +163,51 @@ export function DataTable<T>({
   const mergedViewportRef = useMergedRef(refs.scrollViewport, scrollViewportRef);
 
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
+
+  // Initialize content-based widths when resizable columns are present.
+  useEffect(() => {
+    // If resizable just became disabled, revert to auto layout
+    if (!hasResizableColumns) {
+      prevHasResizableRef.current = false;
+      setFixedLayoutEnabled(false);
+      return;
+    }
+
+    // Only run when switching from non-resizable -> resizable
+    if (prevHasResizableRef.current === true) return;
+    prevHasResizableRef.current = true;
+
+    let raf = requestAnimationFrame(() => {
+      const thead = refs.header.current;
+      if (!thead) {
+        setFixedLayoutEnabled(true);
+        return;
+      }
+
+      const headerCells = Array.from(thead.querySelectorAll<HTMLTableCellElement>('th[data-accessor]'));
+
+      if (headerCells.length === 0) {
+        setFixedLayoutEnabled(true);
+        return;
+      }
+
+      const updates = headerCells
+        .map((cell) => {
+          const accessor = cell.getAttribute('data-accessor');
+          if (!accessor || accessor === '__selection__') return null;
+          const width = Math.ceil(cell.getBoundingClientRect().width);
+          return { accessor, width: `${width}px` } as const;
+        })
+        .filter(Boolean) as Array<{ accessor: string; width: string }>;
+
+      setTimeout(() => {
+        if (updates.length) dragToggle.setMultipleColumnWidths(updates);
+        setFixedLayoutEnabled(true);
+      }, 0);
+    });
+
+    return () => cancelAnimationFrame(raf);
+  }, [hasResizableColumns]);
 
   const handlePageChange = useCallback(
     (page: number) => {
@@ -267,7 +317,7 @@ export function DataTable<T>({
                   'mantine-datatable-pin-last-column': pinLastColumn,
                   'mantine-datatable-selection-column-visible': selectionColumnVisible,
                   'mantine-datatable-pin-first-column': pinFirstColumn,
-                  'mantine-datatable-resizable-columns': hasResizableColumns,
+                  'mantine-datatable-resizable-columns': fixedLayoutEnabled,
                 },
                 classNames?.table
               )}

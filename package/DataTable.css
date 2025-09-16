@@ -61,7 +61,7 @@
 }
 
 .mantine-datatable-resizable-columns {
-  table-layout: auto;
+  table-layout: fixed;
 }
 
 .mantine-datatable-resizable-columns th {
