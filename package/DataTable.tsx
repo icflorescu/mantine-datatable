@@ -191,14 +191,27 @@ export function DataTable<T>({
         return;
       }
 
-      const updates = headerCells
+      let measured = headerCells
         .map((cell) => {
           const accessor = cell.getAttribute('data-accessor');
           if (!accessor || accessor === '__selection__') return null;
-          const width = Math.ceil(cell.getBoundingClientRect().width);
-          return { accessor, width: `${width}px` } as const;
+          const width = Math.round(cell.getBoundingClientRect().width);
+          return { accessor, width } as const;
         })
-        .filter(Boolean) as Array<{ accessor: string; width: string }>;
+        .filter(Boolean) as Array<{ accessor: string; width: number }>;
+
+      const viewport = refs.scrollViewport.current;
+      const viewportWidth = viewport?.clientWidth ?? 0;
+      if (viewportWidth && measured.length) {
+        const total = measured.reduce((acc, u) => acc + u.width, 0);
+        const overflow = total - viewportWidth;
+        if (overflow > 0) {
+          const last = measured[measured.length - 1];
+          last.width = Math.max(50, last.width - overflow);
+        }
+      }
+
+      const updates = measured.map((m) => ({ accessor: m.accessor, width: `${m.width}px` }));
 
       setTimeout(() => {
         if (updates.length) dragToggle.setMultipleColumnWidths(updates);
@@ -233,14 +246,27 @@ export function DataTable<T>({
 
       const headerCells = Array.from(thead.querySelectorAll<HTMLTableCellElement>('th[data-accessor]'));
 
-      const updates = headerCells
+      let measured = headerCells
         .map((cell) => {
           const accessor = cell.getAttribute('data-accessor');
           if (!accessor || accessor === '__selection__') return null;
-          const width = Math.ceil(cell.getBoundingClientRect().width);
-          return { accessor, width: `${width}px` } as const;
+          const width = Math.round(cell.getBoundingClientRect().width);
+          return { accessor, width } as const;
         })
-        .filter(Boolean) as Array<{ accessor: string; width: string }>;
+        .filter(Boolean) as Array<{ accessor: string; width: number }>;
+
+      const viewport = refs.scrollViewport.current;
+      const viewportWidth = viewport?.clientWidth ?? 0;
+      if (viewportWidth && measured.length) {
+        const total = measured.reduce((acc, u) => acc + u.width, 0);
+        const overflow = total - viewportWidth;
+        if (overflow > 0) {
+          const last = measured[measured.length - 1];
+          last.width = Math.max(50, last.width - overflow);
+        }
+      }
+
+      const updates = measured.map((m) => ({ accessor: m.accessor, width: `${m.width}px` }));
 
       setTimeout(() => {
         if (updates.length) dragToggle.setMultipleColumnWidths(updates);
