@@ -16,10 +16,10 @@ export default function ResizingExample() {
     key,
     columns: [
       { accessor: 'name', resizable },
-      { accessor: 'streetAddress', resizable },
-      { accessor: 'city', resizable },
+      { accessor: 'streetAddress', resizable, ellipsis: true },
+      { accessor: 'city', resizable, ellipsis: true },
       { accessor: 'state', resizable },
-      { accessor: 'missionStatement', resizable },
+      { accessor: 'missionStatement', resizable, ellipsis: true },
     ],
   });
 

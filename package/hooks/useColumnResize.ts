@@ -24,10 +24,14 @@ export const useColumnResize = ({ onColumnResize, minColumnWidth = 50 }: UseColu
       event.stopPropagation();
 
       const nextColumn = currentColumn.nextElementSibling as HTMLTableCellElement | null;
-      if (!nextColumn) return false; // Can't resize without next column
+      if (!nextColumn) {
+        return false;
+      }
 
       const nextAccessor = nextColumn.getAttribute('data-accessor');
-      if (!nextAccessor) return false; // Need accessor for next column
+      if (!nextAccessor) {
+        return false;
+      }
 
       const currentWidth = currentColumn.getBoundingClientRect().width;
       const nextWidth = nextColumn.getBoundingClientRect().width;
@@ -57,11 +61,6 @@ export const useColumnResize = ({ onColumnResize, minColumnWidth = 50 }: UseColu
       if (!resizeState || !currentColumnRef.current || !nextColumnRef.current) return;
 
       const deltaX = clientX - resizeState.startX;
-
-      // Calculate new widths with constraints
-      const newCurrentWidth = Math.max(minColumnWidth, resizeState.originalWidths.current + deltaX);
-
-      const newNextWidth = Math.max(minColumnWidth, resizeState.originalWidths.next - deltaX);
 
       // Calculate the actual delta we can apply based on constraints
       const actualDelta = Math.min(
