@@ -87,7 +87,7 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
         currentCol.style.width = `${finalCurrentWidth}px`;
         nextCol.style.width = `${finalNextWidth}px`;
 
-        // Force the table layout to recalculate
+        // Ensure the table maintains fixed layout during resize
         currentCol.style.minWidth = `${finalCurrentWidth}px`;
         currentCol.style.maxWidth = `${finalCurrentWidth}px`;
         nextCol.style.minWidth = `${finalNextWidth}px`;
@@ -141,7 +141,7 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     },
-    [accessor, setMultipleColumnWidths]
+    [accessor, columnRef, setMultipleColumnWidths]
   );
 
   const handleDoubleClick = useCallback(() => {
@@ -150,12 +150,13 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
     const currentColumn = columnRef.current;
     const nextColumn = currentColumn.nextElementSibling as HTMLTableCellElement | null;
 
-    // Reset styles immediately
+    // Clear any inline styles that might interfere with natural sizing
     currentColumn.style.width = '';
     currentColumn.style.minWidth = '';
     currentColumn.style.maxWidth = '';
 
-    const updates = [{ accessor, width: 'initial' }];
+    // Reset current column to auto width
+    const updates = [{ accessor, width: 'auto' }];
 
     if (nextColumn) {
       nextColumn.style.width = '';
@@ -163,17 +164,15 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
       nextColumn.style.maxWidth = '';
 
       const nextAccessor = nextColumn.getAttribute('data-accessor');
-      // Only add to updates if it's not the selection column
+      // Only reset next column if it's not the selection column
       if (nextAccessor && nextAccessor !== '__selection__') {
-        updates.push({ accessor: nextAccessor, width: 'initial' });
+        updates.push({ accessor: nextAccessor, width: 'auto' });
       }
     }
 
-    // Use setTimeout to ensure DOM changes are applied before context update
-    setTimeout(() => {
-      setMultipleColumnWidths(updates);
-    }, 0);
-  }, [accessor, setMultipleColumnWidths]);
+    // Update context - this will trigger re-measurement of natural widths
+    setMultipleColumnWidths(updates);
+  }, [accessor, columnRef, setMultipleColumnWidths]);
 
   return (
     <div

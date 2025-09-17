@@ -1,7 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -134,19 +134,9 @@ export function DataTable<T>({
     return groups?.flatMap((group) => group.columns) ?? columns!;
   }, [columns, groups]);
 
-  const hasResizableColumns = useMemo(() => {
-    return effectiveColumns.some((col) => col.resizable);
-  }, [effectiveColumns]);
-
   // When columns are resizable, start with auto layout to let the browser
   // compute natural widths, then capture them and switch to fixed layout.
   const [fixedLayoutEnabled, setFixedLayoutEnabled] = useState(false);
-  const prevHasResizableRef = useRef<boolean | null>(null);
-
-  const dragToggle = useDataTableColumns({
-    key: storeColumnsKey,
-    columns: effectiveColumns,
-  });
 
   const { refs, onScroll: handleScrollPositionChange } = useDataTableInjectCssVariables({
     scrollCallbacks: {
@@ -159,123 +149,18 @@ export function DataTable<T>({
     withRowBorders: otherProps.withRowBorders,
   });
 
+  const dragToggle = useDataTableColumns({
+    key: storeColumnsKey,
+    columns: effectiveColumns,
+    headerRef: refs.header as any,
+    scrollViewportRef: refs.scrollViewport as any,
+    onFixedLayoutChange: setFixedLayoutEnabled,
+  });
+
   const mergedTableRef = useMergedRef(refs.table, tableRef);
   const mergedViewportRef = useMergedRef(refs.scrollViewport, scrollViewportRef);
 
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
-
-  // Initialize content-based widths when resizable columns are present.
-  useEffect(() => {
-    // If resizable just became disabled, revert to auto layout
-    if (!hasResizableColumns) {
-      prevHasResizableRef.current = false;
-      setFixedLayoutEnabled(false);
-      return;
-    }
-
-    // Only run when switching from non-resizable -> resizable
-    if (prevHasResizableRef.current === true) return;
-    prevHasResizableRef.current = true;
-
-    let raf = requestAnimationFrame(() => {
-      const thead = refs.header.current;
-      if (!thead) {
-        setFixedLayoutEnabled(true);
-        return;
-      }
-
-      const headerCells = Array.from(thead.querySelectorAll<HTMLTableCellElement>('th[data-accessor]'));
-
-      if (headerCells.length === 0) {
-        setFixedLayoutEnabled(true);
-        return;
-      }
-
-      let measured = headerCells
-        .map((cell) => {
-          const accessor = cell.getAttribute('data-accessor');
-          if (!accessor || accessor === '__selection__') return null;
-          const width = Math.round(cell.getBoundingClientRect().width);
-          return { accessor, width } as const;
-        })
-        .filter(Boolean) as Array<{ accessor: string; width: number }>;
-
-      const viewport = refs.scrollViewport.current;
-      const viewportWidth = viewport?.clientWidth ?? 0;
-      if (viewportWidth && measured.length) {
-        const total = measured.reduce((acc, u) => acc + u.width, 0);
-        const overflow = total - viewportWidth;
-        if (overflow > 0) {
-          const last = measured[measured.length - 1];
-          last.width = Math.max(50, last.width - overflow);
-        }
-      }
-
-      const updates = measured.map((m) => ({ accessor: m.accessor, width: `${m.width}px` }));
-
-      setTimeout(() => {
-        if (updates.length) dragToggle.setMultipleColumnWidths(updates);
-        setFixedLayoutEnabled(true);
-      }, 0);
-    });
-
-    return () => cancelAnimationFrame(raf);
-  }, [hasResizableColumns]);
-
-  // If user resets widths to 'initial', recompute widths and re-enable fixed layout.
-  const allResizableWidthsInitial = useMemo(() => {
-    if (!hasResizableColumns) return false;
-    return effectiveColumns
-      .filter((c) => c.resizable && !c.hidden && c.accessor !== '__selection__')
-      .every((c) => c.width === undefined || c.width === '' || c.width === 'initial');
-  }, [effectiveColumns, hasResizableColumns]);
-
-  useEffect(() => {
-    if (!hasResizableColumns) return;
-    if (!allResizableWidthsInitial) return;
-
-    // Temporarily disable fixed layout so natural widths can be measured
-    setFixedLayoutEnabled(false);
-
-    let raf = requestAnimationFrame(() => {
-      const thead = refs.header.current;
-      if (!thead) {
-        setFixedLayoutEnabled(true);
-        return;
-      }
-
-      const headerCells = Array.from(thead.querySelectorAll<HTMLTableCellElement>('th[data-accessor]'));
-
-      let measured = headerCells
-        .map((cell) => {
-          const accessor = cell.getAttribute('data-accessor');
-          if (!accessor || accessor === '__selection__') return null;
-          const width = Math.round(cell.getBoundingClientRect().width);
-          return { accessor, width } as const;
-        })
-        .filter(Boolean) as Array<{ accessor: string; width: number }>;
-
-      const viewport = refs.scrollViewport.current;
-      const viewportWidth = viewport?.clientWidth ?? 0;
-      if (viewportWidth && measured.length) {
-        const total = measured.reduce((acc, u) => acc + u.width, 0);
-        const overflow = total - viewportWidth;
-        if (overflow > 0) {
-          const last = measured[measured.length - 1];
-          last.width = Math.max(50, last.width - overflow);
-        }
-      }
-
-      const updates = measured.map((m) => ({ accessor: m.accessor, width: `${m.width}px` }));
-
-      setTimeout(() => {
-        if (updates.length) dragToggle.setMultipleColumnWidths(updates);
-        setFixedLayoutEnabled(true);
-      }, 0);
-    });
-
-    return () => cancelAnimationFrame(raf);
-  }, [hasResizableColumns, allResizableWidthsInitial, refs.header, dragToggle]);
 
   const handlePageChange = useCallback(
     (page: number) => {
@@ -385,7 +270,7 @@ export function DataTable<T>({
                   'mantine-datatable-pin-last-column': pinLastColumn,
                   'mantine-datatable-selection-column-visible': selectionColumnVisible,
                   'mantine-datatable-pin-first-column': pinFirstColumn,
-                  'mantine-datatable-resizable-columns': fixedLayoutEnabled,
+                  'mantine-datatable-resizable-columns': dragToggle.hasResizableColumns && fixedLayoutEnabled,
                 },
                 classNames?.table
               )}
