@@ -1,5 +1,9 @@
 .mantine-datatable-page-size-selector-button-icon {
   margin: 0 rem(-4px) 0 rem(2px);
+
+  @mixin rtl {
+    margin: 0 rem(2px) 0 rem(-4px);
+  }
 }
 
 .mantine-datatable-page-size-selector-menu-arrow {
