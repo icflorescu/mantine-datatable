@@ -2,6 +2,7 @@ import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { Fragment } from 'react';
 import { PRODUCT_NAME } from '~/app/config';
+import PaginationCustomRenderExample from '~/app/examples/pagination/PaginationCustomRenderExample';
 import { CodeBlock } from '~/components/CodeBlock';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
@@ -23,6 +24,7 @@ export default async function PaginationExamplePage() {
   const code = await allPromiseProps({
     'PaginationExample.tsx': readCodeFile<string>(`${PATH}/PaginationExample.tsx`),
     'PaginationExampleWithControlProps.tsx': readCodeFile<string>(`${PATH}/PaginationExampleWithControlProps.tsx`),
+    'PaginationCustomRenderExample.tsx': readCodeFile<string>(`${PATH}/PaginationCustomRenderExample.tsx`),
     'PaginationExampleWithPageSizeSelector.tsx': readCodeFile<string>(
       `${PATH}/PaginationExampleWithPageSizeSelector.tsx`
     ),
@@ -150,6 +152,28 @@ export default async function PaginationExamplePage() {
       </UnorderedList>
       <CodeBlock code={code['PaginationExampleWithPageSizeSelector.tsx']} />
       <PaginationExampleWithPageSizeSelector />
+
+      <PageSubtitle value="Customizing pagination controls" />
+      <Txt>
+        You can fully customize pagination by providing the <Code>renderPagination</Code> prop. The callback receives a
+        context with default controls as factories:
+        <UnorderedList>
+          <li>
+            <Code>Controls.Text</Code>: the pagination text.
+          </li>
+          <li>
+            <Code>Controls.PageSizeSelector</Code>: the page size selector (if enabled).
+          </li>
+          <li>
+            <Code>Controls.Pagination</Code>: the pagination component.
+          </li>
+        </UnorderedList>
+        This allows you to render them in any order, inject your own elements, or override their props. The example
+        below shows how to add a &quot;jump to page&quot; control between page size selector and pagination controls.
+      </Txt>
+      <CodeBlock code={code['PaginationCustomRenderExample.tsx']} />
+      <PaginationCustomRenderExample />
+
       <PageSubtitle value="Using pagination control props" />
       <Txt>
         You can provide additional props to pagination controls by using the <Code>getPaginationControlProps</Code>{' '}
