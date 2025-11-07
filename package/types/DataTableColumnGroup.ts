@@ -21,8 +21,15 @@ export type DataTableColumnGroup<T = Record<string, unknown>> = {
 
   /**
    * Columns which are part of the group.
+   * Optional when groups are provided for multilevel grouping.
    */
-  columns: DataTableColumn<T>[];
+  columns?: DataTableColumn<T>[];
+
+  /**
+   * Nested column groups for multilevel grouping.
+   * When provided, columns should be omitted.
+   */
+  groups?: DataTableColumnGroup<T>[];
 
   /**
    * Optional className to apply to the column group header.

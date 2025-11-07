@@ -1,3 +1,4 @@
+import { useDirection } from '@mantine/core';
 import type { RefObject } from 'react';
 import { useCallback, useRef, useState } from 'react';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
@@ -12,6 +13,9 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
   const [isResizing, setIsResizing] = useState(false);
   const startXRef = useRef<number>(0);
   const originalWidthsRef = useRef<{ current: number; next: number }>({ current: 0, next: 0 });
+
+  const { dir } = useDirection();
+  const isRTL = dir === 'rtl';
 
   const { setMultipleColumnWidths } = useDataTableColumnsContext();
 
@@ -67,7 +71,13 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
         const nextCol = currentCol.nextElementSibling as HTMLTableCellElement | null;
         if (!nextCol) return;
 
-        const deltaX = moveEvent.clientX - startXRef.current;
+        let deltaX = moveEvent.clientX - startXRef.current;
+
+        // In RTL, reverse the deltaX to make resizing follow mouse movement naturally
+        if (isRTL) {
+          deltaX = -deltaX;
+        }
+
         const minWidth = 50;
 
         // Calculate the maximum possible movement in both directions
@@ -141,7 +151,7 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     },
-    [accessor, columnRef, setMultipleColumnWidths]
+    [accessor, columnRef, isRTL, setMultipleColumnWidths]
   );
 
   const handleDoubleClick = useCallback(() => {
@@ -170,8 +180,10 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
       }
     }
 
-    // Update context - this will trigger re-measurement of natural widths
-    setMultipleColumnWidths(updates);
+    // Use setTimeout to ensure DOM changes are applied before context update
+    setTimeout(() => {
+      setMultipleColumnWidths(updates);
+    }, 0);
   }, [accessor, columnRef, setMultipleColumnWidths]);
 
   return (

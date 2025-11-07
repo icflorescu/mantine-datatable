@@ -4,6 +4,7 @@ import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import { getPaginationCssVariables } from './cssVariables';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTablePaginationProps } from './types';
+import type { PaginationRenderContext } from './types/PaginationRenderContext';
 import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
 
 type DataTablePaginationComponentProps = WithOptionalProperty<
@@ -11,7 +12,7 @@ type DataTablePaginationComponentProps = WithOptionalProperty<
     DataTablePaginationProps,
     'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint' | 'getPaginationControlProps'
   >,
-  'onRecordsPerPageChange' | 'recordsPerPageOptions'
+  'onRecordsPerPageChange' | 'recordsPerPageOptions' | 'renderPagination'
 > & {
   className: string | undefined;
   style: MantineStyleProp | undefined;
@@ -44,6 +45,7 @@ export function DataTablePagination({
   horizontalSpacing,
   paginationWrapBreakpoint,
   getPaginationControlProps,
+  renderPagination,
 }: DataTablePaginationComponentProps) {
   let paginationTextValue: React.ReactNode;
   if (totalRecords) {
@@ -54,6 +56,11 @@ export function DataTablePagination({
     paginationTextValue = fetching ? loadingText : noRecordsText;
   }
 
+  const totalPages = totalRecords && recordsPerPage ? Math.max(1, Math.ceil(totalRecords / recordsPerPage)) : 1;
+
+  const from = totalRecords ? (page - 1) * (recordsPerPage ?? 0) + 1 : undefined;
+  const to = totalRecords ? (from ?? 1) + (recordsLength ?? 0) - 1 : undefined;
+
   const isAbovePaginationWrapBreakpoint = useMediaQueryStringOrFunction(
     ({ breakpoints }) =>
       `(min-width: ${
@@ -63,17 +70,16 @@ export function DataTablePagination({
       })`
   );
 
-  return (
-    <Box
-      px={horizontalSpacing ?? 'xs'}
-      py="xs"
-      className={clsx('mantine-datatable-pagination', className)}
-      style={[{ flexDirection: isAbovePaginationWrapBreakpoint ? 'row' : 'column' }, style]}
-    >
-      <Text component="div" className="mantine-datatable-pagination-text" size={paginationSize}>
+  const isWrapped = !isAbovePaginationWrapBreakpoint;
+
+  const Controls: PaginationRenderContext['Controls'] = {
+    Text: (props) => (
+      <Text component="div" className="mantine-datatable-pagination-text" size={paginationSize} {...props}>
         {paginationTextValue}
       </Text>
-      {recordsPerPageOptions && (
+    ),
+    PageSizeSelector: (props) =>
+      recordsPerPageOptions ? (
         <DataTablePageSizeSelector
           activeTextColor={paginationActiveTextColor}
           activeBackgroundColor={paginationActiveBackgroundColor}
@@ -82,8 +88,12 @@ export function DataTablePagination({
           values={recordsPerPageOptions}
           value={recordsPerPage!}
           onChange={onRecordsPerPageChange!}
+          {...props}
         />
-      )}
+      ) : (
+        <></>
+      ),
+    Pagination: (props) => (
       <Pagination
         classNames={{
           root: clsx('mantine-datatable-pagination-pages', {
@@ -94,7 +104,11 @@ export function DataTablePagination({
         style={
           paginationActiveTextColor || paginationActiveBackgroundColor
             ? (theme) =>
-                getPaginationCssVariables({ theme, paginationActiveTextColor, paginationActiveBackgroundColor })
+                getPaginationCssVariables({
+                  theme,
+                  paginationActiveTextColor,
+                  paginationActiveBackgroundColor,
+                })
             : undefined
         }
         withEdges={paginationWithEdges}
@@ -102,9 +116,49 @@ export function DataTablePagination({
         value={page}
         onChange={onPageChange}
         size={paginationSize}
-        total={Math.ceil(totalRecords! / recordsPerPage!)}
+        total={totalPages}
         getControlProps={getPaginationControlProps}
+        {...props}
       />
+    ),
+  };
+
+  const ctx: PaginationRenderContext = {
+    state: {
+      paginationSize,
+      page,
+      totalPages,
+      totalRecords,
+      recordsPerPage,
+      recordsLength,
+      fetching,
+      from,
+      to,
+      isWrapped,
+    },
+    actions: {
+      setPage: (n) => onPageChange?.(n),
+      setRecordsPerPage: onRecordsPerPageChange ? (n) => onRecordsPerPageChange(n) : undefined,
+    },
+    Controls,
+  };
+
+  return (
+    <Box
+      px={horizontalSpacing ?? 'xs'}
+      py="xs"
+      className={clsx('mantine-datatable-pagination', className)}
+      style={[{ flexDirection: isWrapped ? 'column' : 'row' }, style]}
+    >
+      {typeof renderPagination === 'function' ? (
+        renderPagination(ctx)
+      ) : (
+        <>
+          <Controls.Text />
+          <Controls.PageSizeSelector />
+          <Controls.Pagination />
+        </>
+      )}
     </Box>
   );
 }

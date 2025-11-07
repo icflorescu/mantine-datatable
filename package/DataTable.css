@@ -54,6 +54,11 @@
   overflow: hidden;
   color: var(--mantine-datatable-color);
   background: var(--mantine-datatable-background-color);
+
+  th,
+  td {
+    border-left: 0;
+  }
 }
 
 .mantine-datatable-with-border {
@@ -71,8 +76,8 @@
 }
 
 /* Selection column should always have fixed width */
-.mantine-datatable th[data-accessor="__selection__"],
-.mantine-datatable td[data-accessor="__selection__"] {
+.mantine-datatable th[data-accessor='__selection__'],
+.mantine-datatable td[data-accessor='__selection__'] {
   width: 44px !important;
   min-width: 44px !important;
   max-width: 44px !important;
@@ -88,8 +93,8 @@
 }
 
 /* But selection column should still be fixed even in auto layout */
-.mantine-datatable:not(.mantine-datatable-resizable-columns) th[data-accessor="__selection__"],
-.mantine-datatable:not(.mantine-datatable-resizable-columns) td[data-accessor="__selection__"] {
+.mantine-datatable:not(.mantine-datatable-resizable-columns) th[data-accessor='__selection__'],
+.mantine-datatable:not(.mantine-datatable-resizable-columns) td[data-accessor='__selection__'] {
   width: 44px !important;
   min-width: 44px !important;
   max-width: 44px !important;

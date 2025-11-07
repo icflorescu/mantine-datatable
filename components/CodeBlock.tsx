@@ -1,5 +1,11 @@
 import { CodeHighlight, CodeHighlightTabs } from '@mantine/code-highlight';
-import { IconBrandCss3, IconBrandTypescript, IconFileTypeTsx, IconTerminal } from '@tabler/icons-react';
+import {
+  IconBrandCss3,
+  IconBrandJavascript,
+  IconBrandTypescript,
+  IconFileTypeTsx,
+  IconTerminal,
+} from '@tabler/icons-react';
 import classes from './CodeBlock.module.css';
 
 const ICON_PROPS = { size: 16 };
@@ -7,6 +13,7 @@ const ICON_PROPS = { size: 16 };
 const ICONS = {
   tsx: <IconFileTypeTsx {...ICON_PROPS} />,
   ts: <IconBrandTypescript {...ICON_PROPS} />,
+  js: <IconBrandJavascript {...ICON_PROPS} />,
   css: <IconBrandCss3 {...ICON_PROPS} />,
   shell: <IconTerminal {...ICON_PROPS} />,
 };

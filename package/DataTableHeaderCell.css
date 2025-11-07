@@ -55,7 +55,7 @@
   z-index: 100; /* Higher z-index to ensure it's above other elements */
   opacity: 0;
   transition: opacity 0.2s;
-  
+
   &::after {
     position: absolute;
     content: '';
@@ -67,19 +67,24 @@
     border-radius: 1px;
     transition: background-color 0.2s;
   }
-  
+
   &:hover {
     opacity: 1;
     &::after {
       background: var(--mantine-primary-color-6);
     }
   }
-  
+
   &:active {
     opacity: 1 !important;
     &::after {
       background: var(--mantine-primary-color-7);
     }
+  }
+
+  @mixin rtl {
+    right: auto;
+    left: -6px;
   }
 }
 
@@ -88,7 +93,8 @@ tr:hover .mantine-datatable-header-resizable-handle {
 }
 
 /* Ensure resize handle is always visible and accessible for columns with toggleable buttons */
-.mantine-datatable-header-cell-toggleable.mantine-datatable-header-cell-resizable:hover .mantine-datatable-header-resizable-handle {
+.mantine-datatable-header-cell-toggleable.mantine-datatable-header-cell-resizable:hover
+  .mantine-datatable-header-resizable-handle {
   opacity: 1;
 }
 

@@ -18,7 +18,7 @@ import { DataTableHeaderCell } from './DataTableHeaderCell';
 import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
 import type { DataTableColumnToggle } from './hooks';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
-import { humanize } from './utils';
+import { getGroupsAtDepth, getMaxGroupDepth, humanize } from './utils';
 
 type DataTableHeaderProps<T> = {
   selectionColumnHeaderRef: React.ForwardedRef<HTMLTableCellElement>;
@@ -39,6 +39,7 @@ type DataTableHeaderProps<T> = {
   selectorCellShadowVisible: boolean;
   selectionColumnClassName: string | undefined;
   selectionColumnStyle: MantineStyleProp;
+  withColumnBorders?: boolean;
   ref: React.Ref<HTMLTableSectionElement>;
 };
 
@@ -61,8 +62,12 @@ export function DataTableHeader<T>({
   selectorCellShadowVisible,
   selectionColumnClassName,
   selectionColumnStyle,
+  withColumnBorders = false,
   ref,
 }: DataTableHeaderProps<T>) {
+  const maxGroupDepth = groups ? getMaxGroupDepth(groups) : 0;
+  const totalHeaderRows = maxGroupDepth > 0 ? maxGroupDepth + 1 : 1;
+
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
       ref={selectionColumnHeaderRef}
@@ -74,7 +79,7 @@ export function DataTableHeader<T>({
       indeterminate={selectionIndeterminate}
       checkboxProps={selectionCheckboxProps}
       onChange={onSelectionChange}
-      rowSpan={groups ? 2 : undefined}
+      rowSpan={groups ? totalHeaderRows : undefined}
     />
   ) : null;
 
@@ -100,14 +105,30 @@ export function DataTableHeader<T>({
           : undefined
       }
     >
-      {groups && (
-        <TableTr>
-          {allRecordsSelectorCell}
-          {groups.map((group) => (
-            <DataTableColumnGroupHeaderCell key={group.id} group={group} />
-          ))}
-        </TableTr>
-      )}
+      {groups &&
+        Array.from({ length: maxGroupDepth }, (_, depthIndex) => {
+          const groupsAtDepth = getGroupsAtDepth(groups, depthIndex);
+
+          return (
+            <TableTr key={`group-depth-${depthIndex}`}>
+              {depthIndex === 0 && allRecordsSelectorCell}
+              {groupsAtDepth.map((group, index) => {
+                return (
+                  <DataTableColumnGroupHeaderCell
+                    key={group.id}
+                    group={group}
+                    maxDepth={maxGroupDepth}
+                    currentDepth={depthIndex}
+                    previousGroups={groupsAtDepth.slice(0, index)}
+                    isLastGroup={index === groupsAtDepth.length - 1}
+                    withColumnBorders={withColumnBorders}
+                    totalTableColumns={columns.length}
+                  />
+                );
+              })}
+            </TableTr>
+          );
+        })}
 
       <TableTr>
         {!groups && allRecordsSelectorCell}

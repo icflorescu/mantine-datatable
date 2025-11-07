@@ -99,7 +99,7 @@ export const useDataTableColumns = <T>({
       if (column?.accessor === '__selection__') {
         return column;
       }
-      
+
       return {
         ...column,
         width: columnsWidth.find((width) => {
