@@ -13,8 +13,8 @@ module.exports = async () => {
     output: 'export',
     trailingSlash: true,
     images: { unoptimized: true },
+    typedRoutes: true,
     experimental: {
-      typedRoutes: true,
       optimizePackageImports: [
         '@mantine/code-highlight',
         '@mantine/core',
