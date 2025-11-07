@@ -1,4 +1,6 @@
 import type { DropResult } from '@hello-pangea/dnd';
+import type { DataTableColumn, DataTableColumnGroup } from './types';
+
 
 /**
  * Utility function that returns a humanized version of a string, e.g. "camelCase" -> "Camel Case"
@@ -82,3 +84,93 @@ export function swapRecords<T>(dropResult: DropResult, records: T[]): T[] {
 
   return draft;
 }
+
+/**
+ * Calculates the maximum depth of nested column groups
+ */
+export function getMaxGroupDepth<T>(groups: readonly DataTableColumnGroup<T>[]): number {
+  if (!groups || groups.length === 0) return 0;
+
+  return Math.max(
+    ...groups.map((group) => {
+      if (group.groups && group.groups.length > 0) {
+        return 1 + getMaxGroupDepth(group.groups);
+      }
+      return 1;
+    })
+  );
+}
+
+/**
+ * Flattens nested column groups to extract all columns at the deepest level
+ */
+export function flattenColumns<T>(groups: DataTableColumnGroup<T>[]): DataTableColumn<T>[] {
+  const columns: DataTableColumn<T>[] = [];
+
+  for (const group of groups) {
+    if (group.columns && group.columns.length > 0) {
+      columns.push(...group.columns.filter((col) => col != null));
+    } else if (group.groups && group.groups.length > 0) {
+      columns.push(...flattenColumns(group.groups));
+    }
+  }
+
+  return columns.filter((col) => col != null);
+}
+
+/**
+ * Calculates the column span for a group based on visible columns
+ */
+export function calculateColSpan<T>(group: DataTableColumnGroup<T>, visibles?: (boolean | undefined)[]): number {
+  if (group.columns && group.columns.length > 0) {
+    return group.columns.filter((column, index) => {
+      if (column.hidden) return false;
+      return visibles ? visibles[index] !== false : true;
+    }).length;
+  }
+
+  if (group.groups && group.groups.length > 0) {
+    return group.groups.reduce((sum, subGroup) => {
+      return sum + calculateColSpan(subGroup, visibles);
+    }, 0);
+  }
+
+  return 0;
+}
+
+
+/**
+ * Gets all groups at a specific depth level
+ */
+export function getGroupsAtDepth<T>(
+  groups: readonly DataTableColumnGroup<T>[],
+  targetDepth: number,
+  currentDepth: number = 0
+): DataTableColumnGroup<T>[] {
+  if (currentDepth === targetDepth) {
+    return [...groups];
+  }
+
+  const result: DataTableColumnGroup<T>[] = [];
+  for (const group of groups) {
+    if (group.groups && group.groups.length > 0) {
+      result.push(...getGroupsAtDepth(group.groups, targetDepth, currentDepth + 1));
+    }
+  }
+
+  return result;
+}
+
+
+/**
+ * Checks if a group needs a right border based on its position and context
+ */
+export function needsRightBorder(
+  isLastGroup: boolean,
+  hasMoreColumnsAfter: boolean,
+  withColumnBorders: boolean
+): boolean {
+  if (!withColumnBorders) return false;
+  return !isLastGroup || hasMoreColumnsAfter;
+}
+

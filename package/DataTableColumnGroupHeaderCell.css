@@ -1,0 +1,3 @@
+.mantine-datatable-column-group-header-cell--needs-border {
+  border-inline-end: 1px solid var(--mantine-datatable-row-border-color);
+}
