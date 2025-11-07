@@ -2,6 +2,7 @@ import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -135,14 +136,9 @@ export function DataTable<T>({
     return groups ? flattenColumns(groups) : columns!;
   }, [columns, groups]);
 
-  const hasResizableColumns = useMemo(() => {
-    return effectiveColumns.some((col) => col.resizable);
-  }, [effectiveColumns]);
-
-  const dragToggle = useDataTableColumns({
-    key: storeColumnsKey,
-    columns: effectiveColumns,
-  });
+  // When columns are resizable, start with auto layout to let the browser
+  // compute natural widths, then capture them and switch to fixed layout.
+  const [fixedLayoutEnabled, setFixedLayoutEnabled] = useState(false);
 
   const { refs, onScroll: handleScrollPositionChange } = useDataTableInjectCssVariables({
     scrollCallbacks: {
@@ -153,6 +149,14 @@ export function DataTable<T>({
       onScrollToRight,
     },
     withRowBorders: otherProps.withRowBorders,
+  });
+
+  const dragToggle = useDataTableColumns({
+    key: storeColumnsKey,
+    columns: effectiveColumns,
+    headerRef: refs.header as any,
+    scrollViewportRef: refs.scrollViewport as any,
+    onFixedLayoutChange: setFixedLayoutEnabled,
   });
 
   const mergedTableRef = useMergedRef(refs.table, tableRef);
@@ -300,7 +304,7 @@ export function DataTable<T>({
                   'mantine-datatable-pin-last-column': pinLastColumn,
                   'mantine-datatable-selection-column-visible': selectionColumnVisible,
                   'mantine-datatable-pin-first-column': pinFirstColumn,
-                  'mantine-datatable-resizable-columns': hasResizableColumns,
+                  'mantine-datatable-resizable-columns': dragToggle.hasResizableColumns && fixedLayoutEnabled,
                 },
                 classNames?.table
               )}

@@ -34,8 +34,8 @@ export default function ResizingComplexExample() {
   const { effectiveColumns, resetColumnsWidth, resetColumnsOrder, resetColumnsToggle } = useDataTableColumns<Company>({
     key,
     columns: [
-      { accessor: 'name', ...props },
-      { accessor: 'streetAddress', ...props },
+      { accessor: 'name', ellipsis: true, ...props },
+      { accessor: 'streetAddress', ellipsis: true, ...props },
       { accessor: 'city', ellipsis: true, ...props },
       { accessor: 'state', textAlign: 'right', ...props },
     ],

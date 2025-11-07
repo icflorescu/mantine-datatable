@@ -1,15 +1,10 @@
-import { useLocalStorage } from '@mantine/hooks';
-import { useMemo } from 'react';
+import { useMemo, type RefObject } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
+import { useDataTableColumnReorder } from './useDataTableColumnReorder';
+import { useDataTableColumnResize } from './useDataTableColumnResize';
+import { useDataTableColumnToggle, type DataTableColumnToggle } from './useDataTableColumnToggle';
 
-export type DataTableColumnToggle = {
-  accessor: string;
-  defaultToggle: boolean;
-  toggleable: boolean;
-  toggled: boolean;
-};
-
-type DataTableColumnWidth = Record<string, string | number>;
+export type { DataTableColumnToggle };
 
 /**
  * Hook to handle column features such as drag-and-drop reordering, visibility toggling and resizing.
@@ -19,6 +14,9 @@ export const useDataTableColumns = <T>({
   key,
   columns = [],
   getInitialValueInEffect = true,
+  headerRef,
+  scrollViewportRef,
+  onFixedLayoutChange,
 }: {
   /**
    * The key to use in localStorage to store the columns order and toggle state.
@@ -29,13 +27,22 @@ export const useDataTableColumns = <T>({
    */
   columns: DataTableColumn<T>[];
   /**
-   * Columns definitions.
-   */
-  /**
-   * If set to true, value will be update is useEffect after mount.
+   * If set to true, value will be updated in useEffect after mount.
    * @default true
    */
   getInitialValueInEffect?: boolean;
+  /**
+   * Reference to the table header element for measuring column widths.
+   */
+  headerRef?: RefObject<HTMLTableSectionElement | null>;
+  /**
+   * Reference to the scroll viewport for calculating overflow.
+   */
+  scrollViewportRef?: RefObject<HTMLElement | null>;
+  /**
+   * Callback to control fixed layout state in the parent component.
+   */
+  onFixedLayoutChange?: (enabled: boolean) => void;
 }) => {
   // align order
   function alignColumnsOrder<T>(columnsOrder: string[], columns: DataTableColumn<T>[]) {
@@ -241,6 +248,11 @@ export const useDataTableColumns = <T>({
       }) as DataTableColumn<T>[];
 
     const newWidths = result.map((column) => {
+      // Skip width application for selection column
+      if (column?.accessor === '__selection__') {
+        return column;
+      }
+      
       return {
         ...column,
         width: columnsWidth.find((width) => {
@@ -251,36 +263,6 @@ export const useDataTableColumns = <T>({
 
     return newWidths;
   }, [columns, columnsOrder, columnsToggle, columnsWidth]);
-
-  const setColumnWidth = (accessor: string, width: string | number) => {
-    const newColumnsWidth = columnsWidth.map((column) => {
-      if (!column[accessor]) {
-        return column;
-      }
-      return {
-        [accessor]: width,
-      };
-    });
-
-    setColumnsWidth(newColumnsWidth);
-  };
-
-  const setMultipleColumnWidths = (updates: Array<{ accessor: string; width: string | number }>) => {
-    const newColumnsWidth = columnsWidth.map((column) => {
-      const accessor = Object.keys(column)[0];
-      const update = updates.find((u) => u.accessor === accessor);
-
-      if (update) {
-        return {
-          [accessor]: update.width,
-        };
-      }
-
-      return column;
-    });
-
-    setColumnsWidth(newColumnsWidth);
-  };
 
   return {
     effectiveColumns: effectiveColumns as DataTableColumn<T>[],
@@ -301,5 +283,8 @@ export const useDataTableColumns = <T>({
     setColumnWidth,
     setMultipleColumnWidths,
     resetColumnsWidth,
+    hasResizableColumns,
+    allResizableWidthsInitial,
+    measureAndSetColumnWidths,
   } as const;
 };
