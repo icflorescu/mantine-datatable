@@ -118,7 +118,7 @@ export function useDataTableColumnResize<T>({
     (updates: Array<{ accessor: string; width: string | number }>) => {
       // Filter out any updates to the selection column
       const filteredUpdates = updates.filter((update) => update.accessor !== '__selection__');
-      
+
       const newWidths = effectiveColumnsWidth.map((column) => {
         const accessor = Object.keys(column)[0];
         const update = filteredUpdates.find((u) => u.accessor === accessor);
