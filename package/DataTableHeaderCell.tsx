@@ -137,7 +137,7 @@ export function DataTableHeaderCell<T>({
       style={[
         {
           width,
-          ...(!resizable ? { minWidth: width, maxWidth: width } : { minWidth: '1px' }),
+          ...(!resizable ? { minWidth: width, maxWidth: width } : {}),
         },
         style,
       ]}

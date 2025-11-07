@@ -1,15 +1,10 @@
-import { useLocalStorage } from '@mantine/hooks';
-import { useMemo } from 'react';
+import { useMemo, type RefObject } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
+import { useDataTableColumnReorder } from './useDataTableColumnReorder';
+import { useDataTableColumnResize } from './useDataTableColumnResize';
+import { useDataTableColumnToggle, type DataTableColumnToggle } from './useDataTableColumnToggle';
 
-export type DataTableColumnToggle = {
-  accessor: string;
-  defaultToggle: boolean;
-  toggleable: boolean;
-  toggled: boolean;
-};
-
-type DataTableColumnWidth = Record<string, string | number>;
+export type { DataTableColumnToggle };
 
 /**
  * Hook to handle column features such as drag-and-drop reordering, visibility toggling and resizing.
@@ -19,6 +14,9 @@ export const useDataTableColumns = <T>({
   key,
   columns = [],
   getInitialValueInEffect = true,
+  headerRef,
+  scrollViewportRef,
+  onFixedLayoutChange,
 }: {
   /**
    * The key to use in localStorage to store the columns order and toggle state.
@@ -29,199 +27,55 @@ export const useDataTableColumns = <T>({
    */
   columns: DataTableColumn<T>[];
   /**
-   * Columns definitions.
-   */
-  /**
-   * If set to true, value will be update is useEffect after mount.
+   * If set to true, value will be updated in useEffect after mount.
    * @default true
    */
   getInitialValueInEffect?: boolean;
+  /**
+   * Reference to the table header element for measuring column widths.
+   */
+  headerRef?: RefObject<HTMLTableSectionElement | null>;
+  /**
+   * Reference to the scroll viewport for calculating overflow.
+   */
+  scrollViewportRef?: RefObject<HTMLElement | null>;
+  /**
+   * Callback to control fixed layout state in the parent component.
+   */
+  onFixedLayoutChange?: (enabled: boolean) => void;
 }) => {
-  // align order
-  function alignColumnsOrder<T>(columnsOrder: string[], columns: DataTableColumn<T>[]) {
-    const updatedColumnsOrder: string[] = [];
-    columnsOrder.forEach((col) => {
-      if (columns.find((c) => c.accessor === col)) {
-        updatedColumnsOrder.push(col);
-      }
-    });
-    columns.forEach((col) => {
-      if (!updatedColumnsOrder.includes(col.accessor as string)) {
-        updatedColumnsOrder.push(col.accessor as string);
-      }
-    });
-    return updatedColumnsOrder;
-  }
+  // Use specialized hooks for each feature
+  const { columnsOrder, setColumnsOrder, resetColumnsOrder } = useDataTableColumnReorder({
+    key,
+    columns,
+    getInitialValueInEffect,
+  });
 
-  // align toggle
-  function alignColumnsToggle<T>(columnsToggle: DataTableColumnToggle[], columns: DataTableColumn<T>[]) {
-    const updatedColumnsToggle: DataTableColumnToggle[] = [];
-    columnsToggle.forEach((col) => {
-      if (columns.find((c) => c.accessor === col.accessor)) {
-        updatedColumnsToggle.push(col);
-      }
-    });
-    columns.forEach((col) => {
-      if (!updatedColumnsToggle.find((c) => c.accessor === col.accessor)) {
-        updatedColumnsToggle.push({
-          accessor: col.accessor as string,
-          defaultToggle: col.defaultToggle || true,
-          toggleable: col.toggleable as boolean,
-          toggled: col.defaultToggle === undefined ? true : col.defaultToggle,
-        });
-      }
-    });
-    return updatedColumnsToggle as DataTableColumnToggle[];
-  }
+  const { columnsToggle, setColumnsToggle, resetColumnsToggle } = useDataTableColumnToggle({
+    key,
+    columns,
+    getInitialValueInEffect,
+  });
 
-  // align width
-  function alignColumnsWidth<T>(columnsWidth: DataTableColumnWidth[], columns: DataTableColumn<T>[]) {
-    const updatedColumnsWidth: DataTableColumnWidth[] = [];
+  const {
+    columnsWidth,
+    setColumnsWidth,
+    setColumnWidth,
+    setMultipleColumnWidths,
+    resetColumnsWidth,
+    hasResizableColumns,
+    allResizableWidthsInitial,
+    measureAndSetColumnWidths,
+  } = useDataTableColumnResize({
+    key,
+    columns,
+    getInitialValueInEffect,
+    headerRef,
+    scrollViewportRef,
+    onFixedLayoutChange,
+  });
 
-    columnsWidth.forEach((col) => {
-      const accessor = Object.keys(col)[0];
-      if (columns.find((c) => c.accessor === accessor)) {
-        updatedColumnsWidth.push(col);
-      }
-    });
-
-    columns.forEach((col) => {
-      const accessor = col.accessor;
-      if (!updatedColumnsWidth.find((c) => Object.keys(c)[0] === accessor)) {
-        const widthObj: DataTableColumnWidth = {};
-        widthObj[accessor as string] = '';
-        updatedColumnsWidth.push(widthObj);
-      }
-    });
-
-    return updatedColumnsWidth;
-  }
-
-  // align order
-  function useAlignColumnsOrder() {
-    const [columnsOrder, _setColumnsOrder] = useLocalStorage<string[]>({
-      key: key ? `${key}-columns-order` : '',
-      defaultValue: key ? (defaultColumnsOrder as string[]) : undefined,
-      getInitialValueInEffect,
-    });
-
-    function setColumnsOrder(order: string[] | ((prev: string[]) => string[])) {
-      if (key) {
-        _setColumnsOrder(order);
-      }
-    }
-
-    if (!key) {
-      return [columnsOrder, setColumnsOrder] as const;
-    }
-
-    const alignedColumnsOrder = alignColumnsOrder(columnsOrder, columns);
-
-    const prevColumnsOrder = JSON.stringify(columnsOrder);
-
-    if (JSON.stringify(alignedColumnsOrder) !== prevColumnsOrder) {
-      setColumnsOrder(alignedColumnsOrder);
-    }
-
-    return [alignedColumnsOrder, setColumnsOrder] as const;
-  }
-
-  function useAlignColumnsToggle() {
-    const [columnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
-      key: key ? `${key}-columns-toggle` : '',
-      defaultValue: key ? (defaultColumnsToggle as DataTableColumnToggle[]) : undefined,
-      getInitialValueInEffect,
-    });
-
-    function setColumnsToggle(
-      toggle: DataTableColumnToggle[] | ((prev: DataTableColumnToggle[]) => DataTableColumnToggle[])
-    ) {
-      if (key) {
-        _setColumnsToggle(toggle);
-      }
-    }
-
-    if (!key) {
-      return [columnsToggle, setColumnsToggle] as const;
-    }
-
-    const alignedColumnsToggle = alignColumnsToggle(columnsToggle, columns);
-
-    const prevColumnsToggle = JSON.stringify(columnsToggle);
-
-    if (JSON.stringify(alignedColumnsToggle) !== prevColumnsToggle) {
-      setColumnsToggle(alignedColumnsToggle);
-    }
-
-    return [alignColumnsToggle(columnsToggle, columns), setColumnsToggle] as const;
-  }
-
-  function useAlignColumnsWidth() {
-    const [columnsWidth, _setColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
-      key: key ? `${key}-columns-width` : '',
-      defaultValue: key ? (defaultColumnsWidth as DataTableColumnWidth[]) : undefined,
-      getInitialValueInEffect,
-    });
-
-    function setColumnsWidth(
-      width: DataTableColumnWidth[] | ((prev: DataTableColumnWidth[]) => DataTableColumnWidth[])
-    ) {
-      if (key) {
-        _setColumnsWidth(width);
-      }
-    }
-
-    if (!key) {
-      return [columnsWidth, setColumnsWidth] as const;
-    }
-
-    const alignedColumnsWidth = alignColumnsWidth(columnsWidth, columns);
-
-    const prevColumnsWidth = JSON.stringify(columnsWidth);
-
-    if (JSON.stringify(alignedColumnsWidth) !== prevColumnsWidth) {
-      setColumnsWidth(alignedColumnsWidth);
-    }
-
-    return [alignColumnsWidth(columnsWidth, columns), setColumnsWidth] as const;
-  }
-
-  // Default columns id ordered is the order of the columns in the array
-  const defaultColumnsOrder = (columns && columns.map((column) => column.accessor)) || [];
-
-  // create an array of object with key = accessor and value = width
-  const defaultColumnsWidth =
-    (columns && columns.map((column) => ({ [column.accessor]: column.width ?? 'initial' }))) || [];
-
-  // Default columns id toggled is the array of columns which have the toggleable property set to true
-  const defaultColumnsToggle =
-    columns &&
-    columns.map((column) => ({
-      accessor: column.accessor,
-      defaultToggle: column.defaultToggle || true,
-      toggleable: column.toggleable,
-      toggled: column.defaultToggle === undefined ? true : column.defaultToggle,
-    }));
-
-  // Store the columns order in localStorage
-  const [columnsOrder, setColumnsOrder] = useAlignColumnsOrder();
-
-  // Store the columns toggle in localStorage
-  const [columnsToggle, setColumnsToggle] = useAlignColumnsToggle();
-
-  // Store the columns widths in localStorage
-  const [columnsWidth, setColumnsWidth] = useAlignColumnsWidth();
-
-  // we won't use the "remove" function from useLocalStorage() because
-  // we got issue with rendering
-  const resetColumnsOrder = () => setColumnsOrder(defaultColumnsOrder as string[]);
-
-  const resetColumnsToggle = () => {
-    setColumnsToggle(defaultColumnsToggle as DataTableColumnToggle[]);
-  };
-
-  const resetColumnsWidth = () => setColumnsWidth(defaultColumnsWidth as DataTableColumnWidth[]);
-
+  // Compute effective columns based on order, toggle, and width
   const effectiveColumns = useMemo(() => {
     if (!columnsOrder) {
       return columns;
@@ -241,6 +95,11 @@ export const useDataTableColumns = <T>({
       }) as DataTableColumn<T>[];
 
     const newWidths = result.map((column) => {
+      // Skip width application for selection column
+      if (column?.accessor === '__selection__') {
+        return column;
+      }
+      
       return {
         ...column,
         width: columnsWidth.find((width) => {
@@ -251,36 +110,6 @@ export const useDataTableColumns = <T>({
 
     return newWidths;
   }, [columns, columnsOrder, columnsToggle, columnsWidth]);
-
-  const setColumnWidth = (accessor: string, width: string | number) => {
-    const newColumnsWidth = columnsWidth.map((column) => {
-      if (!column[accessor]) {
-        return column;
-      }
-      return {
-        [accessor]: width,
-      };
-    });
-
-    setColumnsWidth(newColumnsWidth);
-  };
-
-  const setMultipleColumnWidths = (updates: Array<{ accessor: string; width: string | number }>) => {
-    const newColumnsWidth = columnsWidth.map((column) => {
-      const accessor = Object.keys(column)[0];
-      const update = updates.find((u) => u.accessor === accessor);
-
-      if (update) {
-        return {
-          [accessor]: update.width,
-        };
-      }
-
-      return column;
-    });
-
-    setColumnsWidth(newColumnsWidth);
-  };
 
   return {
     effectiveColumns: effectiveColumns as DataTableColumn<T>[],
@@ -301,5 +130,8 @@ export const useDataTableColumns = <T>({
     setColumnWidth,
     setMultipleColumnWidths,
     resetColumnsWidth,
+    hasResizableColumns,
+    allResizableWidthsInitial,
+    measureAndSetColumnWidths,
   } as const;
 };
