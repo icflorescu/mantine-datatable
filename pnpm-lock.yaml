@@ -96,8 +96,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       mantine-contextmenu:
-        specifier: ^8.3.6
-        version: 8.3.6(@mantine/core@8.3.7(@mantine/hooks@8.3.7(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.7(react@19.2.0))(clsx@2.1.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^8.3.7
+        version: 8.3.7(@mantine/core@8.3.7(@mantine/hooks@8.3.7(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.7(react@19.2.0))(clsx@2.1.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       next:
         specifier: ^15.5.6
         version: 15.5.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2249,8 +2249,8 @@ packages:
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
-  mantine-contextmenu@8.3.6:
-    resolution: {integrity: sha512-DQ9IMY60VnNgoiVkLuFFxtkF3mJla7oId1GsiF9/PAiliTMcbu2eni13Ej29KS9hkRS9L4B1Gxp32DyrO5/Fog==}
+  mantine-contextmenu@8.3.7:
+    resolution: {integrity: sha512-U6EZ8vmYxWCf07brsZ0YdCftZNQamp2wk8hjkRJO0eppPLJmB17iXcCFIwNZ4/S3JDDfiMhL5H40/Bnsjkn+Ag==}
     peerDependencies:
       '@mantine/core': '>=8.3'
       '@mantine/hooks': '>=8.3'
@@ -5629,7 +5629,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  mantine-contextmenu@8.3.6(@mantine/core@8.3.7(@mantine/hooks@8.3.7(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.7(react@19.2.0))(clsx@2.1.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  mantine-contextmenu@8.3.7(@mantine/core@8.3.7(@mantine/hooks@8.3.7(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.7(react@19.2.0))(clsx@2.1.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@mantine/core': 8.3.7(@mantine/hooks@8.3.7(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@mantine/hooks': 8.3.7(react@19.2.0)
