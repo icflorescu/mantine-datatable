@@ -11,16 +11,18 @@ const PAGE_SIZES = [10, 15, 20];
 export default function PaginationCustomRenderExample() {
   const [pageSize, setPageSize] = useState(PAGE_SIZES[1]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [pageSize]);
-
   const [page, setPage] = useState(1);
   const [records, setRecords] = useState(employees.slice(0, pageSize));
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPage(1);
+  }, [pageSize]);
+
+  useEffect(() => {
     const from = (page - 1) * pageSize;
     const to = from + pageSize;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(employees.slice(from, to));
   }, [page, pageSize]);
 

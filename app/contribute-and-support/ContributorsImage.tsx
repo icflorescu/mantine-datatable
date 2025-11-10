@@ -12,6 +12,7 @@ export function ContributorsImage() {
   };
 
   useWindowEvent('resize', adjustCols);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(adjustCols, []);
 
   return (

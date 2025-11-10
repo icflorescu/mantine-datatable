@@ -26,6 +26,7 @@ export function Navbar({ onClick }: NavbarProps) {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setScrolledToBottom(Math.ceil(viewportHeight) === (viewportRef.current?.scrollHeight || 0));
   }, [viewportHeight, viewportRef]);
 

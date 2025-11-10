@@ -24,6 +24,7 @@ export function UsingWithAutoAnimateExample() {
   const [records, setRecords] = useState<User[]>([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(Array.from({ length: 6 }, createUser));
   }, []);
 

@@ -1,6 +1,6 @@
 import { rem } from '@mantine/core';
 import { useCallback, useEffect, useRef } from 'react';
-import { DataTableScrollProps } from '../types/DataTableScrollProps';
+import type { DataTableScrollProps } from '../types/DataTableScrollProps';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 import { useStableValue } from './useStableValue';
 
@@ -76,6 +76,7 @@ export function useDataTableInjectCssVariables({
   const onScroll = useCallback<OnScroll>((ev) => {
     stableScrollCallbacks.current.onScroll?.(ev);
     processScrollingRef.current();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -86,6 +87,7 @@ export function useDataTableInjectCssVariables({
       },
       () => setCssVar(root.current, VAR_HEADER_HEIGHT, '0')
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header.current]);
 
   useEffect(() => {
@@ -96,6 +98,7 @@ export function useDataTableInjectCssVariables({
       },
       () => setCssVar(root.current, VAR_FOOTER_HEIGHT, '0')
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [footer.current]);
 
   useEffect(() => {
@@ -106,6 +109,7 @@ export function useDataTableInjectCssVariables({
       },
       () => setCssVar(root.current, VAR_SELECTION_COLUMN_WIDTH, '0')
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectionColumnHeader.current]);
 
   useIsomorphicLayoutEffect(() => {

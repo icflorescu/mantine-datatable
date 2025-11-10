@@ -3,6 +3,14 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.3.7 (2025-11-10)
+
+- Fix [#763](https://github.com/icflorescu/mantine-datatable/issues/763) regression introduced in [#749](https://github.com/icflorescu/mantine-datatable/pull/749)
+- Fix [#764](https://github.com/icflorescu/mantine-datatable/issues/764) docs website bug introduced in [#749](https://github.com/icflorescu/mantine-datatable/pull/749)
+- Update deps to ensure compatibility with Mantine 8.3.7
+- Update other dev deps (docsearch, faker, etc.)
+- Fix linting & linting errors
+
 ## 8.3.6 (2025-11-07)
 
 - Merge [#740](https://github.com/icflorescu/mantine-datatable/pull/740) to fix [#739](https://github.com/icflorescu/mantine-datatable/issues/739)

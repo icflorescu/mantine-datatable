@@ -13,7 +13,6 @@ export function useDataTableColumnResize<T>({
   columns = [],
   getInitialValueInEffect = true,
   headerRef,
-  scrollViewportRef,
   onFixedLayoutChange,
 }: {
   /**
@@ -84,6 +83,7 @@ export function useDataTableColumnResize<T>({
 
   // Handle SSR
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsSSR(false);
   }, []);
 
@@ -241,6 +241,7 @@ export function useDataTableColumnResize<T>({
 
     // Apply stored widths if available
     if (storedColumnsWidth && storedColumnsWidth.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setEffectiveColumnsWidth(storedColumnsWidth);
     }
   }, [isSSR, key, getInitialValueInEffect, storedColumnsWidth]);

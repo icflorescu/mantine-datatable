@@ -26,6 +26,7 @@ export function SearchingAndFilteringExample() {
   const [debouncedQuery] = useDebouncedValue(query, 200);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(
       initialRecords.filter(({ firstName, lastName, department, birthDate }) => {
         if (
