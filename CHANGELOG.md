@@ -8,7 +8,8 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 - Fix [#763](https://github.com/icflorescu/mantine-datatable/issues/763) regression introduced in [#749](https://github.com/icflorescu/mantine-datatable/pull/749)
 - Fix [#764](https://github.com/icflorescu/mantine-datatable/issues/764) docs website bug introduced in [#749](https://github.com/icflorescu/mantine-datatable/pull/749)
 - Update deps to ensure compatibility with Mantine 8.3.7
-- Update other dev deps (docsearch, faker, etc.) 
+- Update other dev deps (docsearch, faker, etc.)
+- Fix linting & linting errors
 
 ## 8.3.6 (2025-11-07)
 
