@@ -1,6 +1,7 @@
 import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
+import type { RefObject } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
@@ -153,8 +154,8 @@ export function DataTable<T>({
   const dragToggle = useDataTableColumns({
     key: storeColumnsKey,
     columns: effectiveColumns,
-    headerRef: refs.header as any,
-    scrollViewportRef: refs.scrollViewport as any,
+    headerRef: refs.header as RefObject<HTMLTableSectionElement | null>,
+    scrollViewportRef: refs.scrollViewport as RefObject<HTMLElement | null>,
     onFixedLayoutChange: setFixedLayoutEnabled,
   });
 

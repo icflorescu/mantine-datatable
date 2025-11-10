@@ -33,7 +33,7 @@ export function DataTableColumnGroupHeaderCell<T>({
       return flattenColumns([{ id, columns, groups }]);
     }
     return [];
-  }, [columns, groups]);
+  }, [columns, groups, id]);
 
   const queries = useMemo(() => allColumns.map(({ visibleMediaQuery }) => visibleMediaQuery), [allColumns]);
   const visibles = useMediaQueriesStringOrFunction(queries);
