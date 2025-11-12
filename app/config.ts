@@ -253,6 +253,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: a complex usage scenario for ${PRODUCT_NAME} featuring custom column definitions, asynchronous data loading with React Query, sorting, pagination, custom cell rendering, multiple row selection, and more`,
   },
   {
+    href: '/examples/inline-editing',
+    title: 'Inline editing',
+    description: `Example: inline editing with ${PRODUCT_NAME}`,
+  },
+  {
     href: '/type-definitions',
     title: 'Type definitions',
     description: `${PRODUCT_NAME} is written in TypeScript and its options are well documented with additional JSDoc annotations`,
