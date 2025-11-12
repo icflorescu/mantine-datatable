@@ -1,4 +1,4 @@
-import type { MantineStyleProp, MantineTheme, PopoverProps, TextInputProps } from '@mantine/core';
+import type { MantineStyleProp, MantineTheme, PopoverProps } from '@mantine/core';
 import type { DataTableColumnTextAlign } from './DataTableColumnTextAlign';
 
 export type DataTableColumn<T = Record<string, unknown>> = {
@@ -167,15 +167,14 @@ export type DataTableColumn<T = Record<string, unknown>> = {
    */
   footerStyle?: MantineStyleProp;
 } & (
-  | {
+    | {
       /**
        * If true, the cells in this column will be editable.
        */
       editable?: false;
       onEdit?: never;
-      textInputProps?: never;
     }
-  | {
+    | {
       /**
        * If true, the cells in this column will be editable.
        */
@@ -185,13 +184,9 @@ export type DataTableColumn<T = Record<string, unknown>> = {
        * Receives the edited record and its index as arguments.
        */
       onEdit: (record: T, index: number) => void;
-      /**
-       * Optional props to pass to the TextInput component when a cell is editable.
-       */
-      textInputProps?: Omit<TextInputProps, 'value' | 'onChange' | 'onBlur' | 'onKeyDown' | 'autoFocus'>;
     }
-) & (
-  | {
+  ) & (
+    | {
       /**
        * If true, cell content in this column will be truncated with ellipsis as needed and will not wrap
        * to multiple lines (i.e. `overflow: hidden; text-overflow: ellipsis`; `white-space: nowrap`).
@@ -201,7 +196,7 @@ export type DataTableColumn<T = Record<string, unknown>> = {
 
       noWrap?: never;
     }
-  | {
+    | {
       ellipsis?: never;
 
       /**
@@ -211,4 +206,4 @@ export type DataTableColumn<T = Record<string, unknown>> = {
        */
       noWrap?: boolean;
     }
-);
+  );
