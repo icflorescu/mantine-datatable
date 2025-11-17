@@ -14,7 +14,7 @@ import type { Route } from 'next';
 
 export const PRODUCT_NAME = 'Mantine DataTable';
 export const PRODUCT_DESCRIPTION =
-  'A fully-featured data-table/data-grid React component for building data-rich applications with Mantine UI';
+  'A fully-featured data-table/data-grid React component for building data-rich applications with Mantine UI, trusted by thousands of developers and companies around the world, from small startups to large enterprises like Microsoft';
 
 export const WEB_ROOT = 'https://icflorescu.github.io';
 export const WEBSITE_LINK = `${WEB_ROOT}/${process.env.PACKAGE_NAME}`;

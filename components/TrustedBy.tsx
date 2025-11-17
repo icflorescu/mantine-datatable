@@ -11,6 +11,11 @@ const ITEMS: {
   shift?: number;
 }[] = [
   {
+    name: 'Microsoft',
+    logo: { base: 'microsoft', ext: 'svg', shift: -3 },
+    link: 'https://www.microsoft.com',
+  },
+  {
     name: 'Namecheap',
     logo: { base: 'namecheap', ext: 'svg', themed: true },
     link: 'https://www.namecheap.com',
@@ -19,6 +24,11 @@ const ITEMS: {
     name: 'EasyWP',
     logo: { base: 'easywp', ext: 'svg', themed: true },
     link: 'https://www.easywp.com',
+  },
+  {
+    name: 'LeasingSH.ro',
+    logo: { base: 'leasingsh-ro', ext: 'png', themed: true, scale: 80 },
+    link: 'https://leasingsh.ro',
   },
   {
     name: 'CodeParrot.AI',
@@ -121,7 +131,7 @@ const ROOT_URL = `${process.env.GITHUB_PAGES === 'TRUE' ? WEBSITE_LINK : ''}/use
 export function TrustedBy() {
   return (
     <div className={classes.root}>
-      <h2 className={classes.title}>{PRODUCT_NAME} is trusted by</h2>
+      <h2 className={classes.title}>{PRODUCT_NAME} is used and trusted by</h2>
       <Container className={classes.links}>
         {ITEMS.map(({ name, logo: { base, ext, themed, scale, shift: imageShift }, link, showText, shift }) => {
           const title = `${name} is using ${PRODUCT_NAME}`;

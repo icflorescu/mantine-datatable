@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.3.8 (2025-11-17)
+
+- Fix [#758](https://github.com/icflorescu/mantine-datatable/discussions/758) - implement `getPaginationItemProps`
+- Update deps to ensure compatibility with Mantine 8.3.8
+
 ## 8.3.7 (2025-11-10)
 
 - Fix [#763](https://github.com/icflorescu/mantine-datatable/issues/763) regression introduced in [#749](https://github.com/icflorescu/mantine-datatable/pull/749)
