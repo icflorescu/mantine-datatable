@@ -20,8 +20,8 @@ type DataTableRowCellProps<T> = {
   record: T;
   index: number;
   defaultRender:
-  | ((record: T, index: number, accessor: keyof T | (string & NonNullable<unknown>)) => React.ReactNode)
-  | undefined;
+    | ((record: T, index: number, accessor: keyof T | (string & NonNullable<unknown>)) => React.ReactNode)
+    | undefined;
   onClick: React.MouseEventHandler<HTMLTableCellElement> | undefined;
   onDoubleClick: React.MouseEventHandler<HTMLTableCellElement> | undefined;
   onContextMenu: React.MouseEventHandler<HTMLTableCellElement> | undefined;
@@ -130,7 +130,6 @@ export function DataTableRowCell<T>({
             }
           }}
           autoFocus
-
         />
       ) : (
         cellContent

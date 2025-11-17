@@ -15,7 +15,6 @@ export function InlineEditingExample() {
         {
           accessor: 'name',
           editable: true,
-
           onEdit: (record, index) => {
             const newData = [...data];
             newData[index] = record;

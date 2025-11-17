@@ -167,14 +167,14 @@ export type DataTableColumn<T = Record<string, unknown>> = {
    */
   footerStyle?: MantineStyleProp;
 } & (
-    | {
+  | {
       /**
        * If true, the cells in this column will be editable.
        */
       editable?: false;
       onEdit?: never;
     }
-    | {
+  | {
       /**
        * If true, the cells in this column will be editable.
        */
@@ -185,25 +185,26 @@ export type DataTableColumn<T = Record<string, unknown>> = {
        */
       onEdit: (record: T, index: number) => void;
     }
-  ) & (
+) &
+  (
     | {
-      /**
-       * If true, cell content in this column will be truncated with ellipsis as needed and will not wrap
-       * to multiple lines (i.e. `overflow: hidden; text-overflow: ellipsis`; `white-space: nowrap`).
-       * On a column, you can either set this property or `noWrap`, but not both.
-       */
-      ellipsis?: boolean;
+        /**
+         * If true, cell content in this column will be truncated with ellipsis as needed and will not wrap
+         * to multiple lines (i.e. `overflow: hidden; text-overflow: ellipsis`; `white-space: nowrap`).
+         * On a column, you can either set this property or `noWrap`, but not both.
+         */
+        ellipsis?: boolean;
 
-      noWrap?: never;
-    }
+        noWrap?: never;
+      }
     | {
-      ellipsis?: never;
+        ellipsis?: never;
 
-      /**
-       * If true, cell content in this column will not wrap to multiple lines (i.e. `white-space: nowrap`).
-       * This is useful for columns containing long strings.
-       * On a column, you can either set this property or `ellipsis`, but not both.
-       */
-      noWrap?: boolean;
-    }
+        /**
+         * If true, cell content in this column will not wrap to multiple lines (i.e. `white-space: nowrap`).
+         * This is useful for columns containing long strings.
+         * On a column, you can either set this property or `ellipsis`, but not both.
+         */
+        noWrap?: boolean;
+      }
   );
