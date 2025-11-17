@@ -12,7 +12,6 @@ type Company = {
   state: string;
   employees: number;
   foundedDate: string;
-  isActive: boolean;
 };
 
 export function InlineCellEditingExample() {
@@ -22,7 +21,6 @@ export function InlineCellEditingExample() {
         ...company,
         employees: 100 + index * 50,
         foundedDate: new Date(2015 + index, index % 12, 1).toISOString(),
-        isActive: index % 2 === 0,
       })),
     []
   );
@@ -55,13 +53,6 @@ export function InlineCellEditingExample() {
           title: 'Founded',
           editable: true,
           editType: 'date',
-          onEdit: handleEdit,
-        },
-        {
-          accessor: 'isActive',
-          title: 'Active',
-          editable: true,
-          editType: 'boolean',
           onEdit: handleEdit,
         },
         { accessor: 'city' },

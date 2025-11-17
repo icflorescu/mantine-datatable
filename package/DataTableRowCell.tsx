@@ -1,4 +1,4 @@
-import { Checkbox, NumberInput, TableTd, TextInput, type MantineStyleProp } from '@mantine/core';
+import { type MantineStyleProp, NumberInput, TableTd, TextInput } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -63,49 +63,34 @@ export function DataTableRowCell<T>({
   editType = 'text',
 }: DataTableRowCellProps<T>) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState<string | number | Date | boolean>('');
+  const [editedValue, setEditedValue] = useState<string | number | Date>('');
 
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
 
   const handleEdit = () => {
     if (onEdit && editType !== 'date') {
       const valueToSave = editedValue;
-      const newRecord = { ...record, [accessor as keyof T]: valueToSave as T[keyof T] };
+      const newRecord = {
+        ...record,
+        [accessor as keyof T]: valueToSave as T[keyof T],
+      };
       onEdit(newRecord, index);
     }
     setIsEditing(false);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLTableCellElement>) => {
-    if (editable && editType !== 'boolean') {
+    if (editable) {
       e.stopPropagation();
       setIsEditing(true);
       const currentValue = getValueAtPath(record, accessor);
       if (editType === 'date' && typeof currentValue === 'string') {
         setEditedValue(new Date(currentValue));
       } else {
-        setEditedValue(currentValue as string | number | Date | boolean);
+        setEditedValue(currentValue as string | number | Date);
       }
     }
     onClick?.(e);
-  };
-
-  const handleBooleanToggle = () => {
-    if (editable && editType === 'boolean' && onEdit) {
-      const currentValue = getValueAtPath(record, accessor) as boolean;
-      const newRecord = { ...record, [accessor as keyof T]: !currentValue as T[keyof T] };
-      onEdit(newRecord, index);
-    }
-  };
-
-  const handleCellClick = (e: React.MouseEvent<HTMLTableCellElement>) => {
-    if (isEditing) {
-      return;
-    } else if (editType === 'boolean') {
-      handleBooleanToggle();
-    } else {
-      handleClick(e);
-    }
   };
 
   let cellContent: React.ReactNode;
@@ -115,9 +100,7 @@ export function DataTableRowCell<T>({
     cellContent = defaultRender(record, index, accessor);
   } else {
     const value = getValueAtPath(record, accessor);
-    if (editType === 'boolean' && typeof value === 'boolean') {
-      cellContent = value ? 'Yes' : 'No';
-    } else if (editType === 'date' && (value instanceof Date || typeof value === 'string')) {
+    if (editType === 'date' && (value instanceof Date || typeof value === 'string')) {
       const date = value instanceof Date ? value : new Date(value);
       cellContent = date.toLocaleDateString();
     } else {
@@ -130,6 +113,7 @@ export function DataTableRowCell<T>({
       case 'number':
         return (
           <NumberInput
+            variant="unstyled"
             value={editedValue as number}
             onChange={(value) => setEditedValue(value ?? 0)}
             onBlur={handleEdit}
@@ -147,6 +131,7 @@ export function DataTableRowCell<T>({
       case 'date':
         return (
           <DatePickerInput
+            variant="unstyled"
             value={editedValue as Date}
             onChange={(value) => {
               if (value) {
@@ -157,7 +142,10 @@ export function DataTableRowCell<T>({
                 setEditedValue(date);
                 if (onEdit) {
                   const dateValue = date.toISOString();
-                  const newRecord = { ...record, [accessor as keyof T]: dateValue as T[keyof T] };
+                  const newRecord = {
+                    ...record,
+                    [accessor as keyof T]: dateValue as T[keyof T],
+                  };
                   onEdit(newRecord, index);
                 }
                 setIsEditing(false);
@@ -167,11 +155,10 @@ export function DataTableRowCell<T>({
             popoverProps={{ withinPortal: true }}
           />
         );
-      case 'boolean':
-        return null;
       default:
         return (
           <TextInput
+            variant="unstyled"
             value={editedValue as string}
             onChange={(event) => setEditedValue(event.currentTarget.value)}
             onBlur={handleEdit}
@@ -211,18 +198,12 @@ export function DataTableRowCell<T>({
         },
         style,
       ]}
-      onClick={handleCellClick}
+      onClick={handleClick}
       onDoubleClick={onDoubleClick}
       onContextMenu={onContextMenu}
       {...customCellAttributes?.(record, index)}
     >
-      {isEditing && editType !== 'boolean' ? (
-        renderEditInput()
-      ) : editType === 'boolean' ? (
-        <Checkbox checked={getValueAtPath(record, accessor) as boolean} onChange={handleBooleanToggle} />
-      ) : (
-        cellContent
-      )}
+      {isEditing ? renderEditInput() : cellContent}
     </TableTd>
   );
 }

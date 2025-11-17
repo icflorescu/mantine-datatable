@@ -189,7 +189,7 @@ export type DataTableColumn<T = Record<string, unknown>> = {
        * Type of input to use when editing cells in this column.
        * @default 'text'
        */
-      editType?: 'text' | 'number' | 'date' | 'boolean';
+      editType?: 'text' | 'number' | 'date';
     }
 ) &
   (
