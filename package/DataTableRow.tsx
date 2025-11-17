@@ -117,6 +117,7 @@ export function DataTableRow<T>({
           customCellAttributes,
           editable,
           onEdit,
+          editType,
         } = { ...defaultColumnProps, ...columnProps };
 
         return (
@@ -152,6 +153,7 @@ export function DataTableRow<T>({
             customCellAttributes={customCellAttributes}
             editable={editable}
             onEdit={onEdit}
+            editType={editType}
           />
         );
       })}

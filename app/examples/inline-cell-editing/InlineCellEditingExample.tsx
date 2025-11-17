@@ -1,13 +1,39 @@
 'use client';
 
 import { DataTable } from '__PACKAGE__';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import companies from '~/data/companies.json';
 
-const records = companies.slice(0, 5);
+type Company = {
+  id: string;
+  name: string;
+  streetAddress: string;
+  city: string;
+  state: string;
+  employees: number;
+  foundedDate: string;
+  isActive: boolean;
+};
 
 export function InlineCellEditingExample() {
-  const [data, setData] = useState(records);
+  const initialRecords = useMemo<Company[]>(
+    () =>
+      companies.slice(0, 5).map((company, index) => ({
+        ...company,
+        employees: 100 + index * 50,
+        foundedDate: new Date(2015 + index, index % 12, 1).toISOString(),
+        isActive: index % 2 === 0,
+      })),
+    []
+  );
+
+  const [data, setData] = useState(initialRecords);
+
+  const handleEdit = (record: Company, index: number) => {
+    const newData = [...data];
+    newData[index] = record;
+    setData(newData);
+  };
 
   return (
     <DataTable
@@ -15,13 +41,29 @@ export function InlineCellEditingExample() {
         {
           accessor: 'name',
           editable: true,
-          onEdit: (record, index) => {
-            const newData = [...data];
-            newData[index] = record;
-            setData(newData);
-          },
+          editType: 'text',
+          onEdit: handleEdit,
         },
-        { accessor: 'streetAddress' },
+        {
+          accessor: 'employees',
+          editable: true,
+          editType: 'number',
+          onEdit: handleEdit,
+        },
+        {
+          accessor: 'foundedDate',
+          title: 'Founded',
+          editable: true,
+          editType: 'date',
+          onEdit: handleEdit,
+        },
+        {
+          accessor: 'isActive',
+          title: 'Active',
+          editable: true,
+          editType: 'boolean',
+          onEdit: handleEdit,
+        },
         { accessor: 'city' },
         { accessor: 'state' },
       ]}

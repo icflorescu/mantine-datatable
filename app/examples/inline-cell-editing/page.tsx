@@ -24,8 +24,13 @@ export default async function InlineEditingExamplePage() {
       <Txt>
         This example demonstrates how to implement inline cell editing in {PRODUCT_NAME}. This is achieved by setting
         the <code>editable</code> property to <code>true</code> in the column definition. Additionally, the{' '}
-        <code>onEdit</code> callback is provided to handle updates to the record when the cell value is changed. In this
-        example, we allow editing of the <code>name</code> field of company records.
+        <code>onEdit</code> callback is provided to handle updates to the record when the cell value is changed.
+      </Txt>
+      <Txt>
+        The <code>editType</code> property allows you to specify the type of input to use when editing cells. Supported
+        types are: <code>text</code> (default), <code>number</code>, <code>date</code>, and <code>boolean</code>. The
+        DataTable automatically renders the appropriate input component for each type - TextInput for text, NumberInput
+        for numbers, DatePickerInput for dates, and Checkbox for booleans.
       </Txt>
       <Txt>
         This is baked in to the <code>DataTable</code> component for the column definitions, so no additional libraries

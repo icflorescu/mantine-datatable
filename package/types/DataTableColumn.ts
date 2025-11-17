@@ -173,6 +173,7 @@ export type DataTableColumn<T = Record<string, unknown>> = {
        */
       editable?: false;
       onEdit?: never;
+      editType?: never;
     }
   | {
       /**
@@ -184,6 +185,11 @@ export type DataTableColumn<T = Record<string, unknown>> = {
        * Receives the edited record and its index as arguments.
        */
       onEdit: (record: T, index: number) => void;
+      /**
+       * Type of input to use when editing cells in this column.
+       * @default 'text'
+       */
+      editType?: 'text' | 'number' | 'date' | 'boolean';
     }
 ) &
   (
