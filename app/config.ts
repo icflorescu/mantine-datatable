@@ -183,6 +183,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: handling cell click events on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/inline-cell-editing',
+    title: 'Inline cell editing',
+    description: `Example: inline cell editing with ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/using-with-mantine-contextmenu',
     title: `Using with ${MANTINE_CONTEXTMENU_PRODUCT_NAME}`,
     description: `Example: how to use ${PRODUCT_NAME} with ${MANTINE_CONTEXTMENU_PRODUCT_NAME}`,
@@ -251,11 +256,6 @@ export const ROUTES: RouteInfo[] = [
     href: '/examples/complex-usage-scenario',
     title: 'Complex usage scenario',
     description: `Example: a complex usage scenario for ${PRODUCT_NAME} featuring custom column definitions, asynchronous data loading with React Query, sorting, pagination, custom cell rendering, multiple row selection, and more`,
-  },
-  {
-    href: '/examples/inline-editing',
-    title: 'Inline editing',
-    description: `Example: inline editing with ${PRODUCT_NAME}`,
   },
   {
     href: '/type-definitions',

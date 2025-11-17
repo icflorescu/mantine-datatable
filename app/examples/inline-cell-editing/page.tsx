@@ -6,15 +6,15 @@ import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
-import { InlineEditingExample } from './InlineEditingExample';
+import { InlineCellEditingExample } from './InlineCellEditingExample';
 
-const PATH: Route = '/examples/inline-editing';
+const PATH: Route = '/examples/inline-cell-editing';
 
 export const metadata = getRouteMetadata(PATH);
 
 export default async function InlineEditingExamplePage() {
   const code = await allPromiseProps({
-    'InlineEditingExample.tsx': readCodeFile<string>(`${PATH}/InlineEditingExample.tsx`),
+    'InlineCellEditingExample.tsx': readCodeFile<string>(`${PATH}/InlineCellEditingExample.tsx`),
     'companies.json': readCodeFile<string>('/../data/companies.json'),
   });
 
@@ -33,8 +33,8 @@ export default async function InlineEditingExamplePage() {
         editing the entire row or adding validation it is still recommended to implement the logic yourself by changing
         the logic of the <code>render</code> function of the column to show input fields when in edit mode.
       </Txt>
-      <CodeBlock tabs={{ code, keys: ['InlineEditingExample.tsx', 'companies.json'] }} />
-      <InlineEditingExample />
+      <CodeBlock tabs={{ code, keys: ['InlineCellEditingExample.tsx', 'companies.json'] }} />
+      <InlineCellEditingExample />
       <PageNavigation of={PATH} />
     </>
   );

@@ -6,7 +6,7 @@ import companies from '~/data/companies.json';
 
 const records = companies.slice(0, 5);
 
-export function InlineEditingExample() {
+export function InlineCellEditingExample() {
   const [data, setData] = useState(records);
 
   return (
