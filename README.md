@@ -36,7 +36,9 @@ The [lightweight](https://bundlephobia.com/package/mantine-datatable), dependenc
 - **[Drag-and-drop support](https://icflorescu.github.io/mantine-datatable/examples/row-dragging)** - implemented using [@hello-pangea/dnd](https://github.com/hello-pangea/dnd) thanks to the outstanding work of [Mohd Ahmad](https://github.com/MohdAhmad1)
 - **More** - check out the [full documentation](https://icflorescu.github.io/mantine-datatable/)
 
-## Trusted by the community
+## Trusted by thousands of developers and companies from around the world
+
+Used by [Microsoft](https://www.microsoft.com/) in [Agent Lightning](https://github.com/microsoft/agent-lightning).
 
 [Emil Sorensen](https://github.com/Emil-Sorensen) @ [kapa.ai](https://kapa.ai/):
 
@@ -46,7 +48,7 @@ The [lightweight](https://bundlephobia.com/package/mantine-datatable), dependenc
 
 > _Thank you for the wonderful, useful, and beautiful DataTable that has allowed me to create several applications without any problem 👏_
 
-Mantine DataTable is used by developers and companies around the world, such as: [Namecheap](https://www.namecheap.com/), [EasyWP](https://www.easywp.com/), [CodeParrot.AI](https://codeparrot.ai), [OmicsStudio](https://omicsstudio.com), [SegmentX](https://segmentx.ai), [Aquarino](https://www.aquarino.com.br/), [Dera](https://getdera.com/), [kapa.ai](https://kapa.ai/), [exdatis.ai](https://exdatis.ai/), [teachfloor](https://www.teachfloor.com/), [MARKUP](https://www.getmarkup.com/), [BookieBase](https://bookiebase.ie/), [zipline](https://zipline.diced.tech/), [Pachtop](https://github.com/pacholoamit/pachtop), [Ganymede](https://github.com/Zibbp/ganymede), [COH3 Stats](https://coh3stats.com/), [Culver City Rental Registry](https://www.ccrentals.org/) and many more.
+Mantine DataTable is used by developers and companies around the world, from startups to S&P 500, such as: [Microsoft](https://www.microsoft.com/), [Namecheap](https://www.namecheap.com/), [EasyWP](https://www.easywp.com/), [CodeParrot.AI](https://codeparrot.ai), [OmicsStudio](https://omicsstudio.com), [SegmentX](https://segmentx.ai), [Aquarino](https://www.aquarino.com.br/), [Dera](https://getdera.com/), [kapa.ai](https://kapa.ai/), [exdatis.ai](https://exdatis.ai/), [teachfloor](https://www.teachfloor.com/), [MARKUP](https://www.getmarkup.com/), [BookieBase](https://bookiebase.ie/), [zipline](https://zipline.diced.tech/), [Pachtop](https://github.com/pacholoamit/pachtop), [Ganymede](https://github.com/Zibbp/ganymede), [COH3 Stats](https://coh3stats.com/), [Culver City Rental Registry](https://www.ccrentals.org/) and many more.
 
 If you're using Mantine DataTable in your project, please drop me a line at the email address listed in my [GitHub profile](https://github.com/icflorescu) and I'll be happy to add it to the list and on the [documentation website](https://icflorescu.github.io/mantine-datatable/).
 

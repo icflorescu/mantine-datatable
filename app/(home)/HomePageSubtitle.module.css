@@ -5,15 +5,15 @@
   height: auto;
 }
 
-.iconTrust {
+.iconGreen {
   color: var(--mantine-color-green-filled);
 }
 
-.iconCompat {
+.iconBlue {
   color: var(--mantine-color-blue-filled);
 }
 
-.iconOldVersion {
+.iconRed {
   color: var(--mantine-color-red-filled);
 }
 

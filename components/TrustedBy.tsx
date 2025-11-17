@@ -11,6 +11,11 @@ const ITEMS: {
   shift?: number;
 }[] = [
   {
+    name: 'Microsoft',
+    logo: { base: 'microsoft', ext: 'svg', shift: -3 },
+    link: 'https://www.microsoft.com',
+  },
+  {
     name: 'Namecheap',
     logo: { base: 'namecheap', ext: 'svg', themed: true },
     link: 'https://www.namecheap.com',

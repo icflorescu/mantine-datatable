@@ -45,6 +45,7 @@ export function DataTablePagination({
   horizontalSpacing,
   paginationWrapBreakpoint,
   getPaginationControlProps,
+  getPaginationItemProps,
   renderPagination,
 }: DataTablePaginationComponentProps) {
   let paginationTextValue: React.ReactNode;
@@ -118,6 +119,7 @@ export function DataTablePagination({
         size={paginationSize}
         total={totalPages}
         getControlProps={getPaginationControlProps}
+        getItemProps={getPaginationItemProps}
         {...props}
       />
     ),
