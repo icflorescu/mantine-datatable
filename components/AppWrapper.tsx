@@ -19,6 +19,7 @@ export function AppWrapper({ children }: React.PropsWithChildren) {
 
   return (
     <AppShell
+      // eslint-disable-next-line react-hooks/refs
       style={{ '--app-wrapper-footer-height': `${ref.current?.getBoundingClientRect().height || 154}px` }}
       header={{ height: 60 }}
       navbar={{ width: 260, breakpoint: 'sm', collapsed: { mobile: !navbarExpanded } }}

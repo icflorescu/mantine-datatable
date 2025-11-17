@@ -151,6 +151,7 @@ export function SelectAllRecordsOnAllPagesExample() {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE;
     const currentRecords = employees.slice(from, to);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(currentRecords);
     if (allRecordsSelected) {
       setSelectedRecords(

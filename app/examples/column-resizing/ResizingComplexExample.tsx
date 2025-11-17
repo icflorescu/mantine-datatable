@@ -18,6 +18,7 @@ export default function ResizingComplexExample() {
 
   useEffect(() => {
     const data = sortBy(companies, sortStatus.columnAccessor);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 
@@ -34,8 +35,8 @@ export default function ResizingComplexExample() {
   const { effectiveColumns, resetColumnsWidth, resetColumnsOrder, resetColumnsToggle } = useDataTableColumns<Company>({
     key,
     columns: [
-      { accessor: 'name', ...props },
-      { accessor: 'streetAddress', ...props },
+      { accessor: 'name', ellipsis: true, ...props },
+      { accessor: 'streetAddress', ellipsis: true, ...props },
       { accessor: 'city', ellipsis: true, ...props },
       { accessor: 'state', textAlign: 'right', ...props },
     ],

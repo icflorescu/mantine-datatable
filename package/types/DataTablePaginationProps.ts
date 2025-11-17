@@ -1,5 +1,6 @@
 import type { MantineColor, MantineSize } from '@mantine/core';
 import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelectorProps';
+import type { PaginationRenderContext } from './PaginationRenderContext';
 
 export type DataTablePaginationProps = (
   | {
@@ -17,6 +18,7 @@ export type DataTablePaginationProps = (
       paginationWrapBreakpoint?: never;
       getPaginationControlProps?: never;
       getPaginationItemProps?: never;
+      renderPagination?: never;
     }
   | {
       /**
@@ -102,6 +104,11 @@ export type DataTablePaginationProps = (
        * Function that returns props object for pagination item (page number button).
        */
       getPaginationItemProps?: (page: number) => Record<string, unknown>;
+
+      /**
+       * Optional render function to replace the entire pagination component.
+       */
+      renderPagination?: (ctx: PaginationRenderContext) => React.ReactNode;
     }
 ) &
   DataTablePageSizeSelectorProps;

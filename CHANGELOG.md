@@ -3,6 +3,25 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.3.7 (2025-11-10)
+
+- Fix [#763](https://github.com/icflorescu/mantine-datatable/issues/763) regression introduced in [#749](https://github.com/icflorescu/mantine-datatable/pull/749)
+- Fix [#764](https://github.com/icflorescu/mantine-datatable/issues/764) docs website bug introduced in [#749](https://github.com/icflorescu/mantine-datatable/pull/749)
+- Update deps to ensure compatibility with Mantine 8.3.7
+- Update other dev deps (docsearch, faker, etc.)
+- Fix linting & linting errors
+
+## 8.3.6 (2025-11-07)
+
+- Merge [#740](https://github.com/icflorescu/mantine-datatable/pull/740) to fix [#739](https://github.com/icflorescu/mantine-datatable/issues/739)
+- Merge [#741](https://github.com/icflorescu/mantine-datatable/pull/741) to fix [#640](https://github.com/icflorescu/mantine-datatable/issues/640)
+- Merge [#746](https://github.com/icflorescu/mantine-datatable/pull/746) to fix [#745](https://github.com/icflorescu/mantine-datatable/issues/745)
+- Merge [#747](https://github.com/icflorescu/mantine-datatable/pull/747) to implement `renderPagination` prop for full pagination customization
+- Merge [#749](https://github.com/icflorescu/mantine-datatable/pull/749) which improves auto resize
+- Merge [#750](https://github.com/icflorescu/mantine-datatable/pull/750) which adds multilevel column grouping support
+- Merge [#761](https://github.com/icflorescu/mantine-datatable/pull/761) to fix [#692](https://github.com/icflorescu/mantine-datatable/issues/692)
+- Update deps to ensure compatibility with Mantine 8.3.6
+
 ## 8.2.0 (2025-07-23)
 
 - **Significant performance improvement by reducing re-renders**, many thanks to [yergom](https://github.com/yergom) for PR [#732](https://github.com/icflorescu/mantine-datatable/pull/732)

@@ -4,12 +4,14 @@ import { CodeBlock } from '~/components/CodeBlock';
 import { ExternalLink } from '~/components/ExternalLink';
 import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
+import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { ColumnGroupingExample } from './ColumnGroupingExample';
+import { MultilevelColumnGroupingExample } from './MultilevelColumnGroupingExample';
 
 const PATH: Route = '/examples/column-grouping';
 
@@ -18,6 +20,7 @@ export const metadata = getRouteMetadata(PATH);
 export default async function ColumnGroupingExamplePage() {
   const code = await allPromiseProps({
     'ColumnGroupingExample.tsx': readCodeFile<string>(`${PATH}/ColumnGroupingExample.tsx`),
+    'MultilevelColumnGroupingExample.tsx': readCodeFile<string>(`${PATH}/MultilevelColumnGroupingExample.tsx`),
     'companies.json': readCodeFile<string>('/../data/companies.json'),
   });
 
@@ -83,6 +86,10 @@ export default async function ColumnGroupingExamplePage() {
       <ColumnGroupingExample />
       <Txt>Here is the code used to generate the table above:</Txt>
       <CodeBlock tabs={{ code, keys: ['ColumnGroupingExample.tsx', 'companies.json'] }} />
+      <PageSubtitle value="Multilevel column grouping" />
+      <MultilevelColumnGroupingExample />
+      <Txt>Here is the code used to generate the table above:</Txt>
+      <CodeBlock tabs={{ code, keys: ['MultilevelColumnGroupingExample.tsx', 'companies.json'] }} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>

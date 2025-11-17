@@ -12,12 +12,12 @@ export function InfiniteScrollingExample() {
   const [records, setRecords] = useState(employees.slice(0, batchSize));
   const scrollViewportRef = useRef<HTMLDivElement>(null);
 
-  let timeout: ReturnType<typeof setTimeout> | undefined;
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   const loadMoreRecords = () => {
     if (records.length < employees.length) {
       setLoading(true);
-      timeout = setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setRecords(employees.slice(0, records.length + batchSize));
         setLoading(false);
       }, 1000);
@@ -38,9 +38,9 @@ export function InfiniteScrollingExample() {
   // Clear timeout on unmount
   useEffect(() => {
     return () => {
-      if (timeout) clearTimeout(timeout);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [timeout]);
+  }, []);
 
   return (
     <>
