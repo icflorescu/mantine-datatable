@@ -111,6 +111,13 @@ const ITEMS: {
     shift: 0.25,
   },
   {
+    name: 'Pipedash',
+    showText: true,
+    logo: { base: 'pipedash', ext: 'png', scale: 85, shift: 4 },
+    link: 'https://github.com/hcavarsan/pipedash',
+    shift: 0.25,
+  },
+  {
     name: 'COH3 Stats',
     showText: true,
     logo: { base: 'coh3-stats', ext: 'png', scale: 80, shift: 4.5 },
