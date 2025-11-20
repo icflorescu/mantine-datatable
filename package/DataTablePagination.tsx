@@ -126,6 +126,7 @@ export function DataTablePagination({
         value={page}
         onChange={onPageChange}
         size={paginationSize}
+        gap={gapValue}
         total={totalPages}
         getControlProps={getPaginationControlProps}
         getItemProps={getPaginationItemProps}
@@ -137,6 +138,7 @@ export function DataTablePagination({
   const ctx: PaginationRenderContext = {
     state: {
       paginationSize,
+      paginationGap,
       page,
       totalPages,
       totalRecords,
@@ -159,13 +161,7 @@ export function DataTablePagination({
       px={horizontalSpacing ?? 'xs'}
       py="xs"
       className={clsx('mantine-datatable-pagination', className)}
-      style={[
-        {
-          flexDirection: isWrapped ? 'column' : 'row',
-          '--datatable-pagination-gap': gapValue,
-        },
-        style,
-      ]}
+      style={[{ flexDirection: isWrapped ? 'column' : 'row' }, style]}
     >
       {typeof renderPagination === 'function' ? (
         renderPagination(ctx)
