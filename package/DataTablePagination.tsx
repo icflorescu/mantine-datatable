@@ -10,14 +10,9 @@ import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
 type DataTablePaginationComponentProps = WithOptionalProperty<
   WithRequiredProperty<
     DataTablePaginationProps,
-    | 'loadingText'
-    | 'paginationSize'
-    | 'paginationGap'
-    | 'recordsPerPageLabel'
-    | 'paginationWrapBreakpoint'
-    | 'getPaginationControlProps'
+    'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint' | 'getPaginationControlProps'
   >,
-  'onRecordsPerPageChange' | 'recordsPerPageOptions' | 'renderPagination'
+  'onRecordsPerPageChange' | 'recordsPerPageOptions' | 'renderPagination' | 'paginationGap'
 > & {
   className: string | undefined;
   style: MantineStyleProp | undefined;
@@ -79,9 +74,6 @@ export function DataTablePagination({
 
   const isWrapped = !isAbovePaginationWrapBreakpoint;
 
-  const gapValue =
-    typeof paginationGap === 'number' ? rem(paginationGap) : `var(--mantine-spacing-${paginationGap ?? 'xs'})`;
-
   const Controls: PaginationRenderContext['Controls'] = {
     Text: (props) => (
       <Text component="div" className="mantine-datatable-pagination-text" size={paginationSize} {...props}>
@@ -126,7 +118,7 @@ export function DataTablePagination({
         value={page}
         onChange={onPageChange}
         size={paginationSize}
-        gap={gapValue}
+        gap={paginationGap}
         total={totalPages}
         getControlProps={getPaginationControlProps}
         getItemProps={getPaginationItemProps}

@@ -41,7 +41,7 @@ export default function PaginationExample() {
       // 👇 uncomment the next line to use a custom pagination size
       // paginationSize="md"
       // 👇 uncomment the next line to use a custom pagination gap
-      // paginationGap="lg"
+      // paginationGap="md"
       // 👇 uncomment the next line to use a custom loading text
       // loadingText="Loading..."
       // 👇 uncomment the next line to display a custom text when no records were found

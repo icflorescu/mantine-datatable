@@ -5,7 +5,7 @@ import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelector
 export type PaginationRenderContext = {
   state: {
     paginationSize: MantineSize;
-    paginationGap: MantineSpacing;
+    paginationGap: MantineSpacing | undefined;
     page: number;
     totalPages: number;
     totalRecords: number | undefined;
