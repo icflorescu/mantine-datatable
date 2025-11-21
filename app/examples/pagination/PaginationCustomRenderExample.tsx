@@ -60,6 +60,8 @@ export default function PaginationCustomRenderExample() {
           <Group gap="xs">
             <Text size={state.paginationSize}>Jump to page</Text>
             <NumberInput
+              // 👇 custom input height to match pagination button height
+              styles={{ wrapper: { '--input-height-sm': '26px' } }}
               hideControls
               w={80}
               size={state.paginationSize}
