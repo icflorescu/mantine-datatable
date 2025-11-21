@@ -12,7 +12,7 @@ type DataTablePaginationComponentProps = WithOptionalProperty<
     DataTablePaginationProps,
     'loadingText' | 'paginationSize' | 'recordsPerPageLabel' | 'paginationWrapBreakpoint' | 'getPaginationControlProps'
   >,
-  'onRecordsPerPageChange' | 'recordsPerPageOptions' | 'renderPagination'
+  'onRecordsPerPageChange' | 'recordsPerPageOptions' | 'renderPagination' | 'paginationGap'
 > & {
   className: string | undefined;
   style: MantineStyleProp | undefined;
@@ -33,6 +33,7 @@ export function DataTablePagination({
   paginationActiveTextColor,
   paginationActiveBackgroundColor,
   paginationSize,
+  paginationGap,
   loadingText,
   noRecordsText,
   paginationText,
@@ -117,6 +118,7 @@ export function DataTablePagination({
         value={page}
         onChange={onPageChange}
         size={paginationSize}
+        gap={paginationGap}
         total={totalPages}
         getControlProps={getPaginationControlProps}
         getItemProps={getPaginationItemProps}
@@ -128,6 +130,7 @@ export function DataTablePagination({
   const ctx: PaginationRenderContext = {
     state: {
       paginationSize,
+      paginationGap,
       page,
       totalPages,
       totalRecords,

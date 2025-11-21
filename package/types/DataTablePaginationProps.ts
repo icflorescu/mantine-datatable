@@ -1,4 +1,4 @@
-import type { MantineColor, MantineSize } from '@mantine/core';
+import type { MantineColor, MantineSize, MantineSpacing } from '@mantine/core';
 import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelectorProps';
 import type { PaginationRenderContext } from './PaginationRenderContext';
 
@@ -13,6 +13,7 @@ export type DataTablePaginationProps = (
       paginationActiveTextColor?: never;
       paginationActiveBackgroundColor?: never;
       paginationSize?: never;
+      paginationGap?: never;
       loadingText?: never;
       paginationText?: never;
       paginationWrapBreakpoint?: never;
@@ -58,6 +59,12 @@ export type DataTablePaginationProps = (
        * @default `sm`
        */
       paginationSize?: MantineSize;
+
+      /**
+       * Gap between pagination controls.
+       * @default `xs`
+       */
+      paginationGap?: MantineSpacing;
 
       /**
        * Color applied to active page button text.
