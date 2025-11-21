@@ -67,7 +67,6 @@ export function DataTable<T>({
   paginationActiveTextColor,
   paginationActiveBackgroundColor,
   paginationSize = 'sm',
-  paginationGap = undefined,
   paginationText = ({ from, to, totalRecords }) => `${from} - ${to} / ${totalRecords}`,
   paginationWrapBreakpoint = 'sm',
   getPaginationControlProps = (control) => {
@@ -454,7 +453,6 @@ export function DataTable<T>({
             paginationActiveTextColor={paginationActiveTextColor}
             paginationActiveBackgroundColor={paginationActiveBackgroundColor}
             paginationSize={paginationSize}
-            paginationGap={paginationGap}
             paginationText={paginationText}
             paginationWrapBreakpoint={paginationWrapBreakpoint}
             getPaginationControlProps={getPaginationControlProps}

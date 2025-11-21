@@ -10,7 +10,7 @@ import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
-import { MANTINE_GAPS, MANTINE_SIZES } from '~/lib/constants';
+import { MANTINE_SIZES } from '~/lib/constants';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import PaginationExample from './PaginationExample';
 import PaginationExampleWithControlProps from './PaginationExampleWithControlProps';
@@ -87,19 +87,6 @@ export default async function PaginationExamplePage() {
           </Code>
           <br />
           The pagination size.
-        </li>
-        <li>
-          <Code>
-            paginationGap:{' '}
-            {MANTINE_GAPS.map((size, index) => (
-              <Fragment key={size}>
-                {index !== 0 && ' | '}
-                &apos;{size}&apos;
-              </Fragment>
-            ))}
-          </Code>
-          <br />
-          The gap between pagination controls.
         </li>
         <li>
           <Code>
