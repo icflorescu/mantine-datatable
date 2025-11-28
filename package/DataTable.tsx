@@ -79,6 +79,7 @@ export function DataTable<T>({
   },
   getPaginationItemProps,
   renderPagination,
+  paginationPosition = 'bottom',
   loaderBackgroundBlur,
   customLoader,
   loaderSize,
@@ -250,6 +251,35 @@ export function DataTable<T>({
     [tableWrapper]
   );
 
+  const Pagination = page && (
+    <DataTablePagination
+      className={classNames?.pagination}
+      style={styles?.pagination}
+      horizontalSpacing={horizontalSpacing}
+      fetching={fetching}
+      page={page}
+      onPageChange={handlePageChange}
+      totalRecords={totalRecords}
+      recordsPerPage={recordsPerPage}
+      onRecordsPerPageChange={onRecordsPerPageChange}
+      recordsPerPageOptions={recordsPerPageOptions}
+      recordsPerPageLabel={recordsPerPageLabel}
+      paginationWithEdges={paginationWithEdges}
+      paginationWithControls={paginationWithControls}
+      paginationActiveTextColor={paginationActiveTextColor}
+      paginationActiveBackgroundColor={paginationActiveBackgroundColor}
+      paginationSize={paginationSize}
+      paginationText={paginationText}
+      paginationWrapBreakpoint={paginationWrapBreakpoint}
+      getPaginationControlProps={getPaginationControlProps}
+      getPaginationItemProps={getPaginationItemProps}
+      noRecordsText={noRecordsText}
+      loadingText={loadingText}
+      recordsLength={recordsLength}
+      renderPagination={renderPagination}
+    />
+  );
+
   return (
     <DataTableColumnsProvider {...dragToggle}>
       <Box
@@ -285,6 +315,7 @@ export function DataTable<T>({
           },
         ]}
       >
+        {(paginationPosition === 'top' || paginationPosition === 'bottomAndTop') && Pagination}
         <DataTableScrollArea
           viewportRef={mergedViewportRef}
           leftShadowBehind={selectionColumnVisible || !!pinFirstColumn}
@@ -435,34 +466,7 @@ export function DataTable<T>({
           </TableWrapper>
         </DataTableScrollArea>
 
-        {page && (
-          <DataTablePagination
-            className={classNames?.pagination}
-            style={styles?.pagination}
-            horizontalSpacing={horizontalSpacing}
-            fetching={fetching}
-            page={page}
-            onPageChange={handlePageChange}
-            totalRecords={totalRecords}
-            recordsPerPage={recordsPerPage}
-            onRecordsPerPageChange={onRecordsPerPageChange}
-            recordsPerPageOptions={recordsPerPageOptions}
-            recordsPerPageLabel={recordsPerPageLabel}
-            paginationWithEdges={paginationWithEdges}
-            paginationWithControls={paginationWithControls}
-            paginationActiveTextColor={paginationActiveTextColor}
-            paginationActiveBackgroundColor={paginationActiveBackgroundColor}
-            paginationSize={paginationSize}
-            paginationText={paginationText}
-            paginationWrapBreakpoint={paginationWrapBreakpoint}
-            getPaginationControlProps={getPaginationControlProps}
-            getPaginationItemProps={getPaginationItemProps}
-            noRecordsText={noRecordsText}
-            loadingText={loadingText}
-            recordsLength={recordsLength}
-            renderPagination={renderPagination}
-          />
-        )}
+        {(paginationPosition === 'bottom' || paginationPosition === 'bottomAndTop') && Pagination}
         <DataTableLoader
           fetching={fetching}
           backgroundBlur={loaderBackgroundBlur}
