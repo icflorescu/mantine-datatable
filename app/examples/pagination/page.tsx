@@ -15,7 +15,6 @@ import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import PaginationExample from './PaginationExample';
 import PaginationExampleWithControlProps from './PaginationExampleWithControlProps';
 import PaginationExampleWithPageSizeSelector from './PaginationExampleWithPageSizeSelector';
-import PaginationExampleWithPosition from './PaginationExampleWithPosition';
 
 const PATH: Route = '/examples/pagination';
 
@@ -29,7 +28,6 @@ export default async function PaginationExamplePage() {
     'PaginationExampleWithPageSizeSelector.tsx': readCodeFile<string>(
       `${PATH}/PaginationExampleWithPageSizeSelector.tsx`
     ),
-    'PaginationExampleWithPosition.tsx': readCodeFile<string>(`${PATH}/PaginationExampleWithPosition.tsx`),
   });
 
   return (
@@ -186,13 +184,6 @@ export default async function PaginationExamplePage() {
       </Txt>
       <CodeBlock code={code['PaginationExampleWithControlProps.tsx']} />
       <PaginationExampleWithControlProps />
-      <PageSubtitle value="Pagination position" />
-      <Txt>
-        You can position the pagination component at the top or the bottom (or both) of the table by setting the{' '}
-        <Code>paginationPosition</Code> property.
-      </Txt>
-      <CodeBlock code={code['PaginationExampleWithPosition.tsx']} />
-      <PaginationExampleWithPosition />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
