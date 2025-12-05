@@ -52,7 +52,7 @@
   right: -6px; /* Extend further to the right */
   width: 12px; /* Wider for easier clicking */
   background: transparent;
-  z-index: 100; /* Higher z-index to ensure it's above other elements */
+  z-index: 0; /* Keep below sticky pinned columns */
   opacity: 0;
   transition: opacity 0.2s;
 
@@ -66,6 +66,11 @@
     background: light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-4));
     border-radius: 1px;
     transition: background-color 0.2s;
+
+    @mixin rtl {
+      left: auto;
+      right: 5px;
+    }
   }
 
   &:hover {

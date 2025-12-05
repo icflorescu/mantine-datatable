@@ -59,6 +59,20 @@
   td {
     border-left: 0;
   }
+
+  @mixin rtl {
+    th,
+    td {
+      border-left: 0;
+      border-right: 0;
+    }
+
+    /* In RTL, add border-right to all cells except the first (which is at the table edge) */
+    th:not(:first-of-type),
+    td:not(:first-of-type) {
+      border-right: 1px solid var(--mantine-datatable-row-border-color);
+    }
+  }
 }
 
 .mantine-datatable-with-border {
@@ -73,6 +87,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Allow overflow for pinned cells so the ::after shadow pseudo-element is not clipped.
+   This overrides overflow: hidden from resizable columns (th) and ellipsis (td). */
+.mantine-datatable-pin-first-column.mantine-datatable-resizable-columns th:first-of-type,
+.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible.mantine-datatable-resizable-columns th:nth-of-type(2),
+.mantine-datatable-pin-last-column.mantine-datatable-resizable-columns th:last-of-type,
+.mantine-datatable-pin-first-column td:first-of-type,
+.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible td:nth-of-type(2),
+.mantine-datatable-pin-last-column td:last-of-type {
+  overflow: visible;
 }
 
 /* Selection column should always have fixed width */
@@ -153,13 +178,21 @@
 .mantine-datatable-pin-last-column {
   th:last-of-type,
   td:not(.mantine-datatable-row-expansion-cell):last-of-type {
-    position: sticky;
+    position: sticky !important; /* Override position: relative from resizable columns */
     z-index: 1;
 
     /* This is to fix a minor visual glitch in webkit browsers */
     right: rem(-0.4px);
     @-moz-document url-prefix() {
       right: 0;
+    }
+
+    @mixin rtl {
+      right: auto;
+      left: rem(-0.4px);
+      @-moz-document url-prefix() {
+        left: 0;
+      }
     }
 
     &::after {
@@ -174,6 +207,17 @@
       pointer-events: none;
       opacity: var(--mantine-datatable-right-shadow-opacity);
       transition: opacity 0.2s;
+
+      @mixin rtl {
+        /* In RTL, last column is on the left side, shadow/border should be on its right (inside edge) */
+        left: 100%;
+        right: auto;
+        border-left: 1px solid var(--mantine-datatable-row-border-color);
+        border-right: 0;
+        background: var(--mantine-datatable-shadow-background-left);
+        opacity: var(--mantine-datatable-left-shadow-opacity);
+        z-index: 2;
+      }
     }
   }
 
@@ -210,9 +254,14 @@
   &.mantine-datatable-selection-column-visible tr:not(:nth-of-type(2)) th:nth-of-type(2),
   &.mantine-datatable-selection-column-visible th.mantine-datatable-column-group-header-cell:nth-of-type(2),
   &.mantine-datatable-selection-column-visible td:not(.mantine-datatable-row-expansion-cell):nth-of-type(2) {
-    position: sticky;
+    position: sticky !important; /* Override position: relative from resizable columns */
     left: var(--mantine-datatable-selection-column-width);
     z-index: 1;
+
+    @mixin rtl {
+      left: auto;
+      right: var(--mantine-datatable-selection-column-width);
+    }
 
     &::after {
       content: '';
@@ -226,11 +275,25 @@
       pointer-events: none;
       opacity: var(--mantine-datatable-left-shadow-opacity);
       transition: opacity 0.2s;
+
+      @mixin rtl {
+        right: auto;
+        left: calc(-1 * var(--mantine-spacing-xs));
+        border-left: 0;
+        border-right: 1px solid var(--mantine-datatable-row-border-color);
+        background: var(--mantine-datatable-shadow-background-right);
+        opacity: var(--mantine-datatable-right-shadow-opacity);
+      }
     }
   }
 
   &.mantine-datatable-selection-column-visible th.mantine-datatable-header-selector-cell {
     left: 0;
+
+    @mixin rtl {
+      left: auto;
+      right: 0;
+    }
   }
 
   &:not(.mantine-datatable-selection-column-visible) th:first-of-type,
@@ -271,4 +334,17 @@
       background: var(--mantine-datatable-selection-color);
     }
   }
+}
+
+/* Explicit override for resizable header cells in pinned columns.
+   The .mantine-datatable-header-cell-resizable class sets position: relative,
+   but pinned columns need position: sticky for the shadow pseudo-element to work.
+   position: sticky also creates a positioning context for absolutely positioned
+   children (like the resize handle), so this works correctly. */
+.mantine-datatable-pin-first-column:not(.mantine-datatable-selection-column-visible)
+  th.mantine-datatable-header-cell-resizable:first-of-type,
+.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible
+  th.mantine-datatable-header-cell-resizable:nth-of-type(2),
+.mantine-datatable-pin-last-column th.mantine-datatable-header-cell-resizable:last-of-type {
+  position: sticky !important;
 }

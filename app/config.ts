@@ -223,6 +223,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to pin the first column on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/rtl-support',
+    title: 'RTL support',
+    description: `Example: demonstrating RTL (Right-to-Left) support in ${PRODUCT_NAME} for languages like Arabic, Hebrew, and Persian`,
+  },
+  {
     href: '/examples/links-or-buttons-inside-clickable-rows-or-cells',
     title: 'Links or buttons inside clickable rows or cells',
     description: `Example: how to add links or buttons inside ${PRODUCT_NAME} clickable rows or cells`,
