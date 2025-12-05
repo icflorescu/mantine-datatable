@@ -1,7 +1,6 @@
 import type { DropResult } from '@hello-pangea/dnd';
 import type { DataTableColumn, DataTableColumnGroup } from './types';
 
-
 /**
  * Utility function that returns a humanized version of a string, e.g. "camelCase" -> "Camel Case"
  */
@@ -138,7 +137,6 @@ export function calculateColSpan<T>(group: DataTableColumnGroup<T>, visibles?: (
   return 0;
 }
 
-
 /**
  * Gets all groups at a specific depth level
  */
@@ -161,7 +159,6 @@ export function getGroupsAtDepth<T>(
   return result;
 }
 
-
 /**
  * Checks if a group needs a right border based on its position and context
  */
@@ -173,4 +170,3 @@ export function needsRightBorder(
   if (!withColumnBorders) return false;
   return !isLastGroup || hasMoreColumnsAfter;
 }
-

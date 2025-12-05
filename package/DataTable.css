@@ -92,7 +92,8 @@
 /* Allow overflow for pinned cells so the ::after shadow pseudo-element is not clipped.
    This overrides overflow: hidden from resizable columns (th) and ellipsis (td). */
 .mantine-datatable-pin-first-column.mantine-datatable-resizable-columns th:first-of-type,
-.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible.mantine-datatable-resizable-columns th:nth-of-type(2),
+.mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible.mantine-datatable-resizable-columns
+  th:nth-of-type(2),
 .mantine-datatable-pin-last-column.mantine-datatable-resizable-columns th:last-of-type,
 .mantine-datatable-pin-first-column td:first-of-type,
 .mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible td:nth-of-type(2),
