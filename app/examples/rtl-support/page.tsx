@@ -21,9 +21,11 @@ export default async function RTLSupportExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        {PRODUCT_NAME} fully supports RTL (Right-to-Left) layouts, making it suitable for languages like Arabic,
-        Hebrew, Persian, and Urdu. When wrapped in Mantine&apos;s <Code>DirectionProvider</Code>, all DataTable features
-        automatically adapt to the text direction. See the{' '}
+        Since <strong>v8.3.9</strong>, {PRODUCT_NAME} fully supports RTL (Right-to-Left) layouts (thanks to the{' '}
+        <ExternalLink to="https://github.com/icflorescu/mantine-datatable/pull/781/">outstanding work</ExternalLink> of{' '}
+        <ExternalLink to="https://github.com/ReemX">Reem Assaf</ExternalLink>), making it suitable for languages like
+        Arabic, Hebrew, Persian, and Urdu. When wrapped in Mantine&apos;s <Code>DirectionProvider</Code>, all DataTable
+        features automatically adapt to the text direction. See the{' '}
         <ExternalLink to={`${MANTINE_LINK}/styles/rtl/`}>Mantine RTL documentation</ExternalLink> for more details on
         setting up RTL in your application.
       </Txt>

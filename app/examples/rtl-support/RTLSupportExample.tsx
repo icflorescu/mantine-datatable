@@ -1,15 +1,6 @@
 'use client';
 
-import {
-  ActionIcon,
-  Box,
-  Button,
-  DirectionProvider,
-  Group,
-  SegmentedControl,
-  Stack,
-  Text,
-} from '@mantine/core';
+import { ActionIcon, Box, Button, DirectionProvider, Group, SegmentedControl, Stack, Text } from '@mantine/core';
 import { IconColumns3, IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { DataTable, useDataTableColumns, type DataTableSortStatus } from '__PACKAGE__';
 import { useMemo, useState } from 'react';
@@ -55,12 +46,7 @@ export function RTLDraggingExample({ direction }: { direction: 'ltr' | 'rtl' }) 
       <Box dir={direction}>
         <Stack gap="xs">
           <Group gap="xs">
-            <Button
-              size="xs"
-              variant="light"
-              leftSection={<IconColumns3 size={16} />}
-              onClick={resetColumnsOrder}
-            >
+            <Button size="xs" variant="light" leftSection={<IconColumns3 size={16} />} onClick={resetColumnsOrder}>
               Reset order
             </Button>
           </Group>
@@ -199,7 +185,7 @@ export function RTLSupportExample() {
   return (
     <Stack gap="xl">
       <Group justify="center">
-        <Text size="sm" fw={500}>
+        <Text size="sm" fw={700}>
           Direction:
         </Text>
         <SegmentedControl
@@ -213,17 +199,17 @@ export function RTLSupportExample() {
       </Group>
 
       <Stack gap="md">
-        <Text fw={500}>Basic table</Text>
+        <Text fw={700}>Basic table:</Text>
         <RTLBasicExample direction={direction} />
       </Stack>
 
       <Stack gap="md">
-        <Text fw={500}>Column dragging</Text>
+        <Text fw={700}>Column dragging:</Text>
         <RTLDraggingExample direction={direction} />
       </Stack>
 
       <Stack gap="md">
-        <Text fw={500}>Full-featured: pinned columns, selection, sorting, pagination, resizing</Text>
+        <Text fw={700}>Full-featured: pinned columns, selection, sorting, pagination, resizing:</Text>
         <RTLFullFeaturedExample direction={direction} />
       </Stack>
     </Stack>
