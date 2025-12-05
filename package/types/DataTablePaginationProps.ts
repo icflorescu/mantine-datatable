@@ -19,6 +19,7 @@ export type DataTablePaginationProps = (
       getPaginationControlProps?: never;
       getPaginationItemProps?: never;
       renderPagination?: never;
+      paginationPosition?: never;
     }
   | {
       /**
@@ -109,6 +110,11 @@ export type DataTablePaginationProps = (
        * Optional render function to replace the entire pagination component.
        */
       renderPagination?: (ctx: PaginationRenderContext) => React.ReactNode;
+      /**
+       * Position of the pagination component.
+       * @default `bottom`
+       */
+      paginationPosition?: 'bottom' | 'top' | 'bottomAndTop';
     }
 ) &
   DataTablePageSizeSelectorProps;
