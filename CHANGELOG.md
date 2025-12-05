@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.3.9 (2025-12-05)
+
+- Implement comprehensive RTL support, thanks to [Reem Assaf](https://github.com/ReemX) (see [PR #781](https://github.com/icflorescu/mantine-datatable/pull/781/))
+- Update deps to ensure compatibility with Mantine 8.3.9
+
 ## 8.3.8 (2025-11-17)
 
 - Fix [#758](https://github.com/icflorescu/mantine-datatable/discussions/758) - implement `getPaginationItemProps`

@@ -154,8 +154,9 @@ export function useDataTableInjectCssVariables({
 
     function processScrolling() {
       const callbacks = stableScrollCallbacks.current;
-      const scrollTop = scrollViewport.current?.scrollTop ?? 0;
-      const scrollLeft = scrollViewport.current?.scrollLeft ?? 0;
+      const viewport = scrollViewport.current;
+      const scrollTop = viewport?.scrollTop ?? 0;
+      const scrollLeft = viewport?.scrollLeft ?? 0;
 
       const newScrolledToTop = scrollTop === 0;
       const newScrolledToBottom = tableRect.height - scrollTop - scrollRect.height < 1;
@@ -164,8 +165,30 @@ export function useDataTableInjectCssVariables({
       if (newScrolledToTop && newScrolledToTop !== scrolledToTop) callbacks.onScrollToTop?.();
       if (newScrolledToBottom && newScrolledToBottom !== scrolledToBottom) callbacks.onScrollToBottom?.();
 
-      const newScrolledToLeft = scrollLeft === 0;
-      const newScrolledToRight = tableRect.width - scrollLeft - scrollRect.width < 1;
+      // In RTL mode, scrollLeft behavior varies by browser:
+      // - Chrome/Edge: starts at 0, goes negative when scrolling left (towards visual left)
+      // - Firefox: starts at 0, goes negative when scrolling left
+      // - Safari: starts at 0, goes negative when scrolling left
+      // The key insight: in RTL, scrollLeft=0 means we're at the RIGHT edge (visual start)
+      // and negative/max values mean we're at the LEFT edge (visual end)
+      const isRtl = viewport ? getComputedStyle(viewport).direction === 'rtl' : false;
+      const maxScrollLeft = (viewport?.scrollWidth ?? 0) - scrollRect.width;
+
+      let newScrolledToLeft: boolean;
+      let newScrolledToRight: boolean;
+
+      if (isRtl) {
+        // In RTL with modern browsers, scrollLeft is 0 at right edge, negative when scrolling left
+        const absScrollLeft = Math.abs(scrollLeft);
+        // At right edge (RTL start): absScrollLeft ≈ 0, so scrolledToRight = true (no right shadow)
+        // At left edge (RTL end): absScrollLeft ≈ maxScrollLeft, so scrolledToLeft = true (no left shadow)
+        newScrolledToRight = absScrollLeft < 1;
+        newScrolledToLeft = maxScrollLeft - absScrollLeft < 1;
+      } else {
+        newScrolledToLeft = scrollLeft < 1;
+        newScrolledToRight = tableRect.width - scrollLeft - scrollRect.width < 1;
+      }
+
       const scrolledToLeft = setScrolledTo('left', newScrolledToLeft);
       const scrolledToRight = setScrolledTo('right', newScrolledToRight);
       if (newScrolledToLeft && newScrolledToLeft !== scrolledToLeft) callbacks.onScrollToLeft?.();

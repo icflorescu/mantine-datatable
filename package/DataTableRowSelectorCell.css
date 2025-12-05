@@ -7,6 +7,12 @@
   left: 0;
   text-align: center;
   padding: var(--mantine-spacing-xs);
+
+  @mixin rtl {
+    left: auto;
+    right: 0;
+  }
+
   tr[data-selected] & {
     background: inherit;
     &::before {
@@ -31,6 +37,14 @@
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s;
+
+    @mixin rtl {
+      right: auto;
+      left: calc(-1 * var(--mantine-spacing-xs));
+      border-left: 0;
+      border-right: 1px solid var(--mantine-datatable-row-border-color);
+      background: var(--mantine-datatable-shadow-background-right);
+    }
   }
 
   tr[data-with-row-border] &::after {
@@ -44,6 +58,10 @@
 
   &[data-shadow-visible]::after {
     opacity: var(--mantine-datatable-left-shadow-opacity);
+
+    @mixin rtl {
+      opacity: var(--mantine-datatable-right-shadow-opacity);
+    }
   }
 }
 
