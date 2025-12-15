@@ -1,0 +1,4 @@
+.buttonSectionRtl {
+  margin-left: var(--mantine-spacing-xs);
+  margin-right: 0;
+}

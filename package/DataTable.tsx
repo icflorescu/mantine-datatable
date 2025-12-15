@@ -434,7 +434,7 @@ export function DataTable<T>({
             </Table>
           </TableWrapper>
         </DataTableScrollArea>
-        {page && (
+        {page && recordsLength && (
           <DataTablePagination
             className={classNames?.pagination}
             style={styles?.pagination}

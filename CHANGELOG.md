@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 8.3.10 (2025-12-15)
+
+- Fix [#784](https://github.com/icflorescu/mantine-datatable/issues/784) - pagination still producing **some** output when recordsLength is 0
+- Update deps to ensure compatibility with Mantine 8.3.10
+
 ## 8.3.9 (2025-12-05)
 
 - Implement comprehensive RTL support, thanks to [Reem Assaf](https://github.com/ReemX) (see [PR #781](https://github.com/icflorescu/mantine-datatable/pull/781/))
