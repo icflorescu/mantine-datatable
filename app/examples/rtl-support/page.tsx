@@ -7,7 +7,7 @@ import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
 import { readCodeFile } from '~/lib/code';
-import { getRouteMetadata } from '~/lib/utils';
+import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { RTLSupportExample } from './RTLSupportExample';
 
 const PATH: Route = '/examples/rtl-support';
@@ -15,7 +15,11 @@ const PATH: Route = '/examples/rtl-support';
 export const metadata = getRouteMetadata(PATH);
 
 export default async function RTLSupportExamplePage() {
-  const code = await readCodeFile<string>(`${PATH}/RTLSupportExample.tsx`);
+  // const code = await readCodeFile<string>(`${PATH}/RTLSupportExample.tsx`);
+  const code = await allPromiseProps({
+    'RTLSupportExample.tsx': readCodeFile<string>(`${PATH}/RTLSupportExample.tsx`),
+    'RTLSupportExample.module.css': readCodeFile<string>(`${PATH}/RTLSupportExample.module.css`),
+  });
 
   return (
     <>
@@ -35,7 +39,7 @@ export default async function RTLSupportExamplePage() {
       </Txt>
       <RTLSupportExample />
       <Txt>Here is the code:</Txt>
-      <CodeBlock code={code} />
+      <CodeBlock tabs={{ code, keys: ['RTLSupportExample.tsx', 'RTLSupportExample.module.css'] }} />
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>

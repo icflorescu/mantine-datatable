@@ -3,8 +3,10 @@
 import { ActionIcon, Box, Button, DirectionProvider, Group, SegmentedControl, Stack, Text } from '@mantine/core';
 import { IconColumns3, IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
 import { DataTable, useDataTableColumns, type DataTableSortStatus } from '__PACKAGE__';
+import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import { companies, employees, type Employee } from '~/data';
+import classes from './RTLSupportExample.module.css';
 
 // Example 1: Basic table without pinned columns
 export function RTLBasicExample({ direction }: { direction: 'ltr' | 'rtl' }) {
@@ -46,7 +48,13 @@ export function RTLDraggingExample({ direction }: { direction: 'ltr' | 'rtl' }) 
       <Box dir={direction}>
         <Stack gap="xs">
           <Group gap="xs">
-            <Button size="xs" variant="light" leftSection={<IconColumns3 size={16} />} onClick={resetColumnsOrder}>
+            <Button
+              classNames={{ section: clsx({ [classes.buttonSectionRtl]: direction === 'rtl' }) }}
+              size="xs"
+              variant="light"
+              leftSection={<IconColumns3 size={16} />}
+              onClick={resetColumnsOrder}
+            >
               Reset order
             </Button>
           </Group>
