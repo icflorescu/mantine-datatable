@@ -1,6 +1,6 @@
 {
   "name": "mantine-datatable",
-  "version": "8.3.9",
+  "version": "8.3.10",
   "description": "The lightweight, dependency-free, dark-theme aware table component for your Mantine UI data-rich applications, featuring asynchronous data loading support, pagination, intuitive Gmail-style additive batch rows selection, column sorting, custom cell data rendering, row expansion, nesting, context menus, and much more",
   "keywords": [
     "mantine",
