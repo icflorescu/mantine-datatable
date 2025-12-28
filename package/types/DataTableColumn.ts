@@ -169,22 +169,48 @@ export type DataTableColumn<T = Record<string, unknown>> = {
 } & (
   | {
       /**
-       * If true, cell content in this column will be truncated with ellipsis as needed and will not wrap
-       * to multiple lines (i.e. `overflow: hidden; text-overflow: ellipsis`; `white-space: nowrap`).
-       * On a column, you can either set this property or `noWrap`, but not both.
+       * If true, the cells in this column will be editable.
        */
-      ellipsis?: boolean;
-
-      noWrap?: never;
+      editable?: false;
+      onEdit?: never;
+      editType?: never;
     }
   | {
-      ellipsis?: never;
-
       /**
-       * If true, cell content in this column will not wrap to multiple lines (i.e. `white-space: nowrap`).
-       * This is useful for columns containing long strings.
-       * On a column, you can either set this property or `ellipsis`, but not both.
+       * If true, the cells in this column will be editable.
        */
-      noWrap?: boolean;
+      editable: true;
+      /**
+       * Callback fired when a cell in this column is edited.
+       * Receives the edited record and its index as arguments.
+       */
+      onEdit: (record: T, index: number) => void;
+      /**
+       * Type of input to use when editing cells in this column.
+       * @default 'text'
+       */
+      editType?: 'text' | 'number' | 'date';
     }
-);
+) &
+  (
+    | {
+        /**
+         * If true, cell content in this column will be truncated with ellipsis as needed and will not wrap
+         * to multiple lines (i.e. `overflow: hidden; text-overflow: ellipsis`; `white-space: nowrap`).
+         * On a column, you can either set this property or `noWrap`, but not both.
+         */
+        ellipsis?: boolean;
+
+        noWrap?: never;
+      }
+    | {
+        ellipsis?: never;
+
+        /**
+         * If true, cell content in this column will not wrap to multiple lines (i.e. `white-space: nowrap`).
+         * This is useful for columns containing long strings.
+         * On a column, you can either set this property or `ellipsis`, but not both.
+         */
+        noWrap?: boolean;
+      }
+  );
