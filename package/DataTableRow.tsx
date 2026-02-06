@@ -5,6 +5,7 @@ import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
 import { getRowCssVariables } from './cssVariables';
+import type { PinnedColumnInfo } from './hooks';
 import type { useRowExpansion } from './hooks';
 import type {
   DataTableCellClickHandler,
@@ -21,6 +22,7 @@ type DataTableRowProps<T> = {
   index: number;
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
+  pinnedMap: Map<string, PinnedColumnInfo>;
   defaultColumnRender:
     | ((record: T, index: number, accessor: keyof T | (string & NonNullable<unknown>)) => React.ReactNode)
     | undefined;
@@ -58,6 +60,7 @@ export function DataTableRow<T>({
   index,
   columns,
   defaultColumnProps,
+  pinnedMap,
   defaultColumnRender,
   selectionTrigger,
   selectionVisible,
@@ -120,6 +123,7 @@ export function DataTableRow<T>({
         return (
           <DataTableRowCell<T>
             key={accessor as React.Key}
+            pinnedInfo={pinnedMap.get(String(accessor))}
             className={typeof cellsClassName === 'function' ? cellsClassName(record, index) : cellsClassName}
             style={cellsStyle?.(record, index)}
             visibleMediaQuery={visibleMediaQuery}

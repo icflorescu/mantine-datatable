@@ -16,6 +16,7 @@ import { getTableCssVariables } from './cssVariables';
 import {
   useDataTableColumns,
   useDataTableInjectCssVariables,
+  useDataTablePinnedColumns,
   useLastSelectionChangeIndex,
   useRowExpansion,
 } from './hooks';
@@ -162,7 +163,19 @@ export function DataTable<T>({
 
   const mergedTableRef = useMergedRef(refs.table, tableRef);
   const mergedViewportRef = useMergedRef(refs.scrollViewport, scrollViewportRef);
+  const internalBodyRef = useRef<HTMLTableSectionElement>(null);
+  const mergedBodyRef = useMergedRef(internalBodyRef, bodyRef);
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
+
+  const { pinnedMap, hasLeftPinned, hasRightPinned } = useDataTablePinnedColumns({
+    columns: effectiveColumns,
+    theadRef: refs.header as RefObject<HTMLTableSectionElement | null>,
+    tbodyRef: internalBodyRef,
+    selectionColumnHeaderRef: refs.selectionColumnHeader as RefObject<HTMLTableCellElement | null>,
+    selectionVisible: !!selectedRecords,
+    pinFirstColumn,
+    pinLastColumn,
+  });
 
   // Track when we should reset scroll due to pagination, but defer until data is rendered
   const resetScrollPending = useRef(false);
@@ -238,7 +251,7 @@ export function DataTable<T>({
   ]);
 
   const { lastSelectionChangeIndex, setLastSelectionChangeIndex } = useLastSelectionChangeIndex(recordIds);
-  const selectorCellShadowVisible = selectionColumnVisible && !pinFirstColumn;
+  const selectorCellShadowVisible = selectionColumnVisible && !hasLeftPinned;
 
   const marginProperties = { m, my, mx, mt, mb, ml, mr };
 
@@ -251,7 +264,7 @@ export function DataTable<T>({
   );
 
   return (
-    <DataTableColumnsProvider {...dragToggle}>
+    <DataTableColumnsProvider {...dragToggle} pinnedMap={pinnedMap}>
       <Box
         ref={refs.root}
         {...marginProperties}
@@ -287,8 +300,8 @@ export function DataTable<T>({
       >
         <DataTableScrollArea
           viewportRef={mergedViewportRef}
-          leftShadowBehind={selectionColumnVisible || !!pinFirstColumn}
-          rightShadowBehind={pinLastColumn}
+          leftShadowBehind={selectionColumnVisible || hasLeftPinned}
+          rightShadowBehind={hasRightPinned}
           onScrollPositionChange={handleScrollPositionChange}
           scrollAreaProps={scrollAreaProps}
         >
@@ -302,9 +315,7 @@ export function DataTable<T>({
                   [TEXT_SELECTION_DISABLED]: textSelectionDisabled,
                   'mantine-datatable-vertical-align-top': verticalAlign === 'top',
                   'mantine-datatable-vertical-align-bottom': verticalAlign === 'bottom',
-                  'mantine-datatable-pin-last-column': pinLastColumn,
                   'mantine-datatable-selection-column-visible': selectionColumnVisible,
-                  'mantine-datatable-pin-first-column': pinFirstColumn,
                   'mantine-datatable-resizable-columns': dragToggle.hasResizableColumns && fixedLayoutEnabled,
                 },
                 classNames?.table
@@ -317,7 +328,7 @@ export function DataTable<T>({
               {...otherProps}
             >
               {noHeader ? null : (
-                <DataTableColumnsProvider {...dragToggle}>
+                <DataTableColumnsProvider {...dragToggle} pinnedMap={pinnedMap}>
                   <DataTableHeader<T>
                     ref={refs.header}
                     selectionColumnHeaderRef={refs.selectionColumnHeader}
@@ -326,6 +337,7 @@ export function DataTable<T>({
                     columns={effectiveColumns}
                     defaultColumnProps={defaultColumnProps}
                     groups={groups}
+                    pinnedMap={pinnedMap}
                     sortStatus={sortStatus}
                     sortIcons={sortIcons}
                     onSortStatusChange={onSortStatusChange}
@@ -342,7 +354,7 @@ export function DataTable<T>({
                   />
                 </DataTableColumnsProvider>
               )}
-              <tbody ref={bodyRef}>
+              <tbody ref={mergedBodyRef}>
                 {recordsLength ? (
                   records.map((record, index) => {
                     const recordId = getRecordId(record, idAccessor);
@@ -387,6 +399,7 @@ export function DataTable<T>({
                         index={index}
                         columns={effectiveColumns}
                         defaultColumnProps={defaultColumnProps}
+                        pinnedMap={pinnedMap}
                         defaultColumnRender={defaultColumnRender}
                         selectionTrigger={selectionTrigger}
                         selectionVisible={selectionColumnVisible}
@@ -427,6 +440,7 @@ export function DataTable<T>({
                   style={styles?.footer}
                   columns={effectiveColumns}
                   defaultColumnProps={defaultColumnProps}
+                  pinnedMap={pinnedMap}
                   selectionVisible={selectionColumnVisible}
                   selectorCellShadowVisible={selectorCellShadowVisible}
                 />

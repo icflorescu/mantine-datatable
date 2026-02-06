@@ -40,6 +40,23 @@
   }
 }
 
+.mantine-datatable-header-cell-pinnable-icon {
+  transition: opacity 0.2s;
+  opacity: 0.1;
+}
+
+.mantine-datatable-header-cell-pinnable {
+  &:hover {
+    .mantine-datatable-header-cell-pinnable-icon {
+      opacity: 1;
+    }
+  }
+}
+
+.mantine-datatable-pinnable-dropdown {
+  padding: var(--mantine-spacing-xs);
+}
+
 .mantine-datatable-header-cell-resizable {
   position: relative;
 }

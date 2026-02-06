@@ -3,12 +3,14 @@ import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
+import { DataTablePinnableDropdown } from './DataTablePinnableDropdown';
 import { DataTableResizableHeaderHandle } from './DataTableResizableHeaderHandle';
 import { useMediaQueryStringOrFunction } from './hooks';
 import { IconArrowUp } from './icons/IconArrowUp';
 import { IconArrowsVertical } from './icons/IconArrowsVertical';
 import { IconGripVertical } from './icons/IconGripVertical';
 import { IconX } from './icons/IconX';
+import type { PinnedColumnInfo } from './hooks';
 import type { DataTableColumn, DataTableSortProps } from './types';
 import { ELLIPSIS, NOWRAP, TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
 import { humanize } from './utils';
@@ -16,6 +18,7 @@ import { humanize } from './utils';
 type DataTableHeaderCellProps<T> = {
   className: string | undefined;
   style: MantineStyleProp | undefined;
+  pinnedInfo: PinnedColumnInfo | undefined;
   visibleMediaQuery: string | ((theme: MantineTheme) => string) | undefined;
   title: React.ReactNode | undefined;
   sortStatus: DataTableSortProps<T>['sortStatus'];
@@ -27,6 +30,7 @@ type DataTableHeaderCellProps<T> = {
   | 'sortable'
   | 'draggable'
   | 'toggleable'
+  | 'pinnable'
   | 'resizable'
   | 'textAlign'
   | 'width'
@@ -40,12 +44,14 @@ type DataTableHeaderCellProps<T> = {
 export function DataTableHeaderCell<T>({
   className,
   style,
+  pinnedInfo,
   accessor,
   visibleMediaQuery,
   title,
   sortable,
   draggable,
   toggleable,
+  pinnable,
   resizable,
   sortIcons,
   textAlign,
@@ -58,9 +64,14 @@ export function DataTableHeaderCell<T>({
   filtering,
   sortKey,
 }: DataTableHeaderCellProps<T>) {
-  const { setSourceColumn, setTargetColumn, swapColumns, setColumnsToggle } = useDataTableColumnsContext();
+  const { setSourceColumn, setTargetColumn, swapColumns, setColumnsToggle, columnsPinning, setColumnsPinning } =
+    useDataTableColumnsContext();
   const [dragOver, setDragOver] = useState<boolean>(false);
   const columnRef = useRef<HTMLTableCellElement | null>(null);
+
+  // Get current pinning state for this column
+  const pinningState = columnsPinning?.find((p) => p.accessor === accessor);
+  const currentPinned = pinningState?.pinned;
 
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   const text = title ?? humanize(accessor as string);
@@ -123,13 +134,27 @@ export function DataTableHeaderCell<T>({
     );
   };
 
+  const handlePinChange = (pinned: 'left' | 'right' | undefined) => {
+    setColumnsPinning((prev) =>
+      prev.map((p) => {
+        if (p.accessor === accessor) {
+          return { ...p, pinned };
+        }
+        return p;
+      })
+    );
+  };
+
   return (
     <TableTh
       data-accessor={accessor}
+      data-pinned={pinnedInfo?.position}
+      data-pinned-shadow={pinnedInfo?.isBoundary ? pinnedInfo.position : undefined}
       className={clsx(
         {
           'mantine-datatable-header-cell-sortable': sortable,
           'mantine-datatable-header-cell-toggleable': toggleable,
+          'mantine-datatable-header-cell-pinnable': pinnable,
           'mantine-datatable-header-cell-resizable': resizable,
         },
         className
@@ -140,6 +165,12 @@ export function DataTableHeaderCell<T>({
           ...(!resizable ? { minWidth: width, maxWidth: width } : {}),
         },
         style,
+        pinnedInfo && {
+          position: 'sticky',
+          [pinnedInfo.position]: pinnedInfo.offset,
+          zIndex: 2,
+          overflow: 'visible',
+        },
       ]}
       role={sortable ? 'button' : undefined}
       tabIndex={sortable ? 0 : undefined}
@@ -192,6 +223,7 @@ export function DataTableHeaderCell<T>({
             {text}
           </Box>
         </Flex>
+        {pinnable ? <DataTablePinnableDropdown currentPinned={currentPinned} onPinChange={handlePinChange} /> : null}
         {toggleable ? (
           <Center className="mantine-datatable-header-cell-toggleable-icon" role="img" aria-label="Toggle column">
             <ActionIcon size="xs" variant="light" onClick={handleColumnToggle}>
