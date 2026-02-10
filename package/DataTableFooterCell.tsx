@@ -49,7 +49,6 @@ export function DataTableFooterCell<T>({
         pinnedInfo && {
           position: 'sticky',
           [pinnedInfo.position]: pinnedInfo.offset,
-          zIndex: 2,
           overflow: 'visible',
         },
       ]}

@@ -77,7 +77,6 @@ export function DataTableRowCell<T>({
         pinnedInfo && {
           position: 'sticky',
           [pinnedInfo.position]: pinnedInfo.offset,
-          zIndex: 1,
           overflow: 'visible',
         },
       ]}

@@ -164,6 +164,15 @@
   border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
 }
 
+/* Column pinning: z-index layers via CSS custom property */
+td[data-pinned] {
+  z-index: var(--mantine-datatable-pinned-column-z-index, 2);
+}
+
+th[data-pinned] {
+  z-index: calc(var(--mantine-datatable-pinned-column-z-index, 2) + 1);
+}
+
 [data-pinned-shadow="left"]::after {
   content: '';
   position: absolute;

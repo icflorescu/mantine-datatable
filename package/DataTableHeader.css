@@ -1,5 +1,5 @@
 .mantine-datatable-header {
-  z-index: 2;
+  z-index: calc(var(--mantine-datatable-pinned-column-z-index, 2) + 2);
   position: sticky;
   top: 0;
 
