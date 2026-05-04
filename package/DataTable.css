@@ -79,18 +79,18 @@
   border: rem(1px) solid var(--mantine-datatable-border-color);
 }
 
-.mantine-datatable-resizable-columns {
-  table-layout: fixed;
-}
-
+/* Resizable columns stay in `table-layout: auto` so declarative widths
+   (including `width: '0%'` on the actions column) keep working as intended.
+   Pixel widths are locked at drag-start by the resize handle, and
+   `overflow: hidden` on the th creates a block formatting context that
+   makes the browser honor those pixel widths precisely. */
 .mantine-datatable-resizable-columns th {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* Allow overflow for pinned cells so the ::after shadow pseudo-element is not clipped.
-   This overrides overflow: hidden from resizable columns (th) and ellipsis (td). */
+/* Allow overflow for pinned cells so the ::after shadow pseudo-element is not clipped. */
 .mantine-datatable-pin-first-column.mantine-datatable-resizable-columns th:first-of-type,
 .mantine-datatable-pin-first-column.mantine-datatable-selection-column-visible.mantine-datatable-resizable-columns
   th:nth-of-type(2),
@@ -104,23 +104,6 @@
 /* Selection column should always have fixed width */
 .mantine-datatable th[data-accessor='__selection__'],
 .mantine-datatable td[data-accessor='__selection__'] {
-  width: 44px !important;
-  min-width: 44px !important;
-  max-width: 44px !important;
-}
-
-/* When not using fixed layout, allow natural table sizing */
-.mantine-datatable:not(.mantine-datatable-resizable-columns) th {
-  white-space: nowrap;
-  /* Allow natural width calculation */
-  width: auto;
-  min-width: auto;
-  max-width: none;
-}
-
-/* But selection column should still be fixed even in auto layout */
-.mantine-datatable:not(.mantine-datatable-resizable-columns) th[data-accessor='__selection__'],
-.mantine-datatable:not(.mantine-datatable-resizable-columns) td[data-accessor='__selection__'] {
   width: 44px !important;
   min-width: 44px !important;
   max-width: 44px !important;

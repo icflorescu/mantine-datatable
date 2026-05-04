@@ -1,4 +1,5 @@
 import { useLocalStorage } from '@mantine/hooks';
+import { useEffect, useMemo } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
 
 /**
@@ -24,33 +25,15 @@ export function useDataTableColumnReorder<T>({
    */
   getInitialValueInEffect?: boolean;
 }) {
-  // Align order with current columns definition
-  function alignColumnsOrder<T>(columnsOrder: string[], columns: DataTableColumn<T>[]) {
-    const updatedColumnsOrder: string[] = [];
-
-    // Keep existing order for columns that still exist
-    columnsOrder.forEach((col) => {
-      if (columns.find((c) => c.accessor === col)) {
-        updatedColumnsOrder.push(col);
-      }
-    });
-
-    // Add new columns to the end
-    columns.forEach((col) => {
-      if (!updatedColumnsOrder.includes(col.accessor as string)) {
-        updatedColumnsOrder.push(col.accessor as string);
-      }
-    });
-
-    return updatedColumnsOrder;
-  }
-
   // Default columns order is the order of the columns in the array
-  const defaultColumnsOrder = (columns && columns.map((column) => column.accessor)) || [];
+  const defaultColumnsOrder = useMemo(
+    () => (columns ? (columns.map((column) => column.accessor) as string[]) : []),
+    [columns]
+  );
 
   const [columnsOrder, _setColumnsOrder] = useLocalStorage<string[]>({
     key: key ? `${key}-columns-order` : '',
-    defaultValue: key ? (defaultColumnsOrder as string[]) : undefined,
+    defaultValue: key ? defaultColumnsOrder : undefined,
     getInitialValueInEffect,
   });
 
@@ -60,25 +43,43 @@ export function useDataTableColumnReorder<T>({
     }
   }
 
+  // Align stored order with current column definitions: drop accessors that no
+  // longer exist, append accessors added since last persisted state.
+  const alignedColumnsOrder = useMemo(() => {
+    if (!columnsOrder) return defaultColumnsOrder;
+    const aligned: string[] = [];
+    columnsOrder.forEach((col) => {
+      if (columns.find((c) => c.accessor === col)) {
+        aligned.push(col);
+      }
+    });
+    columns.forEach((col) => {
+      if (!aligned.includes(col.accessor as string)) {
+        aligned.push(col.accessor as string);
+      }
+    });
+    return aligned;
+  }, [columnsOrder, columns, defaultColumnsOrder]);
+
+  // Persist alignment in an effect — never set state during render
+  useEffect(() => {
+    if (!key) return;
+    if (!columnsOrder) return;
+    if (JSON.stringify(alignedColumnsOrder) !== JSON.stringify(columnsOrder)) {
+      _setColumnsOrder(alignedColumnsOrder);
+    }
+  }, [key, alignedColumnsOrder, columnsOrder, _setColumnsOrder]);
+
   const resetColumnsOrder = () => {
-    setColumnsOrder(defaultColumnsOrder as string[]);
+    setColumnsOrder(defaultColumnsOrder);
   };
 
-  // If no key is provided, return unmanaged state
   if (!key) {
     return {
       columnsOrder: columnsOrder as string[],
       setColumnsOrder,
       resetColumnsOrder,
     } as const;
-  }
-
-  // Align order with current columns
-  const alignedColumnsOrder = alignColumnsOrder(columnsOrder, columns);
-  const prevColumnsOrder = JSON.stringify(columnsOrder);
-
-  if (JSON.stringify(alignedColumnsOrder) !== prevColumnsOrder) {
-    setColumnsOrder(alignedColumnsOrder);
   }
 
   return {

@@ -5,7 +5,17 @@ import type { DataTableColumn } from '../types/DataTableColumn';
 type DataTableColumnWidth = Record<string, string | number>;
 
 /**
- * Hook to handle column resizing with localStorage persistence and auto-resize calculation.
+ * Hook to handle column resizing with localStorage persistence.
+ *
+ * Strategy (mirrors `mantine-list-view-table`):
+ * 1. Until the user grabs a handle, the table stays in `table-layout: auto`
+ *    so declarative widths — including `width: '0%'` on actions columns —
+ *    work as documented.
+ * 2. On mousedown we snapshot every header cell into pixel widths, lock the
+ *    table total, and switch to `table-layout: fixed` so pixel widths are
+ *    honored strictly during the drag and afterwards.
+ * 3. The lock stays in place until `resetColumnsWidth` is called.
+ *
  * @see https://icflorescu.github.io/mantine-datatable/examples/column-resizing/
  */
 export function useDataTableColumnResize<T>({
@@ -13,130 +23,108 @@ export function useDataTableColumnResize<T>({
   columns = [],
   getInitialValueInEffect = true,
   headerRef,
-  onFixedLayoutChange,
 }: {
-  /**
-   * The key to use in localStorage to store the columns width.
-   */
+  /** The key to use in localStorage to store the columns width. */
   key: string | undefined;
-  /**
-   * Columns definitions.
-   */
+  /** Columns definitions. */
   columns: DataTableColumn<T>[];
   /**
    * If set to true, value will be updated in useEffect after mount.
    * @default true
    */
   getInitialValueInEffect?: boolean;
-  /**
-   * Reference to the table header element for measuring column widths.
-   */
+  /** Reference to the table header element for measuring column widths. */
   headerRef?: RefObject<HTMLTableSectionElement | null>;
   /**
    * Reference to the scroll viewport for calculating overflow.
+   * Kept for backwards compatibility; no longer used internally.
    */
   scrollViewportRef?: RefObject<HTMLElement | null>;
-  /**
-   * Callback to control fixed layout state in the parent component.
-   */
-  onFixedLayoutChange?: (enabled: boolean) => void;
 }) {
-  const isInitializedRef = useRef(false);
-  const naturalWidthsRef = useRef<Record<string, number>>({});
-  const [isSSR, setIsSSR] = useState(true);
-
-  // Check if columns have resizable feature
   const hasResizableColumns = useMemo(() => {
     return columns.some((c) => c.resizable && !c.hidden && c.accessor !== '__selection__');
   }, [columns]);
 
-  // Get resizable columns
-  const resizableColumns = useMemo(() => {
-    return columns.filter((c) => c.resizable && !c.hidden && c.accessor !== '__selection__');
-  }, [columns]);
-
-  // Check if we need to measure natural widths (columns without explicit width)
-  const needsNaturalMeasurement = useMemo(() => {
-    return resizableColumns.some((c) => c.width === undefined || c.width === '' || c.width === 'initial');
-  }, [resizableColumns]);
-
-  // Create default column widths - use explicit widths or 'auto' for natural sizing
-  // Exclude selection column from width management
   const getDefaultColumnsWidth = useCallback(() => {
     return columns
       .filter((column) => column.accessor !== '__selection__')
-      .map((column) => ({
-        [column.accessor]: column.width ?? 'auto',
-      }));
+      .map((column) => ({ [column.accessor]: column.width ?? 'auto' }));
   }, [columns]);
 
   const [storedColumnsWidth, setStoredColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
     key: key ? `${key}-columns-width` : '',
     defaultValue: key ? getDefaultColumnsWidth() : undefined,
-    getInitialValueInEffect: false, // We'll handle initialization manually
+    getInitialValueInEffect: false,
   });
 
-  // Current effective column widths (combines stored + measured natural widths)
   const [effectiveColumnsWidth, setEffectiveColumnsWidth] = useState<DataTableColumnWidth[]>(() =>
     getDefaultColumnsWidth()
   );
 
-  // Handle SSR
+  // True only during an active drag — drives cursor / user-select styling
+  const [isResizing, setIsResizing] = useState(false);
+
+  // Once locked, every column has a pixel width and the table-layout switches
+  // to `fixed`. Persists across drags until `resetColumnsWidth` is called.
+  const [isLocked, setIsLocked] = useState(false);
+
+  // Locked total table width in pixels
+  const [tableWidth, setTableWidth] = useState<number | null>(null);
+
+  // Marks effective widths as user-changed so the persistence effect knows to
+  // sync them to localStorage. We never want the *hydration* path to also
+  // round-trip through localStorage.
+  const dirtyRef = useRef(false);
+
+  // Apply persisted widths after hydration. If any persisted width looks like
+  // a pixel value, the table also enters the locked state on mount.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsSSR(false);
-  }, []);
+    if (!key || !getInitialValueInEffect) return;
+    if (!storedColumnsWidth || storedColumnsWidth.length === 0) return;
 
-  // Measure natural widths of columns
-  const measureNaturalWidths = useCallback(() => {
-    if (!headerRef?.current || isSSR) return {};
-
-    const thead = headerRef.current;
-    const headerCells = Array.from(thead.querySelectorAll<HTMLTableCellElement>('th[data-accessor]'));
-    const naturalWidths: Record<string, number> = {};
-
-    headerCells.forEach((cell) => {
-      const accessor = cell.getAttribute('data-accessor');
-      if (!accessor || accessor === '__selection__') return;
-
-      const column = resizableColumns.find((c) => c.accessor === accessor);
-      if (!column) return;
-
-      // Only measure if column doesn't have explicit width
-      if (column.width === undefined || column.width === '' || column.width === 'initial') {
-        const rect = cell.getBoundingClientRect();
-        naturalWidths[accessor] = Math.round(rect.width);
-      }
+    const hasPixelWidth = storedColumnsWidth.some((entry) => {
+      const value = Object.values(entry)[0];
+      return typeof value === 'string' && /px$/.test(value);
     });
 
-    return naturalWidths;
-  }, [headerRef, resizableColumns, isSSR]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setEffectiveColumnsWidth(storedColumnsWidth);
+    if (hasPixelWidth) {
+      setIsLocked(true);
+    }
+  }, [key, getInitialValueInEffect, storedColumnsWidth]);
 
-  // Update column widths (both stored and effective)
-  // Filter out selection column from updates
   const updateColumnWidths = useCallback(
     (updates: Array<{ accessor: string; width: string | number }>) => {
-      // Filter out any updates to the selection column
-      const filteredUpdates = updates.filter((update) => update.accessor !== '__selection__');
+      const filtered = updates.filter((u) => u.accessor !== '__selection__');
+      if (filtered.length === 0) return;
 
-      const newWidths = effectiveColumnsWidth.map((column) => {
-        const accessor = Object.keys(column)[0];
-        const update = filteredUpdates.find((u) => u.accessor === accessor);
-
-        if (update) {
-          return { [accessor]: update.width };
-        }
-        return column;
-      });
-
-      setEffectiveColumnsWidth(newWidths);
-
-      // Also update stored widths if we have a key
-      if (key) {
-        setStoredColumnsWidth(newWidths);
-      }
+      dirtyRef.current = true;
+      setEffectiveColumnsWidth((prev) =>
+        prev.map((col) => {
+          const accessor = Object.keys(col)[0];
+          const update = filtered.find((u) => u.accessor === accessor);
+          return update ? { [accessor]: update.width } : col;
+        })
+      );
     },
-    [effectiveColumnsWidth, key, setStoredColumnsWidth]
+    []
+  );
+
+  // Persist user-initiated width changes to localStorage. Gated by `dirtyRef`
+  // so the hydration → effective sync above doesn't bounce back into storage
+  // and create a render loop.
+  useEffect(() => {
+    if (!key || !dirtyRef.current) return;
+    dirtyRef.current = false;
+    setStoredColumnsWidth(effectiveColumnsWidth);
+  }, [key, effectiveColumnsWidth, setStoredColumnsWidth]);
+
+  const setColumnWidth = useCallback(
+    (accessor: string, width: string | number) => {
+      updateColumnWidths([{ accessor, width }]);
+    },
+    [updateColumnWidths]
   );
 
   const setMultipleColumnWidths = useCallback(
@@ -146,146 +134,72 @@ export function useDataTableColumnResize<T>({
     [updateColumnWidths]
   );
 
-  // Initialize column widths (measure natural widths and apply stored widths)
-  const initializeColumnWidths = useCallback(() => {
-    if (!headerRef?.current || !onFixedLayoutChange || isSSR) return;
+  /**
+   * Snapshot every header cell width into the React state and lock the
+   * table-layout to `fixed`. Called the moment the user grabs a handle.
+   */
+  const beginResize = useCallback(() => {
+    setIsResizing(true);
 
-    // First, measure natural widths if needed
-    if (needsNaturalMeasurement) {
-      // Temporarily use auto layout to get natural widths
-      onFixedLayoutChange(false);
+    // Already locked from a previous drag (or hydrated from storage) — nothing to snapshot
+    if (isLocked) return;
 
-      // Wait for layout to settle, then measure
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const naturalWidths = measureNaturalWidths();
-          naturalWidthsRef.current = { ...naturalWidthsRef.current, ...naturalWidths };
+    const thead = headerRef?.current;
+    if (!thead) return;
 
-          // Create effective widths combining stored and natural widths
-          // Exclude selection column from width management
-          const newEffectiveWidths = columns
-            .filter((column) => column.accessor !== '__selection__')
-            .map((column) => {
-              const accessor = column.accessor as string;
+    const cells = Array.from(thead.querySelectorAll<HTMLTableCellElement>('th[data-accessor]'));
+    if (cells.length === 0) return;
 
-              // Check if we have a stored width for this column
-              const storedWidth = storedColumnsWidth?.find((w) => Object.keys(w)[0] === accessor);
-              if (storedWidth && storedWidth[accessor] !== 'auto') {
-                return { [accessor]: storedWidth[accessor] };
-              }
+    const snapshot: DataTableColumnWidth[] = [];
+    let total = 0;
 
-              // Use natural width if available, otherwise use column definition or auto
-              const naturalWidth = naturalWidths[accessor];
-              if (naturalWidth) {
-                return { [accessor]: `${naturalWidth}px` };
-              }
-
-              return { [accessor]: column.width ?? 'auto' };
-            });
-
-          setEffectiveColumnsWidth(newEffectiveWidths);
-
-          // Switch to fixed layout for resizing
-          setTimeout(() => {
-            onFixedLayoutChange(true);
-            isInitializedRef.current = true;
-          }, 10);
-        });
-      });
-    } else {
-      // All columns have explicit widths, use them directly
-      // Exclude selection column from width management
-      const explicitWidths = columns
-        .filter((column) => column.accessor !== '__selection__')
-        .map((column) => ({
-          [column.accessor]: column.width ?? 'auto',
-        }));
-
-      setEffectiveColumnsWidth(explicitWidths);
-      onFixedLayoutChange(true);
-      isInitializedRef.current = true;
-    }
-  }, [
-    headerRef,
-    onFixedLayoutChange,
-    isSSR,
-    needsNaturalMeasurement,
-    measureNaturalWidths,
-    columns,
-    storedColumnsWidth,
-  ]);
-
-  const measureAndSetColumnWidths = initializeColumnWidths;
-
-  // Initialize on mount and when columns change
-  useEffect(() => {
-    if (!hasResizableColumns || !onFixedLayoutChange || isSSR) {
-      onFixedLayoutChange?.(false);
-      return;
+    for (const cell of cells) {
+      const accessor = cell.getAttribute('data-accessor');
+      if (!accessor) continue;
+      const width = Math.round(cell.getBoundingClientRect().width);
+      total += width;
+      if (accessor === '__selection__') continue;
+      snapshot.push({ [accessor]: `${width}px` });
     }
 
-    // Reset initialization flag when columns change
-    isInitializedRef.current = false;
+    dirtyRef.current = true;
+    setEffectiveColumnsWidth(snapshot);
+    setTableWidth(total);
+    setIsLocked(true);
+  }, [headerRef, isLocked]);
 
-    // Initialize after a short delay to ensure DOM is ready
-    const timeoutId = setTimeout(() => {
-      initializeColumnWidths();
-    }, 50);
+  /** Clear the active-drag flag — persistence is handled by the effect above. */
+  const endResize = useCallback(() => {
+    setIsResizing(false);
+  }, []);
 
-    return () => clearTimeout(timeoutId);
-  }, [hasResizableColumns, onFixedLayoutChange, isSSR, initializeColumnWidths]);
-
-  // Load stored widths on client-side hydration
-  useEffect(() => {
-    if (isSSR || !key || !getInitialValueInEffect) return;
-
-    // Apply stored widths if available
-    if (storedColumnsWidth && storedColumnsWidth.length > 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setEffectiveColumnsWidth(storedColumnsWidth);
-    }
-  }, [isSSR, key, getInitialValueInEffect, storedColumnsWidth]);
-  // Reset all columns to their natural/initial widths
   const resetColumnsWidth = useCallback(() => {
-    // Clear stored widths
-    if (key) {
-      setStoredColumnsWidth(getDefaultColumnsWidth());
-    }
+    const defaults = getDefaultColumnsWidth();
+    dirtyRef.current = true;
+    setEffectiveColumnsWidth(defaults);
+    setTableWidth(null);
+    setIsResizing(false);
+    setIsLocked(false);
+  }, [getDefaultColumnsWidth]);
 
-    // Reset to natural widths
-    naturalWidthsRef.current = {};
-    isInitializedRef.current = false;
-
-    // Re-initialize to measure natural widths
-    if (onFixedLayoutChange) {
-      onFixedLayoutChange(false);
-      setTimeout(() => {
-        initializeColumnWidths();
-      }, 10);
-    }
-  }, [key, setStoredColumnsWidth, getDefaultColumnsWidth, onFixedLayoutChange, initializeColumnWidths]);
-
-  // Set width for a single column
-  const setColumnWidth = useCallback(
-    (accessor: string, width: string | number) => {
-      updateColumnWidths([{ accessor, width }]);
-    },
-    [updateColumnWidths]
-  );
-
-  // Check if all resizable columns are using auto/natural widths
   const allResizableWidthsInitial = useMemo(() => {
     if (!hasResizableColumns) return false;
+    const resizable = columns.filter((c) => c.resizable && !c.hidden && c.accessor !== '__selection__');
     return effectiveColumnsWidth
-      .filter((colWidth) => {
-        const accessor = Object.keys(colWidth)[0];
-        return resizableColumns.some((c) => c.accessor === accessor);
+      .filter((cw) => {
+        const accessor = Object.keys(cw)[0];
+        return resizable.some((c) => c.accessor === accessor);
       })
-      .every((colWidth) => {
-        const width = Object.values(colWidth)[0];
-        return width === 'auto' || width === 'initial';
+      .every((cw) => {
+        const w = Object.values(cw)[0];
+        return w === 'auto' || w === 'initial';
       });
-  }, [hasResizableColumns, effectiveColumnsWidth, resizableColumns]);
+  }, [hasResizableColumns, columns, effectiveColumnsWidth]);
+
+  // No-op kept for backwards compatibility — measurement is now lazy
+  const measureAndSetColumnWidths = useCallback(() => {
+    /* noop */
+  }, []);
 
   return {
     columnsWidth: effectiveColumnsWidth,
@@ -296,5 +210,10 @@ export function useDataTableColumnResize<T>({
     hasResizableColumns,
     allResizableWidthsInitial,
     measureAndSetColumnWidths,
+    isResizing,
+    isLocked,
+    tableWidth,
+    beginResize,
+    endResize,
   } as const;
 }
