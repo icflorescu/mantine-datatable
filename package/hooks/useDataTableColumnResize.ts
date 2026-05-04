@@ -11,9 +11,9 @@ type DataTableColumnWidth = Record<string, string | number>;
  * 1. Until the user grabs a handle, the table stays in `table-layout: auto`
  *    so declarative widths — including `width: '0%'` on actions columns —
  *    work as documented.
- * 2. On mousedown we snapshot every header cell into pixel widths, lock the
- *    table total, and switch to `table-layout: fixed` so pixel widths are
- *    honored strictly during the drag and afterwards.
+ * 2. On mousedown we snapshot every header cell into pixel widths and switch
+ *    to `table-layout: fixed` so pixel widths are honored strictly during
+ *    the drag and afterwards.
  * 3. The lock stays in place until `resetColumnsWidth` is called.
  *
  * @see https://icflorescu.github.io/mantine-datatable/examples/column-resizing/
@@ -51,48 +51,63 @@ export function useDataTableColumnResize<T>({
       .map((column) => ({ [column.accessor]: column.width ?? 'auto' }));
   }, [columns]);
 
+  // Honor caller's `getInitialValueInEffect`: when false the read is synchronous
+  // and we can seed `effectiveColumnsWidth` directly; when true the value lands
+  // after mount and the hydration effect below picks it up.
   const [storedColumnsWidth, setStoredColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
     key: key ? `${key}-columns-width` : '',
     defaultValue: key ? getDefaultColumnsWidth() : undefined,
-    getInitialValueInEffect: false,
+    getInitialValueInEffect,
   });
 
-  const [effectiveColumnsWidth, setEffectiveColumnsWidth] = useState<DataTableColumnWidth[]>(() =>
-    getDefaultColumnsWidth()
-  );
+  const [effectiveColumnsWidth, setEffectiveColumnsWidth] = useState<DataTableColumnWidth[]>(() => {
+    if (key && storedColumnsWidth && storedColumnsWidth.length > 0) {
+      return storedColumnsWidth;
+    }
+    return getDefaultColumnsWidth();
+  });
 
   // True only during an active drag — drives cursor / user-select styling
   const [isResizing, setIsResizing] = useState(false);
 
-  // Once locked, every column has a pixel width and the table-layout switches
-  // to `fixed`. Persists across drags until `resetColumnsWidth` is called.
-  const [isLocked, setIsLocked] = useState(false);
-
-  // Locked total table width in pixels
-  const [tableWidth, setTableWidth] = useState<number | null>(null);
-
   // Marks effective widths as user-changed so the persistence effect knows to
-  // sync them to localStorage. We never want the *hydration* path to also
-  // round-trip through localStorage.
+  // sync them to localStorage. Hydration / column re-alignment never set this.
   const dirtyRef = useRef(false);
 
-  // Apply persisted widths after hydration. If any persisted width looks like
-  // a pixel value, the table also enters the locked state on mount.
+  // Sync stored → effective whenever the persisted value lands or changes
+  // (covers `getInitialValueInEffect: true`, cross-tab updates, etc.).
+  // Idempotent: when values are unchanged React bails out of the re-render.
   useEffect(() => {
-    if (!key || !getInitialValueInEffect) return;
+    if (!key) return;
     if (!storedColumnsWidth || storedColumnsWidth.length === 0) return;
-
-    const hasPixelWidth = storedColumnsWidth.some((entry) => {
-      const value = Object.values(entry)[0];
-      return typeof value === 'string' && /px$/.test(value);
-    });
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setEffectiveColumnsWidth(storedColumnsWidth);
-    if (hasPixelWidth) {
-      setIsLocked(true);
-    }
-  }, [key, getInitialValueInEffect, storedColumnsWidth]);
+  }, [key, storedColumnsWidth]);
+
+  // Re-align effective state with the current column set: drop entries for
+  // removed accessors, add defaults for newly introduced columns. Bails out
+  // when nothing actually changed to avoid extra renders.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setEffectiveColumnsWidth((prev) => {
+      const validAccessors = new Set(
+        columns.filter((c) => c.accessor !== '__selection__').map((c) => String(c.accessor))
+      );
+      const filtered = prev.filter((entry) => validAccessors.has(Object.keys(entry)[0]));
+      const present = new Set(filtered.map((entry) => Object.keys(entry)[0]));
+      let added = false;
+      for (const column of columns) {
+        if (column.accessor === '__selection__') continue;
+        const accessor = String(column.accessor);
+        if (present.has(accessor)) continue;
+        filtered.push({ [accessor]: column.width ?? 'auto' });
+        added = true;
+      }
+      const removed = filtered.length !== prev.length || added;
+      return removed ? filtered : prev;
+    });
+  }, [columns]);
 
   const updateColumnWidths = useCallback(
     (updates: Array<{ accessor: string; width: string | number }>) => {
@@ -111,14 +126,15 @@ export function useDataTableColumnResize<T>({
     []
   );
 
-  // Persist user-initiated width changes to localStorage. Gated by `dirtyRef`
-  // so the hydration → effective sync above doesn't bounce back into storage
-  // and create a render loop.
+  // Persist user-initiated width changes — but only when no drag is in flight.
+  // `localStorage.setItem` is synchronous and writing it on every mousemove
+  // would block the main thread and visibly hurt drag smoothness.
   useEffect(() => {
     if (!key || !dirtyRef.current) return;
+    if (isResizing) return;
     dirtyRef.current = false;
     setStoredColumnsWidth(effectiveColumnsWidth);
-  }, [key, effectiveColumnsWidth, setStoredColumnsWidth]);
+  }, [key, effectiveColumnsWidth, isResizing, setStoredColumnsWidth]);
 
   const setColumnWidth = useCallback(
     (accessor: string, width: string | number) => {
@@ -135,14 +151,12 @@ export function useDataTableColumnResize<T>({
   );
 
   /**
-   * Snapshot every header cell width into the React state and lock the
-   * table-layout to `fixed`. Called the moment the user grabs a handle.
+   * Snapshot every header cell width into the React state. Called the moment
+   * the user grabs a handle. Idempotent: if all cells are already pixel-locked
+   * the snapshot reads back the same values.
    */
   const beginResize = useCallback(() => {
     setIsResizing(true);
-
-    // Already locked from a previous drag (or hydrated from storage) — nothing to snapshot
-    if (isLocked) return;
 
     const thead = headerRef?.current;
     if (!thead) return;
@@ -151,24 +165,20 @@ export function useDataTableColumnResize<T>({
     if (cells.length === 0) return;
 
     const snapshot: DataTableColumnWidth[] = [];
-    let total = 0;
 
     for (const cell of cells) {
       const accessor = cell.getAttribute('data-accessor');
       if (!accessor) continue;
-      const width = Math.round(cell.getBoundingClientRect().width);
-      total += width;
       if (accessor === '__selection__') continue;
+      const width = Math.round(cell.getBoundingClientRect().width);
       snapshot.push({ [accessor]: `${width}px` });
     }
 
     dirtyRef.current = true;
     setEffectiveColumnsWidth(snapshot);
-    setTableWidth(total);
-    setIsLocked(true);
-  }, [headerRef, isLocked]);
+  }, [headerRef]);
 
-  /** Clear the active-drag flag — persistence is handled by the effect above. */
+  /** Clear the active-drag flag. Persistence runs from the effect once `isResizing` flips off. */
   const endResize = useCallback(() => {
     setIsResizing(false);
   }, []);
@@ -177,9 +187,7 @@ export function useDataTableColumnResize<T>({
     const defaults = getDefaultColumnsWidth();
     dirtyRef.current = true;
     setEffectiveColumnsWidth(defaults);
-    setTableWidth(null);
     setIsResizing(false);
-    setIsLocked(false);
   }, [getDefaultColumnsWidth]);
 
   const allResizableWidthsInitial = useMemo(() => {
@@ -211,8 +219,6 @@ export function useDataTableColumnResize<T>({
     allResizableWidthsInitial,
     measureAndSetColumnWidths,
     isResizing,
-    isLocked,
-    tableWidth,
     beginResize,
     endResize,
   } as const;

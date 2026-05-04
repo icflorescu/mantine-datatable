@@ -62,8 +62,6 @@ export const useDataTableColumns = <T>({
     allResizableWidthsInitial,
     measureAndSetColumnWidths,
     isResizing,
-    isLocked,
-    tableWidth,
     beginResize,
     endResize,
   } = useDataTableColumnResize({
@@ -104,6 +102,32 @@ export const useDataTableColumns = <T>({
       return { ...column, width };
     });
   }, [columns, columnsOrder, columnsToggle, columnsWidth]);
+
+  // Lock the table layout to `fixed` only when *every* visible column has a
+  // pixel width. Mixed states (some 'auto', some pixels) stay in auto layout
+  // so the browser keeps the auto cells visible — the user can re-resize to
+  // produce a complete pixel snapshot.
+  // Recomputes on column visibility changes too, so resize + toggle stays
+  // consistent.
+  const isLocked = useMemo(() => {
+    const visible = effectiveColumns.filter((c) => !c.hidden && c.accessor !== '__selection__');
+    if (visible.length === 0) return false;
+    return visible.every((c) => typeof c.width === 'string' && /px$/.test(c.width));
+  }, [effectiveColumns]);
+
+  const tableWidth = useMemo(() => {
+    if (!isLocked) return null;
+    let sum = 0;
+    for (const col of effectiveColumns) {
+      if (col.hidden || col.accessor === '__selection__') continue;
+      const w = col.width;
+      if (typeof w !== 'string') continue;
+      const n = parseInt(w, 10);
+      if (Number.isNaN(n)) continue;
+      sum += n;
+    }
+    return sum > 0 ? sum : null;
+  }, [isLocked, effectiveColumns]);
 
   return {
     effectiveColumns: effectiveColumns as DataTableColumn<T>[],
