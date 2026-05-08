@@ -43,7 +43,7 @@ export function NavbarExamples({ items }: NavbarExamplesProps) {
         }}
         expanded={expanded}
       />
-      <Collapse in={expanded} onTransitionEnd={() => setDidExpand(expanded)} pos="relative">
+      <Collapse expanded={expanded} onTransitionEnd={() => setDidExpand(expanded)} pos="relative">
         <Box
           bg={COLOR}
           className={clsx(classes.line, { [classes.lineVisible]: didExpand })}

@@ -26,7 +26,7 @@ const showModal = ({ company, action }: { company: Company; action: 'view' | 'ed
               ? 'Here’s where you could put an edit form...'
               : 'Here’s where you could ask for confirmation before deleting...'}
         </Text>
-        <Grid gutter="xs">
+        <Grid gap="xs">
           <GridCol span={2}>ID</GridCol>
           <GridCol span={10}>{company.id}</GridCol>
           <GridCol span={2}>Name</GridCol>

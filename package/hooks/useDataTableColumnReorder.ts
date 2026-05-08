@@ -48,13 +48,15 @@ export function useDataTableColumnReorder<T>({
   // Default columns order is the order of the columns in the array
   const defaultColumnsOrder = (columns && columns.map((column) => column.accessor)) || [];
 
-  const [columnsOrder, _setColumnsOrder] = useLocalStorage<string[]>({
+  const [storedColumnsOrder, _setColumnsOrder] = useLocalStorage<string[]>({
     key: key ? `${key}-columns-order` : '',
     defaultValue: key ? (defaultColumnsOrder as string[]) : undefined,
     getInitialValueInEffect,
   });
 
-  function setColumnsOrder(order: string[] | ((prev: string[]) => string[])) {
+  const columnsOrder = storedColumnsOrder ?? (defaultColumnsOrder as string[]);
+
+  function setColumnsOrder(order: string[]) {
     if (key) {
       _setColumnsOrder(order);
     }
@@ -67,7 +69,7 @@ export function useDataTableColumnReorder<T>({
   // If no key is provided, return unmanaged state
   if (!key) {
     return {
-      columnsOrder: columnsOrder as string[],
+      columnsOrder,
       setColumnsOrder,
       resetColumnsOrder,
     } as const;

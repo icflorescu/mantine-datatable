@@ -67,15 +67,15 @@ export function useDataTableColumnToggle<T>({
       toggled: column.defaultToggle === undefined ? true : column.defaultToggle,
     }));
 
-  const [columnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
+  const [storedColumnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
     key: key ? `${key}-columns-toggle` : '',
     defaultValue: key ? (defaultColumnsToggle as DataTableColumnToggle[]) : undefined,
     getInitialValueInEffect,
   });
 
-  function setColumnsToggle(
-    toggle: DataTableColumnToggle[] | ((prev: DataTableColumnToggle[]) => DataTableColumnToggle[])
-  ) {
+  const columnsToggle = storedColumnsToggle ?? (defaultColumnsToggle as DataTableColumnToggle[]);
+
+  function setColumnsToggle(toggle: DataTableColumnToggle[]) {
     if (key) {
       _setColumnsToggle(toggle);
     }
@@ -88,7 +88,7 @@ export function useDataTableColumnToggle<T>({
   // If no key is provided, return unmanaged state
   if (!key) {
     return {
-      columnsToggle: columnsToggle as DataTableColumnToggle[],
+      columnsToggle,
       setColumnsToggle,
       resetColumnsToggle,
     } as const;

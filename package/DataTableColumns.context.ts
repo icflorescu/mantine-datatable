@@ -18,7 +18,7 @@ interface DataTableColumnsContext {
   resetColumnsOrder: () => void;
 
   columnsToggle: DataTableColumnToggle[];
-  setColumnsToggle: Dispatch<SetStateAction<DataTableColumnToggle[]>>;
+  setColumnsToggle: (toggle: DataTableColumnToggle[]) => void;
   resetColumnsToggle: () => void;
 
   setColumnWidth: (accessor: string, width: string | number) => void;

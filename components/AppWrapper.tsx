@@ -11,7 +11,7 @@ import { TrustedBy } from './TrustedBy';
 
 export function AppWrapper({ children }: React.PropsWithChildren) {
   const [navbarExpanded, { toggle: toggleNavbar, close: collapseNavbar }] = useDisclosure(false);
-  const [ref] = useResizeObserver();
+  const [ref, rect] = useResizeObserver();
 
   useEffect(() => {
     document.body.classList.toggle('noscroll', navbarExpanded);
@@ -19,8 +19,7 @@ export function AppWrapper({ children }: React.PropsWithChildren) {
 
   return (
     <AppShell
-      // eslint-disable-next-line react-hooks/refs
-      style={{ '--app-wrapper-footer-height': `${ref.current?.getBoundingClientRect().height || 154}px` }}
+      style={{ '--app-wrapper-footer-height': `${rect.height || 154}px` }}
       header={{ height: 60 }}
       navbar={{ width: 260, breakpoint: 'sm', collapsed: { mobile: !navbarExpanded } }}
     >
