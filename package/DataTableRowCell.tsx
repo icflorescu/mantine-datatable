@@ -1,5 +1,6 @@
 import { type MantineStyleProp, TableTd } from '@mantine/core';
 import clsx from 'clsx';
+import type { PinnedColumnInfo } from './hooks';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
 import {
@@ -16,6 +17,7 @@ import { getValueAtPath } from './utils';
 type DataTableRowCellProps<T> = {
   className: string | undefined;
   style: MantineStyleProp | undefined;
+  pinnedInfo: PinnedColumnInfo | undefined;
   record: T;
   index: number;
   defaultRender:
@@ -32,6 +34,7 @@ type DataTableRowCellProps<T> = {
 export function DataTableRowCell<T>({
   className,
   style,
+  pinnedInfo,
   visibleMediaQuery,
   record,
   index,
@@ -50,6 +53,8 @@ export function DataTableRowCell<T>({
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
     <TableTd
+      data-pinned={pinnedInfo?.position}
+      data-pinned-shadow={pinnedInfo?.isBoundary ? pinnedInfo.position : undefined}
       className={clsx(
         {
           [NOWRAP]: noWrap || ellipsis,
@@ -69,6 +74,11 @@ export function DataTableRowCell<T>({
           maxWidth: width,
         },
         style,
+        pinnedInfo && {
+          position: 'sticky',
+          [pinnedInfo.position]: pinnedInfo.offset,
+          overflow: 'visible',
+        },
       ]}
       onClick={onClick}
       onDoubleClick={onDoubleClick}

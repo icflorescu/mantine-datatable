@@ -1,10 +1,11 @@
 import { type RefObject, useMemo } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
+import { type DataTableColumnPinning, useDataTableColumnPinning } from './useDataTableColumnPinning';
 import { useDataTableColumnReorder } from './useDataTableColumnReorder';
 import { useDataTableColumnResize } from './useDataTableColumnResize';
 import { type DataTableColumnToggle, useDataTableColumnToggle } from './useDataTableColumnToggle';
 
-export type { DataTableColumnToggle };
+export type { DataTableColumnPinning, DataTableColumnToggle };
 
 /**
  * Hook to handle column features such as drag-and-drop reordering, visibility toggling and resizing.
@@ -52,6 +53,12 @@ export const useDataTableColumns = <T>({
     getInitialValueInEffect,
   });
 
+  const { columnsPinning, setColumnsPinning, resetColumnsPinning } = useDataTableColumnPinning({
+    key,
+    columns,
+    getInitialValueInEffect,
+  });
+
   const {
     columnsWidth,
     setColumnsWidth,
@@ -72,7 +79,7 @@ export const useDataTableColumns = <T>({
     scrollViewportRef,
   });
 
-  // Compute effective columns based on order, toggle, and width.
+  // Compute effective columns based on order, toggle, pinning, and width.
   // Width is applied unconditionally — even without a `storeColumnsKey` —
   // so that `setMultipleColumnWidths` updates from the resize handle
   // actually flow back into the rendered cell `style.width`.
@@ -81,15 +88,29 @@ export const useDataTableColumns = <T>({
     if (columnsOrder) {
       result = columnsOrder
         .map((order) => columns.find((column) => column.accessor === order))
-        .map((column) => ({
-          ...column,
-          hidden: column?.hidden || !columnsToggle.find((toggle) => toggle.accessor === column?.accessor)?.toggled,
-        })) as DataTableColumn<T>[];
+        .map((column) => {
+          // Effective pinned value:
+          // - If pinnable: true → use state from columnsPinning.pinned (interactive)
+          // - Otherwise → use static column.pinned
+          const pinningState = columnsPinning.find((p) => p.accessor === column?.accessor);
+          const effectivePinned = column?.pinnable ? pinningState?.pinned : column?.pinned;
+          return {
+            ...column,
+            hidden: column?.hidden || !columnsToggle.find((toggle) => toggle.accessor === column?.accessor)?.toggled,
+            pinned: effectivePinned,
+          };
+        }) as DataTableColumn<T>[];
     } else {
       result = columns;
     }
 
-    return result.map((column) => {
+    // Reorder columns by pinning: left-pinned → unpinned → right-pinned
+    const leftPinned = result.filter((c) => c.pinned === 'left');
+    const unpinned = result.filter((c) => !c.pinned);
+    const rightPinned = result.filter((c) => c.pinned === 'right');
+    const reordered = [...leftPinned, ...unpinned, ...rightPinned];
+
+    return reordered.map((column) => {
       if (column?.accessor === '__selection__') return column;
       const accessor = column?.accessor as string;
       const widthEntry = columnsWidth.find((entry) => accessor in entry);
@@ -99,7 +120,7 @@ export const useDataTableColumns = <T>({
       if (width === undefined || width === 'auto' || width === 'initial') return column;
       return { ...column, width };
     });
-  }, [columns, columnsOrder, columnsToggle, columnsWidth]);
+  }, [columns, columnsOrder, columnsToggle, columnsPinning, columnsWidth]);
 
   // Lock the table layout to `fixed` only when *every* visible column has a
   // pixel width. Mixed states (some 'auto', some pixels) stay in auto layout
@@ -139,6 +160,11 @@ export const useDataTableColumns = <T>({
     columnsToggle: columnsToggle as DataTableColumnToggle[],
     setColumnsToggle,
     resetColumnsToggle,
+
+    // Pinning handling
+    columnsPinning: columnsPinning as DataTableColumnPinning[],
+    setColumnsPinning,
+    resetColumnsPinning,
 
     // Resize handling
     columnsWidth,

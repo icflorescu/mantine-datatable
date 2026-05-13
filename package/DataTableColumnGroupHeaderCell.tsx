@@ -1,6 +1,7 @@
 import { TableTh } from '@mantine/core';
 import clsx from 'clsx';
 import { useMemo } from 'react';
+import type { PinnedColumnInfo } from './hooks';
 import { useMediaQueriesStringOrFunction } from './hooks';
 import type { DataTableColumnGroup } from './types';
 import { TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
@@ -8,6 +9,7 @@ import { calculateColSpan, flattenColumns, humanize, needsRightBorder } from './
 
 type DataTableColumnGroupHeaderCellProps<T> = {
   group: DataTableColumnGroup<T>;
+  pinnedInfo: PinnedColumnInfo | undefined;
   maxDepth: number;
   currentDepth: number;
   previousGroups: readonly DataTableColumnGroup<T>[];
@@ -18,6 +20,7 @@ type DataTableColumnGroupHeaderCellProps<T> = {
 
 export function DataTableColumnGroupHeaderCell<T>({
   group: { id, columns, groups, title, textAlign, className, style },
+  pinnedInfo,
   maxDepth,
   currentDepth,
   previousGroups,
@@ -56,6 +59,8 @@ export function DataTableColumnGroupHeaderCell<T>({
     <TableTh
       colSpan={colSpan}
       rowSpan={rowSpan > 1 ? rowSpan : undefined}
+      data-pinned={pinnedInfo?.position}
+      data-pinned-shadow={pinnedInfo?.isBoundary ? pinnedInfo.position : undefined}
       className={clsx(
         'mantine-datatable-column-group-header-cell',
         {
@@ -66,7 +71,14 @@ export function DataTableColumnGroupHeaderCell<T>({
         },
         className
       )}
-      style={style}
+      style={[
+        style,
+        pinnedInfo && {
+          position: 'sticky',
+          [pinnedInfo.position]: pinnedInfo.offset,
+          overflow: 'visible',
+        },
+      ]}
     >
       {title ?? humanize(id)}
     </TableTh>

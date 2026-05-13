@@ -2,6 +2,7 @@ import { type MantineStyleProp, TableTfoot, TableTr } from '@mantine/core';
 import clsx from 'clsx';
 import { DataTableFooterCell } from './DataTableFooterCell';
 import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelectorPlaceholderCell';
+import type { PinnedColumnInfo } from './hooks';
 import type { DataTableColumn, DataTableDefaultColumnProps } from './types';
 
 type DataTableFooterProps<T> = {
@@ -9,6 +10,7 @@ type DataTableFooterProps<T> = {
   style: MantineStyleProp | undefined;
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
+  pinnedMap: Map<string, PinnedColumnInfo>;
   selectionVisible: boolean;
   selectorCellShadowVisible: boolean;
   ref: React.Ref<HTMLTableSectionElement>;
@@ -19,6 +21,7 @@ export function DataTableFooter<T>({
   style,
   columns,
   defaultColumnProps,
+  pinnedMap,
   selectionVisible,
   selectorCellShadowVisible,
   ref,
@@ -45,6 +48,7 @@ export function DataTableFooter<T>({
           return (
             <DataTableFooterCell<T>
               key={accessor as React.Key}
+              pinnedInfo={pinnedMap.get(String(accessor))}
               className={footerClassName}
               style={footerStyle}
               visibleMediaQuery={visibleMediaQuery}

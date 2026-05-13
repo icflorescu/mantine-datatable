@@ -223,6 +223,11 @@ export const ROUTES: RouteInfo[] = [
     description: `Example: how to pin the first column on ${PRODUCT_NAME}`,
   },
   {
+    href: '/examples/pinning-arbitrary-columns',
+    title: 'Pinning arbitrary columns',
+    description: `Example: how to pin arbitrary columns on ${PRODUCT_NAME}`,
+  },
+  {
     href: '/examples/rtl-support',
     title: 'RTL support',
     description: `Example: demonstrating RTL (Right-to-Left) support in ${PRODUCT_NAME} for languages like Arabic, Hebrew, and Persian`,
