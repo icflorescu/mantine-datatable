@@ -32,7 +32,13 @@ export function useDataTablePinnedColumns<T>({
 } {
   const [pinnedMap, setPinnedMap] = useState<Map<string, PinnedColumnInfo>>(new Map());
 
+  // Skip all measurement work when no pinning is configured. Otherwise every
+  // render fires a layout-forcing recalculate and tears down/recreates the
+  // ResizeObserver — needless thrash that interferes with consumers observing
+  // the same DOM (e.g. AutoAnimate on the same tbody). The flag is recomputed
+  // inside each hook closure so we don't change the shape of the deps arrays.
   const recalculate = useCallback(() => {
+    if (!pinFirstColumn && !pinLastColumn && !columns.some((c) => c.pinned)) return;
     const measurementSection = theadRef.current ?? tbodyRef.current;
     if (!measurementSection) return;
 
@@ -141,7 +147,9 @@ export function useDataTablePinnedColumns<T>({
     });
   }, [columns, selectionVisible, theadRef, tbodyRef, selectionColumnHeaderRef, pinFirstColumn, pinLastColumn]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: `pinFirstColumn`, `pinLastColumn` and `columns` are captured transitively via `recalculate` — keep the deps array shape (3 items) stable so HMR can't trip "deps array changed size".
   useEffect(() => {
+    if (!pinFirstColumn && !pinLastColumn && !columns.some((c) => c.pinned)) return;
     const section = theadRef.current ?? tbodyRef.current;
     if (!section) return;
 
