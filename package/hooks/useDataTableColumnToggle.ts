@@ -58,14 +58,12 @@ export function useDataTableColumnToggle<T>({
   }
 
   // Default columns toggle state
-  const defaultColumnsToggle =
-    columns &&
-    columns.map((column) => ({
-      accessor: column.accessor,
-      defaultToggle: column.defaultToggle || true,
-      toggleable: column.toggleable,
-      toggled: column.defaultToggle === undefined ? true : column.defaultToggle,
-    }));
+  const defaultColumnsToggle = columns?.map((column) => ({
+    accessor: column.accessor,
+    defaultToggle: column.defaultToggle || true,
+    toggleable: column.toggleable,
+    toggled: column.defaultToggle === undefined ? true : column.defaultToggle,
+  }));
 
   const [storedColumnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
     key: key ? `${key}-columns-toggle` : '',

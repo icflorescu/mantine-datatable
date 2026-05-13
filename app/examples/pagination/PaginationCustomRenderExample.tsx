@@ -1,7 +1,7 @@
 'use client';
 
-import { Group, NumberInput, Text } from '@mantine/core';
 import { DataTable } from '__PACKAGE__';
+import { Group, NumberInput, Text } from '@mantine/core';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import employees from '~/data/employees.json';
@@ -14,8 +14,8 @@ export default function PaginationCustomRenderExample() {
   const [page, setPage] = useState(1);
   const [records, setRecords] = useState(employees.slice(0, pageSize));
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: reset page when pageSize changes
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPage(1);
   }, [pageSize]);
 

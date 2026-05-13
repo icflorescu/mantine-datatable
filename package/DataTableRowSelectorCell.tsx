@@ -1,5 +1,5 @@
 import type { MantineStyleProp } from '@mantine/core';
-import { Checkbox, TableTd, type CheckboxProps } from '@mantine/core';
+import { Checkbox, type CheckboxProps, TableTd } from '@mantine/core';
 import clsx from 'clsx';
 import type { DataTableSelectionTrigger } from './types';
 import { POINTER_CURSOR } from './utilityClasses';

@@ -1,8 +1,8 @@
-import { useMemo, type RefObject } from 'react';
+import { type RefObject, useMemo } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
 import { useDataTableColumnReorder } from './useDataTableColumnReorder';
 import { useDataTableColumnResize } from './useDataTableColumnResize';
-import { useDataTableColumnToggle, type DataTableColumnToggle } from './useDataTableColumnToggle';
+import { type DataTableColumnToggle, useDataTableColumnToggle } from './useDataTableColumnToggle';
 
 export type { DataTableColumnToggle };
 
@@ -83,9 +83,7 @@ export const useDataTableColumns = <T>({
         .map((order) => columns.find((column) => column.accessor === order))
         .map((column) => ({
           ...column,
-          hidden:
-            column?.hidden ||
-            !columnsToggle.find((toggle) => toggle.accessor === column?.accessor)?.toggled,
+          hidden: column?.hidden || !columnsToggle.find((toggle) => toggle.accessor === column?.accessor)?.toggled,
         })) as DataTableColumn<T>[];
     } else {
       result = columns;

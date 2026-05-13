@@ -1,4 +1,4 @@
-import { TableTfoot, TableTr, type MantineStyleProp } from '@mantine/core';
+import { type MantineStyleProp, TableTfoot, TableTr } from '@mantine/core';
 import clsx from 'clsx';
 import { DataTableFooterCell } from './DataTableFooterCell';
 import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelectorPlaceholderCell';

@@ -1,9 +1,9 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { ActionIcon, Box, Button, Grid, GridCol, Group, Stack, Text } from '@mantine/core';
 import { closeModal, openModal } from '@mantine/modals';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
 import type { Company } from '~/data';
 import { companies } from '~/data';
 

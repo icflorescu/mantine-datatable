@@ -1,11 +1,12 @@
 'use client';
+
 // 👆 Since 'useContextMenu' is a hook, don't forget to add the 'use client' directive
 //    at the top of your file if you're using it in a RSC context
 
+import { DataTable } from '__PACKAGE__';
 import { useMediaQuery } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
 import { useContextMenu } from 'mantine-contextmenu';
 import companies from '~/data/companies.json';
 

@@ -1,10 +1,10 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { faker } from '@faker-js/faker';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { ActionIcon, Box, Button, Center, Paper } from '@mantine/core';
-import { IconArrowDown, IconArrowUp, IconArrowsUpDown, IconTrash, IconTrashX } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
+import { IconArrowDown, IconArrowsUpDown, IconArrowUp, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import classes from './UsingWithAutoAnimateExample.module.css';
 

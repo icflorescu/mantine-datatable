@@ -23,7 +23,8 @@ export function DataTableHeaderCellFilter<T>({
   let ref: RefObject<HTMLDivElement | null> | undefined = useClickOutside(close);
   if (filterPopoverDisableClickOutside) ref = undefined;
 
-  return ( // Keep the expanded props before the open/close, or they could be overridden by the client
+  return (
+    // Keep the expanded props before the open/close, or they could be overridden by the client
     <Popover withArrow shadow="md" trapFocus {...filterPopoverProps} opened={isOpen} onClose={close} onDismiss={close}>
       <PopoverTarget>
         <ActionIcon

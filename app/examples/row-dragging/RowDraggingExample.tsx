@@ -1,11 +1,11 @@
 'use client';
 
-import { DragDropContext, Draggable, type DropResult, Droppable } from '@hello-pangea/dnd';
+import type { DataTableColumn } from '__PACKAGE__';
+import { DataTable, DataTableDraggableRow } from '__PACKAGE__';
+import { DragDropContext, Draggable, Droppable, type DropResult } from '@hello-pangea/dnd';
 import { Center, TableTd } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconGripVertical } from '@tabler/icons-react';
-import type { DataTableColumn } from '__PACKAGE__';
-import { DataTable, DataTableDraggableRow } from '__PACKAGE__';
 import clsx from 'clsx';
 import { useState } from 'react';
 import companies from '~/data/companies.json';

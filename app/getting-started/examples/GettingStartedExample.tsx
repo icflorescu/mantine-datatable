@@ -1,8 +1,8 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { Box } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { DataTable } from '__PACKAGE__';
 
 export function GettingStartedExample() {
   return (

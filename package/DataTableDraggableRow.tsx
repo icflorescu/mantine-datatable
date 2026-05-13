@@ -16,6 +16,7 @@ export function DataTableDraggableRow({
   const ref = useRef<HTMLTableRowElement>(null);
   const mergedRef = useMergedRef(ref, refProp);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: re-measure cells when children change
   useEffect(() => {
     // a simple fix to keep column width as in table
     if (!ref.current) return;
@@ -32,10 +33,10 @@ export function DataTableDraggableRow({
 
       const cell = ref.current.children[index] as HTMLTableCellElement;
 
-      cell.style.height = headerCellDimensions.height + 'px';
-      cell.style.width = headerCellDimensions.width + 'px';
-      cell.style.minWidth = headerCellDimensions.width + 'px';
-      cell.style.maxWidth = headerCellDimensions.width + 'px';
+      cell.style.height = `${headerCellDimensions.height}px`;
+      cell.style.width = `${headerCellDimensions.width}px`;
+      cell.style.minWidth = `${headerCellDimensions.width}px`;
+      cell.style.maxWidth = `${headerCellDimensions.width}px`;
     }
   }, [isDragging, children]);
 

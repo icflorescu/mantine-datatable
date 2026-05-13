@@ -52,9 +52,7 @@ export default async function HandlingRowClicksExamplePage() {
           </ExternalLink>
           .
           <br />
-          See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows-or-cells">
-            this example
-          </InternalLink>{' '}
+          See <InternalLink to="/examples/links-or-buttons-inside-clickable-rows-or-cells">this example</InternalLink>{' '}
           for more information.
         </div>
       </Txt>

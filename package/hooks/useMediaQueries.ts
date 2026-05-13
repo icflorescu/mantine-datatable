@@ -24,7 +24,9 @@ function attachMediaListeners(queries: MediaQueryList[], callback: (matches: boo
     }
   });
   return () => {
-    subscriptions.forEach((unsubscribe) => unsubscribe());
+    subscriptions.forEach((unsubscribe) => {
+      unsubscribe();
+    });
   };
 }
 

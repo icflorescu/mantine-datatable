@@ -32,8 +32,8 @@ export default async function StylingPage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        Starting with V7+, all <Code>@mantine/*</Code> packages are shipped with native CSS files which can be imported from{' '}
-        <Code>@mantine/{'{package}'}/styles.css</Code> or <Code>@mantine/{'{package}'}/styles.layer.css</Code>.
+        Starting with V7+, all <Code>@mantine/*</Code> packages are shipped with native CSS files which can be imported
+        from <Code>@mantine/{'{package}'}/styles.css</Code> or <Code>@mantine/{'{package}'}/styles.layer.css</Code>.
       </Txt>
       <Txt>
         Similarly, {PRODUCT_NAME} comes with native CSS files which can be imported from{' '}
@@ -68,13 +68,13 @@ export default async function StylingPage() {
         For example, in a Next.js application you could ensure the correct order of styles either by importing the{' '}
         <Code>styles.layer.css</Code> files and using the <Code>@layer</Code> directive, like so:
       </Txt>
-      <CodeBlock tabs={{ code: code['simple'], keys: ['RootLayout.tsx', 'layout.css'] }} />
+      <CodeBlock tabs={{ code: code.simple, keys: ['RootLayout.tsx', 'layout.css'] }} />
       <Txt>
         Or, if you want to have even more control over the order of styles, you can make use of the{' '}
         <Code>postcss-import</Code> plugin to control the layer names when importing the <Code>styles.css</Code> files,
         and then use the <Code>@layer</Code> directive, like so:
       </Txt>
-      <CodeBlock tabs={{ code: code['fineGrained'], keys: ['RootLayout.tsx', 'postcss.config.js', 'layout.css'] }} />
+      <CodeBlock tabs={{ code: code.fineGrained, keys: ['RootLayout.tsx', 'postcss.config.js', 'layout.css'] }} />
       <PageSubtitle value="Breaking changes in V7" />
       <Txt idea>
         {PRODUCT_NAME} V7 was a major release with{' '}
@@ -87,9 +87,9 @@ export default async function StylingPage() {
         </ExternalLink>
         .
         <br />
-        Since Mantine v7, the styling is no longer done with CSS-in-JS (<ExternalLink to="https://emotion.sh">Emotion</ExternalLink>),
-        hence the <Code>createStyles</Code> function is no longer available for use in other libraries built on top of
-        it or in your own code.
+        Since Mantine v7, the styling is no longer done with CSS-in-JS (
+        <ExternalLink to="https://emotion.sh">Emotion</ExternalLink>), hence the <Code>createStyles</Code> function is
+        no longer available for use in other libraries built on top of it or in your own code.
         <br />
         If you have used {PRODUCT_NAME} with Mantine V6 and you’re migrating to V7, please make sure to check out the
         Mantine <ExternalLink to={`${MANTINE_LINK}/changelog/7-0-0/`}>V7.0</ExternalLink> and{' '}

@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Grid, GridCol } from '@mantine/core';
 import { DataTable } from '__PACKAGE__';
+import { Button, Grid, GridCol } from '@mantine/core';
 import { useRef } from 'react';
 import { employees } from '~/data';
 

@@ -76,7 +76,7 @@ export async function readCodeFile<T extends string | Record<string, string> = s
         '\n';
       skipping = null;
     } else if (adding && !(line.includes('// prettier-ignore') || line.includes('{/* prettier-ignore */}'))) {
-      addition = line.slice(indent) + '\n';
+      addition = `${line.slice(indent)}\n`;
     }
     if (addition) {
       if (blockName !== null) {

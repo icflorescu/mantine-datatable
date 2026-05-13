@@ -95,9 +95,7 @@ export default async function ColumnPropertiesAndStylingExamplePage() {
         <li>
           <Code>filter</Code>
           <br />
-          An optional property which provides the user with filtering options. It can be either a <Code>
-            ReactNode
-          </Code>{' '}
+          An optional property which provides the user with filtering options. It can be either a <Code>ReactNode</Code>{' '}
           or a function returning a <Code>ReactNode</Code>.
           <br />
           If a <Code>ReactNode</Code> is provided, a filter button will be added to the column header. Upon clicking the

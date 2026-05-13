@@ -1,4 +1,4 @@
-import { TableTh, type MantineStyleProp, type MantineTheme } from '@mantine/core';
+import { type MantineStyleProp, type MantineTheme, TableTh } from '@mantine/core';
 import clsx from 'clsx';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';

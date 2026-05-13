@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 export function useLastSelectionChangeIndex(recordIds: unknown[] | undefined) {
   const [lastSelectionChangeIndex, setLastSelectionChangeIndex] = useState<number | null>(null);
   const recordIdsString = recordIds?.join(':') || '';
+  // biome-ignore lint/correctness/useExhaustiveDependencies: reset when recordIds change
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLastSelectionChangeIndex(null);
   }, [recordIdsString]);
 

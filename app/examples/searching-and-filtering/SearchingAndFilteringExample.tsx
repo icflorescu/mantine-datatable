@@ -1,10 +1,10 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { ActionIcon, Button, Checkbox, MultiSelect, Stack, TextInput } from '@mantine/core';
 import { DatePicker, type DatesRangeValue } from '@mantine/dates';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconSearch, IconX } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
 import { employees } from '~/data';
@@ -36,8 +36,7 @@ export function SearchingAndFilteringExample() {
           return false;
 
         if (
-          birthdaySearchRange &&
-          birthdaySearchRange[0] &&
+          birthdaySearchRange?.[0] &&
           birthdaySearchRange[1] &&
           (dayjs(birthdaySearchRange[0]).isAfter(birthDate, 'day') ||
             dayjs(birthdaySearchRange[1]).isBefore(birthDate, 'day'))

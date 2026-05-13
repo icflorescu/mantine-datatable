@@ -1,12 +1,12 @@
-import { ActionIcon, Box, Center, Flex, Group, TableTh, type MantineStyleProp, type MantineTheme } from '@mantine/core';
+import { ActionIcon, Box, Center, Flex, Group, type MantineStyleProp, type MantineTheme, TableTh } from '@mantine/core';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
 import { DataTableResizableHeaderHandle } from './DataTableResizableHeaderHandle';
 import { useMediaQueryStringOrFunction } from './hooks';
-import { IconArrowUp } from './icons/IconArrowUp';
 import { IconArrowsVertical } from './icons/IconArrowsVertical';
+import { IconArrowUp } from './icons/IconArrowUp';
 import { IconGripVertical } from './icons/IconGripVertical';
 import { IconX } from './icons/IconX';
 import type { DataTableColumn, DataTableSortProps } from './types';
@@ -58,7 +58,8 @@ export function DataTableHeaderCell<T>({
   filtering,
   sortKey,
 }: DataTableHeaderCellProps<T>) {
-  const { setSourceColumn, setTargetColumn, swapColumns, columnsToggle, setColumnsToggle } = useDataTableColumnsContext();
+  const { setSourceColumn, setTargetColumn, swapColumns, columnsToggle, setColumnsToggle } =
+    useDataTableColumnsContext();
   const [dragOver, setDragOver] = useState<boolean>(false);
   const columnRef = useRef<HTMLTableCellElement | null>(null);
 
@@ -200,27 +201,21 @@ export function DataTableHeaderCell<T>({
           </Center>
         ) : null}
         {sortable || sortStatus?.columnAccessor === accessor ? (
-          <>
-            {sortStatus?.columnAccessor === accessor ? (
-              <Center
-                className={clsx('mantine-datatable-header-cell-sortable-icon', {
-                  'mantine-datatable-header-cell-sortable-icon-reversed': sortStatus.direction === 'desc',
-                })}
-                role="img"
-                aria-label={`Sorted ${sortStatus.direction === 'desc' ? 'descending' : 'ascending'}`}
-              >
-                {sortIcons?.sorted || <IconArrowUp />}
-              </Center>
-            ) : (
-              <Center
-                className="mantine-datatable-header-cell-sortable-unsorted-icon"
-                role="img"
-                aria-label="Not sorted"
-              >
-                {sortIcons?.unsorted || <IconArrowsVertical />}
-              </Center>
-            )}
-          </>
+          sortStatus?.columnAccessor === accessor ? (
+            <Center
+              className={clsx('mantine-datatable-header-cell-sortable-icon', {
+                'mantine-datatable-header-cell-sortable-icon-reversed': sortStatus.direction === 'desc',
+              })}
+              role="img"
+              aria-label={`Sorted ${sortStatus.direction === 'desc' ? 'descending' : 'ascending'}`}
+            >
+              {sortIcons?.sorted || <IconArrowUp />}
+            </Center>
+          ) : (
+            <Center className="mantine-datatable-header-cell-sortable-unsorted-icon" role="img" aria-label="Not sorted">
+              {sortIcons?.unsorted || <IconArrowsVertical />}
+            </Center>
+          )
         ) : null}
         {filter ? (
           <DataTableHeaderCellFilter

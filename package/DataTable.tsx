@@ -1,8 +1,9 @@
-import { Box, Table, type MantineSize } from '@mantine/core';
+import { Box, type MantineSize, Table } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import type { RefObject } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { getTableCssVariables } from './cssVariables';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -12,7 +13,6 @@ import { DataTableLoader } from './DataTableLoader';
 import { DataTablePagination } from './DataTablePagination';
 import { DataTableRow } from './DataTableRow';
 import { DataTableScrollArea } from './DataTableScrollArea';
-import { getTableCssVariables } from './cssVariables';
 import {
   useDataTableColumns,
   useDataTableInjectCssVariables,

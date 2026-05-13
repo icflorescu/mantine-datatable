@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/noUnusedVariables: This is a declaration file */
 namespace NodeJS {
   interface ProcessEnv extends NodeJS.ProcessEnv {
     GITHUB_PAGES: 'TRUE' | 'FALSE';

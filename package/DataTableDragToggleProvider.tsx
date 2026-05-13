@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type PropsWithChildren } from 'react';
+import { type PropsWithChildren, useState } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
 import type { DataTableColumnToggle } from './hooks';
 

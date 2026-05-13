@@ -1,11 +1,11 @@
 'use client';
 
+import { DataTable, type DataTableSortStatus, useDataTableColumns } from '__PACKAGE__';
 import { ActionIcon, Box, Button, DirectionProvider, Group, SegmentedControl, Stack, Text } from '@mantine/core';
 import { IconColumns3, IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
-import { DataTable, useDataTableColumns, type DataTableSortStatus } from '__PACKAGE__';
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
-import { companies, employees, type Employee } from '~/data';
+import { companies, type Employee, employees } from '~/data';
 import classes from './RTLSupportExample.module.css';
 
 // Example 1: Basic table without pinned columns

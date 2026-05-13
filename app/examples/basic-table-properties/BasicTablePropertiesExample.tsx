@@ -1,6 +1,6 @@
-import type { MantineSize } from '@mantine/core';
 import type { DataTableVerticalAlign } from '__PACKAGE__';
 import { DataTable } from '__PACKAGE__';
+import type { MantineSize } from '@mantine/core';
 import companies from '~/data/companies.json';
 
 const records = companies.slice(0, 5);
@@ -65,7 +65,7 @@ export function BasicTablePropertiesExample({
         { accessor: 'missionStatement', width: 150 },
         { accessor: 'streetAddress' },
         { accessor: 'city' },
-        { accessor: 'state' }
+        { accessor: 'state' },
       ]}
       records={records}
     />

@@ -1,7 +1,7 @@
 'use client';
 
 import { DataTable, type DataTableColumn } from '__PACKAGE__';
-import { employees, type Employee } from '~/data';
+import { type Employee, employees } from '~/data';
 
 const records = employees.slice(0, 15);
 

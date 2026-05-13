@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, Group, Stack, Text } from '@mantine/core';
-import { IconBuildingCommunity, IconBuildingSkyscraper, IconMap, IconRoadSign } from '@tabler/icons-react';
 import type { DataTableColumn } from '__PACKAGE__';
 import { DataTable, useDataTableColumns } from '__PACKAGE__';
+import { Button, Group, Stack, Text } from '@mantine/core';
+import { IconBuildingCommunity, IconBuildingSkyscraper, IconMap, IconRoadSign } from '@tabler/icons-react';
 import { useState } from 'react';
 import { companies } from '~/data';
 

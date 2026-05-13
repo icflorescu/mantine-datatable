@@ -1,7 +1,7 @@
 'use client';
 
-import { Box, Button, ButtonGroup, Group, Stack } from '@mantine/core';
 import { DataTable } from '__PACKAGE__';
+import { Box, Button, ButtonGroup, Group, Stack } from '@mantine/core';
 import { useState } from 'react';
 import { companies } from '~/data';
 import classes from './RowExpansionExampleControlledMode.module.css';

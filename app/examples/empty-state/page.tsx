@@ -51,7 +51,7 @@ export default async function EmptyStateExamplePage() {
         Make sure to set a <Code>minHeight</Code> large enough to accommodate the icon and text when dealing with empty
         state in non <em>“vertically-scrollable”</em> tables.
       </Txt>
-      <CodeBlock code={code['default']} />
+      <CodeBlock code={code.default} />
       <Txt>
         You can modify the displayed text by setting the <Code>noRecordsText</Code> property:
       </Txt>

@@ -1,9 +1,9 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { useMediaQuery } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
 import { useContextMenu } from 'mantine-contextmenu';
 import employees from '~/data/employees.json';
 

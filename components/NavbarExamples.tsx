@@ -22,12 +22,11 @@ export function NavbarExamples({ items }: NavbarExamplesProps) {
 
   const pathname = usePathname();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: open should not be a dependency
   useEffect(() => {
     if (pathname.startsWith('/examples/') || localStorage.getItem(EXPANSION_STATE_STORAGE_KEY)) {
       open();
     }
-    // open should not be a dependency...
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const [didExpand, setDidExpand] = useState(false);

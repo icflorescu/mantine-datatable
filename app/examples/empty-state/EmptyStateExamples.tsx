@@ -1,9 +1,9 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { Box, Button, Image, Stack, Text } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconMoodSad } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
 import classes from './EmptyStateExamples.module.css';
 
 export function EmptyStateExample() {

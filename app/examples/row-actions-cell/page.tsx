@@ -30,7 +30,7 @@ export default async function RowActionsCellExamplePage() {
       </Txt>
       <RowActionsCellExample />
       <Txt>Here is the code:</Txt>
-      <CodeBlock code={code['default']} />
+      <CodeBlock code={code.default} />
       <Txt info title="Heads up">
         If you need to combine row actions with{' '}
         <InternalLink to="/examples/handling-row-clicks">clickable rows</InternalLink>,{' '}

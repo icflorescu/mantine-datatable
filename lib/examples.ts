@@ -1,4 +1,5 @@
 export type DelayOptions = { min: number; max: number };
+
 import { useCallback, useEffect, useRef } from 'react';
 
 export function delay({ min, max }: DelayOptions) {

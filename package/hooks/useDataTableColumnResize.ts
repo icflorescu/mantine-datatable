@@ -1,5 +1,5 @@
 import { useLocalStorage } from '@mantine/hooks';
-import { useCallback, useEffect, useMemo, useRef, useState, type RefObject } from 'react';
+import { type RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
 
 type DataTableColumnWidth = Record<string, string | number>;
@@ -109,22 +109,19 @@ export function useDataTableColumnResize<T>({
     });
   }, [columns]);
 
-  const updateColumnWidths = useCallback(
-    (updates: Array<{ accessor: string; width: string | number }>) => {
-      const filtered = updates.filter((u) => u.accessor !== '__selection__');
-      if (filtered.length === 0) return;
+  const updateColumnWidths = useCallback((updates: Array<{ accessor: string; width: string | number }>) => {
+    const filtered = updates.filter((u) => u.accessor !== '__selection__');
+    if (filtered.length === 0) return;
 
-      dirtyRef.current = true;
-      setEffectiveColumnsWidth((prev) =>
-        prev.map((col) => {
-          const accessor = Object.keys(col)[0];
-          const update = filtered.find((u) => u.accessor === accessor);
-          return update ? { [accessor]: update.width } : col;
-        })
-      );
-    },
-    []
-  );
+    dirtyRef.current = true;
+    setEffectiveColumnsWidth((prev) =>
+      prev.map((col) => {
+        const accessor = Object.keys(col)[0];
+        const update = filtered.find((u) => u.accessor === accessor);
+        return update ? { [accessor]: update.width } : col;
+      })
+    );
+  }, []);
 
   // Persist user-initiated width changes — but only when no drag is in flight.
   // `localStorage.setItem` is synchronous and writing it on every mousemove

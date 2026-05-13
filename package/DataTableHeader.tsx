@@ -1,14 +1,14 @@
 import {
   Checkbox,
+  type CheckboxProps,
   Group,
+  type MantineStyleProp,
   Popover,
   PopoverDropdown,
   PopoverTarget,
   Stack,
   TableThead,
   TableTr,
-  type CheckboxProps,
-  type MantineStyleProp,
 } from '@mantine/core';
 import clsx from 'clsx';
 import { useState } from 'react';

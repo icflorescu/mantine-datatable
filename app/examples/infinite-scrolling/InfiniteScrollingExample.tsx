@@ -1,8 +1,8 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { Button, Group, Paper, Text } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
-import { DataTable } from '__PACKAGE__';
 import { useEffect, useRef, useState } from 'react';
 import { employees } from '~/data';
 

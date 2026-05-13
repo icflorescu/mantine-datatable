@@ -1,4 +1,4 @@
-import { useMantineTheme, type MantineTheme } from '@mantine/core';
+import { type MantineTheme, useMantineTheme } from '@mantine/core';
 import { useMemo } from 'react';
 import { useMediaQueries } from './useMediaQueries';
 

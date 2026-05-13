@@ -51,7 +51,7 @@ export function Navbar({ onClick }: NavbarProps) {
           {buttonsInfo['before-examples'].map((item) => (
             <NavbarButton key={item.href} {...item} />
           ))}
-          <NavbarExamples items={buttonsInfo['examples']} />
+          <NavbarExamples items={buttonsInfo.examples} />
           {buttonsInfo['after-examples'].map((item) => (
             <NavbarButton key={item.href} {...item} />
           ))}

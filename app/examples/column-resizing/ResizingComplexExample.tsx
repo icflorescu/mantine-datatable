@@ -1,10 +1,10 @@
 'use client';
 
+import { DataTable, type DataTableSortStatus, useDataTableColumns } from '__PACKAGE__';
 import { Button, Group, Stack, Switch } from '@mantine/core';
-import { DataTable, useDataTableColumns, type DataTableSortStatus } from '__PACKAGE__';
 import { sortBy } from 'lodash';
 import { useEffect, useState } from 'react';
-import { companies, type Company } from '~/data';
+import { type Company, companies } from '~/data';
 
 export default function ResizingComplexExample() {
   const key = 'resize-complex-example';

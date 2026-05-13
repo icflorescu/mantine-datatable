@@ -1,10 +1,10 @@
 import type { MantineTheme } from '@mantine/core';
-import { TableTr, type CheckboxProps, type MantineColor, type MantineStyleProp } from '@mantine/core';
+import { type CheckboxProps, type MantineColor, type MantineStyleProp, TableTr } from '@mantine/core';
 import clsx from 'clsx';
+import { getRowCssVariables } from './cssVariables';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
-import { getRowCssVariables } from './cssVariables';
 import type { useRowExpansion } from './hooks';
 import type {
   DataTableCellClickHandler,
@@ -239,7 +239,7 @@ export function getRowProps<T>({
       typeof className === 'function' ? className(record, index) : className
     ),
 
-    ['data-selected']: selectionChecked || undefined,
+    'data-selected': selectionChecked || undefined,
 
     onClick: (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
       if (expansion) {

@@ -1,4 +1,4 @@
-import { parseThemeColor, type MantineColor, type MantineTheme } from '@mantine/core';
+import { type MantineColor, type MantineTheme, parseThemeColor } from '@mantine/core';
 import type { DataTableProps } from './types';
 
 export function getColor(
