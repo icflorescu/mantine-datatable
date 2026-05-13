@@ -16,6 +16,9 @@ type DataTableColumnsProviderProps = PropsWithChildren<{
   setColumnWidth: (accessor: string, width: string | number) => void;
   setMultipleColumnWidths: (updates: Array<{ accessor: string; width: string | number }>) => void;
   resetColumnsWidth: () => void;
+
+  beginResize: () => void;
+  endResize: () => void;
 }>;
 
 export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) => {
@@ -32,6 +35,9 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
     setColumnWidth,
     setMultipleColumnWidths,
     resetColumnsWidth,
+
+    beginResize,
+    endResize,
   } = props;
 
   const [sourceColumn, setSourceColumn] = useState('');
@@ -70,6 +76,9 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
         setColumnWidth,
         setMultipleColumnWidths,
         resetColumnsWidth,
+
+        beginResize,
+        endResize,
       }}
     >
       {children}

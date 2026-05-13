@@ -2,7 +2,7 @@ import { Box, Table, type MantineSize } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import type { RefObject } from 'react';
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
 import { DataTableEmptyState } from './DataTableEmptyState';
@@ -133,13 +133,9 @@ export function DataTable<T>({
   tableWrapper,
   ...otherProps
 }: DataTableProps<T>) {
-  const effectiveColumns = useMemo(() => {
+  const flatColumns = useMemo(() => {
     return groups ? flattenColumns(groups) : columns!;
   }, [columns, groups]);
-
-  // When columns are resizable, start with auto layout to let the browser
-  // compute natural widths, then capture them and switch to fixed layout.
-  const [fixedLayoutEnabled, setFixedLayoutEnabled] = useState(false);
 
   const { refs, onScroll: handleScrollPositionChange } = useDataTableInjectCssVariables({
     scrollCallbacks: {
@@ -154,11 +150,14 @@ export function DataTable<T>({
 
   const dragToggle = useDataTableColumns({
     key: storeColumnsKey,
-    columns: effectiveColumns,
+    columns: flatColumns,
     headerRef: refs.header as RefObject<HTMLTableSectionElement | null>,
     scrollViewportRef: refs.scrollViewport as RefObject<HTMLElement | null>,
-    onFixedLayoutChange: setFixedLayoutEnabled,
   });
+
+  // Use the columns enriched with order/visibility/width from the hook so
+  // resize widths actually reach the rendered <th>/<td> cells.
+  const effectiveColumns = dragToggle.effectiveColumns;
 
   const mergedTableRef = useMergedRef(refs.table, tableRef);
   const mergedViewportRef = useMergedRef(refs.scrollViewport, scrollViewportRef);
@@ -305,12 +304,16 @@ export function DataTable<T>({
                   'mantine-datatable-pin-last-column': pinLastColumn,
                   'mantine-datatable-selection-column-visible': selectionColumnVisible,
                   'mantine-datatable-pin-first-column': pinFirstColumn,
-                  'mantine-datatable-resizable-columns': dragToggle.hasResizableColumns && fixedLayoutEnabled,
+                  'mantine-datatable-resizable-columns': dragToggle.hasResizableColumns,
+                  'mantine-datatable-resize-locked': dragToggle.isLocked,
+                  'mantine-datatable-resizing': dragToggle.isResizing,
                 },
                 classNames?.table
               )}
               style={{
                 ...styles?.table,
+                ...(dragToggle.isLocked ? { tableLayout: 'fixed' } : null),
+                ...(dragToggle.tableWidth != null ? { width: `${dragToggle.tableWidth}px` } : null),
               }}
               data-striped={(recordsLength && striped) || undefined}
               data-highlight-on-hover={highlightOnHover || undefined}

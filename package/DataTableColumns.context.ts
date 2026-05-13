@@ -24,6 +24,10 @@ interface DataTableColumnsContext {
   setColumnWidth: (accessor: string, width: string | number) => void;
   setMultipleColumnWidths: (updates: Array<{ accessor: string; width: string | number }>) => void;
   resetColumnsWidth: () => void;
+
+  // Drag lifecycle: snapshot DOM widths, lock the table, then persist on release
+  beginResize: () => void;
+  endResize: () => void;
 }
 
 export const [DataTableColumnsContextProvider, useDataTableColumnsContext] = createSafeContext<DataTableColumnsContext>(
