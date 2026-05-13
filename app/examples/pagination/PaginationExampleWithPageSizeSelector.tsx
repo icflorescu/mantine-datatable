@@ -20,7 +20,6 @@ export default function PaginationExampleWithPageSizeSelector() {
   useEffect(() => {
     const from = (page - 1) * pageSize;
     const to = from + pageSize;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(employees.slice(from, to));
   }, [page, pageSize]);
 

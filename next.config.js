@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 const { name: PACKAGE_NAME, version: PACKAGE_VERSION } = require('./package.json');
 
 module.exports = async () => {

@@ -19,7 +19,6 @@ export default function DraggingTogglingComplexExample() {
 
   useEffect(() => {
     const data = sortBy(companies, sortStatus.columnAccessor) as Company[];
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 

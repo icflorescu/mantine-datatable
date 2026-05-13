@@ -81,7 +81,6 @@ export function useDataTableColumnResize<T>({
     if (!key) return;
     if (!storedColumnsWidth || storedColumnsWidth.length === 0) return;
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setEffectiveColumnsWidth(storedColumnsWidth);
   }, [key, storedColumnsWidth]);
 
@@ -89,7 +88,6 @@ export function useDataTableColumnResize<T>({
   // removed accessors, add defaults for newly introduced columns. Bails out
   // when nothing actually changed to avoid extra renders.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setEffectiveColumnsWidth((prev) => {
       const validAccessors = new Set(
         columns.filter((c) => c.accessor !== '__selection__').map((c) => String(c.accessor))

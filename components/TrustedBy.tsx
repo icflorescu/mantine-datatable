@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { Container, Text } from '@mantine/core';
 import { PRODUCT_NAME, WEBSITE_LINK } from '~/app/config';
 import classes from './TrustedBy.module.css';

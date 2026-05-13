@@ -18,7 +18,6 @@ export default function ResizingComplexExample() {
 
   useEffect(() => {
     const data = sortBy(companies, sortStatus.columnAccessor);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 
