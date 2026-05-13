@@ -28,9 +28,7 @@ export function VersionBadge() {
             <IconAlertSquareRoundedFilled />
           </Box>
           <br />
-          This version works with Mantine V8.x
-          <br />
-          (and probably V7.x).
+          This version works with Mantine V9.x.
           <br />
           <br />
           If you’re still using <ExternalLink to="https://v6.mantine.dev">Mantine V6</ExternalLink>, check the old
