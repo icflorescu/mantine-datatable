@@ -58,7 +58,7 @@ export function DataTableHeaderCell<T>({
   filtering,
   sortKey,
 }: DataTableHeaderCellProps<T>) {
-  const { setSourceColumn, setTargetColumn, swapColumns, setColumnsToggle } = useDataTableColumnsContext();
+  const { setSourceColumn, setTargetColumn, swapColumns, columnsToggle, setColumnsToggle } = useDataTableColumnsContext();
   const [dragOver, setDragOver] = useState<boolean>(false);
   const columnRef = useRef<HTMLTableCellElement | null>(null);
 
@@ -113,7 +113,7 @@ export function DataTableHeaderCell<T>({
   const handleColumnToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
-    setColumnsToggle((columnsToggle) =>
+    setColumnsToggle(
       columnsToggle.map((c) => {
         if (c.accessor === accessor) {
           return { ...c, toggled: false };

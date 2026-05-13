@@ -1,3 +1,5 @@
+'use client';
+
 import { Group, Text, UnstyledButton } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';

@@ -1,16 +1,16 @@
 'use client';
 
-import { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
+import { useState, type PropsWithChildren } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
 import type { DataTableColumnToggle } from './hooks';
 
 type DataTableColumnsProviderProps = PropsWithChildren<{
   columnsOrder: string[];
-  setColumnsOrder: Dispatch<SetStateAction<string[]>>;
+  setColumnsOrder: (order: string[]) => void;
   resetColumnsOrder: () => void;
 
   columnsToggle: DataTableColumnToggle[];
-  setColumnsToggle: Dispatch<SetStateAction<DataTableColumnToggle[]>>;
+  setColumnsToggle: (toggle: DataTableColumnToggle[]) => void;
   resetColumnsToggle: () => void;
 
   setColumnWidth: (accessor: string, width: string | number) => void;

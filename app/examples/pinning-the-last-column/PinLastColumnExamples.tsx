@@ -27,7 +27,7 @@ const showModal = ({ employee, action }: { employee: Employee; action: 'view' | 
               ? 'Here’s where you could put an edit form...'
               : 'Here’s where you could ask for confirmation before deleting...'}
         </Text>
-        <Grid gutter="xs">
+        <Grid gap="xs">
           <GridCol span={2}>ID</GridCol>
           <GridCol span={10}>{employee.id}</GridCol>
           <GridCol span={2}>First name</GridCol>
