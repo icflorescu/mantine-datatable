@@ -1,6 +1,4 @@
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
-  - unrs-resolver
-packages:
-  - package
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
