@@ -32,28 +32,7 @@ export default async function StylingPage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        {PRODUCT_NAME} V7 is a major release with{' '}
-        <ExternalLink to={`${REPO_LINK}/blob/main/CHANGELOG.md`}>breaking changes</ExternalLink> and is compatible with{' '}
-        <ExternalLink to={MANTINE_LINK}>Mantine V7</ExternalLink>.
-        <br />
-        One of the breaking changes in Mantine V7 is the{' '}
-        <ExternalLink to={`${MANTINE_LINK}/changelog/7-0-0/#migration-to-native-css`}>
-          migration to native CSS
-        </ExternalLink>
-        .
-        <br />
-        The styling is no longer done with CSS-in-JS (<ExternalLink to="https://emotion.sh">Emotion</ExternalLink>),
-        hence the <Code>createStyles</Code> function is no longer available for use in other libraries built on top of
-        it or in your own code.
-      </Txt>
-      <Txt idea>
-        If you have used {PRODUCT_NAME} with Mantine V6 and you’re migrating to V7, please make sure to check out the
-        Mantine <ExternalLink to={`${MANTINE_LINK}/changelog/7-0-0/`}>V7.0</ExternalLink> and{' '}
-        <ExternalLink to={`${MANTINE_LINK}/changelog/7-1-0/`}>V7.1</ExternalLink> changelogs to understand the new
-        styling approach and how you can use CSS layers to control the order of styles in your application.
-      </Txt>
-      <Txt>
-        In V7, all <Code>@mantine/*</Code> packages are shipped with native CSS files which can be imported from{' '}
+        Starting with V7+, all <Code>@mantine/*</Code> packages are shipped with native CSS files which can be imported from{' '}
         <Code>@mantine/{'{package}'}/styles.css</Code> or <Code>@mantine/{'{package}'}/styles.layer.css</Code>.
       </Txt>
       <Txt>
@@ -96,6 +75,27 @@ export default async function StylingPage() {
         and then use the <Code>@layer</Code> directive, like so:
       </Txt>
       <CodeBlock tabs={{ code: code['fineGrained'], keys: ['RootLayout.tsx', 'postcss.config.js', 'layout.css'] }} />
+      <PageSubtitle value="Breaking changes in V7" />
+      <Txt idea>
+        {PRODUCT_NAME} V7 was a major release with{' '}
+        <ExternalLink to={`${REPO_LINK}/blob/main/CHANGELOG.md`}>breaking changes</ExternalLink> and was compatible with{' '}
+        <ExternalLink to={MANTINE_LINK}>Mantine V7</ExternalLink>.
+        <br />
+        One of the breaking changes in Mantine V7 was the{' '}
+        <ExternalLink to={`${MANTINE_LINK}/changelog/7-0-0/#migration-to-native-css`}>
+          migration to native CSS
+        </ExternalLink>
+        .
+        <br />
+        Since Mantine v7, the styling is no longer done with CSS-in-JS (<ExternalLink to="https://emotion.sh">Emotion</ExternalLink>),
+        hence the <Code>createStyles</Code> function is no longer available for use in other libraries built on top of
+        it or in your own code.
+        <br />
+        If you have used {PRODUCT_NAME} with Mantine V6 and you’re migrating to V7, please make sure to check out the
+        Mantine <ExternalLink to={`${MANTINE_LINK}/changelog/7-0-0/`}>V7.0</ExternalLink> and{' '}
+        <ExternalLink to={`${MANTINE_LINK}/changelog/7-1-0/`}>V7.1</ExternalLink> changelogs to understand the new
+        styling approach and how you can use CSS layers to control the order of styles in your application.
+      </Txt>
       <Txt>
         Now that you understand how styling works, feel free to browse the{' '}
         <InternalLink to={firstExampleHref}>code examples</InternalLink> to see the DataTable in action and learn how to
