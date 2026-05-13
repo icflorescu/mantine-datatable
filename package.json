@@ -25,7 +25,10 @@
     "ux",
     "user experience"
   ],
-  "repository": "icflorescu/mantine-datatable",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icflorescu/mantine-datatable.git"
+  },
   "homepage": "https://icflorescu.github.io/mantine-datatable/",
   "bugs": {
     "url": "https://github.com/icflorescu/mantine-datatable/issues"
