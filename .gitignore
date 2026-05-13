@@ -20,3 +20,7 @@ public/workbox-*.js.map
 
 # build output
 /dist/
+
+# claude code
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
