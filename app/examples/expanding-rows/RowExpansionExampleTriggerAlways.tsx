@@ -1,7 +1,7 @@
 'use client';
 
-import { Box, Group, Stack } from '@mantine/core';
 import { DataTable } from '__PACKAGE__';
+import { Box, Group, Stack } from '@mantine/core';
 import { companies } from '~/data';
 import classes from './RowExpansionExampleTriggerAlways.module.css';
 

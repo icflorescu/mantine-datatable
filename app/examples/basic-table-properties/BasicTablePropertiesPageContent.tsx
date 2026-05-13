@@ -1,7 +1,7 @@
 'use client';
 
-import { Code, Paper, Switch, type MantineSize } from '@mantine/core';
 import type { DataTableVerticalAlign } from '__PACKAGE__';
+import { Code, type MantineSize, Paper, Switch } from '@mantine/core';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import { CheckableSegmentedControl } from '~/components/CheckableSegmentedControl';

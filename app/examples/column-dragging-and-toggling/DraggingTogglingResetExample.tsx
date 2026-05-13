@@ -1,7 +1,7 @@
 'use client';
 
-import { IconColumnRemove, IconColumns3 } from '@tabler/icons-react';
 import { DataTable, useDataTableColumns } from '__PACKAGE__';
+import { IconColumnRemove, IconColumns3 } from '@tabler/icons-react';
 import { useContextMenu } from 'mantine-contextmenu';
 import { companies } from '~/data';
 

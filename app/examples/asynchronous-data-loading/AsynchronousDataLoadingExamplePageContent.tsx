@@ -1,6 +1,6 @@
 'use client';
 
-import { Paper, type MantineSize } from '@mantine/core';
+import { type MantineSize, Paper } from '@mantine/core';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import { CheckableSegmentedControl } from '~/components/CheckableSegmentedControl';

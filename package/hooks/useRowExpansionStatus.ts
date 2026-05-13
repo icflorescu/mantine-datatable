@@ -11,7 +11,6 @@ export function useRowExpansionStatus(open: boolean, transitionDuration?: number
   useEffect(() => {
     if (open) {
       hide.clear();
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(true);
       expand.start();
     } else {

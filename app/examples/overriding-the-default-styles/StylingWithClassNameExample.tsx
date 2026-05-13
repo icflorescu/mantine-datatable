@@ -1,7 +1,7 @@
 import { DataTable } from '__PACKAGE__';
-import classes from './StylingWithClassNameExample.module.css';
 // example-skip
 import companies from '~/data/companies.json';
+import classes from './StylingWithClassNameExample.module.css';
 
 const records = companies.slice(0, 5);
 // example-resume

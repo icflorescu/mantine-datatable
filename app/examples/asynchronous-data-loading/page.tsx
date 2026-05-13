@@ -26,7 +26,7 @@ export default async function AsynchronousDataLoadingExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>Customize the loader properties in the interactive example below:</Txt>
-      <AsynchronousDataLoadingExamplePageContent initialCode={code['default']} />
+      <AsynchronousDataLoadingExamplePageContent initialCode={code.default} />
       <Txt>
         Simply set a <Code>fetching: true</Code> property to the DataTable to indicate data loading state by overlaying
         a <ExternalLink to="https://mantine.dev/core/loader/">Loader</ExternalLink> over the DataTable rows.
@@ -55,7 +55,7 @@ export default async function AsynchronousDataLoadingExamplePage() {
         If your DataTable is not vertically scrollable and contains no initial data, make sure to set its{' '}
         <Code>minHeight</Code> to minimize the “content jump” and accommodate the <Code>Loader</Code> height.
       </Txt>
-      <CodeBlock code={code['default']} />
+      <CodeBlock code={code.default} />
       <PageSubtitle value="Using a custom loader component" />
       <Txt>
         If you’re not happy with standard Mantine{' '}

@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, Group, Stack, Switch } from '@mantine/core';
 import { DataTable, useDataTableColumns } from '__PACKAGE__';
+import { Button, Group, Stack, Switch } from '@mantine/core';
 import { useState } from 'react';
-import { companies, type Company } from '~/data';
+import { type Company, companies } from '~/data';
 
 export default function ResizingExample() {
   const key = 'resize-example';

@@ -1,3 +1,5 @@
+'use client';
+
 import { Anchor } from '@mantine/core';
 import { kebabCase } from 'lodash';
 import type { Route } from 'next';

@@ -1,8 +1,8 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import type { DefaultMantineColor, MantineLoader, MantineSize } from '@mantine/core';
 import { useInterval } from '@mantine/hooks';
-import { DataTable } from '__PACKAGE__';
 import { useEffect, useState } from 'react';
 import type { Company } from '~/data';
 import { getCompaniesAsync } from '~/data/async';

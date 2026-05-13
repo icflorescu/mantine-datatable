@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { Container, Text } from '@mantine/core';
 import { PRODUCT_NAME, WEBSITE_LINK } from '~/app/config';
 import classes from './TrustedBy.module.css';
@@ -170,11 +169,21 @@ export function TrustedBy() {
             >
               {themed ? (
                 <>
-                  <img className={classes.light} {...commonImageAttrs} src={`${ROOT_URL}${base}-light.${ext}`} />
-                  <img className={classes.dark} {...commonImageAttrs} src={`${ROOT_URL}${base}-dark.${ext}`} />
+                  <img
+                    alt={title}
+                    className={classes.light}
+                    {...commonImageAttrs}
+                    src={`${ROOT_URL}${base}-light.${ext}`}
+                  />
+                  <img
+                    alt={title}
+                    className={classes.dark}
+                    {...commonImageAttrs}
+                    src={`${ROOT_URL}${base}-dark.${ext}`}
+                  />
                 </>
               ) : (
-                <img {...commonImageAttrs} src={`${ROOT_URL}${base}.${ext}`} />
+                <img alt={title} {...commonImageAttrs} src={`${ROOT_URL}${base}.${ext}`} />
               )}
               {showText && (
                 <Text c="dimmed" size="md" className={classes.text}>

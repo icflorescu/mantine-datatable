@@ -1,8 +1,8 @@
 import type { DataTableSortStatus } from '__PACKAGE__';
 import dayjs, { type Dayjs } from 'dayjs';
 import { get, sortBy } from 'lodash';
-import { delay, type DelayOptions } from '~/lib/examples';
-import { companies, departments, employees, type Employee } from '.';
+import { type DelayOptions, delay } from '~/lib/examples';
+import { companies, departments, type Employee, employees } from '.';
 
 export async function getCompaniesAsync({
   count,

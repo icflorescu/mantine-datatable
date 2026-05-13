@@ -1,8 +1,8 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { Button, Center, Code, Stack, Text } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
-import { DataTable } from '__PACKAGE__';
 import { companies } from '~/data';
 
 export function HandlingCellDoubleClicksExample() {

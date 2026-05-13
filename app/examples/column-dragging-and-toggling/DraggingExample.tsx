@@ -1,8 +1,8 @@
 'use client';
 
-import { Button, Group, Stack } from '@mantine/core';
 import { DataTable, useDataTableColumns } from '__PACKAGE__';
-import { companies, type Company } from '~/data';
+import { Button, Group, Stack } from '@mantine/core';
+import { type Company, companies } from '~/data';
 
 export default function DraggingExample() {
   const key = 'draggable-example';

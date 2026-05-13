@@ -1,6 +1,6 @@
-import { Box, Center, Text, rgba } from '@mantine/core';
-import { IconChevronRight } from '@tabler/icons-react';
 import type { WithOptionalProperty, WithRequiredProperty } from '__PACKAGE__';
+import { Box, Center, rgba, Text } from '@mantine/core';
+import { IconChevronRight } from '@tabler/icons-react';
 import clsx from 'clsx';
 import type { Route } from 'next';
 import Link from 'next/link';

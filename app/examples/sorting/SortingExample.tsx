@@ -3,7 +3,7 @@
 import { DataTable, type DataTableSortStatus } from '__PACKAGE__';
 import sortBy from 'lodash/sortBy';
 import { useEffect, useState } from 'react';
-import { companies, type Company } from '~/data';
+import { type Company, companies } from '~/data';
 
 export default function SortingExample() {
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus<Company>>({
@@ -14,7 +14,6 @@ export default function SortingExample() {
 
   useEffect(() => {
     const data = sortBy(companies, sortStatus.columnAccessor) as Company[];
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 

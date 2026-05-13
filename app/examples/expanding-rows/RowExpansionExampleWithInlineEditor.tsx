@@ -1,10 +1,10 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { Box, Button, Grid, GridCol, Group, TextInput } from '@mantine/core';
 import { IconArrowBackUp, IconCheck } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
 import { useState } from 'react';
-import { companies as companyData, type Company } from '~/data';
+import { type Company, companies as companyData } from '~/data';
 import classes from './RowExpansionExampleWithInlineEditor.module.css';
 
 const initialRecords = companyData.slice(0, 5);

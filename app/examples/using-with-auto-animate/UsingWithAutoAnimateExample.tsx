@@ -1,11 +1,11 @@
 'use client';
 
-import { faker } from '@faker-js/faker';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { ActionIcon, Box, Button, Center, Paper } from '@mantine/core';
-import { IconArrowDown, IconArrowUp, IconArrowsUpDown, IconTrash, IconTrashX } from '@tabler/icons-react';
 import { DataTable } from '__PACKAGE__';
-import { useEffect, useState } from 'react';
+import { faker } from '@faker-js/faker';
+import autoAnimate from '@formkit/auto-animate';
+import { ActionIcon, Box, Button, Center, Paper } from '@mantine/core';
+import { IconArrowDown, IconArrowsUpDown, IconArrowUp, IconTrash, IconTrashX } from '@tabler/icons-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import classes from './UsingWithAutoAnimateExample.module.css';
 
 type User = {
@@ -24,7 +24,6 @@ export function UsingWithAutoAnimateExample() {
   const [records, setRecords] = useState<User[]>([]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(Array.from({ length: 6 }, createUser));
   }, []);
 
@@ -70,7 +69,17 @@ export function UsingWithAutoAnimateExample() {
 
   // example-start
   // ...
-  const [bodyRef] = useAutoAnimate<HTMLTableSectionElement>();
+  // React strict mode (Next.js dev) double-invokes ref callbacks on mount,
+  // which corrupts AutoAnimate's per-parent enabled state when using the
+  // official `useAutoAnimate` adapter. We sidestep it by calling `autoAnimate`
+  // directly, exactly once per real tbody mount. Production builds are unaffected.
+  const autoAnimateInitialized = useRef(false);
+  const bodyRef = useCallback((node: HTMLTableSectionElement | null) => {
+    if (node && !autoAnimateInitialized.current) {
+      autoAnimate(node);
+      autoAnimateInitialized.current = true;
+    }
+  }, []);
 
   return (
     <>

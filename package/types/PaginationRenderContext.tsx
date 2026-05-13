@@ -21,7 +21,7 @@ export type PaginationRenderContext = {
   };
   Controls: {
     Text: (props?: Partial<TextProps>) => JSX.Element;
-    PageSizeSelector: (props?: Partial<DataTablePageSizeSelectorProps>) => JSX.Element;
+    PageSizeSelector: (props?: Partial<DataTablePageSizeSelectorProps>) => JSX.Element | null;
     Pagination: (props?: Partial<PaginationProps>) => JSX.Element;
   };
 };

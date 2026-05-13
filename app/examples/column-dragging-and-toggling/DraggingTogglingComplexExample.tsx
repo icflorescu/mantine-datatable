@@ -1,11 +1,11 @@
 'use client';
 
+import { DataTable, type DataTableSortStatus, useDataTableColumns } from '__PACKAGE__';
 import { IconColumnRemove, IconColumns3 } from '@tabler/icons-react';
-import { DataTable, useDataTableColumns, type DataTableSortStatus } from '__PACKAGE__';
 import sortBy from 'lodash/sortBy';
 import { useContextMenu } from 'mantine-contextmenu';
 import { useEffect, useState } from 'react';
-import { companies, type Company } from '~/data';
+import { type Company, companies } from '~/data';
 
 export default function DraggingTogglingComplexExample() {
   const { showContextMenu } = useContextMenu();
@@ -19,7 +19,6 @@ export default function DraggingTogglingComplexExample() {
 
   useEffect(() => {
     const data = sortBy(companies, sortStatus.columnAccessor) as Company[];
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 

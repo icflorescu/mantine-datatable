@@ -1,21 +1,30 @@
 'use client';
 
-import { useState, type Dispatch, type PropsWithChildren, type SetStateAction } from 'react';
+import { type Dispatch, type PropsWithChildren, type SetStateAction, useState } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
-import type { DataTableColumnToggle } from './hooks';
+import type { DataTableColumnPinning, DataTableColumnToggle, PinnedColumnInfo } from './hooks';
 
 type DataTableColumnsProviderProps = PropsWithChildren<{
   columnsOrder: string[];
-  setColumnsOrder: Dispatch<SetStateAction<string[]>>;
+  setColumnsOrder: (order: string[]) => void;
   resetColumnsOrder: () => void;
 
   columnsToggle: DataTableColumnToggle[];
-  setColumnsToggle: Dispatch<SetStateAction<DataTableColumnToggle[]>>;
+  setColumnsToggle: (toggle: DataTableColumnToggle[]) => void;
   resetColumnsToggle: () => void;
+
+  columnsPinning: DataTableColumnPinning[];
+  setColumnsPinning: Dispatch<SetStateAction<DataTableColumnPinning[]>>;
+  resetColumnsPinning: () => void;
 
   setColumnWidth: (accessor: string, width: string | number) => void;
   setMultipleColumnWidths: (updates: Array<{ accessor: string; width: string | number }>) => void;
   resetColumnsWidth: () => void;
+
+  beginResize: () => void;
+  endResize: () => void;
+
+  pinnedMap: Map<string, PinnedColumnInfo>;
 }>;
 
 export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) => {
@@ -25,13 +34,21 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
     setColumnsOrder,
     columnsToggle,
     setColumnsToggle,
+    columnsPinning,
+    setColumnsPinning,
 
     resetColumnsOrder,
     resetColumnsToggle,
+    resetColumnsPinning,
 
     setColumnWidth,
     setMultipleColumnWidths,
     resetColumnsWidth,
+
+    beginResize,
+    endResize,
+
+    pinnedMap,
   } = props;
 
   const [sourceColumn, setSourceColumn] = useState('');
@@ -41,16 +58,19 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
     if (!columnsOrder || !setColumnsOrder || !sourceColumn || !targetColumn) {
       return;
     }
+
+    const sourceInfo = pinnedMap.get(sourceColumn);
+    const targetInfo = pinnedMap.get(targetColumn);
+    if (sourceInfo?.logicalSide !== targetInfo?.logicalSide) return;
+
     const sourceIndex = columnsOrder.indexOf(sourceColumn);
     const targetIndex = columnsOrder.indexOf(targetColumn);
 
     if (sourceIndex !== -1 && targetIndex !== -1) {
-      const removedColumn = columnsOrder.splice(sourceIndex, 1)[0];
-
-      columnsOrder.splice(targetIndex, 0, removedColumn);
-
-      // update the columns order
-      setColumnsOrder([...columnsOrder]);
+      const newOrder = [...columnsOrder];
+      const [removed] = newOrder.splice(sourceIndex, 1);
+      newOrder.splice(targetIndex, 0, removed);
+      setColumnsOrder(newOrder);
     }
   };
 
@@ -63,13 +83,19 @@ export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) =
         setTargetColumn,
         columnsToggle,
         setColumnsToggle,
+        columnsPinning,
+        setColumnsPinning,
         swapColumns,
         resetColumnsOrder,
         resetColumnsToggle,
+        resetColumnsPinning,
 
         setColumnWidth,
         setMultipleColumnWidths,
         resetColumnsWidth,
+
+        beginResize,
+        endResize,
       }}
     >
       {children}

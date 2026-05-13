@@ -1,17 +1,17 @@
 'use client';
 
-import { Box } from '@mantine/core';
-import { IconBuilding, IconChevronRight, IconUser, IconUsers } from '@tabler/icons-react';
 import type { DataTableSortStatus } from '__PACKAGE__';
 import { DataTable } from '__PACKAGE__';
+import { Box } from '@mantine/core';
+import { IconBuilding, IconChevronRight, IconUser, IconUsers } from '@tabler/icons-react';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import {
+  type CompanyWithEmployeeCount,
   useCompaniesAsync,
   useDepartmentsAsync,
   useEmployeesAsync,
-  type CompanyWithEmployeeCount,
 } from '~/data/nestedAsync';
 import classes from './NestedTablesAsyncSortingExample.module.css';
 

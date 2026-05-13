@@ -12,11 +12,7 @@ export function DisablingTextSelectionExample({ textSelectionDisabled }: { textS
       // example-skip
       withTableBorder
       withColumnBorders
-      columns={[
-        { accessor: 'name' },
-        { accessor: 'city' },
-        { accessor: 'state' }
-      ]}
+      columns={[{ accessor: 'name' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={records}
       // example-resume
     />

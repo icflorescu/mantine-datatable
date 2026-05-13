@@ -73,12 +73,13 @@ export function useDataTableInjectCssVariables({
   const stableScrollCallbacks = useStableValue(scrollCallbacks);
   const processScrollingRef = useRef<() => void>(() => void 0);
   const processLastRowBottomBorderRef = useRef<() => void>(() => void 0);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: stable refs only
   const onScroll = useCallback<OnScroll>((ev) => {
     stableScrollCallbacks.current.onScroll?.(ev);
     processScrollingRef.current();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: refs are stable
   useEffect(() => {
     return observe(
       header.current,
@@ -87,9 +88,9 @@ export function useDataTableInjectCssVariables({
       },
       () => setCssVar(root.current, VAR_HEADER_HEIGHT, '0')
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header.current]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: refs are stable
   useEffect(() => {
     return observe(
       footer.current,
@@ -98,9 +99,9 @@ export function useDataTableInjectCssVariables({
       },
       () => setCssVar(root.current, VAR_FOOTER_HEIGHT, '0')
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [footer.current]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: refs are stable
   useEffect(() => {
     return observe(
       selectionColumnHeader.current,
@@ -109,11 +110,10 @@ export function useDataTableInjectCssVariables({
       },
       () => setCssVar(root.current, VAR_SELECTION_COLUMN_WIDTH, '0')
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectionColumnHeader.current]);
 
   useIsomorphicLayoutEffect(() => {
-    if (typeof window === undefined) {
+    if (typeof window === 'undefined') {
       return;
     }
     const scrollPosition: Record<Pos, boolean> = {

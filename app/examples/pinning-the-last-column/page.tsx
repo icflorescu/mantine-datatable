@@ -40,7 +40,7 @@ export default async function PinLastColumnExamplePage() {
       </Txt>
       <PinLastColumnExample />
       <Txt>Here is the code:</Txt>
-      <CodeBlock code={code['default']} />
+      <CodeBlock code={code.default} />
       <PageSubtitle value="Using with column grouping" />
       <Txt warning title="Warning!">
         When using this feature with <InternalLink to="/examples/column-grouping">column grouping</InternalLink>, you

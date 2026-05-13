@@ -1,4 +1,5 @@
 import { useLocalStorage } from '@mantine/hooks';
+import { useEffect, useMemo } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
 
 export type DataTableColumnToggle = {
@@ -31,21 +32,45 @@ export function useDataTableColumnToggle<T>({
    */
   getInitialValueInEffect?: boolean;
 }) {
-  // Align toggle state with current columns definition
-  function alignColumnsToggle<T>(columnsToggle: DataTableColumnToggle[], columns: DataTableColumn<T>[]) {
-    const updatedColumnsToggle: DataTableColumnToggle[] = [];
+  // Default columns toggle state
+  const defaultColumnsToggle = useMemo(
+    () =>
+      columns?.map((column) => ({
+        accessor: column.accessor as string,
+        defaultToggle: column.defaultToggle || true,
+        toggleable: column.toggleable as boolean,
+        toggled: column.defaultToggle === undefined ? true : column.defaultToggle,
+      })) as DataTableColumnToggle[],
+    [columns]
+  );
 
-    // Keep existing toggle states for columns that still exist
+  const [storedColumnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
+    key: key ? `${key}-columns-toggle` : '',
+    defaultValue: key ? defaultColumnsToggle : undefined,
+    getInitialValueInEffect,
+  });
+
+  const columnsToggle = storedColumnsToggle ?? defaultColumnsToggle;
+
+  function setColumnsToggle(toggle: DataTableColumnToggle[]) {
+    if (key) {
+      _setColumnsToggle(toggle);
+    }
+  }
+
+  // Align stored toggle state with current column definitions: drop accessors
+  // that no longer exist, append accessors added since last persisted state.
+  const alignedColumnsToggle = useMemo(() => {
+    if (!columnsToggle) return defaultColumnsToggle;
+    const aligned: DataTableColumnToggle[] = [];
     columnsToggle.forEach((col) => {
       if (columns.find((c) => c.accessor === col.accessor)) {
-        updatedColumnsToggle.push(col);
+        aligned.push(col);
       }
     });
-
-    // Add toggle state for new columns
     columns.forEach((col) => {
-      if (!updatedColumnsToggle.find((c) => c.accessor === col.accessor)) {
-        updatedColumnsToggle.push({
+      if (!aligned.find((c) => c.accessor === col.accessor)) {
+        aligned.push({
           accessor: col.accessor as string,
           defaultToggle: col.defaultToggle || true,
           toggleable: col.toggleable as boolean,
@@ -53,53 +78,28 @@ export function useDataTableColumnToggle<T>({
         });
       }
     });
+    return aligned;
+  }, [columnsToggle, columns, defaultColumnsToggle]);
 
-    return updatedColumnsToggle as DataTableColumnToggle[];
-  }
-
-  // Default columns toggle state
-  const defaultColumnsToggle =
-    columns &&
-    columns.map((column) => ({
-      accessor: column.accessor,
-      defaultToggle: column.defaultToggle || true,
-      toggleable: column.toggleable,
-      toggled: column.defaultToggle === undefined ? true : column.defaultToggle,
-    }));
-
-  const [columnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
-    key: key ? `${key}-columns-toggle` : '',
-    defaultValue: key ? (defaultColumnsToggle as DataTableColumnToggle[]) : undefined,
-    getInitialValueInEffect,
-  });
-
-  function setColumnsToggle(
-    toggle: DataTableColumnToggle[] | ((prev: DataTableColumnToggle[]) => DataTableColumnToggle[])
-  ) {
-    if (key) {
-      _setColumnsToggle(toggle);
+  // Persist alignment in an effect — never set state during render
+  useEffect(() => {
+    if (!key) return;
+    if (!columnsToggle) return;
+    if (JSON.stringify(alignedColumnsToggle) !== JSON.stringify(columnsToggle)) {
+      _setColumnsToggle(alignedColumnsToggle);
     }
-  }
+  }, [key, alignedColumnsToggle, columnsToggle, _setColumnsToggle]);
 
   const resetColumnsToggle = () => {
-    setColumnsToggle(defaultColumnsToggle as DataTableColumnToggle[]);
+    setColumnsToggle(defaultColumnsToggle);
   };
 
-  // If no key is provided, return unmanaged state
   if (!key) {
     return {
-      columnsToggle: columnsToggle as DataTableColumnToggle[],
+      columnsToggle,
       setColumnsToggle,
       resetColumnsToggle,
     } as const;
-  }
-
-  // Align toggle state with current columns
-  const alignedColumnsToggle = alignColumnsToggle(columnsToggle, columns);
-  const prevColumnsToggle = JSON.stringify(columnsToggle);
-
-  if (JSON.stringify(alignedColumnsToggle) !== prevColumnsToggle) {
-    setColumnsToggle(alignedColumnsToggle);
   }
 
   return {

@@ -12,15 +12,14 @@ export default function PaginationExampleWithPageSizeSelector() {
   const [page, setPage] = useState(1);
   const [records, setRecords] = useState(employees.slice(0, pageSize));
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: reset page when pageSize changes
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPage(1);
   }, [pageSize]);
 
   useEffect(() => {
     const from = (page - 1) * pageSize;
     const to = from + pageSize;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(employees.slice(from, to));
   }, [page, pageSize]);
 

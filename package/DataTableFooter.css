@@ -1,5 +1,5 @@
 .mantine-datatable-footer {
-  z-index: 2;
+  z-index: calc(var(--mantine-datatable-pinned-column-z-index, 2) + 2);
   position: var(--mantine-datatable-footer-position);
   bottom: var(--mantine-datatable-footer-bottom);
   th {

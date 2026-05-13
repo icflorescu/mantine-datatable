@@ -1,7 +1,7 @@
 'use client';
 
-import { showNotification } from '@mantine/notifications';
 import { DataTable } from '__PACKAGE__';
+import { showNotification } from '@mantine/notifications';
 import { companies } from '~/data';
 
 const records = companies.slice(0, 5);

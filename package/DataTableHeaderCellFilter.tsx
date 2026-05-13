@@ -24,7 +24,8 @@ export function DataTableHeaderCellFilter<T>({
   if (filterPopoverDisableClickOutside) ref = undefined;
 
   return (
-    <Popover withArrow shadow="md" opened={isOpen} onClose={close} trapFocus {...filterPopoverProps}>
+    // Keep the expanded props before the open/close, or they could be overridden by the client
+    <Popover withArrow shadow="md" trapFocus {...filterPopoverProps} opened={isOpen} onClose={close} onDismiss={close}>
       <PopoverTarget>
         <ActionIcon
           className="mantine-datatable-header-cell-filter-action-icon"

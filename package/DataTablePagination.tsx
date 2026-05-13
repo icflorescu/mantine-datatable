@@ -1,7 +1,7 @@
-import { Box, Pagination, Text, rem, type MantineSpacing, type MantineStyleProp } from '@mantine/core';
+import { Box, type MantineSpacing, type MantineStyleProp, Pagination, rem, Text } from '@mantine/core';
 import clsx from 'clsx';
-import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import { getPaginationCssVariables } from './cssVariables';
+import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTablePaginationProps } from './types';
 import type { PaginationRenderContext } from './types/PaginationRenderContext';
@@ -91,9 +91,7 @@ export function DataTablePagination({
           onChange={onRecordsPerPageChange!}
           {...props}
         />
-      ) : (
-        <></>
-      ),
+      ) : null,
     Pagination: (props) => (
       <Pagination
         classNames={{

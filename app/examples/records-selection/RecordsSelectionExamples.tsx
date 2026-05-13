@@ -1,11 +1,11 @@
 'use client';
 
+import { DataTable, type DataTableColumn, differenceBy, uniqBy } from '__PACKAGE__';
 import { Box, Button, Center, Paper, Stack, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
-import { DataTable, differenceBy, uniqBy, type DataTableColumn } from '__PACKAGE__';
 import { useEffect, useState } from 'react';
-import { companies, employees, type Company, type Employee } from '~/data';
+import { type Company, companies, type Employee, employees } from '~/data';
 
 // example-start columns.ts
 const columns: DataTableColumn<Company>[] = [
@@ -151,7 +151,6 @@ export function SelectAllRecordsOnAllPagesExample() {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE;
     const currentRecords = employees.slice(from, to);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(currentRecords);
     if (allRecordsSelected) {
       setSelectedRecords(

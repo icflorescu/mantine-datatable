@@ -123,7 +123,7 @@ export default function ContributeAndSupportPage() {
             linting errors, and <Code>pnpm build</Code> to check that the code compiles.
             <br />
             Running <Code>pnpm format</Code> will automatically format your code with{' '}
-            <ExternalLink to="https://prettier.io/">Prettier</ExternalLink>, so that it adheres to the project’s coding
+            <ExternalLink to="https://biomejs.dev/">Biome</ExternalLink>, so that it adheres to the project’s coding
             style.
             <br />
             This is a <ExternalLink to="https://nextjs.org/">Next.js</ExternalLink> project with an{' '}
@@ -160,20 +160,17 @@ export default function ContributeAndSupportPage() {
       <PageSubtitle value="Other means of support" />
       <Txt>
         If you find this project useful, it would help a lot if you could:
-        <br />
-        🙏{' '}
+        <br />🙏{' '}
         <strong>
           <ExternalLink to={REPO_LINK}>star the repository</ExternalLink>
         </strong>
-        <br />
-        💕{' '}
+        <br />💕{' '}
         <ExternalLink
           to={`https://twitter.com/share?text=${TWITTER_TEXT}&url=${TWITTER_URL}&hashtags=${TWITTER_HASHTAGS}&via=icflorescu`}
         >
           spread the word
         </ExternalLink>
-        <br />
-        👍 <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>
+        <br />👍 <ExternalLink to="https://www.linkedin.com/in/icflorescu">endorse me on LinkedIn</ExternalLink>
         <br />
         or, better yet, <InternalLink to="/hire-the-author">hire my services</InternalLink>.
       </Txt>

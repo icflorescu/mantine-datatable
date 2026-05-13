@@ -1,14 +1,14 @@
 import {
   Checkbox,
+  type CheckboxProps,
   Group,
+  type MantineStyleProp,
   Popover,
   PopoverDropdown,
   PopoverTarget,
   Stack,
   TableThead,
   TableTr,
-  type CheckboxProps,
-  type MantineStyleProp,
 } from '@mantine/core';
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -16,7 +16,7 @@ import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCell } from './DataTableHeaderCell';
 import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
-import type { DataTableColumnToggle } from './hooks';
+import type { DataTableColumnToggle, PinnedColumnInfo } from './hooks';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
 import { getGroupsAtDepth, getMaxGroupDepth, humanize } from './utils';
 
@@ -30,6 +30,7 @@ type DataTableHeaderProps<T> = {
   columns: DataTableColumn<T>[];
   defaultColumnProps: Omit<DataTableColumn<T>, 'accessor'> | undefined;
   groups: readonly DataTableColumnGroup<T>[] | undefined;
+  pinnedMap: Map<string, PinnedColumnInfo>;
   selectionTrigger: DataTableSelectionTrigger;
   selectionVisible: boolean;
   selectionChecked: boolean;
@@ -43,6 +44,30 @@ type DataTableHeaderProps<T> = {
   ref: React.Ref<HTMLTableSectionElement>;
 };
 
+function getGroupPinnedInfo<T>(
+  group: DataTableColumnGroup<T>,
+  pinnedMap: Map<string, PinnedColumnInfo>
+): PinnedColumnInfo | undefined {
+  const leafColumns = group.columns ?? [];
+  const leafAccessors = leafColumns.filter((c) => !c.hidden).map((c) => String(c.accessor));
+
+  const pinnedInfos = leafAccessors.map((acc) => pinnedMap.get(acc)).filter(Boolean) as PinnedColumnInfo[];
+
+  if (pinnedInfos.length === 0 || pinnedInfos.length !== leafAccessors.length) return undefined;
+
+  const logicalSides = new Set(pinnedInfos.map((p) => p.logicalSide));
+  if (logicalSides.size > 1) return undefined;
+
+  const logicalSide = [...logicalSides][0];
+  const targetAcc = logicalSide === 'left' ? leafAccessors[0] : leafAccessors[leafAccessors.length - 1];
+  const info = pinnedMap.get(targetAcc);
+  if (!info) return undefined;
+
+  const boundaryAcc = logicalSide === 'left' ? leafAccessors[leafAccessors.length - 1] : leafAccessors[0];
+  const boundaryInfo = pinnedMap.get(boundaryAcc);
+  return { ...info, isBoundary: boundaryInfo?.isBoundary ?? false };
+}
+
 export function DataTableHeader<T>({
   selectionColumnHeaderRef,
   className,
@@ -53,6 +78,7 @@ export function DataTableHeader<T>({
   columns,
   defaultColumnProps,
   groups,
+  pinnedMap,
   selectionTrigger,
   selectionVisible,
   selectionChecked,
@@ -117,6 +143,7 @@ export function DataTableHeader<T>({
                   <DataTableColumnGroupHeaderCell
                     key={group.id}
                     group={group}
+                    pinnedInfo={getGroupPinnedInfo(group, pinnedMap)}
                     maxDepth={maxGroupDepth}
                     currentDepth={depthIndex}
                     previousGroups={groupsAtDepth.slice(0, index)}
@@ -145,6 +172,7 @@ export function DataTableHeader<T>({
             sortable,
             draggable,
             toggleable,
+            pinnable,
             resizable,
             titleClassName,
             titleStyle,
@@ -159,6 +187,7 @@ export function DataTableHeader<T>({
             <DataTableHeaderCell<T>
               key={accessor as React.Key}
               accessor={accessor}
+              pinnedInfo={pinnedMap.get(String(accessor))}
               className={titleClassName}
               style={titleStyle}
               visibleMediaQuery={visibleMediaQuery}
@@ -168,6 +197,7 @@ export function DataTableHeader<T>({
               sortable={sortable}
               draggable={draggable}
               toggleable={toggleable}
+              pinnable={pinnable}
               // we won't display the resize handle for the last column to avoid overflow render issues
               resizable={resizable && index < columns.length - 1}
               sortStatus={sortStatus}

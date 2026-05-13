@@ -1,12 +1,30 @@
 {
+  "eslint.enable": false,
+  "prettier.enable": false,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "source.organizeImports.biome": "explicit",
+    "source.removeUnusedImports": "explicit",
+    "source.fixAll.biome": "explicit"
   },
   "files.associations": {
     "*.css": "postcss"
   },
-  "editor.unicodeHighlight.ambiguousCharacters": false,
   "postcss.validate": false,
-  "cssVariables.lookupFiles": ["node_modules/@mantine/core/esm/index.css"]
+  "cssVariables.lookupFiles": ["node_modules/@mantine/core/esm/index.css"],
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  }
 }

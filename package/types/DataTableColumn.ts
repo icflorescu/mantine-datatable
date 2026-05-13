@@ -51,6 +51,19 @@ export type DataTableColumn<T = Record<string, unknown>> = {
   resizable?: boolean;
 
   /**
+   * If set, the column will be pinned to the specified side of the table.
+   * If `pinnable` is false or undefined, this is a static pin (not changeable by user).
+   * If `pinnable` is true, this is the initial pinning state (user can change it).
+   */
+  pinned?: 'left' | 'right';
+
+  /**
+   * If set to true, the column can be pinned/unpinned by the user via UI.
+   * When true, `pinned` acts as the initial pinning state.
+   */
+  pinnable?: boolean;
+
+  /**
    * If set to true, the column will be toggled by default.
    */
   defaultToggle?: boolean;

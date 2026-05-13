@@ -1,8 +1,8 @@
 'use client';
 
+import { DataTable, uniqBy } from '__PACKAGE__';
 import { Box, Group } from '@mantine/core';
 import { IconSum } from '@tabler/icons-react';
-import { DataTable, uniqBy } from '__PACKAGE__';
 import dayjs from 'dayjs';
 import { employees } from '~/data';
 

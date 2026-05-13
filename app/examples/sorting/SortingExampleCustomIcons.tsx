@@ -1,11 +1,11 @@
 'use client';
 
-import { IconChevronUp, IconSelector } from '@tabler/icons-react';
 import type { DataTableSortStatus } from '__PACKAGE__';
 import { DataTable } from '__PACKAGE__';
+import { IconChevronUp, IconSelector } from '@tabler/icons-react';
 import sortBy from 'lodash/sortBy';
 import { useEffect, useState } from 'react';
-import { companies, type Company } from '~/data';
+import { type Company, companies } from '~/data';
 
 export default function SortingExampleCustomIcons() {
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus<Company>>({
@@ -16,7 +16,6 @@ export default function SortingExampleCustomIcons() {
 
   useEffect(() => {
     const data = sortBy(companies, sortStatus.columnAccessor) as Company[];
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 

@@ -1,11 +1,11 @@
 import type { MantineTheme } from '@mantine/core';
-import { TableTr, type CheckboxProps, type MantineColor, type MantineStyleProp } from '@mantine/core';
+import { type CheckboxProps, type MantineColor, type MantineStyleProp, TableTr } from '@mantine/core';
 import clsx from 'clsx';
+import { getRowCssVariables } from './cssVariables';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
 import { DataTableRowSelectorCell } from './DataTableRowSelectorCell';
-import { getRowCssVariables } from './cssVariables';
-import type { useRowExpansion } from './hooks';
+import type { PinnedColumnInfo, useRowExpansion } from './hooks';
 import type {
   DataTableCellClickHandler,
   DataTableColumn,
@@ -21,6 +21,7 @@ type DataTableRowProps<T> = {
   index: number;
   columns: DataTableColumn<T>[];
   defaultColumnProps: DataTableDefaultColumnProps<T> | undefined;
+  pinnedMap: Map<string, PinnedColumnInfo>;
   defaultColumnRender:
     | ((record: T, index: number, accessor: keyof T | (string & NonNullable<unknown>)) => React.ReactNode)
     | undefined;
@@ -58,6 +59,7 @@ export function DataTableRow<T>({
   index,
   columns,
   defaultColumnProps,
+  pinnedMap,
   defaultColumnRender,
   selectionTrigger,
   selectionVisible,
@@ -120,6 +122,7 @@ export function DataTableRow<T>({
         return (
           <DataTableRowCell<T>
             key={accessor as React.Key}
+            pinnedInfo={pinnedMap.get(String(accessor))}
             className={typeof cellsClassName === 'function' ? cellsClassName(record, index) : cellsClassName}
             style={cellsStyle?.(record, index)}
             visibleMediaQuery={visibleMediaQuery}
@@ -239,7 +242,7 @@ export function getRowProps<T>({
       typeof className === 'function' ? className(record, index) : className
     ),
 
-    ['data-selected']: selectionChecked || undefined,
+    'data-selected': selectionChecked || undefined,
 
     onClick: (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
       if (expansion) {

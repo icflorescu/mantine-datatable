@@ -1,8 +1,8 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { Box } from '@mantine/core';
 import { IconBuilding, IconChevronRight, IconUser, IconUsers } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -46,6 +46,7 @@ export function NestedTablesExample() {
           <DataTable
             noHeader
             withColumnBorders
+            minHeight={100}
             columns={[
               {
                 accessor: 'name',

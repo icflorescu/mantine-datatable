@@ -1,10 +1,10 @@
 'use client';
 
+import { DataTable } from '__PACKAGE__';
 import { ActionIcon, Box, Button, Grid, GridCol, Group, Stack, Text } from '@mantine/core';
 import { closeModal, openModal } from '@mantine/modals';
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-react';
-import { DataTable } from '__PACKAGE__';
-import { companies, type Company } from '~/data';
+import { type Company, companies } from '~/data';
 
 const records = companies.slice(0, 5);
 
@@ -26,7 +26,7 @@ const showModal = ({ company, action }: { company: Company; action: 'view' | 'ed
               ? 'Here’s where you could put an edit form...'
               : 'Here’s where you could ask for confirmation before deleting...'}
         </Text>
-        <Grid gutter="xs">
+        <Grid gap="xs">
           <GridCol span={2}>ID</GridCol>
           <GridCol span={10}>{company.id}</GridCol>
           <GridCol span={2}>Name</GridCol>

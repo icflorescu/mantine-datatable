@@ -1,5 +1,5 @@
-import { Center, Flex, Text } from '@mantine/core';
 import type { WithRequiredProperty } from '__PACKAGE__';
+import { Center, Flex, Text } from '@mantine/core';
 import classes from './Feature.module.css';
 
 export type FeatureProps = WithRequiredProperty<

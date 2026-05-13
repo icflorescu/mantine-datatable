@@ -1,7 +1,7 @@
 'use client';
 
-import { rgba } from '@mantine/core';
 import { DataTable, uniqBy } from '__PACKAGE__';
+import { rgba } from '@mantine/core';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { employees } from '~/data';

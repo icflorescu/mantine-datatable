@@ -1,5 +1,5 @@
 import type { MantineColor } from '@mantine/core';
-import { Button, Group, Menu, MenuDropdown, MenuItem, MenuTarget, Text, rem, type MantineSize } from '@mantine/core';
+import { Button, Group, type MantineSize, Menu, MenuDropdown, MenuItem, MenuTarget, rem, Text } from '@mantine/core';
 import clsx from 'clsx';
 import { getPaginationCssVariables } from './cssVariables';
 import { IconSelector } from './icons/IconSelector';

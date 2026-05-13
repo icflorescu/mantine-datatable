@@ -1,0 +1,60 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+  "files": {
+    "includes": ["**", "!**/.next", "!**/dist", "!**/out", "!**/public", "!**/next-env.d.ts", "!**/*.css"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "trailingCommas": "es5",
+      "quoteProperties": "asNeeded",
+      "semicolons": "always",
+      "arrowParentheses": "always"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noConsole": "error",
+        "noArrayIndexKey": "off"
+      },
+      "style": {
+        "useImportType": "error",
+        "noNonNullAssertion": "off"
+      },
+      "complexity": {
+        "noUselessRename": "error"
+      },
+      "performance": {
+        "noImgElement": "off"
+      },
+      "a11y": {
+        "noStaticElementInteractions": "off",
+        "useKeyWithClickEvents": "off",
+        "noSvgWithoutTitle": "off",
+        "useValidAnchor": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["app/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noSuspiciousSemicolonInJsx": "off"
+          }
+        }
+      }
+    }
+  ]
+}

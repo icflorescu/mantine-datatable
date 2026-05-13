@@ -1,4 +1,4 @@
-import { Checkbox, Code, SegmentedControl, Text, rem } from '@mantine/core';
+import { Checkbox, Code, rem, SegmentedControl, Text } from '@mantine/core';
 import { useId } from '@mantine/hooks';
 import clsx from 'clsx';
 import classes from './CheckableSegmentedControl.module.css';

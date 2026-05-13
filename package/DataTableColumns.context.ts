@@ -1,6 +1,6 @@
 import { createSafeContext } from '@mantine/core';
 import type { Dispatch, SetStateAction } from 'react';
-import type { DataTableColumnToggle } from './hooks';
+import type { DataTableColumnPinning, DataTableColumnToggle } from './hooks';
 
 interface DataTableColumnsContext {
   // accessor of the column which is currently dragged
@@ -18,12 +18,20 @@ interface DataTableColumnsContext {
   resetColumnsOrder: () => void;
 
   columnsToggle: DataTableColumnToggle[];
-  setColumnsToggle: Dispatch<SetStateAction<DataTableColumnToggle[]>>;
+  setColumnsToggle: (toggle: DataTableColumnToggle[]) => void;
   resetColumnsToggle: () => void;
+
+  columnsPinning: DataTableColumnPinning[];
+  setColumnsPinning: Dispatch<SetStateAction<DataTableColumnPinning[]>>;
+  resetColumnsPinning: () => void;
 
   setColumnWidth: (accessor: string, width: string | number) => void;
   setMultipleColumnWidths: (updates: Array<{ accessor: string; width: string | number }>) => void;
   resetColumnsWidth: () => void;
+
+  // Drag lifecycle: snapshot DOM widths, lock the table, then persist on release
+  beginResize: () => void;
+  endResize: () => void;
 }
 
 export const [DataTableColumnsContextProvider, useDataTableColumnsContext] = createSafeContext<DataTableColumnsContext>(

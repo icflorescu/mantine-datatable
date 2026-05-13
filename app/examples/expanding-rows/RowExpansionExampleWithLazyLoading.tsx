@@ -1,7 +1,7 @@
 'use client';
 
-import { Box, Center, Group, LoadingOverlay, Stack } from '@mantine/core';
 import { DataTable } from '__PACKAGE__';
+import { Box, Center, Group, LoadingOverlay, Stack } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { companies } from '~/data';
 import { countCompanyDepartmentsAsync, countCompanyEmployeesAsync } from '~/data/async';

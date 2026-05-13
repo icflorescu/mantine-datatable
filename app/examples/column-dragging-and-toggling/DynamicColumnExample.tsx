@@ -1,10 +1,10 @@
 'use client';
 
-import { Button, Group, Stack, Text } from '@mantine/core';
-import { IconBuildingCommunity, IconBuildingSkyscraper, IconMap, IconRoadSign } from '@tabler/icons-react';
 import type { DataTableColumn } from '__PACKAGE__';
 import { DataTable, useDataTableColumns } from '__PACKAGE__';
-import { useState } from 'react';
+import { Button, Group, Stack, Text } from '@mantine/core';
+import { IconBuildingCommunity, IconBuildingSkyscraper, IconMap, IconRoadSign } from '@tabler/icons-react';
+import { useRef, useState } from 'react';
 import { companies } from '~/data';
 
 export default function DynamicColumnExample() {
@@ -62,13 +62,31 @@ export default function DynamicColumnExample() {
     },
   ]);
 
-  const { effectiveColumns, resetColumnsToggle } = useDataTableColumns({
+  const initialColumns = useRef(columns);
+
+  const { effectiveColumns, resetColumnsToggle, columnsToggle, setColumnsToggle } = useDataTableColumns({
     key,
     columns,
   });
 
-  // add or remove the whole record with missionStatement accessor
+  function resetAll() {
+    setColumns(initialColumns.current);
+    resetColumnsToggle();
+  }
+
+  // Show / hide the Mission Statement column. If it's currently hidden via the
+  // header X (but still in `columns`), un-hide it; otherwise add or remove the
+  // column definition itself.
   function toggleColumnMissionStatement() {
+    const inColumns = columns.some((col) => col.accessor === 'missionStatement');
+    const hiddenByToggle =
+      inColumns && columnsToggle?.find((t) => t.accessor === 'missionStatement')?.toggled === false;
+
+    if (hiddenByToggle) {
+      setColumnsToggle(columnsToggle.map((t) => (t.accessor === 'missionStatement' ? { ...t, toggled: true } : t)));
+      return;
+    }
+
     const newColumns = columns.filter((col) => col.accessor !== 'missionStatement');
     if (columns.length === newColumns.length) {
       newColumns.push({
@@ -102,7 +120,7 @@ export default function DynamicColumnExample() {
         columns={effectiveColumns}
       />
       <Group justify="right">
-        <Button onClick={resetColumnsToggle}>Reset toggled columns</Button>
+        <Button onClick={resetAll}>Reset toggled columns</Button>
       </Group>
     </Stack>
   );

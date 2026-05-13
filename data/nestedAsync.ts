@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { delay, useIsMounted } from '~/lib/examples';
 import type { DataTableSortStatus } from '~/package';
 import {
-  companies as companyData,
-  departments as departmentData,
-  employees,
   type Company,
+  companies as companyData,
   type Department,
+  departments as departmentData,
   type Employee,
+  employees,
 } from '.';
 
 export type DepartmentWithEmployeeCount = Department & { employees: number };
