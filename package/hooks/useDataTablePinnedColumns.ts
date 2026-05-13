@@ -123,7 +123,22 @@ export function useDataTablePinnedColumns<T>({
       rightOffset += widths.get(acc) || 0;
     });
 
-    setPinnedMap(newMap);
+    setPinnedMap((prev) => {
+      if (prev.size !== newMap.size) return newMap;
+      for (const [k, v] of newMap) {
+        const pv = prev.get(k);
+        if (
+          !pv ||
+          pv.position !== v.position ||
+          pv.logicalSide !== v.logicalSide ||
+          pv.offset !== v.offset ||
+          pv.isBoundary !== v.isBoundary
+        ) {
+          return newMap;
+        }
+      }
+      return prev;
+    });
   }, [columns, selectionVisible, theadRef, tbodyRef, selectionColumnHeaderRef, pinFirstColumn, pinLastColumn]);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { useLocalStorage } from '@mantine/hooks';
+import { useEffect, useMemo } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
 
 export type DataTableColumnPinning = {
@@ -31,48 +32,25 @@ export function useDataTableColumnPinning<T>({
    */
   getInitialValueInEffect?: boolean;
 }) {
-  // Align pinning state with current columns definition
-  function alignColumnsPinning<T>(
-    columnsPinning: DataTableColumnPinning[],
-    columns: DataTableColumn<T>[]
-  ): DataTableColumnPinning[] {
-    const updated: DataTableColumnPinning[] = [];
-
-    // Keep existing pinning states for columns that still exist
-    columnsPinning.forEach((col) => {
-      if (columns.find((c) => c.accessor === col.accessor)) {
-        updated.push(col);
-      }
-    });
-
-    // Add pinning state for new columns
-    columns.forEach((col) => {
-      if (!updated.find((c) => c.accessor === col.accessor)) {
-        updated.push({
-          accessor: col.accessor as string,
-          defaultPinned: col.pinned,
-          pinnable: !!col.pinnable,
-          pinned: col.pinned,
-        });
-      }
-    });
-
-    return updated;
-  }
-
   // Default columns pinning state
-  const defaultColumnsPinning = columns.map((column) => ({
-    accessor: column.accessor as string,
-    defaultPinned: column.pinned,
-    pinnable: !!column.pinnable,
-    pinned: column.pinned,
-  }));
+  const defaultColumnsPinning = useMemo(
+    () =>
+      columns.map((column) => ({
+        accessor: column.accessor as string,
+        defaultPinned: column.pinned,
+        pinnable: !!column.pinnable,
+        pinned: column.pinned,
+      })),
+    [columns]
+  );
 
-  const [columnsPinning, _setColumnsPinning] = useLocalStorage<DataTableColumnPinning[]>({
+  const [storedColumnsPinning, _setColumnsPinning] = useLocalStorage<DataTableColumnPinning[]>({
     key: key ? `${key}-columns-pinning` : '',
     defaultValue: key ? defaultColumnsPinning : undefined,
     getInitialValueInEffect,
   });
+
+  const columnsPinning = storedColumnsPinning ?? defaultColumnsPinning;
 
   function setColumnsPinning(
     pinning: DataTableColumnPinning[] | ((prev: DataTableColumnPinning[]) => DataTableColumnPinning[])
@@ -85,26 +63,48 @@ export function useDataTableColumnPinning<T>({
     }
   }
 
+  // Align stored pinning state with current column definitions: drop accessors
+  // that no longer exist, append accessors added since last persisted state.
+  const alignedColumnsPinning = useMemo(() => {
+    if (!columnsPinning) return defaultColumnsPinning;
+    const aligned: DataTableColumnPinning[] = [];
+    columnsPinning.forEach((col) => {
+      if (columns.find((c) => c.accessor === col.accessor)) {
+        aligned.push(col);
+      }
+    });
+    columns.forEach((col) => {
+      if (!aligned.find((c) => c.accessor === col.accessor)) {
+        aligned.push({
+          accessor: col.accessor as string,
+          defaultPinned: col.pinned,
+          pinnable: !!col.pinnable,
+          pinned: col.pinned,
+        });
+      }
+    });
+    return aligned;
+  }, [columnsPinning, columns, defaultColumnsPinning]);
+
+  // Persist alignment in an effect — never set state during render
+  useEffect(() => {
+    if (!key) return;
+    if (!columnsPinning) return;
+    if (JSON.stringify(alignedColumnsPinning) !== JSON.stringify(columnsPinning)) {
+      _setColumnsPinning(alignedColumnsPinning);
+    }
+  }, [key, alignedColumnsPinning, columnsPinning, _setColumnsPinning]);
+
   const resetColumnsPinning = () => {
     setColumnsPinning(defaultColumnsPinning);
   };
 
-  // If no key is provided, return default state (no persistence)
   if (!key) {
     return {
       columnsPinning: defaultColumnsPinning,
       setColumnsPinning,
       resetColumnsPinning,
     } as const;
-  }
-
-  // Align pinning state with current columns
-  // columnsPinning may be undefined on first render with getInitialValueInEffect
-  const alignedColumnsPinning = alignColumnsPinning(columnsPinning ?? [], columns);
-  const prevColumnsPinning = JSON.stringify(columnsPinning ?? []);
-
-  if (JSON.stringify(alignedColumnsPinning) !== prevColumnsPinning) {
-    setColumnsPinning(alignedColumnsPinning);
   }
 
   return {
