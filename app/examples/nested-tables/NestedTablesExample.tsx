@@ -46,6 +46,7 @@ export function NestedTablesExample() {
           <DataTable
             noHeader
             withColumnBorders
+            minHeight={100}
             columns={[
               {
                 accessor: 'name',
