@@ -3,6 +3,15 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.2.0 (2026-05-13)
+
+- Migrate to Mantine v9 and Next.js 16, thanks to [pfo-omicsstudio](https://github.com/pfo-omicsstudio) for [PR #804](https://github.com/icflorescu/mantine-datatable/pull/804)
+- Implement arbitrary column pinning, thanks to [DavidTanner](https://github.com/DavidTanner) for [PR #794](https://github.com/icflorescu/mantine-datatable/pull/794)
+- Fix [#789](https://github.com/icflorescu/mantine-datatable/issues/789) - rewrite column resize to honor declarative widths, thanks to [Giovambattista Fazioli](https://github.com/gfazioli) for [PR #803](https://github.com/icflorescu/mantine-datatable/pull/803)
+- Implement `onDismiss` handler to handle Escape button click in filters, thanks to [DavidTanner](https://github.com/DavidTanner) for [PR #796](https://github.com/icflorescu/mantine-datatable/pull/796)
+- Switch linting & formatting to Biome
+- Update to TypeScript 6
+
 ## 8.3.13 (2026-01-20)
 
 - Update deps to ensure compatibility with Mantine 8.3.13
