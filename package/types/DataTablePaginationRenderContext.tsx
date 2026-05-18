@@ -2,7 +2,7 @@ import type { MantineSize, PaginationProps, TextProps } from '@mantine/core';
 import type { JSX } from 'react';
 import type { DataTablePageSizeSelectorProps } from './DataTablePageSizeSelectorProps';
 
-export type PaginationRenderContext = {
+export type DataTablePaginationRenderContext = {
   state: {
     paginationSize: MantineSize;
     page: number;

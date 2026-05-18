@@ -3,6 +3,14 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.2.1 (2026-05-18)
+
+- Use fixed deps in dev dependencies
+- Update deps to ensure compatibility with Mantine 9.2.1
+- Increase scoll area elements z-index (fixes issues like [#808](https://github.com/icflorescu/mantine-datatable/issues/808))
+- Fix issue [#790](https://github.com/icflorescu/mantine-datatable/issues/790)
+- Export type definition for `DataTablePaginationRenderContext` (feature request [#772](https://github.com/icflorescu/mantine-datatable/issues/772))
+
 ## 9.2.0 (2026-05-13)
 
 - Migrate to Mantine v9 and Next.js 16, thanks to [pfo-omicsstudio](https://github.com/pfo-omicsstudio) for [PR #804](https://github.com/icflorescu/mantine-datatable/pull/804)

@@ -4,7 +4,7 @@ import { getPaginationCssVariables } from './cssVariables';
 import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTablePaginationProps } from './types';
-import type { PaginationRenderContext } from './types/PaginationRenderContext';
+import type { DataTablePaginationRenderContext } from './types/DataTablePaginationRenderContext';
 import type { WithOptionalProperty, WithRequiredProperty } from './types/utils';
 
 type DataTablePaginationComponentProps = WithOptionalProperty<
@@ -73,7 +73,7 @@ export function DataTablePagination({
 
   const isWrapped = !isAbovePaginationWrapBreakpoint;
 
-  const Controls: PaginationRenderContext['Controls'] = {
+  const Controls: DataTablePaginationRenderContext['Controls'] = {
     Text: (props) => (
       <Text component="div" className="mantine-datatable-pagination-text" size={paginationSize} {...props}>
         {paginationTextValue}
@@ -123,7 +123,7 @@ export function DataTablePagination({
     ),
   };
 
-  const ctx: PaginationRenderContext = {
+  const ctx: DataTablePaginationRenderContext = {
     state: {
       paginationSize,
       page,
