@@ -9,7 +9,7 @@
   color: var(--mantine-datatable-row-color, inherit);
   background: var(--mantine-datatable-row-background-color, inherit);
 
-  &[data-with-row-border]:not(:last-of-type) td {
+  .mantine-datatable &[data-with-row-border]:not(:last-of-type) td {
     border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
   }
 

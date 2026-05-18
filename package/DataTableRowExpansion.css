@@ -6,6 +6,9 @@
   tr:not(:last-of-type) & {
     border-bottom: rem(1px) solid var(--mantine-datatable-row-border-color);
   }
+  tr:last-of-type & {
+    border-bottom: 0;
+  }
   border-top: rem(1px) solid var(--mantine-datatable-row-border-color);
   [data-with-row-border] & {
     border-top: 0;

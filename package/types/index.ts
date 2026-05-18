@@ -7,6 +7,7 @@ export * from './DataTableDraggableRowProps';
 export * from './DataTableEmptyStateProps';
 export * from './DataTableOuterBorderProps';
 export * from './DataTablePaginationProps';
+export * from './DataTablePaginationRenderContext';
 export * from './DataTableProps';
 export * from './DataTableRowClickHandler';
 export * from './DataTableRowExpansionCollapseProps';

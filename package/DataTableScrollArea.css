@@ -7,10 +7,11 @@
 }
 
 .mantine-datatable-scroll-area-thumb {
-  z-index: 3;
+  z-index: 5;
 }
 
 .mantine-datatable-scroll-area-scrollbar {
+  z-index: 5;
   &[data-state='visible'] {
     background: transparent;
   }
@@ -26,7 +27,7 @@
 }
 
 .mantine-datatable-scroll-area-top-shadow {
-  z-index: 2;
+  z-index: 5;
   left: 0;
   right: 0;
   height: calc(var(--mantine-spacing-xs) / 2);
@@ -36,7 +37,7 @@
 }
 
 .mantine-datatable-scroll-area-left-shadow {
-  z-index: 3;
+  z-index: 5;
   top: 0;
   left: 0;
   bottom: 0;
@@ -53,7 +54,7 @@
 }
 
 .mantine-datatable-scroll-area-right-shadow {
-  z-index: 3;
+  z-index: 5;
   top: 0;
   bottom: 0;
   right: 0;
@@ -75,7 +76,7 @@
 }
 
 .mantine-datatable-scroll-area-bottom-shadow {
-  z-index: 2;
+  z-index: 5;
   left: 0;
   right: 0;
   height: calc(var(--mantine-spacing-xs) / 2);
