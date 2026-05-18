@@ -3,6 +3,10 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.2.2 (2026-05-18)
+
+- Fix issue [#743](https://github.com/icflorescu/mantine-datatable/issues/743) - abnormal vertical scroll bar When using both footer and selection at the same time
+
 ## 9.2.1 (2026-05-18)
 
 - Use fixed deps in dev dependencies
