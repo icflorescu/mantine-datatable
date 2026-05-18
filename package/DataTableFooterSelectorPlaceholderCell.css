@@ -13,7 +13,7 @@
     position: absolute;
     top: 0;
     right: calc(-1 * var(--mantine-spacing-xs));
-    bottom: rem(-1px);
+    bottom: 0;
     border-left: 1px solid var(--mantine-datatable-row-border-color);
     width: var(--mantine-spacing-xs);
     background: var(--mantine-datatable-shadow-background-left);
