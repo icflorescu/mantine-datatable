@@ -1,6 +1,7 @@
 import { useLocalStorage } from '@mantine/hooks';
 import { type RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
+import { sanitizeStoredArray } from '../utils';
 
 type DataTableColumnWidth = Record<string, string | number>;
 
@@ -54,14 +55,22 @@ export function useDataTableColumnResize<T>({
   // Honor caller's `getInitialValueInEffect`: when false the read is synchronous
   // and we can seed `effectiveColumnsWidth` directly; when true the value lands
   // after mount and the hydration effect below picks it up.
-  const [storedColumnsWidth, setStoredColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
+  const [rawStoredColumnsWidth, setStoredColumnsWidth] = useLocalStorage<DataTableColumnWidth[]>({
     key: key ? `${key}-columns-width` : '',
     defaultValue: key ? getDefaultColumnsWidth() : undefined,
     getInitialValueInEffect,
   });
 
+  // Guard against malformed persisted state (e.g. a non-array value propagated
+  // across tabs via the `storage` event) before any `.map()` / `.filter()` call.
+  const storedColumnsWidth = sanitizeStoredArray<DataTableColumnWidth>(
+    rawStoredColumnsWidth,
+    [],
+    (item) => typeof item === 'object' && item !== null
+  );
+
   const [effectiveColumnsWidth, setEffectiveColumnsWidth] = useState<DataTableColumnWidth[]>(() => {
-    if (key && storedColumnsWidth && storedColumnsWidth.length > 0) {
+    if (key && storedColumnsWidth.length > 0) {
       return storedColumnsWidth;
     }
     return getDefaultColumnsWidth();

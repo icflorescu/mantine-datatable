@@ -14,6 +14,35 @@ export function humanize(value: string) {
 }
 
 /**
+ * Sanitizes a value read from `localStorage` before the column hooks call array
+ * methods on it.
+ *
+ * Persisted column state is synchronized across browser tabs through the native
+ * `storage` event (e.g. when a tab is duplicated). A malformed or unexpected
+ * value — written by another tab, by a different DataTable instance sharing the
+ * same `storeColumnsKey`, or by manual tampering — is delivered verbatim to
+ * every listening table. Without this guard such a value flows straight into
+ * `.map()` / `.forEach()` and crashes the app with
+ * `TypeError: <x>.map is not a function`.
+ *
+ * Returns `value` when it is an array whose items all pass the optional
+ * `isValidItem` predicate; otherwise returns `fallback`.
+ */
+export function sanitizeStoredArray<T>(value: unknown, fallback: T[], isValidItem?: (item: unknown) => boolean): T[] {
+  if (!Array.isArray(value)) return fallback;
+  if (isValidItem && !value.every(isValidItem)) return fallback;
+  return value as T[];
+}
+
+/**
+ * Predicate matching the `{ accessor: string, ... }` shape persisted for column
+ * toggle and pinning state.
+ */
+export function hasStringAccessor(item: unknown): boolean {
+  return typeof item === 'object' && item !== null && typeof (item as { accessor?: unknown }).accessor === 'string';
+}
+
+/**
  * Utility function that returns an array of values that are present in the first array but not in the second
  */
 export function differenceBy<T>(arr1: T[], arr2: T[], iteratee: (value: T) => unknown) {

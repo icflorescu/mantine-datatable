@@ -1,6 +1,7 @@
 import { useLocalStorage } from '@mantine/hooks';
 import { useEffect, useMemo } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
+import { sanitizeStoredArray } from '../utils';
 
 /**
  * Hook to handle column reordering with localStorage persistence.
@@ -37,7 +38,13 @@ export function useDataTableColumnReorder<T>({
     getInitialValueInEffect,
   });
 
-  const columnsOrder = storedColumnsOrder ?? (defaultColumnsOrder as string[]);
+  // Guard against malformed persisted state (e.g. a non-array value propagated
+  // across tabs via the `storage` event) before any `.map()` / `.forEach()` call.
+  const columnsOrder = sanitizeStoredArray<string>(
+    storedColumnsOrder,
+    defaultColumnsOrder as string[],
+    (item) => typeof item === 'string'
+  );
 
   function setColumnsOrder(order: string[]) {
     if (key) {
