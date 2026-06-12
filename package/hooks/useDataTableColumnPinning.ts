@@ -1,6 +1,7 @@
 import { useLocalStorage } from '@mantine/hooks';
 import { useEffect, useMemo } from 'react';
 import type { DataTableColumn } from '../types/DataTableColumn';
+import { hasStringAccessor, sanitizeStoredArray } from '../utils';
 
 export type DataTableColumnPinning = {
   accessor: string;
@@ -50,7 +51,13 @@ export function useDataTableColumnPinning<T>({
     getInitialValueInEffect,
   });
 
-  const columnsPinning = storedColumnsPinning ?? defaultColumnsPinning;
+  // Guard against malformed persisted state (e.g. a non-array value propagated
+  // across tabs via the `storage` event) before any `.map()` / `.forEach()` call.
+  const columnsPinning = sanitizeStoredArray<DataTableColumnPinning>(
+    storedColumnsPinning,
+    defaultColumnsPinning,
+    hasStringAccessor
+  );
 
   function setColumnsPinning(
     pinning: DataTableColumnPinning[] | ((prev: DataTableColumnPinning[]) => DataTableColumnPinning[])
