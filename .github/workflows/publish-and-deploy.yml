@@ -90,7 +90,7 @@ jobs:
         run: npm install -g npm@latest
 
       # Stages the release via OIDC; a maintainer must approve it with 2FA
-      # (`npm stage approve mantine-contextmenu@<version>`) before it goes public.
+      # (`npm stage approve mantine-datatable@<version>`) before it goes public.
       - name: Stage npm release (OIDC, provenance enabled automatically)
         run: npm stage publish --access public
 
