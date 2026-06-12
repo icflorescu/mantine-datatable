@@ -7,6 +7,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 - Fix issue [#818](https://github.com/icflorescu/mantine-datatable/issues/818) - DataTable crashes when invalid persisted column state is received via localStorage/storage events, thanks to [Sheharyar Khalid](https://github.com/main03) for raising and fixing
 - Update dev deps and ensure compatibility with Mantine 9.3
+- Harden npm publishing workflow security
 
 ## 9.2.2 (2026-05-18)
 
