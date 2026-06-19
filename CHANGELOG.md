@@ -3,6 +3,13 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.3.1 (2026-06-19)
+
+- Update dev deps to ensure compatibility with Mantine 9.3.1
+- Update GitHub workflow action and Node.js versions
+- Update Biome version and config
+- Target dependabot PRs against the `next` branch
+
 ## 9.3.0 (2026-06-12)
 
 - Fix issue [#818](https://github.com/icflorescu/mantine-datatable/issues/818) - DataTable crashes when invalid persisted column state is received via localStorage/storage events, thanks to [Sheharyar Khalid](https://github.com/main03) for raising and fixing
