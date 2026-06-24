@@ -1,5 +1,5 @@
-import type { MantineTheme } from '@mantine/core';
-import { type CheckboxProps, type MantineColor, type MantineStyleProp, TableTr } from '@mantine/core';
+import type { MantineStyleProp, MantineTheme } from '@mantine/core';
+import { type CheckboxProps, type MantineColor, TableTr } from '@mantine/core';
 import clsx from 'clsx';
 import { getRowCssVariables } from './cssVariables';
 import { DataTableRowCell } from './DataTableRowCell';
@@ -15,6 +15,7 @@ import type {
   DataTableSelectionTrigger,
 } from './types';
 import { CONTEXT_MENU_CURSOR, POINTER_CURSOR } from './utilityClasses';
+import { getValueAtPath } from './utils';
 
 type DataTableRowProps<T> = {
   record: T;
@@ -52,6 +53,26 @@ type DataTableRowProps<T> = {
   selectionColumnClassName: string | undefined;
   selectionColumnStyle: MantineStyleProp | undefined;
   idAccessor: string;
+  recordId: React.Key;
+  editingCell: { recordKey: React.Key; accessor: string; value: string } | null;
+  onEditStart: (recordKey: React.Key, accessor: string, value: string) => void;
+  onEditChange: (value: string) => void;
+  onEditCommit: (value?: string) => void;
+  onEditCancel: () => void;
+  defaultCommitEditOn: ('blur' | 'enter')[];
+  editMode: 'cell' | 'global';
+  globalEditValues: Map<string, string>;
+  focusedCell: { recordKey: string; accessor: string } | null;
+  onCellFocus: (recordKey: React.Key, accessor: string) => void;
+  onCellBlur: () => void;
+  onGlobalEditChange: (recordKey: React.Key, accessor: string, value: string) => void;
+  onGlobalEditCommit: (recordKey: React.Key, accessor: string, overrideValue?: string) => void;
+  onGlobalEditCancel: (recordKey: React.Key, accessor: string) => void;
+  registerCellRef: (recordKey: React.Key, accessor: string, el: HTMLInputElement | null) => void;
+  onFocusCell: (recordKey: React.Key, accessor: string) => void;
+  onFocusNextRow: (direction: 'next' | 'prev', fromRecordId: React.Key) => void;
+  editingCellStyle?: MantineStyleProp;
+  editingCellClassName?: string;
 } & Pick<DataTableProps<T>, 'rowFactory'>;
 
 export function DataTableRow<T>({
@@ -84,7 +105,32 @@ export function DataTableRow<T>({
   selectionColumnClassName,
   selectionColumnStyle,
   rowFactory,
+  recordId,
+  editingCell,
+  onEditStart,
+  onEditChange,
+  onEditCommit,
+  onEditCancel,
+  defaultCommitEditOn,
+  editMode,
+  globalEditValues,
+  focusedCell,
+  onCellFocus,
+  onCellBlur,
+  onGlobalEditChange,
+  onGlobalEditCommit,
+  onGlobalEditCancel,
+  registerCellRef,
+  onFocusCell,
+  onFocusNextRow,
+  editingCellStyle,
+  editingCellClassName,
 }: Readonly<DataTableRowProps<T>>) {
+  const editableAccessors = columns
+    .filter(({ hidden, hiddenContent }) => !hidden && !hiddenContent)
+    .map((col) => ({ ...defaultColumnProps, ...col }))
+    .filter(({ editable }) => editable === true || (typeof editable === 'function' && editable(record, index)))
+    .map(({ accessor }) => String(accessor));
   const cols = (
     <>
       {selectionVisible && (
@@ -117,7 +163,70 @@ export function DataTableRow<T>({
           cellsClassName,
           cellsStyle,
           customCellAttributes,
+          editable,
+          editRender,
+          commitEditOn,
         } = { ...defaultColumnProps, ...columnProps };
+
+        const isEditableCell =
+          editable === true || (typeof editable === 'function' && editable(record, index));
+        const cellKey = `${String(recordId)}::${String(accessor)}`;
+        const isEditing =
+          editMode === 'global'
+            ? isEditableCell
+            : isEditableCell &&
+              editingCell?.recordKey === recordId &&
+              editingCell?.accessor === String(accessor);
+        const editValue =
+          editMode === 'global'
+            ? (globalEditValues.get(cellKey) ?? '')
+            : isEditing
+              ? (editingCell?.value ?? '')
+              : '';
+        const cellCommitEditOn = commitEditOn ?? defaultCommitEditOn;
+        const isFocused =
+          focusedCell?.recordKey === String(recordId) && focusedCell?.accessor === String(accessor);
+
+        const cellOnEditChange =
+          editMode === 'global'
+            ? (value: string) => onGlobalEditChange(recordId, String(accessor), value)
+            : onEditChange;
+        const cellOnEditCommit =
+          editMode === 'global'
+            ? (overrideValue?: string) => onGlobalEditCommit(recordId, String(accessor), overrideValue)
+            : onEditCommit;
+        const cellOnEditCancel =
+          editMode === 'global'
+            ? () => onGlobalEditCancel(recordId, String(accessor))
+            : onEditCancel;
+        const cellRegisterInputRef = isEditableCell
+          ? (el: HTMLInputElement | null) => registerCellRef(recordId, String(accessor), el)
+          : undefined;
+        const cellOnCellFocus = isEditableCell
+          ? () => onCellFocus(recordId, String(accessor))
+          : undefined;
+        const cellIdx = isEditableCell ? editableAccessors.indexOf(String(accessor)) : -1;
+        const cellOnFocusNextCell = isEditableCell
+          ? (direction: 'next' | 'prev') => {
+              const targetIdx = direction === 'next' ? cellIdx + 1 : cellIdx - 1;
+              if (targetIdx >= 0 && targetIdx < editableAccessors.length) {
+                const targetAccessor = editableAccessors[targetIdx];
+                if (editMode === 'global') {
+                  onFocusCell(recordId, targetAccessor);
+                } else {
+                  const targetCol = columns.find(
+                    (c) => String(({ ...defaultColumnProps, ...c }).accessor) === targetAccessor
+                  );
+                  if (targetCol) {
+                    const { accessor: tAcc } = { ...defaultColumnProps, ...targetCol };
+                    onEditStart(recordId, targetAccessor, String(getValueAtPath(record, tAcc) ?? ''));
+                  }
+                }
+              } else {
+                onFocusNextRow(direction, recordId);
+              }
+            }
+          : undefined;
 
         return (
           <DataTableRowCell<T>
@@ -134,9 +243,20 @@ export function DataTableRow<T>({
                 : undefined
             }
             onDoubleClick={
-              onCellDoubleClick
-                ? (event) => onCellDoubleClick({ event, record, index, column: columnProps, columnIndex })
-                : undefined
+              isEditableCell && editMode === 'cell'
+                ? (event) => {
+                    if (!isEditing) {
+                      onEditStart(
+                        recordId,
+                        String(accessor),
+                        String(getValueAtPath(record, accessor) ?? '')
+                      );
+                    }
+                    onCellDoubleClick?.({ event, record, index, column: columnProps, columnIndex });
+                  }
+                : onCellDoubleClick
+                  ? (event) => onCellDoubleClick({ event, record, index, column: columnProps, columnIndex })
+                  : undefined
             }
             onContextMenu={
               onCellContextMenu
@@ -151,6 +271,20 @@ export function DataTableRow<T>({
             render={render}
             defaultRender={defaultColumnRender}
             customCellAttributes={customCellAttributes}
+            isEditing={!!isEditing}
+            editValue={editValue}
+            onEditChange={cellOnEditChange}
+            onEditCommit={cellOnEditCommit}
+            onEditCancel={cellOnEditCancel}
+            commitEditOn={cellCommitEditOn}
+            editRender={editRender}
+            isFocused={isFocused}
+            onCellFocus={cellOnCellFocus}
+            onCellBlur={onCellBlur}
+            registerInputRef={cellRegisterInputRef}
+            onFocusNextCell={cellOnFocusNextCell}
+            editingCellStyle={editingCellStyle}
+            editingCellClassName={editingCellClassName}
           />
         );
       })}
