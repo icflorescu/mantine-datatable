@@ -88,10 +88,10 @@ export function DataTableHeaderCell<T>({
     sortable && onSortStatusChange
       ? (e?: React.BaseSyntheticEvent) => {
           if (e?.defaultPrevented) return;
-
+          const hasCycledBackToAsc = sortStatus?.direction === 'desc';
           onSortStatusChange({
             sortKey,
-            columnAccessor: accessor,
+            columnAccessor: sortStatus?.columnAccessor === accessor && hasCycledBackToAsc ? '' : accessor,
             direction:
               sortStatus?.columnAccessor === accessor
                 ? sortStatus.direction === 'asc'
