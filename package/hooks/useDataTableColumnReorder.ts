@@ -33,7 +33,7 @@ export function useDataTableColumnReorder<T>({
   );
 
   const [storedColumnsOrder, _setColumnsOrder] = useLocalStorage<string[]>({
-    key: key ? `${key}-columns-order` : '',
+    key: key ? `${key}-columns-order` : '__mantine_datatable_no_key__',
     defaultValue: key ? defaultColumnsOrder : undefined,
     getInitialValueInEffect,
   });

@@ -46,7 +46,7 @@ export function useDataTableColumnPinning<T>({
   );
 
   const [storedColumnsPinning, _setColumnsPinning] = useLocalStorage<DataTableColumnPinning[]>({
-    key: key ? `${key}-columns-pinning` : '',
+    key: key ? `${key}-columns-pinning` : '__mantine_datatable_no_key__',
     defaultValue: key ? defaultColumnsPinning : undefined,
     getInitialValueInEffect,
   });
