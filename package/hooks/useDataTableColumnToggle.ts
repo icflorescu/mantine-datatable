@@ -46,7 +46,7 @@ export function useDataTableColumnToggle<T>({
   );
 
   const [storedColumnsToggle, _setColumnsToggle] = useLocalStorage<DataTableColumnToggle[]>({
-    key: key ? `${key}-columns-toggle` : '',
+    key: key ? `${key}-columns-toggle` : '__mantine_datatable_no_key__',
     defaultValue: key ? defaultColumnsToggle : undefined,
     getInitialValueInEffect,
   });
