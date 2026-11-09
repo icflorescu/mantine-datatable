@@ -321,11 +321,11 @@ export function DataTable<T>({
                 },
                 classNames?.table
               )}
-              style={{
-                ...styles?.table,
-                ...(dragToggle.isLocked ? { tableLayout: 'fixed' } : null),
-                ...(dragToggle.tableWidth != null ? { width: `${dragToggle.tableWidth}px` } : null),
-              }}
+              style={[
+                styles?.table,
+                dragToggle.isLocked ? { tableLayout: 'fixed' } : undefined,
+                dragToggle.tableWidth != null ? { width: `${dragToggle.tableWidth}px` } : undefined,
+              ]}
               data-striped={(recordsLength && striped) || undefined}
               data-highlight-on-hover={highlightOnHover || undefined}
               {...otherProps}
