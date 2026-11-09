@@ -85,14 +85,32 @@ jobs:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
+      # Skip publishing when package.json version is already on npm (e.g. docs-only merges).
+      # `npm view` prints nothing for a missing version, so compare output rather than exit code;
+      # on any lookup error we fall through to publishing, which fails loudly if something is wrong.
+      - name: Check whether version is already published
+        id: check
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          PUBLISHED=$(npm view "$NAME@$VERSION" version 2>/dev/null || true)
+          if [ "$PUBLISHED" = "$VERSION" ]; then
+            echo "::notice::$NAME@$VERSION is already published on npm, skipping publish."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       # Trusted Publishing requires npm >= 11.5.1
       - name: Update npm
+        if: steps.check.outputs.skip != 'true'
         run: npm install -g npm@latest
 
       # Stages the release via OIDC; a maintainer must approve it with 2FA before it goes public:
       # find the stage id in this step's log (`staged with id <uuid>`) or via `npm stage list mantine-datatable`,
       # then run `npm stage approve <uuid>`.
       - name: Stage npm release (OIDC, provenance enabled automatically)
+        if: steps.check.outputs.skip != 'true'
         run: npm stage publish --access public
 
   deploy:
