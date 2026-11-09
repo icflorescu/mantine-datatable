@@ -1,6 +1,16 @@
-import { useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import type { DataTableRowExpansionProps } from '../types/DataTableRowExpansionProps';
 import { getRecordId } from '../utils';
+
+export type RowExpansion<T> = {
+  expandOnClick: boolean;
+  isRowExpanded: (record: T) => boolean;
+  isExpandable: (params: { record: T; index: number }) => boolean;
+  expandRow: (record: T) => void;
+  collapseRow: (record: T) => void;
+  collapseProps: DataTableRowExpansionProps<T>['collapseProps'];
+  content: (params: { record: T; index: number }) => () => ReactNode;
+};
 
 export function useRowExpansion<T>({
   rowExpansion,
@@ -10,7 +20,7 @@ export function useRowExpansion<T>({
   rowExpansion?: DataTableRowExpansionProps<T>;
   records: T[] | undefined;
   idAccessor: (keyof T | (string & NonNullable<unknown>)) | ((record: T) => React.Key);
-}) {
+}): RowExpansion<T> | undefined {
   let initiallyExpandedRecordIds: unknown[] = [];
   if (rowExpansion && records) {
     const { trigger, allowMultiple, initiallyExpanded } = rowExpansion;

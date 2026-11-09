@@ -1,6 +1,7 @@
 import type { MantineTheme } from '@mantine/core';
 import { type CheckboxProps, type MantineColor, type MantineStyleProp, TableTr } from '@mantine/core';
 import clsx from 'clsx';
+import type { ReactNode } from 'react';
 import { getRowCssVariables } from './cssVariables';
 import { DataTableRowCell } from './DataTableRowCell';
 import { DataTableRowExpansion } from './DataTableRowExpansion';
@@ -84,7 +85,7 @@ export function DataTableRow<T>({
   selectionColumnClassName,
   selectionColumnStyle,
   rowFactory,
-}: Readonly<DataTableRowProps<T>>) {
+}: Readonly<DataTableRowProps<T>>): ReactNode {
   const cols = (
     <>
       {selectionVisible && (
@@ -217,7 +218,7 @@ type GetRowPropsArgs<T> = Readonly<
   >
 >;
 
-export function getRowProps<T>({
+function getRowProps<T>({
   record,
   index,
   selectionChecked,

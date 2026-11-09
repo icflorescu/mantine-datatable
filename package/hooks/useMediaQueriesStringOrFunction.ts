@@ -2,7 +2,9 @@ import { type MantineTheme, useMantineTheme } from '@mantine/core';
 import { useMemo } from 'react';
 import { useMediaQueries } from './useMediaQueries';
 
-export function useMediaQueriesStringOrFunction(queries: (string | ((theme: MantineTheme) => string) | undefined)[]) {
+export function useMediaQueriesStringOrFunction(
+  queries: (string | ((theme: MantineTheme) => string) | undefined)[]
+): boolean[] | undefined {
   const theme = useMantineTheme();
   const values = useMemo(
     () => queries.map((query) => (typeof query === 'function' ? query(theme) : query) ?? ''),

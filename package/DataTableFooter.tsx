@@ -1,5 +1,6 @@
 import { type MantineStyleProp, TableTfoot, TableTr } from '@mantine/core';
 import clsx from 'clsx';
+import type { JSX } from 'react';
 import { DataTableFooterCell } from './DataTableFooterCell';
 import { DataTableFooterSelectorPlaceholderCell } from './DataTableFooterSelectorPlaceholderCell';
 import type { PinnedColumnInfo } from './hooks';
@@ -25,7 +26,7 @@ export function DataTableFooter<T>({
   selectionVisible,
   selectorCellShadowVisible,
   ref,
-}: DataTableFooterProps<T>) {
+}: DataTableFooterProps<T>): JSX.Element {
   return (
     <TableTfoot ref={ref} className={clsx('mantine-datatable-footer', className)} style={style}>
       <TableTr>

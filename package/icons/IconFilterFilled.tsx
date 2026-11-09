@@ -1,4 +1,5 @@
-export function IconFilterFilled() {
+import type { JSX } from 'react';
+export function IconFilterFilled(): JSX.Element {
   return (
     <svg
       width="14"

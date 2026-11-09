@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "incremental": false,
+    "declaration": true,
+    "isolatedDeclarations": true,
+    "noEmit": true
+  },
+  "include": ["../package"]
+}

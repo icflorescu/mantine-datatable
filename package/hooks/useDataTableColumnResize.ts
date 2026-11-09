@@ -41,7 +41,19 @@ export function useDataTableColumnResize<T>({
    * Kept for backwards compatibility; no longer used internally.
    */
   scrollViewportRef?: RefObject<HTMLElement | null>;
-}) {
+}): {
+  readonly columnsWidth: DataTableColumnWidth[];
+  readonly setColumnsWidth: (updates: Array<{ accessor: string; width: string | number }>) => void;
+  readonly setColumnWidth: (accessor: string, width: string | number) => void;
+  readonly setMultipleColumnWidths: (updates: Array<{ accessor: string; width: string | number }>) => void;
+  readonly resetColumnsWidth: () => void;
+  readonly hasResizableColumns: boolean;
+  readonly allResizableWidthsInitial: boolean;
+  readonly measureAndSetColumnWidths: () => void;
+  readonly isResizing: boolean;
+  readonly beginResize: () => void;
+  readonly endResize: () => void;
+} {
   const hasResizableColumns = useMemo(() => {
     return columns.some((c) => c.resizable && !c.hidden && c.accessor !== '__selection__');
   }, [columns]);

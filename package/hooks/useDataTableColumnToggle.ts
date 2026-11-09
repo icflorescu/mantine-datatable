@@ -32,7 +32,11 @@ export function useDataTableColumnToggle<T>({
    * @default true
    */
   getInitialValueInEffect?: boolean;
-}) {
+}): {
+  readonly columnsToggle: DataTableColumnToggle[];
+  readonly setColumnsToggle: (toggle: DataTableColumnToggle[]) => void;
+  readonly resetColumnsToggle: () => void;
+} {
   // Default columns toggle state
   const defaultColumnsToggle = useMemo(
     () =>

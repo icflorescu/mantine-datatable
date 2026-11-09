@@ -1,5 +1,6 @@
 import { type MantineStyleProp, TableTd } from '@mantine/core';
 import clsx from 'clsx';
+import type { JSX } from 'react';
 import type { PinnedColumnInfo } from './hooks';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
@@ -49,7 +50,7 @@ export function DataTableRowCell<T>({
   render,
   defaultRender,
   customCellAttributes,
-}: DataTableRowCellProps<T>) {
+}: DataTableRowCellProps<T>): JSX.Element | null {
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
     <TableTd

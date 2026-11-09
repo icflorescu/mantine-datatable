@@ -1,5 +1,5 @@
 import { rem } from '@mantine/core';
-import { useCallback, useEffect, useRef } from 'react';
+import { type RefObject, useCallback, useEffect, useRef } from 'react';
 import type { DataTableScrollProps } from '../types/DataTableScrollProps';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 import { useStableValue } from './useStableValue';
@@ -58,7 +58,17 @@ function observe(elem: HTMLElement | null, onChange: (rect: Rect) => unknown, on
 export function useDataTableInjectCssVariables({
   scrollCallbacks,
   withRowBorders,
-}: UseDataTableInjectCssVariablesOpts) {
+}: UseDataTableInjectCssVariablesOpts): {
+  refs: {
+    root: RefObject<HTMLDivElement | null>;
+    table: RefObject<HTMLTableElement | null>;
+    scrollViewport: RefObject<HTMLElement | null>;
+    header: RefObject<HTMLTableSectionElement | null>;
+    footer: RefObject<HTMLTableSectionElement | null>;
+    selectionColumnHeader: RefObject<HTMLTableCellElement | null>;
+  };
+  onScroll: (position: { x: number; y: number }) => void;
+} {
   const refs = {
     root: useRef<HTMLDivElement>(null),
     table: useRef<HTMLTableElement>(null),

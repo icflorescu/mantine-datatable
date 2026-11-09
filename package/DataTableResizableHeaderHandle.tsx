@@ -1,5 +1,5 @@
 import { useDirection } from '@mantine/core';
-import type { RefObject } from 'react';
+import type { JSX, RefObject } from 'react';
 import { useCallback, useRef, useState } from 'react';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 
@@ -10,7 +10,7 @@ type DataTableResizableHeaderHandleProps = {
 
 const MIN_COLUMN_WIDTH = 50;
 
-export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHandleProps) => {
+export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHandleProps): JSX.Element => {
   const { accessor, columnRef } = props;
   const [isResizing, setIsResizing] = useState(false);
   const startXRef = useRef<number>(0);

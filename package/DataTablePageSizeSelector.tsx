@@ -1,6 +1,7 @@
 import type { MantineColor } from '@mantine/core';
 import { Button, Group, type MantineSize, Menu, MenuDropdown, MenuItem, MenuTarget, rem, Text } from '@mantine/core';
 import clsx from 'clsx';
+import type { JSX } from 'react';
 import { getPaginationCssVariables } from './cssVariables';
 import { IconSelector } from './icons/IconSelector';
 
@@ -24,7 +25,7 @@ export function DataTablePageSizeSelector({
   activeTextColor,
   activeBackgroundColor,
   onChange,
-}: DataTablePageSizeSelectorComponentProps) {
+}: DataTablePageSizeSelectorComponentProps): JSX.Element {
   return (
     <Group gap="xs">
       <Text component="div" size={size}>

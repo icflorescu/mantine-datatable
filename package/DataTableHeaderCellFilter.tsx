@@ -1,6 +1,6 @@
 import { ActionIcon, Popover, PopoverDropdown, PopoverTarget } from '@mantine/core';
 import { useClickOutside, useDisclosure } from '@mantine/hooks';
-import type { RefObject } from 'react';
+import type { JSX, RefObject } from 'react';
 import { IconFilter } from './icons/IconFilter';
 import { IconFilterFilled } from './icons/IconFilterFilled';
 import type { DataTableColumn } from './types';
@@ -17,7 +17,7 @@ export function DataTableHeaderCellFilter<T>({
   isActive,
   filterPopoverProps,
   filterPopoverDisableClickOutside,
-}: DataTableHeaderCellFilterProps<T>) {
+}: DataTableHeaderCellFilterProps<T>): JSX.Element {
   const [isOpen, { close, toggle }] = useDisclosure(false);
   const Icon = isActive ? IconFilterFilled : IconFilter;
   let ref: RefObject<HTMLDivElement | null> | undefined = useClickOutside(close);

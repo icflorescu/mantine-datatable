@@ -1,6 +1,7 @@
 import type { MantineStyleProp } from '@mantine/core';
 import { Checkbox, type CheckboxProps, TableTh } from '@mantine/core';
 import clsx from 'clsx';
+import type { JSX } from 'react';
 import type { DataTableSelectionTrigger } from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
@@ -28,7 +29,7 @@ export function DataTableHeaderSelectorCell({
   onChange,
   rowSpan,
   ref,
-}: DataTableHeaderSelectorCellProps) {
+}: DataTableHeaderSelectorCellProps): JSX.Element {
   const enabled = !checkboxProps.disabled;
 
   return (

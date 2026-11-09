@@ -1,5 +1,6 @@
 import { Box, ScrollArea, type ScrollAreaProps } from '@mantine/core';
 import clsx from 'clsx';
+import type { JSX } from 'react';
 
 type DataTableScrollAreaProps = React.PropsWithChildren<{
   leftShadowBehind: boolean;
@@ -16,7 +17,7 @@ export function DataTableScrollArea({
   children,
   viewportRef,
   scrollAreaProps,
-}: DataTableScrollAreaProps) {
+}: DataTableScrollAreaProps): JSX.Element {
   return (
     <ScrollArea
       {...scrollAreaProps}

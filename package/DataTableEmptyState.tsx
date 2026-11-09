@@ -1,4 +1,5 @@
 import { Center, Text } from '@mantine/core';
+import type { JSX } from 'react';
 import { IconDatabaseOff } from './icons/IconDatabaseOff';
 
 type DataTableEmptyStateProps = React.PropsWithChildren<{
@@ -7,7 +8,7 @@ type DataTableEmptyStateProps = React.PropsWithChildren<{
   active: boolean;
 }>;
 
-export function DataTableEmptyState({ icon, text, active, children }: DataTableEmptyStateProps) {
+export function DataTableEmptyState({ icon, text, active, children }: DataTableEmptyStateProps): JSX.Element {
   return (
     <Center className="mantine-datatable-empty-state" data-active={active || undefined}>
       {children || (

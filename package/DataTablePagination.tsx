@@ -1,5 +1,6 @@
 import { Box, type MantineSpacing, type MantineStyleProp, Pagination, rem, Text } from '@mantine/core';
 import clsx from 'clsx';
+import type { JSX } from 'react';
 import { getPaginationCssVariables } from './cssVariables';
 import { DataTablePageSizeSelector } from './DataTablePageSizeSelector';
 import { useMediaQueryStringOrFunction } from './hooks';
@@ -47,7 +48,7 @@ export function DataTablePagination({
   getPaginationControlProps,
   getPaginationItemProps,
   renderPagination,
-}: DataTablePaginationComponentProps) {
+}: DataTablePaginationComponentProps): JSX.Element {
   let paginationTextValue: React.ReactNode;
   if (totalRecords) {
     const from = (page - 1) * recordsPerPage + 1;
@@ -73,6 +74,8 @@ export function DataTablePagination({
 
   const isWrapped = !isAbovePaginationWrapBreakpoint;
 
+  // biome-ignore-start lint/correctness/noComponentHookFactories: controls close over the current pagination
+  // state and are exposed to `renderPagination`; making them stable is a separate, behavior-changing refactor
   const Controls: DataTablePaginationRenderContext['Controls'] = {
     Text: (props) => (
       <Text component="div" className="mantine-datatable-pagination-text" size={paginationSize} {...props}>
@@ -122,6 +125,7 @@ export function DataTablePagination({
       />
     ),
   };
+  // biome-ignore-end lint/correctness/noComponentHookFactories: see above
 
   const ctx: DataTablePaginationRenderContext = {
     state: {

@@ -89,8 +89,9 @@ jobs:
       - name: Update npm
         run: npm install -g npm@latest
 
-      # Stages the release via OIDC; a maintainer must approve it with 2FA
-      # (`npm stage approve mantine-datatable@<version>`) before it goes public.
+      # Stages the release via OIDC; a maintainer must approve it with 2FA before it goes public:
+      # find the stage id in this step's log (`staged with id <uuid>`) or via `npm stage list mantine-datatable`,
+      # then run `npm stage approve <uuid>`.
       - name: Stage npm release (OIDC, provenance enabled automatically)
         run: npm stage publish --access public
 

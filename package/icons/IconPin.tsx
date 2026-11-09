@@ -1,4 +1,5 @@
-export function IconPin() {
+import type { JSX } from 'react';
+export function IconPin(): JSX.Element {
   return (
     <svg
       width="14"

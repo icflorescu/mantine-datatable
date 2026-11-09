@@ -1,6 +1,6 @@
 import { ActionIcon, Box, Center, Flex, Group, type MantineStyleProp, type MantineTheme, TableTh } from '@mantine/core';
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import { type JSX, useRef, useState } from 'react';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCellFilter } from './DataTableHeaderCellFilter';
 import { DataTablePinnableDropdown } from './DataTablePinnableDropdown';
@@ -63,7 +63,7 @@ export function DataTableHeaderCell<T>({
   filterPopoverDisableClickOutside,
   filtering,
   sortKey,
-}: DataTableHeaderCellProps<T>) {
+}: DataTableHeaderCellProps<T>): JSX.Element | null {
   const {
     setSourceColumn,
     setTargetColumn,

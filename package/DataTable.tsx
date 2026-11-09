@@ -1,8 +1,7 @@
 import { Box, type MantineSize, Table } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
-import type { RefObject } from 'react';
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { type JSX, type RefObject, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { getTableCssVariables } from './cssVariables';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
@@ -133,7 +132,7 @@ export function DataTable<T>({
   rowFactory,
   tableWrapper,
   ...otherProps
-}: DataTableProps<T>) {
+}: DataTableProps<T>): JSX.Element {
   const flatColumns = useMemo(() => {
     return groups ? flattenColumns(groups) : columns!;
   }, [columns, groups]);

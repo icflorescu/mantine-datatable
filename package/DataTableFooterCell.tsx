@@ -1,5 +1,6 @@
 import { type MantineStyleProp, type MantineTheme, TableTh } from '@mantine/core';
 import clsx from 'clsx';
+import type { JSX } from 'react';
 import type { PinnedColumnInfo } from './hooks';
 import { useMediaQueryStringOrFunction } from './hooks';
 import type { DataTableColumn } from './types';
@@ -23,7 +24,7 @@ export function DataTableFooterCell<T>({
   ellipsis,
   textAlign,
   width,
-}: DataTableFooterCellProps<T>) {
+}: DataTableFooterCellProps<T>): JSX.Element | null {
   if (!useMediaQueryStringOrFunction(visibleMediaQuery)) return null;
   return (
     <TableTh

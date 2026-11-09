@@ -1,4 +1,5 @@
-export function IconGripVertical() {
+import type { JSX } from 'react';
+export function IconGripVertical(): JSX.Element {
   return (
     <svg
       width="14"

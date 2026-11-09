@@ -1,6 +1,7 @@
 import type { MantineStyleProp } from '@mantine/core';
 import { Checkbox, type CheckboxProps, TableTd } from '@mantine/core';
 import clsx from 'clsx';
+import type { JSX } from 'react';
 import type { DataTableSelectionTrigger } from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
@@ -29,7 +30,7 @@ export function DataTableRowSelectorCell<T>({
   checkboxProps,
   getCheckboxProps,
   ...otherProps
-}: Readonly<DataTableRowSelectorCellProps<T>>) {
+}: Readonly<DataTableRowSelectorCellProps<T>>): JSX.Element {
   const allCheckboxProps = { ...checkboxProps, ...getCheckboxProps(record, index) };
   const enabled = !otherProps.disabled && !allCheckboxProps.disabled;
 

@@ -1,4 +1,5 @@
-export function IconDatabaseOff() {
+import type { JSX } from 'react';
+export function IconDatabaseOff(): JSX.Element {
   return (
     <svg
       width="24"

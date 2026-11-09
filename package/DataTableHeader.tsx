@@ -11,7 +11,7 @@ import {
   TableTr,
 } from '@mantine/core';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { type JSX, useState } from 'react';
 import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCell } from './DataTableHeaderCell';
@@ -90,7 +90,7 @@ export function DataTableHeader<T>({
   selectionColumnStyle,
   withColumnBorders = false,
   ref,
-}: DataTableHeaderProps<T>) {
+}: DataTableHeaderProps<T>): JSX.Element {
   const maxGroupDepth = groups ? getMaxGroupDepth(groups) : 0;
   const totalHeaderRows = maxGroupDepth > 0 ? maxGroupDepth + 1 : 1;
 

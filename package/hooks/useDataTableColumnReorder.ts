@@ -25,7 +25,11 @@ export function useDataTableColumnReorder<T>({
    * @default true
    */
   getInitialValueInEffect?: boolean;
-}) {
+}): {
+  readonly columnsOrder: string[];
+  readonly setColumnsOrder: (order: string[]) => void;
+  readonly resetColumnsOrder: () => void;
+} {
   // Default columns order is the order of the columns in the array
   const defaultColumnsOrder = useMemo(
     () => (columns ? (columns.map((column) => column.accessor) as string[]) : []),
