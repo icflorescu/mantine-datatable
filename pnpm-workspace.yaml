@@ -2,3 +2,5 @@ allowBuilds:
   esbuild: true
   sharp: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - mantine-contextmenu@9.7.5

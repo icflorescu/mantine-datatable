@@ -3,6 +3,17 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.7.5 (2026-11-09)
+
+- Fix issue [#845](https://github.com/icflorescu/mantine-datatable/issues/845) - tables without `storeColumnsKey` become invisible when `localStorage` holds a value under an empty key; column order and visibility are no longer read from `localStorage` when no key is provided, thanks to [Rohit Singh](https://github.com/rohit-singh121) for the analysis and initial fix proposal
+- Fix issue [#835](https://github.com/icflorescu/mantine-datatable/issues/835) - `styles.table` prop fails to resolve functions or arrays, thanks to [Malte Kießling](https://github.com/maltekiessling) for raising and fixing
+- Switch package build from tsup to tsdown; type declarations are now generated with Oxc via `isolatedDeclarations`
+- Upgrade to TypeScript 7
+- Make the package build fail properly when any of its steps fail
+- Upgrade docs search to DocSearch 5
+- Update GitHub workflow action versions & Biome config
+- Update dev deps to ensure compatibility with Mantine 9.7.5 & Mantine ContextMenu 9.7.5
+
 ## 9.4.0 (2026-07-15)
 
 - Update dev deps to ensure compatibility with Mantine 9.4.0

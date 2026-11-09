@@ -1,7 +1,7 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.6/schema.json",
   "files": {
-    "includes": ["**", "!**/.next", "!**/dist", "!**/out", "!**/public", "!**/next-env.d.ts", "!**/*.css"]
+    "includes": ["**", "!**/.next", "!**/dist", "!**/out", "!**/public", "!**/next-env.d.ts", "!**/*.css", "!**/*.md"]
   },
   "formatter": {
     "enabled": true,
@@ -56,5 +56,10 @@
         }
       }
     }
-  ]
+  ],
+  "yaml": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  }
 }

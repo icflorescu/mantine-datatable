@@ -1,6 +1,6 @@
 'use client';
 
-import { type Dispatch, type PropsWithChildren, type SetStateAction, useState } from 'react';
+import { type Dispatch, type JSX, type PropsWithChildren, type SetStateAction, useState } from 'react';
 import { DataTableColumnsContextProvider } from './DataTableColumns.context';
 import type { DataTableColumnPinning, DataTableColumnToggle, PinnedColumnInfo } from './hooks';
 
@@ -27,7 +27,7 @@ type DataTableColumnsProviderProps = PropsWithChildren<{
   pinnedMap: Map<string, PinnedColumnInfo>;
 }>;
 
-export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps) => {
+export const DataTableColumnsProvider = (props: DataTableColumnsProviderProps): JSX.Element => {
   const {
     children,
     columnsOrder,

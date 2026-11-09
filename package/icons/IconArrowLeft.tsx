@@ -1,4 +1,5 @@
-export function IconArrowLeft() {
+import type { JSX } from 'react';
+export function IconArrowLeft(): JSX.Element {
   return (
     <svg
       width="14"

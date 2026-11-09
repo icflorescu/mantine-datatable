@@ -32,7 +32,13 @@ export function useDataTableColumnPinning<T>({
    * @default true
    */
   getInitialValueInEffect?: boolean;
-}) {
+}): {
+  readonly columnsPinning: DataTableColumnPinning[];
+  readonly setColumnsPinning: (
+    pinning: DataTableColumnPinning[] | ((prev: DataTableColumnPinning[]) => DataTableColumnPinning[])
+  ) => void;
+  readonly resetColumnsPinning: () => void;
+} {
   // Default columns pinning state
   const defaultColumnsPinning = useMemo(
     () =>

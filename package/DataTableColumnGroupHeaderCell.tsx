@@ -1,6 +1,6 @@
 import { TableTh } from '@mantine/core';
 import clsx from 'clsx';
-import { useMemo } from 'react';
+import { type JSX, useMemo } from 'react';
 import type { PinnedColumnInfo } from './hooks';
 import { useMediaQueriesStringOrFunction } from './hooks';
 import type { DataTableColumnGroup } from './types';
@@ -27,7 +27,7 @@ export function DataTableColumnGroupHeaderCell<T>({
   isLastGroup,
   withColumnBorders = false,
   totalTableColumns,
-}: DataTableColumnGroupHeaderCellProps<T>) {
+}: DataTableColumnGroupHeaderCellProps<T>): JSX.Element | null {
   const allColumns = useMemo(() => {
     if (columns && columns.length > 0) {
       return columns;

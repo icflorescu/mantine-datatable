@@ -1,4 +1,5 @@
 import { Collapse, TableTd, TableTr } from '@mantine/core';
+import type { JSX } from 'react';
 import { useRowExpansionStatus } from './hooks';
 import type { DataTableRowExpansionCollapseProps } from './types';
 
@@ -9,7 +10,12 @@ type DataTableRowExpansionProps = {
   collapseProps: DataTableRowExpansionCollapseProps | undefined;
 };
 
-export function DataTableRowExpansion({ open, colSpan, content, collapseProps }: DataTableRowExpansionProps) {
+export function DataTableRowExpansion({
+  open,
+  colSpan,
+  content,
+  collapseProps,
+}: DataTableRowExpansionProps): JSX.Element | null {
   const { expanded, visible } = useRowExpansionStatus(open, collapseProps?.transitionDuration);
 
   return visible ? (

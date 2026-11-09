@@ -1,4 +1,5 @@
-export function IconX() {
+import type { JSX } from 'react';
+export function IconX(): JSX.Element {
   return (
     <svg
       width="14"

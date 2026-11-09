@@ -1,11 +1,13 @@
 import { type MantineColor, type MantineTheme, parseThemeColor } from '@mantine/core';
 import type { DataTableProps } from './types';
 
+type CssVariables<Name extends string> = Record<`--mantine-datatable-${Name}-${'light' | 'dark'}`, string | undefined>;
+
 export function getColor(
   color: MantineColor | undefined | { light: MantineColor; dark: MantineColor },
   theme: MantineTheme,
   colorScheme: 'light' | 'dark'
-) {
+): string | undefined {
   return color
     ? parseThemeColor({
         color: typeof color === 'object' ? color[colorScheme] : color,
@@ -27,7 +29,9 @@ export function getTableCssVariables({
   'c' | 'backgroundColor' | 'borderColor' | 'rowBorderColor' | 'stripedColor' | 'highlightOnHoverColor'
 > & {
   theme: MantineTheme;
-}) {
+}): CssVariables<
+  'color' | 'background-color' | 'border-color' | 'row-border-color' | 'striped-color' | 'highlight-on-hover-color'
+> {
   return {
     '--mantine-datatable-color-light': getColor(c, theme, 'light'),
     '--mantine-datatable-color-dark': getColor(c, theme, 'dark'),
@@ -55,7 +59,7 @@ export function getPaginationCssVariables({
   paginationActiveBackgroundColor,
 }: Pick<DataTableProps, 'paginationActiveTextColor' | 'paginationActiveBackgroundColor'> & {
   theme: MantineTheme;
-}) {
+}): CssVariables<'pagination-active-text-color' | 'pagination-active-background-color'> {
   return {
     '--mantine-datatable-pagination-active-text-color-light': getColor(paginationActiveTextColor, theme, 'light'),
     '--mantine-datatable-pagination-active-text-color-dark': getColor(paginationActiveTextColor, theme, 'dark'),
@@ -81,7 +85,7 @@ export function getRowCssVariables({
   theme: MantineTheme;
   color: MantineColor | undefined | { light: MantineColor; dark: MantineColor };
   backgroundColor: MantineColor | undefined | { light: MantineColor; dark: MantineColor };
-}) {
+}): CssVariables<'row-color' | 'row-background-color'> {
   return {
     '--mantine-datatable-row-color-light': getColor(color, theme, 'light'),
     '--mantine-datatable-row-color-dark': getColor(color, theme, 'dark'),

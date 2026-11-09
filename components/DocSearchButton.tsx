@@ -6,7 +6,7 @@ export function DocSearchButton() {
   return (
     <DocSearch
       appId={DOCSEARCH_APP_ID}
-      indexName={DOCSEARCH_INDEX_NAME}
+      indices={[DOCSEARCH_INDEX_NAME]}
       apiKey={DOCSEARCH_API_KEY}
       hitComponent={DocSearchHit}
     />

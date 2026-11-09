@@ -1,7 +1,10 @@
 import { useTimeout } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 
-export function useRowExpansionStatus(open: boolean, transitionDuration?: number) {
+export function useRowExpansionStatus(
+  open: boolean,
+  transitionDuration?: number
+): { expanded: boolean; visible: boolean } {
   const [expanded, setExpanded] = useState(open);
   const [visible, setVisible] = useState(open);
 

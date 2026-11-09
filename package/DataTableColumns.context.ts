@@ -1,5 +1,5 @@
 import { createSafeContext } from '@mantine/core';
-import type { Dispatch, SetStateAction } from 'react';
+import type { Context, Dispatch, SetStateAction } from 'react';
 import type { DataTableColumnPinning, DataTableColumnToggle } from './hooks';
 
 interface DataTableColumnsContext {
@@ -34,6 +34,9 @@ interface DataTableColumnsContext {
   endResize: () => void;
 }
 
-export const [DataTableColumnsContextProvider, useDataTableColumnsContext] = createSafeContext<DataTableColumnsContext>(
+const [ColumnsContext, useColumnsContext] = createSafeContext<DataTableColumnsContext>(
   'useDataTableColumnsContext must be used within DataTableColumnProvider'
 );
+
+export const DataTableColumnsContextProvider: Context<DataTableColumnsContext | null> = ColumnsContext;
+export const useDataTableColumnsContext: () => DataTableColumnsContext = useColumnsContext;

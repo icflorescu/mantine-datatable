@@ -39,7 +39,33 @@ export const useDataTableColumns = <T>({
    * Reference to the scroll viewport for calculating overflow.
    */
   scrollViewportRef?: RefObject<HTMLElement | null>;
-}) => {
+}): {
+  readonly effectiveColumns: DataTableColumn<T>[];
+  readonly setColumnsOrder: (order: string[]) => void;
+  readonly columnsOrder: string[];
+  readonly resetColumnsOrder: () => void;
+  readonly columnsToggle: DataTableColumnToggle[];
+  readonly setColumnsToggle: (toggle: DataTableColumnToggle[]) => void;
+  readonly resetColumnsToggle: () => void;
+  readonly columnsPinning: DataTableColumnPinning[];
+  readonly setColumnsPinning: (
+    pinning: DataTableColumnPinning[] | ((prev: DataTableColumnPinning[]) => DataTableColumnPinning[])
+  ) => void;
+  readonly resetColumnsPinning: () => void;
+  readonly columnsWidth: Record<string, string | number>[];
+  readonly setColumnsWidth: (updates: { accessor: string; width: string | number }[]) => void;
+  readonly setColumnWidth: (accessor: string, width: string | number) => void;
+  readonly setMultipleColumnWidths: (updates: { accessor: string; width: string | number }[]) => void;
+  readonly resetColumnsWidth: () => void;
+  readonly hasResizableColumns: boolean;
+  readonly allResizableWidthsInitial: boolean;
+  readonly measureAndSetColumnWidths: () => void;
+  readonly isResizing: boolean;
+  readonly isLocked: boolean;
+  readonly tableWidth: number | null;
+  readonly beginResize: () => void;
+  readonly endResize: () => void;
+} => {
   // Use specialized hooks for each feature
   const { columnsOrder, setColumnsOrder, resetColumnsOrder } = useDataTableColumnReorder({
     key,

@@ -25,7 +25,11 @@ export function useDataTableColumnReorder<T>({
    * @default true
    */
   getInitialValueInEffect?: boolean;
-}) {
+}): {
+  readonly columnsOrder: string[];
+  readonly setColumnsOrder: (order: string[]) => void;
+  readonly resetColumnsOrder: () => void;
+} {
   // Default columns order is the order of the columns in the array
   const defaultColumnsOrder = useMemo(
     () => (columns ? (columns.map((column) => column.accessor) as string[]) : []),
@@ -83,9 +87,10 @@ export function useDataTableColumnReorder<T>({
     setColumnsOrder(defaultColumnsOrder);
   };
 
+  // Without a key nothing is persisted, so never read from localStorage (see #845)
   if (!key) {
     return {
-      columnsOrder,
+      columnsOrder: defaultColumnsOrder,
       setColumnsOrder,
       resetColumnsOrder,
     } as const;

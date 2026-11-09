@@ -32,7 +32,11 @@ export function useDataTableColumnToggle<T>({
    * @default true
    */
   getInitialValueInEffect?: boolean;
-}) {
+}): {
+  readonly columnsToggle: DataTableColumnToggle[];
+  readonly setColumnsToggle: (toggle: DataTableColumnToggle[]) => void;
+  readonly resetColumnsToggle: () => void;
+} {
   // Default columns toggle state
   const defaultColumnsToggle = useMemo(
     () =>
@@ -101,9 +105,10 @@ export function useDataTableColumnToggle<T>({
     setColumnsToggle(defaultColumnsToggle);
   };
 
+  // Without a key nothing is persisted, so never read from localStorage (see #845)
   if (!key) {
     return {
-      columnsToggle,
+      columnsToggle: defaultColumnsToggle,
       setColumnsToggle,
       resetColumnsToggle,
     } as const;

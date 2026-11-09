@@ -13,7 +13,17 @@ interface ResizeState {
   nextAccessor: string | null;
 }
 
-export const useColumnResize = ({ onColumnResize, minColumnWidth = 50 }: UseColumnResizeProps) => {
+export const useColumnResize = ({
+  onColumnResize,
+  minColumnWidth = 50,
+}: UseColumnResizeProps): {
+  isResizing: boolean;
+  startResize: (event: React.MouseEvent, currentColumn: HTMLTableCellElement, currentAccessor: string) => boolean;
+  updateResize: (clientX: number) => { finalCurrentWidth: number; finalNextWidth: number } | undefined;
+  endResize: () => void;
+  cancelResize: () => void;
+  resetColumnWidths: (currentAccessor: string, nextAccessor?: string) => void;
+} => {
   const [resizeState, setResizeState] = useState<ResizeState | null>(null);
   const currentColumnRef = useRef<HTMLTableCellElement | null>(null);
   const nextColumnRef = useRef<HTMLTableCellElement | null>(null);

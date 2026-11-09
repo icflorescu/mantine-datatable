@@ -1,7 +1,7 @@
 'use client';
 
 import { ActionIcon, Center, Group, Popover } from '@mantine/core';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { type JSX, useCallback, useEffect, useRef, useState } from 'react';
 import { useIsomorphicLayoutEffect } from './hooks/useIsomorphicLayoutEffect';
 import { IconArrowLeft } from './icons/IconArrowLeft';
 import { IconArrowRight } from './icons/IconArrowRight';
@@ -13,7 +13,7 @@ type DataTablePinnableDropdownProps = {
   onPinChange: (pinned: 'left' | 'right' | undefined) => void;
 };
 
-export function DataTablePinnableDropdown({ currentPinned, onPinChange }: DataTablePinnableDropdownProps) {
+export function DataTablePinnableDropdown({ currentPinned, onPinChange }: DataTablePinnableDropdownProps): JSX.Element {
   const [opened, setOpened] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isRtl, setIsRtl] = useState(false);
