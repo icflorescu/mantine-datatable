@@ -11,13 +11,18 @@ const ITEMS: {
 }[] = [
   {
     name: 'Microsoft',
-    logo: { base: 'microsoft', ext: 'svg', shift: -3 },
+    logo: { base: 'microsoft', ext: 'svg', shift: -1 },
     link: 'https://www.microsoft.com',
   },
   {
     name: 'Namecheap',
-    logo: { base: 'namecheap', ext: 'svg', themed: true },
+    logo: { base: 'namecheap', ext: 'svg', themed: true, shift: 2 },
     link: 'https://www.namecheap.com',
+  },
+  {
+    name: 'Swapp',
+    logo: { base: 'swapp', ext: 'svg', themed: true, scale: 90, shift: -6 },
+    link: 'https://swapp.ro',
   },
   {
     name: 'EasyWP',
@@ -25,40 +30,19 @@ const ITEMS: {
     link: 'https://www.easywp.com',
   },
   {
-    name: 'LeasingSH.ro',
-    logo: { base: 'leasingsh-ro', ext: 'png', themed: true, scale: 80 },
-    link: 'https://leasingsh.ro',
-  },
-  {
-    name: 'CodeParrot.AI',
-    showText: true,
-    logo: { base: 'codeparrot', ext: 'svg', shift: 3, scale: 110 },
-    link: 'https://codeparrot.ai',
-    shift: 1,
-  },
-  {
     name: 'OmicsStudio',
-    logo: { base: 'omicsstudio', ext: 'svg', themed: true },
+    logo: { base: 'omicsstudio', ext: 'svg', themed: true, shift: -2 },
     link: 'https://omicsstudio.com',
   },
   {
-    name: 'SegmentX',
-    showText: true,
-    logo: { base: 'segmentx', ext: 'png', shift: 5, scale: 110 },
-    link: 'https://segmentx.ai',
-    shift: 1.5,
+    name: 'SalesPlayX',
+    logo: { base: 'salesplayx', ext: 'png', themed: true, scale: 80, shift: -5 },
+    link: 'https://www.salesplayx.com',
   },
   {
     name: 'Aquarino',
     logo: { base: 'aquarino', ext: 'svg', shift: 2 },
     link: 'http://aquarino.com.br',
-  },
-  {
-    name: 'Dera',
-    showText: true,
-    logo: { base: 'dera', ext: 'webp', shift: 10 },
-    link: 'https://getdera.com/',
-    shift: 1,
   },
   {
     name: 'kappa.ai',
@@ -89,6 +73,11 @@ const ITEMS: {
     name: 'BookieBase',
     logo: { base: 'bookiebase', ext: 'svg', themed: true, scale: 72, shift: 2 },
     link: 'https://bookiebase.ie',
+  },
+  {
+    name: 'LeasingSH.ro',
+    logo: { base: 'leasingsh-ro', ext: 'png', themed: true, scale: 80 },
+    link: 'https://leasingsh.ro',
   },
   {
     name: 'Zipline',
@@ -145,7 +134,7 @@ export function TrustedBy() {
             style: {
               height: `${scale || '100'}%`,
               marginTop: imageShift && imageShift > 0 ? `-${imageShift}%` : undefined,
-              marginBottom: imageShift && imageShift < 0 ? `-${imageShift}%` : undefined,
+              marginBottom: imageShift && imageShift < 0 ? `${imageShift}%` : undefined,
             },
             alt: title,
           };
@@ -161,7 +150,7 @@ export function TrustedBy() {
               style={
                 shift
                   ? {
-                      marginTop: shift < 0 ? `-${shift}%` : undefined,
+                      marginTop: shift < 0 ? `${shift}%` : undefined,
                       marginBottom: shift > 0 ? `-${shift}%` : undefined,
                     }
                   : undefined
