@@ -1,5 +1,6 @@
 import type { MantineStyleProp, MantineTheme, PopoverProps } from '@mantine/core';
 import type { DataTableColumnTextAlign } from './DataTableColumnTextAlign';
+import type { DataTableEditRenderContext } from './DataTableEditRenderContext';
 
 export type DataTableColumn<T = Record<string, unknown>> = {
   /**
@@ -179,6 +180,27 @@ export type DataTableColumn<T = Record<string, unknown>> = {
    * Optional style passed to the column footer.
    */
   footerStyle?: MantineStyleProp;
+
+  /**
+   * If true, cells in this column are editable on double-click.
+   * Can be a function receiving the current record and its index, returning a boolean,
+   * allowing per-cell control over editability.
+   */
+  editable?: boolean | ((record: T, index: number) => boolean);
+
+  /**
+   * Custom edit UI for this column.
+   * If provided, replaces the built-in unstyled TextInput when a cell enters edit mode.
+   * Receives the current record, its index, and a context with value/onChange/onCommit/onCancel.
+   */
+  editRender?: (record: T, index: number, context: DataTableEditRenderContext) => React.ReactNode;
+
+  /**
+   * Events that commit the edit for cells in this column.
+   * Overrides `defaultCommitEditOn` set at the DataTable level.
+   * @default ['blur', 'enter']
+   */
+  commitEditOn?: ('blur' | 'enter')[];
 } & (
   | {
       /**

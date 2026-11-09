@@ -164,6 +164,42 @@ export type DataTableProps<T = Record<string, unknown>> = {
   onCellContextMenu?: DataTableCellClickHandler<T>;
 
   /**
+   * Callback fired when an inline cell edit is committed.
+   * Receives the updated record, its index, the column accessor, and the new string value.
+   */
+  onCellEdit?: (params: {
+    record: T;
+    index: number;
+    accessor: keyof T | (string & NonNullable<unknown>);
+    value: string;
+  }) => void;
+
+  /**
+   * Default commit trigger events for all editable columns.
+   * Can be overridden per column via `commitEditOn`.
+   * @default ['blur', 'enter']
+   */
+  defaultCommitEditOn?: ('blur' | 'enter')[];
+
+  /**
+   * Edit mode for editable cells.
+   * - `'cell'` (default): double-click a cell to enter edit mode one at a time.
+   * - `'global'`: all editable cells are in edit mode simultaneously.
+   * @default 'cell'
+   */
+  editMode?: 'cell' | 'global';
+
+  /**
+   * Style applied to the `<td>` of the currently focused editing cell.
+   */
+  editingCellStyle?: MantineStyleProp;
+
+  /**
+   * Class name applied to the `<td>` of the currently focused editing cell.
+   */
+  editingCellClassName?: string;
+
+  /**
    * Function to call when a row is clicked.
    * Receives an object with the current record, its index in `records` and the click event
    * as properties.

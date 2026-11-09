@@ -2,7 +2,7 @@ import { Box, type MantineSize, Table } from '@mantine/core';
 import { useMergedRef } from '@mantine/hooks';
 import clsx from 'clsx';
 import type { RefObject } from 'react';
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { getTableCssVariables } from './cssVariables';
 import { DataTableColumnsProvider } from './DataTableDragToggleProvider';
 import { DataTableEmptyRow } from './DataTableEmptyRow';
@@ -22,7 +22,7 @@ import {
 } from './hooks';
 import type { DataTableProps } from './types';
 import { TEXT_SELECTION_DISABLED } from './utilityClasses';
-import { differenceBy, flattenColumns, getRecordId, uniqBy } from './utils';
+import { differenceBy, flattenColumns, getRecordId, getValueAtPath, uniqBy } from './utils';
 
 export function DataTable<T>({
   withTableBorder,
@@ -98,6 +98,11 @@ export function DataTable<T>({
   onCellClick,
   onCellDoubleClick,
   onCellContextMenu,
+  onCellEdit,
+  defaultCommitEditOn = ['blur', 'enter'],
+  editMode = 'cell',
+  editingCellStyle,
+  editingCellClassName,
   onScroll,
   onScrollToTop,
   onScrollToBottom,
@@ -165,6 +170,179 @@ export function DataTable<T>({
   const internalBodyRef = useRef<HTMLTableSectionElement>(null);
   const mergedBodyRef = useMergedRef(internalBodyRef, bodyRef);
   const rowExpansionInfo = useRowExpansion<T>({ rowExpansion, records, idAccessor });
+
+  const [editingCell, setEditingCell] = useState<{
+    recordKey: React.Key;
+    accessor: string;
+    value: string;
+  } | null>(null);
+
+  const [globalEditValues, setGlobalEditValues] = useState<Map<string, string>>(new Map());
+  const [focusedCell, setFocusedCell] = useState<{ recordKey: string; accessor: string } | null>(null);
+  const cellInputRefs = useRef<Map<string, HTMLInputElement>>(new Map());
+
+  // Initialize globalEditValues when switching to global mode or when records change
+  useEffect(() => {
+    if (editMode !== 'global') {
+      setGlobalEditValues(new Map());
+      setFocusedCell(null);
+      return;
+    }
+    if (!records) return;
+    setGlobalEditValues((prev) => {
+      const next = new Map(prev);
+      let changed = false;
+      for (let i = 0; i < records.length; i++) {
+        const record = records[i];
+        const recordKey = String(getRecordId(record, idAccessor));
+        for (const col of effectiveColumns) {
+          if (col.hidden || col.hiddenContent) continue;
+          const { accessor, editable } = defaultColumnProps ? { ...defaultColumnProps, ...col } : col;
+          const isEditable =
+            editable === true || (typeof editable === 'function' && editable(record, i));
+          if (isEditable) {
+            const mapKey = `${recordKey}::${String(accessor)}`;
+            if (!next.has(mapKey)) {
+              next.set(mapKey, String(getValueAtPath(record, accessor) ?? ''));
+              changed = true;
+            }
+          }
+        }
+      }
+      return changed ? next : prev;
+    });
+  }, [editMode, records, idAccessor, effectiveColumns, defaultColumnProps]);
+
+  const handleEditStart = useCallback((recordKey: React.Key, accessor: string, value: string) => {
+    setEditingCell({ recordKey, accessor, value });
+  }, []);
+
+  const handleEditChange = useCallback((value: string) => {
+    setEditingCell((prev) => (prev ? { ...prev, value } : null));
+  }, []);
+
+  const handleEditCommit = useCallback(
+    (overrideValue?: string) => {
+      if (editingCell) {
+        if (onCellEdit) {
+          const finalValue = overrideValue !== undefined ? overrideValue : editingCell.value;
+          const record = records?.find((r) => getRecordId(r, idAccessor) === editingCell.recordKey);
+          if (record) {
+            const index = records!.indexOf(record);
+            onCellEdit({
+              record,
+              index,
+              accessor: editingCell.accessor as keyof T | (string & NonNullable<unknown>),
+              value: finalValue,
+            });
+          }
+        }
+        setEditingCell(null);
+      }
+    },
+    [editingCell, onCellEdit, records, idAccessor]
+  );
+
+  const handleEditCancel = useCallback(() => {
+    setEditingCell(null);
+  }, []);
+
+  const handleGlobalEditChange = useCallback((recordKey: React.Key, accessor: string, value: string) => {
+    setGlobalEditValues((prev) => {
+      const next = new Map(prev);
+      next.set(`${String(recordKey)}::${accessor}`, value);
+      return next;
+    });
+  }, []);
+
+  const handleGlobalEditCommit = useCallback(
+    (recordKey: React.Key, accessor: string, overrideValue?: string) => {
+      if (onCellEdit) {
+        const mapKey = `${String(recordKey)}::${accessor}`;
+        const finalValue = overrideValue !== undefined ? overrideValue : (globalEditValues.get(mapKey) ?? '');
+        const record = records?.find((r) => getRecordId(r, idAccessor) === recordKey);
+        if (record) {
+          const index = records!.indexOf(record);
+          onCellEdit({
+            record,
+            index,
+            accessor: accessor as keyof T | (string & NonNullable<unknown>),
+            value: finalValue,
+          });
+        }
+      }
+      // In global mode, cell stays in edit state — do not clear editingCell
+    },
+    [onCellEdit, globalEditValues, records, idAccessor]
+  );
+
+  const handleGlobalEditCancel = useCallback(
+    (recordKey: React.Key, accessor: string) => {
+      const record = records?.find((r) => String(getRecordId(r, idAccessor)) === String(recordKey));
+      if (record) {
+        const original = String(getValueAtPath(record, accessor) ?? '');
+        setGlobalEditValues((prev) => {
+          const next = new Map(prev);
+          next.set(`${String(recordKey)}::${accessor}`, original);
+          return next;
+        });
+      }
+    },
+    [records, idAccessor]
+  );
+
+  const handleCellFocus = useCallback((recordKey: React.Key, accessor: string) => {
+    setFocusedCell({ recordKey: String(recordKey), accessor });
+  }, []);
+
+  const handleCellBlur = useCallback(() => {
+    setFocusedCell(null);
+  }, []);
+
+  const registerCellRef = useCallback((recordKey: React.Key, accessor: string, el: HTMLInputElement | null) => {
+    const key = `${String(recordKey)}::${accessor}`;
+    if (el) {
+      cellInputRefs.current.set(key, el);
+    } else {
+      cellInputRefs.current.delete(key);
+    }
+  }, []);
+
+  const handleFocusCell = useCallback((recordKey: React.Key, accessor: string) => {
+    const key = `${String(recordKey)}::${accessor}`;
+    cellInputRefs.current.get(key)?.focus();
+  }, []);
+
+  const handleFocusNextRow = useCallback(
+    (direction: 'next' | 'prev', fromRecordId: React.Key) => {
+      if (!records) return;
+      const currentIdx = records.findIndex((r) => getRecordId(r, idAccessor) === fromRecordId);
+      if (currentIdx === -1) return;
+      const rawNext = direction === 'next' ? currentIdx + 1 : currentIdx - 1;
+      const nextIdx = ((rawNext % records.length) + records.length) % records.length;
+
+      const nextRecord = records[nextIdx];
+      const nextRecordKey = getRecordId(nextRecord, idAccessor) as React.Key;
+      const editableCols = effectiveColumns
+        .filter(({ hidden, hiddenContent }) => !hidden && !hiddenContent)
+        .map((col) => (defaultColumnProps ? { ...defaultColumnProps, ...col } : col))
+        .filter(
+          ({ editable }) =>
+            editable === true || (typeof editable === 'function' && editable(nextRecord, nextIdx))
+        );
+      if (!editableCols.length) return;
+
+      const targetCol = direction === 'next' ? editableCols[0] : editableCols[editableCols.length - 1];
+      const targetAccessor = String(targetCol.accessor);
+
+      if (editMode === 'global') {
+        handleFocusCell(nextRecordKey, targetAccessor);
+      } else {
+        handleEditStart(nextRecordKey, targetAccessor, String(getValueAtPath(nextRecord, targetCol.accessor) ?? ''));
+      }
+    },
+    [records, idAccessor, effectiveColumns, defaultColumnProps, editMode, handleFocusCell, handleEditStart]
+  );
 
   const { pinnedMap, hasLeftPinned, hasRightPinned } = useDataTablePinnedColumns({
     columns: effectiveColumns,
@@ -428,6 +606,26 @@ export function DataTable<T>({
                         selectionColumnStyle={selectionColumnStyle}
                         idAccessor={idAccessor as string}
                         rowFactory={rowFactory}
+                        recordId={recordId as React.Key}
+                        editingCell={editingCell}
+                        onEditStart={handleEditStart}
+                        onEditChange={handleEditChange}
+                        onEditCommit={handleEditCommit}
+                        onEditCancel={handleEditCancel}
+                        defaultCommitEditOn={defaultCommitEditOn}
+                        editMode={editMode}
+                        globalEditValues={globalEditValues}
+                        focusedCell={focusedCell}
+                        onCellFocus={handleCellFocus}
+                        onCellBlur={handleCellBlur}
+                        onGlobalEditChange={handleGlobalEditChange}
+                        onGlobalEditCommit={handleGlobalEditCommit}
+                        onGlobalEditCancel={handleGlobalEditCancel}
+                        registerCellRef={registerCellRef}
+                        onFocusCell={handleFocusCell}
+                        onFocusNextRow={handleFocusNextRow}
+                        editingCellStyle={editingCellStyle}
+                        editingCellClassName={editingCellClassName}
                       />
                     );
                   })
