@@ -87,9 +87,10 @@ export function useDataTableColumnReorder<T>({
     setColumnsOrder(defaultColumnsOrder);
   };
 
+  // Without a key nothing is persisted, so never read from localStorage (see #845)
   if (!key) {
     return {
-      columnsOrder,
+      columnsOrder: defaultColumnsOrder,
       setColumnsOrder,
       resetColumnsOrder,
     } as const;

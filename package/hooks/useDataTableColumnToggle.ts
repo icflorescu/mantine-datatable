@@ -105,9 +105,10 @@ export function useDataTableColumnToggle<T>({
     setColumnsToggle(defaultColumnsToggle);
   };
 
+  // Without a key nothing is persisted, so never read from localStorage (see #845)
   if (!key) {
     return {
-      columnsToggle,
+      columnsToggle: defaultColumnsToggle,
       setColumnsToggle,
       resetColumnsToggle,
     } as const;
