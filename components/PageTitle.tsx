@@ -15,7 +15,7 @@ export type PageTitleProps =
 
 export function PageTitle({ of, children }: PageTitleProps) {
   return (
-    <Title className={classes.root} order={2}>
+    <Title className={classes.root} order={1}>
       {children || getRouteTitle(of!)}
     </Title>
   );

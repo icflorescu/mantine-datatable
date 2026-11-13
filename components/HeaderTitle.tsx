@@ -1,4 +1,4 @@
-import { Title } from '@mantine/core';
+import { Text } from '@mantine/core';
 import { IconTable } from '@tabler/icons-react';
 import Link from 'next/link';
 import { PRODUCT_NAME } from '~/app/config';
@@ -8,9 +8,9 @@ export function HeaderTitle() {
   return (
     <Link className={classes.root} href="/">
       <IconTable className={classes.icon} />
-      <Title className={classes.text} order={1}>
+      <Text className={classes.text} component="span" fw={700} lh={1.3}>
         {PRODUCT_NAME}
-      </Title>
+      </Text>
     </Link>
   );
 }
