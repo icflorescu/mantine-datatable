@@ -550,6 +550,17 @@ describe('default column props', () => {
     await page.getByRole('checkbox', { name: 'Age' }).click();
     await expect.poll(headers).toEqual(['First name', 'Last name', 'City']);
   });
+
+  test('persists the actual defaultToggle value of each column', async () => {
+    await renderDataTable({
+      columns: [{ accessor: 'firstName', toggleable: true, defaultToggle: false }, ...columns.slice(1)],
+      storeColumnsKey: 'stored-default-toggle',
+    });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    await expect
+      .poll(() => JSON.parse(localStorage.getItem('stored-default-toggle-columns-toggle') ?? '[]')[0])
+      .toEqual(expect.objectContaining({ accessor: 'firstName', defaultToggle: false, toggled: false }));
+  });
 });
 
 describe('scrolling', () => {

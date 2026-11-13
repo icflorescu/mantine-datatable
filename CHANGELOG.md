@@ -8,6 +8,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 - Fix column group headers getting out of sync with the columns when these are reordered, toggled or pinned; a group whose columns are no longer adjacent (e.g. when one of them is pinned to the other side) now gets its header split accordingly
 - Fix `toggleable`, `defaultToggle`, `resizable`, `pinned` and `pinnable` being ignored or only partly working when set via `defaultColumnProps`
 - Fix tables constrained only by `maxHeight` (without `height`) not being scrollable
+- Fix `defaultToggle` always being persisted as `true` in the stored columns toggle state
 - Fix typos and inaccuracies in JSDoc comments
 - Update dev deps to ensure compatibility with Mantine 9.8.0 & Mantine ContextMenu 9.8.0
 - Update GitHub workflow action versions & Biome config
