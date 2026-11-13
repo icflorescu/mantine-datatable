@@ -14,7 +14,7 @@ import type { Route } from 'next';
 
 export const PRODUCT_NAME = 'Mantine DataTable';
 export const PRODUCT_DESCRIPTION =
-  'A fully-featured data-table/data-grid React component for building data-rich applications with Mantine UI, trusted by thousands of developers and companies around the world, from small startups to large enterprises like Microsoft';
+  'A fully-featured React data table/data grid component for Mantine UI, trusted by thousands of developers and companies around the world, including Microsoft';
 
 export const WEB_ROOT = 'https://icflorescu.github.io';
 export const WEBSITE_LINK = `${WEB_ROOT}/${process.env.PACKAGE_NAME}`;
@@ -258,7 +258,7 @@ export const ROUTES: RouteInfo[] = [
   {
     href: '/examples/complex-usage-scenario',
     title: 'Complex usage scenario',
-    description: `Example: a complex usage scenario for ${PRODUCT_NAME} featuring custom column definitions, asynchronous data loading with TanStack Query, sorting, pagination, custom cell rendering, multiple row selection and more`,
+    description: `Example: a complex usage scenario for ${PRODUCT_NAME} with TanStack Query data loading, sorting, pagination, custom cell rendering, row selection and more`,
   },
   {
     href: '/type-definitions',
