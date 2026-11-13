@@ -438,6 +438,33 @@ describe('column toggling & persistence', () => {
   });
 });
 
+describe('scrolling', () => {
+  const manyPeople = Array.from({ length: 40 }, (_, i) => ({ ...people[i % people.length], id: i + 1 }));
+  const viewport = () => document.querySelector<HTMLElement>('.mantine-datatable-scroll-area-viewport')!;
+
+  test('becomes scrollable when height is set', async () => {
+    await renderDataTable({ records: manyPeople, height: 300 });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    expect(viewport().clientHeight).toBe(300);
+    expect(viewport().scrollHeight).toBeGreaterThan(300);
+  });
+
+  test('becomes scrollable when only maxHeight is set', async () => {
+    await renderDataTable({ records: manyPeople, maxHeight: 300 });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    expect(document.querySelector<HTMLElement>('.mantine-datatable')!.offsetHeight).toBe(300);
+    expect(viewport().clientHeight).toBe(300);
+    viewport().scrollTop = viewport().scrollHeight;
+    await expect.poll(() => viewport().scrollTop).toBeGreaterThan(0);
+  });
+
+  test('grows with its content when no height is set', async () => {
+    await renderDataTable({ records: manyPeople });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    expect(viewport().clientHeight).toBe(viewport().scrollHeight);
+  });
+});
+
 describe('styling', () => {
   test('resolves function and array values of styles.table (#835)', async () => {
     await renderDataTable({

@@ -24,6 +24,7 @@ export function DataTableScrollArea({
       viewportRef={viewportRef}
       classNames={{
         root: 'mantine-datatable-scroll-area',
+        viewport: 'mantine-datatable-scroll-area-viewport',
         scrollbar: 'mantine-datatable-scroll-area-scrollbar',
         thumb: 'mantine-datatable-scroll-area-thumb',
         corner: 'mantine-datatable-scroll-area-corner',
