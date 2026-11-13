@@ -42,8 +42,8 @@ export default async function TypeDefinitionsPage() {
         allow dot-notation paths and virtual columns, so accessor typos aren’t caught by the compiler).
       </Txt>
       <Txt>
-        Most of the types listed below are exported by the package, so you can also use them explicitly; for instance,
-        when declaring column definitions outside of the component, or when typing the state used for{' '}
+        All the types listed below are exported by the package, so you can also use them explicitly; for instance, when
+        declaring column definitions outside of the component, or when typing the state used for{' '}
         <InternalLink to="/examples/sorting">sorting</InternalLink> (<Code>DataTableSortStatus</Code>):
       </Txt>
       <CodeBlock code={typedColumnsCode} />

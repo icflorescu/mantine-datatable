@@ -3,7 +3,15 @@ import { useState } from 'react';
 import { describe, expect, test, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-react';
-import { DataTable, type DataTableSortStatus } from '../package/index';
+import {
+  DataTable,
+  type DataTableColorProps,
+  type DataTableColumnProps,
+  type DataTableLoaderProps,
+  type DataTablePageSizeSelectorProps,
+  type DataTableScrollProps,
+  type DataTableSortStatus,
+} from '../package/index';
 import { columns, type Person, people, renderDataTable } from './utils';
 
 // Vitest's role engine only maps `<th>` elements to `columnheader` when they have a `scope` attribute,
@@ -588,6 +596,17 @@ describe('colors', () => {
     await expect.element(page.getByRole('table')).toBeVisible();
     const selectedCell = bodyRows()[1].element().querySelector('td:not(.mantine-datatable-row-selector-cell)')!;
     expect(getComputedStyle(selectedCell).backgroundColor).toBe('rgb(0, 255, 0)');
+  });
+});
+
+describe('type exports', () => {
+  test('exports the prop types used by DataTableProps', () => {
+    const colorProps: DataTableColorProps<Person> = { selectionColor: 'red' };
+    const columnProps: Partial<DataTableColumnProps<Person>> = {};
+    const loaderProps: DataTableLoaderProps = { loaderSize: 'md' };
+    const pageSizeSelectorProps: Partial<DataTablePageSizeSelectorProps> = {};
+    const scrollProps: DataTableScrollProps = {};
+    expect([colorProps, columnProps, loaderProps, pageSizeSelectorProps, scrollProps]).toHaveLength(5);
   });
 });
 
