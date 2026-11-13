@@ -24,7 +24,7 @@ export type DataTableSortProps<T = Record<string, unknown>> = (
   sortIcons?: {
     /**
      * Icon to display when column is sorted ascending.
-     * Will be rotated 180deg for descending sort
+     * Will be flipped vertically for descending sort
      */
     sorted: React.ReactNode;
     /**

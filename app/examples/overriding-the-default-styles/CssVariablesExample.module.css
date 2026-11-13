@@ -1,0 +1,4 @@
+.root {
+  --mantine-datatable-selection-color: light-dark(var(--mantine-color-teal-1), var(--mantine-color-teal-9));
+  --mantine-datatable-highlight-on-hover-color: light-dark(var(--mantine-color-teal-0), var(--mantine-color-dark-5));
+}

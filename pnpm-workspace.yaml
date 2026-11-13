@@ -3,4 +3,4 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - mantine-contextmenu@9.7.5
+  - mantine-contextmenu@9.8.0

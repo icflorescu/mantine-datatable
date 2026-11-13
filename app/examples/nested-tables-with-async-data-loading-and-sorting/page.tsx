@@ -5,6 +5,7 @@ import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
+import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { NestedTablesAsyncSortingExample } from './NestedTablesAsyncSortingExample';
@@ -26,12 +27,13 @@ export default async function NestedTablesWithAsyncDataLoadingAndSortingExampleP
     <>
       <PageTitle of={PATH} />
       <Txt>
-        Here is how you can combine{' '}
-        <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink> with{' '}
-        <InternalLink to="/examples/sorting">sorting</InternalLink> in nested tables.
+        Building on the{' '}
+        <InternalLink to="/examples/nested-tables-with-async-data-loading">previous example</InternalLink>, here is how
+        you can combine <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink>{' '}
+        with <InternalLink to="/examples/sorting">sorting</InternalLink> in nested tables.
       </Txt>
       <Txt warning title="Warning">
-        Nested tables do not work with column pinning -{' '}
+        Nested tables do not work with column pinning &mdash;{' '}
         <InternalLink to="/examples/pinning-the-first-column">
           <Code>pinFirstColumn</Code>
         </InternalLink>{' '}
@@ -41,9 +43,27 @@ export default async function NestedTablesWithAsyncDataLoadingAndSortingExampleP
         </InternalLink>
         .
       </Txt>
-      <Txt>Click on the column headers and the expandable rows in the table below to see it in action:</Txt>
+      <Txt>Click the column headers and the expandable rows in the table below to see it in action:</Txt>
       <NestedTablesAsyncSortingExample />
-      <Txt>The above example is implemented with the following code:</Txt>
+      <Txt>How it works:</Txt>
+      <UnorderedList>
+        <li>
+          Only the top-level table has a header, so it owns the <Code>sortStatus</Code> state and is the only one
+          receiving an <Code>onSortStatusChange</Code> handler.
+        </li>
+        <li>
+          The sort status is passed down as a prop to the nested table components, which include it in their data
+          requests; this way, the expanded departments and employees are re-sorted as soon as the user clicks a column
+          header. Each data source decides how to interpret the sorted column &mdash; for instance, the second column
+          sorts companies and departments by their employee count and employees by their birth date.
+        </li>
+        <li>
+          The nested tables use <Code>fetching={'{loading && !records.length}'}</Code>, so the loader is only displayed
+          during the initial load. When re-sorting, the current rows stay visible until the newly sorted ones arrive,
+          avoiding a flood of loaders across all the expanded levels.
+        </li>
+      </UnorderedList>
+      <Txt>Here is the code:</Txt>
       <CodeBlock
         tabs={{
           code,

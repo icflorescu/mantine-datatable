@@ -35,7 +35,7 @@ export function RowDraggingExample() {
     setRecords(items);
     notifications.show({
       title: 'Table reordered',
-      message: `The company named "${items[sourceIndex].name}" has been moved from position ${sourceIndex + 1} to ${destinationIndex + 1}.`,
+      message: `The company named “${reorderedItem.name}” has been moved from position ${sourceIndex + 1} to ${destinationIndex + 1}.`,
       color: 'blue',
     });
   };

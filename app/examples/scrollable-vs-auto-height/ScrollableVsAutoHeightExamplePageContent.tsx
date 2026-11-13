@@ -8,7 +8,7 @@ import { AutoHeightExample, ScrollableExample } from './ScrollableVsAutoHeightEx
 export function ScrollableVsAutoHeightExamplePageContent({
   code,
 }: {
-  code: Record<'scrollable' | 'auto-height' | 'scroll-area-props', string>;
+  code: Record<'scrollable' | 'auto-height' | 'min-max-height' | 'scroll-area-props', string>;
 }) {
   const [scrollable, setScrollable] = useState(true);
 

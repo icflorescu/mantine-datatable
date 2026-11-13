@@ -34,27 +34,30 @@ export default async function RowStylingExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        You can style individual rows using the <Code>rowColor</Code>, <Code>rowBackgroundColor</Code>,{' '}
-        <Code>rowClassName</Code> and <Code>rowStyle</Code> properties.
+        You can style individual rows based on their data using the <Code>rowColor</Code>,{' '}
+        <Code>rowBackgroundColor</Code>, <Code>rowClassName</Code> and <Code>rowStyle</Code> properties.
         <br />
-        They work the same way as the <Code>c</Code>, <Code>backgroundColor</Code>, <Code>className</Code> and{' '}
-        <Code>style</Code> <InternalLink to="/examples/overriding-the-default-styles">properties</InternalLink> of the
-        DataTable component, but target rows instead of the component root.
+        They are the row-level counterparts of the <Code>c</Code>, <Code>backgroundColor</Code>, <Code>className</Code>{' '}
+        and <Code>style</Code> <InternalLink to="/examples/overriding-the-default-styles">properties</InternalLink> of
+        the DataTable component, but they accept functions that receive the current record and its index, so each row
+        can be styled differently (<Code>rowClassName</Code> also accepts a plain string).
       </Txt>
-      <PageSubtitle value="With color properties" />
+      <PageSubtitle value="Using rowColor and rowBackgroundColor" />
       <Txt>
-        The <Code>c</Code> and <Code>backgroundColor</Code> properties accept a function that receives the current
-        record and its index as arguments and returns either a <Code>MantineColor</Code> to be applied to the row, or an
-        object with <Code>light</Code> and <Code>dark</Code> keys and <Code>MantineColor</Code> values to be applied to
-        the row in light and dark themes respectively.
+        The <Code>rowColor</Code> and <Code>rowBackgroundColor</Code> properties accept a function that receives the
+        current record and its index as arguments and returns either a <Code>MantineColor</Code> (a key of{' '}
+        <Code>theme.colors</Code> or any valid CSS color string) to be applied to the row, or an object with{' '}
+        <Code>light</Code> and <Code>dark</Code> keys and <Code>MantineColor</Code> values to be applied in light and
+        dark color schemes respectively. Return <Code>undefined</Code> to leave a row with its default colors.
       </Txt>
       <RowStylingWithColorPropertiesExample />
       <Txt>Here is the code used to produce the result above:</Txt>
       <CodeBlock code={code['RowStylingWithColorPropertiesExample.tsx']} />
       <PageSubtitle value="Using rowClassName" />
       <Txt>
-        The <Code>rowClassName</Code> property accepts a function that receives the current record and its index as
-        arguments and returns a string representing the class name to be applied to the row.
+        The <Code>rowClassName</Code> property accepts either a string, to apply the same class name to every row, or a
+        function that receives the current record and its index as arguments and returns the class name to be applied to
+        the row (or <Code>undefined</Code> for no extra class).
       </Txt>
       <RowStylingWithClassNameExample />
       <Txt>Here is the code used to produce the result above:</Txt>
@@ -64,17 +67,22 @@ export default async function RowStylingExamplePage() {
       <PageSubtitle value="Using rowStyle" />
       <Txt>
         The <Code>rowStyle</Code> property accepts a function that receives the current record and its index as
-        arguments and returns either an object representing the style to be applied to the row, or a function accepting
-        the current theme and returning such an object.
+        arguments and returns either a style object to be applied to the row, or a function that accepts the current
+        theme and returns such an object.
       </Txt>
       <RowStylingWithStyleObjectExample />
       <Txt>Here is the code used to produce the result above:</Txt>
       <CodeBlock code={code['RowStylingWithStyleObjectExample.tsx']} />
-      <Txt>And here is how you could build a style by returning a function that accepts the current theme:</Txt>
+      <Txt>And here is how you could build the style based on the current theme, by returning a function:</Txt>
       <RowStylingWithStyleFunctionExample />
-      <Txt>Code:</Txt>
+      <Txt>Here is the code used to produce the result above:</Txt>
       <CodeBlock code={code['RowStylingWithStyleFunctionExample.tsx']} />
-      <Txt>Head over to the next example to learn about its basic properties.</Txt>
+      <Txt idea>
+        If you need to style individual cells rather than whole rows, have a look at the column{' '}
+        <Code>cellsClassName</Code> and <Code>cellsStyle</Code> properties, described in the{' '}
+        <InternalLink to="/examples/column-properties-and-styling">column properties and styling</InternalLink> example.
+      </Txt>
+      <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
   );

@@ -19,7 +19,7 @@ import {
   useLastSelectionChangeIndex,
   useRowExpansion,
 } from './hooks';
-import type { DataTableProps } from './types';
+import type { DataTableColumn, DataTableProps } from './types';
 import { TEXT_SELECTION_DISABLED } from './utilityClasses';
 import { differenceBy, flattenColumns, getRecordId, uniqBy } from './utils';
 
@@ -108,6 +108,7 @@ export function DataTable<T>({
   rowBorderColor,
   stripedColor,
   highlightOnHoverColor,
+  selectionColor,
   rowColor,
   rowBackgroundColor,
   rowExpansion,
@@ -134,8 +135,13 @@ export function DataTable<T>({
   ...otherProps
 }: DataTableProps<T>): JSX.Element {
   const flatColumns = useMemo(() => {
-    return groups ? flattenColumns(groups) : columns!;
-  }, [columns, groups]);
+    const result = groups ? flattenColumns(groups) : columns!;
+    // Apply the default column props up front, so that column features relying on them
+    // (toggling, resizing, pinning...) work the same as when they're set on individual columns
+    return defaultColumnProps
+      ? result.map((column) => ({ ...defaultColumnProps, ...column }) as DataTableColumn<T>)
+      : result;
+  }, [columns, groups, defaultColumnProps]);
 
   const { refs, onScroll: handleScrollPositionChange } = useDataTableInjectCssVariables({
     scrollCallbacks: {
@@ -282,6 +288,7 @@ export function DataTable<T>({
               rowBorderColor,
               stripedColor,
               highlightOnHoverColor,
+              selectionColor,
             }),
             borderRadius: theme.radius[borderRadius as MantineSize] || borderRadius,
             boxShadow: theme.shadows[shadow as MantineSize] || shadow,

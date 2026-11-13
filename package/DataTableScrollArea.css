@@ -1,5 +1,15 @@
 .mantine-datatable-scroll-area {
   flex: 1 1 100%;
+  /* Allow the scroll area to shrink below its content height, so that tables constrained
+     only by `maxHeight` (without a fixed `height`) become scrollable instead of clipping rows */
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mantine-datatable-scroll-area-viewport {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .mantine-datatable-scroll-area-corner {

@@ -42,7 +42,7 @@ export function useDataTableColumnToggle<T>({
     () =>
       columns?.map((column) => ({
         accessor: column.accessor as string,
-        defaultToggle: column.defaultToggle || true,
+        defaultToggle: column.defaultToggle ?? true,
         toggleable: column.toggleable as boolean,
         toggled: column.defaultToggle === undefined ? true : column.defaultToggle,
       })) as DataTableColumnToggle[],
@@ -83,7 +83,7 @@ export function useDataTableColumnToggle<T>({
       if (!aligned.find((c) => c.accessor === col.accessor)) {
         aligned.push({
           accessor: col.accessor as string,
-          defaultToggle: col.defaultToggle || true,
+          defaultToggle: col.defaultToggle ?? true,
           toggleable: col.toggleable as boolean,
           toggled: col.defaultToggle === undefined ? true : col.defaultToggle,
         });

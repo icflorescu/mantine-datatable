@@ -3,7 +3,7 @@ import classes from './HomePageTitle.module.css';
 
 export function HomePageTitle() {
   return (
-    <Title className={classes.root} order={2}>
+    <Title className={classes.root} order={1}>
       The{' '}
       <Text className="nowrap" span inherit variant="gradient" gradient={{ from: 'blue', to: 'cyan', deg: 30 }}>
         table component

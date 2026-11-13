@@ -23,7 +23,10 @@
     light-dark(--mantine-datatable-highlight-on-hover-color-light, --mantine-datatable-highlight-on-hover-color-dark),
     light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5))
   );
-  --mantine-datatable-selection-color: var(--mantine-primary-color-light);
+  --mantine-datatable-selection-color: var(
+    light-dark(--mantine-datatable-selection-color-light, --mantine-datatable-selection-color-dark),
+    var(--mantine-primary-color-light)
+  );
   --mantine-datatable-shadow-background-top:
     linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.25)), rgba(0, 0, 0, 0)),
     linear-gradient(rgba(0, 0, 0, light-dark(0.05, 0.25)) 30%, rgba(0, 0, 0, 0));
@@ -124,7 +127,8 @@
     background: inherit;
   }
 
-  &[data-striped] tbody tr:nth-of-type(odd) {
+  &[data-striped]:not([data-striped='even']) tbody tr:nth-of-type(odd),
+  &[data-striped='even'] tbody tr:nth-of-type(even) {
     background: var(--mantine-datatable-striped-color);
   }
 

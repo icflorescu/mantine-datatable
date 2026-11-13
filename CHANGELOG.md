@@ -3,6 +3,20 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.8.0 (2026-11-13)
+
+- Fix column group headers getting out of sync with the columns when these are reordered, toggled or pinned; a group whose columns are no longer adjacent (e.g. when one of them is pinned to the other side) now gets its header split accordingly
+- Fix `toggleable`, `defaultToggle`, `resizable`, `pinned` and `pinnable` being ignored or only partly working when set via `defaultColumnProps`
+- Fix tables constrained only by `maxHeight` (without `height`) not being scrollable
+- Fix `striped="even"` having no effect
+- Fix `defaultToggle` always being persisted as `true` in the stored columns toggle state
+- Add `selectionColor` property to customize the background color of selected rows
+- Export the `DataTableColorProps`, `DataTableColumnProps`, `DataTableLoaderProps`, `DataTablePageSizeSelectorProps` and `DataTableScrollProps` types
+- Fix typos and inaccuracies in JSDoc comments
+- Update dev deps to ensure compatibility with Mantine 9.8.0 & Mantine ContextMenu 9.8.0
+- Update GitHub workflow action versions & Biome config
+- Add component tests with Vitest browser mode & Playwright
+
 ## 9.7.5 (2026-11-09)
 
 - Fix issue [#845](https://github.com/icflorescu/mantine-datatable/issues/845) - tables without `storeColumnsKey` become invisible when `localStorage` holds a value under an empty key; column order and visibility are no longer read from `localStorage` when no key is provided, thanks to [Rohit Singh](https://github.com/rohit-singh121) for the analysis and initial fix proposal

@@ -25,32 +25,33 @@ export default async function ScrollIntoViewExamplesPage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        There are two possible approaches you could use to scroll a specific row into view in a {PRODUCT_NAME}. Both of
-        them rely on adding <Code>data-*</Code>{' '}
+        There are two approaches you could use to scroll a specific row into view in a {PRODUCT_NAME}. Both rely on
+        adding <Code>data-*</Code>{' '}
         <InternalLink to="/examples/custom-row-or-cell-attributes">
           <Code>customRowAttributes</Code>
         </InternalLink>{' '}
-        to the row, and then using DOM methods to find and scroll the row into view.
+        to the rows, then using DOM methods to find the desired row and scroll it into view.
       </Txt>
       <PageSubtitle value="Using scrollIntoView" />
       <Txt>
-        The simplest possible way is to use the{' '}
+        The simplest way is to use the{' '}
         <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView">
           <Code>scrollIntoView</Code>
         </ExternalLink>{' '}
-        method on the row element itself. Here is an example of how you could use it:
+        method of the row element itself. Here is an example of how you could use it:
       </Txt>
       <ScrollIntoViewExample />
       <Txt idea title="Keep in mind">
         <Text inherit mb="xs">
-          This method is simple and works well in most cases, but it has a limitation when the table is part of a more
-          complex layout - it will scroll the entire page to the top when bringing the row into view.
+          This method is simple and works well in most cases, but it has a drawback when the table is part of a more
+          complex layout: besides the table itself, it will also scroll the page (and any other scrollable ancestors) as
+          needed to bring the row into view.
         </Text>
         <Text inherit mb="xs">
-          Also, due to the fact that the <Code>DataTable</Code> header is fixed, using <Code>scrollIntoView()</Code>{' '}
-          with no arguments, or the equivalent{' '}
-          <Code style={{ whiteSpace: 'nowrap' }}>{"scrollIntoView({ block: 'start' })"}</Code>, will not work as
-          expected.
+          Also, since the <Code>DataTable</Code> header is sticky, using <Code>scrollIntoView()</Code> with no
+          arguments, or the equivalent{' '}
+          <Code style={{ whiteSpace: 'nowrap' }}>{"scrollIntoView({ block: 'start' })"}</Code>, will hide the row
+          underneath the header.
         </Text>
         <Text inherit>
           You should use <Code>scrollIntoView(false)</Code>, or the equivalent{' '}
@@ -61,12 +62,13 @@ export default async function ScrollIntoViewExamplesPage() {
       <CodeBlock code={code['scroll-into-view']} />
       <PageSubtitle value="Using table viewport scrollTo" />
       <Txt>
-        If the DataTable resides in a page with a more complex layout and you want to avoid scrolling the entire page
-        when bringing a row into view, you can use the{' '}
+        If the DataTable is part of a more complex layout and you want to avoid scrolling the page when bringing a row
+        into view, you can get hold of the table’s scrollable viewport element with the <Code>scrollViewportRef</Code>{' '}
+        property and use its{' '}
         <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo">
           <Code>scrollTo</Code>
         </ExternalLink>{' '}
-        method of the table viewport element:
+        method, taking into account the height of the sticky header:
       </Txt>
       <ScrollToExample />
       <Txt>Here is the code:</Txt>

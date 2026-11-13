@@ -44,6 +44,14 @@ export type DataTableColorProps<T> = {
   highlightOnHoverColor?: MantineColor | { light: MantineColor; dark: MantineColor };
 
   /**
+   * Background color of selected rows.
+   * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
+   * or an object with `light` and `dark` keys and `MantineColor` values.
+   * Defaults to the light variant of the theme's primary color.
+   */
+  selectionColor?: MantineColor | { light: MantineColor; dark: MantineColor };
+
+  /**
    * Data table row text color.
    * A function that accepts row data and returns color.
    * The returned color can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
@@ -53,7 +61,7 @@ export type DataTableColorProps<T> = {
 
   /**
    * Data table row background color.
-   * A function that accepts row data and returns background color color.
+   * A function that accepts row data and returns a background color.
    * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
    * or an object with `light` and `dark` keys and `MantineColor` values.
    */

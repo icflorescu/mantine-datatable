@@ -9,16 +9,17 @@ import {
   Stack,
   TableThead,
   TableTr,
+  useMantineTheme,
 } from '@mantine/core';
 import clsx from 'clsx';
-import { type JSX, useState } from 'react';
+import { type JSX, useMemo, useState } from 'react';
 import { DataTableColumnGroupHeaderCell } from './DataTableColumnGroupHeaderCell';
 import { useDataTableColumnsContext } from './DataTableColumns.context';
 import { DataTableHeaderCell } from './DataTableHeaderCell';
 import { DataTableHeaderSelectorCell } from './DataTableHeaderSelectorCell';
-import type { DataTableColumnToggle, PinnedColumnInfo } from './hooks';
+import { type DataTableColumnToggle, type PinnedColumnInfo, useMediaQueries } from './hooks';
 import type { DataTableColumn, DataTableColumnGroup, DataTableSelectionTrigger, DataTableSortProps } from './types';
-import { getGroupsAtDepth, getMaxGroupDepth, humanize } from './utils';
+import { getMaxGroupDepth, humanize } from './utils';
 
 type DataTableHeaderProps<T> = {
   selectionColumnHeaderRef: React.ForwardedRef<HTMLTableCellElement>;
@@ -44,28 +45,110 @@ type DataTableHeaderProps<T> = {
   ref: React.Ref<HTMLTableSectionElement>;
 };
 
-function getGroupPinnedInfo<T>(
-  group: DataTableColumnGroup<T>,
+type ColumnGroupHeaderSegment<T> = {
+  group: DataTableColumnGroup<T>;
+  colSpan: number;
+  rowSpan: number;
+  pinnedInfo: PinnedColumnInfo | undefined;
+  needsBorder: boolean;
+  key: string;
+};
+
+/**
+ * Maps each leaf column accessor to the chain of groups containing it, from the outermost to the innermost one.
+ */
+function getColumnGroupChains<T>(
+  groups: readonly DataTableColumnGroup<T>[],
+  parents: DataTableColumnGroup<T>[] = [],
+  chains = new Map<string, DataTableColumnGroup<T>[]>()
+) {
+  for (const group of groups) {
+    const chain = [...parents, group];
+    if (group.columns && group.columns.length > 0) {
+      for (const column of group.columns) {
+        if (column != null) chains.set(String(column.accessor), chain);
+      }
+    } else if (group.groups && group.groups.length > 0) {
+      getColumnGroupChains(group.groups, chain, chains);
+    }
+  }
+  return chains;
+}
+
+/**
+ * A group header cell is pinned when all of the columns it spans are pinned to the same side.
+ */
+function getSegmentPinnedInfo(
+  accessors: string[],
   pinnedMap: Map<string, PinnedColumnInfo>
 ): PinnedColumnInfo | undefined {
-  const leafColumns = group.columns ?? [];
-  const leafAccessors = leafColumns.filter((c) => !c.hidden).map((c) => String(c.accessor));
+  const pinnedInfos = accessors.map((accessor) => pinnedMap.get(accessor));
+  if (pinnedInfos.some((info) => !info)) return undefined;
 
-  const pinnedInfos = leafAccessors.map((acc) => pinnedMap.get(acc)).filter(Boolean) as PinnedColumnInfo[];
-
-  if (pinnedInfos.length === 0 || pinnedInfos.length !== leafAccessors.length) return undefined;
-
-  const logicalSides = new Set(pinnedInfos.map((p) => p.logicalSide));
+  const logicalSides = new Set(pinnedInfos.map((info) => info!.logicalSide));
   if (logicalSides.size > 1) return undefined;
 
-  const logicalSide = [...logicalSides][0];
-  const targetAcc = logicalSide === 'left' ? leafAccessors[0] : leafAccessors[leafAccessors.length - 1];
-  const info = pinnedMap.get(targetAcc);
+  const isLeft = pinnedInfos[0]!.logicalSide === 'left';
+  const info = pinnedMap.get(isLeft ? accessors[0] : accessors[accessors.length - 1]);
   if (!info) return undefined;
 
-  const boundaryAcc = logicalSide === 'left' ? leafAccessors[leafAccessors.length - 1] : leafAccessors[0];
-  const boundaryInfo = pinnedMap.get(boundaryAcc);
+  const boundaryInfo = pinnedMap.get(isLeft ? accessors[accessors.length - 1] : accessors[0]);
   return { ...info, isBoundary: boundaryInfo?.isBoundary ?? false };
+}
+
+/**
+ * Computes the group header rows from the columns as they are actually rendered, so that group headers
+ * stay in sync with column reordering, toggling and pinning.
+ * Adjacent columns belonging to the same group at a given depth are merged into a single header cell;
+ * if a group's columns are not adjacent (e.g. one of them is pinned to the other side), the group header
+ * is split into multiple cells.
+ */
+function getColumnGroupHeaderRows<T>({
+  groups,
+  maxDepth,
+  visibleAccessors,
+  pinnedMap,
+  withColumnBorders,
+}: {
+  groups: readonly DataTableColumnGroup<T>[];
+  maxDepth: number;
+  visibleAccessors: string[];
+  pinnedMap: Map<string, PinnedColumnInfo>;
+  withColumnBorders: boolean;
+}): ColumnGroupHeaderSegment<T>[][] {
+  const chains = getColumnGroupChains(groups);
+  const visibleCount = visibleAccessors.length;
+
+  return Array.from({ length: maxDepth }, (_, depth) => {
+    const segments: (Omit<ColumnGroupHeaderSegment<T>, 'pinnedInfo' | 'needsBorder' | 'key'> & {
+      start: number;
+      accessors: string[];
+    })[] = [];
+
+    visibleAccessors.forEach((accessor, index) => {
+      const chain = chains.get(accessor);
+      const group = chain?.[depth];
+      if (!chain || !group) return;
+      const last = segments[segments.length - 1];
+      if (last && last.group === group && last.start + last.colSpan === index) {
+        last.colSpan += 1;
+        last.accessors.push(accessor);
+      } else {
+        // The innermost group of a column spans the remaining group header rows
+        const rowSpan = depth === chain.length - 1 ? maxDepth - depth : 1;
+        segments.push({ group, colSpan: 1, rowSpan, start: index, accessors: [accessor] });
+      }
+    });
+
+    return segments.map(({ group, colSpan, rowSpan, start, accessors }) => ({
+      group,
+      colSpan,
+      rowSpan,
+      pinnedInfo: getSegmentPinnedInfo(accessors, pinnedMap),
+      needsBorder: withColumnBorders && start + colSpan < visibleCount,
+      key: `${group.id}-${start}`,
+    }));
+  });
 }
 
 export function DataTableHeader<T>({
@@ -93,6 +176,29 @@ export function DataTableHeader<T>({
 }: DataTableHeaderProps<T>): JSX.Element {
   const maxGroupDepth = groups ? getMaxGroupDepth(groups) : 0;
   const totalHeaderRows = maxGroupDepth > 0 ? maxGroupDepth + 1 : 1;
+
+  // Resolve the columns' media queries to strings, so that the list only changes when the queries do
+  const theme = useMantineTheme();
+  const resolvedQueries = columns.map(({ visibleMediaQuery }) =>
+    typeof visibleMediaQuery === 'function' ? visibleMediaQuery(theme) : (visibleMediaQuery ?? '')
+  );
+  const queriesKey = resolvedQueries.join('\n');
+  // biome-ignore lint/correctness/useExhaustiveDependencies: the queries are memoized by their content
+  const mediaQueries = useMemo(() => resolvedQueries, [queriesKey]);
+  const mediaQueriesDefaults = useMemo(() => mediaQueries.map(() => true), [mediaQueries]);
+  const columnsVisibility = useMediaQueries(mediaQueries, mediaQueriesDefaults);
+
+  const groupHeaderRows = groups
+    ? getColumnGroupHeaderRows({
+        groups,
+        maxDepth: maxGroupDepth,
+        visibleAccessors: columns
+          .filter((column, index) => !column.hidden && columnsVisibility?.[index] !== false)
+          .map(({ accessor }) => String(accessor)),
+        pinnedMap,
+        withColumnBorders,
+      })
+    : [];
 
   const allRecordsSelectorCell = selectionVisible ? (
     <DataTableHeaderSelectorCell
@@ -131,31 +237,21 @@ export function DataTableHeader<T>({
           : undefined
       }
     >
-      {groups &&
-        Array.from({ length: maxGroupDepth }, (_, depthIndex) => {
-          const groupsAtDepth = getGroupsAtDepth(groups, depthIndex);
-
-          return (
-            <TableTr key={`group-depth-${depthIndex}`}>
-              {depthIndex === 0 && allRecordsSelectorCell}
-              {groupsAtDepth.map((group, index) => {
-                return (
-                  <DataTableColumnGroupHeaderCell
-                    key={group.id}
-                    group={group}
-                    pinnedInfo={getGroupPinnedInfo(group, pinnedMap)}
-                    maxDepth={maxGroupDepth}
-                    currentDepth={depthIndex}
-                    previousGroups={groupsAtDepth.slice(0, index)}
-                    isLastGroup={index === groupsAtDepth.length - 1}
-                    withColumnBorders={withColumnBorders}
-                    totalTableColumns={columns.length}
-                  />
-                );
-              })}
-            </TableTr>
-          );
-        })}
+      {groupHeaderRows.map((segments, depthIndex) => (
+        <TableTr key={`group-depth-${depthIndex}`}>
+          {depthIndex === 0 && allRecordsSelectorCell}
+          {segments.map(({ key, group, colSpan, rowSpan, pinnedInfo, needsBorder }) => (
+            <DataTableColumnGroupHeaderCell
+              key={key}
+              group={group}
+              colSpan={colSpan}
+              rowSpan={rowSpan}
+              pinnedInfo={pinnedInfo}
+              needsBorder={needsBorder}
+            />
+          ))}
+        </TableTr>
+      ))}
 
       <TableTr>
         {!groups && allRecordsSelectorCell}

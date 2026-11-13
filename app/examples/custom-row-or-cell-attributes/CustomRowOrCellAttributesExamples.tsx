@@ -35,7 +35,7 @@ export function CustomRowOrCellAttributesMiddleClickExample() {
       columns={[{ accessor: 'name' }, { accessor: 'city' }, { accessor: 'state' }]}
       records={records}
       customRowAttributes={({ name }) => ({
-        onMouseDown: (e: MouseEvent) => {
+        onMouseDown: (e: React.MouseEvent) => {
           if (e.button === 1) {
             showNotification({ message: `Middle-click on row ${name}`, withBorder: true });
           }

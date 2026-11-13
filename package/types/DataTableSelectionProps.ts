@@ -27,7 +27,7 @@ export type DataTableSelectionProps<T = Record<string, unknown>> =
 
       /**
        * Callback fired when selected records change.
-       * Receives and array of selected records as argument.
+       * Receives an array of selected records as argument.
        */
       onSelectedRecordsChange?: (selectedRecords: T[]) => void;
 
@@ -44,7 +44,7 @@ export type DataTableSelectionProps<T = Record<string, unknown>> =
       /**
        * A function used to determine whether a certain record is selectable.
        * if the function returns false, the row selection checkbox is disabled.
-       * Accepts the current recors and index as arguments and returns a boolean.
+       * Accepts the current record and index as arguments and returns a boolean.
        */
       isRecordSelectable?: (record: T, index: number) => boolean;
 

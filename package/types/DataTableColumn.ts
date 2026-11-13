@@ -33,6 +33,11 @@ export type DataTableColumn<T = Record<string, unknown>> = {
    * If true, column will be sortable.
    */
   sortable?: boolean;
+
+  /**
+   * Optional key passed to `onSortStatusChange` as `sortKey`, useful when the value
+   * to sort by differs from the column accessor (e.g. a database field name).
+   */
   sortKey?: string;
 
   /**

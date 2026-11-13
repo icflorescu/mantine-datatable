@@ -19,7 +19,7 @@ export type DataTableLoaderProps = {
   | {
       /**
        * Loader size.
-       * @default `lg`.
+       * @default `md` (Mantine Loader default)
        */
       loaderSize?: MantineSize | (string & NonNullable<unknown>) | number;
 

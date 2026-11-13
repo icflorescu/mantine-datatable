@@ -22,7 +22,7 @@ export default function DraggingTogglingComplexExample() {
     setRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
   }, [sortStatus]);
 
-  const key = 'toggleable-reset-example';
+  const key = 'dragging-toggling-complex-example';
 
   const { effectiveColumns, resetColumnsOrder, resetColumnsToggle } = useDataTableColumns({
     key,

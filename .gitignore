@@ -21,6 +21,9 @@ public/workbox-*.js.map
 # build output
 /dist/
 
+# vitest (failure screenshots)
+/.vitest/
+
 # claude code
 .claude/scheduled_tasks.lock
 .claude/settings.local.json

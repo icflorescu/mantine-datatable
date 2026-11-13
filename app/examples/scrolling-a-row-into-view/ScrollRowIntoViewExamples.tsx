@@ -69,11 +69,13 @@ export function ScrollToExample() {
   // example-start scroll-to
 
   const scrollToRow = (selector: string) => {
-    const el = document.querySelector<HTMLElement>(selector)!;
-    viewportRef.current?.scrollTo({
-      top: el.offsetTop - el.clientHeight - 1,
-      behavior: 'smooth',
-    });
+    const viewport = viewportRef.current;
+    // 👇 look for the row inside this table only
+    const row = viewport?.querySelector<HTMLElement>(selector);
+    if (!viewport || !row) return;
+    // 👇 account for the sticky header, so that the row isn't hidden underneath it
+    const headerHeight = viewport.querySelector('thead')?.offsetHeight ?? 0;
+    viewport.scrollTo({ top: row.offsetTop - headerHeight, behavior: 'smooth' });
   };
 
   return (

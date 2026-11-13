@@ -24,7 +24,7 @@ export function ColumnStylingExample() {
           width: 40,
           // 👇 style cells with a class name
           cellsClassName: classes.idColumnCells,
-          render: (record) => records.indexOf(record) + 1,
+          render: (_, index) => index + 1,
         },
         {
           accessor: 'name',

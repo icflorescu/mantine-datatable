@@ -2,12 +2,19 @@ import { useWindowScroll } from '@mantine/hooks';
 import { memoize } from 'lodash';
 import type { Metadata, Route } from 'next';
 import type { RouteInfo } from '~/app/config';
-import { EXAMPLES_ROUTE_COLOR, PRODUCT_NAME, ROUTES } from '~/app/config';
+import { EXAMPLES_ROUTE_COLOR, PRODUCT_DESCRIPTION, PRODUCT_NAME, ROUTES, WEBSITE_LINK } from '~/app/config';
 import type { NavbarButtonProps } from '~/components/NavbarButton';
 
 function addExamplesPrefix({ href, title }: Pick<RouteInfo, 'href' | 'title'>) {
   return href.startsWith('/examples/') ? `Examples › ${title}` : title;
 }
+
+const SOCIAL_IMAGE = {
+  url: `${WEBSITE_LINK}/og-image.png`,
+  width: 1200,
+  height: 630,
+  alt: PRODUCT_DESCRIPTION,
+};
 
 export const getRouteMetadata = memoize((href: Route): Metadata => {
   const route = ROUTES.find((route) => route.href === href);
@@ -28,6 +35,21 @@ export const getRouteMetadata = memoize((href: Route): Metadata => {
     title,
     alternates: { canonical: url },
     description,
+    openGraph: {
+      type: 'website',
+      siteName: PRODUCT_NAME,
+      locale: 'en_US',
+      url,
+      title,
+      description,
+      images: [SOCIAL_IMAGE],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [SOCIAL_IMAGE],
+    },
   };
 });
 

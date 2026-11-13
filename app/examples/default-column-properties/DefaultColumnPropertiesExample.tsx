@@ -44,6 +44,7 @@ export function DefaultColumnPropertiesExample() {
       striped
       records={records}
       columns={[
+        // 👇 column props override the defaults
         { accessor: 'bookTitle', width: '100%', textAlign: 'left' },
         {
           accessor: 'published',
@@ -61,7 +62,6 @@ export function DefaultColumnPropertiesExample() {
       ]}
       defaultColumnProps={{
         textAlign: 'right',
-        noWrap: true,
         ellipsis: true,
 
         // 👇 customize cell style based on record data and Mantine theme

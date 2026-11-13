@@ -26,7 +26,7 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
   const [customizeBorderRadius, setCustomizeBorderRadius] = useState(false);
   const [borderRadius, setBorderRadius] = useState<MantineSize>(INITIAL_BORDER_RADIUS);
   const [customizeShadow, setCustomizeShadow] = useState(false);
-  const [shadow, setShadow] = useState<MantineSize>(INITIAL_BORDER_RADIUS);
+  const [shadow, setShadow] = useState<MantineSize>(INITIAL_SHADOW);
   const [withColumnBorders, setWithColumnBorders] = useState(false);
   const [striped, setStriped] = useState(false);
   const [highlightOnHover, setHighlightOnHover] = useState(false);
@@ -196,7 +196,7 @@ export function BasicTablePropertiesPageContent({ initialCode }: { initialCode: 
           <CheckableSegmentedControl
             className={classes.control}
             label="Font size"
-            documentAs="fontSize"
+            documentAs="fz, fontSize"
             data={MANTINE_SIZES}
             checked={customizeFz}
             onCheckedChange={setCustomizeFz}

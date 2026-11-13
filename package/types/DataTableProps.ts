@@ -85,12 +85,12 @@ export type DataTableProps<T = Record<string, unknown>> = {
   fetching?: boolean;
 
   /**
-   * If true, the first column will be pinned to the left side of the table.
+   * If true, the first visible column will be pinned to the left side of the table (to the right side in RTL).
    */
   pinFirstColumn?: boolean;
 
   /**
-   * If true, the last column will be pinned to the right side of the table.
+   * If true, the last visible column will be pinned to the right side of the table (to the left side in RTL).
    */
   pinLastColumn?: boolean;
 
@@ -100,8 +100,8 @@ export type DataTableProps<T = Record<string, unknown>> = {
   defaultColumnProps?: DataTableDefaultColumnProps<T>;
 
   /**
-   * If you want to use drag and drop as well as toggle to reorder and toggle columns
-   * provide a unique key which will be used to store the column order in localStorage.
+   * Unique key used to persist the columns state (order, visibility, widths and pinning) in localStorage.
+   * Required if you want users' column dragging, toggling, resizing or pinning to survive page reloads.
    */
   storeColumnsKey?: string | undefined;
 
@@ -203,9 +203,9 @@ export type DataTableProps<T = Record<string, unknown>> = {
   rowStyle?: (record: T, index: number) => MantineStyleProp | undefined;
 
   /**
-   * Optional style passed to each row.
-   * a function that receives the current record, its index, default row props and expanded element as arguments
-   * and returns a React node representing the row.
+   * Optional function rendering a custom row.
+   * Receives the current record, its index, the default row props, the row cells (`children`)
+   * and the expanded element as arguments, and returns a React node representing the row.
    */
   rowFactory?: (props: {
     record: T;
@@ -219,7 +219,7 @@ export type DataTableProps<T = Record<string, unknown>> = {
    * Optional function returning a React node representing the table wrapper.
    * If not provided, no wrapper will be used.
    *
-   * examplle: This function can be used with rowFactory if using drag and drop to pass context
+   * For example, it can be used together with `rowFactory` to provide a drag-and-drop context.
    */
   tableWrapper?: ({ children }: { children: React.ReactNode }) => React.ReactNode;
 
