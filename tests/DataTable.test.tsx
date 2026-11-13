@@ -578,6 +578,17 @@ describe('colors', () => {
     );
     await expect.poll(() => [rowBackground(0) === RED, rowBackground(1) === RED]).toEqual([false, true]);
   });
+
+  test('applies selectionColor to selected rows', async () => {
+    await renderDataTable({
+      selectedRecords: [people[1]],
+      onSelectedRecordsChange: () => undefined,
+      selectionColor: '#00ff00',
+    });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    const selectedCell = bodyRows()[1].element().querySelector('td:not(.mantine-datatable-row-selector-cell)')!;
+    expect(getComputedStyle(selectedCell).backgroundColor).toBe('rgb(0, 255, 0)');
+  });
 });
 
 describe('scrolling', () => {

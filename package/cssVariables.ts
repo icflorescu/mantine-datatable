@@ -24,13 +24,26 @@ export function getTableCssVariables({
   rowBorderColor,
   stripedColor,
   highlightOnHoverColor,
+  selectionColor,
 }: Pick<
   DataTableProps,
-  'c' | 'backgroundColor' | 'borderColor' | 'rowBorderColor' | 'stripedColor' | 'highlightOnHoverColor'
+  | 'c'
+  | 'backgroundColor'
+  | 'borderColor'
+  | 'rowBorderColor'
+  | 'stripedColor'
+  | 'highlightOnHoverColor'
+  | 'selectionColor'
 > & {
   theme: MantineTheme;
 }): CssVariables<
-  'color' | 'background-color' | 'border-color' | 'row-border-color' | 'striped-color' | 'highlight-on-hover-color'
+  | 'color'
+  | 'background-color'
+  | 'border-color'
+  | 'row-border-color'
+  | 'striped-color'
+  | 'highlight-on-hover-color'
+  | 'selection-color'
 > {
   return {
     '--mantine-datatable-color-light': getColor(c, theme, 'light'),
@@ -50,6 +63,9 @@ export function getTableCssVariables({
 
     '--mantine-datatable-highlight-on-hover-color-light': getColor(highlightOnHoverColor, theme, 'light'),
     '--mantine-datatable-highlight-on-hover-color-dark': getColor(highlightOnHoverColor, theme, 'dark'),
+
+    '--mantine-datatable-selection-color-light': getColor(selectionColor, theme, 'light'),
+    '--mantine-datatable-selection-color-dark': getColor(selectionColor, theme, 'dark'),
   };
 }
 

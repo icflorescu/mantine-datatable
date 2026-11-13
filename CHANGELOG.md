@@ -10,6 +10,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 - Fix tables constrained only by `maxHeight` (without `height`) not being scrollable
 - Fix `striped="even"` having no effect
 - Fix `defaultToggle` always being persisted as `true` in the stored columns toggle state
+- Add `selectionColor` property to customize the background color of selected rows
 - Fix typos and inaccuracies in JSDoc comments
 - Update dev deps to ensure compatibility with Mantine 9.8.0 & Mantine ContextMenu 9.8.0
 - Update GitHub workflow action versions & Biome config

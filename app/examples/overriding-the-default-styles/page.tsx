@@ -58,8 +58,8 @@ export default async function OverridingTheDefaultStylesExamplePage() {
       <PageSubtitle value="With color properties" />
       <Txt>
         The quickest way to customize the default colors is to use the <Code>c</Code>, <Code>backgroundColor</Code>,{' '}
-        <Code>borderColor</Code>, <Code>rowBorderColor</Code>, <Code>stripedColor</Code> and{' '}
-        <Code>highlightOnHoverColor</Code> properties.
+        <Code>borderColor</Code>, <Code>rowBorderColor</Code>, <Code>stripedColor</Code>,{' '}
+        <Code>highlightOnHoverColor</Code> and <Code>selectionColor</Code> properties.
         <br />
         Each of them accepts either a <Code>MantineColor</Code> (a key of <Code>theme.colors</Code> or any valid CSS
         color <Code>string</Code>), or an object with <Code>light</Code> and <Code>dark</Code> keys and{' '}
@@ -125,7 +125,10 @@ export default async function OverridingTheDefaultStylesExamplePage() {
         property is enabled (odd rows by default, or even rows with <Code>striped="even"</Code>), while{' '}
         <Code>highlightOnHoverColor</Code> sets the background color of the row under the mouse cursor when the{' '}
         <Code>highlightOnHover</Code> property is enabled (see{' '}
-        <InternalLink to="/examples/basic-table-properties">basic table properties</InternalLink>).
+        <InternalLink to="/examples/basic-table-properties">basic table properties</InternalLink>). The{' '}
+        <Code>selectionColor</Code> property sets the background color of{' '}
+        <InternalLink to="/examples/records-selection">selected rows</InternalLink>, which defaults to the light variant
+        of the theme’s primary color.
       </Txt>
       <Txt>
         If you’re using <InternalLink to="/examples/pagination">pagination</InternalLink>, you can also customize the
@@ -169,8 +172,8 @@ export default async function OverridingTheDefaultStylesExamplePage() {
         </li>
         <li>
           <Code>--mantine-datatable-selection-color</Code> (background color of{' '}
-          <InternalLink to="/examples/records-selection">selected rows</InternalLink>, defaults to{' '}
-          <Code>--mantine-primary-color-light</Code>)
+          <InternalLink to="/examples/records-selection">selected rows</InternalLink>, also settable with the{' '}
+          <Code>selectionColor</Code> property; defaults to <Code>--mantine-primary-color-light</Code>)
         </li>
       </UnorderedList>
       <Txt>
