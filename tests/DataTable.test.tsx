@@ -531,6 +531,27 @@ describe('column groups', () => {
   });
 });
 
+describe('default column props', () => {
+  test('applies defaultToggle from defaultColumnProps, with column props taking precedence', async () => {
+    await renderDataTable({
+      columns: [{ accessor: 'firstName', defaultToggle: true }, ...columns.slice(1)],
+      defaultColumnProps: { toggleable: true, defaultToggle: false },
+      storeColumnsKey: 'default-toggle',
+    });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    await expect.poll(headers).toEqual(['First name']);
+  });
+
+  test('makes columns toggleable from the header context menu via defaultColumnProps', async () => {
+    await renderDataTable({ defaultColumnProps: { toggleable: true }, storeColumnsKey: 'default-toggleable' });
+    await page.getByRole('rowgroup').first().click({ button: 'right' });
+    await expect.element(page.getByRole('checkbox', { name: 'First name' })).toBeChecked();
+    expect(page.getByRole('checkbox').all()).toHaveLength(columns.length);
+    await page.getByRole('checkbox', { name: 'Age' }).click();
+    await expect.poll(headers).toEqual(['First name', 'Last name', 'City']);
+  });
+});
+
 describe('scrolling', () => {
   const manyPeople = Array.from({ length: 40 }, (_, i) => ({ ...people[i % people.length], id: i + 1 }));
   const viewport = () => document.querySelector<HTMLElement>('.mantine-datatable-scroll-area-viewport')!;

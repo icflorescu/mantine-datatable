@@ -38,12 +38,10 @@ export default async function DefaultColumnPropertiesExamplePage() {
       <DefaultColumnPropertiesExample />
       <Txt>Here is the code for the above example:</Txt>
       <CodeBlock code={code} />
-      <Txt warning>
-        Properties that enable stateful column features &mdash; <Code>toggleable</Code>, <Code>defaultToggle</Code>,{' '}
-        <Code>resizable</Code>, <Code>pinned</Code> and <Code>pinnable</Code> &mdash; are read from the column
-        definitions themselves, so set them on each column rather than in <Code>defaultColumnProps</Code>. If you want
-        to avoid repetition, spread a shared object into each column definition instead, as shown in the{' '}
-        <InternalLink to="/examples/column-resizing">column resizing</InternalLink> example.
+      <Txt info>
+        Properties enabling stateful column features &mdash; such as <Code>toggleable</Code>, <Code>defaultToggle</Code>
+        , <Code>resizable</Code>, <Code>pinned</Code> or <Code>pinnable</Code> &mdash; can be set in{' '}
+        <Code>defaultColumnProps</Code> too, and individual columns can still override them.
       </Txt>
       <Txt>
         If you need a fallback for the <Code>render</Code> function, head over to the next example to learn about{' '}
