@@ -1,1 +1,0 @@
-Mantine DataTable is a lightweight, dependency-free component that brings datagrid-like functionality to your data-rich user interfaces
