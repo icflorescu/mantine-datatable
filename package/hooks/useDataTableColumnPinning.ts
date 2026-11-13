@@ -12,7 +12,7 @@ export type DataTableColumnPinning = {
 
 /**
  * Hook to handle column pinning with localStorage persistence.
- * @see https://icflorescu.github.io/mantine-datatable/examples/interactive-column-pinning/
+ * @see https://icflorescu.github.io/mantine-datatable/examples/pinning-arbitrary-columns/
  */
 export function useDataTableColumnPinning<T>({
   key,

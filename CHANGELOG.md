@@ -8,6 +8,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 - Update dev deps to ensure compatibility with Mantine 9.8.0 & Mantine ContextMenu 9.8.0
 - Update GitHub workflow action versions & Biome config
 - Fix tables constrained only by `maxHeight` (without `height`) not being scrollable
+- Fix typos and inaccuracies in JSDoc comments
 - Add component tests with Vitest browser mode & Playwright
 
 ## 9.7.5 (2026-11-09)

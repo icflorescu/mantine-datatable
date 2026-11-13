@@ -53,7 +53,7 @@ export type DataTableColorProps<T> = {
 
   /**
    * Data table row background color.
-   * A function that accepts row data and returns background color color.
+   * A function that accepts row data and returns a background color.
    * Can be a `MantineColor` (key of `theme.colors` or any valid CSS color string),
    * or an object with `light` and `dark` keys and `MantineColor` values.
    */
