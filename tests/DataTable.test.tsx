@@ -563,6 +563,23 @@ describe('default column props', () => {
   });
 });
 
+describe('colors', () => {
+  const rowBackground = (index: number) => getComputedStyle(bodyRows()[index].element()).backgroundColor;
+  const RED = 'rgb(255, 0, 0)';
+
+  test('stripes odd rows by default and even rows when striped is "even"', async () => {
+    const { rerender } = await renderDataTable({ striped: true, stripedColor: '#ff0000' });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    expect([rowBackground(0) === RED, rowBackground(1) === RED]).toEqual([true, false]);
+    await rerender(
+      <MantineProvider>
+        <DataTable records={people} columns={columns} striped="even" stripedColor="#ff0000" />
+      </MantineProvider>
+    );
+    await expect.poll(() => [rowBackground(0) === RED, rowBackground(1) === RED]).toEqual([false, true]);
+  });
+});
+
 describe('scrolling', () => {
   const manyPeople = Array.from({ length: 40 }, (_, i) => ({ ...people[i % people.length], id: i + 1 }));
   const viewport = () => document.querySelector<HTMLElement>('.mantine-datatable-scroll-area-viewport')!;

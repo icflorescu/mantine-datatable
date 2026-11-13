@@ -124,7 +124,8 @@
     background: inherit;
   }
 
-  &[data-striped] tbody tr:nth-of-type(odd) {
+  &[data-striped]:not([data-striped='even']) tbody tr:nth-of-type(odd),
+  &[data-striped='even'] tbody tr:nth-of-type(even) {
     background: var(--mantine-datatable-striped-color);
   }
 

@@ -121,9 +121,10 @@ export default async function OverridingTheDefaultStylesExamplePage() {
         </li>
       </UnorderedList>
       <Txt>
-        The <Code>stripedColor</Code> property sets the background color of odd rows when the <Code>striped</Code>{' '}
-        property is enabled, while <Code>highlightOnHoverColor</Code> sets the background color of the row under the
-        mouse cursor when the <Code>highlightOnHover</Code> property is enabled (see{' '}
+        The <Code>stripedColor</Code> property sets the background color of striped rows when the <Code>striped</Code>{' '}
+        property is enabled (odd rows by default, or even rows with <Code>striped="even"</Code>), while{' '}
+        <Code>highlightOnHoverColor</Code> sets the background color of the row under the mouse cursor when the{' '}
+        <Code>highlightOnHover</Code> property is enabled (see{' '}
         <InternalLink to="/examples/basic-table-properties">basic table properties</InternalLink>).
       </Txt>
       <Txt>
