@@ -7,6 +7,7 @@ import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
+import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { getRouteMetadata } from '~/lib/utils';
 import { SearchingAndFilteringExample } from './SearchingAndFilteringExample';
@@ -22,35 +23,67 @@ export default async function SearchingAndFilteringExamplePage() {
     <>
       <PageTitle of={PATH} />
       <Txt>
-        Adjust the array of <Code>records</Code> you’re feeding to {PRODUCT_NAME} based on your own logic in order to
-        perform searching and filtering.
-        <br />
-        In order to support column-based filtering you can use the <Code>filter</Code> and <Code>filtering</Code>{' '}
-        <InternalLink to="/examples/column-properties-and-styling">column properties</InternalLink>.
-        <br />
-        Here’s a possible (rather naive and rough around the edges) implementation:
+        {PRODUCT_NAME} doesn’t filter your data; to implement searching and filtering, adjust the array of{' '}
+        <Code>records</Code> you’re passing to the component according to your own logic.
       </Txt>
+      <Txt>
+        To help you build column-based filtering UIs, {PRODUCT_NAME} supports the following{' '}
+        <InternalLink to="/examples/column-properties-and-styling">column properties</InternalLink>:
+      </Txt>
+      <UnorderedList>
+        <li>
+          <Code>filter</Code>
+          <br />
+          The content of a popover that opens when the user clicks the filter button added to the column header. It can
+          be a <Code>ReactNode</Code> or a function receiving an object with a <Code>close</Code> method (so you can
+          close the popover programmatically, e.g. after resetting a filter) and returning a <Code>ReactNode</Code>.
+        </li>
+        <li>
+          <Code>filtering: boolean</Code>
+          <br />
+          When <Code>true</Code>, the filter button is highlighted to indicate that a filter is in effect.
+        </li>
+        <li>
+          <Code>filterPopoverProps</Code>
+          <br />
+          Additional <ExternalLink to="https://mantine.dev/core/popover/?t=props">Mantine Popover props</ExternalLink>{' '}
+          to customize the filter popover (position, width, shadow, etc.).
+        </li>
+        <li>
+          <Code>filterPopoverDisableClickOutside: boolean</Code>
+          <br />
+          When <Code>true</Code>, disables the click-outside handler {PRODUCT_NAME} attaches to the filter popover
+          dropdown. You can combine it with <Code>{'filterPopoverProps={{ closeOnClickOutside: false }}'}</Code> if you
+          want the popover to stay open until the user closes it explicitly.
+        </li>
+      </UnorderedList>
+      <Txt>Here’s a possible (rather naive and rough around the edges) implementation:</Txt>
       <SearchingAndFilteringExample />
       <Txt>The code for this example is as follows:</Txt>
       <CodeBlock code={code} />
       <Txt idea>
-        To use the Mantine Component with a popover inside the filter column property, you need to render the child
-        properties without using a Portal. Please refer to the Mantine documentation on{' '}
-        <ExternalLink to="https://mantine.dev/core/popover/#nested-popovers">Nested Popovers</ExternalLink> for more
+        If your filter uses Mantine components that render a dropdown (such as <Code>Select</Code>,{' '}
+        <Code>MultiSelect</Code> or <Code>DatePickerInput</Code>), render their dropdowns without a portal (e.g.{' '}
+        <Code>{'comboboxProps={{ withinPortal: false }}'}</Code>, as in the example above); otherwise, clicking inside
+        the dropdown will close the filter popover. See the Mantine documentation on{' '}
+        <ExternalLink to="https://mantine.dev/core/popover/#nested-popovers">nested popovers</ExternalLink> for more
         details.
       </Txt>
+      <Txt idea>
+        If you’re combining filtering with <InternalLink to="/examples/pagination">pagination</InternalLink>, remember
+        to reset the current page to <Code>1</Code> whenever the filter criteria change.
+      </Txt>
       <Txt info title="Why no built-in “Excel-like” searching and filtering support?">
-        You’ll often have to implement searching and filtering data in your projects.
+        You’ll often have to implement searching and filtering in your projects.
         <br />
-        However there’s simply no way for {PRODUCT_NAME} to accommodate every possible usage scenario out there. Most of
-        the times you’d have to deal with pagination, sorting, asynchronous loading; sometimes you’d have to place a
-        search box or custom filtering criteria selectors in the header of your entire website/application.
+        However, there’s simply no way for {PRODUCT_NAME} to accommodate every possible usage scenario out there. Most
+        of the time you’ll have to deal with pagination, sorting and asynchronous loading; sometimes you’ll have to
+        place a search box or custom filter selectors in the header of your entire website or application.
         <br />
-        Not to mention that in real-life you’d most often do the actual filtering and/or searching in a server API.
+        Not to mention that in real life you’ll most often do the actual searching and filtering in a server API.
         <br />
-        The responsibilities and areas of control are most of the times spread across your application’s UI and
-        architectural layers, and trying to fit all this in a standard component design and behavior would needlessly
-        constrain the developer.
+        The responsibilities and areas of control are usually spread across your application’s UI and architectural
+        layers, and trying to fit all this into a standard component design would needlessly constrain the developer.
       </Txt>
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />

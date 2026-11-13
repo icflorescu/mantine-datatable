@@ -66,3 +66,22 @@ export function ScrollAreaPropsExample() {
     // example-end
   );
 }
+
+export function MinMaxHeightExample() {
+  return (
+    // example-start min-max-height
+    <DataTable
+      height="50dvh"
+      minHeight={200}
+      maxHeight={400}
+      // example-skip more table props
+      withTableBorder
+      withColumnBorders
+      striped
+      records={records}
+      columns={columns}
+      // example-resume
+    />
+    // example-end
+  );
+}

@@ -50,20 +50,16 @@ export function MultilevelColumnGroupingExample() {
           ],
         },
         {
+          // 👇 a group with columns can sit next to groups with nested groups;
+          //    its header will span the extra header rows
           id: 'contact-info',
           title: 'Contact Information',
-          groups: [
+          columns: [
             {
-              id: 'email-group',
-              title: 'Email',
-              columns: [
-                {
-                  accessor: 'email',
-                  title: 'Email Address',
-                  width: 250,
-                  ellipsis: true,
-                },
-              ],
+              accessor: 'email',
+              title: 'Email Address',
+              width: 250,
+              ellipsis: true,
             },
           ],
         },

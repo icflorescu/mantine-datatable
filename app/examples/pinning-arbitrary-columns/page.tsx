@@ -50,6 +50,12 @@ export default async function PinArbitraryColumnsExamplePage() {
       <PinMultipleLeftColumnsExample />
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code['multiple-left-pinned']} />
+      <Txt info>
+        Pinned columns are always rendered at the edges of the table: left-pinned columns come first, followed by the
+        unpinned ones, and then by the right-pinned columns. Within each of these areas, columns keep their original
+        order. So if you pin a column that sits in the middle of the <Code>columns</Code> array, it will be moved to the
+        corresponding side of the table.
+      </Txt>
       <PageSubtitle value="Pinning columns to both sides" />
       <Txt>
         You can combine left-pinned and right-pinned columns. In this example, the first two columns are pinned to the
@@ -63,21 +69,28 @@ export default async function PinArbitraryColumnsExamplePage() {
       <Txt>
         You can allow users to pin and unpin columns interactively by setting <Code>{'pinnable: true'}</Code> on
         columns. When enabled, a pin icon appears in the column header on hover. Clicking it reveals a dropdown where
-        users can choose to pin the column to the left, right, or unpin it.
+        users can choose to pin the column to the left or to the right, or to unpin it.
       </Txt>
       <Txt>
-        Use <Code>pinned</Code> to set the initial pinning state for pinnable columns. The pinning state is persisted in
-        localStorage when you provide a <Code>storeColumnsKey</Code> prop to the DataTable. You can also use the{' '}
-        <Code>resetColumnsPinning</Code> function from the <Code>useDataTableColumns</Code> hook to reset pinning to
-        default values.
+        For pinnable columns, <Code>pinned</Code> sets the <em>initial</em> pinning state. Interactive pinning relies on
+        the same mechanism as{' '}
+        <InternalLink to="/examples/column-dragging-and-toggling">column dragging and toggling</InternalLink>: provide a{' '}
+        <Code>storeColumnsKey</Code> prop to the DataTable &mdash; it’s required for interactive pinning, since the
+        pinning state is kept in local storage under this key. If you also need to restore the initial pinning state,
+        call the <Code>useDataTableColumns()</Code> hook with the same <Code>key</Code> and use the{' '}
+        <Code>resetColumnsPinning()</Code> function it returns.
+      </Txt>
+      <Txt>
+        Pinning also works in right-to-left layouts, where the “left” and “right” sides are mirrored. Use the direction
+        switch in the example below to see it in action:
       </Txt>
       <InteractivePinningExample />
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code['interactive-pinning']} />
       <PageSubtitle value="Combining pinning with column toggling" />
       <Txt>
-        You can combine <Code>pinnable</Code> with <Code>toggleable</Code> on the same columns. This allows users to
-        both pin/unpin columns and show/hide them. Right-click on the table header to open the column visibility menu.
+        You can combine <Code>pinnable</Code> with <Code>toggleable</Code> on the same columns, allowing users to both
+        pin or unpin columns and show or hide them. Right-click on the table header to open the column visibility menu.
       </Txt>
       <Txt>
         In this example, some columns are hidden by default using <Code>{'defaultToggle: false'}</Code>. Use the{' '}
@@ -94,18 +107,21 @@ export default async function PinArbitraryColumnsExamplePage() {
         <strong>all columns in the group</strong> are pinned to the same side. If columns within a group have different
         pinning states (some pinned left, some unpinned, or mixed), the group header will not be pinned.
       </Txt>
-      <Txt idea>
-        <strong>Important:</strong> Pinning works within the group&apos;s visual position in the table. If a group is
-        positioned on the left side of the table (like the &ldquo;Employee&rdquo; group below), its columns can only be
-        effectively pinned to the left. Pinning them to the right will have no visual effect because pinning uses CSS{' '}
-        <Code>position: sticky</Code> which doesn&apos;t reorder columns — it only makes them &ldquo;stick&rdquo; when
-        scrolling. Similarly, columns in a middle-positioned group will only stick from their group&apos;s starting
-        position.
+      <Txt warning title="Important">
+        Group headers are rendered in the order in which you define the groups, but pinned columns are{' '}
+        <strong>moved to the edges of the table</strong> (see above). If a column is pinned to the side opposite to its
+        group &mdash; for instance, if you pin one of the columns of the “Employee” group below to the right &mdash; it
+        will be moved to the right edge of the table and will end up under the wrong group header.
+        <br />
+        Since users can pin a pinnable column to either side, consider using static pinning (<Code>pinned</Code> without{' '}
+        <Code>pinnable</Code>) for the columns of groups located at the edges of the table, and enabling interactive
+        pinning only where this side effect is acceptable.
       </Txt>
       <Txt>Try pinning and unpinning columns in the example below to see how the group headers behave:</Txt>
       <PinningWithColumnGroupsExample />
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code['pinning-with-column-groups']} />
+      <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>
   );

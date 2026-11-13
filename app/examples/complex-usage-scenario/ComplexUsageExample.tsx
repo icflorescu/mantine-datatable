@@ -7,7 +7,7 @@ import { ActionIcon, Button, Center, Flex, Group, Image, rem, Text, TextInput } 
 import { closeAllModals, openModal } from '@mantine/modals';
 import { showNotification } from '@mantine/notifications';
 import { IconClick, IconEdit, IconMessage, IconTrash, IconTrashX } from '@tabler/icons-react';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useContextMenu } from 'mantine-contextmenu';
 import { useCallback, useState } from 'react';
@@ -29,6 +29,7 @@ export function ComplexUsageExample() {
   const { data, isFetching } = useQuery({
     queryKey: ['employees', sortStatus.columnAccessor, sortStatus.direction, page],
     queryFn: () => getEmployeesAsync({ recordsPerPage: PAGE_SIZE, page, sortStatus, delay: { min: 300, max: 500 } }),
+    placeholderData: keepPreviousData, // 👈 keep showing the current page while the next one is loading
   });
 
   const [selectedRecords, setSelectedRecords] = useState<Employee[]>([]);
@@ -136,8 +137,8 @@ export function ComplexUsageExample() {
           {firstName} {lastName}, born on {dayjs(birthDate).format('MMM D YYYY')}, works in {department.name} department
           at {department.company.name}.
           <br />
-          His office address is {department.company.streetAddress}, {department.company.city},{' '}
-          {department.company.state}.
+          {sex === 'male' ? 'His' : 'Her'} office address is {department.company.streetAddress},{' '}
+          {department.company.city}, {department.company.state}.
         </Text>
       </Flex>
     ),

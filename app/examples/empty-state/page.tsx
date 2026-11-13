@@ -1,6 +1,7 @@
 import { Code } from '@mantine/core';
 import type { Route } from 'next';
 import { CodeBlock } from '~/components/CodeBlock';
+import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageSubtitle } from '~/components/PageSubtitle';
 import { PageTitle } from '~/components/PageTitle';
@@ -43,39 +44,48 @@ export default async function EmptyStateExamplePage() {
       <PageTitle of={PATH} />
       <Code hidden>minHeight</Code>
       <Txt>
-        If <Code>records</Code> property points to an empty array, the <Code>DataTable</Code> component will indicate
-        its empty state by displaying a customizable icon and text, like so:
+        When the <Code>records</Code> property is an empty array, the <Code>DataTable</Code> component indicates its
+        empty state by displaying a customizable icon and text, like so:
       </Txt>
       <EmptyStateExample />
       <Txt info>
-        Make sure to set a <Code>minHeight</Code> large enough to accommodate the icon and text when dealing with empty
-        state in non <em>“vertically-scrollable”</em> tables.
+        If your table is not <InternalLink to="/examples/scrollable-vs-auto-height">vertically scrollable</InternalLink>
+        , make sure to set a <Code>minHeight</Code> large enough to accommodate the empty state icon and text.
+        <br />
+        The empty state is not displayed while the table is{' '}
+        <InternalLink to="/examples/asynchronous-data-loading">loading data</InternalLink> (i.e. when{' '}
+        <Code>fetching</Code> is <Code>true</Code>), so it won’t flash while waiting for the first batch of records.
       </Txt>
       <CodeBlock code={code.default} />
       <Txt>
-        You can modify the displayed text by setting the <Code>noRecordsText</Code> property:
+        You can change the displayed text (<Code>No records</Code> by default) by setting the <Code>noRecordsText</Code>{' '}
+        property:
       </Txt>
       <EmptyStateExampleCustomText />
       <CodeBlock code={code['custom-text']} />
       <Txt>
-        The icon can also be modified by setting the <Code>noRecordsIcon</Code> property:
+        You can also replace the icon by setting the <Code>noRecordsIcon</Code> property:
       </Txt>
       <EmptyStateExampleCustomIconAndText />
       <CodeBlock
         tabs={{ code: code['custom-icon-and-text'], keys: ['CustomIconAndText.tsx', 'CustomIconAndText.module.css'] }}
       />
       <Txt>
-        If you’re not happy with the standard empty state indicator, you can entirely replace it by setting the{' '}
-        <Code>emptyState</Code> property:
+        If you’re not happy with the standard empty state indicator, you can replace it entirely by setting the{' '}
+        <Code>emptyState</Code> property. The provided content will be overlaid and centered automatically. Note that{' '}
+        <Code>emptyState</Code> and <Code>noRecordsIcon</Code> are mutually exclusive, and <Code>noRecordsText</Code> is
+        ignored when <Code>emptyState</Code> is set:
       </Txt>
       <EmptyStateExampleCustomContent />
       <CodeBlock code={code['custom-content']} />
       <PageSubtitle value="Interactive custom empty state content" />
       <Txt>
-        The empty state component has the <Code>pointer-events</Code> CSS property set to <Code>none</Code>.
+        The empty state overlay has its <Code>pointer-events</Code> CSS property set to <Code>none</Code>, so that it
+        doesn’t get in the way of the table underneath.
         <br />
-        Which means that if you need to add interactive content to the custom empty state, you’ll have to enable pointer
-        interactions using the <Code>pointer-events</Code> CSS prop:
+        This means that if you need to add interactive content to a custom empty state, you’ll have to re-enable pointer
+        events on the interactive elements by setting their <Code>pointer-events</Code> CSS property to <Code>all</Code>
+        :
       </Txt>
       <EmptyStateExampleCustomInteractiveContent />
       <CodeBlock code={code['custom-interactive-content']} />

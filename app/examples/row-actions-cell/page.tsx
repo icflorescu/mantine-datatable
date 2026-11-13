@@ -25,8 +25,9 @@ export default async function RowActionsCellExamplePage() {
       <Txt>
         If a simple <InternalLink to="/examples/handling-row-clicks">row click</InternalLink> or{' '}
         <InternalLink to="/examples/handling-cell-clicks">cell click</InternalLink> handler is not enough and{' '}
-        <InternalLink to="/examples/using-with-mantine-contextmenu">context menus</InternalLink> are not your thing,
-        implementing a row actions cell using the column <Code>render</Code> function should’t be difficult.
+        <InternalLink to="/examples/using-with-mantine-contextmenu">context menus</InternalLink> are not your thing, you
+        can easily implement a row actions cell by using a column <Code>render</Code> function that returns a group of
+        action buttons:
       </Txt>
       <RowActionsCellExample />
       <Txt>Here is the code:</Txt>
@@ -39,9 +40,9 @@ export default async function RowActionsCellExamplePage() {
         <InternalLink to="/examples/using-with-mantine-contextmenu">
           row context-menus triggered by <Code>click</Code> instead of <Code>right-click</Code>
         </InternalLink>
-        , make sure to intercept the <Code>click</Code> event on the actions and{' '}
+        , make sure to intercept the <Code>click</Code> event on the action buttons and{' '}
         <ExternalLink to="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">
-          invoke its <Code>.stopPropagation()</Code> method
+          call its <Code>.stopPropagation()</Code> method
         </ExternalLink>
         .
         <br />
@@ -50,14 +51,19 @@ export default async function RowActionsCellExamplePage() {
       </Txt>
       <PageSubtitle value="Constraining the actions column width" />
       <Txt>
-        If you want to constrain the actions column to be no wider than its content, you can set its <Code>width</Code>{' '}
-        to <Code>&apos;0%&apos;</Code> and, if you have more than one action icon, make sure the actions are wrapped in
-        a <ExternalLink to={`${MANTINE_LINK}/core/group/`}>Mantine Group</ExternalLink> component with{' '}
-        <Code>wrap=&apos;nowrap&apos;</Code>:
+        To make the actions column no wider than its content, set its <Code>width</Code> to <Code>{"'0%'"}</Code> and,
+        if you have more than one action icon, wrap the icons in a{' '}
+        <ExternalLink to={`${MANTINE_LINK}/core/group/`}>Mantine Group</ExternalLink> component with{' '}
+        <Code>{'wrap="nowrap"'}</Code>:
       </Txt>
       <RowActionsCellExampleConstrainWidth />
       <Txt>Here is the code:</Txt>
       <CodeBlock code={code['constrain-width']} />
+      <Txt idea>
+        If your table is horizontally scrollable, you might also want to{' '}
+        <InternalLink to="/examples/pinning-the-last-column">pin the actions column</InternalLink> to keep the actions
+        visible at all times.
+      </Txt>
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>

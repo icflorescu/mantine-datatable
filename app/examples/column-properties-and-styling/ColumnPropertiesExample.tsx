@@ -19,7 +19,8 @@ export function ColumnPropertiesExample() {
           title: '#',
           textAlign: 'right',
           width: 40,
-          render: (record) => records.indexOf(record) + 1,
+          // 👇 `render` receives the record and its index in `records`
+          render: (_, index) => index + 1,
         },
         {
           accessor: 'name',

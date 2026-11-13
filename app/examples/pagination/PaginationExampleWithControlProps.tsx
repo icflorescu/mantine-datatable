@@ -50,6 +50,10 @@ export default function PaginationExampleWithControlProps() {
         }
         return {};
       }}
+      getPaginationItemProps={(pageNumber) => {
+        const title = `Go to page ${pageNumber}`;
+        return { title, 'aria-label': title };
+      }}
     />
     // example-end
   );

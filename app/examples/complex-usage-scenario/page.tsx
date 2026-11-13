@@ -7,6 +7,7 @@ import { InternalLink } from '~/components/InternalLink';
 import { PageNavigation } from '~/components/PageNavigation';
 import { PageTitle } from '~/components/PageTitle';
 import { Txt } from '~/components/Txt';
+import { UnorderedList } from '~/components/UnorderedList';
 import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import { ComplexUsageExample } from './ComplexUsageExample';
@@ -28,34 +29,54 @@ export default async function ComplexUsageExamplePage() {
   return (
     <>
       <PageTitle of={PATH} />
-      <Txt>
-        Here is a complex usage scenario featuring{' '}
-        <InternalLink to="/examples/column-properties-and-styling">custom column definitions</InternalLink>,{' '}
-        <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink> with{' '}
-        <ExternalLink to="https://tanstack.com/query/latest">TanStack Query</ExternalLink>,{' '}
-        <InternalLink to="/examples/sorting">sorting</InternalLink>,{' '}
-        <InternalLink to="/examples/pagination">pagination</InternalLink>, custom cell data rendering,{' '}
-        <InternalLink to="/examples/records-selection">multiple row selection</InternalLink>,{' '}
-        <InternalLink to="/examples/expanding-rows">row expansion</InternalLink>,{' '}
-        <InternalLink to="/examples/row-actions-cell">action cells</InternalLink>, and{' '}
-        <InternalLink to="/examples/using-with-mantine-contextmenu">row context-menu</InternalLink>.
-      </Txt>
+      <Txt>Here is a more realistic example that brings together many {PRODUCT_NAME} features in a single table:</Txt>
+      <UnorderedList compact>
+        <li>
+          <InternalLink to="/examples/asynchronous-data-loading">asynchronous data loading</InternalLink> with{' '}
+          <ExternalLink to="https://tanstack.com/query/latest">TanStack Query</ExternalLink>, combined with server-side{' '}
+          <InternalLink to="/examples/sorting">sorting</InternalLink> and{' '}
+          <InternalLink to="/examples/pagination">pagination</InternalLink>;
+        </li>
+        <li>
+          <InternalLink to="/examples/column-properties-and-styling">custom column definitions</InternalLink> with
+          custom cell rendering and columns that are hidden on small screens via <Code>visibleMediaQuery</Code>;
+        </li>
+        <li>
+          <InternalLink to="/examples/records-selection">multiple record selection</InternalLink>;
+        </li>
+        <li>
+          <InternalLink to="/examples/expanding-rows">row expansion</InternalLink> showing additional employee details;
+        </li>
+        <li>
+          a <InternalLink to="/examples/row-actions-cell">row actions cell</InternalLink> in a{' '}
+          <InternalLink to="/examples/pinning-the-last-column">pinned last column</InternalLink>, opening a Mantine
+          modal or showing a notification;
+        </li>
+        <li>
+          a <InternalLink to="/examples/using-with-mantine-contextmenu">row context menu</InternalLink> whose items
+          depend on the current selection (select a few rows, then right-click one of them).
+        </li>
+      </UnorderedList>
       <ComplexUsageExampleWrapper>
         <ComplexUsageExample />
       </ComplexUsageExampleWrapper>
       <Txt>
-        Since this example is using TanStack Query, we have to wrap everything in a <Code>QueryClientProvider</Code>{' '}
-        like so:
+        Since this example uses TanStack Query, everything has to be wrapped in a <Code>QueryClientProvider</Code>:
       </Txt>
       <CodeBlock code={code['ComplexUsageExampleWrapper.tsx']} />
-      <Txt>Here is the actual code:</Txt>
+      <Txt>
+        Note how the sort status and the page number are part of the query key, so changing either of them triggers a
+        new request, and how <Code>placeholderData: keepPreviousData</Code> keeps the current records on screen while
+        the next ones are loading. Also note that changing the sort order resets the table to the first page.
+      </Txt>
+      <Txt>Here is the code for the table itself:</Txt>
       <CodeBlock
         tabs={{
           code,
           keys: ['ComplexUsageExample.tsx', 'ComplexUsageExample.module.css', 'data/async.ts', 'data/index.ts'],
         }}
       />
-      <Txt>Head over to the next page to see {PRODUCT_NAME} type definitions.</Txt>
+      <Txt>Head over to the next page to learn about the {PRODUCT_NAME} type definitions.</Txt>
       <PageNavigation of={PATH} />
     </>
   );

@@ -137,6 +137,7 @@ export function SearchingAndFilteringExample() {
               }}
             />
           ),
+          filtering: seniors,
         },
       ]}
     />

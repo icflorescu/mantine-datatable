@@ -29,8 +29,6 @@ export const SPONSORS_LINK = 'https://github.com/sponsors/icflorescu';
 export const MANTINE_LINK = 'https://mantine.dev';
 export const NEXTJS_LINK = 'https://nextjs.org';
 export const VITE_LINK = 'https://vitejs.dev';
-export const REMIX_LINK = 'https://remix.run';
-export const CRA_LINK = 'https://create-react-app.dev';
 export const GATSBY_LINK = 'https://www.gatsbyjs.com';
 
 export const MANTINE_CONTEXTMENU_LINK = `${WEB_ROOT}/mantine-contextmenu`;
@@ -68,7 +66,7 @@ export const ROUTES: RouteInfo[] = [
   {
     href: '/styling',
     title: 'Styling',
-    description: `Learn how styling works in Mantine V7 and ${PRODUCT_NAME} V7`,
+    description: `Learn how styling works in ${PRODUCT_NAME} and how to make sure your styles are applied in the correct order`,
     icon: IconBrandCss3,
     color: 'pink',
   },
@@ -130,7 +128,7 @@ export const ROUTES: RouteInfo[] = [
   {
     href: '/examples/empty-state',
     title: 'Empty state',
-    description: `Example: ${PRODUCT_NAME} shows an empty state indicator when is provided with an empty array`,
+    description: `Example: ${PRODUCT_NAME} shows a customizable empty state indicator when its records array is empty`,
   },
   {
     href: '/examples/pagination',
@@ -170,7 +168,7 @@ export const ROUTES: RouteInfo[] = [
   {
     href: '/examples/records-selection',
     title: 'Records selection',
-    description: `Example: how to enable multiple records selection on ${PRODUCT_NAME}`,
+    description: `Example: how to enable multiple records selection with ${PRODUCT_NAME}`,
   },
   {
     href: '/examples/handling-row-clicks',
@@ -200,12 +198,12 @@ export const ROUTES: RouteInfo[] = [
   {
     href: '/examples/nested-tables-with-async-data-loading',
     title: 'Nested tables with async data loading',
-    description: `Example: how to implement nested ${PRODUCT_NAME}s with async data loading`,
+    description: `Example: how to implement nested tables with async data loading using ${PRODUCT_NAME}`,
   },
   {
     href: '/examples/nested-tables-with-async-data-loading-and-sorting',
     title: 'Nested tables with async data loading and sorting',
-    description: `Example: how to implement nested ${PRODUCT_NAME}s with async data loading and sorting`,
+    description: `Example: how to implement nested tables with async data loading and sorting using ${PRODUCT_NAME}`,
   },
   {
     href: '/examples/row-actions-cell',
@@ -230,7 +228,7 @@ export const ROUTES: RouteInfo[] = [
   {
     href: '/examples/rtl-support',
     title: 'RTL support',
-    description: `Example: demonstrating RTL (Right-to-Left) support in ${PRODUCT_NAME} for languages like Arabic, Hebrew, and Persian`,
+    description: `Example: ${PRODUCT_NAME} supports right-to-left (RTL) languages such as Arabic, Hebrew and Persian`,
   },
   {
     href: '/examples/links-or-buttons-inside-clickable-rows-or-cells',
@@ -250,50 +248,50 @@ export const ROUTES: RouteInfo[] = [
   {
     href: '/examples/custom-row-or-cell-attributes',
     title: 'Custom row or cell attributes',
-    description: `Example: How to add custom attributes to ${PRODUCT_NAME} rows or cells`,
+    description: `Example: how to add custom attributes to ${PRODUCT_NAME} rows or cells`,
   },
   {
     href: '/examples/using-with-auto-animate',
     title: 'Using bodyRef with AutoAnimate',
-    description: `Example: How to use ${PRODUCT_NAME} bodyRef property with AutoAnimate`,
+    description: `Example: how to use the ${PRODUCT_NAME} bodyRef property with AutoAnimate`,
   },
   {
     href: '/examples/complex-usage-scenario',
     title: 'Complex usage scenario',
-    description: `Example: a complex usage scenario for ${PRODUCT_NAME} featuring custom column definitions, asynchronous data loading with React Query, sorting, pagination, custom cell rendering, multiple row selection, and more`,
+    description: `Example: a complex usage scenario for ${PRODUCT_NAME} featuring custom column definitions, asynchronous data loading with TanStack Query, sorting, pagination, custom cell rendering, multiple row selection and more`,
   },
   {
     href: '/type-definitions',
     title: 'Type definitions',
-    description: `${PRODUCT_NAME} is written in TypeScript and its options are well documented with additional JSDoc annotations`,
+    description: `${PRODUCT_NAME} is written in TypeScript and its properties are documented with JSDoc annotations`,
     icon: IconAdjustments,
     color: 'grape',
   },
   {
     href: '/mantine-v6-support',
     title: 'Mantine V6 support',
-    description: `${PRODUCT_NAME} is compatible with Mantine V7; if you're using Mantine V6, please check the old documentation website`,
+    description: `${PRODUCT_NAME} V7+ requires Mantine V7 or newer; if you're still using Mantine V6, please check the old documentation website`,
     icon: IconQuestionMark,
     color: 'orange',
   },
   {
     href: '/contribute-and-support',
     title: 'Contribute and support',
-    description: `Contribute and support the development of ${PRODUCT_NAME} by sponsoring or hiring its author, starring the repo, raising issues, bringing up new ideas and coming up with pull-requests`,
+    description: `Support ${PRODUCT_NAME} by sponsoring or hiring its author, starring the repo, reporting issues, suggesting ideas or opening pull requests`,
     icon: IconThumbUp,
     color: 'red',
   },
   {
     href: '/hire-the-author',
     title: 'Hire the author',
-    description: `Hire ${AUTHOR_NAME}, the author of ${PRODUCT_NAME}, a full-stack developer with 20+ years of experience`,
+    description: `Hire ${AUTHOR_NAME}, the author of ${PRODUCT_NAME}, a hands-on fractional CTO and product builder with 25+ years of experience`,
     icon: IconHeartHandshake,
     color: 'teal',
   },
   {
     href: `${REPO_LINK}/blob/main/CHANGELOG.md` as Route,
     title: `Changelog`,
-    description: `See ${PRODUCT_NAME} changelog`,
+    description: `See the ${PRODUCT_NAME} changelog`,
     icon: IconList,
     color: 'gray',
   },

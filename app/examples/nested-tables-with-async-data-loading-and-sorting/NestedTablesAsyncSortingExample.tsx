@@ -86,6 +86,7 @@ function DepartmentsTable({ companyId, sortStatus }: { companyId: string; sortSt
     />
   );
 }
+
 export function NestedTablesAsyncSortingExample() {
   const [expandedRecordIds, setExpandedRecordIds] = useState<string[]>([]);
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus<CompanyWithEmployeeCount>>({

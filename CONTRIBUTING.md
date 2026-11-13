@@ -14,7 +14,7 @@ Since the repo root contains a `pnpm-lock.yaml` file, it **should be obvious** t
 Use `pnpm dev` to start the development server, `pnpm lint` to check the code for linting errors, and `pnpm build` to check that the code compiles.  
 Running `pnpm format` will automatically format your code with [Biome](https://biomejs.dev/formatter/), so that it adheres to the project’s coding style.  
 Use `pnpm test` to run the component tests in a headless Chromium (they're not run in CI, so please run them locally before submitting a PR); the first time, you'll need to install the browser with `pnpm exec playwright install --only-shell chromium`.  
-This is a [Next.js](https://nextjs.org/) project with an [app router](https://nextjs.org/docs/app/building-your-application/routing) and makes use of [React Server Components]().  
+This is a [Next.js](https://nextjs.org/) project with an [app router](https://nextjs.org/docs/app/building-your-application/routing) and makes use of [React Server Components](https://react.dev/reference/rsc/server-components).  
 **Make sure you have a good grasp of the above before attempting to contribute.**
 
 The Mantine DataTable package code is located in the `package` folder, while the documentation website code is located in the `app` folder.  

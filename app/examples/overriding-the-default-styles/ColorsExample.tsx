@@ -24,13 +24,20 @@ export function ColorsExample() {
     <DataTable
       withTableBorder
       withColumnBorders
+      striped
+      highlightOnHover
       // 👇 override default text color for light and dark themes
       c={{ dark: '#dbc7a0', light: '#55350d' }}
       // 👇 override default background color for light and dark themes
       backgroundColor={{ dark: '#232b25', light: '#f0f7f1' }}
       borderColor="#40c057" // 👈 override default border color
       rowBorderColor="#fab005" // 👈 override default row border color
+      // 👇 override default striped rows background color for light and dark themes
+      stripedColor={{ dark: '#2b3a2e', light: '#e1f0e3' }}
+      // 👇 override default background color of the row under the mouse cursor
+      highlightOnHoverColor={{ dark: '#3f5242', light: '#c6e5ca' }}
       paginationActiveBackgroundColor="#40c057" // 👈 override default pagination active background color
+      paginationActiveTextColor="#1b1f1c" // 👈 override default pagination active text color
       // example-skip
       records={records}
       columns={[
