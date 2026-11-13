@@ -438,6 +438,99 @@ describe('column toggling & persistence', () => {
   });
 });
 
+describe('column groups', () => {
+  // Header rows as `title|colSpan|rowSpan|pinned side` strings
+  const headerRows = () =>
+    Array.from(document.querySelectorAll('thead tr'), (tr) =>
+      Array.from(
+        tr.querySelectorAll('th'),
+        (th) => `${th.textContent}|${th.colSpan}|${th.rowSpan}|${th.getAttribute('data-pinned') ?? ''}`
+      )
+    );
+
+  const groups = [
+    { id: 'name', columns: [{ accessor: 'firstName' }, { accessor: 'lastName' }] },
+    { id: 'details', columns: [{ accessor: 'age' }, { accessor: 'address.city', title: 'City' }] },
+  ] as const;
+
+  test('renders group headers spanning their columns', async () => {
+    await renderDataTable({ columns: undefined, groups: groups.map((g) => ({ ...g, columns: [...g.columns] })) });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    expect(headerRows()).toEqual([
+      ['Name|2|1|', 'Details|2|1|'],
+      ['First name|1|1|', 'Last name|1|1|', 'Age|1|1|', 'City|1|1|'],
+    ]);
+  });
+
+  test('splits a group header when one of its columns is pinned to the other side', async () => {
+    await renderDataTable({
+      columns: undefined,
+      groups: [
+        { id: 'name', columns: [{ accessor: 'firstName' }, { accessor: 'lastName', pinned: 'right' }] },
+        { id: 'details', columns: [...groups[1].columns] },
+      ],
+    });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    await expect.poll(headerRows).toEqual([
+      ['Name|1|1|', 'Details|2|1|', 'Name|1|1|right'],
+      ['First name|1|1|', 'Age|1|1|', 'City|1|1|', 'Last name|1|1|right'],
+    ]);
+  });
+
+  test('keeps group headers in sync with toggled columns', async () => {
+    localStorage.setItem(
+      'grouped-columns-toggle',
+      JSON.stringify(
+        ['firstName', 'lastName', 'age', 'address.city'].map((accessor) => ({
+          accessor,
+          defaultToggle: true,
+          toggleable: true,
+          toggled: accessor !== 'age',
+        }))
+      )
+    );
+    await renderDataTable({
+      columns: undefined,
+      groups: groups.map((g) => ({ ...g, columns: g.columns.map((c) => ({ ...c, toggleable: true })) })),
+      storeColumnsKey: 'grouped',
+    });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    await expect.poll(headerRows).toEqual([
+      ['Name|2|1|', 'Details|1|1|'],
+      ['First name|1|1|', 'Last name|1|1|', 'City|1|1|'],
+    ]);
+  });
+
+  test('pins parent group headers in multilevel groups when all of their columns are pinned', async () => {
+    await renderDataTable({
+      columns: undefined,
+      groups: [
+        {
+          id: 'person',
+          groups: [
+            {
+              id: 'name',
+              columns: [
+                { accessor: 'firstName', pinned: 'left' },
+                { accessor: 'lastName', pinned: 'left' },
+              ],
+            },
+          ],
+        },
+        { id: 'details', columns: [...groups[1].columns] },
+      ],
+    });
+    await expect.element(page.getByRole('table')).toBeVisible();
+    await expect
+      .poll(headerRows)
+      .toEqual([
+        ['Person|2|1|left', 'Details|2|2|'],
+        ['Name|2|1|left'],
+        ['First name|1|1|left', 'Last name|1|1|left', 'Age|1|1|', 'City|1|1|'],
+      ]);
+  });
+});
+
 describe('scrolling', () => {
   const manyPeople = Array.from({ length: 40 }, (_, i) => ({ ...people[i % people.length], id: i + 1 }));
   const viewport = () => document.querySelector<HTMLElement>('.mantine-datatable-scroll-area-viewport')!;

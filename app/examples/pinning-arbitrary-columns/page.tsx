@@ -107,15 +107,11 @@ export default async function PinArbitraryColumnsExamplePage() {
         <strong>all columns in the group</strong> are pinned to the same side. If columns within a group have different
         pinning states (some pinned left, some unpinned, or mixed), the group header will not be pinned.
       </Txt>
-      <Txt warning title="Important">
-        Group headers are rendered in the order in which you define the groups, but pinned columns are{' '}
-        <strong>moved to the edges of the table</strong> (see above). If a column is pinned to the side opposite to its
-        group &mdash; for instance, if you pin one of the columns of the “Employee” group below to the right &mdash; it
-        will be moved to the right edge of the table and will end up under the wrong group header.
-        <br />
-        Since users can pin a pinnable column to either side, consider using static pinning (<Code>pinned</Code> without{' '}
-        <Code>pinnable</Code>) for the columns of groups located at the edges of the table, and enabling interactive
-        pinning only where this side effect is acceptable.
+      <Txt info>
+        Since pinned columns are <strong>moved to the edges of the table</strong> (see above), a column pinned to the
+        side opposite to its group &mdash; for instance, one of the columns of the “Employee” group below pinned to the
+        right &mdash; is moved away from the rest of its group. In this case, the group header is split in two: one part
+        stays above the remaining columns, while the other follows the pinned column.
       </Txt>
       <Txt>Try pinning and unpinning columns in the example below to see how the group headers behave:</Txt>
       <PinningWithColumnGroupsExample />

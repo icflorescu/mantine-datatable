@@ -1,61 +1,27 @@
 import { TableTh } from '@mantine/core';
 import clsx from 'clsx';
-import { type JSX, useMemo } from 'react';
+import type { JSX } from 'react';
 import type { PinnedColumnInfo } from './hooks';
-import { useMediaQueriesStringOrFunction } from './hooks';
 import type { DataTableColumnGroup } from './types';
 import { TEXT_ALIGN_CENTER, TEXT_ALIGN_LEFT, TEXT_ALIGN_RIGHT } from './utilityClasses';
-import { calculateColSpan, flattenColumns, humanize, needsRightBorder } from './utils';
+import { humanize } from './utils';
 
 type DataTableColumnGroupHeaderCellProps<T> = {
   group: DataTableColumnGroup<T>;
+  colSpan: number;
+  rowSpan: number;
   pinnedInfo: PinnedColumnInfo | undefined;
-  maxDepth: number;
-  currentDepth: number;
-  previousGroups: readonly DataTableColumnGroup<T>[];
-  isLastGroup: boolean;
-  withColumnBorders?: boolean;
-  totalTableColumns: number;
+  needsBorder: boolean;
 };
 
 export function DataTableColumnGroupHeaderCell<T>({
-  group: { id, columns, groups, title, textAlign, className, style },
+  group: { id, title, textAlign, className, style },
+  colSpan,
+  rowSpan,
   pinnedInfo,
-  maxDepth,
-  currentDepth,
-  previousGroups,
-  isLastGroup,
-  withColumnBorders = false,
-  totalTableColumns,
-}: DataTableColumnGroupHeaderCellProps<T>): JSX.Element | null {
-  const allColumns = useMemo(() => {
-    if (columns && columns.length > 0) {
-      return columns;
-    }
-    if (groups && groups.length > 0) {
-      return flattenColumns([{ id, columns, groups }]);
-    }
-    return [];
-  }, [columns, groups, id]);
-
-  const queries = useMemo(() => allColumns.map(({ visibleMediaQuery }) => visibleMediaQuery), [allColumns]);
-  const visibles = useMediaQueriesStringOrFunction(queries);
-
-  const colSpan = useMemo(() => {
-    return calculateColSpan({ id, columns, groups }, visibles);
-  }, [id, columns, groups, visibles]);
-
-  const columnsBeforeGroup = useMemo(() => {
-    return previousGroups.reduce((sum, g) => sum + calculateColSpan(g, visibles), 0);
-  }, [previousGroups, visibles]);
-
-  const hasSubGroups = groups && groups.length > 0;
-  const rowSpan = hasSubGroups ? 1 : maxDepth - currentDepth;
-
-  const hasMoreColumns = columnsBeforeGroup + colSpan < totalTableColumns;
-  const needsBorder = needsRightBorder(isLastGroup, hasMoreColumns, withColumnBorders);
-
-  return colSpan > 0 ? (
+  needsBorder,
+}: DataTableColumnGroupHeaderCellProps<T>): JSX.Element {
+  return (
     <TableTh
       colSpan={colSpan}
       rowSpan={rowSpan > 1 ? rowSpan : undefined}
@@ -82,5 +48,5 @@ export function DataTableColumnGroupHeaderCell<T>({
     >
       {title ?? humanize(id)}
     </TableTh>
-  ) : null;
+  );
 }

@@ -79,10 +79,9 @@ export default async function PinFirstColumnExamplePage() {
       <CodeBlock code={code['with-column-groups']} />
       <Txt idea>
         If you need to pin more than one column, or a whole group of columns, set the <Code>pinned</Code> property on
-        individual columns instead. Group headers are pinned too when all of their columns are pinned to the same side
-        (this applies to groups that directly contain columns). Head over to the{' '}
-        <InternalLink to="/examples/pinning-arbitrary-columns">pinning arbitrary columns</InternalLink> example to learn
-        more.
+        individual columns instead. Group headers are pinned too when all of their columns are pinned to the same side.
+        Head over to the <InternalLink to="/examples/pinning-arbitrary-columns">pinning arbitrary columns</InternalLink>{' '}
+        example to learn more.
       </Txt>
       <PageNavigation of={PATH} />
     </>
