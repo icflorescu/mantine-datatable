@@ -3,6 +3,11 @@
   --docsearch-logo-color: var(--mantine-color-blue-6);
 }
 
+/* In dark mode, the modal's default shadow is barely visible against the backdrop */
+:root[data-theme='dark'] {
+  --docsearch-modal-shadow: 0 0 0 1px var(--mantine-color-dark-4), 0 3px 8px 0 #000309;
+}
+
 .DocSearch-Container {
   z-index: 1000;
   position: fixed;
