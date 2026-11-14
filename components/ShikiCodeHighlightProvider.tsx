@@ -10,7 +10,7 @@ const DARK_THEME = 'github-dark-default';
 async function loadShiki() {
   const { createHighlighter } = await import('shiki');
   const shiki = await createHighlighter({
-    langs: ['ts', 'tsx', 'js', 'json', 'css', 'shell'],
+    langs: ['ts', 'tsx', 'js', 'json', 'css', 'shell', 'md'],
     themes: [DARK_THEME],
   });
 

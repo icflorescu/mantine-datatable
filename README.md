@@ -57,6 +57,8 @@ If you're using Mantine DataTable in your project, please drop me a line at the 
 
 Visit [icflorescu.github.io/mantine-datatable](https://icflorescu.github.io/mantine-datatable/) to view the full documentation and learn how to use it by browsing a comprehensive list of examples.
 
+🤖 Using an AI assistant or coding agent? Point it to [`llms.txt`](https://icflorescu.github.io/mantine-datatable/llms.txt) or [`llms-full.txt`](https://icflorescu.github.io/mantine-datatable/llms-full.txt) for LLM-friendly documentation (see [how to use them](https://icflorescu.github.io/mantine-datatable/llms-txt/)).
+
 ## Mantine DataTable AI Bot
 
 [Mantine DataTable AI Bot](https://codeparrot.ai/oracle?owner=icflorescu&repo=mantine-datatable), kindly provided by [CodeParrot.AI](https://codeparrot.ai), will help you understand this repository better. You can ask for code examples, installation guide, debugging help and much more.

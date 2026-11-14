@@ -1,0 +1,1666 @@
+import { readdir } from 'node:fs/promises';
+import type { Route } from 'next';
+import {
+  MANTINE_CONTEXTMENU_LINK,
+  MANTINE_CONTEXTMENU_PRODUCT_NAME,
+  MANTINE_LINK,
+  PRODUCT_NAME,
+  REPO_LINK,
+  ROUTES,
+  V6_WEBSITE_LINK,
+  WEBSITE_LINK,
+} from '~/app/config';
+import { readCodeFile } from './code';
+
+/**
+ * Generators for the `llms.txt` and `llms-full.txt` files (see https://llmstxt.org),
+ * built from the same route definitions and code example files used by the documentation website.
+ */
+
+const PACKAGE = process.env.PACKAGE_NAME;
+
+const lines = (...value: string[]) => value.join('\n');
+
+function getRoute(href: Route) {
+  const route = ROUTES.find((route) => route.href === href);
+  if (!route) throw new Error(`Route ${href} not found`);
+  return route;
+}
+
+const pageUrl = (href: Route) => (href === '/' ? `${WEBSITE_LINK}/` : `${WEBSITE_LINK}${href}/`);
+
+const getLanguage = (fileName: string) => fileName.split('.').pop() as string;
+
+function fence(code: string, language: string, fileName?: string) {
+  return lines(...(fileName ? [`\`${fileName}\`:`, ''] : []), `\`\`\`${language}`, code.trimEnd(), '```');
+}
+
+/**
+ * Docs-site sample data files (e.g. `companies.json`) are shown by several pages;
+ * to keep `llms-full.txt` smaller, each one is only included the first time it's used.
+ * Sections are generated sequentially, so "first time" is deterministic.
+ */
+const DATA_PATH_PREFIX = '/../data/';
+const shownDataFiles = new Map<string, string>();
+let currentSectionHeading = '';
+
+/**
+ * Read a code example file used by a documentation page and wrap it in a fenced code block
+ */
+async function codeFile(path: string, fileName = path.split('/').pop() as string) {
+  if (path.startsWith(DATA_PATH_PREFIX)) {
+    const shownIn = shownDataFiles.get(path);
+    if (shownIn) return `(\`${fileName}\` is the same as in the "${shownIn}" section above.)`;
+    shownDataFiles.set(path, currentSectionHeading);
+  }
+  return fence(await readCodeFile<string>(path), getLanguage(fileName), fileName);
+}
+
+/**
+ * Read a named block from a code example file containing multiple `example-start [block name]` blocks
+ */
+async function codeBlock(path: string, block: string, fileName?: string) {
+  const blocks = await readCodeFile<Record<string, string>>(path);
+  if (blocks[block] === undefined) throw new Error(`Block ${block} not found in ${path}`);
+  return fence(blocks[block], getLanguage(fileName ?? path), fileName);
+}
+
+const TYPE_FILES_PATH = 'package/types';
+
+/**
+ * Read all type definition files, the same way the type definitions page does
+ */
+async function typeFiles() {
+  const fileNames = (await readdir(TYPE_FILES_PATH)).filter((name) => name !== 'index.ts').sort();
+  const files = await Promise.all(fileNames.map((name) => codeFile(`/../${TYPE_FILES_PATH}/${name}`)));
+  return files.join('\n\n');
+}
+
+const INSTALL = fence(`npm i ${PACKAGE} clsx\n# or: pnpm i ${PACKAGE} clsx\n# or: yarn add ${PACKAGE} clsx`, 'shell');
+
+const DOCS_HELPERS_NOTE =
+  'Note: the examples use a few documentation-website helpers which are not part of the package: ' +
+  'the sample data and types imported from `~/data` (`companies`, `departments`, `employees`, `Company`, `Employee` etc.) ' +
+  'and from `~/data/async`, `~/data/nested` and `~/data/nestedAsync` (simulated API calls and hooks such as `getEmployeesAsync`), ' +
+  'and small utilities imported from `~/lib/examples` (e.g. `delay`). Replace them with your own data and API calls. ' +
+  'Code hidden for brevity is marked with `// ...` comments.';
+
+const KEY_FACTS = lines(
+  `- ${PRODUCT_NAME} V9.x is compatible with Mantine V9.x (the major version follows Mantine’s; use \`${PACKAGE}@8\` with Mantine 8, \`${PACKAGE}@7\` with Mantine 7). Peer dependencies are \`@mantine/core\`, \`@mantine/hooks\`, \`clsx\`, \`react\` and \`react-dom\` (React 19+). It has no other dependencies.`,
+  `- Import \`${PACKAGE}/styles.layer.css\` (or \`${PACKAGE}/styles.css\`) **after** the Mantine core styles. When using the \`styles.layer.css\` files, declare \`@layer mantine, ${PACKAGE};\` in your own CSS so Mantine core styles are applied first; otherwise the table may look broken (missing borders, wrong spacing, misplaced pinned columns).`,
+  `- The package entry point is marked \`'use client'\`. Since \`DataTable\` props usually include functions (\`render\`, \`onRowClick\` etc.), render it from a client component (a file with the \`'use client'\` directive) in React Server Components environments such as the Next.js app router.`,
+  '- `DataTable` is generic: the record type is inferred from `records`. When declaring columns outside the component, type them as `DataTableColumn<YourType>[]`.',
+  '- `records` is the array of rows to display; `columns` is an array of objects, each with an `accessor` (a record key, or a dot-notation path like `department.company.name`). A column without `render` displays the accessor value; when `title` is omitted, it is generated by "humanizing" the accessor (`firstName` → "First name"). An accessor doesn’t have to match a record key if the column has a `render` function. Use `groups` instead of `columns` to group columns under shared headers.',
+  '- Each record needs a unique key, read from its `id` property by default. Use `idAccessor` (a property name, a dot-notation path or a function `(record) => key`) when your records have a different unique identifier; the same key is used to compare records for selection and row expansion.',
+  '- The component does **not** paginate, sort or filter data for you. Pagination (`page`, `onPageChange`, `totalRecords`, `recordsPerPage`, with a 1-based `page`) expects `records` to contain only the current page. Sorting (`sortStatus: { columnAccessor, direction }`, `onSortStatusChange`, `sortable: true` on columns) only renders the indicators and reports changes: sort the records yourself. Filtering is done by passing a `filter` node to a column and filtering the records yourself.',
+  "- Selection is controlled: pass `selectedRecords` and `onSelectedRecordsChange` (optionally `isRecordSelectable`, `selectionTrigger: 'checkbox' | 'cell'`). Shift-click selects ranges, Gmail-style.",
+  '- Set `fetching` to show a loader overlay while loading data asynchronously; an empty `records` array shows a customizable empty state (`noRecordsText`, `emptyState`, `noRecordsIcon`).',
+  '- The table is vertically scrollable with a sticky header only when it has a restricted height (`height`, `maxHeight`, or a height-restricted parent); otherwise it grows with its content. It is always horizontally scrollable if its content is wider than its container.',
+  '- Column dragging, toggling and interactive pinning (`draggable`, `toggleable`, `pinnable` on columns) require a `storeColumnsKey` on the table and the `useDataTableColumns({ key, columns })` hook called with the same `key`: pass the returned `effectiveColumns` to `columns`. Their state is persisted in `localStorage`. Column resizing (`resizable: true`) also works without them, but then widths are not persisted.',
+  '- Row expansion is configured with the `rowExpansion` property (`content`, `trigger`, `allowMultiple`, controlled `expanded` state); nested tables are built by rendering another `DataTable` (with `noHeader`) inside the expansion content.',
+  '- Styling: use Mantine table props (`withTableBorder`, `withColumnBorders`, `striped`, `highlightOnHover`, `borderRadius`, `shadow`, `verticalSpacing`, `fz` etc.), color props (`c`, `backgroundColor`, `borderColor`, `rowBorderColor`, `stripedColor`, `highlightOnHoverColor`, `selectionColor`), `className`/`style`/`classNames`/`styles`, per-row `rowClassName`, `rowStyle`, `rowColor`, `rowBackgroundColor`, and per-column `cellsClassName`, `cellsStyle`. `createStyles` (Mantine V6) is not available.',
+  '- RTL layouts are supported automatically through Mantine’s `DirectionProvider`.'
+);
+
+type Section = {
+  href: Route;
+  content: () => Promise<string> | string;
+};
+
+const SECTIONS: Section[] = [
+  {
+    href: '/getting-started',
+    content: async () =>
+      lines(
+        `${PRODUCT_NAME} is built on top of Mantine (${MANTINE_LINK}) and has no dependencies of its own. Its peer dependencies are \`@mantine/core\` and \`@mantine/hooks\` (version 9 or newer), \`react\` and \`react-dom\` (version 19 or newer), and \`clsx\` (version 2 or newer).`,
+        '',
+        `The major version of ${PRODUCT_NAME} follows the major version of Mantine it supports. The current version is built for Mantine 9; if your application uses Mantine 8 or 7, install the matching major version (e.g. \`${PACKAGE}@8\`). For Mantine 6, see the Mantine V6 support section below.`,
+        '',
+        `Create an application with Mantine (see ${MANTINE_LINK}/getting-started/), then install \`${PACKAGE}\` along with \`clsx\`:`,
+        '',
+        INSTALL,
+        '',
+        `Next, import the necessary CSS files and make sure the styles are applied **in the correct order**: the \`@mantine/core\` styles must be applied before the ${PRODUCT_NAME} styles (see the Styling section below).`,
+        '',
+        'For example, in a Next.js application with the app router, your root `layout.tsx` could look like this:',
+        '',
+        await codeFile('/getting-started/examples/RootLayout.tsx'),
+        '',
+        await codeFile('/getting-started/examples/layout.css'),
+        '',
+        'Then import the component and use it in your application like so:',
+        '',
+        await codeFile('/getting-started/examples/GettingStartedExample.tsx'),
+        '',
+        `This example uses Mantine Notifications (${MANTINE_LINK}/x/notifications/) to react to row clicks; \`@mantine/notifications\` is **not** required by ${PRODUCT_NAME}.`,
+        '',
+        '`DataTable` is a generic component: the type of the records is inferred from the `records` property, so callbacks such as `render` or `onRowClick` are fully typed and column `accessor` values are autocompleted.'
+      ),
+  },
+  {
+    href: '/styling',
+    content: async () =>
+      lines(
+        'Mantine doesn’t use CSS-in-JS: all `@mantine/*` packages ship native CSS files, which can be imported from `@mantine/{package}/styles.css` or `@mantine/{package}/styles.layer.css`.',
+        '',
+        `Similarly, ${PRODUCT_NAME} ships native CSS files, which can be imported from \`${PACKAGE}/styles.css\` or \`${PACKAGE}/styles.layer.css\`.`,
+        '',
+        `**Order matters**: ${PRODUCT_NAME} styles build on top of the \`@mantine/core\` styles, so they **must** be applied **after** them. If they’re not, the table may look broken (for instance, missing borders, wrong spacing or misplaced pinned columns).`,
+        '',
+        '### Importing styles without CSS layers',
+        '',
+        'If your bundler preserves the order of CSS imports (as Vite does, for instance), the simplest approach is to import the `styles.css` files in the right order, at the root of your application:',
+        '',
+        await codeFile('/styling/examples/no-layers/main.tsx'),
+        '',
+        '### Controlling the order of styles with CSS layers',
+        '',
+        'Some bundlers and frameworks (including Next.js) don’t let you control the order in which imported stylesheets are applied. You can work around this by using CSS layers:',
+        '',
+        '- `@mantine/{package}/styles.layer.css` files place their styles in a layer named `mantine`;',
+        `- \`${PACKAGE}/styles.layer.css\` places its styles in a layer named \`${PACKAGE}\`.`,
+        '',
+        'For example, in a Next.js application you can ensure the correct order of styles by importing the `styles.layer.css` files and declaring the layer order with the `@layer` directive:',
+        '',
+        await codeFile('/styling/examples/simple/RootLayout.tsx'),
+        '',
+        await codeFile('/styling/examples/simple/layout.css'),
+        '',
+        'For even more control, use the `postcss-import` plugin to choose your own layer names when importing the `styles.css` files, then declare their order with the `@layer` directive:',
+        '',
+        await codeFile('/styling/examples/fine-grained/RootLayout.tsx'),
+        '',
+        await codeFile('/styling/examples/fine-grained/postcss.config.js'),
+        '',
+        await codeFile('/styling/examples/fine-grained/layout.css'),
+        '',
+        `Styles that are **not** placed in any layer always take precedence over layered styles, so your own un-layered CSS overrides both Mantine and ${PRODUCT_NAME} styles, regardless of specificity.`,
+        '',
+        '### Customizing the look of your tables',
+        '',
+        `${PRODUCT_NAME} follows the current Mantine theme, so the best way to achieve a consistent look-and-feel is to customize the theme you pass to \`MantineProvider\`. To go further, use the basic table properties (borders, spacing, font size, shadow, striping etc.), set custom colors, class names or styles (see "Overriding the default styles"), and style individual columns and rows.`,
+        '',
+        '### Migrating from Mantine V6',
+        '',
+        `${PRODUCT_NAME} V7 was a major release with breaking changes, made to support Mantine V7, which migrated to native CSS. Styling is no longer done with CSS-in-JS (Emotion), so the \`createStyles\` function is no longer available. When migrating an application from Mantine V6, read the Mantine V7.0 (${MANTINE_LINK}/changelog/7-0-0/) and V7.1 (${MANTINE_LINK}/changelog/7-1-0/) changelogs.`
+      ),
+  },
+  {
+    href: '/examples/basic-usage',
+    content: async () => {
+      const path = '/examples/basic-usage';
+      return lines(
+        'In its most basic usage scenario, the `DataTable` component only requires the `records` and `columns` properties to be set:',
+        '',
+        await codeFile(`${path}/BasicUsageExample.tsx`),
+        '',
+        await codeFile('/../data/companies.json'),
+        '',
+        'A few things worth noting:',
+        '',
+        '- each column’s `accessor` tells the component which record property to display in that column;',
+        '- when a column doesn’t have a `title`, one is generated by “humanizing” its accessor (e.g. `streetAddress` becomes “Street address”);',
+        `- each record must have a unique \`id\` property, which is used as the row key; if your records are identified by a different property, see the non-standard record IDs example (${WEBSITE_LINK}/examples/non-standard-record-ids/).`,
+        '',
+        '### Displaying nested properties',
+        '',
+        'Accessors support dot-notation, so you can display nested object properties without writing a custom `render` function:',
+        '',
+        await codeFile(`${path}/BasicUsageNestedPropertiesExample.tsx`)
+      );
+    },
+  },
+  {
+    href: '/examples/basic-table-properties',
+    content: async () => {
+      // The page renders an interactive playground and builds the displayed code by rewriting the prop lines
+      // of the example according to the controls state; here we show the code with most properties enabled.
+      const code = (await readCodeFile<string>('/examples/basic-table-properties/BasicTablePropertiesExample.tsx'))
+        .replace(/( +)withTableBorder=.*\n/, (_, spaces) => `${spaces}withTableBorder\n`)
+        .replace(/( +)withRowBorders=.*\n/, '')
+        .replace(/( +)noHeader=.*\n/, '')
+        .replace(/( +)borderRadius=.*\n/, (_, spaces) => `${spaces}borderRadius="sm"\n`)
+        .replace(/( +)shadow=.*\n/, (_, spaces) => `${spaces}shadow="sm"\n`)
+        .replace(/( +)withColumnBorders=.*\n/, (_, spaces) => `${spaces}withColumnBorders\n`)
+        .replace(/( +)striped=.*\n/, (_, spaces) => `${spaces}striped\n`)
+        .replace(/( +)highlightOnHover=.*\n/, (_, spaces) => `${spaces}highlightOnHover\n`)
+        .replace(/( +)horizontalSpacing=.*\n/, (_, spaces) => `${spaces}horizontalSpacing="xs"\n`)
+        .replace(/( +)verticalSpacing=.*\n/, (_, spaces) => `${spaces}verticalSpacing="xs"\n`)
+        .replace(/( +)fz=.*\n/, (_, spaces) => `${spaces}fz="sm"\n`)
+        .replace(/( +)verticalAlign=.*\n/, (_, spaces) => `${spaces}verticalAlign="top"\n`);
+      return lines(
+        `The \`DataTable\` component passes most properties of the underlying Mantine Table component (${MANTINE_LINK}/core/table/) through, and implements a number of additional ones:`,
+        '',
+        '- `withRowBorders: boolean` → show borders between rows; defaults to `true`;',
+        '- `withColumnBorders: boolean` → show borders between columns;',
+        "- `striped: boolean | 'odd' | 'even'` → stripe rows (odd rows by default);",
+        '- `highlightOnHover: boolean` → highlight the row under the mouse cursor;',
+        '- `withTableBorder: boolean` → show an outer table border;',
+        '- `noHeader: boolean` → hide the table header;',
+        '- `shadow` → box shadow of the table;',
+        '- `horizontalSpacing` and `verticalSpacing` → cell padding;',
+        '- `fz` → font size;',
+        '- `borderRadius` → radius of the outer table border;',
+        "- `verticalAlign: 'top' | 'center' | 'bottom'` → vertical alignment of row cells.",
+        '',
+        'Here is an example using most of them:',
+        '',
+        fence(code, 'tsx'),
+        '',
+        '### Things to keep in mind',
+        '',
+        '- row borders are shown by default; set `withRowBorders={false}` to hide them;',
+        '- `borderRadius` is meant to round the corners of the outer table border, so it can only be set together with `withTableBorder` (TypeScript will complain otherwise);',
+        '- `horizontalSpacing`, `verticalSpacing`, `fz`, `borderRadius` and `shadow` accept a key of the corresponding Mantine theme property (`xs`, `sm`, `md`, `lg` or `xl`) as well as any valid CSS value;',
+        '- `verticalAlign` controls the vertical alignment of row cells and defaults to `center`; its effect is only visible when some cells span multiple lines.',
+        '',
+        '### Other table properties',
+        '',
+        `Since ${PRODUCT_NAME} passes unknown properties down to the Mantine Table component, you can also use other Table properties (${MANTINE_LINK}/core/table/?t=props), such as \`tabularNums\` (which applies \`font-variant-numeric: tabular-nums\`, so that numbers in different rows line up nicely).`,
+        '',
+        'Other examples cover related properties in more detail:',
+        '',
+        `- overriding the default styles (${WEBSITE_LINK}/examples/overriding-the-default-styles/) → text, background, border, striped and hover colors, class names and styles;`,
+        `- scrollable vs. auto-height (${WEBSITE_LINK}/examples/scrollable-vs-auto-height/) → \`height\`, \`minHeight\` and \`maxHeight\`;`,
+        `- disabling text selection (${WEBSITE_LINK}/examples/disabling-text-selection/) → \`textSelectionDisabled\`.`
+      );
+    },
+  },
+  {
+    href: '/examples/overriding-the-default-styles',
+    content: async () => {
+      const path = '/examples/overriding-the-default-styles';
+      return lines(
+        `${PRODUCT_NAME} closely follows the current Mantine theme, so it should look great out of the box in most cases.`,
+        '',
+        '**Keep in mind:** if you want to customize your application’s look-and-feel and keep a consistent design across all areas of the screen, do so by providing a custom theme to the top-level `MantineProvider` instead of overriding individual component styles. You will achieve a better result with less effort and your code will be easier to maintain.',
+        '',
+        `However, if you’re not happy with the default ${PRODUCT_NAME} styling, there are several ways to override it.`,
+        '',
+        '### With color properties',
+        '',
+        'The quickest way to customize the default colors is to use the `c`, `backgroundColor`, `borderColor`, `rowBorderColor`, `stripedColor`, `highlightOnHoverColor` and `selectionColor` properties. Each of them accepts either a `MantineColor` (a key of `theme.colors` or any valid CSS color string), or an object with `light` and `dark` keys and `MantineColor` values, used for the light and dark color schemes respectively.',
+        '',
+        '- `c` sets the text color of the table body, header and footer, and of the pagination text and page buttons (if present);',
+        '- `backgroundColor` applies to the table body, header and footer, and to the pagination area (if present);',
+        '- `borderColor` applies to the outer table border (if enabled by `withTableBorder`), the header bottom border, the footer top border, and the pagination top border and page button borders (if present);',
+        '- `rowBorderColor` defaults to the `borderColor` value and applies to the bottom border of each row and to the column borders (if enabled by `withColumnBorders`);',
+        '- `stripedColor` sets the background color of striped rows when `striped` is enabled (odd rows by default, or even rows with `striped="even"`);',
+        '- `highlightOnHoverColor` sets the background color of the row under the mouse cursor when `highlightOnHover` is enabled;',
+        '- `selectionColor` sets the background color of selected rows, and defaults to the light variant of the theme’s primary color.',
+        '',
+        'With pagination, you can also customize the colors of the active page button with `paginationActiveTextColor` and `paginationActiveBackgroundColor`.',
+        '',
+        await codeFile(`${path}/ColorsExample.tsx`),
+        '',
+        `To set the text or background color of individual rows based on their data, use the \`rowColor\` and \`rowBackgroundColor\` properties (see ${WEBSITE_LINK}/examples/row-styling/).`,
+        '',
+        '### With CSS variables',
+        '',
+        'Under the hood, the color properties above are implemented with CSS variables defined on the component root (the element with the `mantine-datatable` class). You can override them in your own CSS:',
+        '',
+        '- `--mantine-datatable-color`',
+        '- `--mantine-datatable-background-color`',
+        '- `--mantine-datatable-border-color`',
+        '- `--mantine-datatable-row-border-color`',
+        '- `--mantine-datatable-striped-color`',
+        '- `--mantine-datatable-highlight-on-hover-color`',
+        '- `--mantine-datatable-selection-color` (background color of selected rows, also settable with `selectionColor`; defaults to `--mantine-primary-color-light`)',
+        '',
+        'In the example below, a `className` is used to change the colors of the selected and hovered rows:',
+        '',
+        await codeFile(`${path}/CssVariablesExample.tsx`),
+        '',
+        await codeFile(`${path}/CssVariablesExample.module.css`),
+        '',
+        `**Mind the CSS order:** your overrides have the same specificity as the ${PRODUCT_NAME} rules defining these variables, so they only take effect if your styles are loaded after the ${PRODUCT_NAME} ones (or if the ${PRODUCT_NAME} styles are placed in a CSS layer). See the styling guide (${WEBSITE_LINK}/styling/) for details.`,
+        '',
+        '### With className',
+        '',
+        'You can pass a `className` that will be applied to the `DataTable` component root:',
+        '',
+        await codeFile(`${path}/StylingWithClassNameExample.tsx`),
+        '',
+        await codeFile(`${path}/StylingWithClassNameExample.module.css`),
+        '',
+        '### With a style object or function',
+        '',
+        'You can style the component root with a `style` object:',
+        '',
+        await codeFile(`${path}/StylingWithStyleObjectExample.tsx`),
+        '',
+        'The `style` property also accepts a function that receives the current theme and returns a style object:',
+        '',
+        await codeFile(`${path}/StylingWithStyleFunctionExample.tsx`),
+        '',
+        '### With multiple class names',
+        '',
+        'You can target the component root, table, header, footer and pagination individually by passing an object with `root`, `table`, `header`, `footer` and `pagination` keys to the `classNames` property:',
+        '',
+        await codeFile(`${path}/StylingWithClassNamesExample.tsx`),
+        '',
+        await codeFile(`${path}/StylingWithClassNamesExample.module.css`),
+        '',
+        '### With multiple style objects or functions',
+        '',
+        'Similarly, the `styles` property accepts an object with the same keys and style objects (or functions receiving the current theme and returning style objects) as values:',
+        '',
+        await codeFile(`${path}/StylingWithStyleObjectsAndFunctionsExample.tsx`),
+        '',
+        '### With global class names',
+        '',
+        `${PRODUCT_NAME} elements have static class names you can target in global stylesheets, such as \`mantine-datatable\` (the root), \`mantine-datatable-table\`, \`mantine-datatable-header\`, \`mantine-datatable-row\`, \`mantine-datatable-footer\` and \`mantine-datatable-pagination\`. Prefer the approaches above when possible, though: they are scoped to a single table and less likely to be affected by changes in the component’s internal structure.`
+      );
+    },
+  },
+  {
+    href: '/examples/column-properties-and-styling',
+    content: async () => {
+      const path = '/examples/column-properties-and-styling';
+      return lines(
+        '### The accessor',
+        '',
+        "The only property you **have** to specify for a column is its `accessor`: the name of the record property whose value is displayed in the column cells. It supports dot-notation for nested objects (e.g. `'department.company.name'`).",
+        '',
+        "The column header title is derived by “humanizing” the accessor (e.g. `'firstName'` → “First name”, `'department.company.name'` → “Department company name”). Override it by setting the column `title`, which can be any `ReactNode`.",
+        '',
+        '### Basic column properties',
+        '',
+        '- `width: number | string` → desired column width;',
+        '- `ellipsis: boolean` → if `true`, cell content will not wrap and will be truncated with an ellipsis if needed (set either this or `noWrap`, not both);',
+        '- `noWrap: boolean` → if `true`, cell content will not wrap (`white-space: nowrap`) (set either this or `ellipsis`, not both);',
+        "- `textAlign: 'left' | 'center' | 'right'` → alignment of the column title, cells and footer; defaults to `'left'`;",
+        '- `hidden: boolean` → if `true`, the column is not visible;',
+        '- `visibleMediaQuery` → a media query string, or a function receiving the current `MantineTheme` and returning one; if set, the column is only visible when the media query matches;',
+        '- `render` → a function receiving the current record and its index in `records` and returning a `ReactNode` (strings and numbers are valid React nodes);',
+        '- `filter` → a `ReactNode`, or a function returning one; if set, a filter button is added to the column header, opening a popover with the provided node; a function receives an object with a `close()` method that closes the popover;',
+        '- `filtering: boolean` → if `true`, the filter button is highlighted to indicate an active filter; defaults to `false`;',
+        '- `filterPopoverProps` → props passed to the filter Mantine `Popover` (position, width, shadow, etc.);',
+        '- `filterPopoverDisableClickOutside: boolean` → if `true`, disables the click-outside handler the DataTable attaches to the filter popover dropdown; combine it with `filterPopoverProps={{ closeOnClickOutside: false }}` to keep the popover open until closed explicitly (useful when the filter contains components rendering their own dropdowns in a portal, such as date pickers or selects).',
+        '',
+        `See the searching and filtering example (${WEBSITE_LINK}/examples/searching-and-filtering/) to learn how to use \`filter\` and \`filtering\`.`,
+        '',
+        'You can create a “virtual column” by providing an accessor that doesn’t refer to an existing (nested) record property; in this case you **must** provide a `render` function. Each accessor must be unique within the columns collection.',
+        '',
+        await codeFile(`${path}/ColumnPropertiesExample.tsx`),
+        '',
+        await codeFile('/../data/index.ts', 'data/index.ts'),
+        '',
+        '### Column footers',
+        '',
+        'The DataTable displays a footer row at the bottom of the table if you specify a `footer` property for at least one column (this example uses the same `data/index.ts` as above):',
+        '',
+        await codeFile(`${path}/ColumnFooterExample.tsx`),
+        '',
+        'The footer is always visible and sticks to the bottom of the table, whether the table is scrollable or taller than its content.',
+        '',
+        '### Styling column titles, cells and footers',
+        '',
+        '- `titleClassName: string` → class name for the column title;',
+        '- `titleStyle` → style object for the column title, or a function receiving the current theme and returning one;',
+        '- `cellsClassName` → class name for the column cells, or a function receiving the current record and its index and returning one;',
+        '- `cellsStyle` → a function receiving the current record and its index and returning either a style object for the cells, or a function receiving the current theme and returning a style object;',
+        '- `footerClassName: string` → class name for the column footer;',
+        '- `footerStyle` → style object for the column footer, or a function receiving the current theme and returning one.',
+        '',
+        'Example (using the same `data/index.ts` as above):',
+        '',
+        await codeFile(`${path}/ColumnStylingExample.tsx`),
+        '',
+        await codeFile(`${path}/ColumnStylingExample.module.css`),
+        '',
+        '### Other column properties',
+        '',
+        `- \`sortable\` and \`sortKey\` → see sorting (${WEBSITE_LINK}/examples/sorting/);`,
+        `- \`draggable\`, \`toggleable\` and \`defaultToggle\` → see column dragging and toggling (${WEBSITE_LINK}/examples/column-dragging-and-toggling/);`,
+        `- \`resizable\` → see column resizing (${WEBSITE_LINK}/examples/column-resizing/);`,
+        `- \`pinned\` and \`pinnable\` → see pinning arbitrary columns (${WEBSITE_LINK}/examples/pinning-arbitrary-columns/);`,
+        `- \`customCellAttributes\` → see custom row or cell attributes (${WEBSITE_LINK}/examples/custom-row-or-cell-attributes/);`,
+        `- \`hiddenContent\` → if \`true\`, the column header is rendered but its body cells are not; only useful in advanced scenarios where you render the table rows yourself, as in the row dragging example (${WEBSITE_LINK}/examples/row-dragging/).`,
+        '',
+        `If you find yourself repeating the same properties for many columns, see default column properties (${WEBSITE_LINK}/examples/default-column-properties/).`
+      );
+    },
+  },
+  {
+    href: '/examples/column-grouping',
+    content: async () => {
+      const path = '/examples/column-grouping';
+      return lines(
+        'To group the headers of closely related columns under a shared title, pass the `groups` prop to the DataTable instead of `columns`.',
+        '',
+        'Each group requires:',
+        '',
+        '- `id` → used as a React key; any string unique among the groups; a humanized version of it is used as the group header if no `title` is provided;',
+        '- `columns` → an array of column definitions belonging to the group; alternatively, provide nested `groups` instead of `columns` (see multilevel column grouping below).',
+        '',
+        'Optional group properties:',
+        '',
+        '- `title` → a `ReactNode` rendered inside the group header (defaults to the humanized `id`);',
+        "- `textAlign: 'left' | 'center' | 'right'` → alignment of the group header; it doesn’t affect the alignment of the columns in the group, which you set individually;",
+        '- `className: string` → class name applied to the group header;',
+        '- `style` → style applied to the group header; a style object or a function receiving the current theme and returning one.',
+        '',
+        'Groups are hidden if they don’t have any visible columns (all their columns are hidden by `hidden` or `visibleMediaQuery`, or the group has an empty `columns` array).',
+        '',
+        await codeFile(`${path}/ColumnGroupingExample.tsx`),
+        '',
+        await codeFile('/../data/companies.json'),
+        '',
+        '### Multilevel column grouping',
+        '',
+        'Groups can be nested to create multiple header rows: provide a `groups` array instead of `columns` for a group; each nested group can, in turn, contain either `columns` or further `groups`, but not both.',
+        '',
+        'Branches don’t need to have the same depth: if a group containing `columns` sits at a shallower level than others, its header spans the extra header rows. The order of the leaf columns follows their order in the group tree.',
+        '',
+        await codeFile(`${path}/MultilevelColumnGroupingExample.tsx`),
+        '',
+        await codeFile('/../data/index.ts', 'data/index.ts'),
+        '',
+        `Column grouping works together with other column features such as sorting or pinning; see pinning the first column (${WEBSITE_LINK}/examples/pinning-the-first-column/), pinning the last column (${WEBSITE_LINK}/examples/pinning-the-last-column/) and pinning arbitrary columns (${WEBSITE_LINK}/examples/pinning-arbitrary-columns/) to learn how pinning interacts with column groups.`
+      );
+    },
+  },
+  {
+    href: '/examples/default-column-properties',
+    content: async () =>
+      lines(
+        'To avoid repeating the same properties for multiple columns, use the `defaultColumnProps` DataTable prop to set them once as a fallback for all columns.',
+        '',
+        `\`defaultColumnProps\` accepts the same properties as a column definition, except for \`accessor\`, \`hidden\`, \`visibleMediaQuery\` and \`render\` (for the latter, see default column render: ${WEBSITE_LINK}/examples/default-column-render/). The default properties are shallow-merged with each column’s own properties, so a property set on a column always takes precedence over its default value.`,
+        '',
+        'In the example below, all columns are right-aligned, truncated with an ellipsis and styled the same way by default, but the first column overrides the default alignment:',
+        '',
+        await codeFile('/examples/default-column-properties/DefaultColumnPropertiesExample.tsx'),
+        '',
+        'Properties enabling stateful column features, such as `toggleable`, `defaultToggle`, `resizable`, `pinned` or `pinnable`, can be set in `defaultColumnProps` too, and individual columns can still override them.'
+      ),
+  },
+  {
+    href: '/examples/default-column-render',
+    content: async () =>
+      lines(
+        'A `defaultColumnRender` function provided to the DataTable is used to render the cells of all columns that don’t have their own `render` function. It receives the current record, its index in `records` and the column `accessor` as arguments, and should return a `ReactNode`.',
+        '',
+        'In the example below, a single function renders strings as they are and dates as relative time intervals, so the columns don’t need individual `render` functions:',
+        '',
+        await codeFile('/examples/default-column-render/DefaultColumnRenderExample.tsx'),
+        '',
+        "A column’s own `render` function always takes precedence over `defaultColumnRender`. Also keep in mind that `defaultColumnRender` receives the accessor as-is; for dot-notation accessors such as `'department.name'`, resolve the value with the `getValueAtPath(record, accessor)` helper exported by the package."
+      ),
+  },
+  {
+    href: '/examples/row-styling',
+    content: async () => {
+      const path = '/examples/row-styling';
+      return lines(
+        `Style individual rows based on their data with the \`rowColor\`, \`rowBackgroundColor\`, \`rowClassName\` and \`rowStyle\` properties. They are the row-level counterparts of the DataTable \`c\`, \`backgroundColor\`, \`className\` and \`style\` properties (see ${WEBSITE_LINK}/examples/overriding-the-default-styles/), but accept functions receiving the current record and its index, so each row can be styled differently (\`rowClassName\` also accepts a plain string).`,
+        '',
+        '### Using rowColor and rowBackgroundColor',
+        '',
+        '`rowColor` and `rowBackgroundColor` accept a function receiving the current record and its index and returning either a `MantineColor` (a key of `theme.colors` or any valid CSS color string), or an object with `light` and `dark` keys and `MantineColor` values for the light and dark color schemes. Return `undefined` to leave a row with its default colors.',
+        '',
+        await codeFile(`${path}/RowStylingWithColorPropertiesExample.tsx`),
+        '',
+        '### Using rowClassName',
+        '',
+        '`rowClassName` accepts either a string, applied to every row, or a function receiving the current record and its index and returning the class name for the row (or `undefined` for no extra class).',
+        '',
+        await codeFile(`${path}/RowStylingWithClassNameExample.tsx`),
+        '',
+        await codeFile(`${path}/RowStylingWithClassNameExample.module.css`),
+        '',
+        '### Using rowStyle',
+        '',
+        '`rowStyle` accepts a function receiving the current record and its index and returning either a style object for the row, or a function that receives the current theme and returns such an object:',
+        '',
+        await codeFile(`${path}/RowStylingWithStyleObjectExample.tsx`),
+        '',
+        'Building the style based on the current theme, by returning a function:',
+        '',
+        await codeFile(`${path}/RowStylingWithStyleFunctionExample.tsx`),
+        '',
+        `To style individual cells rather than whole rows, use the column \`cellsClassName\` and \`cellsStyle\` properties (see ${WEBSITE_LINK}/examples/column-properties-and-styling/).`
+      );
+    },
+  },
+  {
+    href: '/examples/non-standard-record-ids',
+    content: async () => {
+      const path = '/examples/non-standard-record-ids';
+      return lines(
+        'By default, the DataTable assumes each record has an `id` property holding a unique value of a primitive type (such as a string or a number). Record IDs are used as React keys when rendering rows, and to identify records in features such as records selection and row expansion (e.g. the `rowExpansion.expanded.recordIds` array holds the IDs of the expanded records).',
+        '',
+        'If your records use a different unique property, set the `idAccessor` property of the DataTable to its name:',
+        '',
+        await codeFile(`${path}/NonStandardRecordIdsStringExample.tsx`),
+        '',
+        'If the unique value is stored in a nested object, use dot notation, e.g. `idAccessor="meta.uuid"`.',
+        '',
+        '### Using functions to generate composite record IDs',
+        '',
+        '`idAccessor` also accepts a function that receives a record and returns its ID. This is useful when no single property is unique and you need to build a composite ID from several record properties:',
+        '',
+        await codeFile(`${path}/NonStandardRecordIdsFunctionExample.tsx`),
+        '',
+        '**Make sure IDs are unique:** duplicate record IDs lead to React key collisions and to unpredictable behavior when selecting or expanding rows.'
+      );
+    },
+  },
+  {
+    href: '/examples/scrollable-vs-auto-height',
+    content: async () => {
+      const path = '/examples/scrollable-vs-auto-height/ScrollableVsAutoHeightExamples.tsx';
+      return lines(
+        "The DataTable component embeds a Mantine `ScrollArea` and has a default `height` of `'100%'`. Setting the component `height` or placing it inside a height-restricted container makes it vertically scrollable, with a sticky header:",
+        '',
+        await codeBlock(path, 'scrollable'),
+        '',
+        'Otherwise, the table simply grows to fit its content (auto-height):',
+        '',
+        await codeBlock(path, 'auto-height'),
+        '',
+        'The DataTable is always horizontally scrollable if its content is wider than its container.',
+        '',
+        '### Using minHeight and maxHeight',
+        '',
+        'Besides `height`, you can set `minHeight` and `maxHeight` (numbers in pixels or CSS size strings). They’re particularly useful with a relative `height`; for instance, the table below takes up half of the browser window height, but never less than 200 and never more than 400 pixels:',
+        '',
+        await codeBlock(path, 'min-max-height'),
+        '',
+        '`minHeight` is also useful to leave enough room for the empty state indicator or the loader when an auto-height table has few or no records.',
+        '',
+        'You can also set a `maxHeight` without a `height`: the table grows with its content and becomes vertically scrollable once the content exceeds the maximum height.',
+        '',
+        '### Customizing the underlying ScrollArea',
+        '',
+        `Pass \`scrollAreaProps\` to customize the underlying scroll area. It accepts Mantine ScrollArea props (${MANTINE_LINK}/core/scroll-area/?t=props) such as \`type\`, \`scrollbarSize\`, \`scrollHideDelay\` or \`offsetScrollbars\` (except \`classNames\`, \`styles\` and \`onScrollPositionChange\`, which are used internally; to get a reference to the scroll viewport, use the \`scrollViewportRef\` property instead of \`viewportRef\`). For instance, to hide the scrollbars:`,
+        '',
+        await codeBlock(path, 'scroll-area-props'),
+        '',
+        `To react to scrolling, use the \`onScroll\`, \`onScrollToTop\`, \`onScrollToBottom\`, \`onScrollToLeft\` and \`onScrollToRight\` callbacks (see infinite scrolling: ${WEBSITE_LINK}/examples/infinite-scrolling/). To scroll the table programmatically, use \`scrollViewportRef\` to get hold of the scrollable viewport element (see scrolling a row into view: ${WEBSITE_LINK}/examples/scrolling-a-row-into-view/).`
+      );
+    },
+  },
+  {
+    href: '/examples/scrolling-a-row-into-view',
+    content: async () => {
+      const path = '/examples/scrolling-a-row-into-view/ScrollRowIntoViewExamples.tsx';
+      return lines(
+        `There are two ways to scroll a specific row into view in a ${PRODUCT_NAME}. Both rely on adding \`data-*\` attributes to the rows with [\`customRowAttributes\`](${WEBSITE_LINK}/examples/custom-row-or-cell-attributes/), then using DOM methods to find the desired row and scroll it into view.`,
+        '',
+        '### Using scrollIntoView',
+        '',
+        'The simplest way is to call the [`scrollIntoView`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) method of the row element itself.',
+        '',
+        'Keep in mind:',
+        '',
+        '- this method also scrolls the page (and any other scrollable ancestors) as needed to bring the row into view, which may be a drawback when the table is part of a more complex layout;',
+        "- since the `DataTable` header is sticky, `scrollIntoView()` with no arguments (or the equivalent `scrollIntoView({ block: 'start' })`) hides the row underneath the header; use `scrollIntoView(false)` or the equivalent `scrollIntoView({ block: 'end' })` instead.",
+        '',
+        await codeBlock(path, 'scroll-into-view'),
+        '',
+        '### Using table viewport scrollTo',
+        '',
+        'To avoid scrolling the page when bringing a row into view, get hold of the table’s scrollable viewport element with the `scrollViewportRef` property and call its [`scrollTo`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo) method, taking into account the height of the sticky header:',
+        '',
+        await codeBlock(path, 'scroll-to')
+      );
+    },
+  },
+  {
+    href: '/examples/empty-state',
+    content: async () => {
+      const path = '/examples/empty-state';
+      return lines(
+        'When the `records` property is an empty array, the `DataTable` component indicates its empty state by displaying a customizable icon and text.',
+        '',
+        `If your table is not [vertically scrollable](${WEBSITE_LINK}/examples/scrollable-vs-auto-height/), set a \`minHeight\` large enough to accommodate the empty state icon and text. The empty state is not displayed while the table is [loading data](${WEBSITE_LINK}/examples/asynchronous-data-loading/) (i.e. when \`fetching\` is \`true\`), so it won’t flash while waiting for the first batch of records.`,
+        '',
+        await codeBlock(`${path}/EmptyStateExamples.tsx`, 'default'),
+        '',
+        'Change the displayed text (`No records` by default) with the `noRecordsText` property:',
+        '',
+        await codeBlock(`${path}/EmptyStateExamples.tsx`, 'custom-text'),
+        '',
+        'Replace the icon with the `noRecordsIcon` property:',
+        '',
+        await codeBlock(`${path}/EmptyStateExamples.tsx`, 'custom-icon-and-text', 'CustomIconAndText.tsx'),
+        '',
+        await codeFile(`${path}/EmptyStateExamples.module.css`, 'CustomIconAndText.module.css'),
+        '',
+        'To replace the standard empty state indicator entirely, set the `emptyState` property; the provided content is overlaid and centered automatically. `emptyState` and `noRecordsIcon` are mutually exclusive, and `noRecordsText` is ignored when `emptyState` is set:',
+        '',
+        await codeBlock(`${path}/EmptyStateExamples.tsx`, 'custom-content'),
+        '',
+        '### Interactive custom empty state content',
+        '',
+        'The empty state overlay has `pointer-events: none`, so that it doesn’t get in the way of the table underneath. If you add interactive content to a custom empty state, re-enable pointer events on the interactive elements by setting their `pointer-events` CSS property to `all`:',
+        '',
+        await codeBlock(`${path}/EmptyStateExamples.tsx`, 'custom-interactive-content')
+      );
+    },
+  },
+  {
+    href: '/examples/pagination',
+    content: async () => {
+      const path = '/examples/pagination';
+      return lines(
+        `To enable pagination, set the following ${PRODUCT_NAME} properties:`,
+        '',
+        '- `page: number` → the current page number (1-based);',
+        '- `onPageChange: (page: number) => void` → invoked with the new page number when the user navigates to another page;',
+        '- `totalRecords: number | undefined` → the total number of records in the dataset (used to compute the number of pages);',
+        '- `recordsPerPage: number` → the number of records per page.',
+        '',
+        `Keep in mind: ${PRODUCT_NAME} does not slice your data. The \`records\` property should only contain the records of the current page. Typically, you’d fetch them from a server API whenever \`page\` changes, setting \`fetching\` to \`true\` while the request is in flight (see the [asynchronous data loading example](${WEBSITE_LINK}/examples/asynchronous-data-loading/) and the [complex usage scenario](${WEBSITE_LINK}/examples/complex-usage-scenario/)).`,
+        '',
+        'Optional properties to customize the default pagination behavior and appearance:',
+        '',
+        '- `loadingText: string` → text displayed in the pagination footer while records are loading; defaults to `...`;',
+        '- `noRecordsText: string` → text displayed when there are no records; defaults to `No records` (also used by the empty state indicator);',
+        '- `paginationText` → a callback receiving `{ from: number; to: number; totalRecords: number }` and returning a `ReactNode`; by default the text looks like `1 - 15 / 500`;',
+        "- `paginationSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl'` → defaults to `sm`;",
+        "- `paginationWrapBreakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {}) | number` → breakpoint below which the pagination footer content wraps on multiple lines; defaults to `sm`; a string such as `'300px'` or `'20rem'` is also accepted, and a number is interpreted as pixels and converted to `rem`;",
+        '- `paginationActiveTextColor: MantineColor | { light: MantineColor; dark: MantineColor }` → text color of the active page button; defaults to white;',
+        '- `paginationActiveBackgroundColor: MantineColor | { light: MantineColor; dark: MantineColor }` → background color of the active page button; defaults to the theme’s primary color.',
+        '',
+        'Both color properties accept a `MantineColor` (a key of `theme.colors` or any valid CSS color string), or an object with `light` and `dark` keys to use different colors for each color scheme.',
+        '',
+        await codeFile(`${path}/PaginationExample.tsx`),
+        '',
+        '### Displaying a page size selector',
+        '',
+        'To let the user choose the page size, set:',
+        '',
+        '- `recordsPerPageOptions: number[]` → the page sizes to choose from;',
+        '- `onRecordsPerPageChange: (recordsPerPage: number) => void` → invoked with the new page size;',
+        "- `recordsPerPageLabel: string` → the selector label; defaults to `'Records per page'`.",
+        '',
+        'When the page size changes, the current page may no longer exist, so it’s usually a good idea to reset it to `1`:',
+        '',
+        await codeFile(`${path}/PaginationExampleWithPageSizeSelector.tsx`),
+        '',
+        '### Showing first and last page buttons',
+        '',
+        'The pagination component shows “previous page” and “next page” buttons by default. Set `paginationWithEdges` to also show “first page” and “last page” buttons, or set `paginationWithControls` to `false` to hide the “previous” and “next” buttons:',
+        '',
+        await codeFile(`${path}/PaginationExampleWithEdges.tsx`),
+        '',
+        '### Customizing pagination controls',
+        '',
+        'Fully customize the pagination footer by providing a `renderPagination` callback. It receives a context object with:',
+        '',
+        '- `state` → the current pagination state (`page`, `totalPages`, `totalRecords`, `recordsPerPage`, `from`, `to`, `fetching`, `paginationSize`, `isWrapped`, etc.);',
+        '- `actions` → `setPage` and, when the page size selector is enabled, `setRecordsPerPage`;',
+        '- `Controls` → factories for the default controls: `Controls.Text` (the pagination text), `Controls.PageSizeSelector` (the page size selector, if enabled) and `Controls.Pagination` (the [Mantine Pagination](https://mantine.dev/core/pagination/) component); each accepts optional props to override the defaults.',
+        '',
+        'This lets you render the controls in any order, inject your own elements, or override their props. The example below adds a “jump to page” input between the page size selector and the pagination component:',
+        '',
+        await codeFile(`${path}/PaginationCustomRenderExample.tsx`),
+        '',
+        '### Passing props to pagination buttons',
+        '',
+        'Pass additional props to the pagination buttons with these callbacks:',
+        '',
+        "- `getPaginationControlProps` → receives the control type (`'first'`, `'last'`, `'previous'` or `'next'`) and returns an object of props for that control;",
+        '- `getPaginationItemProps` → receives a page number and returns an object of props for the corresponding page button.',
+        '',
+        'For instance, to override the default accessibility labels:',
+        '',
+        await codeFile(`${path}/PaginationExampleWithControlProps.tsx`)
+      );
+    },
+  },
+  {
+    href: '/examples/sorting',
+    content: async () => {
+      const path = '/examples/sorting';
+      return lines(
+        'To enable sorting:',
+        '',
+        '- add a `sortable: true` property to each column that should be sortable;',
+        "- set the DataTable `sortStatus` property to an object describing the current sort status (the column accessor and the sort direction, `'asc'` or `'desc'`);",
+        '- provide an `onSortStatusChange` handler, invoked with the new sort status when the user clicks a sortable column header.',
+        '',
+        await codeFile(`${path}/SortingExample.tsx`),
+        '',
+        `Keep in mind: ${PRODUCT_NAME} doesn’t sort the records for you; it only renders the sort indicators and reports the user’s intent. You are responsible for sorting the \`records\` you pass to the component, either on the client (as in the examples on this page) or on the server, by passing the sort status to your API (see the [complex usage scenario](${WEBSITE_LINK}/examples/complex-usage-scenario/)). Clicking the header of the currently sorted column toggles the sort direction, while clicking another sortable column keeps the current direction.`,
+        '',
+        `When sorting is enabled, consider [disabling text selection](${WEBSITE_LINK}/examples/disabling-text-selection/); otherwise, repeatedly clicking the same column header will select the column title text.`,
+        '',
+        '### Sorting by a different key',
+        '',
+        'When the value you want to sort by is not the one designated by the column accessor (e.g. a column rendering a value computed from several record properties), set the column’s `sortKey` property; it is included in the sort status object received by `onSortStatusChange`, so you can use it in your sorting logic. In the example below, the *Name* column renders the employee’s full name but is sorted by last name. Dot-notation accessors such as `department.name` can be sortable too:',
+        '',
+        await codeFile(`${path}/SortingExampleSortKey.tsx`),
+        '',
+        '### Custom sort icons',
+        '',
+        'To use custom sort icons, pass an object with `sorted` and `unsorted` keys to the `sortIcons` property. The `sorted` icon should point up; it is flipped vertically automatically when the sort direction is descending:',
+        '',
+        await codeFile(`${path}/SortingExampleCustomIcons.tsx`)
+      );
+    },
+  },
+  {
+    href: '/examples/column-dragging-and-toggling',
+    content: async () => {
+      const path = '/examples/column-dragging-and-toggling';
+      return lines(
+        `${PRODUCT_NAME} lets users reorder columns by drag-and-drop and show or hide them as needed. The column order and visibility are persisted in the browser’s local storage, so they survive page reloads.`,
+        '',
+        '### Column drag-and-drop reordering',
+        '',
+        'To enable column dragging:',
+        '',
+        "- add a `storeColumnsKey: 'your_key'` property to the DataTable (the column order is persisted in local storage under this key);",
+        '- add a `draggable: true` property to each dragging candidate column;',
+        '- use the `useDataTableColumns()` hook with the same `key` to get the effective (sorted) columns and pass them to the DataTable.',
+        '',
+        await codeFile(`${path}/DraggingExample.tsx`),
+        '',
+        'Draggable columns display a grip icon in their header. A column can only be dropped onto another draggable column, and is then moved to that column’s position. The default order is the order in which columns are defined in the `columns` prop; restore it at any time by calling the `resetColumnsOrder()` function returned by the hook.',
+        '',
+        '### Column toggling',
+        '',
+        'In the example below, the first 3 columns are toggleable (the first one hidden by default), while the last column is not toggleable and always visible. Hover over a toggleable column header and click its × button to hide the column, or right-click anywhere on the table header to open a menu where you can show or hide each toggleable column.',
+        '',
+        'To enable column toggling:',
+        '',
+        "- add a `storeColumnsKey: 'your_key'` property to the DataTable (the column visibility is persisted in local storage under this key);",
+        '- add a `toggleable: true` property to each toggling candidate column;',
+        '- use the `useDataTableColumns()` hook with the same `key` to get the effective columns and pass them to the DataTable.',
+        '',
+        await codeFile(`${path}/TogglingExample.tsx`),
+        '',
+        'Toggleable columns are visible by default. To hide a column initially, set its `defaultToggle` property to `false`. Call `resetColumnsToggle()` to restore the default visibility of all columns.',
+        '',
+        '### Custom column visibility controls',
+        '',
+        'Besides the built-in header menu, you can build your own column visibility controls. The `useDataTableColumns()` hook returns the current visibility state as `columnsToggle` (an array of `{ accessor, toggleable, toggled }` objects) and a `setColumnsToggle()` function to update it:',
+        '',
+        await codeFile(`${path}/TogglingWithCustomControlsExample.tsx`),
+        '',
+        'Similarly, use `columnsOrder` (an array of accessors) and `setColumnsOrder()` to change the column order programmatically.',
+        '',
+        '### Adding and removing columns at runtime',
+        '',
+        'Add or remove columns at runtime by changing the array of columns you pass to the hook. The persisted order and visibility state is kept in sync with the current column definitions: state for removed columns is discarded, and newly added columns are appended with their default settings.',
+        '',
+        await codeFile(`${path}/DynamicColumnExample.tsx`),
+        '',
+        '### Resetting the column state from a context menu',
+        '',
+        `The reset functions returned by the hook can be called from anywhere, for example from a [row context menu](${WEBSITE_LINK}/examples/using-with-mantine-contextmenu/):`,
+        '',
+        await codeFile(`${path}/DraggingTogglingResetExample.tsx`),
+        '',
+        '### Combining dragging and toggling with sorting',
+        '',
+        `Column dragging and toggling work seamlessly with other features, such as [sorting](${WEBSITE_LINK}/examples/sorting/):`,
+        '',
+        await codeFile(`${path}/DraggingTogglingComplexExample.tsx`),
+        '',
+        'The `useDataTableColumns()` hook stores its state in local storage under keys derived from the one you provide (`your_key-columns-order`, `your_key-columns-toggle`, `your_key-columns-width` and `your_key-columns-pinning`), so make sure each table on your site uses a unique key. The stored values are read after the component mounts, to avoid server-side rendering hydration mismatches; if you only render the table on the client, pass `getInitialValueInEffect: false` to the hook to read them synchronously.',
+        '',
+        `See also [column resizing](${WEBSITE_LINK}/examples/column-resizing/) and [pinning arbitrary columns](${WEBSITE_LINK}/examples/pinning-arbitrary-columns/), which rely on the same hook.`
+      );
+    },
+  },
+  {
+    href: '/examples/row-dragging',
+    content: async () => {
+      const path = '/examples/row-dragging';
+      return lines(
+        `${PRODUCT_NAME} doesn’t include a drag-and-drop implementation of its own, but it exposes the building blocks needed to make rows draggable with a library such as [@hello-pangea/dnd](https://github.com/hello-pangea/dnd).`,
+        '',
+        '### How it works',
+        '',
+        'The implementation relies on the following DataTable features:',
+        '',
+        '- `tableWrapper` → a function receiving the table as `children` and returning a React node that wraps it; use it to wrap the table in a `Droppable` container;',
+        `- \`rowFactory\` → a function that takes over the rendering of each row. It receives an object with the current \`record\`, its \`index\`, the default \`rowProps\` (class name, style, event handlers, etc.), the row cells as \`children\` and, when using [row expansion](${WEBSITE_LINK}/examples/expanding-rows/), the \`expandedElement\` to render after the row. Use it to wrap each row in a \`Draggable\` component;`,
+        `- \`DataTableDraggableRow\` → a table row component exported by ${PRODUCT_NAME}. Pass it the \`rowProps\` received by \`rowFactory\`, along with an \`isDragging\` flag. While a row is being dragged, the component fixes its cell widths to match the header cells, so that the row keeps its shape, and sets \`data-is-dragging="true"\` on it, which you can use for styling.`,
+        '',
+        'Since the drag handle is rendered by `rowFactory` in an extra cell, add a matching column with `hiddenContent` set to `true`, so that the header and body cells stay aligned. Giving the columns explicit widths and setting the table layout to `fixed` prevents them from changing size while dragging.',
+        '',
+        await codeFile(`${path}/RowDraggingExample.tsx`),
+        '',
+        await codeFile(`${path}/RowDraggingExample.module.css`),
+        '',
+        await codeFile('/../data/companies.json'),
+        '',
+        `Heads up: \`@hello-pangea/dnd\` is not a dependency of ${PRODUCT_NAME}, so you’ll need to install it separately. Also remember to update your records in the \`onDragEnd\` handler; the DataTable simply renders the records you pass to it, in the given order.`
+      );
+    },
+  },
+  {
+    href: '/examples/column-resizing',
+    content: async () => {
+      const path = '/examples/column-resizing';
+      return lines(
+        `${PRODUCT_NAME} lets users resize columns by dragging a handle at the edge of a column header. Resized widths can optionally be persisted in the browser’s local storage, so they survive page reloads.`,
+        '',
+        'To enable column resizing with persistent widths:',
+        '',
+        '- add a `resizable: true` property to each resizing candidate column;',
+        "- add a `storeColumnsKey: 'your_key'` property to the DataTable (the column widths are persisted in local storage under this key);",
+        '- use the `useDataTableColumns()` hook with the same `key` to get the effective columns and the `resetColumnsWidth()` function.',
+        '',
+        await codeFile(`${path}/ResizingExample.tsx`),
+        '',
+        'How resizing works:',
+        '',
+        '- dragging a handle changes the width of the column and of the column next to it, so the overall table width stays the same;',
+        '- a column can’t be made narrower than 50 pixels;',
+        '- the last column has no resize handle, since there’s no column after it;',
+        '- double-clicking a handle resets the two adjacent columns to their default widths;',
+        '- calling `resetColumnsWidth()` restores all columns to the `width` they were defined with in the `columns` prop (or to automatic width, if they don’t have one).',
+        '',
+        '### Resizing without persistence',
+        '',
+        'If you don’t need to remember the column widths, simply add `resizable: true` to the columns you want to make resizable; no `storeColumnsKey` or `useDataTableColumns()` hook required. The widths are reset to their defaults when the component is remounted:',
+        '',
+        await codeFile(`${path}/ResizingWithoutPersistenceExample.tsx`),
+        '',
+        'The functions returned by the `useDataTableColumns()` hook (such as `resetColumnsWidth()`) communicate with the DataTable through local storage, so they only take effect when the hook `key` matches the DataTable `storeColumnsKey`.',
+        '',
+        '### Combining resizing with other column features',
+        '',
+        `Resizing can be combined with [sorting](${WEBSITE_LINK}/examples/sorting/), [records selection](${WEBSITE_LINK}/examples/records-selection/) and [column dragging and toggling](${WEBSITE_LINK}/examples/column-dragging-and-toggling/). Widths, order and visibility are persisted under the same \`storeColumnsKey\`, and each can be reset independently. The example below avoids repetition by spreading a shared object into each column definition:`,
+        '',
+        await codeFile(`${path}/ResizingComplexExample.tsx`)
+      );
+    },
+  },
+  {
+    href: '/examples/infinite-scrolling',
+    content: async () =>
+      lines(
+        'The DataTable invokes the `onScrollToTop`, `onScrollToBottom`, `onScrollToLeft` and `onScrollToRight` callbacks when the user scrolls to the top, bottom, left or right edge of the table, respectively. Each callback is invoked once, when the corresponding edge is reached; scrolling away and back again triggers it anew. There’s also an `onScroll` callback, invoked with the current scroll position (`{ x: number; y: number }`) whenever the table is scrolled.',
+        '',
+        'To implement infinite scrolling:',
+        '',
+        `- make the table [vertically scrollable](${WEBSITE_LINK}/examples/scrollable-vs-auto-height/) by setting its \`height\` or placing it inside a height-restricted container;`,
+        '- load the next batch of records in the `onScrollToBottom` handler and append it to the existing records;',
+        `- set the \`fetching\` property to \`true\` while loading, to display the [loader](${WEBSITE_LINK}/examples/asynchronous-data-loading/);`,
+        '- optionally, use the `scrollViewportRef` property to get hold of the scrollable viewport element, e.g. to scroll back to the top when the records are reset.',
+        '',
+        await codeFile('/examples/infinite-scrolling/InfiniteScrollingExample.tsx')
+      ),
+  },
+  {
+    href: '/examples/searching-and-filtering',
+    content: async () =>
+      lines(
+        `${PRODUCT_NAME} doesn’t filter your data; to implement searching and filtering, adjust the array of \`records\` you pass to the component according to your own logic.`,
+        '',
+        `To help you build column-based filtering UIs, ${PRODUCT_NAME} supports the following [column properties](${WEBSITE_LINK}/examples/column-properties-and-styling/):`,
+        '',
+        '- `filter` → the content of a popover that opens when the user clicks the filter button added to the column header; either a `ReactNode` or a function receiving an object with a `close` method (to close the popover programmatically, e.g. after resetting a filter) and returning a `ReactNode`;',
+        '- `filtering: boolean` → when `true`, the filter button is highlighted to indicate that a filter is in effect;',
+        `- \`filterPopoverProps\` → additional [Mantine Popover props](${MANTINE_LINK}/core/popover/?t=props) to customize the filter popover (position, width, shadow, etc.);`,
+        `- \`filterPopoverDisableClickOutside: boolean\` → when \`true\`, disables the click-outside handler ${PRODUCT_NAME} attaches to the filter popover dropdown; combine it with \`filterPopoverProps={{ closeOnClickOutside: false }}\` to keep the popover open until the user closes it explicitly.`,
+        '',
+        'Here’s a possible (rather naive) implementation:',
+        '',
+        await codeFile('/examples/searching-and-filtering/SearchingAndFilteringExample.tsx'),
+        '',
+        `If your filter uses Mantine components that render a dropdown (such as \`Select\`, \`MultiSelect\` or \`DatePickerInput\`), render their dropdowns without a portal (e.g. \`comboboxProps={{ withinPortal: false }}\`, as in the example above); otherwise, clicking inside the dropdown will close the filter popover. See the Mantine documentation on [nested popovers](${MANTINE_LINK}/core/popover/#nested-popovers).`,
+        '',
+        `If you’re combining filtering with [pagination](${WEBSITE_LINK}/examples/pagination/), remember to reset the current page to \`1\` whenever the filter criteria change.`,
+        '',
+        `Why no built-in “Excel-like” searching and filtering? There’s no way for ${PRODUCT_NAME} to accommodate every possible usage scenario: you’ll usually also deal with pagination, sorting and asynchronous loading, may need to place search boxes or filter selectors elsewhere in your application, and in real life the actual searching and filtering is most often done by a server API. Fitting all this into a standard component design would needlessly constrain the developer.`
+      ),
+  },
+  {
+    href: '/examples/records-selection',
+    content: async () => {
+      const path = '/examples/records-selection/RecordsSelectionExamples.tsx';
+      return lines(
+        `${PRODUCT_NAME} supports Gmail-like batch selection of records: **shift-clicking a row selection checkbox selects or deselects all records between the last clicked record and the current one**.`,
+        '',
+        'To enable records selection, set these DataTable properties:',
+        '',
+        '- `selectedRecords` → the array of currently selected records (same type as the items in `records`);',
+        '- `onSelectedRecordsChange` → a callback invoked with the new array of selected records when the user changes the selection.',
+        '',
+        'With both set, the table renders a selection checkbox column. Clicking a row checkbox toggles that record; clicking the header checkbox selects or deselects all visible records (selected records not currently visible, e.g. on other pages, are left untouched); shift-clicking a row checkbox toggles the whole range since the last clicked record.',
+        '',
+        "Keep in mind: records are compared by their IDs, as designated by the `idAccessor` property (defaults to `'id'`; see " +
+          `${WEBSITE_LINK}/examples/non-standard-record-ids/), not by object reference.`,
+        '',
+        await codeBlock(path, 'RecordsSelectionExample.tsx', 'RecordsSelectionExample.tsx'),
+        '',
+        await codeBlock(path, 'columns.ts', 'columns.ts'),
+        '',
+        '### Disable selection of certain records',
+        '',
+        'Provide an `isRecordSelectable` function; it receives a record and its index and should return `false` for records that can’t be selected. Their checkboxes are disabled, and both the header checkbox and shift-click range selection skip them:',
+        '',
+        await codeBlock(path, 'DisabledRecordsExample.tsx', 'DisabledRecordsExample.tsx'),
+        '',
+        '(`columns.ts` is the same as above.)',
+        '',
+        '### Customizing the selection column className and style',
+        '',
+        'By default the selection column has a fixed width of `44px`. To change its width or otherwise customize it, use the `selectionColumnClassName` and/or `selectionColumnStyle` properties:',
+        '',
+        await codeBlock(path, 'CustomColumnStyleExample.tsx'),
+        '',
+        '### Additional selection checkbox props',
+        '',
+        'Pass additional Mantine Checkbox props (https://mantine.dev/core/checkbox/?t=props) to the selection checkboxes with:',
+        '',
+        '- `selectionCheckboxProps` → props applied to all selection checkboxes (header and rows);',
+        '- `allRecordsSelectionCheckboxProps` → props applied to the column header checkbox;',
+        '- `getRecordSelectionCheckboxProps` → a function receiving a record and its index and returning props for that record’s checkbox.',
+        '',
+        'The example below renders smaller checkboxes with custom `aria-label` attributes:',
+        '',
+        await codeBlock(path, 'CheckboxPropsExample.tsx', 'CheckboxPropsExample.tsx'),
+        '',
+        '(`columns.ts` is the same as above.)',
+        '',
+        '### Selecting all records on all pages',
+        '',
+        `With pagination, the best practice is to only load the current page’s records from the server, so ${PRODUCT_NAME} can’t (and shouldn’t) know about the entire dataset; the “select all” checkbox only affects the records on the current page.`,
+        '',
+        `To let users “select all records on all pages” (like in Gmail), use \`allRecordsSelectionCheckboxProps\` to implement your own selection mechanism. The example below also uses the \`uniqBy\` and \`differenceBy\` utility functions exported by ${PRODUCT_NAME}:`,
+        '',
+        await codeBlock(path, 'SelectAllRecordsOnAllPagesExample.tsx'),
+        '',
+        '### Horizontal scrolling behavior',
+        '',
+        'When the table is horizontally scrollable, the selection column stays pinned to the left side, so the selection checkboxes are always visible:',
+        '',
+        await codeBlock(path, 'RecordsSelectionHorizontalScrollingBehaviorExample.tsx'),
+        '',
+        '### Maximizing the selection trigger area to the entire cell',
+        '',
+        "By default, selection is triggered by clicking the checkbox. Set `selectionTrigger` to `'cell'` (default `'checkbox'`) to make a click anywhere in the cell holding the checkbox toggle the record:",
+        '',
+        await codeBlock(path, 'CellTriggerRecordsSelectionExample.tsx')
+      );
+    },
+  },
+  {
+    href: '/examples/handling-row-clicks',
+    content: async () => {
+      const path = '/examples/handling-row-clicks';
+      return lines(
+        'To react when the user clicks a row, pass an `onRowClick` handler to the DataTable. It receives an object with:',
+        '',
+        '- `record` → the clicked record;',
+        '- `index` → the index of the clicked record in the `records` array;',
+        '- `event` → the original React mouse event (useful, for instance, to check whether a modifier key was pressed).',
+        '',
+        await codeFile(`${path}/HandlingRowClicksExample.tsx`),
+        '',
+        'When a row click handler is provided, rows display a `pointer` cursor.',
+        '',
+        '### Double-clicks',
+        '',
+        'The `onRowDoubleClick` handler receives the same arguments:',
+        '',
+        await codeFile(`${path}/HandlingRowDoubleClicksExample.tsx`),
+        '',
+        'Combining single and double clicks: a double-click is preceded by two regular `click` events, so if you provide both `onRowClick` and `onRowDoubleClick`, `onRowClick` is called twice before `onRowDoubleClick` fires. Make sure the two behaviors don’t interfere.',
+        '',
+        '### Right-clicks',
+        '',
+        'Use the `onRowContextMenu` handler (same arguments) to react to right-clicks. Rows with a context menu handler display a `context-menu` cursor; call `event.preventDefault()` to suppress the browser’s own context menu:',
+        '',
+        await codeFile(`${path}/HandlingRowContextMenuExample.tsx`),
+        '',
+        `To display an actual context menu, see ${WEBSITE_LINK}/examples/using-with-mantine-contextmenu/.`,
+        '',
+        `Heads up: when handling row clicks you might want to disable text selection (${WEBSITE_LINK}/examples/disabling-text-selection/). If you combine clickable rows with links, buttons, row action cells or other clickable components inside cells, intercept the \`click\` event on those components and call its \`.stopPropagation()\` method (see ${WEBSITE_LINK}/examples/links-or-buttons-inside-clickable-rows-or-cells/).`,
+        '',
+        `If you need to know which cell was clicked, use the \`onCellClick\`, \`onCellDoubleClick\` and \`onCellContextMenu\` handlers instead (${WEBSITE_LINK}/examples/handling-cell-clicks/).`
+      );
+    },
+  },
+  {
+    href: '/examples/handling-cell-clicks',
+    content: async () => {
+      const path = '/examples/handling-cell-clicks';
+      return lines(
+        'To know not only which row but also which column was clicked, pass an `onCellClick` handler to the DataTable. It receives an object with:',
+        '',
+        '- `record` → the clicked record;',
+        '- `index` → the index of the clicked record in the `records` array;',
+        '- `column` → the clicked column’s definition;',
+        '- `columnIndex` → the index of the clicked column in display order (which can differ from its position in your `columns` array when columns are reordered, pinned or grouped);',
+        '- `event` → the original React mouse event.',
+        '',
+        await codeFile(`${path}/HandlingCellClicksExample.tsx`),
+        '',
+        '### Double-clicks',
+        '',
+        'The `onCellDoubleClick` handler receives the same arguments:',
+        '',
+        await codeFile(`${path}/HandlingCellDoubleClicksExample.tsx`),
+        '',
+        '### Right-clicks',
+        '',
+        `Use the \`onCellContextMenu\` handler to react to right-clicks on a cell; call \`event.preventDefault()\` to suppress the browser’s own context menu. See how to use it to display a cell context menu with Mantine ContextMenu: ${WEBSITE_LINK}/examples/using-with-mantine-contextmenu/.`,
+        '',
+        'Heads up:',
+        '',
+        '- Cell events bubble up to the row, so you can combine cell handlers with row handlers such as `onRowClick`; the cell handler is called first. A double-click is preceded by two regular `click` events.',
+        `- When handling cell clicks you might want to disable text selection (${WEBSITE_LINK}/examples/disabling-text-selection/).`,
+        `- If you combine clickable cells with links, buttons, row action cells or other clickable components inside cells, intercept the \`click\` event on those components and call its \`.stopPropagation()\` method (see ${WEBSITE_LINK}/examples/links-or-buttons-inside-clickable-rows-or-cells/).`
+      );
+    },
+  },
+  {
+    href: '/examples/using-with-mantine-contextmenu',
+    content: async () => {
+      const path = '/examples/using-with-mantine-contextmenu';
+      return lines(
+        `Mantine doesn’t include a context-menu component, but ${PRODUCT_NAME} works seamlessly with ${MANTINE_CONTEXTMENU_PRODUCT_NAME} (${MANTINE_CONTEXTMENU_LINK}), a library by the same author.`,
+        '',
+        'Important:',
+        '',
+        `- Wrap your application in a \`ContextMenuProvider\` and include the necessary CSS files **in the correct order** (see ${MANTINE_CONTEXTMENU_LINK}/getting-started).`,
+        `- With a scrollable ${PRODUCT_NAME}, close the context menu when the user scrolls the table (see “Using with scrollable tables” below).`,
+        `- On touch devices, consider disabling text selection on the table (${WEBSITE_LINK}/examples/disabling-text-selection/).`,
+        '',
+        '### Row context-menu',
+        '',
+        'Use the `onRowContextMenu` property to show a context menu when the user right-clicks a row. The handler receives the current `record`, its `index` and the mouse `event`, which you pass to the function returned by `showContextMenu`:',
+        '',
+        await codeFile(`${path}/RowContextMenuExample.tsx`),
+        '',
+        '### Using with scrollable tables',
+        '',
+        `By default, a ${MANTINE_CONTEXTMENU_PRODUCT_NAME} menu places an overlay over the page and closes on overlay click, \`Escape\`, page scroll or window resize. However, the user can still scroll a scrollable DataTable (with the mouse wheel or arrow keys), leaving the menu detached from its row. To prevent this, pass the \`hideContextMenu\` function returned by the \`useContextMenu\` hook to the DataTable \`onScroll\` property:`,
+        '',
+        await codeFile(`${path}/RowContextMenuOnScrollableTableExample.tsx`),
+        '',
+        '### Cell context-menu',
+        '',
+        'Use the `onCellContextMenu` property to create context menus for individual cells. Besides the `record` and the `event`, its handler also receives the `column` and its index, so you can decide which cells get a menu. Here only the `name` column cells have one:',
+        '',
+        await codeFile(`${path}/CellContextMenuExample.tsx`),
+        '',
+        '### Mixing row and cell context-menus',
+        '',
+        'Right-clicking a `name` cell shows a cell-specific menu, while right-clicking anywhere else on the row shows the row menu:',
+        '',
+        await codeFile(`${path}/RowAndCellContextMenuExample.tsx`),
+        '',
+        '### Showing a context-menu on left-click',
+        '',
+        'To show a context menu on left-click, use the `onRowClick` and `onCellClick` properties instead of `onRowContextMenu` and `onCellContextMenu`:',
+        '',
+        await codeFile(`${path}/ContextMenuOnClickExample.tsx`),
+        '',
+        '### Using context-menus inside modals',
+        '',
+        'Context menus also work for tables rendered inside modals:',
+        '',
+        await codeFile(`${path}/RowContextMenuInsideModalExample.tsx`),
+        '',
+        '### Submenus, disabled items and custom titles',
+        '',
+        `Context menu items support all ${MANTINE_CONTEXTMENU_PRODUCT_NAME} features, for instance:`,
+        '',
+        '- a custom `title` (otherwise one is generated by “humanizing” the item `key`, which is why the examples above don’t specify titles);',
+        '- a submenu, by providing an `items` array instead of an `onClick` handler;',
+        '- disabling or hiding items based on the current state, with the `disabled` and `hidden` properties.',
+        '',
+        'In the example below, the menu has a submenu and an item that is only enabled when some rows are selected:',
+        '',
+        await codeFile(`${path}/AdvancedContextMenuExample.tsx`),
+        '',
+        `Instead of an array of items, \`showContextMenu\` also accepts a function that receives a \`close\` callback and returns completely custom content. See the ${MANTINE_CONTEXTMENU_PRODUCT_NAME} documentation (${MANTINE_CONTEXTMENU_LINK}) for all options.`
+      );
+    },
+  },
+  {
+    href: '/examples/expanding-rows',
+    content: async () => {
+      const path = '/examples/expanding-rows';
+      return lines(
+        'The `rowExpansion` property lets you display additional content below a row when the user clicks it (“row expansion”).',
+        '',
+        '### Basic usage',
+        '',
+        'At minimum, provide a `content` function returning the content to be *lazily rendered* when a row is expanded. It receives an object with the current `record`, its `index` and a `collapse` callback.',
+        '',
+        `Heads up: styling the expanded content is up to you. Don’t forget to set the \`idAccessor\` property if your unique record key is not \`'id'\` (see ${WEBSITE_LINK}/examples/non-standard-record-ids/).`,
+        '',
+        await codeFile(`${path}/RowExpansionExampleSimple.tsx`),
+        '',
+        await codeFile(`${path}/RowExpansionExampleSimple.module.css`),
+        '',
+        '### Specifying collapse properties',
+        '',
+        'The expanded content is rendered inside a Mantine `Collapse` component (https://mantine.dev/core/collapse/). Customize its `animateOpacity`, `transitionDuration` and `transitionTimingFunction` properties with a `collapseProps` object:',
+        '',
+        await codeFile(`${path}/RowExpansionExampleCollapseProps.tsx`),
+        '',
+        '### Allowing multiple rows to be expanded at once',
+        '',
+        'By default only one row can be expanded at a time (expanding a row collapses the previously expanded one). Set `allowMultiple: true` to change this:',
+        '',
+        await codeFile(`${path}/RowExpansionExampleMultipleExpandedRows.tsx`),
+        '',
+        '### Specifying which rows are expandable',
+        '',
+        'Use the `expandable` function to specify which rows can be expanded. It receives an object with the current `record` and its `index` and returns a boolean:',
+        '',
+        await codeFile(`${path}/RowExpansionExampleExpandableRows.tsx`),
+        '',
+        '### Specifying which rows are initially expanded',
+        '',
+        'Use the `initiallyExpanded` function to specify which rows are expanded on first render. Unless `allowMultiple` is `true`, only the first matching row is expanded:',
+        '',
+        await codeFile(`${path}/RowExpansionExampleInitiallyExpandedRows.tsx`),
+        '',
+        '### Always expand all rows',
+        '',
+        "To lock all rows in their expanded state, set the row expansion `trigger` property to `'always'` (possible values: `'click'` (default), `'always'`, `'never'`):",
+        '',
+        await codeFile(`${path}/RowExpansionExampleTriggerAlways.tsx`),
+        '',
+        '### Using the collapse function in row expansion content',
+        '',
+        'The `content` function also receives a `collapse` callback you can call to collapse the expanded row, e.g. when the user saves or cancels changes in an inline editor:',
+        '',
+        await codeFile(`${path}/RowExpansionExampleWithInlineEditor.tsx`),
+        '',
+        '### Lazy-loading row expansion data',
+        '',
+        'Since the `content` function is lazily executed when a row is expanded (avoiding unnecessary DOM elements), you can use it to load data that doesn’t come from the table `records` only when a row is expanded:',
+        '',
+        await codeFile(`${path}/RowExpansionExampleWithLazyLoading.tsx`),
+        '',
+        '### Controlled mode',
+        '',
+        'To control which rows are expanded from outside the table, set `rowExpansion.expanded` to an object containing:',
+        '',
+        '- `recordIds` → an array with the IDs of the currently expanded records;',
+        '- `onRecordIdsChange` → a callback invoked with the new array of expanded record IDs when the user expands or collapses a row.',
+        '',
+        await codeFile(`${path}/RowExpansionExampleControlledMode.tsx`),
+        '',
+        '### Expanding rows with a toggle button',
+        '',
+        "If you don’t want rows to expand or collapse when clicked, set `rowExpansion.trigger` to `'never'` and control the expansion state yourself, for instance with a button in a dedicated column:",
+        '',
+        await codeFile(`${path}/RowExpansionExampleToggleButton.tsx`),
+        '',
+        await codeFile(`${path}/RowExpansionExampleToggleButton.module.css`),
+        '',
+        "Since `trigger: 'never'` disables expanding on click, the toggle button handler doesn’t need to call `event.stopPropagation()`; the row itself doesn’t react to clicks.",
+        '',
+        `If you combine expanding rows on click with links, buttons, row action cells or other clickable components inside cells, intercept the \`click\` event on those components and call its \`.stopPropagation()\` method (see ${WEBSITE_LINK}/examples/links-or-buttons-inside-clickable-rows-or-cells/).`,
+        '',
+        `See ${WEBSITE_LINK}/examples/nested-tables/ for using row expansion to display nested tables.`
+      );
+    },
+  },
+  {
+    href: '/examples/nested-tables',
+    content: async () => {
+      const path = '/examples/nested-tables';
+      return lines(
+        `There is no dedicated “tree table” component, but you can build nested tables by combining the row expansion feature (${WEBSITE_LINK}/examples/expanding-rows/) with the \`noHeader\` property: each expanded row renders a header-less DataTable whose columns line up with those of its parent.`,
+        '',
+        'Warning: nested tables do not work with column pinning (`pinFirstColumn` and `pinLastColumn`).',
+        '',
+        'Implementation notes:',
+        '',
+        '- Each level keeps its expanded record IDs in state and passes them to `rowExpansion.expanded` (`recordIds` and `onRecordIdsChange`). Controlling the expansion state lets the column `render` functions know which rows are expanded, so they can rotate the chevron icons.',
+        '- `allowMultiple: true` lets the user expand several companies or departments at once.',
+        '- Nested tables use the same fixed `width` for the last column as their parent so columns stay aligned, while a left margin on the first cell content indents each level.',
+        '- If some records have no children, use the `rowExpansion.expandable` function to prevent expanding them.',
+        '',
+        await codeFile(`${path}/NestedTablesExample.tsx`),
+        '',
+        await codeFile(`${path}/NestedTablesExample.module.css`),
+        '',
+        await codeFile('/../data/nested.ts', 'data.ts')
+      );
+    },
+  },
+  {
+    href: '/examples/nested-tables-with-async-data-loading',
+    content: async () => {
+      const path = '/examples/nested-tables-with-async-data-loading';
+      return lines(
+        'The row expansion `content` function is lazily executed (only when a row is expanded), so you can load the data of nested tables on demand.',
+        '',
+        'Warning: nested tables do not work with column pinning (`pinFirstColumn` and `pinLastColumn`).',
+        '',
+        `Compared to the synchronous version (${WEBSITE_LINK}/examples/nested-tables/), each nested level is a separate component (\`DepartmentsTable\` and \`EmployeesTable\`) that loads its own records when it mounts and passes the loading state to the \`fetching\` property. A \`minHeight\` on the nested tables leaves enough room for the loader to be visible while data is being fetched.`,
+        '',
+        `Good to know: the content of a collapsed row is unmounted once the collapse animation ends, so expanding the same row again triggers a new request. To avoid that, cache the results with a data-fetching library such as TanStack Query (see ${WEBSITE_LINK}/examples/complex-usage-scenario/).`,
+        '',
+        await codeFile(`${path}/NestedTablesAsyncExample.tsx`),
+        '',
+        await codeFile(`${path}/NestedTablesAsyncExample.module.css`),
+        '',
+        await codeFile('/../data/nestedAsync.ts', 'dataAsync.ts')
+      );
+    },
+  },
+  {
+    href: '/examples/nested-tables-with-async-data-loading-and-sorting',
+    content: async () => {
+      const path = '/examples/nested-tables-with-async-data-loading-and-sorting';
+      return lines(
+        'Building on the previous example, here is how to combine asynchronous data loading with sorting in nested tables.',
+        '',
+        'Warning: nested tables do not work with column pinning (`pinFirstColumn` and `pinLastColumn`).',
+        '',
+        'How it works:',
+        '',
+        '- Only the top-level table has a header, so it owns the `sortStatus` state and is the only one receiving an `onSortStatusChange` handler.',
+        '- The sort status is passed down as a prop to the nested table components, which include it in their data requests, so expanded departments and employees are re-sorted as soon as the user clicks a column header. Each data source decides how to interpret the sorted column (e.g. the second column sorts companies and departments by employee count and employees by birth date).',
+        '- The nested tables use `fetching={loading && !records.length}`, so the loader is only shown during the initial load; when re-sorting, the current rows stay visible until the newly sorted ones arrive, avoiding a flood of loaders across all expanded levels.',
+        '',
+        await codeFile(`${path}/NestedTablesAsyncSortingExample.tsx`),
+        '',
+        await codeFile(`${path}/NestedTablesAsyncSortingExample.module.css`),
+        '',
+        await codeFile('/../data/nestedAsync.ts', 'dataAsync.ts')
+      );
+    },
+  },
+  {
+    href: '/examples/row-actions-cell',
+    content: async () => {
+      const path = '/examples/row-actions-cell/RowActionsCellExamples.tsx';
+      return lines(
+        'If row or cell click handlers aren’t enough and context menus aren’t your thing, implement a row actions cell with a column `render` function returning a group of action buttons:',
+        '',
+        await codeBlock(path, 'default'),
+        '',
+        'Heads up: if you combine row actions with clickable rows, clickable cells, expandable rows or row context menus triggered by `click`, intercept the `click` event on the action buttons and call its `.stopPropagation()` method (see ' +
+          `${WEBSITE_LINK}/examples/links-or-buttons-inside-clickable-rows-or-cells/).`,
+        '',
+        '### Constraining the actions column width',
+        '',
+        `To make the actions column no wider than its content, set its \`width\` to \`'0%'\` and, if you have more than one action icon, wrap the icons in a Mantine \`Group\` (${MANTINE_LINK}/core/group/) with \`wrap="nowrap"\`:`,
+        '',
+        await codeBlock(path, 'constrain-width'),
+        '',
+        `If your table is horizontally scrollable, you might also want to pin the actions column (${WEBSITE_LINK}/examples/pinning-the-last-column/) to keep the actions visible at all times.`
+      );
+    },
+  },
+  {
+    href: '/examples/pinning-the-last-column',
+    content: async () => {
+      const path = '/examples/pinning-the-last-column/PinLastColumnExamples.tsx';
+      return lines(
+        'When using records selection and the table scrolls horizontally, the selection checkbox column is always visible, because it is pinned to the left side of the table.',
+        '',
+        'In the same way, when a table has many columns, you can keep its last column visible at all times (for instance, a row actions column) by pinning it to the right side of the table. Set the `pinLastColumn` DataTable prop to `true`:',
+        '',
+        await codeBlock(path, 'default'),
+        '',
+        '`pinLastColumn` pins the last **visible** column. If that column is hidden (e.g. by column toggling or a `visibleMediaQuery`), the previous visible column is pinned instead.',
+        '',
+        '### Using with column grouping',
+        '',
+        'Warning: when using this feature with column grouping, **make sure the last group contains only one column**. Otherwise only the last column is pinned, while its group header scrolls away with the rest of the table.',
+        '',
+        'In the example below, the last group contains only one column, and an absolutely positioned custom title component creates the illusion that the “Actions” title is vertically centered:',
+        '',
+        await codeBlock(path, 'with-column-groups'),
+        '',
+        `To pin more than one column, or a whole group of columns, set the \`pinned\` property on individual columns instead (see ${WEBSITE_LINK}/examples/pinning-arbitrary-columns/).`
+      );
+    },
+  },
+  {
+    href: '/examples/pinning-the-first-column',
+    content: async () => {
+      const path = '/examples/pinning-the-first-column/PinFirstColumnExamples.tsx';
+      return lines(
+        'When a table has many columns and scrolls horizontally, you may want its first column to always stay visible (for instance, to keep the record name or the row actions in view). Set the `pinFirstColumn` DataTable prop to `true`:',
+        '',
+        await codeBlock(path, 'without-record-selection'),
+        '',
+        '`pinFirstColumn` pins the first **visible** column. If that column is hidden (e.g. by column toggling or a `visibleMediaQuery`), the next visible column is pinned instead.',
+        '',
+        'The feature can be combined with records selection, in which case both the selection checkbox column and the first user-provided column are pinned to the left side of the table:',
+        '',
+        await codeBlock(path, 'with-record-selection'),
+        '',
+        'You can also use records selection and pin both the first and the last column (`pinLastColumn`) at the same time:',
+        '',
+        await codeBlock(path, 'first-last-and-record-selection'),
+        '',
+        '### Using with column grouping',
+        '',
+        'Warning: when using this feature with column grouping, **make sure the first group contains only one column**. Otherwise only the first column is pinned, while its group header scrolls away with the rest of the table.',
+        '',
+        'In the example below, the first group contains only one column, and an absolutely positioned custom title component creates the illusion that the “Name” title is vertically centered:',
+        '',
+        await codeBlock(path, 'with-column-groups'),
+        '',
+        `To pin more than one column, or a whole group of columns, set the \`pinned\` property on individual columns instead. Group headers are pinned too when all of their columns are pinned to the same side. See ${WEBSITE_LINK}/examples/pinning-arbitrary-columns/.`
+      );
+    },
+  },
+  {
+    href: '/examples/pinning-arbitrary-columns',
+    content: async () => {
+      const path = '/examples/pinning-arbitrary-columns/PinArbitraryColumnsExamples.tsx';
+      return lines(
+        "Besides pinning the first and the last column with the `pinFirstColumn` and `pinLastColumn` DataTable props, you can pin **arbitrary columns** to the left or right side of the table by setting the `pinned` property (`'left' | 'right'`) on individual column definitions.",
+        '',
+        '### Pinning multiple columns to the left',
+        '',
+        "Set `pinned: 'left'` on every column you want pinned to the left side of the table:",
+        '',
+        await codeBlock(path, 'multiple-left-pinned'),
+        '',
+        'Pinned columns are always rendered at the edges of the table: left-pinned columns first, then the unpinned ones, then the right-pinned ones. Within each area, columns keep their original order, so pinning a column from the middle of the `columns` array moves it to the corresponding side of the table.',
+        '',
+        '### Pinning columns to both sides',
+        '',
+        'Left-pinned and right-pinned columns can be combined. Below, the first two columns are pinned to the left and the actions column to the right; this also works with records selection:',
+        '',
+        await codeBlock(path, 'left-and-right-pinned'),
+        '',
+        '### Interactive pinning',
+        '',
+        'Set `pinnable: true` on columns to let users pin and unpin them interactively. A pin icon appears in the column header on hover; clicking it opens a dropdown allowing the user to pin the column to the left or right, or to unpin it.',
+        '',
+        'For pinnable columns, `pinned` sets the **initial** pinning state. Interactive pinning relies on the same mechanism as column dragging and toggling: a `storeColumnsKey` DataTable prop is **required**, since the pinning state is kept in local storage under this key. To restore the initial pinning state, call the `useDataTableColumns()` hook with the same `key` and use the `resetColumnsPinning()` function it returns.',
+        '',
+        'Pinning also works in right-to-left layouts, where the “left” and “right” sides are mirrored (the example includes a direction switch):',
+        '',
+        await codeBlock(path, 'interactive-pinning'),
+        '',
+        '### Combining pinning with column toggling',
+        '',
+        '`pinnable` can be combined with `toggleable` on the same columns, so users can both pin/unpin and show/hide them (right-click the table header to open the column visibility menu). In this example some columns are hidden by default with `defaultToggle: false`; the `resetColumnsToggle` and `resetColumnsPinning` functions reset visibility and pinning independently:',
+        '',
+        await codeBlock(path, 'pinning-and-toggling'),
+        '',
+        '### Pinning with column groups',
+        '',
+        'With column groups and interactive pinning, individual columns within groups can be pinned. A group header is pinned only when **all columns in the group** are pinned to the same side; if the columns have different pinning states (some pinned left, some unpinned, or mixed), the group header is not pinned.',
+        '',
+        'Since pinned columns are moved to the edges of the table, a column pinned to the side opposite to its group (e.g. one of the “Employee” group columns pinned to the right) is moved away from the rest of its group. In that case the group header is split in two: one part stays above the remaining columns, the other follows the pinned column.',
+        '',
+        await codeBlock(path, 'pinning-with-column-groups')
+      );
+    },
+  },
+  {
+    href: '/examples/rtl-support',
+    content: async () => {
+      const path = '/examples/rtl-support';
+      return lines(
+        `Since **v8.3.9**, ${PRODUCT_NAME} fully supports right-to-left (RTL) layouts, for languages such as Arabic, Hebrew, Persian and Urdu (contributed by Reem Assaf in https://github.com/icflorescu/mantine-datatable/pull/781/). There is no RTL-specific property to set: all DataTable features automatically adapt to the text direction of the surrounding document.`,
+        '',
+        '### Setting up RTL',
+        '',
+        `Set up RTL in your application as described in the Mantine RTL documentation (${MANTINE_LINK}/styles/rtl/), which means:`,
+        '',
+        `- setting the \`dir="rtl"\` attribute on an ancestor element, usually the root \`<html>\` element; ${PRODUCT_NAME} relies on the computed CSS direction for its layout, borders, scroll shadows and pinned columns;`,
+        `- wrapping your application in Mantine’s \`DirectionProvider\`, which some Mantine components rely on to determine the text direction; ${PRODUCT_NAME} also uses it to make column resizing handles work in the right direction.`,
+        '',
+        'The example below sets both locally, on a wrapper element around each table, so you can switch between LTR and RTL with a toggle. It showcases a basic table, column dragging, and a table with pinned columns, row selection, sorting, pagination and column resizing.',
+        '',
+        "Column pinning in RTL mode: “left” and “right” should be read as “start” and “end”. `pinFirstColumn` pins the first column to the right edge of the table, `pinLastColumn` pins the last column to the left edge, and the same goes for arbitrary columns pinned with `pinned: 'left'` or `pinned: 'right'`.",
+        '',
+        await codeFile(`${path}/RTLSupportExample.tsx`),
+        '',
+        await codeFile(`${path}/RTLSupportExample.module.css`)
+      );
+    },
+  },
+  {
+    href: '/examples/links-or-buttons-inside-clickable-rows-or-cells',
+    content: async () =>
+      lines(
+        'Click events bubble up the DOM tree, so when the user clicks a link, button or other interactive component placed inside a clickable row (`onRowClick`), clickable cell (`onCellClick`), expandable row, or a row with a context menu triggered by `click` instead of right-click, the row or cell reacts to the click as well.',
+        '',
+        'To prevent this, intercept the `click` event on the interactive component and call its `.stopPropagation()` method.',
+        '',
+        'The table below implements both expandable rows and a row actions cell. Clicking a row expands it, while clicking an action button only opens a modal dialog, without toggling the row expansion:',
+        '',
+        await codeFile(
+          '/examples/links-or-buttons-inside-clickable-rows-or-cells/LinksOrButtonsInsideClickableRowsOrCellsExample.tsx'
+        ),
+        '',
+        'The same technique applies to regular links: add an `onClick` handler calling `event.stopPropagation()` to the anchor element (or Mantine `Anchor` component), and the browser will follow the link without triggering the row or cell handlers.'
+      ),
+  },
+  {
+    href: '/examples/disabling-text-selection',
+    content: async () => {
+      // The page shows the code with the `textSelectionDisabled` line adjusted according to a switch;
+      // here we show it in the "enabled" state, which is the point of the example
+      const code = (
+        await readCodeFile<string>('/examples/disabling-text-selection/DisablingTextSelectionExample.tsx')
+      ).replace(/( +)textSelectionDisabled=.*\n/, (_, spaces) => `${spaces}textSelectionDisabled\n`);
+      return lines(
+        'Set the `textSelectionDisabled` property (`boolean`) to prevent users from selecting text inside the DataTable. This improves usability whenever clicking on the table is meant to trigger an action rather than select text, for instance if you:',
+        '',
+        '- work with records selection;',
+        '- handle row clicks or cell clicks, especially double-clicks, which would otherwise select the clicked word;',
+        '- use expandable rows;',
+        '- use context menus on touch devices;',
+        '- use sorting.',
+        '',
+        fence(code, 'tsx', 'DisablingTextSelectionExample.tsx')
+      );
+    },
+  },
+  {
+    href: '/examples/asynchronous-data-loading',
+    content: async () => {
+      const path = '/examples/asynchronous-data-loading/AsynchronousDataLoadingExamples.tsx';
+      // The page shows the `default` block adjusted by interactive controls (each `loader*` line is either removed
+      // or replaced with a literal value); we show it without customizations, then with all of them applied
+      const defaultCode = (await readCodeFile<Record<string, string>>(path)).default;
+      const plainCode = defaultCode.replace(/ +loader(Type|Size|Color|BackgroundBlur)=.*\n/g, '');
+      const customizedCode = defaultCode
+        .replace(/( +)loaderType=.*\n/, (_, spaces) => `${spaces}loaderType="oval"\n`)
+        .replace(/( +)loaderSize=.*\n/, (_, spaces) => `${spaces}loaderSize="lg"\n`)
+        .replace(/( +)loaderColor=.*\n/, (_, spaces) => `${spaces}loaderColor="blue"\n`)
+        .replace(/( +)loaderBackgroundBlur=.*\n/, (_, spaces) => `${spaces}loaderBackgroundBlur={1}\n`);
+      return lines(
+        'When loading data asynchronously, set the `fetching` property to `true` while the request is in flight. The DataTable indicates the loading state by overlaying a Mantine `Loader` (https://mantine.dev/core/loader/) over its rows:',
+        '',
+        fence(plainCode, 'tsx'),
+        '',
+        'You can customize the loader appearance with the following properties:',
+        '',
+        "- `loaderSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {}) | number` → the loader size; you can also pass a number (in pixels) or any valid CSS size string;",
+        "- `loaderType: 'oval' | 'bars' | 'dots'` → the loader type; defaults to the loader type set in your Mantine theme;",
+        '- `loaderColor` → the loader color (https://mantine.dev/theming/colors/); defaults to the theme’s primary color;',
+        '- `loaderBackgroundBlur: number` → the loader background blur, in pixels; no blur by default.',
+        '',
+        fence(customizedCode, 'tsx'),
+        '',
+        'Keep in mind: if your DataTable is not vertically scrollable and has no initial data, set its `minHeight` to accommodate the loader and minimize the “content jump” when the records arrive.',
+        '',
+        'When using pagination, the pagination footer displays the `loadingText` (`...` by default) while fetching and the total number of records is unknown. The empty state indicator is not displayed while fetching.',
+        '',
+        '### Using a custom loader component',
+        '',
+        'To use something other than the standard Mantine `Loader` types, pass your own component to the `customLoader` property. In this case you can’t set the `loaderSize`, `loaderType` and `loaderColor` properties (TypeScript will complain if you do), but you can still use `loaderBackgroundBlur`:',
+        '',
+        await codeBlock(path, 'custom-loader')
+      );
+    },
+  },
+  {
+    href: '/examples/custom-row-or-cell-attributes',
+    content: async () => {
+      const path = '/examples/custom-row-or-cell-attributes/CustomRowOrCellAttributesExamples.tsx';
+      return lines(
+        'Custom attributes on table rows or cells can be useful for testing, for analytics, or for handling events the DataTable doesn’t expose a dedicated property for.',
+        '',
+        'To add custom attributes to table rows, use the `customRowAttributes` DataTable property. It accepts a function receiving the current record and its index as arguments, and returning an object whose properties are applied as attributes to the corresponding row.',
+        '',
+        'Similarly, each column accepts a `customCellAttributes` property, which works the same way but applies the returned attributes to the column’s cells:',
+        '',
+        await codeBlock(path, 'custom-row-or-cell-attributes'),
+        '',
+        '### Handling middle-clicks',
+        '',
+        'Since the returned object can also contain event handlers, you can use `customRowAttributes` to handle middle-clicks on table rows:',
+        '',
+        await codeBlock(path, 'middle-click'),
+        '',
+        'Be careful what you override: the attributes returned by `customRowAttributes` are applied **after** the ones the DataTable sets on each row, so they take precedence. Returning a `className`, `style`, `onClick` or `onContextMenu` property would replace the default one, breaking features such as row styling, row click handling or row expansion. Use the dedicated DataTable properties for those, and keep `customRowAttributes` for everything else.'
+      );
+    },
+  },
+  {
+    href: '/examples/using-with-auto-animate',
+    content: async () =>
+      lines(
+        'The `bodyRef` property gives you access to the underlying `<tbody>` element of the table. You can hand it over to the AutoAnimate library (https://auto-animate.formkit.com/) to smoothly animate rows as they are added, removed or reordered.',
+        '',
+        `AutoAnimate tracks rows by their DOM elements, which ${PRODUCT_NAME} keys by record ID. Make sure each record has a unique, stable ID (see ${WEBSITE_LINK}/examples/non-standard-record-ids/ if your records don’t have an \`id\` property); otherwise reordered rows are simply re-rendered in place, without animation.`,
+        '',
+        'Warning: AutoAnimate does not play well with column pinning. Rows won’t animate on a table with pinned columns, because the pinning logic measures column widths synchronously after every render, and these layout reads interfere with AutoAnimate’s observation of the same `<tbody>`.',
+        '',
+        'Heads up: in React strict mode (enabled by default in Next.js development builds), the official `useAutoAnimate()` hook double-invokes its ref callback on mount, which corrupts AutoAnimate’s per-element state and breaks animations after client-side navigation. To work around this, the example calls `autoAnimate(node)` directly from a stable ref callback that runs exactly once per `<tbody>` element. Production builds are not affected, so the official hook works fine there.',
+        '',
+        await codeFile('/examples/using-with-auto-animate/UsingWithAutoAnimateExample.tsx')
+      ),
+  },
+  {
+    href: '/examples/complex-usage-scenario',
+    content: async () => {
+      const path = '/examples/complex-usage-scenario';
+      return lines(
+        `A more realistic example bringing together many ${PRODUCT_NAME} features in a single table:`,
+        '',
+        '- asynchronous data loading with TanStack Query (https://tanstack.com/query/latest), combined with server-side sorting and pagination;',
+        '- custom column definitions with custom cell rendering, and columns hidden on small screens via `visibleMediaQuery`;',
+        '- multiple records selection;',
+        '- row expansion showing additional employee details;',
+        '- a row actions cell in a pinned last column, opening a Mantine modal or showing a notification;',
+        '- a row context menu whose items depend on the current selection.',
+        '',
+        'Since the example uses TanStack Query, everything has to be wrapped in a `QueryClientProvider`:',
+        '',
+        await codeFile(`${path}/ComplexUsageExampleWrapper.tsx`),
+        '',
+        'The sort status and the page number are part of the query key, so changing either of them triggers a new request; `placeholderData: keepPreviousData` keeps the current records on screen while the next ones are loading. Changing the sort order resets the table to the first page.',
+        '',
+        'The table itself, its styles, and the data helpers it uses:',
+        '',
+        await codeFile(`${path}/ComplexUsageExample.tsx`),
+        '',
+        await codeFile(`${path}/ComplexUsageExample.module.css`),
+        '',
+        await codeFile('/../data/async.ts', 'data/async.ts'),
+        '',
+        await codeFile('/../data/index.ts', 'data/index.ts')
+      );
+    },
+  },
+  {
+    href: '/type-definitions',
+    content: async () =>
+      lines(
+        `${PRODUCT_NAME} is written in TypeScript and its properties are documented with JSDoc annotations.`,
+        '',
+        '### Using the types in your code',
+        '',
+        '`DataTable` is a generic component that infers the type of your records from the `records` property. When you declare columns inline, render functions and event handlers are typed automatically, and accessors are autocompleted with your record keys (any string is still accepted, to allow dot-notation paths and virtual columns, so accessor typos aren’t caught by the compiler).',
+        '',
+        'All the types listed below are exported by the package, so you can also use them explicitly; for instance, when declaring column definitions outside of the component, or when typing the sorting state (`DataTableSortStatus`):',
+        '',
+        await codeFile('/type-definitions/TypedColumnsExample.tsx'),
+        '',
+        '### Type files',
+        '',
+        await typeFiles()
+      ),
+  },
+  {
+    href: '/mantine-v6-support',
+    content: () =>
+      `${PRODUCT_NAME} V7+ requires Mantine V7 or newer, since Mantine V7 migrated from CSS-in-JS (Emotion) to native CSS. Since then, the major version of ${PRODUCT_NAME} has followed the major version of Mantine it supports. If you’re still using Mantine V6, use ${PRODUCT_NAME} V6 instead (documentation: ${V6_WEBSITE_LINK}).`,
+  },
+];
+
+const DOCS_HREFS: Route[] = ['/getting-started', '/styling', '/type-definitions'];
+const OPTIONAL_HREFS: Route[] = ['/mantine-v6-support', '/contribute-and-support', '/hire-the-author'];
+
+function linkItem(href: Route) {
+  const { title, description } = getRoute(href);
+  return `- [${title}](${pageUrl(href)}): ${description.replace(/^Example: /, '')}`;
+}
+
+const HEADER = lines(
+  `# ${PRODUCT_NAME}`,
+  '',
+  `> ${getRoute('/').description}. \`${PACKAGE}\` is a lightweight, dependency-free, dark-theme aware table component for React applications built with Mantine (${MANTINE_LINK}), supporting asynchronous data loading, pagination, sorting, Gmail-style batch row selection, custom cell rendering, column grouping, dragging, toggling, resizing and pinning, row expansion, nested tables, context menus, RTL layouts and more.`
+);
+
+export function getLlmsTxt() {
+  return lines(
+    HEADER,
+    '',
+    'Key facts:',
+    '',
+    KEY_FACTS,
+    '',
+    `The complete documentation, including all code examples and type definitions, is available as a single file at ${WEBSITE_LINK}/llms-full.txt`,
+    '',
+    '## Docs',
+    '',
+    ...DOCS_HREFS.map(linkItem),
+    '',
+    '## Examples',
+    '',
+    ...ROUTES.filter(({ href }) => href.startsWith('/examples/')).map(({ href }) => linkItem(href)),
+    '',
+    '## Optional',
+    '',
+    ...OPTIONAL_HREFS.map(linkItem),
+    `- [Changelog](${REPO_LINK}/blob/main/CHANGELOG.md): Notable changes in each ${PRODUCT_NAME} version`,
+    `- [Source code](${REPO_LINK}): GitHub repository`,
+    `- [${MANTINE_CONTEXTMENU_PRODUCT_NAME}](${MANTINE_CONTEXTMENU_LINK}/): Context menu component for Mantine, by the same author (its own LLM-friendly docs: ${MANTINE_CONTEXTMENU_LINK}/llms.txt)`,
+    ''
+  );
+}
+
+export async function getLlmsFullTxt() {
+  shownDataFiles.clear();
+  const sections: string[] = [];
+  // sequential on purpose, so data files are deduplicated deterministically (see `codeFile`)
+  for (const { href, content } of SECTIONS) {
+    const title = getRoute(href).title;
+    const heading = href.startsWith('/examples/') ? `Example: ${title}` : title;
+    currentSectionHeading = heading;
+    sections.push(lines(`## ${heading}`, '', `Source: ${pageUrl(href)}`, '', await content()));
+  }
+
+  return lines(
+    HEADER,
+    '',
+    `Documentation website: ${WEBSITE_LINK}/`,
+    `Repository: ${REPO_LINK}`,
+    `Changelog: ${REPO_LINK}/blob/main/CHANGELOG.md`,
+    '',
+    '## Key facts',
+    '',
+    KEY_FACTS,
+    '',
+    DOCS_HELPERS_NOTE,
+    '',
+    sections.join('\n\n'),
+    ''
+  );
+}
