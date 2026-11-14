@@ -3,6 +3,11 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.8.1 (2026-11-14)
+
+- Revise package keywords to improve discoverability on npm
+- Publish LLM-friendly documentation ([`llms.txt`](https://icflorescu.github.io/mantine-datatable/llms.txt) and [`llms-full.txt`](https://icflorescu.github.io/mantine-datatable/llms-full.txt)), generated from the docs website content, and add a corresponding [docs page](https://icflorescu.github.io/mantine-datatable/llms-txt/) explaining how to use them with AI assistants and coding agents
+
 ## 9.8.0 (2026-11-13)
 
 - Fix column group headers getting out of sync with the columns when these are reordered, toggled or pinned; a group whose columns are no longer adjacent (e.g. when one of them is pinned to the other side) now gets its header split accordingly

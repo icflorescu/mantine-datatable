@@ -4,6 +4,7 @@ import {
   IconBrandJavascript,
   IconBrandTypescript,
   IconFileTypeTsx,
+  IconMarkdown,
   IconTerminal,
 } from '@tabler/icons-react';
 import classes from './CodeBlock.module.css';
@@ -16,6 +17,7 @@ const ICONS = {
   js: <IconBrandJavascript {...ICON_PROPS} />,
   css: <IconBrandCss3 {...ICON_PROPS} />,
   shell: <IconTerminal {...ICON_PROPS} />,
+  md: <IconMarkdown {...ICON_PROPS} />,
 };
 
 function getLanguage(fileName: string) {
