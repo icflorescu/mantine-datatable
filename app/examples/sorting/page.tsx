@@ -43,6 +43,11 @@ export default async function SortingExamplePage() {
           clicks a sortable column header.
         </li>
       </UnorderedList>
+      <Txt idea>
+        Clicking a sorted column header a third time clears its sorting: <Code>onSortStatusChange</Code> is called with{' '}
+        <Code>columnAccessor</Code> set to an empty string, while <Code>direction</Code> resets to <Code>'asc'</Code>.
+        Handle this case in your own sorting logic, as shown in the example below.
+      </Txt>
       <CodeBlock code={code['SortingExample.tsx']} />
       <Txt info title="Keep in mind">
         {PRODUCT_NAME} doesn’t sort the records for you; it only renders the sort indicators and reports the user’s
