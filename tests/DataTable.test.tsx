@@ -660,3 +660,25 @@ describe('styling', () => {
     expect(getComputedStyle(bodyRows()[0].element()).fontStyle).toBe('italic');
   });
 });
+
+describe('column filters', () => {
+  test('gives the filter button an accessible name derived from the column title', async () => {
+    await renderDataTable({
+      columns: [
+        { accessor: 'firstName', filter: <div>First name filter</div> },
+        { accessor: 'address.city', title: 'City', filter: <div>City filter</div> },
+      ],
+    });
+    await expect.element(page.getByRole('button', { name: 'Filter First name' })).toBeVisible();
+    await expect.element(page.getByRole('button', { name: 'Filter City' })).toBeVisible();
+  });
+
+  test('uses a custom filter button label when provided', async () => {
+    await renderDataTable({
+      columns: [{ accessor: 'firstName', filter: <div>Filter content</div>, filterButtonLabel: 'Filtrer le prénom' }],
+    });
+    await expect.element(page.getByRole('button', { name: 'Filtrer le prénom' })).toBeVisible();
+    await page.getByRole('button', { name: 'Filtrer le prénom' }).click();
+    await expect.element(page.getByText('Filter content')).toBeVisible();
+  });
+});

@@ -275,6 +275,7 @@ export function DataTableHeader<T>({
             filter,
             filterPopoverProps,
             filterPopoverDisableClickOutside,
+            filterButtonLabel,
             filtering,
             sortKey,
           } = { ...defaultColumnProps, ...columnProps };
@@ -303,6 +304,7 @@ export function DataTableHeader<T>({
               filter={filter}
               filterPopoverProps={filterPopoverProps}
               filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
+              filterButtonLabel={filterButtonLabel}
               filtering={filtering}
             />
           );
