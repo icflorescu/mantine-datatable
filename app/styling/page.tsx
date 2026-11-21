@@ -76,7 +76,13 @@ export default async function StylingPage() {
           </li>
           <li>
             <Code>{process.env.PACKAGE_NAME}/styles.layer.css</Code> places its styles in a layer named{' '}
-            <Code>{process.env.PACKAGE_NAME}</Code>.
+            <Code>{process.env.PACKAGE_NAME}</Code> and declares the <Code>mantine, {process.env.PACKAGE_NAME}</Code>{' '}
+            layer order itself, so its styles take precedence over Mantine core styles regardless of the order in which
+            the stylesheets are loaded;
+          </li>
+          <li>
+            the order of CSS layers is set by the first place they are declared, so if you need a custom layer order,
+            make sure to declare it <strong>before</strong> any layered stylesheet is loaded.
           </li>
         </Box>
       </Txt>

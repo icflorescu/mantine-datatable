@@ -1,1 +1,8 @@
+/*
+ * Declare the layer order up front, so that DataTable styles take precedence over Mantine core styles
+ * even if this file happens to be loaded before `@mantine/core/styles.layer.css`.
+ * A layer order statement only affects layers that are not yet declared, so this is a no-op
+ * when the application has already declared its own layer order.
+ */
+@layer mantine, mantine-datatable;
 @import './styles.css' layer(mantine-datatable);

@@ -3,4 +3,7 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - mantine-contextmenu@9.8.2
+  - mantine-contextmenu@9.8.3
+permissions:
+  tsdown:
+    skills: true

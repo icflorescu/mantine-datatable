@@ -60,9 +60,13 @@ function SortableTable({ onChange }: { onChange?: (s: DataTableSortStatus<Person
 function SelectableTable({
   isRecordSelectable,
   selectionTrigger,
+  onRecordCheckboxChange,
+  onAllRecordsCheckboxChange,
 }: {
   isRecordSelectable?: (record: Person) => boolean;
   selectionTrigger?: 'checkbox' | 'cell';
+  onRecordCheckboxChange?: () => void;
+  onAllRecordsCheckboxChange?: () => void;
 }) {
   const [selectedRecords, setSelectedRecords] = useState<Person[]>([]);
   return (
@@ -74,6 +78,12 @@ function SelectableTable({
         onSelectedRecordsChange={setSelectedRecords}
         isRecordSelectable={isRecordSelectable}
         selectionTrigger={selectionTrigger}
+        selectionCheckboxProps={onRecordCheckboxChange ? { onChange: onRecordCheckboxChange } : undefined}
+        allRecordsSelectionCheckboxProps={
+          onAllRecordsCheckboxChange
+            ? { 'aria-label': 'Select all records', onChange: onAllRecordsCheckboxChange }
+            : undefined
+        }
       />
       <output data-testid="selection">{selectedRecords.map((r) => r.id).join(',')}</output>
     </MantineProvider>
@@ -292,6 +302,33 @@ describe('selection', () => {
     const checkbox = selectRecord(3).element();
     (checkbox.closest('td') as HTMLElement).click();
     await expect.poll(() => selection().element().textContent).toBe('3');
+  });
+
+  test('selects a range of records with Shift+click on the selector cells when selectionTrigger is "cell"', async () => {
+    await render(<SelectableTable selectionTrigger="cell" />);
+    const cell = (n: number) => selectRecord(n).element().closest('td') as HTMLElement;
+    cell(1).dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await expect.poll(() => selection().element().textContent).toBe('1');
+    cell(4).dispatchEvent(new MouseEvent('click', { bubbles: true, shiftKey: true }));
+    await expect.poll(() => selection().element().textContent).toBe('1,2,3,4');
+  });
+
+  test('clicking a selector cell behaves like clicking its checkbox when selectionTrigger is "cell"', async () => {
+    const onRecordCheckboxChange = vi.fn();
+    const onAllRecordsCheckboxChange = vi.fn();
+    await render(
+      <SelectableTable
+        selectionTrigger="cell"
+        onRecordCheckboxChange={onRecordCheckboxChange}
+        onAllRecordsCheckboxChange={onAllRecordsCheckboxChange}
+      />
+    );
+    (selectAll().element().closest('th') as HTMLElement).click();
+    await expect.element(selectAll()).toBeChecked();
+    expect(onAllRecordsCheckboxChange).toHaveBeenCalledTimes(1);
+    (selectRecord(2).element().closest('td') as HTMLElement).click();
+    await expect.element(selectRecord(2)).not.toBeChecked();
+    expect(onRecordCheckboxChange).toHaveBeenCalledTimes(1);
   });
 });
 
