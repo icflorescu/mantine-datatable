@@ -168,7 +168,8 @@ export function useDataTableInjectCssVariables({
       const scrollTop = viewport?.scrollTop ?? 0;
       const scrollLeft = viewport?.scrollLeft ?? 0;
 
-      const newScrolledToTop = scrollTop === 0;
+      // `< 1` rather than `=== 0`, since iOS Safari overscroll ("rubber-band" bounce) can make `scrollTop` negative
+      const newScrolledToTop = scrollTop < 1;
       const newScrolledToBottom = tableRect.height - scrollTop - scrollRect.height < 1;
       const scrolledToTop = setScrolledTo('top', newScrolledToTop);
       const scrolledToBottom = setScrolledTo('bottom', newScrolledToBottom);
