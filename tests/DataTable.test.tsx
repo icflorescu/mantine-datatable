@@ -632,6 +632,22 @@ describe('colors', () => {
     await expect.poll(() => [rowBackground(0) === RED, rowBackground(1) === RED]).toEqual([false, true]);
   });
 
+  test.each([true, 'even'] as const)(
+    'highlights striped and non-striped rows on hover (striped=%s)',
+    async (striped) => {
+      await renderDataTable({
+        striped,
+        stripedColor: '#ff0000',
+        highlightOnHover: true,
+        highlightOnHoverColor: '#0000ff',
+      });
+      for (const index of [0, 1]) {
+        await userEvent.hover(bodyRows()[index]);
+        await expect.poll(() => rowBackground(index)).toBe('rgb(0, 0, 255)');
+      }
+    }
+  );
+
   test('applies selectionColor to selected rows', async () => {
     await renderDataTable({
       selectedRecords: [people[1]],
