@@ -2,6 +2,7 @@ import type { MantineStyleProp } from '@mantine/core';
 import { Checkbox, type CheckboxProps, TableTh } from '@mantine/core';
 import clsx from 'clsx';
 import type { JSX } from 'react';
+import { forwardClickToCheckbox } from './forwardClickToCheckbox';
 import type { DataTableSelectionTrigger } from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
@@ -44,7 +45,13 @@ export function DataTableHeaderSelectorCell({
       rowSpan={rowSpan}
       data-shadow-visible={shadowVisible || undefined}
       data-accessor="__selection__"
-      onClick={trigger === 'cell' && enabled ? onChange : undefined}
+      onClick={
+        trigger === 'cell' && enabled
+          ? (e) => {
+              if (!forwardClickToCheckbox(e)) onChange?.();
+            }
+          : undefined
+      }
     >
       <Checkbox
         classNames={enabled ? { input: POINTER_CURSOR } : undefined}

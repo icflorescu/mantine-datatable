@@ -2,6 +2,7 @@ import type { MantineStyleProp } from '@mantine/core';
 import { Checkbox, type CheckboxProps, TableTd } from '@mantine/core';
 import clsx from 'clsx';
 import type { JSX } from 'react';
+import { forwardClickToCheckbox } from './forwardClickToCheckbox';
 import type { DataTableSelectionTrigger } from './types';
 import { POINTER_CURSOR } from './utilityClasses';
 
@@ -36,7 +37,7 @@ export function DataTableRowSelectorCell<T>({
 
   const handleClick: React.MouseEventHandler = (e) => {
     e.stopPropagation();
-    if (trigger === 'cell' && enabled) {
+    if (trigger === 'cell' && enabled && !forwardClickToCheckbox(e)) {
       onChange?.(e);
     }
   };
