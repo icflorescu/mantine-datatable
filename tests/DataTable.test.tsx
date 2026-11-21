@@ -199,6 +199,51 @@ describe('sorting', () => {
     await userEvent.keyboard('{Enter}');
     await expect.element(page.getByRole('img', { name: 'Sorted descending' })).toBeVisible();
   });
+
+  test('sorts with the Space key without scrolling the page', async () => {
+    const onChange = vi.fn();
+    await render(<SortableTable onChange={onChange} />);
+    const th = page.getByRole('button', { name: /First name/ }).element() as HTMLElement;
+    th.focus();
+    const event = new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+    th.dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(true);
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ columnAccessor: 'firstName', direction: 'desc' })
+    );
+    await expect.element(page.getByRole('img', { name: 'Sorted descending' })).toBeVisible();
+  });
+
+  test('does not sort when a key is pressed on a control nested in the header cell', async () => {
+    const onChange = vi.fn();
+    await renderDataTable({
+      columns: [{ accessor: 'firstName', sortable: true, toggleable: true }],
+      storeColumnsKey: 'sort-nested-controls-test',
+      sortStatus: { columnAccessor: 'firstName', direction: 'asc' },
+      onSortStatusChange: onChange,
+    });
+    const nested = document.querySelector('thead th button') as HTMLElement;
+    for (const key of [' ', 'Enter']) {
+      nested.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+    }
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  test('uses custom sort labels, falling back to the defaults for omitted ones', async () => {
+    await renderDataTable({
+      columns: [
+        { accessor: 'firstName', sortable: true },
+        { accessor: 'age', sortable: true },
+      ],
+      sortStatus: { columnAccessor: 'firstName', direction: 'desc' },
+      onSortStatusChange: vi.fn(),
+      sortLabels: { descending: 'Trié par ordre décroissant', unsorted: 'Non trié' },
+    });
+    await expect.element(page.getByRole('img', { name: 'Trié par ordre décroissant' })).toBeVisible();
+    await expect.element(page.getByRole('img', { name: 'Non trié' })).toBeVisible();
+    await expect.element(page.getByRole('img', { name: 'Sorted descending' })).not.toBeInTheDocument();
+  });
 });
 
 describe('selection', () => {
@@ -587,6 +632,22 @@ describe('colors', () => {
     await expect.poll(() => [rowBackground(0) === RED, rowBackground(1) === RED]).toEqual([false, true]);
   });
 
+  test.each([true, 'even'] as const)(
+    'highlights striped and non-striped rows on hover (striped=%s)',
+    async (striped) => {
+      await renderDataTable({
+        striped,
+        stripedColor: '#ff0000',
+        highlightOnHover: true,
+        highlightOnHoverColor: '#0000ff',
+      });
+      for (const index of [0, 1]) {
+        await userEvent.hover(bodyRows()[index]);
+        await expect.poll(() => rowBackground(index)).toBe('rgb(0, 0, 255)');
+      }
+    }
+  );
+
   test('applies selectionColor to selected rows', async () => {
     await renderDataTable({
       selectedRecords: [people[1]],
@@ -658,5 +719,27 @@ describe('styling', () => {
     await expect.element(page.getByRole('cell', { name: 'Ada' })).toBeVisible();
     expect(bodyRows().map((r) => r.element().classList.contains('senior'))).toEqual([false, false, true, false, true]);
     expect(getComputedStyle(bodyRows()[0].element()).fontStyle).toBe('italic');
+  });
+});
+
+describe('column filters', () => {
+  test('gives the filter button an accessible name derived from the column title', async () => {
+    await renderDataTable({
+      columns: [
+        { accessor: 'firstName', filter: <div>First name filter</div> },
+        { accessor: 'address.city', title: 'City', filter: <div>City filter</div> },
+      ],
+    });
+    await expect.element(page.getByRole('button', { name: 'Filter First name' })).toBeVisible();
+    await expect.element(page.getByRole('button', { name: 'Filter City' })).toBeVisible();
+  });
+
+  test('uses a custom filter button label when provided', async () => {
+    await renderDataTable({
+      columns: [{ accessor: 'firstName', filter: <div>Filter content</div>, filterButtonLabel: 'Filtrer le prénom' }],
+    });
+    await expect.element(page.getByRole('button', { name: 'Filtrer le prénom' })).toBeVisible();
+    await page.getByRole('button', { name: 'Filtrer le prénom' }).click();
+    await expect.element(page.getByText('Filter content')).toBeVisible();
   });
 });

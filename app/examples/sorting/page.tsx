@@ -79,6 +79,15 @@ export default async function SortingExamplePage() {
       </Txt>
       <CodeBlock code={code['SortingExampleCustomIcons.tsx']} />
       <SortingExampleCustomIcons />
+      <PageSubtitle value="Localized sort labels" />
+      <Txt>
+        The sort state of each header cell is announced to screen readers as <em>Not sorted</em>,{' '}
+        <em>Sorted ascending</em> or <em>Sorted descending</em>. To translate these labels, pass an object with any of
+        the <Code>unsorted</Code>, <Code>ascending</Code> and <Code>descending</Code> keys to the{' '}
+        <Code>sortLabels</Code> property; omitted keys keep their English defaults.
+        <br />
+        Sortable headers can be activated with both the <kbd>Enter</kbd> and <kbd>Space</kbd> keys.
+      </Txt>
       <Txt>Head over to the next example to discover more features.</Txt>
       <PageNavigation of={PATH} />
     </>

@@ -3,6 +3,13 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.8.2 (2026-11-21)
+
+- Fix issue [#860](https://github.com/icflorescu/mantine-datatable/issues/860) - striped rows not being highlighted on hover when both `striped` and `highlightOnHover` are set (regression introduced in 9.8.0), thanks to [donatmarko](https://github.com/donatmarko) for the detailed analysis and fix proposal
+- Add `sortLabels` property to localize the screen-reader labels of the sort state, and allow activating sortable column headers with the Space key (issue [#844](https://github.com/icflorescu/mantine-datatable/issues/844)), thanks to [Asish Kumar](https://github.com/officialasishkumar)
+- Add an accessible label to the column filter button, customizable via the new `filterButtonLabel` column property (issue [#754](https://github.com/icflorescu/mantine-datatable/issues/754)), thanks to [Asish Kumar](https://github.com/officialasishkumar)
+- Update dev deps to ensure compatibility with Mantine 9.8.2 & Mantine ContextMenu 9.8.2
+
 ## 9.8.1 (2026-11-14)
 
 - Revise package keywords to improve discoverability on npm

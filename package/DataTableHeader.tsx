@@ -27,6 +27,7 @@ type DataTableHeaderProps<T> = {
   style?: MantineStyleProp;
   sortStatus: DataTableSortProps<T>['sortStatus'];
   sortIcons: DataTableSortProps<T>['sortIcons'];
+  sortLabels: DataTableSortProps<T>['sortLabels'];
   onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
   columns: DataTableColumn<T>[];
   defaultColumnProps: Omit<DataTableColumn<T>, 'accessor'> | undefined;
@@ -157,6 +158,7 @@ export function DataTableHeader<T>({
   style,
   sortStatus,
   sortIcons,
+  sortLabels,
   onSortStatusChange,
   columns,
   defaultColumnProps,
@@ -275,6 +277,7 @@ export function DataTableHeader<T>({
             filter,
             filterPopoverProps,
             filterPopoverDisableClickOutside,
+            filterButtonLabel,
             filtering,
             sortKey,
           } = { ...defaultColumnProps, ...columnProps };
@@ -298,11 +301,13 @@ export function DataTableHeader<T>({
               resizable={resizable && index < columns.length - 1}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
+              sortLabels={sortLabels}
               sortKey={sortKey}
               onSortStatusChange={onSortStatusChange}
               filter={filter}
               filterPopoverProps={filterPopoverProps}
               filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
+              filterButtonLabel={filterButtonLabel}
               filtering={filtering}
             />
           );

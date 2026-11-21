@@ -127,7 +127,8 @@
     background: inherit;
   }
 
-  &[data-striped]:not([data-striped='even']) tbody tr:nth-of-type(odd),
+  /* :where() keeps the negation from adding specificity, so the hover rule below can still override stripes */
+  &[data-striped]:where(:not([data-striped='even'])) tbody tr:nth-of-type(odd),
   &[data-striped='even'] tbody tr:nth-of-type(even) {
     background: var(--mantine-datatable-striped-color);
   }

@@ -53,6 +53,7 @@ export function DataTable<T>({
   getRecordSelectionCheckboxProps = (_, index) => ({ 'aria-label': `Select record ${index + 1}` }),
   sortStatus,
   sortIcons,
+  sortLabels,
   onSortStatusChange,
   horizontalSpacing,
   page,
@@ -349,6 +350,7 @@ export function DataTable<T>({
                     pinnedMap={pinnedMap}
                     sortStatus={sortStatus}
                     sortIcons={sortIcons}
+                    sortLabels={sortLabels}
                     onSortStatusChange={onSortStatusChange}
                     selectionTrigger={selectionTrigger}
                     selectionVisible={selectionColumnVisible}

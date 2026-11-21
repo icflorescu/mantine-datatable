@@ -23,6 +23,7 @@ type DataTableHeaderCellProps<T> = {
   title: React.ReactNode | undefined;
   sortStatus: DataTableSortProps<T>['sortStatus'];
   sortIcons: DataTableSortProps<T>['sortIcons'];
+  sortLabels: DataTableSortProps<T>['sortLabels'];
   onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
 } & Pick<
   DataTableColumn<T>,
@@ -37,6 +38,7 @@ type DataTableHeaderCellProps<T> = {
   | 'filter'
   | 'filterPopoverProps'
   | 'filterPopoverDisableClickOutside'
+  | 'filterButtonLabel'
   | 'filtering'
   | 'sortKey'
 >;
@@ -54,6 +56,7 @@ export function DataTableHeaderCell<T>({
   pinnable,
   resizable,
   sortIcons,
+  sortLabels,
   textAlign,
   width,
   sortStatus,
@@ -61,6 +64,7 @@ export function DataTableHeaderCell<T>({
   filter,
   filterPopoverProps,
   filterPopoverDisableClickOutside,
+  filterButtonLabel,
   filtering,
   sortKey,
 }: DataTableHeaderCellProps<T>): JSX.Element | null {
@@ -181,7 +185,15 @@ export function DataTableHeaderCell<T>({
       role={sortable ? 'button' : undefined}
       tabIndex={sortable ? 0 : undefined}
       onClick={sortAction}
-      onKeyDown={(e) => e.key === 'Enter' && sortAction?.()}
+      onKeyDown={(e) => {
+        // ignore key presses bubbling up from nested controls (drag handle, pin menu, toggle button...)
+        if (!sortable || e.target !== e.currentTarget) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          // prevent the page from scrolling when activating with the Space key
+          e.preventDefault();
+          sortAction?.();
+        }
+      }}
       ref={columnRef}
     >
       <Group className="mantine-datatable-header-cell-sortable-group" justify="space-between" wrap="nowrap">
@@ -244,12 +256,20 @@ export function DataTableHeaderCell<T>({
                 'mantine-datatable-header-cell-sortable-icon-reversed': sortStatus.direction === 'desc',
               })}
               role="img"
-              aria-label={`Sorted ${sortStatus.direction === 'desc' ? 'descending' : 'ascending'}`}
+              aria-label={
+                sortStatus.direction === 'desc'
+                  ? (sortLabels?.descending ?? 'Sorted descending')
+                  : (sortLabels?.ascending ?? 'Sorted ascending')
+              }
             >
               {sortIcons?.sorted || <IconArrowUp />}
             </Center>
           ) : (
-            <Center className="mantine-datatable-header-cell-sortable-unsorted-icon" role="img" aria-label="Not sorted">
+            <Center
+              className="mantine-datatable-header-cell-sortable-unsorted-icon"
+              role="img"
+              aria-label={sortLabels?.unsorted ?? 'Not sorted'}
+            >
               {sortIcons?.unsorted || <IconArrowsVertical />}
             </Center>
           )
@@ -258,6 +278,7 @@ export function DataTableHeaderCell<T>({
           <DataTableHeaderCellFilter
             filterPopoverProps={filterPopoverProps}
             isActive={!!filtering}
+            filterButtonLabel={filterButtonLabel ?? (tooltip ? `Filter ${tooltip}` : 'Filter')}
             filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
           >
             {filter}
