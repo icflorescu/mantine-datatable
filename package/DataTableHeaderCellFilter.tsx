@@ -9,12 +9,14 @@ type DataTableHeaderCellFilterProps<T> = {
   children: DataTableColumn<T>['filter'];
   filterPopoverProps: DataTableColumn<T>['filterPopoverProps'];
   filterPopoverDisableClickOutside?: DataTableColumn<T>['filterPopoverDisableClickOutside'];
+  filterButtonLabel: string;
   isActive: boolean;
 };
 
 export function DataTableHeaderCellFilter<T>({
   children,
   isActive,
+  filterButtonLabel,
   filterPopoverProps,
   filterPopoverDisableClickOutside,
 }: DataTableHeaderCellFilterProps<T>): JSX.Element {
@@ -29,6 +31,7 @@ export function DataTableHeaderCellFilter<T>({
       <PopoverTarget>
         <ActionIcon
           className="mantine-datatable-header-cell-filter-action-icon"
+          aria-label={filterButtonLabel}
           data-active={isActive || undefined}
           size="sm"
           variant="default"

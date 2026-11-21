@@ -112,6 +112,12 @@ export type DataTableColumn<T = Record<string, unknown>> = {
   filterPopoverDisableClickOutside?: boolean;
 
   /**
+   * Accessible label of the filter button rendered in the column header.
+   * Defaults to `Filter <column title>` when the title is a string, or to `Filter` otherwise.
+   */
+  filterButtonLabel?: string;
+
+  /**
    * If true, filter icon will be styled differently to indicate the filter is in effect.
    */
   filtering?: boolean;

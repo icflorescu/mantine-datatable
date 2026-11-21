@@ -124,6 +124,13 @@ export default async function ColumnPropertiesAndStylingExamplePage() {
           popover open until it’s closed explicitly, which is useful when the filter contains components rendering their
           own dropdowns in a portal, such as date pickers or selects.
         </li>
+        <li>
+          <Code>filterButtonLabel: string</Code>
+          <br />
+          Accessible label (<Code>aria-label</Code>) of the filter button in the column header. Defaults to{' '}
+          <Code>Filter &lt;column title&gt;</Code> when the column title is a string, or to <Code>Filter</Code>{' '}
+          otherwise; set it to localize the label or to describe the filter more precisely.
+        </li>
       </UnorderedList>
       <Txt info>
         See the <InternalLink to="/examples/searching-and-filtering">searching and filtering</InternalLink> example to

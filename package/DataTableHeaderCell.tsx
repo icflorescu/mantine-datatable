@@ -38,6 +38,7 @@ type DataTableHeaderCellProps<T> = {
   | 'filter'
   | 'filterPopoverProps'
   | 'filterPopoverDisableClickOutside'
+  | 'filterButtonLabel'
   | 'filtering'
   | 'sortKey'
 >;
@@ -63,6 +64,7 @@ export function DataTableHeaderCell<T>({
   filter,
   filterPopoverProps,
   filterPopoverDisableClickOutside,
+  filterButtonLabel,
   filtering,
   sortKey,
 }: DataTableHeaderCellProps<T>): JSX.Element | null {
@@ -276,6 +278,7 @@ export function DataTableHeaderCell<T>({
           <DataTableHeaderCellFilter
             filterPopoverProps={filterPopoverProps}
             isActive={!!filtering}
+            filterButtonLabel={filterButtonLabel ?? (tooltip ? `Filter ${tooltip}` : 'Filter')}
             filterPopoverDisableClickOutside={filterPopoverDisableClickOutside}
           >
             {filter}
