@@ -78,8 +78,8 @@ importers:
         specifier: 4.18.1
         version: 4.18.1
       mantine-contextmenu:
-        specifier: 9.8.2
-        version: 9.8.2(@mantine/core@9.8.2(@mantine/hooks@9.8.2(react@19.3.1))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@mantine/hooks@9.8.2(react@19.3.1))(clsx@2.1.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: 9.8.3
+        version: 9.8.3(@mantine/core@9.8.2(@mantine/hooks@9.8.2(react@19.3.1))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@mantine/hooks@9.8.2(react@19.3.1))(clsx@2.1.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       next:
         specifier: 16.4.6
         version: 16.4.6(@opentelemetry/api@1.10.0)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -1530,8 +1530,8 @@ packages:
   magic-string@1.4.5:
     resolution: {integrity: sha512-oLLC2+YvQUfAa+vxoufE/yc1icb87M9iXIRqAoR/2EhE/8cb3SF/+Gi0c2By1B+5Vz2e2vQtUvHiu1+63Znh+w==}
 
-  mantine-contextmenu@9.8.2:
-    resolution: {integrity: sha512-PYrsfNfqggpRS5h/6uV9hnRtCD2O+LUWBLWIg44p5R09NZ6Es7pAwS5UTUVcwaYJWyVSBlb29m/T+3AAj0P0IQ==}
+  mantine-contextmenu@9.8.3:
+    resolution: {integrity: sha512-W/JS2fgoLkwDSeDSMsJp/y5nLIxKYLD9601rNXurxaroHldpXs2G2OYno1L1M3RY7CscFRsYqFwxSSjf6TnW+A==}
     peerDependencies:
       '@mantine/core': '>=9'
       '@mantine/hooks': '>=9'
@@ -3386,7 +3386,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  mantine-contextmenu@9.8.2(@mantine/core@9.8.2(@mantine/hooks@9.8.2(react@19.3.1))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@mantine/hooks@9.8.2(react@19.3.1))(clsx@2.1.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  mantine-contextmenu@9.8.3(@mantine/core@9.8.2(@mantine/hooks@9.8.2(react@19.3.1))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@mantine/hooks@9.8.2(react@19.3.1))(clsx@2.1.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
       '@mantine/core': 9.8.2(@mantine/hooks@9.8.2(react@19.3.1))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@mantine/hooks': 9.8.2(react@19.3.1)
