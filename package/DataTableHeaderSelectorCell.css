@@ -1,12 +1,12 @@
 .mantine-datatable-header-selector-cell {
   position: sticky;
   z-index: 1;
-  width: 44px;
-  min-width: 44px;
-  max-width: 44px;
+  width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
+  min-width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
+  max-width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
   left: 0;
   text-align: center;
-  padding: var(--mantine-spacing-xs);
+  padding: var(--table-vertical-spacing) var(--table-horizontal-spacing, var(--mantine-spacing-xs));
 
   @mixin rtl {
     left: auto;
