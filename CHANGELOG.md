@@ -3,6 +3,13 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.8.3 (2026-11-21)
+
+- Fix issue [#826](https://github.com/icflorescu/mantine-datatable/issues/826) - missing striped rows and transparent pinned columns when using `styles.layer.css`; if the bundler happened to load the DataTable layered stylesheet before the Mantine core one, the `mantine` layer ended up taking precedence over `mantine-datatable`, so Mantine's transparent table row background overrode the DataTable styles. `styles.layer.css` now declares the `mantine, mantine-datatable` layer order itself
+- Fix issue [#704](https://github.com/icflorescu/mantine-datatable/issues/704) - when `selectionTrigger` is `'cell'`, clicking a selector cell outside its checkbox did not call the `onChange` handler passed via `allRecordsSelectionCheckboxProps`, `selectionCheckboxProps` or `getRecordSelectionCheckboxProps`; clicking anywhere in a selector cell now behaves exactly like clicking its checkbox
+- Fix issue [#791](https://github.com/icflorescu/mantine-datatable/issues/791) - top scroll shadow incorrectly shown in iOS Safari when overscrolling ("rubber-band" bounce) past the top of a scrollable table
+- Update dev deps to ensure compatibility with Mantine ContextMenu 9.8.3
+
 ## 9.8.2 (2026-11-21)
 
 - Fix issue [#860](https://github.com/icflorescu/mantine-datatable/issues/860) - striped rows not being highlighted on hover when both `striped` and `highlightOnHover` are set (regression introduced in 9.8.0), thanks to [donatmarko](https://github.com/donatmarko) for the detailed analysis and fix proposal
