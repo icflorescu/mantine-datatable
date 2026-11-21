@@ -199,6 +199,51 @@ describe('sorting', () => {
     await userEvent.keyboard('{Enter}');
     await expect.element(page.getByRole('img', { name: 'Sorted descending' })).toBeVisible();
   });
+
+  test('sorts with the Space key without scrolling the page', async () => {
+    const onChange = vi.fn();
+    await render(<SortableTable onChange={onChange} />);
+    const th = page.getByRole('button', { name: /First name/ }).element() as HTMLElement;
+    th.focus();
+    const event = new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+    th.dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(true);
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ columnAccessor: 'firstName', direction: 'desc' })
+    );
+    await expect.element(page.getByRole('img', { name: 'Sorted descending' })).toBeVisible();
+  });
+
+  test('does not sort when a key is pressed on a control nested in the header cell', async () => {
+    const onChange = vi.fn();
+    await renderDataTable({
+      columns: [{ accessor: 'firstName', sortable: true, toggleable: true }],
+      storeColumnsKey: 'sort-nested-controls-test',
+      sortStatus: { columnAccessor: 'firstName', direction: 'asc' },
+      onSortStatusChange: onChange,
+    });
+    const nested = document.querySelector('thead th button') as HTMLElement;
+    for (const key of [' ', 'Enter']) {
+      nested.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+    }
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  test('uses custom sort labels, falling back to the defaults for omitted ones', async () => {
+    await renderDataTable({
+      columns: [
+        { accessor: 'firstName', sortable: true },
+        { accessor: 'age', sortable: true },
+      ],
+      sortStatus: { columnAccessor: 'firstName', direction: 'desc' },
+      onSortStatusChange: vi.fn(),
+      sortLabels: { descending: 'Trié par ordre décroissant', unsorted: 'Non trié' },
+    });
+    await expect.element(page.getByRole('img', { name: 'Trié par ordre décroissant' })).toBeVisible();
+    await expect.element(page.getByRole('img', { name: 'Non trié' })).toBeVisible();
+    await expect.element(page.getByRole('img', { name: 'Sorted descending' })).not.toBeInTheDocument();
+  });
 });
 
 describe('selection', () => {

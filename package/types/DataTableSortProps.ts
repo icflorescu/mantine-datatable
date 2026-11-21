@@ -32,4 +32,23 @@ export type DataTableSortProps<T = Record<string, unknown>> = (
      */
     unsorted: React.ReactNode;
   };
+
+  /**
+   * Custom accessible labels announced by screen readers for the sort state of a column header.
+   * Use it to localize the default English labels; omitted keys fall back to the defaults.
+   */
+  sortLabels?: {
+    /**
+     * Label for a column that is not sorted. Defaults to `Not sorted`.
+     */
+    unsorted?: string;
+    /**
+     * Label for a column sorted ascending. Defaults to `Sorted ascending`.
+     */
+    ascending?: string;
+    /**
+     * Label for a column sorted descending. Defaults to `Sorted descending`.
+     */
+    descending?: string;
+  };
 };
