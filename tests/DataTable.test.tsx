@@ -330,6 +330,43 @@ describe('selection', () => {
     await expect.element(selectRecord(2)).not.toBeChecked();
     expect(onRecordCheckboxChange).toHaveBeenCalledTimes(1);
   });
+
+  const selectorCells = () =>
+    [
+      document.querySelector('.mantine-datatable-header-selector-cell'),
+      document.querySelector('.mantine-datatable-row-selector-cell'),
+    ] as HTMLElement[];
+
+  test('selection cells use the default table spacing', async () => {
+    await renderDataTable({ selectedRecords: [], onSelectedRecordsChange: () => {} });
+    for (const cell of selectorCells()) {
+      const style = getComputedStyle(cell);
+      const shadow = getComputedStyle(cell, '::after');
+      expect(style.width).toBe('44px');
+      expect(style.paddingTop).toBe('7px');
+      expect(style.paddingLeft).toBe('10px');
+      expect(shadow.width).toBe('10px');
+      expect(shadow.right).toBe('-10px');
+    }
+  });
+
+  test('selection cells and their shadows follow custom table spacing', async () => {
+    await renderDataTable({
+      selectedRecords: [],
+      onSelectedRecordsChange: () => {},
+      horizontalSpacing: 'xl',
+      verticalSpacing: 'lg',
+    });
+    for (const cell of selectorCells()) {
+      const style = getComputedStyle(cell);
+      const shadow = getComputedStyle(cell, '::after');
+      expect(style.width).toBe('88px');
+      expect(style.paddingTop).toBe('20px');
+      expect(style.paddingLeft).toBe('32px');
+      expect(shadow.width).toBe('32px');
+      expect(shadow.right).toBe('-32px');
+    }
+  });
 });
 
 describe('pagination', () => {

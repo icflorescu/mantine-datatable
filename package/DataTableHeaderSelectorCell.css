@@ -1,9 +1,9 @@
 .mantine-datatable-header-selector-cell {
   position: sticky;
   z-index: 1;
-  width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
-  min-width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
-  max-width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
+  width: var(--mantine-datatable-selection-cell-width, 44px);
+  min-width: var(--mantine-datatable-selection-cell-width, 44px);
+  max-width: var(--mantine-datatable-selection-cell-width, 44px);
   left: 0;
   text-align: center;
   padding: var(--table-vertical-spacing) var(--table-horizontal-spacing, var(--mantine-spacing-xs));
@@ -17,10 +17,10 @@
     content: '';
     position: absolute;
     top: 0;
-    right: calc(-1 * var(--mantine-spacing-xs));
+    right: calc(-1 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
     bottom: rem(-1px);
     border-left: 1px solid var(--mantine-datatable-row-border-color);
-    width: var(--mantine-spacing-xs);
+    width: var(--table-horizontal-spacing, var(--mantine-spacing-xs));
     background: var(--mantine-datatable-shadow-background-left);
     pointer-events: none;
     opacity: 0;
@@ -28,7 +28,7 @@
 
     @mixin rtl {
       right: auto;
-      left: calc(-1 * var(--mantine-spacing-xs));
+      left: calc(-1 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
       border-left: 0;
       border-right: 1px solid var(--mantine-datatable-row-border-color);
       background: var(--mantine-datatable-shadow-background-right);

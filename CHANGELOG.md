@@ -3,6 +3,12 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
+## 9.8.4 (2026-11-22)
+
+- Fix issue [#776](https://github.com/icflorescu/mantine-datatable/issues/776) - selection column cells ignored `horizontalSpacing` and `verticalSpacing` because their padding and width were hard-coded; their padding now matches regular table cells and their width follows the horizontal spacing and scales with `--mantine-scale`, thanks to [Mateus Silva](https://github.com/mateuscmtropical) for the fix
+- Make sticky shadows and dividers on selection cells, pinned columns and the footer selection placeholder follow `horizontalSpacing` instead of the fixed `xs` spacing
+- Update dev deps to `@tanstack/react-query` 5.108.2 and `mantine-contextmenu` 9.8.4
+
 ## 9.8.3 (2026-11-21)
 
 - Fix issue [#826](https://github.com/icflorescu/mantine-datatable/issues/826) - missing striped rows and transparent pinned columns when using `styles.layer.css`; if the bundler happened to load the DataTable layered stylesheet before the Mantine core one, the `mantine` layer ended up taking precedence over `mantine-datatable`, so Mantine's transparent table row background overrode the DataTable styles. `styles.layer.css` now declares the `mantine, mantine-datatable` layer order itself

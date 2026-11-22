@@ -98,15 +98,19 @@
   overflow: visible;
 }
 
-/* Selection column should always have fixed width */
+/* Selection column width tracks the table's horizontal cell spacing */
 .mantine-datatable th[data-accessor='__selection__'],
 .mantine-datatable td[data-accessor='__selection__'] {
-  width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs))) !important;
-  min-width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs))) !important;
-  max-width: calc(24px + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs))) !important;
+  width: var(--mantine-datatable-selection-cell-width, 44px) !important;
+  min-width: var(--mantine-datatable-selection-cell-width, 44px) !important;
+  max-width: var(--mantine-datatable-selection-cell-width, 44px) !important;
 }
 
 .mantine-datatable-table {
+  --mantine-datatable-selection-cell-width: calc(
+    1.5rem * var(--mantine-scale, 1) + 2 * var(--table-horizontal-spacing, var(--mantine-spacing-xs))
+  );
+
   border-collapse: separate;
   border-spacing: 0;
   color: inherit;
@@ -172,8 +176,8 @@ th[data-pinned] {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: calc(-1 * var(--mantine-spacing-xs));
-  width: var(--mantine-spacing-xs);
+  right: calc(-1 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
+  width: var(--table-horizontal-spacing, var(--mantine-spacing-xs));
   border-left: rem(1px) solid var(--mantine-datatable-row-border-color);
   background: var(--mantine-datatable-shadow-background-left);
   opacity: var(--mantine-datatable-left-shadow-opacity);
@@ -186,8 +190,8 @@ th[data-pinned] {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(-1 * var(--mantine-spacing-xs));
-  width: var(--mantine-spacing-xs);
+  left: calc(-1 * var(--table-horizontal-spacing, var(--mantine-spacing-xs)));
+  width: var(--table-horizontal-spacing, var(--mantine-spacing-xs));
   border-right: rem(1px) solid var(--mantine-datatable-row-border-color);
   background: var(--mantine-datatable-shadow-background-right);
   opacity: var(--mantine-datatable-right-shadow-opacity);
