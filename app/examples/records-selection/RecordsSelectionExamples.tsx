@@ -1,11 +1,12 @@
 'use client';
 
 import { DataTable, type DataTableColumn, differenceBy, uniqBy } from '__PACKAGE__';
-import { Box, Button, Center, Paper, Stack, Text } from '@mantine/core';
+import { Box, Button, Center, Group, type MantineSize, Paper, SegmentedControl, Stack, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { type Company, companies, type Employee, employees } from '~/data';
+import { MANTINE_SIZES } from '~/lib/constants';
 
 // example-start columns.ts
 const columns: DataTableColumn<Company>[] = [
@@ -89,6 +90,53 @@ export function CustomColumnStyleExample() {
       // example-resume
       selectionColumnStyle={{ minWidth: 100 }}
     />
+  );
+  // example-end
+}
+
+export function SelectionCellSpacingExample() {
+  // example-start SelectionCellSpacingExample.tsx
+  const [selectedRecords, setSelectedRecords] = useState<Company[]>([]);
+  const [horizontalSpacing, setHorizontalSpacing] = useState<MantineSize>('xs');
+  const [verticalSpacing, setVerticalSpacing] = useState<MantineSize>('xs');
+
+  return (
+    <Stack>
+      {/* example-skip spacing controls */}
+      <Group gap="xl">
+        <Stack gap={4}>
+          <Text size="sm" fw={500}>
+            Horizontal spacing
+          </Text>
+          <SegmentedControl
+            data={MANTINE_SIZES}
+            value={horizontalSpacing}
+            onChange={(value) => setHorizontalSpacing(value as MantineSize)}
+          />
+        </Stack>
+        <Stack gap={4}>
+          <Text size="sm" fw={500}>
+            Vertical spacing
+          </Text>
+          <SegmentedControl
+            data={MANTINE_SIZES}
+            value={verticalSpacing}
+            onChange={(value) => setVerticalSpacing(value as MantineSize)}
+          />
+        </Stack>
+      </Group>
+      {/* example-resume */}
+      <DataTable
+        withTableBorder
+        withColumnBorders
+        records={companies.slice(0, 5)}
+        columns={columns}
+        selectedRecords={selectedRecords}
+        onSelectedRecordsChange={setSelectedRecords}
+        horizontalSpacing={horizontalSpacing}
+        verticalSpacing={verticalSpacing}
+      />
+    </Stack>
   );
   // example-end
 }

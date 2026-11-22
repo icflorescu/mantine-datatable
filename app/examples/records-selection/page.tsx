@@ -19,6 +19,7 @@ import {
   RecordsSelectionExample,
   RecordsSelectionHorizontalScrollingBehaviorExample,
   SelectAllRecordsOnAllPagesExample,
+  SelectionCellSpacingExample,
 } from './RecordsSelectionExamples';
 
 const PATH: Route = '/examples/records-selection';
@@ -35,7 +36,8 @@ export default async function RecordsSelectionExamplePage() {
       | 'CustomColumnStyleExample.tsx'
       | 'CheckboxPropsExample.tsx'
       | 'SelectAllRecordsOnAllPagesExample.tsx'
-      | 'RecordsSelectionHorizontalScrollingBehaviorExample.tsx',
+      | 'RecordsSelectionHorizontalScrollingBehaviorExample.tsx'
+      | 'SelectionCellSpacingExample.tsx',
       string
     >
   >(`${PATH}/RecordsSelectionExamples.tsx`);
@@ -103,12 +105,21 @@ export default async function RecordsSelectionExamplePage() {
       <DisabledRecordsExample />
       <PageSubtitle value="Customizing the selection column className and style" />
       <Txt>
-        By default, the selection column has a fixed width of <Code>44px</Code>, just enough to fit the selection
-        checkboxes. If you need a different width, or you need to customize the column for other reasons, you can do so
-        by providing the <Code>selectionColumnClassName</Code> and/or <Code>selectionColumnStyle</Code> properties:
+        By default, the selection column is <Code>44px</Code> wide — the space needed for the checkbox plus the default{' '}
+        <Code>xs</Code> horizontal spacing on each side. Its width and padding follow the table’s{' '}
+        <Code>horizontalSpacing</Code> and <Code>verticalSpacing</Code>. If you need a different width, or you need to
+        customize the column for other reasons, you can do so by providing the <Code>selectionColumnClassName</Code>{' '}
+        and/or <Code>selectionColumnStyle</Code> properties:
       </Txt>
       <CodeBlock code={code['CustomColumnStyleExample.tsx']} />
       <CustomColumnStyleExample />
+      <PageSubtitle value="Selection column spacing" />
+      <Txt>
+        The selection column uses the same <Code>horizontalSpacing</Code> and <Code>verticalSpacing</Code> values as the
+        other columns. Change them below to see how the checkbox cell padding, width and sticky divider follow along:
+      </Txt>
+      <CodeBlock code={code['SelectionCellSpacingExample.tsx']} />
+      <SelectionCellSpacingExample />
       <PageSubtitle value="Additional selection checkbox props" />
       <Txt>
         You can pass additional{' '}

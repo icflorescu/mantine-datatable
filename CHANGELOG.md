@@ -7,6 +7,7 @@ Minor versions that are not listed in the changelog are bug fixes and small impr
 
 - Fix issue [#776](https://github.com/icflorescu/mantine-datatable/issues/776) - selection column cells ignored `horizontalSpacing` and `verticalSpacing` because their padding and width were hard-coded; their padding now matches regular table cells and their width follows the horizontal spacing and scales with `--mantine-scale`, thanks to [Mateus Silva](https://github.com/mateuscmtropical) for the fix
 - Make sticky shadows and dividers on selection cells, pinned columns and the footer selection placeholder follow `horizontalSpacing` instead of the fixed `xs` spacing
+- Add spacing controls to the records selection example so the selector column’s width, padding and sticky divider are easy to inspect
 - Update dev deps to `@tanstack/react-query` 5.108.2 and `mantine-contextmenu` 9.8.4
 
 ## 9.8.3 (2026-11-21)
