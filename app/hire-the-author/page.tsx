@@ -46,12 +46,11 @@ export default function HireTheAuthorPage() {
         Besides open-source work (I’m also the author of{' '}
         <ExternalLink to="https://icflorescu.github.io/trpc-sveltekit">tRPC-SvelteKit</ExternalLink> and{' '}
         <ExternalLink to="https://pocketbase-uml.github.io">PocketBaseUML</ExternalLink>, and a contributor to Mantine
-        and tRPC), I’ve been the technical partner and fractional CTO behind{' '}
-        <ExternalLink to="https://www.leasingsh.ro">LeasingSH.ro</ExternalLink> since 2013, and I’m the founder of{' '}
-        <ExternalLink to="https://swapp.ro">swapp.ro</ExternalLink>, an invoicing and accounting app for Romanian
-        freelancers, which I rebuilt from scratch, solo, in 2026. Earlier in my career, I built enterprise software at
-        Allianz-Țiriac and Garanta (National Bank of Greece Group). I’m at home in rule-heavy domains (insurance,
-        leasing, tax), where “almost right” means wrong.
+        and tRPC), I was the technical partner and fractional CTO behind LeasingSH.ro from 2013 to 2026, and I’m the
+        founder of <ExternalLink to="https://swapp.ro">swapp.ro</ExternalLink>, an invoicing and accounting app for
+        Romanian freelancers, which I rebuilt from scratch, solo, in 2026. Earlier in my career, I built enterprise
+        software at Allianz-Țiriac and Garanta (National Bank of Greece Group). I’m at home in rule-heavy domains
+        (insurance, leasing, tax), where “almost right” means wrong.
       </Txt>
       <Txt>
         These days, I’m open to <strong>fractional CTO and technical partner roles</strong> for early-stage products,{' '}
