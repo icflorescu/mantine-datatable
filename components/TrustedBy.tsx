@@ -75,11 +75,6 @@ const ITEMS: {
     link: 'https://bookiebase.ie',
   },
   {
-    name: 'LeasingSH.ro',
-    logo: { base: 'leasingsh-ro', ext: 'png', themed: true, scale: 80 },
-    link: 'https://leasingsh.ro',
-  },
-  {
     name: 'Zipline',
     logo: { base: 'zipline', ext: 'png' },
     link: 'https://zipline.diced.sh',
