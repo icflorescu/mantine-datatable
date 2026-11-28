@@ -888,6 +888,48 @@ describe('column resizing', () => {
     expect(headerWidth('age')).toBe(age);
   });
 
+  test('shrinks the scroll area with the table when independentColumnResizing is set', async () => {
+    await renderDataTable({ columns: resizableColumns, independentColumnResizing: true });
+    await expect.element(header('First name')).toBeVisible();
+
+    const root = document.querySelector<HTMLElement>('.mantine-datatable')!;
+    const scrollArea = document.querySelector<HTMLElement>('.mantine-datatable-scroll-area')!;
+    const table = page.getByRole('table').element();
+    const initialWidth = root.getBoundingClientRect().width;
+
+    dragResizeHandle('lastName', -100);
+
+    await expect.poll(() => Math.round(table.getBoundingClientRect().width)).toBeLessThan(Math.round(initialWidth));
+    expect(Math.abs(root.getBoundingClientRect().width - table.getBoundingClientRect().width)).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(scrollArea.getBoundingClientRect().width - table.getBoundingClientRect().width)
+    ).toBeLessThanOrEqual(1);
+    expectNoHorizontalOverflow();
+  });
+
+  test('shows the horizontal scrollbar when independentColumnResizing grows the table', async () => {
+    await renderDataTable({ columns: resizableColumns, independentColumnResizing: true });
+    await expect.element(header('First name')).toBeVisible();
+
+    const content = () => viewport().firstElementChild as HTMLElement;
+    const horizontalScrollbar = () =>
+      document.querySelector<HTMLElement>(
+        '.mantine-datatable-scroll-area [data-mantine-scrollbar][data-orientation="horizontal"]'
+      );
+
+    expect(horizontalScrollbar()).toBeNull();
+
+    dragResizeHandle('firstName', 100);
+
+    await expect
+      .poll(() => Math.round(content().getBoundingClientRect().width))
+      .toBeGreaterThan(viewport().clientWidth);
+    await expect.poll(() => !!horizontalScrollbar()).toBe(true);
+    document.querySelector('.mantine-datatable-scroll-area')!.dispatchEvent(new PointerEvent('pointerenter'));
+    await expect.poll(() => horizontalScrollbar()?.getAttribute('data-state')).toBe('visible');
+    expect(viewport().scrollWidth).toBeGreaterThan(viewport().clientWidth);
+  });
+
   test.each([false, true])(
     'makes the last column resizable when independentColumnResizing is set (pinLastColumn: %s)',
     async (pinLastColumn) => {

@@ -276,7 +276,10 @@ export function DataTable<T>({
         {...marginProperties}
         className={clsx(
           'mantine-datatable',
-          { 'mantine-datatable-with-border': withTableBorder },
+          {
+            'mantine-datatable-with-border': withTableBorder,
+            'mantine-datatable-independent-resize-locked': independentColumnResizing && dragToggle.isLocked,
+          },
           className,
           classNames?.root
         )}
