@@ -25,6 +25,7 @@ type DataTableHeaderCellProps<T> = {
   sortIcons: DataTableSortProps<T>['sortIcons'];
   sortLabels: DataTableSortProps<T>['sortLabels'];
   onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
+  lastColumn: boolean;
   independentColumnResizing: boolean | undefined;
 } & Pick<
   DataTableColumn<T>,
@@ -56,6 +57,7 @@ export function DataTableHeaderCell<T>({
   toggleable,
   pinnable,
   resizable,
+  lastColumn,
   independentColumnResizing,
   sortIcons,
   sortLabels,
@@ -169,6 +171,7 @@ export function DataTableHeaderCell<T>({
           'mantine-datatable-header-cell-toggleable': toggleable,
           'mantine-datatable-header-cell-pinnable': pinnable,
           'mantine-datatable-header-cell-resizable': resizable,
+          'mantine-datatable-header-cell-resizable-last': resizable && lastColumn,
         },
         className
       )}

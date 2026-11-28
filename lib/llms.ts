@@ -877,7 +877,7 @@ const SECTIONS: Section[] = [
         '- dragging a handle only changes the width of the column it belongs to;',
         '- the table grows or shrinks along with the resized column; when it becomes wider than its container, it can be scrolled horizontally, and when it becomes narrower than its container, there will be some empty space next to it;',
         '- the last column can be resized too;',
-        '- double-clicking a handle only resets the column it belongs to.',
+        '- double-clicking a handle only resets the width of the column it belongs to; since resetting releases the pixel-locked layout, the table returns to its fluid layout and the other columns may reflow to fit;',
         '',
         '### Combining resizing with other column features',
         '',

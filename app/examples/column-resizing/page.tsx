@@ -96,7 +96,10 @@ export default async function ColumnResizingExamplePage() {
           it;
         </li>
         <li>the last column can be resized too;</li>
-        <li>double-clicking a handle only resets the column it belongs to.</li>
+        <li>
+          double-clicking a handle only resets the width of the column it belongs to; since resetting releases the
+          pixel-locked layout, the table returns to its fluid layout and the other columns may reflow to fit;
+        </li>
       </UnorderedList>
       <PageSubtitle value="Combining resizing with other column features" />
       <Txt>

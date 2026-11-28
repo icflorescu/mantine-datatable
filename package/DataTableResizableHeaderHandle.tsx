@@ -48,10 +48,8 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
 
       // Unless resizing is independent, the width is taken from (or given to) the next data column
       const nextColumn = independentColumnResizing ? null : getNextDataColumn(currentColumn);
-      const nextAccessor = nextColumn?.getAttribute('data-accessor');
-      if (!independentColumnResizing && !nextAccessor) {
-        return;
-      }
+      const nextAccessor = nextColumn?.getAttribute('data-accessor') ?? '';
+      if (!independentColumnResizing && !nextAccessor) return;
 
       // Capture pixel widths BEFORE switching the table to fixed layout —
       // these are the natural rendered widths the user is starting from.
@@ -74,7 +72,7 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
 
         const maxShrinkCurrent = originalWidthsRef.current.current - MIN_COLUMN_WIDTH;
 
-        if (!nextAccessor) {
+        if (independentColumnResizing) {
           // Independent resizing: only the dragged column changes, so the table width (the sum of the
           // locked pixel widths) grows or shrinks with it, overflowing horizontally if needed
           const finalCurrentWidth = originalWidthsRef.current.current + Math.max(-maxShrinkCurrent, deltaX);
@@ -122,15 +120,12 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
   const handleDoubleClick = useCallback(() => {
     if (!columnRef.current) return;
 
-    const currentColumn = columnRef.current;
-    const nextColumn = currentColumn.nextElementSibling as HTMLTableCellElement | null;
-
     const updates = [{ accessor, width: 'auto' }];
 
     // With independent resizing, the next column was never changed, so only this one is reset
-    if (nextColumn && !independentColumnResizing) {
-      const nextAccessor = nextColumn.getAttribute('data-accessor');
-      if (nextAccessor && nextAccessor !== '__selection__') {
+    if (!independentColumnResizing) {
+      const nextAccessor = getNextDataColumn(columnRef.current)?.getAttribute('data-accessor');
+      if (nextAccessor) {
         updates.push({ accessor: nextAccessor, width: 'auto' });
       }
     }

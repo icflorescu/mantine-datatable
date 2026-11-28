@@ -192,6 +192,12 @@ export function DataTableHeader<T>({
   const mediaQueriesDefaults = useMemo(() => mediaQueries.map(() => true), [mediaQueries]);
   const columnsVisibility = useMediaQueries(mediaQueries, mediaQueriesDefaults);
 
+  // The last rendered column has no column after it to take width from
+  const lastVisibleColumnIndex = columns.reduce(
+    (lastIndex, column, index) => (!column.hidden && columnsVisibility?.[index] !== false ? index : lastIndex),
+    -1
+  );
+
   const groupHeaderRows = groups
     ? getColumnGroupHeaderRows({
         groups,
@@ -301,7 +307,8 @@ export function DataTableHeader<T>({
               pinnable={pinnable}
               // unless resizing is independent, the last column has no resize handle, since there's no column
               // after it to take the width from
-              resizable={resizable && (independentColumnResizing || index < columns.length - 1)}
+              resizable={resizable && (independentColumnResizing || index < lastVisibleColumnIndex)}
+              lastColumn={index === lastVisibleColumnIndex}
               independentColumnResizing={independentColumnResizing}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
