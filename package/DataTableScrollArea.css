@@ -12,6 +12,21 @@
   min-height: 0;
 }
 
+/* Independent resizing changes the total table width, so the wrappers must follow it */
+.mantine-datatable-independent-resize-locked {
+  width: fit-content;
+  max-width: 100%;
+
+  .mantine-datatable-scroll-area {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .mantine-datatable-scroll-area-viewport > div {
+    min-width: max-content;
+  }
+}
+
 .mantine-datatable-scroll-area-corner {
   background: transparent;
 }

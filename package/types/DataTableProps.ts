@@ -106,6 +106,14 @@ export type DataTableProps<T = Record<string, unknown>> = {
   storeColumnsKey?: string | undefined;
 
   /**
+   * If true, dragging a column resize handle will only change the width of that column, letting the table
+   * grow or shrink (and scroll horizontally if needed) instead of taking the width from the next column.
+   * This also makes the last column resizable.
+   * @default false
+   */
+  independentColumnResizing?: boolean;
+
+  /**
    * A default render function for all columns.
    * Accepts the current record, its index in `records` and the column `accessor` as
    * arguments and returns a React node (remember that a string is a valid React node too).

@@ -12,6 +12,7 @@ import { readCodeFile } from '~/lib/code';
 import { allPromiseProps, getRouteMetadata } from '~/lib/utils';
 import ResizingComplexExample from './ResizingComplexExample';
 import ResizingExample from './ResizingExample';
+import ResizingIndependentExample from './ResizingIndependentExample';
 import ResizingWithoutPersistenceExample from './ResizingWithoutPersistenceExample';
 
 const PATH: Route = '/examples/column-resizing';
@@ -22,6 +23,7 @@ export default async function ColumnResizingExamplePage() {
   const code = await allPromiseProps({
     'ResizingExample.tsx': readCodeFile<string>(`${PATH}/ResizingExample.tsx`),
     'ResizingWithoutPersistenceExample.tsx': readCodeFile<string>(`${PATH}/ResizingWithoutPersistenceExample.tsx`),
+    'ResizingIndependentExample.tsx': readCodeFile<string>(`${PATH}/ResizingIndependentExample.tsx`),
     'ResizingComplexExample.tsx': readCodeFile<string>(`${PATH}/ResizingComplexExample.tsx`),
   });
 
@@ -50,7 +52,7 @@ export default async function ColumnResizingExamplePage() {
         </li>
       </UnorderedList>
       <CodeBlock code={code['ResizingExample.tsx']} />
-      <Txt>Here’s how resizing works:</Txt>
+      <Txt>Here’s how resizing works by default:</Txt>
       <UnorderedList compact>
         <li>
           dragging a handle changes the width of the column <em>and</em> of the column next to it, so the overall table
@@ -77,6 +79,28 @@ export default async function ColumnResizingExamplePage() {
         communicate with the DataTable through local storage, so they only take effect when the hook <Code>key</Code>{' '}
         matches the DataTable <Code>storeColumnsKey</Code>.
       </Txt>
+      <PageSubtitle value="Independent column resizing" />
+      <Txt>
+        By default, resizing a column takes the extra width from the column next to it (or gives it back), so the
+        overall table width stays the same. If you’d rather let users size each column without disturbing the others,
+        set the <Code>independentColumnResizing</Code> property on the DataTable:
+      </Txt>
+      <ResizingIndependentExample />
+      <CodeBlock code={code['ResizingIndependentExample.tsx']} />
+      <Txt>With independent column resizing:</Txt>
+      <UnorderedList compact>
+        <li>dragging a handle only changes the width of the column it belongs to;</li>
+        <li>
+          the table grows or shrinks along with the resized column; when it becomes wider than its container, it can be
+          scrolled horizontally, and when it becomes narrower than its container, there will be some empty space next to
+          it;
+        </li>
+        <li>the last column can be resized too;</li>
+        <li>
+          double-clicking a handle only resets the width of the column it belongs to; since resetting releases the
+          pixel-locked layout, the table returns to its fluid layout and the other columns may reflow to fit;
+        </li>
+      </UnorderedList>
       <PageSubtitle value="Combining resizing with other column features" />
       <Txt>
         Resizing can be combined with <InternalLink to="/examples/sorting">sorting</InternalLink>,{' '}

@@ -35,6 +35,7 @@ export function DataTable<T>({
   fetching,
   columns,
   storeColumnsKey,
+  independentColumnResizing,
   groups,
   pinFirstColumn,
   pinLastColumn,
@@ -275,7 +276,10 @@ export function DataTable<T>({
         {...marginProperties}
         className={clsx(
           'mantine-datatable',
-          { 'mantine-datatable-with-border': withTableBorder },
+          {
+            'mantine-datatable-with-border': withTableBorder,
+            'mantine-datatable-independent-resize-locked': independentColumnResizing && dragToggle.isLocked,
+          },
           className,
           classNames?.root
         )}
@@ -352,6 +356,7 @@ export function DataTable<T>({
                     sortIcons={sortIcons}
                     sortLabels={sortLabels}
                     onSortStatusChange={onSortStatusChange}
+                    independentColumnResizing={independentColumnResizing}
                     selectionTrigger={selectionTrigger}
                     selectionVisible={selectionColumnVisible}
                     selectionChecked={allSelectableRecordsSelected}

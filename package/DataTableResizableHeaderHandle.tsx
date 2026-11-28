@@ -6,12 +6,28 @@ import { useDataTableColumnsContext } from './DataTableColumns.context';
 type DataTableResizableHeaderHandleProps = {
   accessor: string;
   columnRef: RefObject<HTMLTableCellElement | null>;
+  independentColumnResizing: boolean | undefined;
 };
 
 const MIN_COLUMN_WIDTH = 50;
 
+/**
+ * Finds the header cell of the next data column (skipping the selection column), if any.
+ */
+function getNextDataColumn(column: HTMLTableCellElement) {
+  let nextColumn = column.nextElementSibling as HTMLTableCellElement | null;
+  while (nextColumn) {
+    const nextAccessor = nextColumn.getAttribute('data-accessor');
+    if (nextAccessor && nextAccessor !== '__selection__') {
+      break;
+    }
+    nextColumn = nextColumn.nextElementSibling as HTMLTableCellElement | null;
+  }
+  return nextColumn;
+}
+
 export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHandleProps): JSX.Element => {
-  const { accessor, columnRef } = props;
+  const { accessor, columnRef, independentColumnResizing } = props;
   const [isResizing, setIsResizing] = useState(false);
   const startXRef = useRef<number>(0);
   const originalWidthsRef = useRef<{ current: number; next: number }>({ current: 0, next: 0 });
@@ -30,29 +46,15 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
 
       const currentColumn = columnRef.current;
 
-      // Find the next resizable data column (skip selection column)
-      let nextColumn = currentColumn.nextElementSibling as HTMLTableCellElement | null;
-      while (nextColumn) {
-        const nextAccessor = nextColumn.getAttribute('data-accessor');
-        if (nextAccessor && nextAccessor !== '__selection__') {
-          break;
-        }
-        nextColumn = nextColumn.nextElementSibling as HTMLTableCellElement | null;
-      }
-
-      if (!nextColumn) {
-        return;
-      }
-
-      const nextAccessor = nextColumn.getAttribute('data-accessor');
-      if (!nextAccessor) {
-        return;
-      }
+      // Unless resizing is independent, the width is taken from (or given to) the next data column
+      const nextColumn = independentColumnResizing ? null : getNextDataColumn(currentColumn);
+      const nextAccessor = nextColumn?.getAttribute('data-accessor') ?? '';
+      if (!independentColumnResizing && !nextAccessor) return;
 
       // Capture pixel widths BEFORE switching the table to fixed layout —
       // these are the natural rendered widths the user is starting from.
       const startCurrentWidth = currentColumn.offsetWidth;
-      const startNextWidth = nextColumn.offsetWidth;
+      const startNextWidth = nextColumn?.offsetWidth ?? 0;
 
       // Snapshot every header cell into pixel widths and switch to fixed layout
       beginResize();
@@ -69,6 +71,15 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
         if (isRTL) deltaX = -deltaX;
 
         const maxShrinkCurrent = originalWidthsRef.current.current - MIN_COLUMN_WIDTH;
+
+        if (independentColumnResizing) {
+          // Independent resizing: only the dragged column changes, so the table width (the sum of the
+          // locked pixel widths) grows or shrinks with it, overflowing horizontally if needed
+          const finalCurrentWidth = originalWidthsRef.current.current + Math.max(-maxShrinkCurrent, deltaX);
+          setMultipleColumnWidths([{ accessor, width: `${finalCurrentWidth}px` }]);
+          return;
+        }
+
         const maxShrinkNext = originalWidthsRef.current.next - MIN_COLUMN_WIDTH;
 
         const constrainedDelta = Math.max(-maxShrinkCurrent, Math.min(deltaX, maxShrinkNext));
@@ -103,26 +114,24 @@ export const DataTableResizableHeaderHandle = (props: DataTableResizableHeaderHa
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     },
-    [accessor, columnRef, isRTL, setMultipleColumnWidths, beginResize, endResize]
+    [accessor, columnRef, independentColumnResizing, isRTL, setMultipleColumnWidths, beginResize, endResize]
   );
 
   const handleDoubleClick = useCallback(() => {
     if (!columnRef.current) return;
 
-    const currentColumn = columnRef.current;
-    const nextColumn = currentColumn.nextElementSibling as HTMLTableCellElement | null;
-
     const updates = [{ accessor, width: 'auto' }];
 
-    if (nextColumn) {
-      const nextAccessor = nextColumn.getAttribute('data-accessor');
-      if (nextAccessor && nextAccessor !== '__selection__') {
+    // With independent resizing, the next column was never changed, so only this one is reset
+    if (!independentColumnResizing) {
+      const nextAccessor = getNextDataColumn(columnRef.current)?.getAttribute('data-accessor');
+      if (nextAccessor) {
         updates.push({ accessor: nextAccessor, width: 'auto' });
       }
     }
 
     setMultipleColumnWidths(updates);
-  }, [accessor, columnRef, setMultipleColumnWidths]);
+  }, [accessor, columnRef, independentColumnResizing, setMultipleColumnWidths]);
 
   return (
     <div

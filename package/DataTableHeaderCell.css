@@ -110,6 +110,17 @@
   }
 }
 
+/* With independent column resizing, the last column is resizable too; keep its handle inside the table,
+   so that it doesn't cause horizontal overflow when the cell content is not clipped (i.e. when pinned) */
+.mantine-datatable-header-cell-resizable-last > .mantine-datatable-header-resizable-handle {
+  right: 0;
+
+  @mixin rtl {
+    right: auto;
+    left: 0;
+  }
+}
+
 tr:hover .mantine-datatable-header-resizable-handle {
   opacity: 1;
 }

@@ -1,4 +1,4 @@
-import { MantineProvider } from '@mantine/core';
+import { Box, DirectionProvider, MantineProvider } from '@mantine/core';
 import { useState } from 'react';
 import { describe, expect, test, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
@@ -9,6 +9,7 @@ import {
   type DataTableColumnProps,
   type DataTableLoaderProps,
   type DataTablePageSizeSelectorProps,
+  type DataTableProps,
   type DataTableScrollProps,
   type DataTableSortStatus,
 } from '../package/index';
@@ -815,5 +816,171 @@ describe('column filters', () => {
     await expect.element(page.getByRole('button', { name: 'Filtrer le prénom' })).toBeVisible();
     await page.getByRole('button', { name: 'Filtrer le prénom' }).click();
     await expect.element(page.getByText('Filter content')).toBeVisible();
+  });
+});
+
+describe('column resizing', () => {
+  const resizableColumns = columns.map((c) => ({ ...c, resizable: true }));
+  const headerCell = (accessor: string) =>
+    document.querySelector<HTMLElement>(`thead th[data-accessor="${accessor}"]`)!;
+  const resizeHandle = (accessor: string) =>
+    headerCell(accessor).querySelector<HTMLElement>('.mantine-datatable-header-resizable-handle');
+  const headerWidth = (accessor: string) => Math.round(headerCell(accessor).getBoundingClientRect().width);
+  const viewport = () => document.querySelector<HTMLElement>('.mantine-datatable-scroll-area-viewport')!;
+  // cell widths are rounded when the pixel lock is taken, so allow a 1px rounding difference
+  const expectNoHorizontalOverflow = () => {
+    const element = viewport();
+    expect(element.scrollWidth).toBeLessThanOrEqual(element.clientWidth + 1);
+  };
+
+  function dragResizeHandle(accessor: string, deltaX: number) {
+    const handle = resizeHandle(accessor)!;
+    const { left, width } = handle.getBoundingClientRect();
+    const startX = left + width / 2;
+    handle.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientX: startX }));
+    document.dispatchEvent(new MouseEvent('mousemove', { bubbles: true, clientX: startX + deltaX }));
+    document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, clientX: startX + deltaX }));
+  }
+
+  function renderRtlDataTable(props: Partial<DataTableProps<Person>> = {}) {
+    const tableProps = { records: people, columns, ...props } as DataTableProps<Person>;
+    return render(
+      <MantineProvider>
+        <DirectionProvider initialDirection="rtl" detectDirection={false}>
+          <Box dir="rtl">
+            <DataTable {...tableProps} />
+          </Box>
+        </DirectionProvider>
+      </MantineProvider>
+    );
+  }
+
+  test('takes the width from the next column by default and has no handle on the last column', async () => {
+    await renderDataTable({ columns: resizableColumns });
+    await expect.element(header('First name')).toBeVisible();
+    expect(resizeHandle('address.city')).toBeNull();
+
+    const [firstName, lastName, age] = [headerWidth('firstName'), headerWidth('lastName'), headerWidth('age')];
+    dragResizeHandle('firstName', 100);
+    await expect.poll(() => headerWidth('firstName')).toBe(firstName + 100);
+    expect(headerWidth('lastName')).toBe(lastName - 100);
+    expect(headerWidth('age')).toBe(age);
+    expectNoHorizontalOverflow();
+  });
+
+  test('only resizes the dragged column when independentColumnResizing is set', async () => {
+    await renderDataTable({ columns: resizableColumns, independentColumnResizing: true });
+    await expect.element(header('First name')).toBeVisible();
+
+    const [firstName, lastName, age] = [headerWidth('firstName'), headerWidth('lastName'), headerWidth('age')];
+    const tableWidth = page.getByRole('table').element().getBoundingClientRect().width;
+    dragResizeHandle('firstName', 100);
+    await expect.poll(() => headerWidth('firstName')).toBe(firstName + 100);
+    expect(headerWidth('lastName')).toBe(lastName);
+    expect(headerWidth('age')).toBe(age);
+    // the table grows into horizontal overflow instead of shrinking the neighbor
+    expect(page.getByRole('table').element().getBoundingClientRect().width).toBeGreaterThan(tableWidth);
+    expect(viewport().scrollWidth).toBeGreaterThan(viewport().clientWidth);
+
+    dragResizeHandle('lastName', -100);
+    await expect.poll(() => headerWidth('lastName')).toBe(lastName - 100);
+    expect(headerWidth('firstName')).toBe(firstName + 100);
+    expect(headerWidth('age')).toBe(age);
+  });
+
+  test('shrinks the scroll area with the table when independentColumnResizing is set', async () => {
+    await renderDataTable({ columns: resizableColumns, independentColumnResizing: true });
+    await expect.element(header('First name')).toBeVisible();
+
+    const root = document.querySelector<HTMLElement>('.mantine-datatable')!;
+    const scrollArea = document.querySelector<HTMLElement>('.mantine-datatable-scroll-area')!;
+    const table = page.getByRole('table').element();
+    const initialWidth = root.getBoundingClientRect().width;
+
+    dragResizeHandle('lastName', -100);
+
+    await expect.poll(() => Math.round(table.getBoundingClientRect().width)).toBeLessThan(Math.round(initialWidth));
+    expect(Math.abs(root.getBoundingClientRect().width - table.getBoundingClientRect().width)).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(scrollArea.getBoundingClientRect().width - table.getBoundingClientRect().width)
+    ).toBeLessThanOrEqual(1);
+    expectNoHorizontalOverflow();
+  });
+
+  test('shows the horizontal scrollbar when independentColumnResizing grows the table', async () => {
+    await renderDataTable({ columns: resizableColumns, independentColumnResizing: true });
+    await expect.element(header('First name')).toBeVisible();
+
+    const content = () => viewport().firstElementChild as HTMLElement;
+    const horizontalScrollbar = () =>
+      document.querySelector<HTMLElement>(
+        '.mantine-datatable-scroll-area [data-mantine-scrollbar][data-orientation="horizontal"]'
+      );
+
+    expect(horizontalScrollbar()).toBeNull();
+
+    dragResizeHandle('firstName', 100);
+
+    await expect
+      .poll(() => Math.round(content().getBoundingClientRect().width))
+      .toBeGreaterThan(viewport().clientWidth);
+    await expect.poll(() => !!horizontalScrollbar()).toBe(true);
+    document.querySelector('.mantine-datatable-scroll-area')!.dispatchEvent(new PointerEvent('pointerenter'));
+    await expect.poll(() => horizontalScrollbar()?.getAttribute('data-state')).toBe('visible');
+    expect(viewport().scrollWidth).toBeGreaterThan(viewport().clientWidth);
+  });
+
+  test.each([false, true])(
+    'makes the last column resizable when independentColumnResizing is set (pinLastColumn: %s)',
+    async (pinLastColumn) => {
+      await renderDataTable({ columns: resizableColumns, independentColumnResizing: true, pinLastColumn });
+      await expect.element(header('City')).toBeVisible();
+      // the last column handle must not overflow the table
+      expectNoHorizontalOverflow();
+
+      const [age, city] = [headerWidth('age'), headerWidth('address.city')];
+      dragResizeHandle('address.city', -100);
+      await expect.poll(() => headerWidth('address.city')).toBe(city - 100);
+      expect(headerWidth('age')).toBe(age);
+    }
+  );
+
+  test('has no handle on the last visible column when the columns after it are hidden', async () => {
+    await renderDataTable({
+      columns: [...resizableColumns, { accessor: 'id', resizable: true, hidden: true }],
+    });
+    await expect.element(header('First name')).toBeVisible();
+    expect(resizeHandle('address.city')).toBeNull();
+  });
+
+  test('only resizes the dragged column in RTL when independentColumnResizing is set', async () => {
+    await renderRtlDataTable({ columns: resizableColumns, independentColumnResizing: true });
+    await expect.element(header('First name')).toBeVisible();
+
+    const [firstName, lastName] = [headerWidth('firstName'), headerWidth('lastName')];
+    // in RTL the leading edge of a column is on its left, so dragging left widens it
+    dragResizeHandle('firstName', -100);
+    await expect.poll(() => headerWidth('firstName')).toBe(firstName + 100);
+    expect(headerWidth('lastName')).toBe(lastName);
+  });
+
+  test('does not shrink a column below the minimum width when independentColumnResizing is set', async () => {
+    await renderDataTable({ columns: resizableColumns, independentColumnResizing: true });
+    await expect.element(header('First name')).toBeVisible();
+
+    dragResizeHandle('firstName', -10000);
+    await expect.poll(() => headerWidth('firstName')).toBe(50);
+  });
+
+  test('only resets the double-clicked column when independentColumnResizing is set', async () => {
+    await renderDataTable({ columns: resizableColumns, independentColumnResizing: true });
+    await expect.element(header('First name')).toBeVisible();
+
+    dragResizeHandle('lastName', -100);
+    await expect.poll(() => headerCell('lastName').style.width).not.toBe('');
+    const lastNameWidth = headerCell('lastName').style.width;
+    resizeHandle('firstName')!.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
+    await expect.poll(() => headerCell('firstName').style.width).toBe('');
+    expect(headerCell('lastName').style.width).toBe(lastNameWidth);
   });
 });

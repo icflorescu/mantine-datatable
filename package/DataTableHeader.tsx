@@ -29,6 +29,7 @@ type DataTableHeaderProps<T> = {
   sortIcons: DataTableSortProps<T>['sortIcons'];
   sortLabels: DataTableSortProps<T>['sortLabels'];
   onSortStatusChange: DataTableSortProps<T>['onSortStatusChange'];
+  independentColumnResizing: boolean | undefined;
   columns: DataTableColumn<T>[];
   defaultColumnProps: Omit<DataTableColumn<T>, 'accessor'> | undefined;
   groups: readonly DataTableColumnGroup<T>[] | undefined;
@@ -160,6 +161,7 @@ export function DataTableHeader<T>({
   sortIcons,
   sortLabels,
   onSortStatusChange,
+  independentColumnResizing,
   columns,
   defaultColumnProps,
   groups,
@@ -189,6 +191,12 @@ export function DataTableHeader<T>({
   const mediaQueries = useMemo(() => resolvedQueries, [queriesKey]);
   const mediaQueriesDefaults = useMemo(() => mediaQueries.map(() => true), [mediaQueries]);
   const columnsVisibility = useMediaQueries(mediaQueries, mediaQueriesDefaults);
+
+  // The last rendered column has no column after it to take width from
+  const lastVisibleColumnIndex = columns.reduce(
+    (lastIndex, column, index) => (!column.hidden && columnsVisibility?.[index] !== false ? index : lastIndex),
+    -1
+  );
 
   const groupHeaderRows = groups
     ? getColumnGroupHeaderRows({
@@ -297,8 +305,11 @@ export function DataTableHeader<T>({
               draggable={draggable}
               toggleable={toggleable}
               pinnable={pinnable}
-              // we won't display the resize handle for the last column to avoid overflow render issues
-              resizable={resizable && index < columns.length - 1}
+              // unless resizing is independent, the last column has no resize handle, since there's no column
+              // after it to take the width from
+              resizable={resizable && (independentColumnResizing || index < lastVisibleColumnIndex)}
+              lastColumn={index === lastVisibleColumnIndex}
+              independentColumnResizing={independentColumnResizing}
               sortStatus={sortStatus}
               sortIcons={sortIcons}
               sortLabels={sortLabels}
