@@ -35,6 +35,7 @@ export function DataTable<T>({
   fetching,
   columns,
   storeColumnsKey,
+  independentColumnResizing,
   groups,
   pinFirstColumn,
   pinLastColumn,
@@ -352,6 +353,7 @@ export function DataTable<T>({
                     sortIcons={sortIcons}
                     sortLabels={sortLabels}
                     onSortStatusChange={onSortStatusChange}
+                    independentColumnResizing={independentColumnResizing}
                     selectionTrigger={selectionTrigger}
                     selectionVisible={selectionColumnVisible}
                     selectionChecked={allSelectableRecordsSelected}
