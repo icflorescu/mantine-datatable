@@ -3,7 +3,7 @@
 The following is a list of notable changes to the Mantine DataTable component.  
 Minor versions that are not listed in the changelog are bug fixes and small improvements.
 
-## 9.9.0 (2026-11-28)
+## 9.8.5 (2026-11-28)
 
 - Add `independentColumnResizing` property to resize a column without changing the width of the adjacent one; the last column becomes resizable too and the table grows or shrinks along with the resized column, thanks to [Asish Kumar](https://github.com/officialasishkumar) for [PR #867](https://github.com/icflorescu/mantine-datatable/pull/867)
 
